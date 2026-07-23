@@ -8,10 +8,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const REGISTRY_PATH = path.join(ROOT, 'books', 'registry.json');
 const SOURCES_DIR = path.join(ROOT, 'books', 'sources');
-const PAGES_BASE = 'https://udayai-sudo.github.io/DigitalNotes';
-const GITHUB_BASE = 'https://github.com/Udayai-sudo/DigitalNotes';
-/** Push book branches here — keeps personal TextBook `origin` untouched. */
-const GIT_REMOTE = process.env.BOOK_REMOTE || 'digitalnotes';
+const PAGES_BASE = 'https://stringstack-bengaluru.github.io/ClassNotes';
+const GITHUB_BASE = 'https://github.com/StringStack-bengaluru/ClassNotes';
+/** Push book branches here — override with BOOK_REMOTE if needed. */
+const GIT_REMOTE = process.env.BOOK_REMOTE || 'stringstack';
 
 function run(command, options = {}) {
   execSync(command, { cwd: ROOT, stdio: 'inherit', ...options });
