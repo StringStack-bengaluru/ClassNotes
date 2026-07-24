@@ -42,6 +42,11 @@ def normalize_q(s):
     s = re.sub(r"^\\d+\\.\\s*", "", s)
     return s.strip()
 
+QUESTION_START = (
+    r"^(What|Why|How|When|Where|Who|Which|Can|Could|Does|Do|Is|Are|Will|"
+    r"Would|Should|Explain|Describe|Define)\\b"
+)
+
 def is_question(s):
     s2 = normalize_q(s)
     if s2.endswith("?"):
@@ -49,15 +54,33 @@ def is_question(s):
     # Numbered lines (e.g. "27. When ...") can be questions without "?".
     # Do NOT treat bare "When/What ..." answer bodies as questions.
     if re.match(r"^\\d+[G]?\\.\\s*", s):
-        return bool(
-            re.match(
-                r"^(What|Why|How|When|Where|Who|Which|Can|Could|Does|Do|Is|Are|Will|"
-                r"Would|Should|Explain|Describe|Define)\\b",
-                s2,
-                re.I,
-            )
-        )
+        return bool(re.match(QUESTION_START, s2, re.I))
     return False
+
+def expand_glued_qa(line):
+    """
+    Word often glues Q+A in one paragraph with no break, e.g.:
+      1. Explain ... format.The char data type is used...
+      2. Why ... memory?A computer stores...
+    Split once on '.'/'?' immediately followed by a capital letter.
+    """
+    if not re.match(r"^\\d+[G]?\\.\\s+", line):
+        return [line]
+    if not re.match(QUESTION_START, normalize_q(line), re.I):
+        return [line]
+    match = re.search(r"[.?](?=[A-Z])", line)
+    if not match:
+        return [line]
+    left = line[: match.end()].strip()
+    right = line[match.end() :].strip()
+    if len(normalize_q(left)) < 20 or len(right) < 10:
+        return [line]
+    return [left, right]
+
+expanded = []
+for para in clean:
+    expanded.extend(expand_glued_qa(para))
+clean = expanded
 
 def is_code_line(s):
     line = s.strip()
