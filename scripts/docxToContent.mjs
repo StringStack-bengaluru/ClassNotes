@@ -44,7 +44,9 @@ def normalize_q(s):
 
 QUESTION_START = (
     r"^(What|Why|How|When|Where|Who|Which|Can|Could|Does|Do|Is|Are|Will|"
-    r"Would|Should|Explain|Describe|Define)\\b"
+    r"Would|Should|Explain|Describe|Define|Write|Compare|List|Name|State|"
+    r"Differentiate|Discuss|Outline|Show|Give|Mention|Draw|Convert|"
+    r"Identify|Justify|Illustrate)\\b"
 )
 
 def is_question(s):
