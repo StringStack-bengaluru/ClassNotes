@@ -88,7 +88,8 @@ def is_code_line(s):
     line = s.strip()
     if not line:
         return False
-    if line in ("{", "}", "};"):
+    # Brace-only lines, including spaced closers like "} }" from Word
+    if re.fullmatch(r"[{}\\s;]+", line) and re.search(r"[{}]", line):
         return True
     if re.match(r"^(//|/\\*|\\*|@\\w+)", line):
         return True
