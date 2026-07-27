@@ -33,13 +33,21 @@ def is_junk(s):
         return True
     if re.fullmatch(r"Introduction to Java", s, re.I):
         return True
+    # Meta footer sometimes pasted into Q&A docs
+    if re.search(r"based only on the technical concepts discussed in the transcript", s, re.I):
+        return True
     return False
 
 clean = [p for p in paras if not is_junk(p)]
 
+def strip_answer_label(s):
+    """Word often puts 'Question? Answer:' on one line — peel the label off."""
+    return re.sub(r"\\s*Answer\\s*:?\\s*$", "", s, flags=re.I).strip()
+
 def normalize_q(s):
     s = re.sub(r"^\\d*G\\.\\s*", "", s)
     s = re.sub(r"^\\d+\\.\\s*", "", s)
+    s = strip_answer_label(s)
     return s.strip()
 
 QUESTION_START = (
@@ -57,6 +65,9 @@ def is_question(s):
     # Do NOT treat bare "When/What ..." answer bodies as questions.
     if re.match(r"^\\d+[G]?\\.\\s*", s):
         return bool(re.match(QUESTION_START, s2, re.I))
+    # 'What is X? Answer:' (label on same line) — already stripped above.
+    if re.match(QUESTION_START, s2, re.I) and "?" in s:
+        return True
     return False
 
 def expand_glued_qa(line):
