@@ -5,6 +5,7 @@ import { bookEase, bookMotionFlags, getBookPageSize } from '../../config/bookMot
 import { brandColors, themeConfig } from '../../config/theme';
 import { useReadingProgress } from '../../hooks/useReadingProgress';
 import { useTheme } from '../../hooks/useTheme';
+import { bindPageFlipSoundUnlock } from '../../services/pageFlipSound';
 import type { BookManifest, FlatPage } from '../../types/book';
 import { CoverFace } from './CoverFace';
 import { CoverPageFlip } from './CoverPageFlip';
@@ -73,6 +74,8 @@ export function BookOpenStage({
     currentPageIndex,
     enabled: isReading,
   });
+
+  useEffect(() => bindPageFlipSoundUnlock(), []);
 
   useEffect(() => {
     setCurrentPageIndex(initialPageIndex);

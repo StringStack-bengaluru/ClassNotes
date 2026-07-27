@@ -1,6 +1,7 @@
 import { forwardRef, useEffect, useRef } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import type { FlipBookRef } from 'react-pageflip';
+import { playPageFlipSound } from '../../services/pageFlipSound';
 import type { BookManifest, FlatPage, ThemeMode } from '../../types/book';
 import { BookPage } from './BookPage';
 import { CoverFace } from './CoverFace';
@@ -78,12 +79,15 @@ export function CoverPageFlip({
           if (api.getCurrentPageIndex() !== 1) api.turnToPage(1);
           window.setTimeout(() => {
             try {
+              // Cover shut after End Session rewind — soft close cue.
+              playPageFlipSound({ force: true, mode: 'rapid' });
               api.flipPrev();
             } catch {
               finishOnce();
             }
           }, 40);
         } else {
+          playPageFlipSound({ force: true });
           api.flipNext();
         }
       } catch {

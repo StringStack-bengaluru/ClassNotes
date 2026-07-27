@@ -12,6 +12,7 @@ import HTMLFlipBook from 'react-pageflip';
 import type { FlipBookRef } from 'react-pageflip';
 import { useIsMobile } from '../../hooks/useMediaQuery';
 import { useVirtualWindow, VIRTUAL_WINDOW_SIZE } from '../../hooks/useVirtualPages';
+import { playPageFlipSound } from '../../services/pageFlipSound';
 import type { FlatPage, ThemeMode } from '../../types/book';
 import { getBookPageSize } from '../../config/bookMotion';
 import { themeConfig } from '../../config/theme';
@@ -174,6 +175,8 @@ export const FlipBookReader = forwardRef<FlipBookHandle, FlipBookReaderProps>(
         }
       }
 
+      // Mobile / no animation path — desktop animated flips play via onFlip.
+      playPageFlipSound();
       onPageChange(target);
     }, [currentIndex, isMobile, onPageChange, totalPages, windowPages.length, windowStart]);
 
@@ -201,6 +204,7 @@ export const FlipBookReader = forwardRef<FlipBookHandle, FlipBookReaderProps>(
         }
       }
 
+      playPageFlipSound();
       onPageChange(target);
     }, [currentIndex, isMobile, onPageChange, windowStart]);
 
@@ -241,6 +245,8 @@ export const FlipBookReader = forwardRef<FlipBookHandle, FlipBookReaderProps>(
         }
 
         if (isMobile) {
+          // No flip animation on mobile — one soft close cue, then land on cover.
+          playPageFlipSound({ mode: 'rapid', force: true });
           onPageChange(0);
           rewindTimerRef.current = window.setTimeout(() => {
             rewindTimerRef.current = null;
@@ -252,6 +258,7 @@ export const FlipBookReader = forwardRef<FlipBookHandle, FlipBookReaderProps>(
         setRewinding(true);
 
         if (indexRef.current > 8) {
+          playPageFlipSound({ mode: 'rapid' });
           onPageChange(6);
         }
 
@@ -265,8 +272,10 @@ export const FlipBookReader = forwardRef<FlipBookHandle, FlipBookReaderProps>(
 
           const api = flipRef.current?.pageFlip();
           if (api && api.getCurrentPageIndex() > 0) {
+            // Animated leaf — SFX fires from onFlip in rapid mode.
             api.flipPrev();
           } else {
+            playPageFlipSound({ mode: 'rapid' });
             onPageChange(Math.max(0, indexRef.current - 1));
           }
 
@@ -323,6 +332,7 @@ export const FlipBookReader = forwardRef<FlipBookHandle, FlipBookReaderProps>(
         }
 
         if (globalIndex !== currentIndex) {
+          playPageFlipSound({ mode: rewinding ? 'rapid' : 'normal' });
           onPageChange(globalIndex);
         }
       },
