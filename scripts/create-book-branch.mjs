@@ -192,9 +192,29 @@ function setupBook({ slug, title, sourcePath, mode, readerMode }) {
   return { manifest, branch, entry, bookTitle };
 }
 
+function discardGeneratedNoise() {
+  // Local preview / convert often dirties these; never block branch switches.
+  for (const file of [
+    'public/api/book-manifest.json',
+    'content/book.config.json',
+  ]) {
+    try {
+      run(`git restore --worktree --staged -- ${file}`);
+    } catch {
+      try {
+        run(`git checkout -- ${file}`);
+      } catch {
+        // ignore if file absent on this branch
+      }
+    }
+  }
+}
+
 function syncRegistryToMain(slug, bookTitle) {
   const registrySnapshot = fs.readFileSync(REGISTRY_PATH, 'utf8');
+  discardGeneratedNoise();
   run('git checkout main');
+  discardGeneratedNoise();
   fs.writeFileSync(REGISTRY_PATH, registrySnapshot, 'utf8');
   run('git add books/registry.json');
 
@@ -256,6 +276,7 @@ Args:
   const title = args.title || humanizeTitle(sourcePath);
   const branch = `book/${args.slug}`;
 
+  discardGeneratedNoise();
   run('git checkout main');
   try {
     run(`git checkout -B ${branch}`);
