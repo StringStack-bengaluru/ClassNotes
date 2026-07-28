@@ -1,0 +1,147 @@
+{
+  "title": "Notes Java Methods 2",
+  "itemsPerPage": 2,
+  "source": "notes-java-methods-2.docx",
+  "items": [
+    {
+      "question": "What is a method in Java?",
+      "answer": "Answer: A method is a set or block of statements used to perform a particular task. For example, statements used for greeting, addition, subtraction, or displaying data can be placed inside separate methods."
+    },
+    {
+      "question": "What are the four main components of a method?",
+      "answer": "Answer: A method contains four main components: Return type Method name Parameters Method body The return type represents the output, parameters represent the input, and the body contains the statements that perform the task."
+    },
+    {
+      "question": "Why should each task be placed inside a separate method?",
+      "answer": "Answer: Each task should be placed inside a separate method to organise the program properly. For example, a program may have different methods for: Greeting the user Addition Subtraction Multiplication Displaying results This keeps each task separate and makes the program easier to understand."
+    },
+    {
+      "question": "How should a method name be selected?",
+      "answer": "Answer: A method name should describe the task performed by the method. Examples: greet() add() printMessage() A method that greets the user can be named greet(), while a method that performs addition can be named add()."
+    },
+    {
+      "question": "What does void mean in a method declaration?",
+      "answer": "Answer: void means that the method does not return any value to the calling method. Example:\n\n```java\npublic static void greet() {\nSystem.out.println(\"Hello\");\n}\n```\n\nThe method prints a message but does not send any value back to the caller. Therefore, its return type is void."
+    },
+    {
+      "question": "Is printing a value the same as returning a value?",
+      "answer": "Answer: No. Printing displays a value on the monitor:\n\n```java\nSystem.out.println(result);\n```\n\nReturning sends a value back to the calling method:\n\n```java\nreturn result;\n```\n\nA method can print a value and still have void as its return type because nothing is returned to the caller."
+    },
+    {
+      "question": "How is a method declared when it accepts no parameters?",
+      "answer": "Answer: When a method accepts no parameters, empty parentheses are written after the method name. Example:\n\n```java\npublic static void greet() {\nSystem.out.println(\"Hello\");\n}\n```\n\nThe empty parentheses in greet() indicate that the method accepts no input."
+    },
+    {
+      "question": "What steps should be followed while writing a method?",
+      "answer": "Answer: The following steps should be followed: Identify the task. Write the statements required for the task. Place those statements inside a method. Give the method a meaningful name. Identify whether the method returns a value. Identify whether the method accepts input. Specify the return type and parameters accordingly."
+    },
+    {
+      "question": "Where must methods be written in Java?",
+      "answer": "Answer: Every method, including the main() method, must be written inside a class boundary. Example:\n\n```java\nclass PrintingApp {\npublic static void greet() {\nSystem.out.println(\"Hello\");\n}\n}\n```\n\nA method cannot be declared independently outside a class."
+    },
+    {
+      "question": "What naming conventions are used for classes and methods?",
+      "answer": "Answer: A class name should start with a capital letter. If it contains multiple words, every word should start with a capital letter. Example: PrintingApp A method name should start with a lowercase letter. If it contains multiple words, every word after the first should start with a capital letter. Example: printMessage()"
+    },
+    {
+      "question": "Why can a class containing only a normal method not run as a Java application?",
+      "answer": "Answer: The JVM starts program execution by searching for the main() method. If a class contains only a method such as greet() and does not contain main(), the JVM cannot find the starting point of the program. Therefore, the class cannot run as a Java application."
+    },
+    {
+      "question": "Why is the main() method required in Java?",
+      "answer": "Answer: The main() method is the entry point of a Java application. During execution: The operating system transfers control to the JVM. The JVM searches for the main() method. The JVM starts execution from main(). Without main(), Java application execution cannot begin."
+    },
+    {
+      "question": "Why is there no output when main() is empty?",
+      "answer": "Answer: An empty main() method contains no executable statements. Even if another method is defined in the class, it will not execute automatically. It must be called explicitly. Example:\n\n```java\npublic static void main(String[] args) {\n}\n```\n\nThis method produces no output."
+    },
+    {
+      "question": "When will a method be executed?",
+      "answer": "Answer: A method will be executed only when it is called. Defining a method does not execute it. Example:\n\n```java\ngreet();\n```\n\nThis statement calls the greet() method."
+    },
+    {
+      "question": "How is a method called in Java?",
+      "answer": "Answer: A method is called using its name followed by parentheses. Example:\n\n```java\ngreet();\n```\n\nIf the method accepts parameters, the required values are passed inside the parentheses."
+    },
+    {
+      "question": "What is the difference between method definition and method call?",
+      "answer": "Answer: A method definition contains the statements that perform the task.\n\n```java\npublic static void greet() {\nSystem.out.println(\"Hello\");\n}\n```\n\nA method call requests the execution of that method.\n\n```java\ngreet();\n```\n\nThe definition specifies what the method does, while the call starts its execution."
+    },
+    {
+      "question": "Explain the execution flow when a method is called from main().",
+      "answer": "Answer: The execution flow is: The operating system transfers control to the JVM. The JVM calls the main() method. Control enters main(). main() calls another method. Control moves to the called method. The called method executes its statements. Control returns to main(). After main() completes, control returns to the JVM. The JVM returns control to the operating system."
+    },
+    {
+      "question": "What happens when control reaches the closing brace of a method?",
+      "answer": "Answer: When control reaches the closing brace of a method, it returns to the same place from where the method was called. For example, if greet() was called from main(), control returns to main() after greet() finishes."
+    },
+    {
+      "question": "Write a Java program that calls a greet() method from main().",
+      "answer": "Answer: ```java\nclass PrintingApp {\npublic static void greet() {\nSystem.out.println(\"Hello\");\nSystem.out.println(\"How are you?\");\n}\npublic static void main(String[] args) {\ngreet();\n}\n}\n```\n\nOutput: Hello"
+    },
+    {
+      "question": "How are you?",
+      "answer": "Answer: Line-by-line explanation\n\n```java\nclass PrintingApp declares the class.\npublic static void greet() defines a method with no parameters and no returned value.\n```\n\nThe two println() statements print the greeting. main() is the entry point of the program. greet(); calls the greet() method. After greet() finishes, control returns to main()."
+    },
+    {
+      "question": "Write a method that adds two numbers and prints the result.",
+      "answer": "Answer: ```java\nclass AdditionApp {\npublic static void add() {\nint a = 10;\nint b = 20;\nint c = a + b;\nSystem.out.println(c);\n}\npublic static void main(String[] args) {\nadd();\n}\n}\n```\n\nOutput: The add() method accepts no parameters and returns no value. It performs the calculation and prints the result internally."
+    },
+    {
+      "question": "On what basis are methods classified into four types?",
+      "answer": "Answer: Methods are classified based on two factors: Whether the method accepts parameters. Whether the method returns a value. Different combinations of input and output produce four types of methods."
+    },
+    {
+      "question": "What are the four types of methods in Java",
+      "answer": "Answer: Type Parameters Return value Type 1 No No Type 2 Yes No Type 3 No Yes Type 4 Yes Yes The classification depends on whether the method accepts input and whether it produces output."
+    },
+    {
+      "question": "What is a Type 1 method?",
+      "answer": "Answer: A Type 1 method: Does not accept parameters. Does not return a value. It has no input and no returned output. Example:\n\n```java\npublic static void add() {\nint a = 10;\nint b = 20;\nint c = a + b;\nSystem.out.println(c);\n}\n```\n\nThe empty parentheses indicate no parameters, and void indicates no returned value."
+    },
+    {
+      "question": "What happens in stack memory when a method is called?",
+      "answer": "Answer: Whenever a method is called, a separate chunk of memory is allocated for that method in the stack segment. This memory is called: A stack frame An activation record The stack frame stores the data required during the method's execution."
+    },
+    {
+      "question": "When is a stack frame created and deleted?",
+      "answer": "Answer: A stack frame is created when a method is called. It is deleted when control leaves the method after the method completes its execution. Therefore: Method call → Stack frame created Method completion → Stack frame deleted"
+    },
+    {
+      "question": "Where are the local variables of a method stored?",
+      "answer": "Answer: Local variables declared inside a method are stored in that method's stack frame. Example:\n\n```java\npublic static void add() {\nint a = 10;\nint b = 20;\nint c = a + b;\n}\n```\n\nThe memory for a, b, and c is allocated inside the stack frame created for add()."
+    },
+    {
+      "question": "Why is the return type of the add() method void in the below program?",
+      "answer": "Answer: Consider:\n\n```java\npublic static void add() {\nint a = 10;\nint b = 20;\nint c = a + b;\nSystem.out.println(c);\n}\n```\n\nThe method prints 30, but it does not send any value back to the calling method. Therefore, its return type is void."
+    },
+    {
+      "question": "Why is the return type of main() also void?",
+      "answer": "Answer: When the main() method finishes, control returns to the JVM without carrying any value. Since main() does not return a value to the JVM, its return type is void."
+    },
+    {
+      "question": "What is the purpose of the return statement?",
+      "answer": "Answer: The return statement performs two actions: It ends the execution of the current method. It sends a value back to the calling method. Example:\n\n```java\nreturn c;\n```\n\nThis statement sends the value stored in c back to the caller."
+    },
+    {
+      "question": "How is the return type of a method decided?",
+      "answer": "Answer: The return type of a method must match the data type of the value returned by the method. Example:\n\n```java\npublic static int add() {\nint a = 10;\nint b = 20;\nint c = a + b;\nreturn c;\n}\n```\n\nSince c is an int, the return type of the method is int."
+    },
+    {
+      "question": "Why should a returned value be collected in a variable?",
+      "answer": "Answer: When a method returns a value, the calling method should collect that value in a compatible variable. Example:\n\n```java\nint result = add();\n```\n\nHere: add() is called. The method returns an integer. The returned integer is stored in result. The variable's data type should be compatible with the method's return type."
+    },
+    {
+      "question": "In which stack frame is the returned value stored?",
+      "answer": "Answer: When a method returns a value to main(), the variable that collects the value is created in the stack frame of main(). Example:\n\n```java\nint result = add();\n```\n\nThe variable result belongs to main(), so its memory is allocated inside the stack frame of main()."
+    },
+    {
+      "question": "Write a method that accepts no parameters but returns a value.",
+      "answer": "Answer: ```java\nclass AdditionApp {\npublic static int add() {\nint a = 10;\nint b = 20;\nint c = a + b;\nreturn c;\n}\npublic static void main(String[] args) {\nint result = add();\nSystem.out.println(result);\n}\n}\n```\n\nOutput: Line-by-line explanation\n\n```java\npublic static int add() defines a method that accepts no parameters and returns an int.\nint a = 10; stores 10 in a.\nint b = 20; stores 20 in b.\nint c = a + b; adds the values and stores 30 in c.\nreturn c; sends 30 back to the caller.\nint result = add(); calls the method and collects the returned value.\nSystem.out.println(result); prints 30.\n```\n\nThis is a Type 3 method because it accepts no parameters but returns a value."
+    },
+    {
+      "question": "Explain the complete stack execution of a method that returns a value.",
+      "answer": "Answer: Consider:\n\n```java\nclass AdditionApp {\npublic static int add() {\nint a = 10;\nint b = 20;\nint c = a + b;\nreturn c;\n}\npublic static void main(String[] args) {\nint result = add();\nSystem.out.println(result);\n}\n}\n```\n\nThe execution happens as follows: The JVM calls main(). A stack frame is created for main(). main() calls add(). A stack frame is created for add(). The local variables of add() are stored in its stack frame. add() calculates the result.\n\n```java\nreturn sends the result back to main().\n```\n\nThe stack frame of add() is deleted. The returned value is stored in result inside the stack frame of main(). The value is printed. When main() finishes, its stack frame is deleted. Control returns to the JVM and then to the operating system."
+    }
+  ]
+}
