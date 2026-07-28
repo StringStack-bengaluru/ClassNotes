@@ -39,12 +39,14 @@ function bookFingerprint(manifest: BookManifest, pages: FlatPage[]): string {
       pageCount: chapter.pageCount,
       itemsPerPage: chapter.itemsPerPage,
       qa: chapter.qaItems?.map((item) => [item.question, item.answer]),
+      docPages: chapter.documentPages?.length,
     })),
     pages: pages.map((page) => ({
       kind: page.kind,
       pageInChapter: page.pageInChapter,
       contentMode: page.contentMode,
       qa: page.qaItems?.map((item) => [item.question, item.answer]),
+      docBlocks: page.documentBlocks?.length,
       pdfUrl: page.pdfUrl,
     })),
   });
@@ -74,7 +76,10 @@ export function useBookData(): UseBookDataResult {
       const data = await fetchBookManifest();
       const chaptersWithCounts = await Promise.all(
         data.chapters.map(async (chapter) => {
-          if (chapter.contentMode === 'qa' && chapter.contentUrl) {
+          if (
+            (chapter.contentMode === 'qa' || chapter.contentMode === 'document') &&
+            chapter.contentUrl
+          ) {
             return enrichChapterWithContent(chapter);
           }
 

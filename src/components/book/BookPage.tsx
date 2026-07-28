@@ -5,6 +5,7 @@ import type { FlatPage, ThemeMode } from '../../types/book';
 import { themeConfig } from '../../config/theme';
 import { QaCompletePage } from './QaCompletePage';
 import { QaContentPage } from './QaContentPage';
+import { DocumentContentPage } from './DocumentContentPage';
 import { SessionPage } from './SessionPage';
 
 interface PdfPageCanvasProps {
@@ -162,6 +163,20 @@ export const BookPage = memo(function BookPage({
     );
   }
 
+  if (page.contentMode === 'document') {
+    return (
+      <div
+        className={clsx(
+          'h-full w-full overflow-hidden',
+          colors.paperBorder,
+          side === 'left' ? 'rounded-l-sm border-r' : 'rounded-r-sm',
+        )}
+      >
+        <DocumentContentPage page={page} theme={theme} bookTitle={bookTitle} />
+      </div>
+    );
+  }
+
   return (
     <div
       className={clsx(
@@ -181,7 +196,7 @@ export function preloadNearbyPages(pages: FlatPage[], centerIndex: number, zoom:
   for (const index of indices) {
     const page = pages[index];
     if (!page || page.kind !== 'content') continue;
-    if (page.contentMode === 'qa' || !page.pdfUrl) continue;
+    if (page.contentMode === 'qa' || page.contentMode === 'document' || !page.pdfUrl) continue;
     preloadPdfPages(page.pdfUrl, [page.pageInChapter], 1.4 * zoom);
   }
 }

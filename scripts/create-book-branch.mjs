@@ -33,6 +33,7 @@ function parseArgs(argv) {
     else if (token === '--docx') args.docx = argv[++i];
     else if (token === '--push' || token === 'push') args.push = true;
     else if (token === '--deploy' || token === 'deploy') args.deploy = true;
+    else if (token === '--document' || token === 'document') args.document = true;
     else if (token === '--no-commit') args.noCommit = true;
     else if (token.startsWith('--')) {
       console.error(`Unknown flag: ${token}`);
@@ -53,9 +54,11 @@ function parseArgs(argv) {
     if (/\.pdf$/i.test(source)) args.pdf = source;
     else args.docx = source;
   }
-  if (!args.title && positionals[2] && !['push', 'deploy'].includes(positionals[2])) {
+  if (!args.title && positionals[2] && !['push', 'deploy', 'document'].includes(positionals[2])) {
     args.title = positionals[2];
   }
+  // Allow: npm run new-book -- slug docx title document deploy
+  if (positionals.includes('document')) args.document = true;
 
   if (args.deploy) args.push = true;
   return args;
@@ -76,9 +79,18 @@ function writeRegistry(registry) {
 function clearChapterSources() {
   for (const file of fs.readdirSync(paths.CHAPTERS_DIR)) {
     const lower = file.toLowerCase();
-    if (lower.endsWith('.pdf') || lower.endsWith('.docx') || lower.endsWith('.content.json')) {
+    if (
+      lower.endsWith('.pdf') ||
+      lower.endsWith('.docx') ||
+      lower.endsWith('.content.json') ||
+      lower.endsWith('.document.json')
+    ) {
       fs.unlinkSync(path.join(paths.CHAPTERS_DIR, file));
     }
+  }
+  const mediaRoot = path.join(paths.CHAPTERS_DIR, 'media');
+  if (fs.existsSync(mediaRoot)) {
+    fs.rmSync(mediaRoot, { recursive: true, force: true });
   }
 }
 
@@ -122,7 +134,7 @@ function archiveSource(sourcePath, slug, mode) {
   return archivePath;
 }
 
-function setupBook({ slug, title, sourcePath, mode }) {
+function setupBook({ slug, title, sourcePath, mode, readerMode }) {
   const day = dayFromSlug(slug);
   const bookTitle = title || titleFromSource(sourcePath);
   const sourceExt = mode === 'docx' ? '.docx' : '.pdf';
@@ -143,6 +155,8 @@ function setupBook({ slug, title, sourcePath, mode }) {
     autoTitleFromFirstPdf: false,
     chapterSortMode: 'numbered',
     singleBookMode: true,
+    /** `qa` (default) keeps current Q&A books. `document` = formatted DOCX reader. */
+    readerMode: readerMode === 'document' ? 'document' : 'qa',
   };
 
   fs.writeFileSync(paths.CONFIG_PATH, `${JSON.stringify(config, null, 2)}\n`, 'utf8');
@@ -164,6 +178,7 @@ function setupBook({ slug, title, sourcePath, mode }) {
     source: chapterFilename,
     githubUrl: `${GITHUB_BASE}/tree/${branch}`,
     pagesUrl: `${PAGES_BASE}/${slug}/`,
+    readerMode: config.readerMode,
   };
   if (mode === 'pdf') entry.pdf = chapterFilename;
   if (mode === 'docx') entry.docx = chapterFilename;
@@ -210,6 +225,9 @@ function main() {
     console.error(`Usage (Windows / npm — preferred):
   npm run new-book -- 05-day-05 "books/sources/Day-05.docx" "Day 05 Session" deploy
 
+Formatted document mode (preserves paragraphs — parallel to Q&A):
+  npm run new-book -- 05-day-05 "books/sources/Day-05.docx" "Day 05 Session" document deploy
+
 Or call node directly (flags work):
   node scripts/create-book-branch.mjs --slug 05-day-05 --docx "books/sources/Day-05.docx" --title "Day 05 Session" --deploy
 
@@ -217,6 +235,7 @@ Args:
   1 slug     Required (e.g. 05-day-05)
   2 docx     Path to today's .docx (or .pdf)
   3 title    Optional display title
+  document   Optional — formatted DOCX reader (does not replace default Q&A)
   deploy     Optional — push book branch + push main (triggers Pages)
   push       Optional — push book branch only
 `);
@@ -249,6 +268,7 @@ Args:
     title,
     sourcePath: tempCopy,
     mode,
+    readerMode: args.document ? 'document' : 'qa',
   });
 
   fs.unlinkSync(tempCopy);

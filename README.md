@@ -21,6 +21,12 @@ npm run new-book -- 05-day-05 "books/sources/Day-05-Session.docx" "Day 05 Sessio
 
 That creates `book/05-day-05`, pushes it, and pushes `main` to deploy.
 
+**Formatted document mode** (preserves paragraphs — parallel to Q&A; see [docs/DOCUMENT-MODE.md](docs/DOCUMENT-MODE.md)):
+
+```powershell
+npm run new-book -- 05-day-05-doc "books/sources/Day-05-Session.docx" "Day 05 Session" document deploy
+```
+
 **Live URL pattern:**  
 `https://udaymi8871.github.io/TextBook/<slug>/`
 

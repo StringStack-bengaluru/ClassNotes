@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { convertDocxChapters } from './docxToContent.mjs';
+import { convertDocxDocuments } from './docxToDocument.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -115,11 +116,14 @@ function scanChapterSources(sortMode) {
     const lower = filename.toLowerCase();
     const isPdf = lower.endsWith('.pdf');
     const isContent = lower.endsWith('.content.json');
-    if (!isPdf && !isContent) continue;
+    const isDocument = lower.endsWith('.document.json');
+    if (!isPdf && !isContent && !isDocument) continue;
 
     const base = isContent
       ? filename.replace(/\.content\.json$/i, '')
-      : filename.replace(/\.pdf$/i, '');
+      : isDocument
+        ? filename.replace(/\.document\.json$/i, '')
+        : filename.replace(/\.pdf$/i, '');
     const filePath = path.join(CHAPTERS_DIR, filename);
     const stats = fs.statSync(filePath);
     const parsed = parseChapterFilename(filename);
@@ -141,12 +145,29 @@ function scanChapterSources(sortMode) {
         const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
         const items = Array.isArray(data.items) ? data.items : [];
         const perPage = Number(data.itemsPerPage) > 0 ? Number(data.itemsPerPage) : QA_PER_PAGE;
-        existing.pageCount = Math.max(1, Math.ceil(items.length / perPage));
+        existing.qaPageCount = Math.max(1, Math.ceil(items.length / perPage));
         if (typeof data.title === 'string' && data.title.trim()) {
           existing.title = data.title.trim();
         }
       } catch {
-        existing.pageCount = 1;
+        existing.qaPageCount = 1;
+      }
+    } else if (isDocument) {
+      existing.documentFilename = filename;
+      try {
+        const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        const pageCount =
+          Number(data.pageCount) > 0
+            ? Number(data.pageCount)
+            : Array.isArray(data.pages)
+              ? Math.max(1, data.pages.length)
+              : 1;
+        existing.documentPageCount = pageCount;
+        if (typeof data.title === 'string' && data.title.trim()) {
+          existing.documentTitle = data.title.trim();
+        }
+      } catch {
+        existing.documentPageCount = 1;
       }
     } else {
       existing.pdfFilename = filename;
@@ -155,12 +176,15 @@ function scanChapterSources(sortMode) {
     byBase.set(base, existing);
   }
 
-  const files = [...byBase.values()].filter((file) => file.contentFilename || file.pdfFilename);
+  const files = [...byBase.values()].filter(
+    (file) => file.contentFilename || file.documentFilename || file.pdfFilename,
+  );
   return sortChapterFiles(files, sortMode);
 }
 
 export function buildManifest() {
   const config = readBookConfig();
+  const readerMode = config.readerMode === 'document' ? 'document' : 'qa';
   let sources = scanChapterSources(config.chapterSortMode);
 
   /**
@@ -184,23 +208,51 @@ export function buildManifest() {
     const title =
       config.singleBookMode && config.title
         ? config.title
-        : file.title || `Chapter ${linearOrder}`;
-    const idSource = file.contentFilename || file.pdfFilename || file.base;
+        : file.title || file.documentTitle || `Chapter ${linearOrder}`;
+    const idSource =
+      (readerMode === 'document' && file.documentFilename) ||
+      file.contentFilename ||
+      file.documentFilename ||
+      file.pdfFilename ||
+      file.base;
     const chapter = {
       id: slugify(idSource) || `chapter-${linearOrder}`,
       title,
       order: linearOrder,
       uploadedAt: file.uploadedAt,
-      filename: file.contentFilename || file.pdfFilename,
+      filename:
+        (readerMode === 'document' && file.documentFilename) ||
+        file.contentFilename ||
+        file.documentFilename ||
+        file.pdfFilename,
     };
 
-    if (file.contentFilename) {
-      chapter.contentUrl = `/chapters/${encodeURIComponent(file.contentFilename)}`;
-      chapter.contentMode = 'qa';
-      chapter.pageCount = file.pageCount ?? 1;
+    // Prefer document mode only when config opts in AND .document.json exists.
+    if (readerMode === 'document' && file.documentFilename) {
+      chapter.contentUrl = `/chapters/${encodeURIComponent(file.documentFilename)}`;
+      chapter.contentMode = 'document';
+      chapter.pageCount = file.documentPageCount ?? 1;
       chapter.pdfUrl = file.pdfFilename
         ? `/chapters/${encodeURIComponent(file.pdfFilename)}`
         : '';
+    } else if (file.contentFilename) {
+      chapter.contentUrl = `/chapters/${encodeURIComponent(file.contentFilename)}`;
+      chapter.contentMode = 'qa';
+      chapter.pageCount = file.qaPageCount ?? file.pageCount ?? 1;
+      chapter.pdfUrl = file.pdfFilename
+        ? `/chapters/${encodeURIComponent(file.pdfFilename)}`
+        : '';
+    } else if (file.documentFilename) {
+      // Document file present but readerMode is qa — fall through to PDF if any, else document.
+      if (file.pdfFilename) {
+        chapter.pdfUrl = `/chapters/${encodeURIComponent(file.pdfFilename)}`;
+        chapter.contentMode = 'pdf';
+      } else {
+        chapter.contentUrl = `/chapters/${encodeURIComponent(file.documentFilename)}`;
+        chapter.contentMode = 'document';
+        chapter.pageCount = file.documentPageCount ?? 1;
+        chapter.pdfUrl = '';
+      }
     } else {
       chapter.pdfUrl = `/chapters/${encodeURIComponent(file.pdfFilename)}`;
       chapter.contentMode = 'pdf';
@@ -224,6 +276,7 @@ export function buildManifest() {
 
 export function writeManifest() {
   convertDocxChapters();
+  convertDocxDocuments();
   const manifest = buildManifest();
   fs.mkdirSync(path.dirname(MANIFEST_PATH), { recursive: true });
   fs.writeFileSync(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');

@@ -1,5 +1,6 @@
 export type PageKind = 'session-start' | 'content' | 'qa-complete' | 'session-end';
-export type ChapterContentMode = 'pdf' | 'qa';
+/** `qa` = current Q&A flip book. `document` = formatted DOCX blocks. `pdf` = PDF canvas. */
+export type ChapterContentMode = 'pdf' | 'qa' | 'document';
 
 export interface QAItem {
   question: string;
@@ -13,6 +14,34 @@ export interface ChapterContentFile {
   items: QAItem[];
 }
 
+/** Inline run from DOCX (parallel document mode). */
+export interface DocumentTextRun {
+  text: string;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+}
+
+export type DocumentBlock =
+  | { type: 'blank' }
+  | { type: 'paragraph'; runs: DocumentTextRun[]; align?: string; indent?: boolean }
+  | { type: 'heading'; level: number; runs: DocumentTextRun[]; align?: string }
+  | { type: 'quote'; runs: DocumentTextRun[]; align?: string }
+  | { type: 'list'; ordered?: boolean; items: { runs: DocumentTextRun[] }[] }
+  | { type: 'code'; text: string }
+  | { type: 'table'; rows: string[][] }
+  | { type: 'image'; src: string; alt?: string };
+
+export interface DocumentContentFile {
+  title?: string;
+  mode?: 'document';
+  source?: string;
+  pageCount?: number;
+  blocks: DocumentBlock[];
+  /** Pre-paginated block groups for flip pages. */
+  pages?: DocumentBlock[][];
+}
+
 export interface BookChapter {
   id: string;
   title: string;
@@ -23,6 +52,8 @@ export interface BookChapter {
   pageCount?: number;
   qaItems?: QAItem[];
   itemsPerPage?: number;
+  /** Formatted document blocks for the active flip page (after enrich + flatten). */
+  documentPages?: DocumentBlock[][];
   uploadedAt: string;
   filename?: string;
 }
@@ -53,6 +84,7 @@ export interface FlatPage {
   sessionLabel?: string;
   contentMode?: ChapterContentMode;
   qaItems?: QAItem[];
+  documentBlocks?: DocumentBlock[];
   contentPageTotal?: number;
 }
 

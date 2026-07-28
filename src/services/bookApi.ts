@@ -2,6 +2,8 @@ import type {
   BookChapter,
   BookManifest,
   ChapterContentFile,
+  DocumentBlock,
+  DocumentContentFile,
   FlatPage,
   QAItem,
 } from '../types/book';
@@ -38,6 +40,23 @@ export async function fetchChapterContent(contentUrl: string): Promise<ChapterCo
     throw new Error(`Failed to load chapter content: ${response.statusText}`);
   }
   return (await response.json()) as ChapterContentFile;
+}
+
+export async function fetchDocumentContent(contentUrl: string): Promise<DocumentContentFile> {
+  const response = await fetch(contentUrl, { cache: 'no-store' });
+  if (!response.ok) {
+    throw new Error(`Failed to load document content: ${response.statusText}`);
+  }
+  return (await response.json()) as DocumentContentFile;
+}
+
+function rewriteDocumentMediaUrls(blocks: DocumentBlock[]): DocumentBlock[] {
+  return blocks.map((block) => {
+    if (block.type === 'image' && block.src && block.src.startsWith('/')) {
+      return { ...block, src: withBase(block.src) };
+    }
+    return block;
+  });
 }
 
 function chunkQAItems(items: QAItem[], perPage: number): QAItem[][] {
@@ -90,6 +109,25 @@ export function flattenChaptersToPages(manifest: BookManifest): FlatPage[] {
           contentMode: 'qa',
           qaItems,
           contentPageTotal: chunks.length,
+        });
+        globalIndex += 1;
+      });
+      continue;
+    }
+
+    if (chapter.contentMode === 'document' && chapter.documentPages && chapter.documentPages.length > 0) {
+      chapter.documentPages.forEach((documentBlocks, index) => {
+        pages.push({
+          kind: 'content',
+          globalIndex,
+          chapterId: chapter.id,
+          chapterTitle: chapter.title,
+          chapterOrder: chapter.order,
+          pageInChapter: index + 1,
+          pdfUrl: chapter.pdfUrl ?? '',
+          contentMode: 'document',
+          documentBlocks,
+          contentPageTotal: chapter.documentPages!.length,
         });
         globalIndex += 1;
       });
@@ -203,6 +241,21 @@ export async function enrichChapterWithContent(chapter: BookChapter): Promise<Bo
       itemsPerPage: perPage,
       pageCount: Math.max(1, Math.ceil(items.length / perPage)),
       contentMode: 'qa',
+    };
+  }
+
+  if (chapter.contentMode === 'document' && chapter.contentUrl) {
+    const content = await fetchDocumentContent(chapter.contentUrl);
+    const rawPages =
+      Array.isArray(content.pages) && content.pages.length > 0
+        ? content.pages
+        : [Array.isArray(content.blocks) ? content.blocks : []];
+    const documentPages = rawPages.map((pageBlocks) => rewriteDocumentMediaUrls(pageBlocks));
+    return {
+      ...chapter,
+      documentPages,
+      pageCount: Math.max(1, documentPages.length),
+      contentMode: 'document',
     };
   }
 
