@@ -1,0 +1,91 @@
+{
+  "title": "Notes Java Datatypes 3",
+  "itemsPerPage": 2,
+  "source": "notes-java-datatypes-3.docx",
+  "items": [
+    {
+      "question": "Explain the char data type in Java, including its purpose, memory allocation, and storage format.",
+      "answer": "Answer: The char data type is used to store a single character in Java. When a char variable is declared, Java allocates 2 bytes (16 bits) of memory. The character is stored using the UTF-16 encoding format, which assigns a unique 16-bit binary code to every supported character."
+    },
+    {
+      "question": "Why must characters be converted into binary before they are stored in memory?",
+      "answer": "Answer: A computer stores all types of data in binary (0s and 1s). Whether the data is an integer, real number, character, or Boolean value, it must first be converted into binary before it can be stored in the computer's memory."
+    },
+    {
+      "question": "Why does every character need a unique binary code? Explain with examples.",
+      "answer": "Answer: Each character must have a unique binary code so that the computer can correctly identify and retrieve it. For example: If there are 2 characters (A, B), 1 bit is enough: A → 0 B → 1 If there are 4 characters (A, B, C, D), 1 bit is not enough because duplicate codes would create confusion. Therefore, 2 bits are required. As the number of characters increases, the number of bits must also increase to provide every character with a unique binary representation."
+    },
+    {
+      "question": "Explain the relationship between the number of characters and the number of binary digits required to represent them.",
+      "answer": "Answer: The required number of binary digits depends on the total number of characters in the character set. Examples: 2 characters = 2¹ → 1 bit 4 characters = 2² → 2 bits 8 characters = 2³ → 3 bits 16 characters = 2⁴ → 4 bits In general, if a character set contains 2ⁿ characters, then n bits are needed to uniquely represent every character."
+    },
+    {
+      "question": "What is ASCII, and why was it introduced?",
+      "answer": "Answer: ASCII (American Standard Code for Information Interchange) is a character encoding standard introduced to assign a unique binary code to English characters and commonly used symbols. Key points: Contains 128 characters. Each character has a unique 7-bit binary code. It was widely used by programming languages developed before Java for storing English text."
+    },
+    {
+      "question": "What are the limitations of ASCII, and why did Java choose Unicode instead?",
+      "answer": "Answer: ASCII supports only English letters and symbols. It does not include characters from languages such as Chinese, Japanese, Korean, Kannada, Telugu, and many others. Since Java was designed as an Internet programming language, it needed to support multiple languages worldwide. Therefore, Java uses Unicode (UTF-16) instead of ASCII to represent characters from many different languages."
+    },
+    {
+      "question": "What is UTF-16, and why is it used in Java?",
+      "answer": "Answer: UTF-16 is the character encoding format used by Java. Features: Supports 65,536 characters. Each character is assigned a unique 16-bit (2-byte) binary code. It allows Java applications to work with characters from many languages around the world, making Java suitable for international software development."
+    },
+    {
+      "question": "Why does the char data type occupy 2 bytes in Java?",
+      "answer": "Answer: Java stores characters using UTF-16, where every character is represented using 16 bits. Since 16 bits = 2 bytes, every char variable occupies 2 bytes of memory."
+    },
+    {
+      "question": "Explain the boolean data type in Java and its memory allocation.",
+      "answer": "Answer: The boolean data type stores logical values such as true or false.Unlike other primitive data types, its memory allocation is not fixed. It depends on the JVM and the operating system. According to the trainer: Windows: typically allocates 1 byte Unix/Mac-based systems: may allocate 2 bytes Therefore, boolean has no standard memory size across all platforms."
+    },
+    {
+      "question": "What are the three important properties you should know about every primitive data type?",
+      "answer": "Answer: For every primitive data type, you should know: What kind of data it stores (integer, real number, character, or Boolean). How much memory it occupies. The format used to store the data internally in memory. These three properties help you understand how Java stores and manages primitive data efficiently."
+    },
+    {
+      "question": "Write a Java program that demonstrates all primitive data types. Explain it line by line.",
+      "answer": "Answer: ```java\npublic class PrimitiveDataTypes {\npublic static void main(String[] args) {\nbyte a = 10;\nshort b = 128;\nint c = 32768;\nlong d = 2147483648L;\nfloat e = 3.147F;\ndouble g = 22.3456789012;\nchar h = 'A';\nSystem.out.println(a + \" \" + b + \" \" + c + \" \" +\nd + \" \" + e + \" \" + g + \" \" + h);\n} }\n```\n\nLine-by-Line Explanation\n\n```java\nbyte a = 10;\n```\n\nDeclares a byte variable and stores the value 10.\n\n```java\nshort b = 128;\n```\n\nDeclares a short variable because 128 is outside the valid range of byte.\n\n```java\nint c = 32768;\n```\n\nDeclares an int variable to store a larger integer.\n\n```java\nlong d = 2147483648L;\n```\n\nDeclares a long variable. The suffix L tells Java that the literal is of type long.\n\n```java\nfloat e = 3.147F;\n```\n\nDeclares a float variable. The suffix F is required because decimal literals are treated as double by default.\n\n```java\ndouble g = 22.3456789012;\n```\n\nDeclares a double variable for higher precision decimal values.\n\n```java\nchar h = 'A';\n```\n\nDeclares a char variable and stores a single character enclosed in single quotes.\n\n```java\nSystem.out.println(...);\n```\n\nPrints the values of all primitive variables. This program demonstrates how different primitive data types are declared and used in Java."
+    },
+    {
+      "question": "Why do compile-time errors occur when assigning values beyond a data type's range?",
+      "answer": "Answer: Every primitive data type has a fixed range. If a value exceeds that range, Java reports a compile-time error because the value cannot fit into the allocated memory. Examples from the transcript:\n\n```java\nbyte maximum value is 127. Assigning 128 causes an error.\nshort cannot store values beyond its range.\nint cannot store values beyond its maximum limit. Such values must be stored in a long variable.\n```\n\nJava performs these checks during compilation to prevent invalid assignments."
+    },
+    {
+      "question": "Why are the L and F suffixes used in Java?",
+      "answer": "Answer: Java requires suffixes for certain numeric literals: L (or l) is used with long literals. F (or f) is used with float literals because decimal literals are considered double by default. Examples:\n\n```java\nlong num = 2147483648L;\nfloat price = 3.147F;\n```\n\nWithout these suffixes, Java treats the values as different data types and compilation may fail."
+    },
+    {
+      "question": "What is Type Casting in Java?",
+      "answer": "Answer: Type Casting is the process of converting data from one data type to another data type. When data stored in one type needs to be assigned to a variable of another type, Java converts the data into the destination type before storing it. Examples: byte → short int → double\n\n```java\ndouble → int\n```\n\nDuring this process, Java converts the internal representation of the data to match the destination data type. This conversion process is called Type Casting."
+    },
+    {
+      "question": "Why is Type Casting required in Java?",
+      "answer": "Answer: Type Casting is required when the value of one data type needs to be stored in a variable of another data type. For example: A value stored in a byte variable may need to be stored in a short variable. An int value may need to be stored in a double variable. Since each data type has a different memory size and storage format, Java converts the data into the destination type before storing it."
+    },
+    {
+      "question": "Explain the internal working of Type Casting with an example.",
+      "answer": "Answer: Consider the following example:\n\n```java\nbyte a = 10;\nshort b = a;\n```\n\nHere:\n\n```java\nbyte occupies 1 byte (8 bits).\nshort occupies 2 bytes (16 bits).\n```\n\nThe value 10 is first stored in 8-bit binary format. Before storing it in the short variable, Java converts the 8-bit binary value into a 16-bit binary value. This conversion is called Type Casting. Similarly, when converting int to double, Java converts the 4-byte integer value into an 8-byte IEEE double-precision format before storing it."
+    },
+    {
+      "question": "What is Implicit Type Casting (Widening/Type Promotion)? Why is it called widening?",
+      "answer": "Answer: Implicit Type Casting is the automatic conversion of data from a smaller data type to a larger data type. Examples: byte → short short → int int → long int → double It is called Widening because the destination data type has a larger memory size than the source data type. Since the larger type can hold all values of the smaller type, Java performs the conversion automatically without requiring any explicit cast. It is also known as Type Promotion."
+    },
+    {
+      "question": "What is Explicit Type Casting (Narrowing)? Why is it called narrowing?",
+      "answer": "Answer: Explicit Type Casting is the conversion of data from a larger data type to a smaller data type. Examples: short → byte\n\n```java\ndouble → int\n```\n\nIt is called Narrowing because the destination type has less memory than the source type. Since this conversion may lose data, Java requires the programmer to explicitly specify the cast."
+    },
+    {
+      "question": "Why does Java perform implicit type casting automatically but not explicit type casting?",
+      "answer": "Answer: Java automatically performs implicit type casting because converting from a smaller type to a larger type does not cause data loss. However, Java does not perform explicit type casting automatically because converting from a larger type to a smaller type may result in: Loss of bits Loss of decimal values Incorrect results Therefore, the programmer must explicitly tell the compiler to perform the conversion."
+    },
+    {
+      "question": "Compare Implicit Type Casting and Explicit Type Casting.",
+      "answer": "Answer: Feature Implicit Type Casting Explicit Type Casting Also Called Widening, Type Promotion Narrowing Conversion Smaller → Larger Larger → Smaller Performed By Compiler automatically Programmer using cast operator Data Loss No Possible Cast Required No Yes This comparison is one of the most frequently asked Java interview questions."
+    },
+    {
+      "question": "Which primitive data types participate in type casting?",
+      "answer": "Answer: The trainer explains that all primitive data types except boolean participate in type casting. The participating data types are: byte short int long float\n\n```java\ndouble\n```\n\nchar The boolean data type does not participate in type casting."
+    }
+  ]
+}
