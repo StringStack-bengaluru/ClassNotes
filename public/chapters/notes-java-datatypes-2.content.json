@@ -1,0 +1,87 @@
+{
+  "title": "Notes Java Datatypes 2",
+  "itemsPerPage": 2,
+  "source": "notes-java-datatypes-2.docx",
+  "items": [
+    {
+      "question": "How does the most significant bit determine whether a value is positive or negative?",
+      "answer": "Answer: The most significant bit (MSB) acts as the sign indicator in a byte. If the MSB is 0, the stored value is interpreted as positive. If the MSB is 1, the stored value is interpreted as negative. This sign representation is one of the reasons why positive values beyond the supported range cannot be represented correctly."
+    },
+    {
+      "question": "What is the consequence of forcing a value greater than 127 into a byte?",
+      "answer": "Answer: When a value larger than 127 is forced into a byte, the stored value wraps around into the negative range instead of representing the intended positive value. This happens because the available storage capacity has been exceeded, causing the representation to cycle through the supported range."
+    },
+    {
+      "question": "How does the JVM reconstruct the original decimal value from binary data?",
+      "answer": "Answer: While retrieving the stored value, the JVM converts the binary representation back into decimal. This is done by multiplying each binary digit by its corresponding power of two and adding the resulting values together to obtain the original decimal number."
+    },
+    {
+      "question": "Why does Java provide separate data types for storing real numbers?",
+      "answer": "Answer: Integer data types cannot represent values containing decimal points. Therefore, Java provides two dedicated data types—float and double—to store real numbers. These data types use special storage formats designed specifically for decimal values."
+    },
+    {
+      "question": "What is the difference between storing data using float and double?",
+      "answer": "Answer: When a variable is declared using float, the data is stored using IEEE single precision format in 4 bytes (32 bits). When a variable is declared using double, the data is stored using IEEE double precision format in 8 bytes (64 bits)."
+    },
+    {
+      "question": "How is memory organized when a float value is stored?",
+      "answer": "Answer: A float occupies 32 bits, which are divided into three parts: 1 bit for the sign. 8 bits for the exponent (Excess-127). 23 bits for the mantissa. This arrangement is known as the IEEE single precision format."
+    },
+    {
+      "question": "How is memory organized when a double value is stored?",
+      "answer": "Answer: A double occupies 64 bits, divided into: 1 sign bit 11 exponent bits (Excess-1023) 52 mantissa bits This arrangement is called the IEEE double precision format."
+    },
+    {
+      "question": "Why is the IEEE single and double precision format important for storing real numbers?",
+      "answer": "Answer: Real numbers cannot be stored in memory in the same way as integers. Therefore, Java stores floating-point values using IEEE formats that divide the available bits into three sections—sign, exponent, and mantissa. This standardized format enables real numbers to be represented in computer memory."
+    },
+    {
+      "question": "Why is the literal 44.17F used instead of just 44.17 while storing a float value?",
+      "answer": "Answer: When storing a value in a float variable, the suffix F is appended to the numeric literal. Similar to using L for long, the F suffix indicates that the value should be treated as a float."
+    },
+    {
+      "question": "What is the first step in converting a real number into IEEE single precision format?",
+      "answer": "Answer: The first step is to separate the real number into its integer part and fractional part. The integer part is converted to binary using repeated division by 2, while the fractional part is converted using a different multiplication-based method."
+    },
+    {
+      "question": "How is the fractional part of a real number converted into binary?",
+      "answer": "Answer: The fractional part is repeatedly multiplied by 2. After each multiplication, the integer part of the result is recorded as the next binary digit, and the remaining fractional part is used for the next multiplication. This process continues until the required number of binary digits is obtained."
+    },
+    {
+      "question": "How is the complete binary representation of a real number obtained?",
+      "answer": "Answer: After converting both the integer and fractional parts separately into binary, they are combined by placing a binary point between them. This combined binary value represents the complete real number before normalization."
+    },
+    {
+      "question": "Why is the binary number normalized before being stored?",
+      "answer": "Answer: The binary number is normalized by moving the binary point so that it appears immediately after the first digit. This normalized form is used to determine the exponent and prepare the number for storage in IEEE single precision format."
+    },
+    {
+      "question": "How is the exponent determined after normalizing a binary number?",
+      "answer": "Answer: The exponent is determined by counting the number of positions the binary point is moved during normalization. For the example discussed, the binary point is moved five positions, making the exponent equal to 5."
+    },
+    {
+      "question": "What does the term \"Excess-127\" mean in IEEE single precision format?",
+      "answer": "Answer: In IEEE single precision format, the actual exponent is not stored directly. Instead, 127 is added to the exponent, and the resulting value is stored in the exponent field. For an exponent of 5, the stored exponent becomes 132 (127 + 5)."
+    },
+    {
+      "question": "Why is the exponent value converted to binary before storage?",
+      "answer": "Answer: After adding the bias value (127), the exponent becomes a decimal number. Since computer memory stores only binary values, this decimal exponent must also be converted into binary before being placed in the exponent field."
+    },
+    {
+      "question": "How are the sign, exponent, and mantissa combined to form the final IEEE single precision representation?",
+      "answer": "Answer: The final representation is formed by placing: the sign bit in the first position, the binary form of the biased exponent in the next eight bits, and the mantissa bits in the remaining twenty-three positions. Together, these fields form the complete 32-bit IEEE single precision representation."
+    },
+    {
+      "question": "How does the JVM know when to stop generating mantissa bits?",
+      "answer": "Answer: The JVM generates only the number of mantissa bits required by the IEEE format. Since the mantissa field in single precision is limited to 23 bits, the conversion process stops as soon as those bits are obtained."
+    },
+    {
+      "question": "Why is the leading 1 not stored in the mantissa?",
+      "answer": "Answer: After normalization, the leading 1 is intentionally omitted from the mantissa because that is the defined IEEE storage format. When the value is later retrieved, this leading 1 is added back during reconstruction."
+    },
+    {
+      "question": "How does storing a value in double differ from storing it in float?",
+      "answer": "Answer: The overall procedure remains the same, but a double provides a 52-bit mantissa and an exponent stored using Excess-1023. Therefore, more mantissa calculations are required before the value is stored in IEEE double precision format."
+    }
+  ]
+}
