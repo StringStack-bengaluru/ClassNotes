@@ -1,0 +1,123 @@
+{
+  "title": "Notes Java Methods 1",
+  "itemsPerPage": 2,
+  "source": "notes-java-methods-1.docx",
+  "items": [
+    {
+      "question": "Why are underscores used in numeric literals in Java?",
+      "answer": "Answer: Underscores can be placed inside numeric literals to improve readability. They do not change the actual value. Example:\n\n```java\nint amount = 1_00_000;\n```\n\nThe value stored is 100000."
+    },
+    {
+      "question": "How many underscores can be used between digits in a numeric literal?",
+      "answer": "Answer: Java allows any number of underscores between digits. Example:\n\n```java\nint a = 1_0;\nint b = 1_____0;\n```\n\nBoth variables store the value 10."
+    },
+    {
+      "question": "Can an underscore be placed at the beginning or end of a numeric literal?",
+      "answer": "Answer: No. An underscore cannot be placed before the first digit or after the last digit. Invalid examples:\n\n```java\nint a = _10;\nint b = 10_;\n```\n\nAn underscore must be placed only between digits."
+    },
+    {
+      "question": "Where can underscores be used in a floating-point literal?",
+      "answer": "Answer: Underscores can be placed: Between digits before the decimal point Between digits after the decimal point Examples:\n\n```java\nfloat a = 3_3.147F;\nfloat b = 33.1_47F;\n```\n\nThe underscores do not affect the value."
+    },
+    {
+      "question": "Where are underscores not allowed in a floating-point literal?",
+      "answer": "Answer: An underscore cannot be placed: Immediately before the decimal point Immediately after the decimal point Immediately before the suffix After the suffix At the beginning or end of the literal Invalid examples:\n\n```java\nfloat a = 33_.147F;\nfloat b = 33._147F;\nfloat c = 33.147_F;\nfloat d = 33.147F_;\n```\n\nUnderscores must appear only between digits."
+    },
+    {
+      "question": "In how many ways can a real number be represented in Java?",
+      "answer": "Answer: A real number can be represented in two ways: Normal decimal notation Scientific notation Example:\n\n```java\ndouble a = 3147.326;\ndouble b = 3.147326E3;\n```\n\nBoth statements represent the same value."
+    },
+    {
+      "question": "What is scientific notation in Java?",
+      "answer": "Answer: Scientific notation represents a real number using E or e followed by an exponent. Example:\n\n```java\ndouble value = 3.147326E3;\n```\n\nHere, E3 means that the value is multiplied by (10^3). Therefore: 3.147326E3 = 3147.326"
+    },
+    {
+      "question": "What does a positive exponent mean in scientific notation?",
+      "answer": "Answer: A positive exponent moves the decimal point towards the right. Example:\n\n```java\ndouble value = 3.147326E3;\n```\n\nThe decimal point moves three positions towards the right: 3.147326 → 3147.326"
+    },
+    {
+      "question": "What does a negative exponent mean in scientific notation?",
+      "answer": "Answer: A negative exponent moves the decimal point towards the left. Example:\n\n```java\ndouble value = 314732.6E-2;\n```\n\nThe decimal point moves two positions towards the left: 314732.6 → 3147.326"
+    },
+    {
+      "question": "What is the output of the following scientific-notation program?",
+      "answer": "Answer: ```java\nclass Demo {\npublic static void main(String[] args) {\ndouble a = 3147.326;\ndouble b = 3.147326E3;\ndouble c = 314732.6E-2;\nSystem.out.println(a);\nSystem.out.println(b);\nSystem.out.println(c);\n}\n}\n```\n\nOutput: 3147.326 3147.326 3147.326 All three literals represent the same real number. The first uses normal notation, while the second and third use scientific notation."
+    },
+    {
+      "question": "What is the default data type of a real-number literal in Java?",
+      "answer": "Answer: By default, every real-number literal in Java is treated as a double. Example: 3.147 The compiler treats this value as a double and represents it using the 64-bit IEEE double-precision format."
+    },
+    {
+      "question": "Why does float a = 3.147; produce a compile-time error?",
+      "answer": "Answer: The literal 3.147 is treated as a double by default. A double occupies 8 bytes, while a float occupies 4 bytes. Assigning a double value directly to a float is a narrowing conversion, which Java does not perform automatically. Therefore, the statement produces a compile-time error."
+    },
+    {
+      "question": "Explain the internal working of float a = 3.147;.",
+      "answer": "Answer: The assignment operator evaluates the expression from right to left. The compiler first reads 3.147. It treats the literal as a double. It converts the value into the 64-bit IEEE double-precision format. It then tries to store the 8-byte value in a 4-byte float variable. Since this is narrowing, the compiler reports an error. The conversion cannot happen implicitly because data may be lost."
+    },
+    {
+      "question": "Why is the F suffix added to a floating-point literal?",
+      "answer": "Answer: The suffix F or f tells the compiler to treat the real-number literal as a float instead of a double. Example:\n\n```java\nfloat value = 3.147F;\n```\n\nWithout the suffix, the compiler treats 3.147 as a double, and double-to-float conversion cannot happen implicitly."
+    },
+    {
+      "question": "Can explicit casting be used instead of the F suffix?",
+      "answer": "Answer: Yes. A double literal can be explicitly converted to float. Example:\n\n```java\nfloat value = (float) 3.147;\n```\n\nHere, (float) explicitly converts the default double value into a float."
+    },
+    {
+      "question": "What is the default data type of an integer literal in Java?",
+      "answer": "Answer: By default, an integer literal is treated as an int, provided the value is within the valid int range. The maximum positive int value is:"
+    },
+    {
+      "question": "Is the L suffix mandatory for every value assigned to a long variable?",
+      "answer": "Answer: No. The L suffix is not mandatory when the literal is within the range of int. Examples:\n\n```java\nlong a = 0;\nlong b = 128;\nlong c = 32768;\nlong d = 2147483647;\n```\n\nThe values are initially treated as int and then implicitly widened to long."
+    },
+    {
+      "question": "When is the L suffix required?",
+      "answer": "Answer: The L suffix is required when the integer literal exceeds the range of int. Example:\n\n```java\nlong value = 2147483648L;\n```\n\nWithout L, the compiler treats the literal as an int and reports that it is outside the int range."
+    },
+    {
+      "question": "Why is adding L recommended even when the literal fits within the int range?",
+      "answer": "Answer: Without L, the compiler first treats the literal as an int and then converts it into a long. Example:\n\n```java\nlong value = 128;\n```\n\nThe compiler: Creates a 4-byte int representation. Converts it into an 8-byte long representation. Stores it in the long variable. With L:\n\n```java\nlong value = 128L;\n```\n\nThe compiler directly treats the literal as a long, avoiding the intermediate conversion."
+    },
+    {
+      "question": "How is an integer literal interpreted when it has no prefix?",
+      "answer": "Answer: An integer literal without a prefix is treated as a decimal number. Example:\n\n```java\nint value = 45;\n```\n\nHere, 45 is interpreted using the decimal number system."
+    },
+    {
+      "question": "How is an octal literal represented in Java?",
+      "answer": "Answer: An integer literal prefixed with 0 is treated as an octal number. Example:\n\n```java\nint value = 045;\n```\n\nThe octal number system uses digits from 0 to 7. Each octal digit can be represented using three binary bits."
+    },
+    {
+      "question": "What is the output of System.out.println(045);?",
+      "answer": "Answer: The output is: 045 is an octal literal. Its decimal value is: 4 × 8¹ + 5 × 8⁰ = 32 + 5 = 37 Java displays the result in decimal form."
+    },
+    {
+      "question": "How is a hexadecimal literal represented in Java?",
+      "answer": "Answer: A hexadecimal literal is prefixed with 0x or 0X. Example:\n\n```java\nint value = 0x45;\n```\n\nHexadecimal uses digits 0 to 9 and letters A to F. Each hexadecimal digit represents four binary bits."
+    },
+    {
+      "question": "What is the output of System.out.println(0x45);?",
+      "answer": "Answer: The output is: The hexadecimal value is converted as follows: 4 × 16¹ + 5 × 16⁰ = 64 + 5 = 69"
+    },
+    {
+      "question": "How is a binary literal represented in Java?",
+      "answer": "Answer: A binary literal is prefixed with 0b or 0B. Example:\n\n```java\nint value = 0b1010;\n```\n\nA binary literal can contain only 0 and 1. 26. Summarise the prefixes used for integer number systems in Java. Number system Prefix Example Decimal No prefix Octal Hexadecimal 0x or 0X 0x45 Binary 0b or 0B 0b1010 An integer literal without a prefix is treated as decimal."
+    },
+    {
+      "question": "Explain JRE from the software and memory perspectives.",
+      "answer": "Answer: JRE stands for Java Runtime Environment. From the software perspective, JRE is a collection of components required to run a Java program, including: Class loader Bytecode verifier Java libraries JVM and its components From the memory perspective, JRE is the region in RAM where a Java program is loaded and executed."
+    },
+    {
+      "question": "What are the four segments of the JRE memory region?",
+      "answer": "Answer: The JRE memory region is divided into four segments: Code Segment Static Segment Stack Segment Heap Segment Each segment manages a different category of program information."
+    },
+    {
+      "question": "What is a method in Java, and why is it required?",
+      "answer": "Answer: A method is a set of statements used to perform a particular task. During program development, every separate task should be placed inside its own method. For example, a calculator may use different methods for: Addition Subtraction Multiplication Finding the quotient Finding the remainder This helps organise the tasks performed by the program."
+    },
+    {
+      "question": "What are the four main components of a method?",
+      "answer": "Answer: A method contains four main components: Method name – identifies the method. Return type – represents the output produced by the method. Parameters – represent the input accepted by the method. Method definition or body – contains the statements that perform the actual task. Therefore: Parameters are the method's input. Return type is the method's output. Method body is the actual task or implementation."
+    }
+  ]
+}
