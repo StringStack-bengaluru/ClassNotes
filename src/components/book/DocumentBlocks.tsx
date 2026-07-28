@@ -10,40 +10,51 @@ function flattenRuns(runs: DocumentTextRun[]): string {
   return runs.map((run) => run.text ?? '').join('').trim();
 }
 
-/** Numbered / interrogative lines that should always render bold. */
+/**
+ * Numbered / interrogative lines must always look like questions (bold + clear).
+ * Matches: "1. What is…?", "2) Why…?", "What is a method in Java?"
+ */
 function isQuestionText(text: string): boolean {
-  const cleaned = text
+  const raw = text.replace(/\s+/g, ' ').trim();
+  if (!raw) return false;
+
+  const cleaned = raw
     .replace(/^\d+[G]?[.)]\s*/i, '')
     .replace(/^G\.\s*/i, '')
     .replace(/\s*Answer\s*:?\s*$/i, '')
     .trim();
   if (!cleaned) return false;
-  if (/^\d+[G]?[.)]\s+\S/i.test(text) && (cleaned.endsWith('?') || QUESTION_START.test(cleaned))) {
-    return true;
-  }
+
+  // Any numbered item that ends with ? (standard Q&A notes)
+  if (/^\d+[G]?[.)]\s+\S/i.test(raw) && cleaned.endsWith('?')) return true;
+
+  // Numbered + question-word stem (even if Word dropped the "?")
+  if (/^\d+[G]?[.)]\s+\S/i.test(raw) && QUESTION_START.test(cleaned)) return true;
+
+  // Unnumbered interrogative
   if (cleaned.endsWith('?') && QUESTION_START.test(cleaned)) return true;
+
   return false;
 }
 
-function forceBoldRuns(runs: DocumentTextRun[]): DocumentTextRun[] {
-  return runs.map((run) => ({ ...run, bold: true }));
-}
-
-function Runs({ runs, forceBold = false }: { runs: DocumentTextRun[]; forceBold?: boolean }) {
-  const displayRuns = forceBold ? forceBoldRuns(runs) : runs;
+function Runs({
+  runs,
+  forceBold = false,
+}: {
+  runs: DocumentTextRun[];
+  forceBold?: boolean;
+}) {
   return (
     <>
-      {displayRuns.map((run, index) => {
+      {runs.map((run, index) => {
         const text = run.text ?? '';
         if (!text) return null;
+        const bold = forceBold || Boolean(run.bold);
         return (
           <span
             key={index}
-            className={clsx(
-              run.bold && 'font-bold',
-              run.italic && 'italic',
-              run.underline && 'underline',
-            )}
+            className={clsx(run.italic && 'italic', run.underline && 'underline')}
+            style={bold ? { fontWeight: 700 } : undefined}
           >
             {text}
           </span>
@@ -67,6 +78,11 @@ function alignClass(align?: string): string {
   }
 }
 
+/** Shared look: every question is bold, slightly larger, clearly separated from answers. */
+function questionClassName(): string {
+  return 'mt-4 mb-2 font-serif text-[15px] leading-snug first:mt-0 md:text-base';
+}
+
 interface DocumentBlocksProps {
   blocks: DocumentBlock[];
   theme: ThemeMode;
@@ -85,40 +101,62 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
         {blocks.map((block, index) => {
           switch (block.type) {
             case 'blank':
-              return <div key={index} className="h-4 shrink-0" aria-hidden />;
+              return <div key={index} className="h-3 shrink-0" aria-hidden />;
             case 'heading': {
-              const Tag = (`h${Math.min(4, Math.max(1, block.level))}` as 'h1' | 'h2' | 'h3' | 'h4');
               const asQuestion = isQuestionText(flattenRuns(block.runs));
+              if (asQuestion) {
+                return (
+                  <p
+                    key={index}
+                    className={clsx(questionClassName(), alignClass(block.align), colors.text)}
+                    style={{ fontWeight: 700 }}
+                  >
+                    <Runs runs={block.runs} forceBold />
+                  </p>
+                );
+              }
+              const Tag = (`h${Math.min(4, Math.max(1, block.level))}` as 'h1' | 'h2' | 'h3' | 'h4');
               return (
                 <Tag
                   key={index}
                   className={clsx(
-                    'mt-3 mb-1.5 font-serif font-bold leading-snug first:mt-0',
+                    'mt-3 mb-1.5 font-serif leading-snug first:mt-0',
                     block.level <= 1 && 'text-lg md:text-xl',
                     block.level === 2 && 'text-base md:text-lg',
                     block.level >= 3 && 'text-sm md:text-base',
                     alignClass(block.align),
                     colors.text,
                   )}
+                  style={{ fontWeight: 700 }}
                 >
-                  <Runs runs={block.runs} forceBold={asQuestion} />
+                  <Runs runs={block.runs} forceBold />
                 </Tag>
               );
             }
             case 'paragraph': {
               const asQuestion = isQuestionText(flattenRuns(block.runs));
+              if (asQuestion) {
+                return (
+                  <p
+                    key={index}
+                    className={clsx(questionClassName(), alignClass(block.align), colors.text)}
+                    style={{ fontWeight: 700 }}
+                  >
+                    <Runs runs={block.runs} forceBold />
+                  </p>
+                );
+              }
               return (
                 <p
                   key={index}
                   className={clsx(
-                    'mb-3 whitespace-pre-line last:mb-0',
-                    asQuestion && 'font-bold font-serif',
-                    block.indent && !asQuestion && 'pl-3',
+                    'mb-3 whitespace-pre-line font-normal last:mb-0',
+                    block.indent && 'pl-3',
                     alignClass(block.align),
                     colors.text,
                   )}
                 >
-                  <Runs runs={block.runs} forceBold={asQuestion} />
+                  <Runs runs={block.runs} />
                 </p>
               );
             }
@@ -127,7 +165,7 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
                 <blockquote
                   key={index}
                   className={clsx(
-                    'mb-3 border-l-2 border-[#C6A43B]/70 pl-3 italic whitespace-pre-line',
+                    'mb-3 border-l-2 border-[#C6A43B]/70 pl-3 italic whitespace-pre-line font-normal',
                     colors.muted,
                   )}
                 >
@@ -138,14 +176,18 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
               return block.ordered ? (
                 <ol
                   key={index}
-                  className={clsx('mb-3 list-decimal space-y-1.5 pl-5', colors.text)}
+                  className={clsx('mb-3 list-decimal space-y-1.5 pl-5 font-normal', colors.text)}
                 >
                   {block.items.map((item, itemIndex) => {
                     const asQuestion = isQuestionText(flattenRuns(item.runs));
                     return (
                       <li
                         key={itemIndex}
-                        className={clsx('whitespace-pre-line pl-1', asQuestion && 'font-bold')}
+                        className={clsx(
+                          'whitespace-pre-line pl-1',
+                          asQuestion && 'font-serif text-[15px]',
+                        )}
+                        style={asQuestion ? { fontWeight: 700 } : undefined}
                       >
                         <Runs runs={item.runs} forceBold={asQuestion} />
                       </li>
@@ -155,14 +197,18 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
               ) : (
                 <ul
                   key={index}
-                  className={clsx('mb-3 list-disc space-y-1.5 pl-5', colors.text)}
+                  className={clsx('mb-3 list-disc space-y-1.5 pl-5 font-normal', colors.text)}
                 >
                   {block.items.map((item, itemIndex) => {
                     const asQuestion = isQuestionText(flattenRuns(item.runs));
                     return (
                       <li
                         key={itemIndex}
-                        className={clsx('whitespace-pre-line pl-1', asQuestion && 'font-bold')}
+                        className={clsx(
+                          'whitespace-pre-line pl-1',
+                          asQuestion && 'font-serif text-[15px]',
+                        )}
+                        style={asQuestion ? { fontWeight: 700 } : undefined}
                       >
                         <Runs runs={item.runs} forceBold={asQuestion} />
                       </li>
