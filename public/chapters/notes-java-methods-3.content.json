@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Methods 3",
+  "itemsPerPage": 2,
+  "source": "notes-java-methods-3.docx",
+  "items": [
+    {
+      "question": "What is a method that accepts parameters but does not return a value?",
+      "answer": "Answer: It is a method that receives input through parameters, performs a task, and returns nothing to the caller. Its return type is void. Example:\n\n```java\npublic static void add(int a, int b) {\nint c = a + b;\nSystem.out.println(c);\n}\n```\n\nThis method accepts two integer parameters but does not return a value."
+    },
+    {
+      "question": "What is a parameter in Java?",
+      "answer": "Answer: A parameter is a variable declared in a method definition to receive a value from the method call. Example:\n\n```java\npublic static void add(int a, int b)\n```\n\nHere, a and b are parameters. They receive the values passed while calling the method."
+    },
+    {
+      "question": "What happens when add(10, 20) is called?",
+      "answer": "Answer: When the following call is executed:\n\n```java\nadd(10, 20);\n```\n\n10 is passed to the first parameter. 20 is passed to the second parameter. The method executes using these values. The values are passed in the same order in which the parameters are declared."
+    },
+    {
+      "question": "How are values assigned to multiple parameters?",
+      "answer": "Answer: Values are assigned positionally. Example:\n\n```java\nadd(10, 20);\n```\n\nFor this method:\n\n```java\npublic static void add(int a, int b)\n```\n\nthe assignments are: a = 10 b = 20 The first value is assigned to the first parameter, and the second value is assigned to the second parameter."
+    },
+    {
+      "question": "Where are method parameters stored in memory?",
+      "answer": "Answer: Parameters are stored in the stack frame or activation record of the called method. For example, when add(10, 20) is called, the parameters a and b are created inside the stack frame of add(). The values 10 and 20 are then stored in those parameter variables."
+    },
+    {
+      "question": "Explain the execution of a method that accepts parameters but returns nothing.",
+      "answer": "Answer: Consider:\n\n```java\npublic static void add(int a, int b) {\nint c = a + b;\nSystem.out.println(c);\n}\n```\n\nThe execution is: main() calls add(10, 20). A stack frame is created for add(). 10 is stored in a. 20 is stored in b. a + b produces 30. 30 is stored in c. 30 is printed. Control reaches the closing brace. The stack frame of add() is deleted. Control returns to main() without carrying a value."
+    },
+    {
+      "question": "Why is the return type of a parameterised method sometimes void?",
+      "answer": "Answer: A parameterised method may accept input but still return nothing. Example:\n\n```java\npublic static void add(int a, int b) {\nSystem.out.println(a + b);\n}\n```\n\nThe method receives a and b, but it only prints the result. Since it does not send a value back to the caller, its return type is void."
+    },
+    {
+      "question": "Write a program using a method that accepts parameters but returns no value.",
+      "answer": "Answer: ```java\nclass AdditionApp {\npublic static void add(int a, int b) {\nint c = a + b;\nSystem.out.println(c);\n}\npublic static void main(String[] args) {\nadd(10, 20);\n}\n}\n```\n\nOutput: Line-by-line explanation add(int a, int b) declares two integer parameters. add(10, 20) passes two values to the method. a receives 10. b receives 20. c stores their sum. The method prints 30. Since it returns nothing, the return type is void."
+    },
+    {
+      "question": "What is a method that accepts parameters and returns a value?",
+      "answer": "Answer: It is a method that: Receives input through parameters. Performs an operation. Returns the result to the calling method. Example:\n\n```java\npublic static int add(int a, int b) {\nint c = a + b;\nreturn c;\n}\n```\n\nThis method accepts two integers and returns an integer result."
+    },
+    {
+      "question": "How is a parameterised method that returns a value called?",
+      "answer": "Answer: The required values are passed during the call, and the returned value is collected in a compatible variable. Example:\n\n```java\nint result = add(10, 20);\n```\n\nHere: 10 and 20 are passed to add(). add() returns an integer. The returned integer is stored in result."
+    },
+    {
+      "question": "Explain the execution of a method that accepts parameters and returns a value.",
+      "answer": "Answer: Consider:\n\n```java\npublic static int add(int a, int b) {\nint c = a + b;\nreturn c;\n}\n```\n\nThe execution is: main() calls add(10, 20). A stack frame is created for add(). a receives 10. b receives 20. c stores 30.\n\n```java\nreturn c; sends 30 back to main().\n```\n\nThe stack frame of add() is deleted. The returned value is stored in a variable belonging to main()."
+    },
+    {
+      "question": "How is the return type decided for a parameterised method?",
+      "answer": "Answer: The return type must match the data type of the value returned by the method. Example:\n\n```java\npublic static int add(int a, int b) {\nint c = a + b;\nreturn c;\n}\n```\n\nSince c is an int, the method's return type must be int."
+    },
+    {
+      "question": "Write a program using a method that accepts parameters and returns a value.",
+      "answer": "Answer: ```java\nclass AdditionApp {\npublic static int add(int a, int b) {\nint c = a + b;\nreturn c;\n}\npublic static void main(String[] args) {\nint result = add(10, 20);\nSystem.out.println(result);\n}\n}\n```\n\nOutput: Line-by-line explanation add(int a, int b) accepts two integer parameters. The return type int indicates that the method returns an integer. c stores the addition result.\n\n```java\nreturn c; sends the result back to main().\n```\n\nresult collects the returned value. The value 30 is printed."
+    },
+    {
+      "question": "Write one Java program demonstrating all four types of methods.",
+      "answer": "Answer: ```java\nclass MethodTypesDemo {\n// No parameters and no return value\npublic static void add() {\nint a = 10;\nint b = 20;\nSystem.out.println(a + b);\n}\n// No parameters but returns a value\npublic static int subtract() {\nint a = 10;\nint b = 20;\nreturn a - b;\n}\n// Accepts parameters but returns no value\npublic static void multiply(int m, int n) {\nSystem.out.println(m * n);\n}\n// Accepts parameters and returns a value\npublic static int divide(int x, int y) {\nreturn x / y;\n}\npublic static void main(String[] args) {\nadd();\nint subtractionResult = subtract();\nSystem.out.println(subtractionResult);\nmultiply(10, 20);\nint divisionResult = divide(10, 2);\nSystem.out.println(divisionResult);\n}\n}\n```\n\nOutput: -10 This program demonstrates every combination of parameters and returned values."
+    },
+    {
+      "question": "Can an expression be returned directly from a method?",
+      "answer": "Answer: Yes. A separate result variable is not always required. Instead of:\n\n```java\nint c = a - b;\nreturn c;\n```\n\nwe can write:\n\n```java\nreturn a - b;\n```\n\nBoth forms return the same result."
+    },
+    {
+      "question": "Can an expression be printed directly inside a void method?",
+      "answer": "Answer: Yes. Instead of:\n\n```java\nint c = m * n;\nSystem.out.println(c);\n```\n\nwe can write:\n\n```java\nSystem.out.println(m * n);\n```\n\nSince the method returns nothing, the result can be printed directly inside the method."
+    },
+    {
+      "question": "What is a single-line comment in Java?",
+      "answer": "Answer: A single-line comment starts with two forward slashes:\n\n```java\n// This is a single-line comment\n```\n\nThe compiler ignores everything written after // on that line. Commented lines are not executed."
+    },
+    {
+      "question": "Will a defined method execute if it is not called?",
+      "answer": "Answer: No. A method may be correctly defined inside a class, but it will not execute unless it is called. Only the methods called directly or indirectly from the execution flow will run."
+    },
+    {
+      "question": "What is debugging?",
+      "answer": "Answer: Debugging is the process of checking program execution to identify where and why something is not working correctly. In Eclipse, debug mode allows the programmer to execute the program line by line and observe: Control flow Variable values Method calls Stack frames Returned values"
+    },
+    {
+      "question": "What is a breakpoint ?",
+      "answer": "Answer: A breakpoint is a marked line where program execution temporarily stops during debugging. A breakpoint can be added by right-clicking beside a line number and selecting Toggle Breakpoint. When the program runs in debug mode, it executes up to that line and pauses."
+    },
+    {
+      "question": "What is the difference between Step Into and Step Over ?",
+      "answer": "Answer: Step Into (F5) enters a called method so that its internal execution can be examined. Step Over (F6) executes the current line and moves to the next line without entering the called method. Use: F5 when you want to examine a method call internally. F6 for normal statements or when you do not want to enter the method."
+    },
+    {
+      "question": "Why are comments skipped during debugging?",
+      "answer": "Answer: Comments are written only for human understanding. They are ignored by the compiler and are not executable statements. Therefore, when debugging line by line, control automatically skips comment lines and moves to the next executable statement."
+    },
+    {
+      "question": "What are the main advantages of methods?",
+      "answer": "Answer: The three main advantages are: Separation of concerns Easier debugging Code reusability Methods allow each task to be organised separately, checked independently, and reused whenever required."
+    },
+    {
+      "question": "What is separation of concerns?",
+      "answer": "Answer: Separation of concerns means placing different tasks in different methods. For example:\n\n```java\nadd();\nsubtract();\nmultiply();\ndivide();\n```\n\nEach method handles one particular operation. This avoids placing all the logic inside main() and keeps the program organised."
+    },
+    {
+      "question": "How do methods make debugging easier?",
+      "answer": "Answer: When each task is written in a separate method, a problem can be checked in the method responsible for that task. For example, if subtraction is incorrect, only the subtract() method needs to be examined. Other correctly working methods do not need to be disturbed."
+    },
+    {
+      "question": "What is code reusability in methods?",
+      "answer": "Answer: Code reusability means using an existing method again instead of rewriting the same logic. For example, an addition method can be reused while calculating an average:\n\n```java\npublic static int add(int a, int b) {\nreturn a + b;\n}\npublic static void main(String[] args) {\nSystem.out.println(add(10, 20) / 2);\n}\n```\n\nThe add() method returns 30, and 30 / 2 produces 15. The addition logic does not need to be written again."
+    },
+    {
+      "question": "How is a static method called from another class?",
+      "answer": "Answer: A static method in another class is called using the class name followed by the method name. Syntax:\n\n```java\nClassName.methodName();\n```\n\nExample:\n\n```java\nSampleOne.greet();\n```\n\nHere, greet() is a static method declared inside SampleOne."
+    },
+    {
+      "question": "Is the class name required when calling a static method from the same class?",
+      "answer": "Answer: When the calling method and the called static method are in the same class, the class name can be omitted. Both forms are valid:\n\n```java\nadd(10, 20);\nSample.add(10, 20);\n```\n\nWhen the method is in another class, the class name is required:\n\n```java\nSampleOne.add(10, 20);\n```"
+    },
+    {
+      "question": "Write a program that calls static methods from another class.",
+      "answer": "Answer: ```java\nclass SampleOne {\npublic static void greet() {\nSystem.out.println(\"Hello, how are you?\");\n}\npublic static int add(int x, int y) {\nreturn x + y;\n}\npublic static String goodbye() {\nreturn \"Goodbye\";\n}\n}\nclass Sample {\npublic static void main(String[] args) {\nSampleOne.greet();\nint result = SampleOne.add(10, 20);\nSystem.out.println(result);\nString message = SampleOne.goodbye();\nSystem.out.println(message);\n}\n}\n```\n\nOutput:"
+    },
+    {
+      "question": "Hello, how are you?",
+      "answer": "Answer: Goodbye Line-by-line explanation SampleOne contains three static methods. SampleOne.greet() calls a void method from another class. SampleOne.add(10, 20) passes two values and returns an integer. result collects the returned integer. SampleOne.goodbye() returns a String. message must be a String because the method returns a string value. The methods are accessed using the class name because they are declared in another class."
+    }
+  ]
+}
