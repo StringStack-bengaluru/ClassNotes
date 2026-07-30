@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Methods 4",
+  "itemsPerPage": 2,
+  "source": "notes-java-methods-4.docx",
+  "items": [
+    {
+      "question": "How do you decide which type of method to use?",
+      "answer": "Answer: The method type depends on the problem requirement. Use a method with parameters when input must be provided by the caller. Use a method with a return value when the result must be sent back to the caller. Use a method with both parameters and a return value when it needs input and must send back a result. Use a method with neither when the method performs the complete task internally."
+    },
+    {
+      "question": "What is a calling method?",
+      "answer": "Answer: A calling method is the method that calls another method. Example:\n\n```java\npublic static void main(String[] args) {\nDemoApp.greet(\"Pravaha\");\n}\n```\n\nHere, main() is the calling method because it calls greet()."
+    },
+    {
+      "question": "What is a called method?",
+      "answer": "Answer: A called method is the method that is invoked by another method. Example:\n\n```java\npublic static String greet(String name) {\nreturn \"Hello \" + name;\n}\n```\n\nHere, greet() is the called method because main() invokes it."
+    },
+    {
+      "question": "What is a method-call statement?",
+      "answer": "Answer: A method-call statement is the statement where a method is invoked. Example:\n\n```java\nDemoApp.greet(\"Pravaha\");\n```\n\nThis statement transfers control to the greet() method."
+    },
+    {
+      "question": "What is a method definition?",
+      "answer": "Answer: A method definition is the complete declaration and body of a method. Example:\n\n```java\npublic static String greet(String name) {\nreturn \"Hello \" + name;\n}\n```\n\nIt contains the return type, method name, parameters, and method body."
+    },
+    {
+      "question": "What is an argument in Java?",
+      "answer": "Answer: An argument is the actual data passed while calling a method. Example:\n\n```java\nDemoApp.greet(\"Pravaha\");\n```\n\nHere, \"Pravaha\" is the argument."
+    },
+    {
+      "question": "What is a parameter in Java?",
+      "answer": "Answer: A parameter is the variable declared in a method definition to receive an argument. Example:\n\n```java\npublic static String greet(String name)\n```\n\nHere, name is the parameter that receives the value passed by the caller."
+    },
+    {
+      "question": "What is the difference between an argument and a parameter?",
+      "answer": "Answer: Argument Parameter Actual data passed during a method call Variable that receives the data Written in the method-call statement Written in the method definition Also called actual parameter Also called formal parameter Example:\n\n```java\ngreet(\"Pravaha\");\n```\n\n\"Pravaha\" is the argument. greet(String name) name is the parameter."
+    },
+    {
+      "question": "What is an actual parameter?",
+      "answer": "Answer: An actual parameter is another name for an argument. It is the actual value supplied during a method call. Example:\n\n```java\nadd(10, 20);\n```\n\nHere, 10 and 20 are actual parameters."
+    },
+    {
+      "question": "What is a formal parameter?",
+      "answer": "Answer: A formal parameter is a variable declared in the method definition to receive an actual parameter. Example:\n\n```java\npublic static int add(int a, int b)\n```\n\nHere, a and b are formal parameters."
+    },
+    {
+      "question": "Explain the execution of a method that accepts a String and returns a String.",
+      "answer": "Answer: Consider:\n\n```java\nclass DemoApp {\npublic static String greet(String name) {\nreturn \"Hello \" + name;\n}\n}\n```\n\nMethod call:\n\n```java\nString greeting = DemoApp.greet(\"Pravaha\");\nSystem.out.println(greeting);\n```\n\nExecution: \"Pravaha\" is passed as an argument. The parameter name receives \"Pravaha\". \"Hello \" is concatenated with name. The method returns \"Hello Pravaha\". The returned string is stored in greeting. The value is printed."
+    },
+    {
+      "question": "Write a method that multiplies a number by two without using the multiplication operator.",
+      "answer": "Answer: A left-shift operation by one position can be used.\n\n```java\nclass Demo {\npublic static int multiplyByTwo(int value) {\nreturn value << 1;\n}\npublic static void main(String[] args) {\nint result = multiplyByTwo(10);\nSystem.out.println(result);\n}\n}\n```\n\nOutput: Left-shifting an integer once is equivalent to multiplying it by two."
+    },
+    {
+      "question": "How does the left-shift operator multiply an integer by two?",
+      "answer": "Answer: The left-shift operator moves the binary bits towards the left. Example:\n\n```java\nint result = 10 << 1;\n```\n\nShifting once produces the same result as: 10 × 2 = 20 Therefore, value << 1 multiplies the value by two."
+    },
+    {
+      "question": "How can division by two be performed using a bitwise operator?",
+      "answer": "Answer: A right shift by one position can be used. Example:\n\n```java\npublic static int divideByTwo(int value) {\nreturn value >> 1;\n}\n```\n\nFor positive integer values, shifting once towards the right produces the same result as integer division by two."
+    },
+    {
+      "question": "Write a method that compares two integers and returns a Boolean value.",
+      "answer": "Answer: ```java\npublic static boolean compare(int a, int b) {\nreturn a == b;\n}\n```\n\nThe equality operator returns: true when both values are equal false when they are different"
+    },
+    {
+      "question": "Why should the return type of a comparison method be boolean?",
+      "answer": "Answer: Relational and equality operations produce only two possible results: true false Therefore, a method returning the result of a comparison should use boolean as its return type. Example:\n\n```java\npublic static boolean compare(int a, int b) {\nreturn a == b;\n}\n```"
+    },
+    {
+      "question": "Can a ternary operator be used inside a Boolean method?",
+      "answer": "Answer: Yes. Example:\n\n```java\npublic static boolean compare(int a, int b) {\nreturn a == b ? true : false;\n}\n```\n\nThe method returns true when the condition is satisfied; otherwise, it returns false."
+    },
+    {
+      "question": "Is return a == b; better than returning true or false through a ternary operator?",
+      "answer": "Answer: Both approaches produce the same result. Direct form:\n\n```java\nreturn a == b;\n```\n\nTernary form:\n\n```java\nreturn a == b ? true : false;\n```\n\nThe direct form is shorter because a == b already produces a Boolean value."
+    },
+    {
+      "question": "How should a returned Boolean value be collected?",
+      "answer": "Answer: It should be stored in a boolean variable. Example:\n\n```java\nboolean result = RelationalDemo.compare(10, 10);\nSystem.out.println(result);\n```\n\nThe receiving variable must be compatible with the method's return type."
+    },
+    {
+      "question": "Write a class containing relational-operation methods.",
+      "answer": "Answer: ```java\nclass RelationalDemo {\npublic static boolean isGreater(int a, int b) {\nreturn a > b;\n}\npublic static boolean isSmaller(int a, int b) {\nreturn a < b;\n}\npublic static boolean isEqual(int a, int b) {\nreturn a == b;\n}\npublic static boolean isNotEqual(int a, int b) {\nreturn a != b;\n}\n}\n```\n\nEach method accepts two integers and returns a Boolean result."
+    },
+    {
+      "question": "Write a main class that calls relational methods from another class.",
+      "answer": "Answer: ```java\nclass MainDemo {\npublic static void main(String[] args) {\nSystem.out.println(RelationalDemo.isGreater(20, 10));\nSystem.out.println(RelationalDemo.isSmaller(20, 10));\nSystem.out.println(RelationalDemo.isEqual(20, 10));\nSystem.out.println(RelationalDemo.isNotEqual(20, 10));\n}\n}\n```\n\nOutput: true false false true The methods are called using the class name because they are defined in another class."
+    },
+    {
+      "question": "Must every returned value first be stored in a variable?",
+      "answer": "Answer: No. A returned value can be used directly. Using a variable:\n\n```java\nboolean result = RelationalDemo.isEqual(10, 10);\nSystem.out.println(result);\n```\n\nDirectly printing:\n\n```java\nSystem.out.println(RelationalDemo.isEqual(10, 10));\n```\n\nBoth approaches are valid."
+    },
+    {
+      "question": "How does separation of concerns apply at the class level?",
+      "answer": "Answer: Separation of concerns means placing related operations inside separate classes. For example: MainDemo contains the main() method. RelationalDemo contains relational operations. LogicalDemo contains logical operations. This keeps related functionality together and makes maintenance easier."
+    },
+    {
+      "question": "Why should relational and logical operations be placed in separate classes?",
+      "answer": "Answer: Keeping them in separate classes provides: Better organisation Easier debugging Clear responsibility for each class Easier maintenance If a logical operation is incorrect, the programmer can directly inspect LogicalDemo instead of searching through unrelated relational code."
+    },
+    {
+      "question": "Write a class containing logical-operation methods.",
+      "answer": "Answer: ```java\nclass LogicalDemo {\npublic static boolean logicalAnd(boolean a, boolean b) {\nreturn a && b;\n}\npublic static boolean logicalOr(boolean a, boolean b) {\nreturn a || b;\n}\npublic static boolean logicalNot(boolean value) {\nreturn !value;\n}\n}\n```\n\nlogicalAnd() and logicalOr() accept two parameters because they use binary operators. logicalNot() accepts one parameter because ! is a unary operator."
+    },
+    {
+      "question": "Why does a logical NOT method accept only one parameter?",
+      "answer": "Answer: Logical NOT (!) is a unary operator. A unary operator works on only one operand. Example:\n\n```java\npublic static boolean logicalNot(boolean value) {\nreturn !value;\n}\n```\n\nLogical AND and OR require two operands, but logical NOT requires only one."
+    },
+    {
+      "question": "What are shorthand assignment operators?",
+      "answer": "Answer: Shorthand assignment operators combine an arithmetic operation with assignment. Example:\n\n```java\na += b;\n```\n\nThis is equivalent to:\n\n```java\na = a + b;\n```\n\nThe result is stored back in the left-side variable."
+    },
+    {
+      "question": "Explain the shorthand arithmetic assignment operators.",
+      "answer": "Answer: Shorthand Equivalent statement a += b a = a + b a -= b a = a - b a *= b a = a * b a /= b a = a / b a %= b a = a % b Each operator performs the operation and stores the result back in the left-side variable."
+    },
+    {
+      "question": "What is the output of the following shorthand operation?",
+      "answer": "Answer: ```java\nint a = 10;\nint b = 20;\na += b;\nSystem.out.println(a);\n```\n\nOutput: a += b means:\n\n```java\na = a + b;\n```\n\nTherefore, 10 + 20 is calculated and 30 is stored back in a."
+    },
+    {
+      "question": "Write one program using relational methods, logical methods, and class-level separation.",
+      "answer": "Answer: ```java\nclass RelationalDemo {\npublic static boolean isGreater(int a, int b) {\nreturn a > b;\n}\npublic static boolean isEqual(int a, int b) {\nreturn a == b;\n}\n}\nclass LogicalDemo {\npublic static boolean logicalAnd(boolean a, boolean b) {\nreturn a && b;\n}\npublic static boolean logicalNot(boolean value) {\nreturn !value;\n}\n}\nclass MainDemo {\npublic static void main(String[] args) {\nboolean greaterResult =\nRelationalDemo.isGreater(20, 10);\nboolean equalResult =\nRelationalDemo.isEqual(20, 10);\nboolean finalResult =\nLogicalDemo.logicalAnd(greaterResult, equalResult);\nSystem.out.println(greaterResult);\nSystem.out.println(equalResult);\nSystem.out.println(finalResult);\nSystem.out.println(LogicalDemo.logicalNot(finalResult));\n}\n}\n```\n\nOutput: true false false true Line-by-line explanation RelationalDemo contains relational operations. LogicalDemo contains logical operations. MainDemo contains only the execution logic. isGreater(20, 10) returns true. isEqual(20, 10) returns false. logicalAnd(true, false) returns false. logicalNot(false) returns true. The program demonstrates separation of concerns at the class level."
+    }
+  ]
+}
