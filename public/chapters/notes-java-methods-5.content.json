@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Methods 5",
+  "itemsPerPage": 2,
+  "source": "notes-java-methods-5.docx",
+  "items": [
+    {
+      "question": "What problem does method overloading solve?",
+      "answer": "Answer: Without method overloading, similar operations may require different method names such as: addOne() addTwo() addThree() When many methods perform the same task with different inputs, remembering every method name becomes difficult. Method overloading allows all such methods to use one meaningful name, such as add()."
+    },
+    {
+      "question": "What is method overloading?",
+      "answer": "Answer: Method overloading is the process of defining multiple methods in the same class with: The same method name Different parameter signatures Example:\n\n```java\npublic static int add(int a, int b) {\nreturn a + b;\n}\npublic static float add(float a, float b) {\nreturn a + b;\n}\n```\n\nBoth methods are named add(), but their parameter types are different."
+    },
+    {
+      "question": "What conditions allow methods to have the same name?",
+      "answer": "Answer: Methods can have the same name when at least one of the following is different: Number of parameters Types of parameters Order of parameter types These differences create distinct method signatures."
+    },
+    {
+      "question": "How is method overloading achieved by changing the number of parameters?",
+      "answer": "Answer: Methods can have the same name but accept different numbers of parameters.\n\n```java\npublic static int add(int a, int b) {\nreturn a + b;\n}\npublic static int add(int a, int b, int c) {\nreturn a + b + c;\n}\n```\n\nThe first method accepts two parameters, while the second accepts three."
+    },
+    {
+      "question": "How is method overloading achieved by changing parameter types?",
+      "answer": "Answer: Methods can have the same name and the same number of parameters when the parameter types differ.\n\n```java\npublic static int add(int a, int b) {\nreturn a + b;\n}\npublic static float add(float a, float b) {\nreturn a + b;\n}\npublic static double add(double a, double b) {\nreturn a + b;\n}\n```\n\nEach method accepts two parameters, but the parameter types are different."
+    },
+    {
+      "question": "How is method overloading achieved by changing parameter order?",
+      "answer": "Answer: Methods can have the same name, the same number of parameters, and the same parameter types when their order differs.\n\n```java\npublic static float add(int a, float b) {\nreturn a + b;\n}\npublic static float add(float a, int b) {\nreturn a + b;\n}\n```\n\nThe signatures are: add(int, float) add(float, int) Therefore, both methods are valid overloads."
+    },
+    {
+      "question": "Can parameter names differentiate overloaded methods?",
+      "answer": "Answer: No.\n\n```java\npublic static int add(int a, int b) {\nreturn a + b;\n}\npublic static int add(int x, int y) {\nreturn x + y;\n}\n```\n\nThese methods are duplicates because both have the same: Method name Number of parameters Parameter types Parameter order Changing parameter names does not change the method signature."
+    },
+    {
+      "question": "Can methods be overloaded only by changing the return type?",
+      "answer": "Answer: No.\n\n```java\npublic static float add(int a, float b) {\nreturn a + b;\n}\npublic static double add(int a, float b) {\nreturn a + b;\n}\n```\n\nBoth methods have the same name and the same parameter signature. Changing only the return type does not create method overloading."
+    },
+    {
+      "question": "Why does the return type not participate in method overloading?",
+      "answer": "Answer: Java selects an overloaded method using the method name and arguments supplied during the call. The compiler checks: Number of parameters Parameter types Parameter order The return type alone cannot identify which method should execute."
+    },
+    {
+      "question": "Are these methods valid overloads?",
+      "answer": "Answer: ```java\npublic static float add(int a, float b) {\nreturn a + b;\n}\npublic static float add(float b, int a) {\nreturn a + b;\n}\n```\n\nYes. The signatures are different: add(int, float) add(float, int) The order of the parameter types is different."
+    },
+    {
+      "question": "Are these methods valid overloads?",
+      "answer": "Answer: ```java\npublic static float add(int x, float y) {\nreturn x + y;\n}\npublic static double add(int a, float b) {\nreturn a + b;\n}\n```\n\nNo. Both methods have the same parameter signature: add(int, float) Different parameter names and return types do not create a separate overload."
+    },
+    {
+      "question": "What is a duplicate-method error?",
+      "answer": "Answer: A duplicate-method error occurs when a class contains methods with: The same method name The same number of parameters The same parameter types The same parameter order Changing only the parameter names or return type does not prevent this error."
+    },
+    {
+      "question": "What is a method signature in method overloading?",
+      "answer": "Answer: For method overloading, the method signature is identified using: Method name Number of parameters Types of parameters Order of parameter types Example: add(int, float) is different from: add(float, int)"
+    },
+    {
+      "question": "How does Java select an overloaded method?",
+      "answer": "Answer: Java examines the arguments supplied during the method call and selects the method whose parameter signature matches those arguments. Example:\n\n```java\nadd(10, 20);\n```\n\nThis matches: add(int, int) because integer literals are treated as int by default."
+    },
+    {
+      "question": "Which overloaded method executes for add(10, 20)?",
+      "answer": "Answer: The method with two int parameters executes:\n\n```java\npublic static int add(int a, int b) {\nreturn a + b;\n}\n```\n\nBoth supplied arguments are integer literals."
+    },
+    {
+      "question": "Which overloaded method executes for two float arguments?",
+      "answer": "Answer: Consider:\n\n```java\nadd(3.1F, 3.2F);\n```\n\nThe following method executes:\n\n```java\npublic static float add(float a, float b) {\nreturn a + b;\n}\n```\n\nThe F suffix makes both arguments float."
+    },
+    {
+      "question": "Which overloaded method executes for two double arguments?",
+      "answer": "Answer: Consider:\n\n```java\nadd(2.111, 3.333);\n```\n\nThe following method executes:\n\n```java\npublic static double add(double a, double b) {\nreturn a + b;\n}\n```\n\nDecimal literals without the F suffix are treated as double."
+    },
+    {
+      "question": "Can the return value of an overloaded method be printed directly?",
+      "answer": "Answer: Yes.\n\n```java\nSystem.out.println(add(10, 20));\n```\n\nThe method executes first, and its returned value is passed directly to println(). A separate result variable is not compulsory."
+    },
+    {
+      "question": "How can multiple variables of the same type be declared in one statement?",
+      "answer": "Answer: Variables of the same type can be declared together.\n\n```java\nint a = 10, b = 20, c = 30;\nfloat d = 3.1F, e = 3.2F;\ndouble g = 2.111, h = 3.333;\n```"
+    },
+    {
+      "question": "Write a program demonstrating overloading by parameter types.",
+      "answer": "Answer: ```java\nclass MethodOverloadingDemo {\npublic static int add(int x, int y) {\nreturn x + y;\n}\npublic static float add(float x, float y) {\nreturn x + y;\n}\npublic static double add(double x, double y) {\nreturn x + y;\n}\npublic static void main(String[] args) {\nSystem.out.println(add(10, 20));\nSystem.out.println(add(3.1F, 3.2F));\nSystem.out.println(add(2.111, 3.333));\n}\n}\n```\n\nOutput: 6.3 5.444 Line-by-line explanation add(int, int) handles integer arguments. add(float, float) handles float arguments. add(double, double) handles double arguments. add(10, 20) selects the integer method. add(3.1F, 3.2F) selects the float method. add(2.111, 3.333) selects the double method."
+    },
+    {
+      "question": "Write overloaded methods that differ by parameter order.",
+      "answer": "Answer: ```java\nclass OrderDemo {\npublic static float add(int a, float b) {\nreturn a + b;\n}\npublic static float add(float a, int b) {\nreturn a + b;\n}\npublic static void main(String[] args) {\nSystem.out.println(add(10, 2.5F));\nSystem.out.println(add(2.5F, 10));\n}\n}\n```\n\nOutput: 12.5 12.5 The first call selects add(int, float), while the second selects add(float, int)."
+    },
+    {
+      "question": "Write overloaded methods that differ by the number of parameters.",
+      "answer": "Answer: ```java\nclass NumberDemo {\npublic static int add(int a, int b) {\nreturn a + b;\n}\npublic static int add(int a, int b, int c) {\nreturn a + b + c;\n}\npublic static int add(int a, int b, int c, int d) {\nreturn a + b + c + d;\n}\npublic static void main(String[] args) {\nSystem.out.println(add(10, 20));\nSystem.out.println(add(10, 20, 30));\nSystem.out.println(add(10, 20, 30, 40));\n}\n}\n```\n\nOutput: Each method has the same name but accepts a different number of parameters."
+    },
+    {
+      "question": "What is a multiline comment in Java?",
+      "answer": "Answer: A multiline comment begins with /* and ends with */.\n\n```java\n/*\n```\n\nThis is a multiline comment. These lines will not be executed.\n\n```java\n*/\n```\n\nIt is used to comment out a block of multiple lines."
+    },
+    {
+      "question": "What is the difference between single-line and multiline comments?",
+      "answer": "Answer: A single-line comment uses //:\n\n```java\n// This is a single-line comment\n```\n\nA multiline comment uses /* and */:\n\n```java\n/*\n```\n\nThis is a multiline comment\n\n```java\n*/\n```\n\nSingle-line comments affect one line, while multiline comments affect the complete enclosed block."
+    },
+    {
+      "question": "What is polymorphism?",
+      "answer": "Answer: Polymorphism is the process of a single entity taking multiple forms. The word can be divided as: poly means many morph means forms Therefore, polymorphism means one entity appearing or behaving in multiple forms."
+    },
+    {
+      "question": "How is method overloading connected to polymorphism?",
+      "answer": "Answer: In method overloading, one common method name appears in multiple forms. For example: add(int, int) add(float, float) add(double, double) add(int, int, int) The method name is the same, but each method has a different parameter signature."
+    },
+    {
+      "question": "What is virtual polymorphism?",
+      "answer": "Answer: Virtual polymorphism is an appearance that one entity is taking multiple forms. In method overloading, the user sees one common method name performing different operations based on the supplied arguments. However, separate method definitions handle the different argument combinations."
+    },
+    {
+      "question": "What is overloaded in method overloading?",
+      "answer": "Answer: Nothing is literally overloaded. Multiple separate methods share the same name. This creates the appearance that one method is performing multiple tasks. Each overloaded method performs one specific task based on its parameter signature."
+    },
+    {
+      "question": "Write a program demonstrating all three rules of method overloading.",
+      "answer": "Answer: ```java\nclass OverloadingRulesDemo {\n// Different number of parameters\npublic static int add(int a, int b) {\nreturn a + b;\n}\npublic static int add(int a, int b, int c) {\nreturn a + b + c;\n}\n// Different parameter types\npublic static float add(float a, float b) {\nreturn a + b;\n}\n// Different parameter order\npublic static float add(int a, float b) {\nreturn a + b;\n}\npublic static float add(float a, int b) {\nreturn a + b;\n}\npublic static void main(String[] args) {\nSystem.out.println(add(10, 20));\nSystem.out.println(add(10, 20, 30));\nSystem.out.println(add(2.5F, 3.5F));\nSystem.out.println(add(10, 2.5F));\nSystem.out.println(add(2.5F, 10));\n}\n}\n```\n\nOutput: 6.0 12.5 12.5 Line-by-line explanation add(int, int) accepts two integers. add(int, int, int) differs by the number of parameters. add(float, float) differs by parameter type. add(int, float) and add(float, int) differ by parameter order. Java selects the matching method using the supplied arguments."
+    },
+    {
+      "question": "What are the important interview rules for method overloading?",
+      "answer": "Answer: Multiple methods can have the same name. Their parameter signatures must differ. The number of parameters may differ. The parameter types may differ. The order of parameter types may differ. Changing parameter names does not create overloading. Changing only the return type does not create overloading. Methods with identical parameter signatures are duplicates. Java selects the method by matching the supplied arguments. Method overloading provides one common name for similar operations."
+    }
+  ]
+}
