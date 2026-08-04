@@ -170,6 +170,11 @@ with zipfile.ZipFile(path) as z:
             return True
         if re.match(r"^(//|/\\*|\\*|@\\w+)", line):
             return True
+        # Continuation lines inside expressions / println args
+        if re.match(r"^[+*/,.]\\s*", line):
+            return True
+        if '"' in line and "+" in line:
+            return True
         # Method / constructor signatures: void eat() {  |  public void start() {
         if re.match(
             r"^(?:public|private|protected|static|final|synchronized|native|abstract|default|\\s)*"
@@ -192,6 +197,50 @@ with zipfile.ZipFile(path) as z:
         ):
             return True
         return line.endswith(";") and bool(re.search(r"[=()?:]|\\+\\+|--", line))
+
+    def code_looks_open(text):
+        """True when a code chunk ends mid-expression (not merely inside a class body)."""
+        t = (text or "").rstrip()
+        if not t:
+            return False
+        if t.endswith(("(", "+", ",", ".")):
+            return True
+        # Unbalanced parentheses only — braces stay open for whole classes
+        return t.count("(") > t.count(")")
+
+    def stitch_open_code_with_paragraphs(items):
+        """Pull expression/string fragments that sit between split code chunks back into code."""
+        out = []
+        i = 0
+        while i < len(items):
+            b = items[i]
+            if b.get("type") != "code":
+                out.append(b)
+                i += 1
+                continue
+            text = b.get("text") or ""
+            j = i + 1
+            while j < len(items):
+                nxt = items[j]
+                if nxt.get("type") == "blank" and code_looks_open(text):
+                    text += "\\n"
+                    j += 1
+                    continue
+                if nxt.get("type") == "code" and code_looks_open(text):
+                    text += "\\n" + (nxt.get("text") or "")
+                    j += 1
+                    continue
+                if nxt.get("type") == "paragraph" and code_looks_open(text):
+                    para = "".join((r.get("text") or "") for r in (nxt.get("runs") or []))
+                    st = para.strip()
+                    if is_code_line(para) or st.startswith("+") or (st[:1] in (chr(34), chr(39))):
+                        text += "\\n" + para
+                        j += 1
+                        continue
+                break
+            out.append({"type": "code", "text": text})
+            i = j
+        return out
 
     def is_question_or_title(text):
         t = re.sub(r"\\s+", " ", (text or "")).strip()
@@ -343,6 +392,7 @@ with zipfile.ZipFile(path) as z:
             merged.append(b)
             i += 1
 
+    merged = stitch_open_code_with_paragraphs(merged)
     print(json.dumps(merged, ensure_ascii=True))
 `;
 
