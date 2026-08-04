@@ -1,0 +1,119 @@
+{
+  "title": "Notes Java Objectorientation 2",
+  "itemsPerPage": 2,
+  "source": "notes-java-objectorientation-2.docx",
+  "items": [
+    {
+      "question": "What are the five basic principles of object orientation?",
+      "answer": "Answer: The five principles are: The entire world is a collection of objects. There is no useless object in this world; every object is useful. Every object belongs to a certain category or type. Every object constantly interacts with some other object; no object is isolated. Every object has certain properties and exhibits certain behaviours."
+    },
+    {
+      "question": "What is a real-world entity?",
+      "answer": "Answer: Anything that is present in the real world is identified as an entity. Examples: Student Mentor College University Product Customer"
+    },
+    {
+      "question": "Where are objects created in the JRE?",
+      "answer": "Answer: All objects are created in the heap segment of the JRE. When an object is created programmatically, the JVM reserves memory for it in the heap."
+    },
+    {
+      "question": "What are the four segments of the JRE?",
+      "answer": "Answer: The four segments are: Code segment Static segment Stack segment Heap segment"
+    },
+    {
+      "question": "What is stored in the stack segment?",
+      "answer": "Answer: Activation records or stack frames are created in the stack segment. Whenever a method is called, a chunk of memory is reserved for that method. That memory is called an activation record or stack frame."
+    },
+    {
+      "question": "How do we identify the properties and behaviours of an object?",
+      "answer": "Answer: We ask:"
+    },
+    {
+      "question": "What does the object do?",
+      "answer": "Answer: For a student: What a student has: ID Name Marks What a student does: Eat Sleep Study ID, name, and marks are the properties of the student. Eat, sleep, and study are the behaviours of the student."
+    },
+    {
+      "question": "How is the “has” part of an object represented in Java?",
+      "answer": "Answer: The properties or “has” part are handled using data types and variables. These are also called data members or class members. Example:\n\n```java\nint id;\nString name;\nint marks;\n```"
+    },
+    {
+      "question": "How is the “does” part of an object represented in Java?",
+      "answer": "Answer: The behaviours or “does” part are handled using methods. These methods are also called member functions. Example: void eat() {\n\n```java\nSystem.out.println(\"Student is eating\");\n}\n```\n\nvoid sleep() {\n\n```java\nSystem.out.println(\"Student is sleeping\");\n}\n```\n\nvoid study() {\n\n```java\nSystem.out.println(\"Student is studying\");\n}\n```"
+    },
+    {
+      "question": "Why do we define a class?",
+      "answer": "Answer: A class is defined to tell the JVM how an object should look. For a student object, the class tells the JVM: What the student has What the student does"
+    },
+    {
+      "question": "What is the relationship between an object and a class?",
+      "answer": "Answer: Every object belongs to a type, category, or class. All student objects belong to the category or class called Student. The Student class is defined once, and multiple student objects can be created from that class."
+    },
+    {
+      "question": "Why must the Student class be defined before creating a student object?",
+      "answer": "Answer: A student is a real-world entity and is not already known to the JVM. The JVM must first be told: What a student has What a student does After defining the Student class, the JVM can create student objects."
+    },
+    {
+      "question": "How is an object created?",
+      "answer": "Answer: An object is created using the new keyword. Example:\n\n```java\nnew Student();\nnew tells the JVM to create an object, and Student tells the JVM which object to create.\n```\n\nThe student object is then created in the heap segment."
+    },
+    {
+      "question": "Can multiple objects be created after defining one class?",
+      "answer": "Answer: Yes. The class is defined only once. After that, multiple objects of that type can be created.\n\n```java\nnew Student();\nnew Student();\n```\n\nEach statement creates a separate student object in heap memory."
+    },
+    {
+      "question": "What is a reference variable?",
+      "answer": "Answer: When an object is created in heap memory, it has an address. That address is stored in a variable. A variable that stores the address or reference of an object is called a reference variable or address variable. Example:\n\n```java\nStudent s1 = new Student();\n```\n\nHere, s1 stores the address of the student object."
+    },
+    {
+      "question": "Why is s1 declared as type Student ?",
+      "answer": "Answer: ```java\nStudent s1 = new Student();\n```\n\ns1 stores the address of a student object. Therefore, the type of s1 must be Student. Student s1; It is not an int, float, double, char, or boolean variable because it stores the address of a student object."
+    },
+    {
+      "question": "Explain Student s1 = new Student();.",
+      "answer": "Answer: ```java\nStudent s1 = new Student();\nnew Student() creates a student object in heap memory.\n```\n\nThe created object has an address. That address is stored in s1. s1 is of type Student because it stores the address of a student object."
+    },
+    {
+      "question": "Why can eat(), sleep(), and study() not be called using the class name?",
+      "answer": "Answer: These methods represent the behaviour of a student object. They are not static methods. Therefore, they cannot be called using the class name. Incorrect:\n\n```java\nStudent.eat();\n```\n\nCorrect:\n\n```java\ns1.eat();\n```\n\nA non-static method must be called using the object reference."
+    },
+    {
+      "question": "What does the dot operator do?",
+      "answer": "Answer: The dot operator is used to access the contents of an object through its reference variable. Example:\n\n```java\ns1.id = 1;\ns1.name = \"Sahana\";\ns1.eat();\n```\n\ns1. goes inside the object and accesses the required property or behaviour."
+    },
+    {
+      "question": "How are values assigned to object properties?",
+      "answer": "Answer: Values are assigned using the object reference and the dot operator.\n\n```java\ns1.id = 1;\ns1.name = \"Sahana\";\ns1.marks = 55;\ns2.id = 2;\ns2.name = \"Omkar\";\ns2.marks = 99;\n```\n\nThe properties of the first object are accessed using s1. The properties of the second object are accessed using s2."
+    },
+    {
+      "question": "Where should the main() method be written?",
+      "answer": "Answer: The main() method can be written inside the Student class or inside a separate class. Both are programmatically correct. However, keeping it in a separate class is recommended. The Student class is written to define: What a student has What a student does If main() is also placed inside it, it may appear as though main() is also a student behaviour. Therefore, the main() method is better kept in a separate application class."
+    },
+    {
+      "question": "What happens when s1.eat() is executed?",
+      "answer": "Answer: When s1.eat() is executed: s1 refers to the student object. The dot operator accesses the object. The eat() method is invoked. An activation record for eat() is created in the stack segment. The statements inside eat() are executed. Student is eating is printed. Control returns to main(). The activation record of eat() is deleted."
+    },
+    {
+      "question": "When does an object become eligible for garbage collection?",
+      "answer": "Answer: When no reference variable refers to an object, that object becomes eligible for garbage collection. When the main() method completes: The activation record of main() is deleted. Reference variables such as s1 and s2 are removed. No reference points to the objects. Those objects become eligible for garbage collection. The garbage collector removes the unreferenced objects from heap memory."
+    },
+    {
+      "question": "Write a program to create and use two student objects.",
+      "answer": "Answer: ```java\nclass Student {\nint id;\nString name;\nint marks;\n```\n\nvoid eat() {\n\n```java\nSystem.out.println(name + \" student is eating\");\n}\n```\n\nvoid sleep() {\n\n```java\nSystem.out.println(name + \" student is sleeping\");\n}\n```\n\nvoid study() {\n\n```java\nSystem.out.println(name + \" student is studying\");\n}\n}\nclass StudentApp {\npublic static void main(String[] args) {\nStudent s1 = new Student();\nStudent s2 = new Student();\ns1.id = 1;\ns1.name = \"Sahana\";\ns1.marks = 55;\ns2.id = 2;\ns2.name = \"Omkar\";\ns2.marks = 99;\nSystem.out.println(s1.id + \" \" + s1.name + \" \" + s1.marks);\ns1.eat();\ns1.sleep();\ns1.study();\nSystem.out.println(s2.id + \" \" + s2.name + \" \" + s2.marks);\ns2.eat();\ns2.sleep();\ns2.study();\n}\n}\n```\n\nOutput 1 Sahana 55 Sahana student is eating Sahana student is sleeping Sahana student is studying 2 Omkar 99 Omkar student is eating Omkar student is sleeping Omkar student is studying Explanation Student defines what a student has and what a student does. id, name, and marks are the properties. eat(), sleep(), and study() are the behaviours. s1 stores the address of the first student object. s2 stores the address of the second student object. Values are assigned using the corresponding reference. Behaviours are invoked using the corresponding reference."
+    },
+    {
+      "question": "Write a program using a fan object.",
+      "answer": "Answer: ```java\nclass Fan {\nint numberOfWings;\nString color;\nint cost;\nString brand;\n```\n\nvoid rotate() {\n\n```java\nSystem.out.println(\n```\n\ncolor + \" \" + brand + \" fan with \" + numberOfWings + \" wings is rotating\"\n\n```java\n);\n}\n```\n\nvoid giveAir() {\n\n```java\nSystem.out.println(\n```\n\ncolor + \" \" + brand + \" fan with \" + numberOfWings + \" wings is giving air\"\n\n```java\n);\n}\n}\nclass FanApp {\npublic static void main(String[] args) {\nFan f1 = new Fan();\nf1.numberOfWings = 4;\nf1.color = \"Blue\";\nf1.cost = 2500;\nf1.brand = \"Usha\";\nf1.rotate();\nf1.giveAir();\n}\n}\n```\n\nOutput Blue Usha fan with 4 wings is rotating Blue Usha fan with 4 wings is giving air Explanation The fan has: Number of wings Color Cost Brand The fan does: Rotate Give air numberOfWings follows camel-case naming because the variable name starts with a small letter and the next word starts with a capital letter."
+    },
+    {
+      "question": "How does object orientation convert a real-world problem into a software solution?",
+      "answer": "Answer: First, the real-world problem is identified. Then the useful real-world entities involved in that problem are identified. Those entities are defined using classes, and objects are created from those class definitions. For an e-commerce shopping application, the entities may include: User Product Category Product image Cart item These real-world entities are created as objects in software. By treating the real-world entities as objects and reproducing their interactions in software, the real-world problem is solved."
+    },
+    {
+      "question": "Write a Java program to create and use a Car object.",
+      "answer": "Answer: ```java\nclass Car {\nString brand;\nString color;\nint price;\n```\n\nvoid start() {\n\n```java\nSystem.out.println(brand + \" car is starting\");\n}\n```\n\nvoid stop() {\n\n```java\nSystem.out.println(brand + \" car is stopping\");\n}\n```\n\nvoid drive() {\n\n```java\nSystem.out.println(brand + \" car is moving\");\n}\n}\nclass CarApp {\npublic static void main(String[] args) {\nCar c1 = new Car();\nc1.brand = \"Tata\";\nc1.color = \"Black\";\nc1.price = 1200000;\nSystem.out.println(c1.brand + \" \" + c1.color + \" \" + c1.price);\nc1.start();\nc1.drive();\nc1.stop();\n}\n}\n```\n\nOutput: Tata Black 1200000 Tata car is starting Tata car is moving Tata car is stopping Properties: Brand Color Price Behaviours: Start Drive Stop"
+    },
+    {
+      "question": "Write a Java program to create and use a Mobile object.",
+      "answer": "Answer: ```java\nclass Mobile {\nString brand;\nString model;\nint price;\n```\n\nvoid call() {\n\n```java\nSystem.out.println(brand + \" \" + model + \" is making a call\");\n}\n```\n\nvoid message() {\n\n```java\nSystem.out.println(brand + \" \" + model + \" is sending a message\");\n}\n```\n\nvoid charge() {\n\n```java\nSystem.out.println(brand + \" \" + model + \" is charging\");\n}\n}\nclass MobileApp {\npublic static void main(String[] args) {\nMobile m1 = new Mobile();\nm1.brand = \"Samsung\";\nm1.model = \"Galaxy\";\nm1.price = 50000;\nSystem.out.println(m1.brand + \" \" + m1.model + \" \" + m1.price);\nm1.call();\nm1.message();\nm1.charge();\n}\n}\n```\n\nOutput: Samsung Galaxy 50000 Samsung Galaxy is making a call Samsung Galaxy is sending a message Samsung Galaxy is charging Properties: Brand Model Price Behaviours: Call Message Charge"
+    }
+  ]
+}
