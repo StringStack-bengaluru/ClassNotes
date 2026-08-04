@@ -170,16 +170,41 @@ with zipfile.ZipFile(path) as z:
             return True
         if re.match(r"^(//|/\\*|\\*|@\\w+)", line):
             return True
+        # Method / constructor signatures: void eat() {  |  public void start() {
+        if re.match(
+            r"^(?:public|private|protected|static|final|synchronized|native|abstract|default|\\s)*"
+            r"(?:void|[A-Za-z_][\\w.<>,\\[\\]?]*)\\s+[A-Za-z_]\\w*\\s*\\([^;]*\\)\\s*\\{?\\s*$",
+            line,
+        ):
+            return True
+        if re.match(
+            r"^(?:public|private|protected|\\s)*[A-Z]\\w*\\s*\\([^;]*\\)\\s*\\{?\\s*$",
+            line,
+        ):
+            return True
         if re.match(
             r"^(package|import|class|interface|enum|record|public|protected|private|static|final|"
             r"abstract|return|throw|try|catch|finally|if|else|for|while|do|switch|case|default|"
-            r"break|continue|new|System\\.|boolean\\s+\\w+|byte\\s+\\w+|short\\s+\\w+|"
+            r"break|continue|new|System\\.|void\\s+\\w+|boolean\\s+\\w+|byte\\s+\\w+|short\\s+\\w+|"
             r"int\\s+\\w+|long\\s+\\w+|float\\s+\\w+|double\\s+\\w+|char\\s+\\w+|"
             r"String\\s+\\w+|var\\s+\\w+)",
             line,
         ):
             return True
         return line.endswith(";") and bool(re.search(r"[=()?:]|\\+\\+|--", line))
+
+    def is_question_or_title(text):
+        t = re.sub(r"\\s+", " ", (text or "")).strip()
+        if not t:
+            return False
+        if re.match(r"^\\d+[G]?[.)]\\s+", t, re.I):
+            return True
+        if t.endswith("?"):
+            return True
+        # Short title-like headings (not a full answer sentence)
+        if len(t) <= 48 and not t.endswith("."):
+            return True
+        return False
 
     def runs_are_mono(runs):
         text_runs = [r for r in runs if r.get("type") != "image"]
@@ -232,12 +257,20 @@ with zipfile.ZipFile(path) as z:
                 continue
             level = heading_level(style)
             looks_code = p_is_code_style(style) or is_code_line(text) or runs_are_mono(text_runs)
-            if level and not looks_code:
+            if level and not looks_code and is_question_or_title(text):
                 blocks.append({
                     "type": "heading",
                     "level": min(max(level, 1), 4),
                     "runs": text_runs,
                     "align": align,
+                })
+            elif level and not looks_code and not is_question_or_title(text):
+                # Word heading style on answer prose → keep as normal paragraph
+                blocks.append({
+                    "type": "paragraph",
+                    "runs": text_runs,
+                    "align": align,
+                    "indent": bool(indented),
                 })
             elif is_list and not looks_code:
                 blocks.append({
@@ -439,7 +472,11 @@ export function paginateDocumentBlocks(blocks, unitsPerPage = 46) {
   const pushBlocks = (chunk) => {
     for (const block of chunk) {
       const u = blockUnits(block);
-      if (current.length > 0 && used + u > unitsPerPage) flush();
+      if (current.length > 0 && used + u > unitsPerPage) {
+        // Never leave a question heading alone on a page before its code/answer
+        const onlyQuestion = current.length === 1 && isQuestionBlock(current[0]);
+        if (!onlyQuestion) flush();
+      }
       current.push(block);
       used += u;
     }
