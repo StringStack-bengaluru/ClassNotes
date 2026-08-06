@@ -175,6 +175,9 @@ with zipfile.ZipFile(path) as z:
             return True
         if '"' in line and "+" in line:
             return True
+        # Field / chained access used as println continuation: bird1.cost
+        if re.fullmatch(r"[A-Za-z_]\\w*(?:\\.[A-Za-z_]\\w*)+(?:\\(\\))?", line):
+            return True
         # Method / constructor signatures: void eat() {  |  public void start() {
         if re.match(
             r"^(?:public|private|protected|static|final|synchronized|native|abstract|default|\\s)*"
@@ -208,6 +211,25 @@ with zipfile.ZipFile(path) as z:
         # Unbalanced parentheses only — braces stay open for whole classes
         return t.count("(") > t.count(")")
 
+    def is_expression_fragment(s):
+        """Short non-prose line that belongs inside an open println / expression."""
+        st = (s or "").strip()
+        if not st:
+            return False
+        if is_code_line(st):
+            return True
+        if st.startswith("+") or st[:1] in (chr(34), chr(39)):
+            return True
+        # Avoid swallowing real answer sentences
+        if st.endswith(".") and " " in st and len(st) > 40:
+            return False
+        if re.match(r"^\\d+[.)]\\s+", st):
+            return False
+        # Identifiers / dotted paths / partial expressions
+        if re.fullmatch(r"[A-Za-z_][\\w.]*", st):
+            return True
+        return False
+
     def stitch_open_code_with_paragraphs(items):
         """Pull expression/string fragments that sit between split code chunks back into code."""
         out = []
@@ -232,11 +254,12 @@ with zipfile.ZipFile(path) as z:
                     continue
                 if nxt.get("type") == "paragraph" and code_looks_open(text):
                     para = "".join((r.get("text") or "") for r in (nxt.get("runs") or []))
-                    st = para.strip()
-                    if is_code_line(para) or st.startswith("+") or (st[:1] in (chr(34), chr(39))):
-                        text += "\\n" + para
-                        j += 1
-                        continue
+                    # After '+' / open '(', absorb continuation fragments like bird1.cost
+                    if is_expression_fragment(para) or text.rstrip().endswith("+"):
+                        if not (para.strip().endswith(".") and " " in para.strip() and len(para.strip()) > 40):
+                            text += "\\n" + para
+                            j += 1
+                            continue
                 break
             out.append({"type": "code", "text": text})
             i = j
@@ -246,7 +269,7 @@ with zipfile.ZipFile(path) as z:
         t = re.sub(r"\\s+", " ", (text or "")).strip()
         if not t:
             return False
-        if re.match(r"^\\d+[G]?[.)]\\s+", t, re.I):
+        if re.match(r"^\\d+[G]?[.)]\\s*", t, re.I):
             return True
         if t.endswith("?"):
             return True
@@ -467,7 +490,7 @@ function isQuestionBlock(block) {
     .replace(/\s*Answer\s*:?\s*$/i, '')
     .trim();
   if (!cleaned) return false;
-  if (/^\d+[G]?[.)]\s+\S/i.test(text) && (cleaned.endsWith('?') || QUESTION_START.test(cleaned))) {
+  if (/^\d+[G]?[.)]\s*\S/i.test(text) && (cleaned.endsWith('?') || QUESTION_START.test(cleaned))) {
     return true;
   }
   return cleaned.endsWith('?') && QUESTION_START.test(cleaned);
