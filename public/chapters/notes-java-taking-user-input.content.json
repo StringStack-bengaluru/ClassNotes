@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Taking User Input",
+  "itemsPerPage": 2,
+  "source": "notes-java-taking-user-input.docx",
+  "items": [
+    {
+      "question": "What is hard-coded data?",
+      "answer": "Answer: Data written directly inside the program is called hard-coded data.\n\n```java\nint a = 10;\nint b = 20;\n```\n\nHere, 10 and 20 are given directly in the program. They are not entered by the user while the program is running."
+    },
+    {
+      "question": "What is dynamic user input?",
+      "answer": "Answer: Dynamic user input means taking data from the user while the program is running and performing operations on that data."
+    },
+    {
+      "question": "What is the standard input device used in the class?",
+      "answer": "Answer: The keyboard is used as the standard input device."
+    },
+    {
+      "question": "What are the two options for taking input from the keyboard?",
+      "answer": "Answer: The two options are: Write our own code to take different types of input. Use the code already available in the Java library. The class uses the Java library."
+    },
+    {
+      "question": "Which inbuilt class is used to take keyboard input?",
+      "answer": "Answer: The Scanner class is used to take input from the keyboard."
+    },
+    {
+      "question": "What is a package?",
+      "answer": "Answer: A package means grouping similar things together. Utilities that help perform similar tasks are kept together under one package."
+    },
+    {
+      "question": "In which package is the Scanner class present?",
+      "answer": "Answer: The Scanner class is present in the java.util package.\n\n```java\nimport java.util.Scanner;\n```"
+    },
+    {
+      "question": "Why must the Scanner class be imported?",
+      "answer": "Answer: The Scanner class is present in the Java library. It must be brought into our program before it can be used.\n\n```java\nimport java.util.Scanner;\n```"
+    },
+    {
+      "question": "How is a Scanner object created?",
+      "answer": "Answer: ```java\nScanner scan = new Scanner(System.in);\n```\n\nScanner is the class. scan is the reference variable.\n\n```java\nnew Scanner(System.in) creates the Scanner object.\n```"
+    },
+    {
+      "question": "What does System.in represent?",
+      "answer": "Answer: ```java\nSystem.in represents the input stream used to bring input from the keyboard.\nScanner scan = new Scanner(System.in);\n```"
+    },
+    {
+      "question": "Why must a Scanner object be created to take input?",
+      "answer": "Answer: The methods used to take input are non-static methods. Therefore, a Scanner object must be created, and the input methods must be called using its reference."
+    },
+    {
+      "question": "Which method is used to take a byte value?",
+      "answer": "Answer: The nextByte() method is used.\n\n```java\nbyte a = scan.nextByte();\n```"
+    },
+    {
+      "question": "Which method is used to take a short value?",
+      "answer": "Answer: The nextShort() method is used.\n\n```java\nshort b = scan.nextShort();\n```"
+    },
+    {
+      "question": "Which method is used to take an int value?",
+      "answer": "Answer: The nextInt() method is used.\n\n```java\nint c = scan.nextInt();\n```\n\nThe method takes an integer from the keyboard and returns it to the calling statement."
+    },
+    {
+      "question": "Which method is used to take a long value?",
+      "answer": "Answer: The nextLong() method is used.\n\n```java\nlong d = scan.nextLong();\n```"
+    },
+    {
+      "question": "Write a program to take byte, short, int, and long values from the user.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass IntegerInput {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nSystem.out.println(\"Enter byte input:\");\nbyte a = scan.nextByte();\nSystem.out.println(\"Enter short input:\");\nshort b = scan.nextShort();\nSystem.out.println(\"Enter integer input:\");\nint c = scan.nextInt();\nSystem.out.println(\"Enter long input:\");\nlong d = scan.nextLong();\nSystem.out.println(\"Byte input is \" + a);\nSystem.out.println(\"Short input is \" + b);\nSystem.out.println(\"Integer input is \" + c);\nSystem.out.println(\"Long input is \" + d);\n}\n}\n```\n\nThe class demonstrates input for byte, short, int, and long."
+    },
+    {
+      "question": "Which method is used to take a float value?",
+      "answer": "Answer: The nextFloat() method is used.\n\n```java\nfloat a = scan.nextFloat();\n```"
+    },
+    {
+      "question": "Which method is used to take a double value?",
+      "answer": "Answer: The nextDouble() method is used.\n\n```java\ndouble b = scan.nextDouble();\n```\n\nThe method name follows camel-case convention: the first word begins with a lowercase letter and the next word begins with an uppercase letter."
+    },
+    {
+      "question": "Which method is used to take a Boolean value?",
+      "answer": "Answer: The nextBoolean() method is used.\n\n```java\nboolean result = scan.nextBoolean();\n```\n\nThe user can enter true or false."
+    },
+    {
+      "question": "Which method is used to take a single word as input?",
+      "answer": "Answer: The next() method is used.\n\n```java\nString firstName = scan.next();\n```\n\nIt takes only one word as input."
+    },
+    {
+      "question": "Which method is used to take multiple words as input?",
+      "answer": "Answer: The nextLine() method is used.\n\n```java\nString fullName = scan.nextLine();\n```\n\nIt can take multiple words, including spaces."
+    },
+    {
+      "question": "What is the difference between next() and nextLine()?",
+      "answer": "Answer: next() takes only one word.\n\n```java\nString firstName = scan.next();\n```\n\nnextLine() takes a complete line containing multiple words.\n\n```java\nString fullName = scan.nextLine();\n```"
+    },
+    {
+      "question": "What problem occurs when nextLine() is used after nextInt()?",
+      "answer": "Answer: After entering an integer, the Enter key leaves a newline character in the keyboard buffer. nextInt() takes only the number. It does not take the newline character. When nextLine() is called immediately after it, nextLine() takes the remaining newline character instead of waiting for another input."
+    },
+    {
+      "question": "How can the nextInt() and nextLine() problem be solved?",
+      "answer": "Answer: An additional nextLine() must be called after nextInt() to remove the remaining newline character.\n\n```java\nint number = scan.nextInt();\nscan.nextLine();\nString name = scan.nextLine();\n```\n\nThe first nextLine() removes the newline character. The second nextLine() takes the required string input."
+    },
+    {
+      "question": "Is the additional nextLine() required when a string is taken before an integer?",
+      "answer": "Answer: No. When nextLine() is used first, it takes the string along with the newline character. Therefore, taking an integer after it does not create the same problem."
+    },
+    {
+      "question": "How is a character taken as input using Scanner?",
+      "answer": "Answer: First, a string is taken using next(). Then charAt(0) is used to take the first character.\n\n```java\nString input = scan.next();\nchar character = input.charAt(0);\n```\n\nnext() belongs to the Scanner class, while charAt() belongs to the String class."
+    },
+    {
+      "question": "What does the argument 0 represent in charAt(0)?",
+      "answer": "Answer: 0 represents the index of the first character in the string.\n\n```java\nString input = \"Java\";\nchar character = input.charAt(0);\n```\n\nThe value of character is: J\n\n```java\nString indexing begins from 0.\n```"
+    },
+    {
+      "question": "Write a program to take all the input types demonstrated in the class.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass UserInput {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nSystem.out.println(\"Enter byte:\");\nbyte byteInput = scan.nextByte();\nSystem.out.println(\"Enter short:\");\nshort shortInput = scan.nextShort();\nSystem.out.println(\"Enter integer:\");\nint intInput = scan.nextInt();\nSystem.out.println(\"Enter long:\");\nlong longInput = scan.nextLong();\nSystem.out.println(\"Enter float:\");\nfloat floatInput = scan.nextFloat();\nSystem.out.println(\"Enter double:\");\ndouble doubleInput = scan.nextDouble();\nSystem.out.println(\"Enter boolean:\");\nboolean booleanInput = scan.nextBoolean();\nSystem.out.println(\"Enter one word:\");\nString wordInput = scan.next();\nscan.nextLine();\nSystem.out.println(\"Enter full name:\");\nString fullName = scan.nextLine();\nSystem.out.println(\"Enter character:\");\nString characterInput = scan.next();\nchar character = characterInput.charAt(0);\nSystem.out.println(\"Byte input is \" + byteInput);\nSystem.out.println(\"Short input is \" + shortInput);\nSystem.out.println(\"Integer input is \" + intInput);\nSystem.out.println(\"Long input is \" + longInput);\nSystem.out.println(\"Float input is \" + floatInput);\nSystem.out.println(\"Double input is \" + doubleInput);\nSystem.out.println(\"Boolean input is \" + booleanInput);\nSystem.out.println(\"Word input is \" + wordInput);\nSystem.out.println(\"Full name is \" + fullName);\nSystem.out.println(\"Character is \" + character);\n}\n}\n```\n\nThe class covered input for the primitive data types, strings, and characters using the appropriate methods."
+    },
+    {
+      "question": "What standard program structure should be followed while solving a task?",
+      "answer": "Answer: The application class should contain only the main() method. The actual task should be written in a separate class and method. The main() method should: Take input. Create the required object. Call the method by passing the input. Collect the returned result. Print the result."
+    },
+    {
+      "question": "Write a Java program to accept two numbers and check whether both are divisible by 5.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass Check {\nboolean checkDivisibility(int a, int b) {\nboolean result =\n```\n\na % 5 == 0 &&\n\n```java\nb % 5 == 0;\nreturn result;\n}\n}\nclass MainApp {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nSystem.out.println(\"Enter two numbers:\");\nint a = scan.nextInt();\nint b = scan.nextInt();\nCheck check = new Check();\nboolean finalResult =\ncheck.checkDivisibility(a, b);\nSystem.out.println(\n```\n\na + \" and \" + b + \" are divisible by 5? \" +\n\n```java\nfinalResult\n);\n}\n}\n```\n\nExample 1: Enter two numbers: 10 and 20 are divisible by 5? true Example 2: Enter two numbers: 10 and 11 are divisible by 5? false The task is written in the Check class. The MainApp class takes the two inputs, creates a Check object, calls the method, collects the Boolean result, and prints it."
+    }
+  ]
+}
