@@ -1,0 +1,99 @@
+{
+  "title": "Notes Java Anonymous Objectcreation 3",
+  "itemsPerPage": 2,
+  "source": "notes-java-anonymous-objectcreation-3.docx",
+  "items": [
+    {
+      "question": "What is a class?",
+      "answer": "Answer: A class is a blueprint given to the JVM in order to create an object."
+    },
+    {
+      "question": "What is an object?",
+      "answer": "Answer: An object is an instance of a class. Instance means physical existence."
+    },
+    {
+      "question": "What is the difference between a class and an object?",
+      "answer": "Answer: A class is a blueprint given to the JVM. An object is the physical existence created from that blueprint. The class does not physically exist in heap memory. The object created from the class exists in heap memory."
+    },
+    {
+      "question": "Explain class and object using an example.",
+      "answer": "Answer: A house blueprint may contain: Kitchen Bedroom Bathroom Dining room Living room However, we cannot cook, sleep, or eat inside the blueprint because it does not have physical existence. The contractor uses the blueprint to construct the house. The constructed house has physical existence. Similarly: Class → Blueprint JVM → Contractor Object → Constructed house The JVM uses the class to create the object in heap memory."
+    },
+    {
+      "question": "What does a class contain?",
+      "answer": "Answer: A class contains: Data members Member functions"
+    },
+    {
+      "question": "What are the other names for data members?",
+      "answer": "Answer: Data members are also called: Properties Attributes Fields"
+    },
+    {
+      "question": "What are the other names for member functions?",
+      "answer": "Answer: Member functions are also called: Behaviours Methods Functionalities"
+    },
+    {
+      "question": "Can values be stored in a class?",
+      "answer": "Answer: The class is a blueprint. The data is stored in the object created from the class. For example, if the class contains:\n\n```java\nint id;\nString name;\nint marks;\n```\n\nThe object created in heap memory will also contain ID, name, and marks. Values can be stored in that object."
+    },
+    {
+      "question": "Write a program to create and use two Dog objects.",
+      "answer": "Answer: ```java\nclass Dog {\nString name;\nString breed;\nint cost;\n```\n\nvoid eat() {\n\n```java\nSystem.out.println(name + \" dog is eating\");\n}\n```\n\nvoid bark() {\n\n```java\nSystem.out.println(name + \" dog is barking\");\n}\n}\nclass DogApp {\npublic static void main(String[] args) {\nDog d1 = new Dog();\nDog d2 = new Dog();\nd1.name = \"Logo\";\nd1.breed = \"Brown\";\nd1.cost = 99999;\nd2.name = \"Rocky\";\nd2.breed = \"White\";\nd2.cost = 999999;\nd1.eat();\nd2.bark();\nd1.bark();\nd2.eat();\n}\n}\n```\n\nOutput Logo dog is eating Rocky dog is barking Logo dog is barking Rocky dog is eating The class exercise asked for two dog objects, values for their attributes, and behaviour calls using both objects."
+    },
+    {
+      "question": "What happens when a class contains default values?",
+      "answer": "Answer: When attributes are given values inside the class, every newly created object initially receives those values. Example:\n\n```java\nclass Bird {\nString name = \"Parakeet\";\nString family = \"Parrot\";\nint age = 2;\nint cost = 7000;\n}\n```\n\nWhen a Bird object is created, it initially contains: Name → Parakeet Family → Parrot Age → 2 Cost → 7000"
+    },
+    {
+      "question": "Can default attribute values be changed after object creation?",
+      "answer": "Answer: Yes. The default values can be used as they are, or they can be changed after creating the object.\n\n```java\nBird bird2 = new Bird();\nbird2.name = \"Parity\";\nbird2.family = \"African Parrot\";\nbird2.age = 3;\nbird2.cost = 30000;\n```\n\nThe new values replace the previous values in bird2."
+    },
+    {
+      "question": "When should an object’s address be stored in a reference variable?",
+      "answer": "Answer: The object’s address should be stored in a reference variable when the object must be accessed more than once. The reference can be used to: Assign attribute values Print attribute values Call behaviours"
+    },
+    {
+      "question": "Can an object be created and accessed without storing its reference?",
+      "answer": "Answer: Yes. When an object is required only once, it can be created and accessed directly. Example:\n\n```java\nnew Bird().fly();\n```\n\nA new bird object is created in heap memory, and its fly() behaviour is invoked directly. Its address is not stored in a reference variable."
+    },
+    {
+      "question": "What is an anonymous object?",
+      "answer": "Answer: An object that has no reference and is created for one-time use is called an anonymous object. Example:\n\n```java\nnew Bird().fly();\n```\n\nThe object is created, used once, and its reference is not collected in a reference variable."
+    },
+    {
+      "question": "When should an anonymous object be created?",
+      "answer": "Answer: An anonymous object should be created when the object is required only once."
+    },
+    {
+      "question": "Write a program to create two Bird objects. Use the default values for the first object and change the values of the second object.",
+      "answer": "Answer: ```java\nclass Bird {\nString name = \"Parakeet\";\nString family = \"Parrot\";\nint age = 2;\nint cost = 7000;\n```\n\nvoid makeSound() {\n\n```java\nSystem.out.println(name + \" \" + family + \" is making sound\");\n}\n```\n\nvoid fly() {\n\n```java\nSystem.out.println(name + \" \" + family + \" is flying\");\n}\n}\nclass BirdApp {\npublic static void main(String[] args) {\nBird bird1 = new Bird();\nSystem.out.println(\n```\n\nbird1.name + \" \" + bird1.family + \" \" + bird1.age + \" \" + bird1.cost\n\n```java\n);\nbird1.makeSound();\nbird1.fly();\nBird bird2 = new Bird();\nbird2.name = \"Parity\";\nbird2.family = \"African Parrot\";\nbird2.age = 3;\nbird2.cost = 30000;\nSystem.out.println(\n```\n\nbird2.name + \" \" + bird2.family + \" \" + bird2.age + \" \" + bird2.cost\n\n```java\n);\nbird2.makeSound();\nbird2.fly();\n}\n}\n```\n\nOutput Parakeet Parrot 2 7000 Parakeet Parrot is making sound Parakeet Parrot is flying Parity African Parrot 3 30000 Parity African Parrot is making sound Parity African Parrot is flying Explanation bird1 uses the values defined inside the class. bird2 initially receives the same values. The values of bird2 are changed after object creation. Each reference accesses the properties and behaviours of its own object."
+    },
+    {
+      "question": "How many objects are created in the following code?",
+      "answer": "Answer: ```java\nBird bird1 = new Bird();\nBird bird2 = new Bird();\nbird1.fly();\nbird1.makeSound();\nbird2.fly();\nbird2.makeSound();\nnew Bird().fly();\nnew Bird().makeSound();\n```\n\nFour objects are created. Objects with references → 2 Objects without references → 2 The first object is referred to by bird1. The second object is referred to by bird2.\n\n```java\nnew Bird().fly() creates one anonymous object.\nnew Bird().makeSound() creates another anonymous object.\n```\n\nEach use of new Bird() creates a separate object."
+    },
+    {
+      "question": "Write an object-oriented calculator program using referenced and anonymous objects.",
+      "answer": "Answer: ```java\nclass Calculator {\nint num1 = 10;\nint num2 = 20;\n```\n\nvoid add() {\n\n```java\nSystem.out.println(\"Addition result is \" + (num1 + num2));\n}\n```\n\nvoid subtract() {\n\n```java\nSystem.out.println(\"Subtraction result is \" + (num1 - num2));\n}\n```\n\nvoid multiply() {\n\n```java\nSystem.out.println(\"Multiplication result is \" + (num1 * num2));\n}\n```\n\nvoid divide() {\n\n```java\nSystem.out.println(\"Division result is \" + (num1 / num2));\n}\n```\n\nvoid remainder() {\n\n```java\nSystem.out.println(\"Remainder result is \" + (num1 % num2));\n}\n```\n\nvoid average() {\n\n```java\nSystem.out.println(\"Average result is \" + ((num1 + num2) / 2));\n}\n}\nclass CalculatorApp {\npublic static void main(String[] args) {\nCalculator casioCalci = new Calculator();\ncasioCalci.num1 = 200;\ncasioCalci.num2 = 100;\ncasioCalci.add();\ncasioCalci.subtract();\ncasioCalci.multiply();\ncasioCalci.divide();\ncasioCalci.remainder();\ncasioCalci.average();\nCalculator citizenCalci = new Calculator();\ncitizenCalci.add();\ncitizenCalci.subtract();\ncitizenCalci.multiply();\ncitizenCalci.divide();\ncitizenCalci.remainder();\ncitizenCalci.average();\nnew Calculator().average();\n}\n}\n```\n\nExplanation num1 and num2 have default values 10 and 20. casioCalci changes the values to 200 and 100. All behaviours are called using casioCalci. citizenCalci uses the default values.\n\n```java\nnew Calculator().average() creates an anonymous calculator object.\n```\n\nThe anonymous object invokes average() only once."
+    },
+    {
+      "question": "Write a program to create an anonymous Fan object and use it only once.",
+      "answer": "Answer: ```java\nclass Fan {\n```\n\nvoid rotate() {\n\n```java\nSystem.out.println(\"Fan is rotating\");\n}\n}\nclass FanApp {\npublic static void main(String[] args) {\nnew Fan().rotate();\n}\n}\n```\n\nOutput: Fan is rotating\n\n```java\nnew Fan() creates an anonymous object, and rotate() is called only once.\n```"
+    },
+    {
+      "question": "Write a program to create an anonymous Mobile object and use it only once.",
+      "answer": "Answer: ```java\nclass Mobile {\n```\n\nvoid call() {\n\n```java\nSystem.out.println(\"Mobile is making a call\");\n}\n}\nclass MobileApp {\npublic static void main(String[] args) {\nnew Mobile().call();\n}\n}\n```\n\nOutput: Mobile is making a call\n\n```java\nnew Mobile() creates an anonymous object, and call() is called only once.\n```"
+    },
+    {
+      "question": "What is the camel-case naming convention?",
+      "answer": "Answer: In camel case, multiple words are written without spaces. The first word begins with a lowercase letter, and each following word begins with an uppercase letter. Examples: studentName mobilePrice totalMarks calculateAverage"
+    },
+    {
+      "question": "How should variable names be written in Java?",
+      "answer": "Answer: Variable names should follow lower camel case. Begin the first word with a lowercase letter. Begin each following word with an uppercase letter. Use a meaningful name related to the stored value. Examples:\n\n```java\nint studentId;\nString studentName;\nint mobilePrice;\ndouble averageMarks;\n```\n\nAvoid:\n\n```java\nint StudentId;\nString student_name;\nint x;\n```"
+    },
+    {
+      "question": "How should method names be written in Java?",
+      "answer": "Answer: Method names should also follow lower camel case. Begin the first word with a lowercase letter. Begin each following word with an uppercase letter. Use a meaningful action name because a method represents a behaviour. Examples: void makeSound() {\n\n```java\n}\n```\n\nvoid calculateAverage() {\n\n```java\n}\n```\n\nvoid displayStudentDetails() {\n\n```java\n}\n```"
+    }
+  ]
+}
