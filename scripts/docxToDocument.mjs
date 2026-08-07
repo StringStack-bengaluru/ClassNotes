@@ -178,6 +178,15 @@ with zipfile.ZipFile(path) as z:
         # Field / chained access used as println continuation: bird1.cost
         if re.fullmatch(r"[A-Za-z_]\\w*(?:\\.[A-Za-z_]\\w*)+(?:\\(\\))?", line):
             return True
+        # } else {  |  else {  |  else if (...) {
+        if re.match(r"^}\\s*else\\b", line) or re.match(r"^else(\\s+if\\b|\\s*\\{|\\s*$)", line):
+            return True
+        # Incomplete assignment / logical continuation: FindNumber findNumber =  |  ... &&
+        if re.search(r"[=&|]$", line) or line.endswith(("&&", "||")):
+            return True
+        # Condition / expression fragment: number % 4 == 0) {
+        if re.search(r"(%|==|!=|<=|>=|&&|\\|\\|)", line) and re.search(r"[){}]", line):
+            return True
         # Method / constructor signatures: void eat() {  |  public void start() {
         if re.match(
             r"^(?:public|private|protected|static|final|synchronized|native|abstract|default|\\s)*"
@@ -199,14 +208,17 @@ with zipfile.ZipFile(path) as z:
             line,
         ):
             return True
-        return line.endswith(";") and bool(re.search(r"[=()?:]|\\+\\+|--", line))
+        # Java statements end with ; — teaching placeholders like statement1; too
+        if line.endswith(";"):
+            return True
+        return False
 
     def code_looks_open(text):
         """True when a code chunk ends mid-expression (not merely inside a class body)."""
         t = (text or "").rstrip()
         if not t:
             return False
-        if t.endswith(("(", "+", ",", ".")):
+        if t.endswith(("(", "+", ",", ".", "=", "&&", "||", "&", "|")):
             return True
         # Unbalanced parentheses only — braces stay open for whole classes
         return t.count("(") > t.count(")")
@@ -223,7 +235,7 @@ with zipfile.ZipFile(path) as z:
         # Avoid swallowing real answer sentences
         if st.endswith(".") and " " in st and len(st) > 40:
             return False
-        if re.match(r"^\\d+[.)]\\s+", st):
+        if re.match(r"^\\d+[.)]\\s*", st):
             return False
         # Identifiers / dotted paths / partial expressions
         if re.fullmatch(r"[A-Za-z_][\\w.]*", st):
@@ -254,12 +266,59 @@ with zipfile.ZipFile(path) as z:
                     continue
                 if nxt.get("type") == "paragraph" and code_looks_open(text):
                     para = "".join((r.get("text") or "") for r in (nxt.get("runs") or []))
-                    # After '+' / open '(', absorb continuation fragments like bird1.cost
-                    if is_expression_fragment(para) or text.rstrip().endswith("+"):
+                    if is_expression_fragment(para) or text.rstrip().endswith(("+", "=", "&&", "||")):
                         if not (para.strip().endswith(".") and " " in para.strip() and len(para.strip()) > 40):
                             text += "\\n" + para
                             j += 1
                             continue
+                break
+            out.append({"type": "code", "text": text})
+            i = j
+        return out
+
+    def stitch_code_sandwiched_paragraphs(items):
+        """Merge code + code-looking paragraphs + code (e.g. '} else {' between two blocks)."""
+        out = []
+        i = 0
+        while i < len(items):
+            b = items[i]
+            if b.get("type") != "code":
+                out.append(b)
+                i += 1
+                continue
+            text = b.get("text") or ""
+            j = i + 1
+            while j < len(items):
+                nxt = items[j]
+                if nxt.get("type") == "blank":
+                    k = j
+                    while k < len(items) and items[k].get("type") == "blank":
+                        k += 1
+                    if k >= len(items):
+                        break
+                    nxt2 = items[k]
+                    if nxt2.get("type") == "code":
+                        text += "\\n" * (k - j)
+                        j = k
+                        continue
+                    if nxt2.get("type") == "paragraph":
+                        para = "".join((r.get("text") or "") for r in (nxt2.get("runs") or []))
+                        if is_code_line(para):
+                            text += "\\n" * (k - j)
+                            j = k
+                            continue
+                    break
+                if nxt.get("type") == "paragraph":
+                    para = "".join((r.get("text") or "") for r in (nxt.get("runs") or []))
+                    if is_code_line(para):
+                        text += "\\n" + para
+                        j += 1
+                        continue
+                    break
+                if nxt.get("type") == "code":
+                    text += "\\n" + (nxt.get("text") or "")
+                    j += 1
+                    continue
                 break
             out.append({"type": "code", "text": text})
             i = j
@@ -416,6 +475,7 @@ with zipfile.ZipFile(path) as z:
             i += 1
 
     merged = stitch_open_code_with_paragraphs(merged)
+    merged = stitch_code_sandwiched_paragraphs(merged)
     print(json.dumps(merged, ensure_ascii=True))
 `;
 
