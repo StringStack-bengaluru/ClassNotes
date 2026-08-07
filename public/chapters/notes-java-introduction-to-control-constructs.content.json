@@ -1,0 +1,135 @@
+{
+  "title": "Notes Java Introduction To Control Constructs",
+  "itemsPerPage": 2,
+  "source": "notes-java-introduction-to-control-constructs.docx",
+  "items": [
+    {
+      "question": "How can a char value be converted into an int value in Java?",
+      "answer": "Answer: A char value can be assigned to an int variable.\n\n```java\nchar x = 'A';\nint value = x;\n```\n\nThe corresponding integer value of the character is stored in value."
+    },
+    {
+      "question": "What should be the parameter type and return type of a method that converts a character into an integer?",
+      "answer": "Answer: The method should: Accept a char. Return an int.\n\n```java\nint convertFromCharacterToInteger(char x) {\nint value = x;\nreturn value;\n}\n```"
+    },
+    {
+      "question": "How can a single character be taken as input using Scanner?",
+      "answer": "Answer: A single character can be taken using:\n\n```java\nchar x = scan.next().charAt(0);\n```\n\nnext() takes the input, and charAt(0) selects the first character."
+    },
+    {
+      "question": "Write a Java program to take a character as input, convert it into an integer, and display the result.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass Conversion {\nint convertFromCharacterToInteger(char x) {\nint value = x;\nreturn value;\n}\n}\nclass ConversionApp {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nSystem.out.println(\"Enter a character:\");\nchar x = scan.next().charAt(0);\nConversion conversion = new Conversion();\nint result =\nconversion.convertFromCharacterToInteger(x);\nSystem.out.println(result);\n}\n}\n```\n\nSample Input 1: A Output: Enter a character: 65 Sample Input 2: B Output: Enter a character: 66"
+    },
+    {
+      "question": "What integer value is obtained when character A is converted into int?",
+      "answer": "Answer: 65"
+    },
+    {
+      "question": "What integer value is obtained when character B is converted into int?",
+      "answer": "Answer: 66"
+    },
+    {
+      "question": "What is the integer value range for uppercase characters A to Z?",
+      "answer": "Answer: 65 to 90"
+    },
+    {
+      "question": "What is the integer value range for lowercase characters a to z?",
+      "answer": "Answer: 97 to 122 Example: b → 98"
+    },
+    {
+      "question": "What do we call the integer values obtained from Java characters?",
+      "answer": "Answer: They are called UTF-16 values. Examples: A → 65 B → 66 a → 97 b → 98"
+    },
+    {
+      "question": "How can an integer value be converted into a character?",
+      "answer": "Answer: An integer can be converted into a character by converting it to char.\n\n```java\nint value = 65;\nchar ch = (char) value;\nSystem.out.println(ch);\n```\n\nOutput: A"
+    },
+    {
+      "question": "What is the normal flow of execution of a Java program?",
+      "answer": "Answer: A Java program normally executes statements one after another, line by line. This is called linear execution or sequential execution."
+    },
+    {
+      "question": "What is linear flow of execution?",
+      "answer": "Answer: Linear flow means statements execute one after another in sequence. Statement 1 Statement 2 Statement 3 Statement 4"
+    },
+    {
+      "question": "Why are control constructs required?",
+      "answer": "Answer: Control constructs are required when we do not want normal linear execution. They help us decide which statements should execute and which statements should be skipped."
+    },
+    {
+      "question": "What is a control construct?",
+      "answer": "Answer: A control construct is used to construct the flow of control according to the programmer's requirement."
+    },
+    {
+      "question": "What are the three types of control constructs?",
+      "answer": "Answer: The three types are: Conditional control constructs Looping control constructs Jump statements"
+    },
+    {
+      "question": "What are the conditional control constructs?",
+      "answer": "Answer: The conditional control constructs introduced are: Simple if\n\n```java\nif-else\nif-else-if ladder\nswitch\n```"
+    },
+    {
+      "question": "What are the standard looping control constructs?",
+      "answer": "Answer: The standard looping control constructs are:\n\n```java\nfor\nwhile\ndo-while\n```"
+    },
+    {
+      "question": "What are the jump statements?",
+      "answer": "Answer: The jump statements introduced are:\n\n```java\nreturn\nbreak\ncontinue\n```"
+    },
+    {
+      "question": "When should a conditional control construct be used?",
+      "answer": "Answer: A conditional control construct should be used when the control flow has to be decided based on a condition."
+    },
+    {
+      "question": "What is a package in Java?",
+      "answer": "Answer: A package is similar to a folder used to group similar or related things together."
+    },
+    {
+      "question": "What naming convention can be followed while creating package names?",
+      "answer": "Answer: The package name can follow this structure:\n\n```java\ndomain.company.project.module\n```\n\nThe package name is written in lowercase."
+    },
+    {
+      "question": "When should simple if be used?",
+      "answer": "Answer: Simple if should be used when one statement or one set of statements has to be either: Executed, or Skipped based on a condition."
+    },
+    {
+      "question": "What is the syntax of simple if?",
+      "answer": "Answer: ```java\nif (condition) {\n// statement or statements\n}\n```\n\nIf the condition is true, the statement or block executes. If the condition is false, it is skipped."
+    },
+    {
+      "question": "Write a Java program to print Eligible only when age is greater than 18.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass Eligibility {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nSystem.out.println(\"Enter age:\");\nint age = scan.nextInt();\nif (age > 18) {\nSystem.out.println(\"Eligible\");\n}\n}\n}\n```\n\nSample Input 1: 19 Output: Enter age: Eligible Sample Input 2: 16 Output: Enter age: For 16, the condition is false, so Eligible is skipped."
+    },
+    {
+      "question": "Are curly brackets required when an if controls only one statement?",
+      "answer": "Answer: No. For a single statement, curly brackets are not required.\n\n```java\nif (age > 18)\nSystem.out.println(\"Eligible\");\n```"
+    },
+    {
+      "question": "What happens if multiple statements are written after if without curly brackets?",
+      "answer": "Answer: Only the immediate next statement comes under the control of the if. If multiple statements have to be controlled together, they should be placed inside curly brackets.\n\n```java\nif (age > 18) {\nSystem.out.println(\"Eligible\");\nSystem.out.println(\"Allowed\");\n}\n```"
+    },
+    {
+      "question": "What is a block of code?",
+      "answer": "Answer: A group of statements placed between opening and closing curly brackets is called a block of code.\n\n```java\n{\n```\n\nstatement1; statement2;\n\n```java\n}\n```\n\nThe complete block can be executed or skipped together."
+    },
+    {
+      "question": "When should if-else be used?",
+      "answer": "Answer: ```java\nif-else should be used when there are two statements or two sets of statements and only one of them has to execute at a given time based on a condition.\nif (condition) {\n// first set\n```\n\n} else {\n\n```java\n// second set\n}\n```"
+    },
+    {
+      "question": "What is the difference between simple if and if-else?",
+      "answer": "Answer: Simple if: Used when one statement or one set of statements has to be executed or skipped.\n\n```java\nif (condition) {\n// execute or skip\n}\nif-else:\n```\n\nUsed when there are two alternatives statements and only one should execute.\n\n```java\nif (condition) {\n// first alternative\n```\n\n} else {\n\n```java\n// second alternative\n}\n```"
+    },
+    {
+      "question": "Write a Java program to print Eligible when age is greater than 18 otherwise print Not Eligible.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass Eligibility {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nSystem.out.println(\"Enter age:\");\nint age = scan.nextInt();\nif (age > 18) {\nSystem.out.println(\"Eligible\");\n```\n\n} else {\n\n```java\nSystem.out.println(\"Not Eligible\");\n}\n}\n}\n```\n\nSample Input 1: 19 Output: Enter age: Eligible Sample Input 2: 16 Output: Enter age: Not Eligible"
+    },
+    {
+      "question": "Write a Java program using the class-and-object approach to check whether a number is even.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass FindNumber {\nboolean checkEven(int number) {\nif (number % 2 == 0) {\nreturn true;\n}\nreturn false;\n}\n}\nclass EvenApp {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nSystem.out.println(\"Enter a number:\");\nint number = scan.nextInt();\n```\n\nFindNumber findNumber =\n\n```java\nnew FindNumber();\nboolean result =\nfindNumber.checkEven(number);\nif (result == true) {\nSystem.out.println(\"Even\");\n}\n}\n}\n```\n\nSample Input: 8 Output: Enter a number: Even"
+    },
+    {
+      "question": "Write a Java program to check whether a number is divisible by both 2 and 4.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass FindNumber {\nboolean checkDivisibility(int number) {\nif (number % 2 == 0 &&\n```\n\nnumber % 4 == 0) {\n\n```java\nreturn true;\n}\nreturn false;\n}\n}\nclass EvenApp {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nSystem.out.println(\"Enter a number:\");\nint number = scan.nextInt();\n```\n\nFindNumber findNumber =\n\n```java\nnew FindNumber();\nboolean result =\nfindNumber.checkDivisibility(number);\nif (result == true) {\nSystem.out.println(\n```\n\n\"Divisible by 2 and 4\"\n\n```java\n);\n```\n\n} else {\n\n```java\nSystem.out.println(\n```\n\n\"Not divisible by 2 and 4\"\n\n```java\n);\n}\n}\n}\n```\n\nSample Input 1: 8 Output: Enter a number: Divisible by 2 and 4 Sample Input 2: 10 Output: Enter a number: Not divisible by 2 and 4"
+    }
+  ]
+}
