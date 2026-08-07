@@ -154,8 +154,7 @@ with zipfile.ZipFile(path) as z:
         s = s.strip()
         if not s:
             return False
-        if re.fullmatch(r"\\d+", s):
-            return True
+        # Do NOT drop bare numbers — answers like "65" / "66" are real content.
         if re.search(r"BTM Layout|Bengaluru|560076|8050749191", s, re.I):
             return True
         if re.match(r"^StringStack\\.ai", s, re.I) and len(s) < 40:

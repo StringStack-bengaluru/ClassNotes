@@ -25,8 +25,7 @@ for p in root.iter(W + "p"):
         paras.append(line)
 
 def is_junk(s):
-    if re.fullmatch(r"\\d+", s):
-        return True
+    # Do NOT drop bare numbers — answers like "65" / "66" are real content.
     if re.search(r"BTM Layout|Bengaluru|560076|8050749191", s, re.I):
         return True
     if re.match(r"^StringStack\\.ai", s, re.I):
