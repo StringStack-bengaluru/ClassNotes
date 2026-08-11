@@ -1,0 +1,247 @@
+{
+  "title": "Notes E Commerce",
+  "itemsPerPage": 2,
+  "source": "notes-e-commerce.docx",
+  "items": [
+    {
+      "question": "What is the purpose of the User Service?",
+      "answer": "Answer: The User Service manages user-related information, such as name, email, phone number, profile, roles, and delivery addresses. It provides operations to register, retrieve, update, and delete users."
+    },
+    {
+      "question": "What is a REST controller, and what does UserController handle?",
+      "answer": "Answer: A REST controller receives HTTP requests from the frontend and returns responses, usually as JSON. UserController can provide endpoints such as: POST /users — create a user GET /users/{id} — retrieve a user PUT /users/{id} — update a user DELETE /users/{id} — delete a user It is created using the @RestController annotation."
+    },
+    {
+      "question": "What is the responsibility of UserService?",
+      "answer": "Answer: UserService contains the business logic of the User Service. It validates data, checks for duplicate emails, converts entities into DTOs, and communicates with UserRepository. The controller should handle HTTP requests, while the service handles business rules."
+    },
+    {
+      "question": "What is a repository, and how does UserRepository interact with MySQL?",
+      "answer": "Answer: A repository is the data-access layer. It performs database operations such as saving, retrieving, updating, and deleting records.\n\n```java\npublic interface UserRepository extends JpaRepository<User, Long> {\nOptional<User> findByEmail(String email);\n}\n```\n\nSpring Data JPA automatically generates the required database queries."
+    },
+    {
+      "question": "What is a JPA entity?",
+      "answer": "Answer: A JPA entity is a Java class mapped to a database table. It is marked with @Entity.\n\n```java\n@Entity\npublic class User {\n@Id\n@GeneratedValue(strategy = GenerationType.IDENTITY)\nprivate Long id;\nprivate String name;\nprivate String email;\n}\n```\n\nEach object represents a row in the users table."
+    },
+    {
+      "question": "What is the difference between @Controller and @RestController?",
+      "answer": "Answer: ```java\n@Controller is generally used for MVC applications that return HTML pages.\n@RestController is used for REST APIs and returns data such as JSON. It combines @Controller and @ResponseBody.\n```"
+    },
+    {
+      "question": "How do you validate user registration data?",
+      "answer": "Answer: Spring Boot provides Jakarta Bean Validation annotations:\n\n```java\n@NotBlank\nprivate String name;\n@NotBlank\n@Email\nprivate String email;\n@Size(min = 8)\nprivate String password;\n```\n\nThe controller uses @Valid to activate validation:\n\n```java\npublic ResponseEntity<?> register(@Valid @RequestBody UserRequest request)\n```"
+    },
+    {
+      "question": "How do you prevent duplicate email registration?",
+      "answer": "Answer: Before creating the user, the service checks whether the email already exists:\n\n```java\nif (userRepository.existsByEmail(request.getEmail())) {\nthrow new EmailAlreadyExistsException();\n}\n```\n\nA unique constraint should also be added to the email column in MySQL."
+    },
+    {
+      "question": "Why use a DTO instead of returning the User entity?",
+      "answer": "Answer: A DTO exposes only the required information. It prevents sensitive information, such as passwords, from being returned to the frontend. DTOs also separate the API structure from the database structure and make validation easier."
+    },
+    {
+      "question": "How do you handle a user that does not exist?",
+      "answer": "Answer: A custom exception can be thrown:\n\n```java\nthrow new UserNotFoundException(\"User not found\");\n```\n\nA class annotated with @RestControllerAdvice can convert it into a suitable HTTP response, such as 404 Not Found. 2. Authentication and Authorization Service"
+    },
+    {
+      "question": "What is the difference between authentication and authorization?",
+      "answer": "Answer: Authentication verifies who the user is, usually through an email and password. Authorization determines what the authenticated user is allowed to do. For example, a customer can view products, while an administrator can create or delete products."
+    },
+    {
+      "question": "What is JWT, and why is it used?",
+      "answer": "Answer: JWT means JSON Web Token. It is a compact token used to securely transfer claims about an authenticated user. After login, the server generates a JWT. The client sends it with later requests, so the user does not need to log in for every request."
+    },
+    {
+      "question": "What are the three parts of a JWT?",
+      "answer": "Answer: A JWT contains: Header — contains the token type and signing algorithm. Payload — contains claims such as user ID, username, role, and expiration. Signature — verifies that the token was issued by the server and was not changed. Its format is: header.payload.signature JWT data is encoded, not encrypted. Sensitive information should not be stored in the payload."
+    },
+    {
+      "question": "How is a JWT generated after login?",
+      "answer": "Answer: The server first verifies the email and password. After successful authentication, it creates a token containing the username, roles, issue time, and expiration time. The token is signed using a secret key or private key and returned to the React frontend."
+    },
+    {
+      "question": "How does the backend validate a JWT?",
+      "answer": "Answer: The frontend sends the token in the HTTP header: Authorization: Bearer <token> A security filter extracts the token and verifies: Its signature Its expiration date Its format The user represented by the token If valid, Spring Security adds the authenticated user to the security context."
+    },
+    {
+      "question": "What is Spring Security?",
+      "answer": "Answer: Spring Security is a framework for securing Java applications. It provides authentication, authorization, password hashing, security filters, and protection for REST endpoints. A SecurityFilterChain defines which endpoints are public and which require authentication."
+    },
+    {
+      "question": "What are UserDetailsService and UserDetails?",
+      "answer": "Answer: UserDetailsService loads a user from the database, usually using a username or email. UserDetails represents the authenticated user and contains the username, password hash, authorities, and account status. Spring Security uses this information during authentication."
+    },
+    {
+      "question": "Why is BCrypt used for passwords?",
+      "answer": "Answer: BCrypt is a password-hashing algorithm. It converts a password into a one-way hash and automatically uses a salt. Passwords should be hashed, not encrypted, because the original password should never be recoverable from the database.\n\n```java\npasswordEncoder.encode(rawPassword);\n```"
+    },
+    {
+      "question": "How do roles control access to APIs?",
+      "answer": "Answer: Roles can be checked in the security configuration or through annotations:\n\n```java\n@PreAuthorize(\"hasRole('ADMIN')\")\n```\n\nFor example: USER can access cart and order APIs. ADMIN can create, update, and delete products. The server must enforce roles; hiding buttons in React is not sufficient security."
+    },
+    {
+      "question": "What happens when a JWT is invalid or expired?",
+      "answer": "Answer: The request is rejected with 401 Unauthorized. The frontend can redirect the user to the login page or use a refresh token to request a new access token. A user with a valid token but insufficient permission normally receives 403 Forbidden. 3. Product Service"
+    },
+    {
+      "question": "What is the purpose of the Product Service?",
+      "answer": "Answer: The Product Service manages the product catalogue, including product names, descriptions, categories, prices, images, and available stock. It supports product CRUD, searching, filtering, sorting, and pagination."
+    },
+    {
+      "question": "Which endpoints are defined in ProductController?",
+      "answer": "Answer: Typical endpoints include: POST /products — create a product GET /products — retrieve products GET /products/{id} — retrieve one product PUT /products/{id} — update a product DELETE /products/{id} — delete a product Administrative endpoints should be protected using authorization rules."
+    },
+    {
+      "question": "What logic is implemented in ProductService?",
+      "answer": "Answer: ProductService performs business operations such as validating price and stock, checking categories, updating inventory, searching products, and converting entities into DTOs. It acts as the connection between ProductController and ProductRepository."
+    },
+    {
+      "question": "How does ProductRepository communicate with MySQL?",
+      "answer": "Answer: It can extend JpaRepository:\n\n```java\npublic interface ProductRepository\n```\n\nextends JpaRepository<Product, Long> {\n\n```java\n}\n```\n\nSpring Data JPA provides built-in methods such as save(), findById(), findAll(), and deleteById(). Custom query methods can also be defined for searching and filtering."
+    },
+    {
+      "question": "How do you model products and categories?",
+      "answer": "Answer: Many products can belong to one category, so a @ManyToOne relationship can be used:\n\n```java\n@ManyToOne\n@JoinColumn(name = \"category_id\")\nprivate Category category;\n```\n\nA category can contain many products through a corresponding @OneToMany relationship."
+    },
+    {
+      "question": "How do you implement product CRUD?",
+      "answer": "Answer: The controller receives the request, the service validates and processes it, and the repository performs the database operation. Create and update use save(). Read uses findById() or findAll(). Delete uses deleteById(). Appropriate HTTP methods and response codes should be returned."
+    },
+    {
+      "question": "How do you implement searching, filtering, sorting, and pagination?",
+      "answer": "Answer: Spring Data provides Pageable and Page:\n\n```java\nPageRequest.of(page, size, Sort.by(\"price\").ascending());\n```\n\nRepository methods or JPA specifications can filter by category, product name, price range, and availability."
+    },
+    {
+      "question": "How do you prevent negative price or stock?",
+      "answer": "Answer: Validation can be added to the DTO or entity:\n\n```java\n@Positive\nprivate BigDecimal price;\n@PositiveOrZero\nprivate Integer stock;\n```\n\nThe service should also validate these values because business rules should not depend only on frontend validation."
+    },
+    {
+      "question": "How is inventory updated after an order?",
+      "answer": "Answer: After an order is successfully confirmed, the Product Service reduces the available quantity:\n\n```java\nnew stock = current stock − ordered quantity\n```\n\nThe operation should run inside a transaction and confirm that enough stock is available before updating it."
+    },
+    {
+      "question": "How do you prevent two customers from buying the last product?",
+      "answer": "Answer: The application can use pessimistic locking, optimistic locking with @Version, or an atomic database update. For example, stock should only be reduced if the available quantity is sufficient. If another transaction has already taken the stock, the second purchase is rejected. 4. Cart Service"
+    },
+    {
+      "question": "What is the purpose of the Cart Service?",
+      "answer": "Answer: The Cart Service manages products that a customer intends to purchase. It supports adding items, changing quantities, removing items, viewing the cart, and calculating the total."
+    },
+    {
+      "question": "What is the relationship between Cart and CartItem?",
+      "answer": "Answer: A cart can contain multiple cart items, so it is normally a one-to-many relationship:\n\n```java\n@OneToMany(mappedBy = \"cart\", cascade = CascadeType.ALL)\nprivate List<CartItem> items;\n```\n\nEach CartItem usually contains a product ID, quantity, and possibly a price snapshot."
+    },
+    {
+      "question": "Which APIs are provided by CartController?",
+      "answer": "Answer: Typical endpoints include: GET /cart — retrieve the current cart POST /cart/items — add an item PUT /cart/items/{productId} — change quantity DELETE /cart/items/{productId} — remove an item DELETE /cart — clear the cart The user identity should come from the authenticated token."
+    },
+    {
+      "question": "What does CartService handle?",
+      "answer": "Answer: CartService handles cart business rules, such as finding the user’s cart, validating products, checking quantity, adding or updating items, calculating totals, and clearing the cart."
+    },
+    {
+      "question": "How does CartRepository retrieve a cart by user ID?",
+      "answer": "Answer: A custom repository method can be defined:\n\n```java\nOptional<Cart> findByUserId(Long userId);\n```\n\nIn a microservice architecture, the cart may store the user ID instead of creating a direct JPA relationship with a User entity owned by another service."
+    },
+    {
+      "question": "What happens when the same product is added again?",
+      "answer": "Answer: Instead of creating another row, the service finds the existing cart item and increases its quantity. For example, if the cart already contains two units and the user adds one more, the quantity becomes three."
+    },
+    {
+      "question": "How do you verify product quantity?",
+      "answer": "Answer: The Cart Service requests product and stock information from the Product Service. It checks that the product exists, is active, and has enough stock. Stock should be checked again during checkout because availability may change after an item is added."
+    },
+    {
+      "question": "How is the cart total calculated?",
+      "answer": "Answer: The total is calculated by multiplying each product’s price by its quantity and adding all item totals: Cart Total=∑(Product Price×Quantity) The final amount must be recalculated and verified by the backend during checkout."
+    },
+    {
+      "question": "What happens when a product’s price changes?",
+      "answer": "Answer: The application should show the latest price and notify the user if the price changed. At checkout, the backend retrieves the current trusted price from the Product Service. It must not trust a price sent by the React frontend."
+    },
+    {
+      "question": "How do you prevent access to another user’s cart?",
+      "answer": "Answer: The user ID should be extracted from the authenticated JWT, not accepted directly from the request body. Before returning or modifying a cart, the service verifies that the cart belongs to the authenticated user. 5. Payment Service — Razorpay"
+    },
+    {
+      "question": "What is the purpose of the Payment Service?",
+      "answer": "Answer: The Payment Service creates payment requests, communicates with Razorpay, verifies payment results, stores payment records, and updates payment status. It connects the application’s order with the Razorpay payment."
+    },
+    {
+      "question": "What is Razorpay, and why use its test API?",
+      "answer": "Answer: Razorpay is an online payment gateway. Its test mode allows developers to simulate payments without transferring real money. It is useful for developing and testing successful, failed, and cancelled payment scenarios safely."
+    },
+    {
+      "question": "How does the backend create a Razorpay order?",
+      "answer": "Answer: The backend calculates the trusted amount and sends it to Razorpay with the currency and receipt reference. Razorpay returns an order ID. The backend stores that ID and sends the required checkout details to the React frontend."
+    },
+    {
+      "question": "What does PaymentController receive from React?",
+      "answer": "Answer: It may receive an internal order ID to initiate payment. After checkout, it may receive: razorpay_order_id razorpay_payment_id razorpay_signature The backend must independently verify these values."
+    },
+    {
+      "question": "What does PaymentService handle?",
+      "answer": "Answer: PaymentService handles: Creating Razorpay orders Calculating or verifying the amount Verifying payment signatures Updating payment status Processing webhook events Preventing duplicate processing Initiating refunds when supported"
+    },
+    {
+      "question": "What information does PaymentRepository store?",
+      "answer": "Answer: A payment record may contain: Internal payment ID Internal order ID Razorpay order ID Razorpay payment ID Amount and currency Payment status Creation and update times Failure details It should not store complete card information or CVV."
+    },
+    {
+      "question": "What are the Razorpay key ID and secret key?",
+      "answer": "Answer: The key ID identifies the Razorpay account and is used by the frontend checkout. The secret key is used by the backend to authenticate API calls and verify signatures. It must be stored securely in an environment variable or secrets manager and must never be exposed to React."
+    },
+    {
+      "question": "How is the Razorpay signature verified?",
+      "answer": "Answer: The backend creates an HMAC-SHA256 value using the Razorpay order ID, payment ID, and secret key. It securely compares the generated value with the received signature. If they match, the response is considered authentic. Signature verification must happen on the backend."
+    },
+    {
+      "question": "How do you handle different payment statuses?",
+      "answer": "Answer: The payment record can use statuses such as: CREATED PENDING SUCCESS FAILED CANCELLED REFUNDED The Payment Service updates the status based on verified API responses or webhook events. It should not mark a payment successful only because the frontend says so."
+    },
+    {
+      "question": "What happens if payment succeeds but order creation fails?",
+      "answer": "Answer: The payment must remain recorded so it is not lost. A retry mechanism or webhook can attempt to confirm the order again. If the order cannot be completed, the system can initiate a refund. Idempotency prevents retries from creating multiple orders or processing the same payment twice. 6. Order Service"
+    },
+    {
+      "question": "What is the purpose of the Order Service?",
+      "answer": "Answer: The Order Service creates and manages customer orders. It stores ordered items, delivery address, total amount, payment reference, and order status. It also provides order history, cancellation, and administrative status updates."
+    },
+    {
+      "question": "What is the relationship between Order and OrderItem?",
+      "answer": "Answer: One order can contain many order items, so it is a one-to-many relationship:\n\n```java\n@OneToMany(mappedBy = \"order\", cascade = CascadeType.ALL)\nprivate List<OrderItem> items;\n```\n\nEach order item records the purchased product, quantity, and purchase price."
+    },
+    {
+      "question": "Which operations are exposed by OrderController?",
+      "answer": "Answer: Typical endpoints include: POST /orders — create an order GET /orders/{id} — retrieve an order GET /orders/my-orders — retrieve the customer’s orders PATCH /orders/{id}/status — update order status POST /orders/{id}/cancel — cancel an order Administrative operations should require an administrator role."
+    },
+    {
+      "question": "What does OrderService handle?",
+      "answer": "Answer: OrderService validates the cart, calculates the total, creates orders and order items, checks payment status, coordinates stock updates, clears the cart, processes cancellations, and controls valid status changes."
+    },
+    {
+      "question": "How does OrderRepository retrieve order history?",
+      "answer": "Answer: A repository method can find orders using the user ID: Page<Order> findByUserIdOrderByCreatedAtDesc( Long userId, Pageable pageable\n\n```java\n);\n```\n\nPagination should be used when a customer has many orders."
+    },
+    {
+      "question": "How is an order created from the cart?",
+      "answer": "Answer: The typical process is: Retrieve the authenticated user’s cart. Confirm prices and stock with the Product Service. Calculate the trusted total. Create an order with PENDING_PAYMENT status. Process and verify payment. Confirm the order and update inventory. Clear the cart after successful completion."
+    },
+    {
+      "question": "What are the different order statuses?",
+      "answer": "Answer: Common statuses include: PENDING_PAYMENT — waiting for payment CONFIRMED or PAID — payment verified PROCESSING — being prepared SHIPPED — handed to delivery DELIVERED — received by the customer CANCELLED — order cancelled REFUNDED — payment returned Only valid status transitions should be allowed."
+    },
+    {
+      "question": "How are payment and order statuses kept consistent?",
+      "answer": "Answer: The Order Service should update the order only after receiving a verified payment event from the Payment Service. Because separate services cannot normally share one database transaction, retries, idempotency, webhooks, and patterns such as Saga or transactional outbox can be used to maintain eventual consistency."
+    },
+    {
+      "question": "Why store a product snapshot in OrderItem?",
+      "answer": "Answer: Product information may change after purchase. The name, price, tax, and other important values should be copied into the order item at checkout. This preserves an accurate historical record and ensures old invoices do not change when the product is updated or deleted."
+    },
+    {
+      "question": "How do cancellation, inventory restoration, and refunds work?",
+      "answer": "Answer: The Order Service first checks whether the current status allows cancellation. It then changes the status to CANCELLED, requests the Product Service to restore stock, and asks the Payment Service to initiate a refund if payment was completed. Each operation should be idempotent so repeated requests do not restore stock or refund money more than once."
+    }
+  ]
+}
