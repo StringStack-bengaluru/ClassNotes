@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Introduction Control Constructs 2",
+  "itemsPerPage": 2,
+  "source": "notes-java-introduction-control-constructs-2.docx",
+  "items": [
+    {
+      "question": "When should simple if be used?",
+      "answer": "Answer: Simple if should be used when one statement or one set of statements has to be executed or skipped based on a condition. Example:\n\n```java\nif (age > 18) {\nSystem.out.println(\"Eligible\");\n}\n```"
+    },
+    {
+      "question": "When should if-else be used?",
+      "answer": "Answer: ```java\nif-else should be used when there are two statements or two sets of statements, and only one of them has to execute based on the condition.\nif (condition) {\n// first statement\n```\n\n} else {\n\n```java\n// second statement\n}\n```"
+    },
+    {
+      "question": "When should an else-if ladder be used?",
+      "answer": "Answer: An else-if ladder should be used when there are more than two possible statements or sets of statements, but only one of them should execute at a given time based on the conditions."
+    },
+    {
+      "question": "What is the syntax of an else-if ladder?",
+      "answer": "Answer: ```java\nif (condition1) {\n// statement 1\n```\n\n} else if (condition2) {\n\n```java\n// statement 2\n```\n\n} else if (condition3) {\n\n```java\n// statement 3\n```\n\n} else {\n\n```java\n// default statement\n}\n```"
+    },
+    {
+      "question": "How does an else-if ladder execute?",
+      "answer": "Answer: The conditions are checked one after another. When one condition becomes true: Its corresponding statement executes. The remaining conditions are not checked. Control comes out of the conditional construct."
+    },
+    {
+      "question": "What happens when none of the conditions in an else-if ladder becomes true?",
+      "answer": "Answer: If an else block is present, the else block executes. Example:\n\n```java\nif (number > 0) {\nSystem.out.println(\"Positive\");\n```\n\n} else if (number < 0) {\n\n```java\nSystem.out.println(\"Negative\");\n```\n\n} else {\n\n```java\nSystem.out.println(\"Equal to zero\");\n}\n```\n\nThe final else handles the remaining case."
+    },
+    {
+      "question": "Write a Java program to check whether a number is positive, negative, or equal to zero.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass NumberCheck {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nSystem.out.println(\"Enter a number:\");\nint number = scan.nextInt();\nif (number > 0) {\nSystem.out.println(\"Number is positive\");\n```\n\n} else if (number < 0) {\n\n```java\nSystem.out.println(\"Number is negative\");\n```\n\n} else {\n\n```java\nSystem.out.println(\"Number is equal to zero\");\n}\n}\n}\n```\n\nSample Input 1: 5 Output: Enter a number: Number is positive Sample Input 2: -5 Output: Enter a number: Number is negative Sample Input 3: 0 Output: Enter a number: Number is equal to zero"
+    },
+    {
+      "question": "Why is simple if not suitable when a number must be classified as positive, negative, or zero?",
+      "answer": "Answer: There are three possible outcomes: Positive Negative Equal to zero At any given time, only one should execute. Therefore, an else-if ladder is more suitable than simple if."
+    },
+    {
+      "question": "Why else-if ladder  is called as else-if ladder?",
+      "answer": "Answer: It starts with an if, can contain multiple else if conditions in between, and can end with an else. The structure appears like a ladder of conditions."
+    },
+    {
+      "question": "Are curly braces mandatory when an if, else if, or else contains only one statement?",
+      "answer": "Answer: No. For a single statement, curly braces are not mandatory.\n\n```java\nif (age <= 5)\nSystem.out.println(\"Kid\");\n```\n\nHowever, braces can still be used for better clarity."
+    },
+    {
+      "question": "When are curly braces required in conditional statements?",
+      "answer": "Answer: When multiple statements have to execute together, they should be placed inside a block using { }.\n\n```java\nif (age <= 5) {\nSystem.out.println(\"Kid\");\nSystem.out.println(\"Age is \" + age);\n}\n```\n\nA set of statements should be kept inside a block."
+    },
+    {
+      "question": "Write a Java program to categorize a person based on age.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass AgeCategory {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nSystem.out.println(\"Enter age:\");\nint age = scan.nextInt();\nif (age <= 5) {\nSystem.out.println(\"Kid\");\n```\n\n} else if (age > 5 && age <= 10) {\n\n```java\nSystem.out.println(\"Child\");\n```\n\n} else if (age >= 11 && age <= 18) {\n\n```java\nSystem.out.println(\"Teen\");\n```\n\n} else {\n\n```java\nSystem.out.println(\"Senior Citizen\");\n}\n}\n}\n```\n\nSample Input 1: 7 Output: Enter age: Child Sample Input 2: 90 Output: Enter age: Senior Citizen"
+    },
+    {
+      "question": "What happens to the remaining conditions after one condition in an else-if ladder becomes true?",
+      "answer": "Answer: The remaining conditions are not checked. The corresponding statement executes, and control comes out of the conditional construct."
+    },
+    {
+      "question": "Write a Java program using an else-if ladder to print the day of the week for numbers 1 to 7.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass WeekDay {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nSystem.out.println(\"Enter a number:\");\nint number = scan.nextInt();\nif (number == 1) {\nSystem.out.println(\"Sunday\");\n```\n\n} else if (number == 2) {\n\n```java\nSystem.out.println(\"Monday\");\n```\n\n} else if (number == 3) {\n\n```java\nSystem.out.println(\"Tuesday\");\n```\n\n} else if (number == 4) {\n\n```java\nSystem.out.println(\"Wednesday\");\n```\n\n} else if (number == 5) {\n\n```java\nSystem.out.println(\"Thursday\");\n```\n\n} else if (number == 6) {\n\n```java\nSystem.out.println(\"Friday\");\n```\n\n} else if (number == 7) {\n\n```java\nSystem.out.println(\"Saturday\");\n}\n}\n}\n```\n\nSample Input: 7 Output: Enter a number: Saturday"
+    },
+    {
+      "question": "When should a switch statement be used?",
+      "answer": "Answer: A switch can be used when there are multiple possible statements and only one has to be selected based on the value of a variable."
+    },
+    {
+      "question": "What is the basic syntax of a switch statement?",
+      "answer": "Answer: ```java\nswitch (number) {\ncase 1:\n// statement\nbreak;\ncase 2:\n// statement\nbreak;\ndefault:\n// statement\n}\n```\n\nThe value supplied to switch is matched with the appropriate case."
+    },
+    {
+      "question": "What is the purpose of a case in a switch statement?",
+      "answer": "Answer: A case represents a value that can be matched with the value supplied to switch. Example:\n\n```java\nswitch (number) {\ncase 1:\nSystem.out.println(\"Sunday\");\nbreak;\n}\n```\n\nIf number is 1, the statement belonging to case 1 executes."
+    },
+    {
+      "question": "What is the difference between an else-if ladder and a switch statement?",
+      "answer": "Answer: Both can be used to select one statement from multiple possibilities. In an else-if ladder, conditions may be checked one after another. A switch selects the matching case based on the supplied value."
+    },
+    {
+      "question": "What is fall-through in a switch statement?",
+      "answer": "Answer: If a matching case is found and there is no break, execution continues into the cases below it. This continued execution is the behavior demonstrated when break statements were omitted. Example:\n\n```java\nswitch (number) {\ncase 1:\nSystem.out.println(\"Sunday\");\ncase 2:\nSystem.out.println(\"Monday\");\ncase 3:\nSystem.out.println(\"Tuesday\");\n}\n```\n\nSample Input: 1 Output: Sunday Monday Tuesday"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "answer": "Answer: ```java\nint number = 2;\nswitch (number) {\ncase 1:\nSystem.out.println(\"Sunday\");\ncase 2:\nSystem.out.println(\"Monday\");\ncase 3:\nSystem.out.println(\"Tuesday\");\ncase 4:\nSystem.out.println(\"Wednesday\");\n}\n```\n\nMonday Tuesday Wednesday Since there is no break after case 2, execution continues through the cases below it. This behavior was explicitly demonstrated with the weekday example."
+    },
+    {
+      "question": "What is the purpose of break in a switch statement?",
+      "answer": "Answer: ```java\nbreak brings the control out of the switch control construct.\ncase 2:\nSystem.out.println(\"Monday\");\nbreak;\n```\n\nAfter break executes, the cases below it are not executed."
+    },
+    {
+      "question": "Why is break called a jump statement?",
+      "answer": "Answer: ```java\nbreak changes the normal flow of control by moving control out of the control construct.\n```\n\nTherefore, it is treated as a jump statement."
+    },
+    {
+      "question": "Is break required after the last case in a switch statement?",
+      "answer": "Answer: No. A break is not required after the last case if there is nothing after it to execute."
+    },
+    {
+      "question": "What is the purpose of default in a switch statement?",
+      "answer": "Answer: ```java\ndefault is used to execute a statement when none of the case values match the supplied value.\n```\n\nExample:\n\n```java\ndefault:\nSystem.out.println(\"Invalid input\");\n```"
+    },
+    {
+      "question": "What happens when no case matches and a default block is present?",
+      "answer": "Answer: The default block executes. For example, if the available cases are 1 to 7 and the user enters 8, the default case can handle that invalid value."
+    },
+    {
+      "question": "Write a Java program using switch to print the day of the week for numbers 1 to 7.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass WeekDay {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nSystem.out.println(\"Enter a number:\");\nint number = scan.nextInt();\nswitch (number) {\ncase 1:\nSystem.out.println(\"Sunday\");\nbreak;\ncase 2:\nSystem.out.println(\"Monday\");\nbreak;\ncase 3:\nSystem.out.println(\"Tuesday\");\nbreak;\ncase 4:\nSystem.out.println(\"Wednesday\");\nbreak;\ncase 5:\nSystem.out.println(\"Thursday\");\nbreak;\ncase 6:\nSystem.out.println(\"Friday\");\nbreak;\ncase 7:\nSystem.out.println(\"Saturday\");\nbreak;\ndefault:\nSystem.out.println(\"Invalid input\");\n}\n}\n}\n```\n\nSample Input 1: 2 Output: Enter a number: Monday Sample Input 2: 7 Output: Enter a number: Saturday Sample Input 3: 8 Output: Enter a number: Invalid input"
+    },
+    {
+      "question": "What is the output if number = 3 and a weekday switch has no break statements?",
+      "answer": "Answer: With this mapping: 1 → Sunday 2 → Monday 3 → Tuesday 4 → Wednesday 5 → Thursday 6 → Friday 7 → Saturday If number is 3 and there are no break statements, output continues from the matching case onward: Tuesday Wednesday Thursday Friday Saturday Once the matching case is reached, subsequent cases continue executing until the switch ends or a break is encountered."
+    },
+    {
+      "question": "What problem does break solve in a traditional switch statement?",
+      "answer": "Answer: Without break, execution continues into the cases below the matching case. Adding break stops that continued execution and brings control out of the switch."
+    },
+    {
+      "question": "What is code redundancy?",
+      "answer": "Answer: Code redundancy means repeating code that performs the same task again and again. The repeated use of statements such as break in the traditional switch syntax was discussed as repeated code."
+    },
+    {
+      "question": "How can the newer arrow-style switch syntax avoid repeated break statements?",
+      "answer": "Answer: The newer switch syntax is available from Java 11 onwards. In this syntax, -> can be used instead of :, and separate break statements are not required.\n\n```java\nswitch (number) {\ncase 1 -> System.out.println(\"Sunday\");\ncase 2 -> System.out.println(\"Monday\");\ncase 3 -> System.out.println(\"Tuesday\");\ncase 4 -> System.out.println(\"Wednesday\");\ncase 5 -> System.out.println(\"Thursday\");\ncase 6 -> System.out.println(\"Friday\");\ncase 7 -> System.out.println(\"Saturday\");\ndefault -> System.out.println(\"Invalid input\");\n}\n```\n\nWith this form, separate break statements are not required for these cases."
+    }
+  ]
+}
