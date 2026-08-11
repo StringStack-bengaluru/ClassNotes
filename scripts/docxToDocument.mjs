@@ -162,10 +162,12 @@ with zipfile.ZipFile(path) as z:
         return False
 
     def is_code_line(s):
-        line = s.strip()
+        line = (s or "").replace("\\u00a0", " ").replace("\\xa0", " ").strip()
+        # Also normalize real NBSP if present in XML text
+        line = line.replace("\u00a0", " ").strip()
         if not line:
             return False
-        if re.fullmatch(r"[{}\\s;]+", line) and re.search(r"[{}]", line):
+        if re.fullmatch(r"[(){}\\s;]+", line) and re.search(r"[(){};]", line):
             return True
         if re.match(r"^(//|/\\*|\\*|@\\w+)", line):
             return True
@@ -182,6 +184,15 @@ with zipfile.ZipFile(path) as z:
             return True
         # Incomplete assignment / logical continuation: FindNumber findNumber =  |  ... &&
         if re.search(r"[=&|]$", line) or line.endswith(("&&", "||")):
+            return True
+        # Multi-line method / call opening: Page<Order> findByUserId...(
+        if re.search(r"[\\w>]\\s*\\(\\s*$", line):
+            return True
+        # Parameter lines: Long userId,  |  Pageable pageable
+        if re.match(
+            r"^(?:final\\s+)?[A-Za-z_][\\w.<>,\\[\\]?]*\\s+[A-Za-z_]\\w*\\s*,?\\s*$",
+            line,
+        ):
             return True
         # Condition / expression fragment: number % 4 == 0) {
         if re.search(r"(%|==|!=|<=|>=|&&|\\|\\|)", line) and re.search(r"[){}]", line):
@@ -202,8 +213,9 @@ with zipfile.ZipFile(path) as z:
             r"^(package|import|class|interface|enum|record|public|protected|private|static|final|"
             r"abstract|return|throw|try|catch|finally|if|else|for|while|do|switch|case|default|"
             r"break|continue|new|System\\.|void\\s+\\w+|boolean\\s+\\w+|byte\\s+\\w+|short\\s+\\w+|"
-            r"int\\s+\\w+|long\\s+\\w+|float\\s+\\w+|double\\s+\\w+|char\\s+\\w+|"
-            r"String\\s+\\w+|var\\s+\\w+)",
+            r"int\\s+\\w+|long\\s+\\w+|float\\s+\\w+|double\\s+\\w+|char\\s+\\w+|Long\\s+\\w+|"
+            r"Integer\\s+\\w+|Boolean\\s+\\w+|String\\s+\\w+|var\\s+\\w+|Pageable\\s+\\w+|"
+            r"Page\\s*<)",
             line,
         ):
             return True
