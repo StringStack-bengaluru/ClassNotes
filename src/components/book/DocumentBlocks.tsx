@@ -4,15 +4,14 @@ import type { DocumentBlock, DocumentTextRun, ThemeMode } from '../../types/book
 import { themeConfig } from '../../config/theme';
 
 const QUESTION_START =
-  /^(What|Why|How|When|Where|Who|Which|Can|Could|Does|Do|Is|Are|Will|Would|Should|Explain|Describe|Define|Write|Compare|List|Name|State|Differentiate|Discuss|Outline|Show|Give|Mention|Draw|Convert|Identify|Justify|Illustrate)\b/i;
+  /^(What|Why|How|When|Where|Who|Which|Can|Could|Does|Do|Is|Are|Will|Would|Should|Explain|Describe|Define|Write|Compare|List|Name|State|Differentiate|Discuss|Outline|Show|Give|Mention|Draw|Convert|Identify|Justify|Illustrate|Apply|Create|Print|Read|Check|Calculate)\b/i;
 
 function flattenRuns(runs: DocumentTextRun[]): string {
   return runs.map((run) => run.text ?? '').join('').trim();
 }
 
 /**
- * Numbered / interrogative lines must always look like questions (bold + clear).
- * Matches: "1. What is…?", "2) Why…?", "What is a method in Java?"
+ * Numbered / interrogative lines — same serif family as answers (Taking User Input pattern).
  */
 function isQuestionText(text: string): boolean {
   const raw = text.replace(/\s+/g, ' ').trim();
@@ -25,39 +24,32 @@ function isQuestionText(text: string): boolean {
     .trim();
   if (!cleaned) return false;
 
-  // Any numbered item that ends with ? (standard Q&A notes)
   if (/^\d+[G]?[.)]\s*\S/i.test(raw) && cleaned.endsWith('?')) return true;
-
-  // Numbered + question-word stem (even if Word dropped the "?")
   if (/^\d+[G]?[.)]\s*\S/i.test(raw) && QUESTION_START.test(cleaned)) return true;
-
-  // Unnumbered interrogative
   if (cleaned.endsWith('?') && QUESTION_START.test(cleaned)) return true;
 
   return false;
 }
 
+/**
+ * One standard body style for all prose (matches Taking User Input):
+ * Cormorant serif + normal weight. Ignore Word bold so answers never look “highlighted”.
+ */
 function Runs({
   runs,
-  forceBold = false,
-  forceNormal = false,
 }: {
   runs: DocumentTextRun[];
-  forceBold?: boolean;
-  /** Ignore Word bold — keep answer body at one standard weight. */
-  forceNormal?: boolean;
 }) {
   return (
     <>
       {runs.map((run, index) => {
         const text = run.text ?? '';
         if (!text) return null;
-        const bold = forceNormal ? false : forceBold || Boolean(run.bold);
         return (
           <span
             key={index}
             className={clsx(run.italic && 'italic', run.underline && 'underline')}
-            style={bold ? { fontWeight: 700 } : { fontWeight: 400 }}
+            style={{ fontWeight: 400 }}
           >
             {text}
           </span>
@@ -81,9 +73,14 @@ function alignClass(align?: string): string {
   }
 }
 
-/** Shared look: every question is bold, slightly larger, clearly separated from answers. */
+/** Question line: same serif + weight as answers; slightly larger for scan. */
 function questionClassName(): string {
-  return 'mt-4 mb-2 font-serif text-[15px] leading-snug first:mt-0 md:text-base';
+  return 'mt-4 mb-2 font-serif text-[15px] font-normal leading-snug first:mt-0 md:text-base';
+}
+
+/** Answer / body line: identical family and weight everywhere. */
+function answerClassName(extra?: string): string {
+  return clsx('mb-3 font-serif text-[13px] font-normal leading-relaxed last:mb-0 md:text-sm', extra);
 }
 
 interface DocumentBlocksProps {
@@ -92,7 +89,8 @@ interface DocumentBlocksProps {
 }
 
 /**
- * Renders structured DOCX blocks with preserved paragraph breaks (never joins lines).
+ * Document-mode page body — typography aligned to Taking User Input:
+ * one serif for Q+A, normal weight, code only inside dark mono blocks.
  */
 export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
   const colors = themeConfig[theme];
@@ -100,67 +98,48 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
 
   return (
     <>
-      <div className="document-blocks mx-auto flex w-full max-w-lg flex-col gap-0 text-[13px] leading-relaxed md:text-sm">
+      <div
+        className={clsx(
+          'document-blocks mx-auto flex w-full max-w-lg flex-col gap-0',
+          'font-serif text-[13px] font-normal leading-relaxed md:text-sm',
+        )}
+        style={{ fontWeight: 400 }}
+      >
         {blocks.map((block, index) => {
           switch (block.type) {
             case 'blank':
               return <div key={index} className="h-3 shrink-0" aria-hidden />;
             case 'heading': {
               const asQuestion = isQuestionText(flattenRuns(block.runs));
-              if (asQuestion) {
-                return (
-                  <p
-                    key={index}
-                    className={clsx(questionClassName(), alignClass(block.align), colors.text)}
-                    style={{ fontWeight: 700 }}
-                  >
-                    <Runs runs={block.runs} forceBold />
-                  </p>
-                );
-              }
-              const Tag = (`h${Math.min(4, Math.max(1, block.level))}` as 'h1' | 'h2' | 'h3' | 'h4');
-              return (
-                <Tag
-                  key={index}
-                  className={clsx(
-                    'mt-3 mb-1.5 font-serif leading-snug first:mt-0',
-                    block.level <= 1 && 'text-lg md:text-xl',
-                    block.level === 2 && 'text-base md:text-lg',
-                    block.level >= 3 && 'text-sm md:text-base',
-                    alignClass(block.align),
-                    colors.text,
-                  )}
-                  style={{ fontWeight: 700 }}
-                >
-                  <Runs runs={block.runs} forceBold />
-                </Tag>
-              );
-            }
-            case 'paragraph': {
-              const asQuestion = isQuestionText(flattenRuns(block.runs));
-              if (asQuestion) {
-                return (
-                  <p
-                    key={index}
-                    className={clsx(questionClassName(), alignClass(block.align), colors.text)}
-                    style={{ fontWeight: 700 }}
-                  >
-                    <Runs runs={block.runs} forceBold />
-                  </p>
-                );
-              }
+              // Questions and short labels both use the same serif/normal body language.
               return (
                 <p
                   key={index}
                   className={clsx(
-                    'mb-3 whitespace-pre-line font-normal last:mb-0',
-                    block.indent && 'pl-3',
+                    asQuestion ? questionClassName() : answerClassName('mt-3 first:mt-0'),
                     alignClass(block.align),
                     colors.text,
                   )}
                   style={{ fontWeight: 400 }}
                 >
-                  <Runs runs={block.runs} forceNormal />
+                  <Runs runs={block.runs} />
+                </p>
+              );
+            }
+            case 'paragraph': {
+              const asQuestion = isQuestionText(flattenRuns(block.runs));
+              return (
+                <p
+                  key={index}
+                  className={clsx(
+                    asQuestion ? questionClassName() : answerClassName(block.indent ? 'pl-3' : undefined),
+                    'whitespace-pre-line',
+                    alignClass(block.align),
+                    colors.text,
+                  )}
+                  style={{ fontWeight: 400 }}
+                >
+                  <Runs runs={block.runs} />
                 </p>
               );
             }
@@ -169,19 +148,23 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
                 <blockquote
                   key={index}
                   className={clsx(
-                    'mb-3 border-l-2 border-[#C6A43B]/70 pl-3 italic whitespace-pre-line font-normal',
+                    answerClassName('border-l-2 border-[#C6A43B]/70 pl-3 italic'),
                     colors.muted,
                   )}
                   style={{ fontWeight: 400 }}
                 >
-                  <Runs runs={block.runs} forceNormal />
+                  <Runs runs={block.runs} />
                 </blockquote>
               );
             case 'list':
               return block.ordered ? (
                 <ol
                   key={index}
-                  className={clsx('mb-3 list-decimal space-y-1.5 pl-5 font-normal', colors.text)}
+                  className={clsx(
+                    'mb-3 list-decimal space-y-1.5 pl-5 font-serif font-normal',
+                    colors.text,
+                  )}
+                  style={{ fontWeight: 400 }}
                 >
                   {block.items.map((item, itemIndex) => {
                     const asQuestion = isQuestionText(flattenRuns(item.runs));
@@ -189,12 +172,12 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
                       <li
                         key={itemIndex}
                         className={clsx(
-                          'whitespace-pre-line pl-1',
-                          asQuestion && 'font-serif text-[15px]',
+                          'whitespace-pre-line pl-1 font-serif font-normal',
+                          asQuestion && 'text-[15px]',
                         )}
-                        style={{ fontWeight: asQuestion ? 700 : 400 }}
+                        style={{ fontWeight: 400 }}
                       >
-                        <Runs runs={item.runs} forceBold={asQuestion} forceNormal={!asQuestion} />
+                        <Runs runs={item.runs} />
                       </li>
                     );
                   })}
@@ -202,7 +185,11 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
               ) : (
                 <ul
                   key={index}
-                  className={clsx('mb-3 list-disc space-y-1.5 pl-5 font-normal', colors.text)}
+                  className={clsx(
+                    'mb-3 list-disc space-y-1.5 pl-5 font-serif font-normal',
+                    colors.text,
+                  )}
+                  style={{ fontWeight: 400 }}
                 >
                   {block.items.map((item, itemIndex) => {
                     const asQuestion = isQuestionText(flattenRuns(item.runs));
@@ -210,12 +197,12 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
                       <li
                         key={itemIndex}
                         className={clsx(
-                          'whitespace-pre-line pl-1',
-                          asQuestion && 'font-serif text-[15px]',
+                          'whitespace-pre-line pl-1 font-serif font-normal',
+                          asQuestion && 'text-[15px]',
                         )}
-                        style={{ fontWeight: asQuestion ? 700 : 400 }}
+                        style={{ fontWeight: 400 }}
                       >
-                        <Runs runs={item.runs} forceBold={asQuestion} forceNormal={!asQuestion} />
+                        <Runs runs={item.runs} />
                       </li>
                     );
                   })}
@@ -225,28 +212,26 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
               return (
                 <pre
                   key={index}
-                  className="mb-3 max-w-full overflow-x-auto rounded-md bg-stone-900/90 p-3 font-mono text-[11px] leading-snug text-stone-100 md:text-xs"
+                  className="mb-3 max-w-full overflow-x-auto rounded-md bg-stone-900/90 p-3 font-mono text-[11px] font-normal leading-snug text-stone-100 md:text-xs"
                 >
-                  <code className="whitespace-pre">{block.text}</code>
+                  <code className="whitespace-pre font-mono font-normal">{block.text}</code>
                 </pre>
               );
             case 'table':
               return (
                 <div key={index} className="mb-3 max-w-full overflow-x-auto">
-                  <table className="w-full min-w-[240px] border-collapse text-left text-[12px]">
+                  <table className="w-full min-w-[240px] border-collapse text-left font-serif text-[12px] font-normal">
                     <tbody>
                       {block.rows.map((row, rowIndex) => (
-                        <tr
-                          key={rowIndex}
-                          className={rowIndex === 0 ? 'bg-[#C6A43B]/15 font-semibold' : undefined}
-                        >
+                        <tr key={rowIndex} className={rowIndex === 0 ? 'bg-[#C6A43B]/15' : undefined}>
                           {row.map((cell, cellIndex) => (
                             <td
                               key={cellIndex}
                               className={clsx(
-                                'border border-stone-300 px-2 py-1.5 whitespace-pre-line align-top dark:border-stone-600',
+                                'border border-stone-300 px-2 py-1.5 align-top font-serif font-normal whitespace-pre-line dark:border-stone-600',
                                 colors.text,
                               )}
+                              style={{ fontWeight: 400 }}
                             >
                               {cell}
                             </td>
@@ -272,7 +257,10 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
                     />
                   </button>
                   {block.alt ? (
-                    <figcaption className={clsx('mt-1 text-center text-[11px]', colors.muted)}>
+                    <figcaption
+                      className={clsx('mt-1 text-center font-serif text-[11px] font-normal', colors.muted)}
+                      style={{ fontWeight: 400 }}
+                    >
                       {block.alt}
                     </figcaption>
                   ) : null}

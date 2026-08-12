@@ -49,7 +49,7 @@ export function DocumentContentPage({ page, theme, bookTitle }: DocumentContentP
         </p>
       </header>
 
-      <div className="book-page-scroll relative z-0 min-h-0 flex-1 overflow-y-auto px-4 py-3 md:px-6 md:py-4">
+      <div className="book-page-scroll relative z-0 min-h-0 flex-1 overflow-y-auto px-4 py-3 font-serif md:px-6 md:py-4">
         {blocks.length === 0 ? (
           <p className={clsx('text-center text-sm', colors.muted)}>No content on this page</p>
         ) : (
