@@ -26,10 +26,10 @@ function isQuestionText(text: string): boolean {
   if (!cleaned) return false;
 
   // Any numbered item that ends with ? (standard Q&A notes)
-  if (/^\d+[G]?[.)]\s+\S/i.test(raw) && cleaned.endsWith('?')) return true;
+  if (/^\d+[G]?[.)]\s*\S/i.test(raw) && cleaned.endsWith('?')) return true;
 
   // Numbered + question-word stem (even if Word dropped the "?")
-  if (/^\d+[G]?[.)]\s+\S/i.test(raw) && QUESTION_START.test(cleaned)) return true;
+  if (/^\d+[G]?[.)]\s*\S/i.test(raw) && QUESTION_START.test(cleaned)) return true;
 
   // Unnumbered interrogative
   if (cleaned.endsWith('?') && QUESTION_START.test(cleaned)) return true;
@@ -40,21 +40,24 @@ function isQuestionText(text: string): boolean {
 function Runs({
   runs,
   forceBold = false,
+  forceNormal = false,
 }: {
   runs: DocumentTextRun[];
   forceBold?: boolean;
+  /** Ignore Word bold — keep answer body at one standard weight. */
+  forceNormal?: boolean;
 }) {
   return (
     <>
       {runs.map((run, index) => {
         const text = run.text ?? '';
         if (!text) return null;
-        const bold = forceBold || Boolean(run.bold);
+        const bold = forceNormal ? false : forceBold || Boolean(run.bold);
         return (
           <span
             key={index}
             className={clsx(run.italic && 'italic', run.underline && 'underline')}
-            style={bold ? { fontWeight: 700 } : undefined}
+            style={bold ? { fontWeight: 700 } : { fontWeight: 400 }}
           >
             {text}
           </span>
@@ -155,8 +158,9 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
                     alignClass(block.align),
                     colors.text,
                   )}
+                  style={{ fontWeight: 400 }}
                 >
-                  <Runs runs={block.runs} />
+                  <Runs runs={block.runs} forceNormal />
                 </p>
               );
             }
@@ -168,8 +172,9 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
                     'mb-3 border-l-2 border-[#C6A43B]/70 pl-3 italic whitespace-pre-line font-normal',
                     colors.muted,
                   )}
+                  style={{ fontWeight: 400 }}
                 >
-                  <Runs runs={block.runs} />
+                  <Runs runs={block.runs} forceNormal />
                 </blockquote>
               );
             case 'list':
@@ -187,9 +192,9 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
                           'whitespace-pre-line pl-1',
                           asQuestion && 'font-serif text-[15px]',
                         )}
-                        style={asQuestion ? { fontWeight: 700 } : undefined}
+                        style={{ fontWeight: asQuestion ? 700 : 400 }}
                       >
-                        <Runs runs={item.runs} forceBold={asQuestion} />
+                        <Runs runs={item.runs} forceBold={asQuestion} forceNormal={!asQuestion} />
                       </li>
                     );
                   })}
@@ -208,9 +213,9 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
                           'whitespace-pre-line pl-1',
                           asQuestion && 'font-serif text-[15px]',
                         )}
-                        style={asQuestion ? { fontWeight: 700 } : undefined}
+                        style={{ fontWeight: asQuestion ? 700 : 400 }}
                       >
-                        <Runs runs={item.runs} forceBold={asQuestion} />
+                        <Runs runs={item.runs} forceBold={asQuestion} forceNormal={!asQuestion} />
                       </li>
                     );
                   })}
