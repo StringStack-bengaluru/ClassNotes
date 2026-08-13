@@ -167,6 +167,13 @@ with zipfile.ZipFile(path) as z:
         line = line.replace("\u00a0", " ").strip()
         if not line:
             return False
+        # Sample outputs / short English labels — never code
+        # e.g. "Grade B", "Child Ticket", "Invalid Day", "Not divisible"
+        if re.fullmatch(r"[A-Za-z][A-Za-z]*(?:\\s+[A-Za-z][A-Za-z]*){1,4}", line) and not re.search(
+            r"[(){};=<>.%/+\\-]|\\b(import|class|public|private|return|new|void|int|if|else)\\b",
+            line,
+        ):
+            return False
         if re.fullmatch(r"[(){}\\s;]+", line) and re.search(r"[(){};]", line):
             return True
         if re.match(r"^(//|/\\*|\\*|@\\w+)", line):
@@ -188,9 +195,10 @@ with zipfile.ZipFile(path) as z:
         # Multi-line method / call opening: Page<Order> findByUserId...(
         if re.search(r"[\\w>]\\s*\\(\\s*$", line):
             return True
-        # Parameter lines: Long userId,  |  Pageable pageable
+        # Parameter lines only: Type varName  where var starts lowercase (Java style)
+        # Do NOT match "Grade B" / "Child Ticket" (both words capitalized).
         if re.match(
-            r"^(?:final\\s+)?[A-Za-z_][\\w.<>,\\[\\]?]*\\s+[A-Za-z_]\\w*\\s*,?\\s*$",
+            r"^(?:final\\s+)?(?:[A-Z][\\w.<>,\\[\\]?]*|(?:boolean|byte|short|int|long|float|double|char|var))\\s+[a-z]\\w*\\s*,?\\s*$",
             line,
         ):
             return True
@@ -285,6 +293,48 @@ with zipfile.ZipFile(path) as z:
                 break
             out.append({"type": "code", "text": text})
             i = j
+        return out
+
+    def peel_sample_output_from_code(items):
+        """If a code block starts with sample output then import/class, split the label out."""
+        out = []
+        for b in items:
+            if b.get("type") != "code":
+                out.append(b)
+                continue
+            text = b.get("text") or ""
+            lines = text.split("\\n")
+            if len(lines) < 2:
+                out.append(b)
+                continue
+            first = lines[0].strip()
+            rest = "\\n".join(lines[1:]).lstrip("\\n")
+            rest_l = rest.lstrip()
+            starts_java = bool(
+                re.match(
+                    r"^(package|import|class|interface|enum|record|public|private|protected|@)\\b",
+                    rest_l,
+                )
+            )
+            first_is_java = bool(
+                re.search(r"[;{}()=]|\\b(import|class|public|private|void|return|new)\\b", first)
+            )
+            if first and starts_java and not first_is_java:
+                out.append({
+                    "type": "paragraph",
+                    "runs": [{
+                        "text": lines[0],
+                        "bold": False,
+                        "italic": False,
+                        "underline": False,
+                        "mono": False,
+                    }],
+                    "align": "left",
+                    "indent": False,
+                })
+                out.append({"type": "code", "text": rest})
+            else:
+                out.append(b)
         return out
 
     def stitch_code_sandwiched_paragraphs(items):
@@ -487,6 +537,7 @@ with zipfile.ZipFile(path) as z:
 
     merged = stitch_open_code_with_paragraphs(merged)
     merged = stitch_code_sandwiched_paragraphs(merged)
+    merged = peel_sample_output_from_code(merged)
     print(json.dumps(merged, ensure_ascii=True))
 `;
 
