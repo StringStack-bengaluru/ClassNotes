@@ -130,7 +130,15 @@ function archiveSource(sourcePath, slug, mode) {
   fs.mkdirSync(SOURCES_DIR, { recursive: true });
   const ext = mode === 'docx' ? '.docx' : '.pdf';
   const archivePath = path.join(SOURCES_DIR, `${slug}${ext}`);
-  fs.copyFileSync(sourcePath, archivePath);
+  const resolved = path.resolve(sourcePath);
+  const sourcesRoot = path.resolve(SOURCES_DIR) + path.sep;
+  // Original already lives in books/sources — do not create a second slug-named copy.
+  if (resolved.startsWith(sourcesRoot) && resolved !== path.resolve(archivePath)) {
+    return resolved;
+  }
+  if (resolved !== path.resolve(archivePath)) {
+    fs.copyFileSync(sourcePath, archivePath);
+  }
   return archivePath;
 }
 

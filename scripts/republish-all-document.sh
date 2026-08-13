@@ -18,10 +18,10 @@ echo "=== notes-java-datatypes-1 ==="
 npm run new-book -- notes-java-datatypes-1 "books/sources/Notes Java DataTypes-1.docx" "Notes Java DataTypes-1" document deploy
 
 echo "=== notes-java-datatypes-2 ==="
-npm run new-book -- notes-java-datatypes-2 "books/sources/notes-java-datatypes-2.docx" "Notes Java DataTypes-2" document deploy
+npm run new-book -- notes-java-datatypes-2 "books/sources/Notes Java DataTypes-2.docx" "Notes Java DataTypes-2" document deploy
 
 echo "=== notes-java-datatypes-3 ==="
-npm run new-book -- notes-java-datatypes-3 "books/sources/notes-java-datatypes-3.docx" "Notes Java DataTypes-3" document deploy
+npm run new-book -- notes-java-datatypes-3 "books/sources/Notes Java DataTypes-3.docx" "Notes Java DataTypes-3" document deploy
 
 echo "=== notes-java-demo-1 ==="
 npm run new-book -- notes-java-demo-1 "books/sources/Notes Java demo-1.docx" "Notes Java Demo-1" document deploy
@@ -39,7 +39,7 @@ echo "=== notes-java-introduction-3 ==="
 npm run new-book -- notes-java-introduction-3 "books/sources/Notes Java Introduction-3.docx" "Notes Java Introduction-3" document deploy
 
 echo "=== notes-java-methods-1 ==="
-npm run new-book -- notes-java-methods-1 "books/sources/notes-java-methods-1.docx" "Notes Java Methods-1" document deploy
+npm run new-book -- notes-java-methods-1 "books/sources/Notes Java Methods-1.docx" "Notes Java Methods-1" document deploy
 
 echo "=== notes-java-operators-1 ==="
 npm run new-book -- notes-java-operators-1 "books/sources/Notes Java Operators-1.docx" "Notes Java Operators-1" document deploy
