@@ -1,0 +1,91 @@
+{
+  "title": "Notes Java Introduction To Looping Construct 3",
+  "itemsPerPage": 2,
+  "source": "notes-java-introduction-to-looping-construct-3.docx",
+  "items": [
+    {
+      "question": "Write a Java method to print the first N natural numbers.",
+      "answer": "Answer: Natural numbers start from 1, so the loop can run from 1 to N.\n\n```java\nclass PrintNumbers {\n```\n\nvoid printNumbers(int n) {\n\n```java\nfor (int i = 1; i <= n; i++) {\nSystem.out.print(i + \" \");\n}\n}\n}\n```\n\nSample Input: 10 Output: 1 2 3 4 5 6 7 8 9 10"
+    },
+    {
+      "question": "Write a Java program to find the sum of the first N natural numbers.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass NaturalNumber {\nint findSum(int n) {\nint sum = 0;\nfor (int i = 1; i <= n; i++) {\nsum = sum + i;\n}\nreturn sum;\n}\n}\nclass Main {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nint n = scan.nextInt();\n```\n\nNaturalNumber naturalNumber =\n\n```java\nnew NaturalNumber();\nint result =\nnaturalNumber.findSum(n);\nSystem.out.println(result);\n}\n}\n```\n\nSample Input: 5 Output: 15 For 5, the calculation is: 1 + 2 + 3 + 4 + 5 = 15"
+    },
+    {
+      "question": "Write a Java program to find the sum of squares of the first N natural numbers.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass SquareSum {\nint findSquareSum(int n) {\nint sum = 0;\nfor (int i = 1; i <= n; i++) {\nsum = sum + (i * i);\n}\nreturn sum;\n}\n}\nclass Main {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nint n = scan.nextInt();\n```\n\nSquareSum squareSum =\n\n```java\nnew SquareSum();\nint result =\nsquareSum.findSquareSum(n);\nSystem.out.println(result);\n}\n}\n```\n\nSample Input: 5 Output: 55 Because: 1 + 4 + 9 + 16 + 25 = 55"
+    },
+    {
+      "question": "What is the purpose of break inside a loop?",
+      "answer": "Answer: ```java\nbreak immediately brings control out of the looping construct.\nfor (int i = 1; i <= 3; i++) {\nSystem.out.println(i);\nbreak;\n}\n```\n\nOutput: 1 Even though the loop condition allows more iterations, break terminates the loop after the first iteration."
+    },
+    {
+      "question": "What is the output of the following code?",
+      "answer": "Answer: ```java\nfor (int i = 1; i <= 3; i++) {\nSystem.out.println(i);\nif (i == 2) {\nbreak;\n}\n}\n```\n\n1 2 When i becomes 2, the condition inside the if becomes true and break terminates the loop."
+    },
+    {
+      "question": "Does break terminate an if statement?",
+      "answer": "Answer: No.\n\n```java\nbreak terminates the enclosing loop or switch.\n```\n\nIf a break is written inside an if that is itself inside a loop, it exits the loop, not merely the if."
+    },
+    {
+      "question": "Why may braces be required when using break with an if statement?",
+      "answer": "Answer: If both another statement and break must belong to the if, they should be grouped using braces.\n\n```java\nif (i == 2) {\nSystem.out.println(\"Stopping\");\nbreak;\n}\n```\n\nWithout the block, only the immediately following statement belongs to the if."
+    },
+    {
+      "question": "What is a nested loop?",
+      "answer": "Answer: A nested loop is a loop written inside another loop.\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 3; i++) {\nSystem.out.println(\"Hello\");\n}\n}\n```\n\nThe inner loop represents a task that is repeated by the outer loop."
+    },
+    {
+      "question": "When should nested loops be used?",
+      "answer": "Answer: Nested loops should be used when: One task itself requires repetition. That complete repeating task must again be repeated multiple times. In that situation, the repeating task is placed inside another loop."
+    },
+    {
+      "question": "What is the difference between an inner loop and an outer loop?",
+      "answer": "Answer: In:\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 3; i++) {\nSystem.out.println(\"Hello\");\n}\n}\n```\n\nThe loop using j is the outer loop. The loop using i is the inner loop. The inner loop completes its repetitions for each iteration of the outer loop."
+    },
+    {
+      "question": "If an outer loop executes 3 times and an inner loop executes 3 times for every outer iteration, how many times does the inner task execute?",
+      "answer": "Answer: 3 × 3 = 9 times So:\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 3; i++) {\nSystem.out.println(\"Hello\");\n}\n}\n```\n\nprints: Hello nine times."
+    },
+    {
+      "question": "What happens to an inner-loop variable after the inner loop ends?",
+      "answer": "Answer: If the variable is declared inside the inner loop, its scope ends when that loop ends. Example:\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 3; i++) {\nSystem.out.println(i);\n}\n}\n```\n\nThe variable i exists only inside the inner-loop scope."
+    },
+    {
+      "question": "Why does an inner loop restart for every iteration of the outer loop?",
+      "answer": "Answer: Because its initialization executes again whenever control re-enters the inner loop. Example:\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 3; i++) {\nSystem.out.println(i);\n}\n}\n```\n\nFor every new value of j, the inner loop again begins with:\n\n```java\nint i = 1;\n```"
+    },
+    {
+      "question": "What is the purpose of continue in a for loop?",
+      "answer": "Answer: ```java\ncontinue skips the remaining statements of the current iteration and transfers control to the increment section of the for loop.\nfor (int i = 1; i <= 3; i++) {\nif (i == 2) {\ncontinue;\n}\nSystem.out.println(i);\n}\n```\n\nOutput: 1 3 The iteration where i == 2 skips the remaining statement."
+    },
+    {
+      "question": "What is the difference between break and continue?",
+      "answer": "Answer: ```java\nbreak terminates the loop completely.\ncontinue skips only the remaining part of the current iteration and proceeds with the next iteration.\nbreak\n```\n\n→ Exit the loop\n\n```java\ncontinue\n```\n\n→ Skip current iteration → Continue with the next iteration"
+    },
+    {
+      "question": "Where does control go after continue in a for loop?",
+      "answer": "Answer: Control goes to the increment/decrement section of the for loop. Example:\n\n```java\nfor (int i = 1; i <= 3; i++) {\nif (i == 2) {\ncontinue;\n}\n}\n```\n\nWhen continue executes, control goes to:\n\n```java\ni++;\n```\n\nand then the condition is checked again."
+    },
+    {
+      "question": "Are break and continue jump statements?",
+      "answer": "Answer: Yes. Both are jump statements because they change the normal sequential flow of control.\n\n```java\nbreak jumps out of the loop.\ncontinue jumps to the next iteration process.\n```"
+    },
+    {
+      "question": "What is unreachable code in Java?",
+      "answer": "Answer: Unreachable code is code that can never be executed because control can never reach it. Example:\n\n```java\nfor (int i = 1; i <= 3; i++) {\nbreak;\nSystem.out.println(\"Hello\");\n}\n```\n\nThe statement:\n\n```java\nSystem.out.println(\"Hello\");\n```\n\ncan never execute because break transfers control out of the loop before that statement is reached. This results in an unreachable code compilation error."
+    },
+    {
+      "question": "What is the output of the following code?",
+      "answer": "Answer: ```java\nint sum = 0;\nfor (int i = 1; i <= 4; i++) {\nsum = sum + i;\n}\nSystem.out.println(sum);\n```\n\n10 Calculation: 0 + 1 = 1 1 + 2 = 3 3 + 3 = 6 6 + 4 = 10"
+    },
+    {
+      "question": "What is the difference between these two placements of break?",
+      "answer": "Answer: Code 1:\n\n```java\nfor (int i = 1; i <= 3; i++) {\nSystem.out.println(i);\nbreak;\n}\n```\n\nCode 2:\n\n```java\nfor (int i = 1; i <= 3; i++) {\nif (i == 2) {\nbreak;\n}\nSystem.out.println(i);\n}\n```\n\nIn Code 1, break executes during the first iteration, so the loop ends immediately. Output: 1 In Code 2, the first iteration completes, and the loop stops when i == 2. Output: 1 The position and condition controlling break determine when the loop terminates."
+    },
+    {
+      "question": "What is the output of the following nested loop?",
+      "answer": "Answer: ```java\nfor (int i = 1; i <= 2; i++) {\nfor (int j = 1; j <= 2; j++) {\nSystem.out.print(j + \" \");\n}\n}\n```\n\n1 2 1 2 The inner loop executes completely for each iteration of the outer loop."
+    }
+  ]
+}
