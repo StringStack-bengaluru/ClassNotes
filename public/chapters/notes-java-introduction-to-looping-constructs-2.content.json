@@ -1,0 +1,91 @@
+{
+  "title": "Notes Java Introduction To Looping Constructs 2",
+  "itemsPerPage": 2,
+  "source": "notes-java-introduction-to-looping-constructs-2.docx",
+  "items": [
+    {
+      "question": "What is the main difference between for, while, and do-while loops?",
+      "answer": "Answer: All three are used to repeat statements, but they are generally chosen based on how the repetition is controlled: Use for when the number of iterations is known. Use while when the exact number of iterations is not known, but the stopping condition is known. Use do-while when the statements must execute at least once before the condition is checked."
+    },
+    {
+      "question": "When should a for loop be used?",
+      "answer": "Answer: A for loop should be used when a set of statements must execute repeatedly and the number of iterations is known. Example:\n\n```java\nfor (int i = 1; i <= 5; i++) {\nSystem.out.println(i);\n}\n```\n\nHere, the loop is known to execute five times."
+    },
+    {
+      "question": "When should a while loop be used?",
+      "answer": "Answer: A while loop should be used when: A set of statements must execute repeatedly. The exact number of repetitions is not known. The condition for stopping the repetition is known."
+    },
+    {
+      "question": "When should a do-while loop be used?",
+      "answer": "Answer: A do-while loop should be used when a statement or set of statements must execute at least once, irrespective of the initial condition. After the first execution, repetition depends on the condition."
+    },
+    {
+      "question": "Why does a do-while loop execute at least once?",
+      "answer": "Answer: Because the loop body executes before the condition is checked.\n\n```java\ndo {\n// statements\n} while (condition);\n```\n\nEven if the condition is false initially, the body has already executed once."
+    },
+    {
+      "question": "What is the difference between entry-controlled and exit-controlled behavior demonstrated by these loops?",
+      "answer": "Answer: ```java\nfor and while check the condition before executing the loop body.\ndo-while executes the body first and checks the condition afterward.\n```\n\nTherefore:\n\n```java\nfor / while  → condition first\ndo-while     → execution first, condition later\n```"
+    },
+    {
+      "question": "What happens if the initial condition is false in a for loop or while loop?",
+      "answer": "Answer: The loop body does not execute even once. The condition is checked before entering the loop body."
+    },
+    {
+      "question": "What happens if the initial condition is false in a do-while loop?",
+      "answer": "Answer: The loop body still executes once. After that execution, the condition is checked, and the loop stops if the condition is false."
+    },
+    {
+      "question": "What is the output of the following code?",
+      "answer": "Answer: ```java\nint n = 0;\nfor (int i = 1; i <= n; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nThere is no output. Since: 1 <= 0 is false, the loop body is never executed."
+    },
+    {
+      "question": "What is the output of the following code?",
+      "answer": "Answer: ```java\nint n = 0;\nint i = 1;\ndo {\nSystem.out.println(\"String Stack\");\ni++;\n} while (i <= n);\nString Stack\n```\n\nThe output is printed once because do-while executes its body before checking the condition."
+    },
+    {
+      "question": "What is the factorial of a number?",
+      "answer": "Answer: The factorial of a positive integer is the product of all integers from 1 up to that number. Examples: 3! = 1 × 2 × 3 = 6 5! = 1 × 2 × 3 × 4 × 5 = 120"
+    },
+    {
+      "question": "Why is a for loop suitable for calculating factorial?",
+      "answer": "Answer: Because the number of iterations is known. If the input is 5, the calculation must repeat from 1 through 5. If the input is 10, it repeats from 1 through 10. Therefore, the ending value is known from the user input."
+    },
+    {
+      "question": "Write a Java program to find the factorial of a number.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass Factorial {\nint findFactorial(int n) {\nint factorial = 1;\nfor (int i = 1; i <= n; i++) {\nfactorial = factorial * i;\n}\nreturn factorial;\n}\n}\nclass FactorialApp {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nint n = scan.nextInt();\nFactorial factorial = new Factorial();\nint result =\nfactorial.findFactorial(n);\nSystem.out.println(result);\n}\n}\n```\n\nSample Input: 5 Output: 120 The recording specifically separates input/output into main() and factorial logic into a separate method."
+    },
+    {
+      "question": "What method-naming convention is followed for a name such as findFactorial()?",
+      "answer": "Answer: The method name follows camel case. It starts with a lowercase letter, and the next word starts with a capital letter. Example: findFactorial()"
+    },
+    {
+      "question": "Where should input, calculation logic, and output be placed in the demonstrated program structure?",
+      "answer": "Answer: The structure used is: Input → main() Calculation logic → separate class/method Output → main() This keeps the actual task logic separate from input and output handling."
+    },
+    {
+      "question": "16 Which loop is most suitable for printing a multiplication table from 1 to 10?",
+      "answer": "Answer: A for loop is the most suitable because the exact number of iterations is known. The loop executes from: 1 to 10"
+    },
+    {
+      "question": "Write a Java program to print the multiplication table of a given number.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass Calculator {\n```\n\nvoid printTable(int n) {\n\n```java\nfor (int i = 1; i <= 10; i++) {\nSystem.out.println(\n```\n\nn + \" x \" + i + \" = \" + (n * i)\n\n```java\n);\n}\n}\n}\nclass Main {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nint n = scan.nextInt();\n```\n\nCalculator calculator =\n\n```java\nnew Calculator();\ncalculator.printTable(n);\n}\n}\n```\n\nSample Input: 5 Output: 5 x 1 = 5 5 x 2 = 10 5 x 3 = 15 5 x 4 = 20 5 x 5 = 25 5 x 6 = 30 5 x 7 = 35 5 x 8 = 40 5 x 9 = 45 5 x 10 = 50"
+    },
+    {
+      "question": "Can while or do-while also be used to print a multiplication table?",
+      "answer": "Answer: Yes. The same result can be achieved using for, while, or do-while. However, when the number of iterations is already known, the recording recommends for as the more appropriate choice."
+    },
+    {
+      "question": "What condition is used to check whether a number is even?",
+      "answer": "Answer: number % 2 == 0 If the remainder after division by 2 is 0, the number is even."
+    },
+    {
+      "question": "Write a Java program to print the first N even numbers.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass Main {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nint n = scan.nextInt();\nint i = 1;\nwhile (i <= n) {\nSystem.out.print((2 * i) + \" \");\ni++;\n}\n}\n}\n```\n\nSample Input: 5 Output: 2 4 6 8 10"
+    },
+    {
+      "question": "Write a Java program to print all numbers from 1 to a user-provided limit that are divisible by both 2 and 4.",
+      "answer": "Answer: ```java\nimport java.util.Scanner;\nclass Demo {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nint n = scan.nextInt();\nfor (int i = 1; i <= n; i++) {\nif (i % 2 == 0 &&\n```\n\ni % 4 == 0) {\n\n```java\nSystem.out.print(i + \" \");\n}\n}\n}\n}\n```\n\nSample Input: 20 Output: 4 8 12 16 20"
+    }
+  ]
+}
