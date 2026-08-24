@@ -167,6 +167,12 @@ with zipfile.ZipFile(path) as z:
         line = line.replace("\u00a0", " ").strip()
         if not line:
             return False
+        # Numbered questions are never code: "16. What is the truth table of &&?"
+        if re.match(r"^\\d+[G]?[.)]\\s+", line):
+            return False
+        # English list fragments: "Boolean values, or"
+        if re.search(r",\\s*or\\s*$", line, re.I) and not re.search(r"[(){};=]", line):
+            return False
         # Sample outputs / short English labels — never code
         # e.g. "Grade B", "Child Ticket", "Invalid Day", "Not divisible"
         if re.fullmatch(r"[A-Za-z][A-Za-z]*(?:\\s+[A-Za-z][A-Za-z]*){1,4}", line) and not re.search(
@@ -178,8 +184,22 @@ with zipfile.ZipFile(path) as z:
             return True
         if re.match(r"^(//|/\\*|\\*|@\\w+)", line):
             return True
-        # Continuation lines inside expressions / println args
-        if re.match(r"^[+*/,.]\\s*", line):
+        # Bare operators / operator + label (catalog lists)
+        if re.fullmatch(
+            r"(?:[+\\-*/%]=?|==|!=|<=|>=|&&|\\|\\||!|\\+\\+|--|&|\\||\\^|~|<<|>>|>>>)",
+            line,
+        ):
+            return True
+        if re.fullmatch(
+            r"(?:[+\\-*/%]=?|==|!=|<=|>=|&&|\\|\\||!)\\s+[A-Za-z][A-Za-z ]+$",
+            line,
+        ):
+            return True
+        # Short comparison used as an example: a == 10
+        if re.fullmatch(r"[A-Za-z_]\\w*\\s*(?:==|!=|<=|>=)\\s*\\d+", line):
+            return True
+        # Continuation lines inside expressions / println args — not English sentences
+        if re.match(r"^[+*/,.]\\s*", line) and not re.search(r"\\bis\\b", line, re.I):
             return True
         if '"' in line and "+" in line:
             return True
@@ -223,10 +243,7 @@ with zipfile.ZipFile(path) as z:
         if re.match(
             r"^(package|import|class|interface|enum|record|public|protected|private|static|final|"
             r"abstract|return|throw|try|catch|finally|if|else|for|while|do|switch|case|default|"
-            r"break|continue|new|System\\.|void\\s+\\w+|boolean\\s+\\w+|byte\\s+\\w+|short\\s+\\w+|"
-            r"int\\s+\\w+|long\\s+\\w+|float\\s+\\w+|double\\s+\\w+|char\\s+\\w+|Long\\s+\\w+|"
-            r"Integer\\s+\\w+|Boolean\\s+\\w+|String\\s+\\w+|var\\s+\\w+|Pageable\\s+\\w+|"
-            r"Page\\s*<)",
+            r"break|continue|new|System\\.|Page\\s*<)",
             line,
         ):
             return True
@@ -542,9 +559,59 @@ with zipfile.ZipFile(path) as z:
             merged.append(b)
             i += 1
 
+    def para_text(b):
+        return "".join((r.get("text") or "") for r in (b.get("runs") or []))
+
+    def as_list_item_runs(text):
+        return {
+            "runs": [{
+                "text": text,
+                "bold": False,
+                "italic": False,
+                "underline": False,
+                "mono": False,
+            }],
+        }
+
+    def looks_like_bullet_prose(s):
+        st = re.sub(r"\\s+", " ", (s or "")).strip()
+        if not st or st.endswith(":") or re.match(r"^\\d+[G]?[.)]\\s+", st):
+            return False
+        if is_code_line(st) or re.search(r"[{};]", st):
+            return False
+        return 2 <= len(st) <= 90
+
+    def attach_loose_bullets(items):
+        """Turn stray prose next to a Word list into list items (Q2 / Q15)."""
+        out = []
+        i = 0
+        while i < len(items):
+            b = items[i]
+            nxt = items[i + 1] if i + 1 < len(items) else None
+            if b.get("type") == "paragraph" and nxt and nxt.get("type") == "list":
+                t = para_text(b)
+                if looks_like_bullet_prose(t):
+                    nxt = dict(nxt)
+                    nxt["items"] = [as_list_item_runs(t)] + list(nxt.get("items") or [])
+                    out.append(nxt)
+                    i += 2
+                    continue
+            if b.get("type") == "list" and nxt and nxt.get("type") == "paragraph":
+                t = para_text(nxt)
+                if looks_like_bullet_prose(t):
+                    extra = dict(b)
+                    extra["items"] = list(b.get("items") or []) + [as_list_item_runs(t)]
+                    out.append(extra)
+                    i += 2
+                    continue
+            out.append(b)
+            i += 1
+        return out
+
     merged = stitch_open_code_with_paragraphs(merged)
     merged = stitch_code_sandwiched_paragraphs(merged)
     merged = peel_sample_output_from_code(merged)
+    merged = attach_loose_bullets(merged)
     print(json.dumps(merged, ensure_ascii=True))
 `;
 
