@@ -186,12 +186,12 @@ with zipfile.ZipFile(path) as z:
             return True
         # Bare operators / operator + label (catalog lists)
         if re.fullmatch(
-            r"(?:[+\\-*/%]=?|==|!=|<=|>=|&&|\\|\\||!|\\+\\+|--|&|\\||\\^|~|<<|>>|>>>)",
+            r"(?:[+\\-*/%]=?|==|!=|<=|>=|>>>|<<|>>|<|>|&&|\\|\\||!|\\+\\+|--|&|\\||\\^|~)",
             line,
         ):
             return True
         if re.fullmatch(
-            r"(?:[+\\-*/%]=?|==|!=|<=|>=|&&|\\|\\||!)\\s+[A-Za-z][A-Za-z ]+$",
+            r"(?:[+\\-*/%]=?|==|!=|<=|>=|>>>|<<|>>|<|>|&&|\\|\\||!)\\s+[A-Za-z][A-Za-z ]+$",
             line,
         ):
             return True
