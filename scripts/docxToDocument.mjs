@@ -189,6 +189,9 @@ with zipfile.ZipFile(path) as z:
         # } else {  |  else {  |  else if (...) {
         if re.match(r"^}\\s*else\\b", line) or re.match(r"^else(\\s+if\\b|\\s*\\{|\\s*$)", line):
             return True
+        # for-loop increment continuation split onto its own line: divisor++) {
+        if re.search(r"(?:\\+\\+|--)", line) and re.search(r"[){};]", line):
+            return True
         # Incomplete assignment / logical continuation: FindNumber findNumber =  |  ... &&
         if re.search(r"[=&|]$", line) or line.endswith(("&&", "||")):
             return True
@@ -238,6 +241,10 @@ with zipfile.ZipFile(path) as z:
         if not t:
             return False
         if t.endswith(("(", "+", ",", ".", "=", "&&", "||", "&", "|")):
+            return True
+        # Split for-header: for (int divisor = 2;  /  divisor * divisor <= number;
+        last = t.splitlines()[-1].strip() if t else ""
+        if last.endswith(";") and t.count("(") > t.count(")"):
             return True
         # Unbalanced parentheses only — braces stay open for whole classes
         return t.count("(") > t.count(")")
