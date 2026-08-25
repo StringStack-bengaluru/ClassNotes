@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Introduction To Data Types",
+  "itemsPerPage": 2,
+  "source": "notes-java-introduction-to-data-types.docx",
+  "items": [
+    {
+      "question": "Which primitive data types are used to store whole numbers in Java?",
+      "answer": "Answer: Java provides four primitive integer data types: byte short int long They differ mainly in the amount of memory they occupy and the range of values they can store."
+    },
+    {
+      "question": "How much memory does a byte variable occupy?",
+      "answer": "Answer: A byte variable occupies: 1 byte = 8 bits Example:\n\n```java\nbyte a = 100;\n```\n\nOne byte of memory is allocated for a."
+    },
+    {
+      "question": "What is the range of the byte data type?",
+      "answer": "Answer: The range of byte is: -128 to 127 For an n-bit signed integer, the range is: -2^(n-1) to 2^(n-1) - 1 Since a byte contains 8 bits: -2^7 to 2^7 - 1 = -128 to 127"
+    },
+    {
+      "question": "Can 127 be stored in a byte variable?",
+      "answer": "Answer: Yes.\n\n```java\nbyte a = 127;\n```\n\n127 is the maximum value that a byte can store."
+    },
+    {
+      "question": "Can 128 be directly stored in a byte variable?",
+      "answer": "Answer: No.\n\n```java\nbyte a = 128;\n```\n\n128 is outside the byte range of -128 to 127."
+    },
+    {
+      "question": "What is integer underflow?",
+      "answer": "Answer: Integer underflow occurs when a value is less than the minimum value that a variable can hold. For example, the minimum value of byte is -128. Trying to represent a value below that limit, such as -129, exceeds the lower boundary."
+    },
+    {
+      "question": "What is integer overflow?",
+      "answer": "Answer: Integer overflow occurs when a value exceeds the maximum value that a variable can hold. For example, the maximum value of byte is 127. A value such as 128 exceeds that upper limit."
+    },
+    {
+      "question": "How much memory does a short variable occupy?",
+      "answer": "Answer: A short occupies: 2 bytes = 16 bits"
+    },
+    {
+      "question": "What is the range of the short data type?",
+      "answer": "Answer: The range of short is: -32768 to 32767 Because short contains 16 bits: -2^15 to 2^15 - 1"
+    },
+    {
+      "question": "Which of the following values can be stored in a short: 2200, 10000, -13000, 32768?",
+      "answer": "Answer: 2200 → valid 10000 → valid -13000 → valid 32768 → not valid 32768 is greater than the maximum short value of 32767."
+    },
+    {
+      "question": "How much memory does an int variable occupy?",
+      "answer": "Answer: An int occupies: 4 bytes = 32 bits Example:\n\n```java\nint a = 1000;\n```"
+    },
+    {
+      "question": "What is the range of the int data type?",
+      "answer": "Answer: The range of int is: -2147483648 to 2147483647 For 32 bits: -2^31 to 2^31 - 1"
+    },
+    {
+      "question": "When should long be used instead of int?",
+      "answer": "Answer: ```java\nlong should be used when the required whole-number value may exceed the range supported by int.\nlong value = 5000000000L;\n```"
+    },
+    {
+      "question": "How much memory does a long variable occupy?",
+      "answer": "Answer: A long occupies: 8 bytes = 64 bits"
+    },
+    {
+      "question": "What is the range formula for a 64-bit signed integer?",
+      "answer": "Answer: For 64 bits, the range is: -2^63 to 2^63 - 1 This is the range used for Java's long type."
+    },
+    {
+      "question": "Why is L used with some long literals?",
+      "answer": "Answer: L can be added to an integer literal to indicate that the literal should be treated as a long. Example:\n\n```java\nlong value = 5000000000L;\n```\n\nUppercase L or lowercase l can be written, though uppercase L is clearer to read."
+    },
+    {
+      "question": "Compare the memory sizes of byte, short, int, and long.",
+      "answer": "Answer: Data type Memory byte 1 byte short 2 bytes int 4 bytes long 8 bytes As the memory size increases, the range of values that can be represented also increases."
+    },
+    {
+      "question": "How do you choose between byte, short, int, and long?",
+      "answer": "Answer: Choose the data type based on the magnitude of the values that must be stored. For example, a small value does not require the same range as a very large value. The important point is to select a type whose range safely contains all expected values."
+    },
+    {
+      "question": "In what form is an integer ultimately stored in computer memory?",
+      "answer": "Answer: Integer data is represented in binary form using 0s and 1s before it is stored in memory."
+    },
+    {
+      "question": "How can decimal 126 be represented in binary?",
+      "answer": "Answer: The binary representation of 126 is: 01111110 For a byte, all eight bit positions are used: 0 1 1 1 1 1 1 0"
+    },
+    {
+      "question": "What are MSB and LSB?",
+      "answer": "Answer: MSB means Most Significant Bit. It is the leftmost bit. LSB means Least Significant Bit. It is the rightmost bit. Example: 0 1 1 1 1 1 1 0 ↑ ↑ MSB LSB"
+    },
+    {
+      "question": "What does the most significant bit indicate in a signed integer representation?",
+      "answer": "Answer: The most significant bit indicates the sign: 0 → positive 1 → negative"
+    },
+    {
+      "question": "How are negative integers represented in binary?",
+      "answer": "Answer: Negative integers are represented using two's complement representation."
+    },
+    {
+      "question": "What is one's complement?",
+      "answer": "Answer: One's complement is obtained by reversing every bit: 0 becomes 1 1 becomes 0 Example: Original: 01111110 One's complement: 10000001"
+    },
+    {
+      "question": "How is two's complement calculated?",
+      "answer": "Answer: Two's complement is calculated in two steps: 1. Find the one's complement. 2. Add 1 to the result. So: Two's complement = One's complement + 1"
+    },
+    {
+      "question": "How much memory do float and double occupy?",
+      "answer": "Answer: float → 4 bytes = 32 bits\n\n```java\ndouble → 8 bytes = 64 bits\n```\n\nThey are used to store real numbers."
+    },
+    {
+      "question": "What is the difference between single precision and double precision?",
+      "answer": "Answer: A float uses single-precision representation, while a double uses double-precision representation. float → 32-bit single precision\n\n```java\ndouble → 64-bit double precision\n```"
+    },
+    {
+      "question": "How are the 32 bits of a float divided in single-precision representation?",
+      "answer": "Answer: The 32 bits are divided into: 1 bit → sign 8 bits → exponent 23 bits → mantissa"
+    },
+    {
+      "question": "How are the 64 bits of a double divided in double-precision representation?",
+      "answer": "Answer: The 64 bits are divided into: 1 bit → sign 11 bits → exponent 52 bits → mantissa"
+    },
+    {
+      "question": "Write a Java program that stores the maximum values of byte, short, and int and prints them.",
+      "answer": "Answer: ```java\npublic class Main {\npublic static void main(String[] args) {\nbyte a = 127;\nshort b = 32767;\nint c = 2147483647;\nSystem.out.println(a);\nSystem.out.println(b);\nSystem.out.println(c);\n}\n}\n```\n\nSample Input: No input Output: 127 32767 2147483647"
+    }
+  ]
+}
