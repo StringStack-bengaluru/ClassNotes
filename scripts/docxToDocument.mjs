@@ -191,7 +191,13 @@ with zipfile.ZipFile(path) as z:
         ):
             return True
         if re.fullmatch(
-            r"(?:[+\\-*/%]=?|==|!=|<=|>=|>>>|<<|>>|<|>|&&|\\|\\||!)\\s+[A-Za-z][A-Za-z ]+$",
+            r"(?:[+\\-*/%]=?|==|!=|<=|>=|>>>|<<|>>|<|>|&&|\\|\\||!|\\+\\+|--)\\s+[A-Za-z][A-Za-z ]+$",
+            line,
+        ):
+            return True
+        # Bare Java type names used as catalogs: byte / short / int / double
+        if re.fullmatch(
+            r"(?:byte|short|int|long|float|double|boolean|char|void|String)",
             line,
         ):
             return True
