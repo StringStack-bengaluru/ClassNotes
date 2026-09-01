@@ -8,6 +8,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const REGISTRY_PATH = path.join(ROOT, 'books', 'registry.json');
 const SOURCES_DIR = path.join(ROOT, 'books', 'sources');
+const NEW_SOURCES_DIR = path.join(SOURCES_DIR, 'xzp');
+const LIVE_SOURCES_DIR = path.join(SOURCES_DIR, 'already-live');
 const PAGES_BASE = 'https://stringstack-bengaluru.github.io/ClassNotes';
 const GITHUB_BASE = 'https://github.com/StringStack-bengaluru/ClassNotes';
 /** Push book branches here — override with BOOK_REMOTE if needed. */
@@ -46,7 +48,7 @@ function parseArgs(argv) {
   /**
    * npm on Windows often strips `--slug` / `--docx` (treats them as npm config).
    * Positional form always works:
-   *   npm run new-book -- 05-day-05 "books/sources/Day-05.docx" "Day 05 Session" deploy
+   *   npm run new-book -- 05-day-05 "books/sources/xzp/Day-05.docx" "Day 05 Session" deploy
    */
   if (!args.slug && positionals[0]) args.slug = positionals[0];
   if (!args.docx && !args.pdf && positionals[1]) {
@@ -96,11 +98,19 @@ function clearChapterSources() {
 
 function resolveSourcePath(sourceArg, extension) {
   const withExt = sourceArg.toLowerCase().endsWith(extension) ? sourceArg : `${sourceArg}${extension}`;
+  const basename = path.basename(withExt);
   const candidates = [
     path.resolve(ROOT, sourceArg),
     path.resolve(ROOT, withExt),
+    path.join(NEW_SOURCES_DIR, basename),
+    path.join(LIVE_SOURCES_DIR, basename),
     path.join(SOURCES_DIR, sourceArg),
     path.join(SOURCES_DIR, withExt),
+    path.join(SOURCES_DIR, basename),
+    path.join(NEW_SOURCES_DIR, sourceArg),
+    path.join(NEW_SOURCES_DIR, withExt),
+    path.join(LIVE_SOURCES_DIR, sourceArg),
+    path.join(LIVE_SOURCES_DIR, withExt),
     path.join(paths.CHAPTERS_DIR, sourceArg),
     path.join(paths.CHAPTERS_DIR, withExt),
   ];
