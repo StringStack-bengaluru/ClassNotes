@@ -201,6 +201,13 @@ with zipfile.ZipFile(path) as z:
             line,
         ):
             return True
+        # Teaching catalogs with arrow: float → 23 mantissa bits / 23 bits → Mantissa
+        if re.match(
+            r"^(?:(?:\\d+\\s+bits)|(?:byte|short|int|long|float|double|boolean|char|String))\\s*→\\s*.+$",
+            line,
+            re.I,
+        ):
+            return True
         # Short comparison used as an example: a == 10
         if re.fullmatch(r"[A-Za-z_]\\w*\\s*(?:==|!=|<=|>=)\\s*\\d+", line):
             return True
