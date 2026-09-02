@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Introduction Methods 1",
+  "itemsPerPage": 2,
+  "source": "notes-java-introduction-methods-1.docx",
+  "items": [
+    {
+      "question": "What rules should be followed when naming a variable in Java?",
+      "answer": "Answer: A variable name: Can contain letters, digits, _, and $. Must not start with a digit. Cannot contain spaces. Cannot contain special symbols other than _ and $. Examples:\n\n```java\nint temp = 10;\nint temp1 = 20;\nint _temp = 30;\nint $temp = 40;\n```"
+    },
+    {
+      "question": "Can a Java variable name start with a number?",
+      "answer": "Answer: No. A variable name cannot start with a digit. Invalid:\n\n```java\nint 2temp = 10;\n```\n\nValid:\n\n```java\nint temp2 = 10;\n```\n\nDigits can appear in a variable name, but not as the first character."
+    },
+    {
+      "question": "Which special characters are allowed in Java variable names?",
+      "answer": "Answer: The two special characters allowed are: _ underscore $ dollar sign Other special symbols are not permitted in variable names."
+    },
+    {
+      "question": "Is there a fixed limit on the number of characters in a variable name?",
+      "answer": "Answer: No fixed restriction on the number of characters in a variable name is specified here. A variable name can contain multiple valid letters, digits, _, and $, provided the naming rules are followed."
+    },
+    {
+      "question": "What naming convention should be followed for Java variables and methods?",
+      "answer": "Answer: Variable names and method names should normally begin with a lowercase letter. Examples:\n\n```java\nint totalMarks;\nstatic void calculateTotal() {\n}\n```\n\nThis is a naming convention rather than a compiler rule."
+    },
+    {
+      "question": "What naming convention should be followed for Java class names?",
+      "answer": "Answer: A class name should normally begin with an uppercase letter. Example:\n\n```java\nclass Calculator {\n}\n```\n\nThis is a convention used to make Java code easier to read and maintain."
+    },
+    {
+      "question": "Can underscores be used inside numeric literals in Java?",
+      "answer": "Answer: Yes. Underscores can be placed between digits in numeric literals to improve readability. Example:\n\n```java\nint amount = 1_00_000;\n```\n\nThe underscores do not change the numeric value."
+    },
+    {
+      "question": "Where can underscores be placed in a numeric literal?",
+      "answer": "Answer: Underscores can be placed between digits. They should not be placed: At the beginning of the literal At the end of the literal Directly beside the decimal point Directly beside a suffix"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "answer": "Answer: ```java\npublic class Main {\npublic static void main(String[] args) {\nint a = 1_0;\nint b = 1_0_0;\nSystem.out.println(a);\nSystem.out.println(b);\n}\n}\n```\n\nSample Input: No input Output: 10 100 Underscores improve readability but do not become part of the numeric value."
+    },
+    {
+      "question": "What are the four memory segments described for the Java Runtime Environment?",
+      "answer": "Answer: The four segments are: 1. Code segment 2. Static segment 3. Stack segment 4. Heap segment"
+    },
+    {
+      "question": "What is a method in Java?",
+      "answer": "Answer: A method is a block of code or a set of statements used to perform a particular task. For example, a method can contain the logic required to add two numbers."
+    },
+    {
+      "question": "What are the main parts of a method?",
+      "answer": "Answer: A method can have: A return type A method name Parameters A method body or implementation"
+    },
+    {
+      "question": "What does the return type of a method represent?",
+      "answer": "Answer: The return type represents the type of value that the method sends back to its caller. If the method does not return a value, its return type is void."
+    },
+    {
+      "question": "What does void mean as a method return type?",
+      "answer": "Answer: void means that the method does not return a value to its caller. Example:\n\n```java\nstatic void display() {\nSystem.out.println(\"Hello\");\n}\n```\n\nPrinting something to the console does not mean that the method is returning that value."
+    },
+    {
+      "question": "What is the difference between printing a value and returning a value from a method?",
+      "answer": "Answer: Printing displays a value on the console:\n\n```java\nSystem.out.println(result);\n```\n\nReturning sends a value back to the method that called it:\n\n```java\nreturn result;\n```\n\nA method can print something and still have void as its return type."
+    },
+    {
+      "question": "Why should a method name describe the task performed by the method?",
+      "answer": "Answer: A meaningful method name makes the purpose of the method clear. For example, if a method performs addition, names such as: addition() or sum() are more appropriate than an unrelated name such as division()."
+    },
+    {
+      "question": "Can one method be defined inside another method in Java?",
+      "answer": "Answer: No. A method cannot be defined inside another method. For example, defining another method inside main() is invalid. Methods should be defined at class level."
+    },
+    {
+      "question": "Where should methods be defined in a Java class?",
+      "answer": "Answer: Methods should be defined inside a class but outside other methods. Example:\n\n```java\nclass Demo {\nstatic void addition() {\n}\npublic static void main(String[] args) {\n}\n}\n```"
+    },
+    {
+      "question": "Does defining a method automatically execute it?",
+      "answer": "Answer: No. Defining a method only provides its implementation. To execute the method, it must be called."
+    },
+    {
+      "question": "How is a static method called using a class name?",
+      "answer": "Answer: A static method can be called using:\n\n```java\nClassName.methodName();\n```\n\nExample:\n\n```java\nDemo.addition();\n```"
+    },
+    {
+      "question": "What happens when a Java program starts executing?",
+      "answer": "Answer: The JVM calls the main() method. Control then enters the body of main() and executes its statements."
+    },
+    {
+      "question": "What happens in the stack when a method is called?",
+      "answer": "Answer: When a method is called, a block of memory is allocated for that method in the stack segment. That memory block is called a: Stack frame, or Activation record"
+    },
+    {
+      "question": "What is an activation record or stack frame?",
+      "answer": "Answer: An activation record is the memory allocated in the stack for a method when that method is called. The method's local data is stored within that memory while the method is executing."
+    },
+    {
+      "question": "Where are local variables of a method stored during execution?",
+      "answer": "Answer: Local variables are allocated within the stack frame of the method in which they are declared. For example:\n\n```java\nstatic void addition() {\nint a = 10;\nint b = 20;\n}\n```\n\nThe memory for a and b is associated with the activation record of addition()."
+    },
+    {
+      "question": "What happens to a method's stack frame when the method finishes execution?",
+      "answer": "Answer: When control leaves the method, the method's activation record or stack frame is removed from the stack. The memory associated with that method's execution is then released."
+    },
+    {
+      "question": "What are the four types of methods based on parameters and return values?",
+      "answer": "Answer: Methods can be classified into four types: Type Accepts Parameters Returns Value Type 1 No No Type 2 Yes No Type 3 No Yes Type 4 Yes Yes"
+    },
+    {
+      "question": "What is a method that accepts parameters but does not return a value?",
+      "answer": "Answer: It is a method that receives input from the caller but returns nothing. Example:\n\n```java\nstatic void addition(int x, int y) {\nint z = x + y;\nSystem.out.println(z);\n}\n```\n\nHere: x and y receive input. The return type is void."
+    },
+    {
+      "question": "What is the difference between arguments and parameters?",
+      "answer": "Answer: Arguments are the values supplied when calling a method. Parameters are the variables that receive those values inside the method declaration. Example:\n\n```java\nstatic void addition(int x, int y) {\n}\naddition(10, 20);\n```\n\nHere: 10, 20 → arguments x, y → parameters The first supplied value is received by the first parameter, and the second supplied value is received by the second parameter."
+    },
+    {
+      "question": "How does a method return a value to its caller?",
+      "answer": "Answer: The return statement sends a value back to the calling method. Example:\n\n```java\nstatic int addition() {\nint a = 10;\nint b = 20;\nint c = a + b;\nreturn c;\n}\n```\n\nThe caller can collect the returned value:\n\n```java\nint result = addition();\n```"
+    },
+    {
+      "question": "Write a method that accepts two integers and returns their sum.",
+      "answer": "Answer: ```java\npublic class Main {\nstatic int addition(int x, int y) {\nint result = x + y;\nreturn result;\n}\npublic static void main(String[] args) {\nint a = 10;\nint b = 20;\nint result = addition(a, b);\nSystem.out.println(result);\n}\n}\n```\n\nSample Input: a = 10 b = 20 Output: 30 This method accepts two values through parameters and returns the calculated result to the caller."
+    }
+  ]
+}
