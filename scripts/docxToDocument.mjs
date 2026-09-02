@@ -170,8 +170,19 @@ with zipfile.ZipFile(path) as z:
         # Numbered questions are never code: "16. What is the truth table of &&?"
         if re.match(r"^\\d+[G]?[.)]\\s+", line):
             return False
-        # English list fragments: "Boolean values, or"
-        if re.search(r",\\s*or\\s*$", line, re.I) and not re.search(r"[(){};=]", line):
+        # Type section labels in notes: float: / double: — not code
+        if re.fullmatch(
+            r"(?:byte|short|int|long|float|double|boolean|char|void|String):",
+            line,
+            re.I,
+        ):
+            return False
+        # English answer sentences mis-styled as mono in Word
+        if line.endswith(".") and len(line) > 30 and re.search(
+            r"\\b(is|are|was|were|can|uses|use|than|more|less|when|because|while|provides|represents|means|allows|since|therefore)\\b",
+            line,
+            re.I,
+        ) and not re.search(r"[{}();]", line):
             return False
         # Sample outputs / short English labels — never code
         # e.g. "Grade B", "Child Ticket", "Invalid Day", "Not divisible"
@@ -201,13 +212,18 @@ with zipfile.ZipFile(path) as z:
             line,
         ):
             return True
-        # Teaching catalogs with arrow: float → 23 mantissa bits / 23 bits → Mantissa
+        # Teaching catalogs with arrow: float → 23 mantissa bits / 1 bit → Sign
         if re.match(
-            r"^(?:(?:\\d+\\s+bits)|(?:byte|short|int|long|float|double|boolean|char|String))\\s*→\\s*.+$",
+            r"^(?:(?:\\d+\\s+bits?)|(?:byte|short|int|long|float|double|boolean|char|String))\\s*(?:→|->)\\s*.+$",
             line,
             re.I,
         ):
             return True
+        # Short spec lines: 4 bytes / 8 bytes / Lower precision
+        if re.fullmatch(r"\\d+\\s+bytes", line, re.I):
+            return False
+        if re.fullmatch(r"(?:Lower|Higher)\\s+precision", line, re.I):
+            return False
         # Short comparison used as an example: a == 10
         if re.fullmatch(r"[A-Za-z_]\\w*\\s*(?:==|!=|<=|>=)\\s*\\d+", line):
             return True
@@ -621,9 +637,53 @@ with zipfile.ZipFile(path) as z:
             i += 1
         return out
 
+    def demote_misclassified_code(items):
+        """Move prose / type labels out of lone code blocks."""
+        out = []
+        for b in items:
+            if b.get("type") != "code":
+                out.append(b)
+                continue
+            text = (b.get("text") or "").strip()
+            lines = [ln for ln in text.split("\\n") if ln.strip()]
+            if len(lines) != 1:
+                out.append(b)
+                continue
+            line = lines[0].strip()
+            demote = False
+            if re.fullmatch(
+                r"(?:byte|short|int|long|float|double|boolean|char|void|String):",
+                line,
+                re.I,
+            ):
+                demote = True
+            elif line.endswith(".") and not re.search(r"[{}();=]", line) and re.search(
+                r"\\b(is|are|can|uses|use|than|more|less|when|because|while|provides|represents|means|allows|since|therefore)\\b",
+                line,
+                re.I,
+            ):
+                demote = True
+            if demote:
+                out.append({
+                    "type": "paragraph",
+                    "runs": [{
+                        "text": line,
+                        "bold": False,
+                        "italic": False,
+                        "underline": False,
+                        "mono": False,
+                    }],
+                    "align": "left",
+                    "indent": False,
+                })
+            else:
+                out.append(b)
+        return out
+
     merged = stitch_open_code_with_paragraphs(merged)
     merged = stitch_code_sandwiched_paragraphs(merged)
     merged = peel_sample_output_from_code(merged)
+    merged = demote_misclassified_code(merged)
     merged = attach_loose_bullets(merged)
     print(json.dumps(merged, ensure_ascii=True))
 `;
