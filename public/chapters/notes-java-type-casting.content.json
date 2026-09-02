@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Type Casting",
+  "itemsPerPage": 2,
+  "source": "notes-java-type-casting.docx",
+  "items": [
+    {
+      "question": "What is type casting in Java?",
+      "answer": "Answer: Type casting is the process of converting data from one data type to another data type. For example, converting a byte value into a short value is type casting."
+    },
+    {
+      "question": "What are the two types of primitive type casting in Java?",
+      "answer": "Answer: The two types are: 1. Implicit type casting 2. Explicit type casting Implicit type casting is also called widening, while explicit type casting is also called narrowing."
+    },
+    {
+      "question": "What is implicit type casting?",
+      "answer": "Answer: Implicit type casting is the automatic conversion of a value from a smaller data type to a larger compatible data type. Example:\n\n```java\nbyte a = 10;\nshort b = a;\n```\n\nThe conversion happens automatically, so an explicit cast is not required."
+    },
+    {
+      "question": "Why is implicit type casting called widening?",
+      "answer": "Answer: It is called widening because the value moves from a smaller data type to a larger compatible data type. For example: byte → short A byte occupies 1 byte, while a short occupies 2 bytes, so the available storage space increases."
+    },
+    {
+      "question": "What is explicit type casting?",
+      "answer": "Answer: Explicit type casting is the conversion of a value from a larger data type to a smaller data type by explicitly specifying the target type. Example:\n\n```java\nshort a = 120;\nbyte b = (byte) a;\n```\n\nThe target type is written inside parentheses."
+    },
+    {
+      "question": "Why is explicit type casting called narrowing?",
+      "answer": "Answer: It is called narrowing because the value is converted from a larger data type to a smaller data type. For example: short → byte The available storage space becomes smaller during the conversion."
+    },
+    {
+      "question": "What is the main risk of explicit type casting?",
+      "answer": "Answer: The main risk is possible data loss. When a value is converted from a larger data type to a smaller data type, the destination type may not be able to represent the original value correctly. Data loss is possible, but it does not necessarily occur in every explicit conversion."
+    },
+    {
+      "question": "Does explicit type casting always cause data loss?",
+      "answer": "Answer: No. Explicit casting may cause data loss depending on: the value being converted, the source data type, and the destination data type. If the value can still be represented correctly by the smaller type, the conversion may not lose the value."
+    },
+    {
+      "question": "What is the output of the following program?",
+      "answer": "Answer: ```java\npublic class Main {\npublic static void main(String[] args) {\nbyte a = 10;\nshort b = a;\nSystem.out.println(a);\nSystem.out.println(b);\n}\n}\n```\n\nSample Input: No input Output: 10 10 The byte value is automatically converted to short through implicit widening."
+    },
+    {
+      "question": "Can an int value be assigned to a double variable without explicit casting?",
+      "answer": "Answer: Yes. Example:\n\n```java\nint a = 20;\ndouble b = a;\n```\n\nThe int value is automatically converted to double."
+    },
+    {
+      "question": "What is the output of the following program?",
+      "answer": "Answer: ```java\npublic class Main {\npublic static void main(String[] args) {\nint a = 20;\ndouble b = a;\nSystem.out.println(b);\n}\n}\n```\n\nSample Input: No input Output: 20.0 The integer value is widened to a double value."
+    },
+    {
+      "question": "Why can't a short value always be assigned directly to a byte variable?",
+      "answer": "Answer: A short occupies more storage than a byte. short → 2 bytes byte → 1 byte Converting from short to byte is a narrowing conversion, so Java requires explicit type casting."
+    },
+    {
+      "question": "What is the syntax for explicit type casting?",
+      "answer": "Answer: The target data type is written inside parentheses before the value or variable being converted.\n\n```java\nbyte b = (byte) a;\n```\n\nGeneral form:\n\n```java\ntargetType variable = (targetType) value;\n```"
+    },
+    {
+      "question": "What is the output of the following program?",
+      "answer": "Answer: ```java\npublic class Main {\npublic static void main(String[] args) {\nshort a = 120;\nbyte b = (byte) a;\nSystem.out.println(a);\nSystem.out.println(b);\n}\n}\n```\n\nSample Input: No input Output: 120 120 Although the conversion is narrowing, 120 can still be represented within the byte range."
+    },
+    {
+      "question": "Why can converting a double value to an int require explicit casting?",
+      "answer": "Answer: ```java\ndouble represents real numbers with fractional information, while int represents whole numbers.\n```\n\nConverting from double to int can remove information, so it is treated as an explicit narrowing conversion."
+    },
+    {
+      "question": "Is primitive type casting based only on memory size?",
+      "answer": "Answer: No. Memory size is important, but precision must also be considered, especially when converting between integer and floating-point types. For example, the conversion rules involving long and float cannot be understood only by comparing their byte sizes."
+    },
+    {
+      "question": "Can a long value be converted to float implicitly?",
+      "answer": "Answer: Yes. The conversion from long to float can happen implicitly. Even though long occupies 8 bytes and float occupies 4 bytes, the conversion rules also consider the type of representation and precision, not only the memory size."
+    },
+    {
+      "question": "Can a float value be converted to double implicitly?",
+      "answer": "Answer: Yes.\n\n```java\nfloat a = 10.5F;\ndouble b = a;\nfloat to double is an implicit conversion.\n```"
+    },
+    {
+      "question": "Can a double value be converted to float implicitly?",
+      "answer": "Answer: No. Converting double to float requires explicit casting because the conversion moves from a more precise floating-point type to a less precise one. Example:\n\n```java\ndouble a = 10.5;\nfloat b = (float) a;\n```"
+    },
+    {
+      "question": "Can an int value be converted to char directly?",
+      "answer": "Answer: An int to char conversion requires explicit casting. Example:\n\n```java\nint value = 65;\nchar ch = (char) value;\n```\n\nThe resulting character corresponds to the character represented by that numeric code."
+    },
+    {
+      "question": "What is the output of the following program?",
+      "answer": "Answer: ```java\npublic class Main {\npublic static void main(String[] args) {\nint value = 65;\nchar ch = (char) value;\nSystem.out.println(ch);\n}\n}\n```\n\nSample Input: No input Output: A The numeric value 65 is converted into its corresponding character."
+    },
+    {
+      "question": "What characters correspond to the integer values from 91 to 96 when explicitly converted to char?",
+      "answer": "Answer: The values correspond to: 91 → [ 92 → \\ 93 → ] 94 → ^ 95 → _ 96 → ` These values can be converted from int to char using explicit casting."
+    },
+    {
+      "question": "Can a char value be converted to int implicitly?",
+      "answer": "Answer: Yes. A char value can be converted to int through implicit type casting. The numeric character value is then represented as an integer."
+    },
+    {
+      "question": "Does boolean participate in primitive type casting?",
+      "answer": "Answer: No.\n\n```java\nboolean does not participate in type casting with the numeric and character primitive types.\n```\n\nFor example, conversions such as these are not supported: boolean → int int → boolean char → boolean\n\n```java\ndouble → boolean\n```"
+    },
+    {
+      "question": "Why is the F suffix used with a float literal?",
+      "answer": "Answer: A real-number literal is treated as a double literal by default. Since assigning a double directly to a float would require narrowing, the suffix F or f is used to tell the compiler that the literal should be treated as a float. Example:\n\n```java\nfloat value = 3.14F;\n```"
+    },
+    {
+      "question": "What happens with the following statement?",
+      "answer": "Answer: ```java\nfloat value = 3.14;\n```\n\nIt produces a type-mismatch error because 3.14 is treated as a double literal by default and cannot be directly assigned to a float. The compiler reports that it cannot convert from double to float."
+    },
+    {
+      "question": "Can uppercase and lowercase suffixes be used for float and long literals?",
+      "answer": "Answer: Yes. For float:\n\n```java\nfloat a = 3.14F;\nfloat b = 3.14f;\n```\n\nFor long:\n\n```java\nlong x = 5000000000L;\nlong y = 5000000000l;\n```\n\nBoth uppercase and lowercase forms are accepted."
+    },
+    {
+      "question": "When is the L suffix required for a long literal?",
+      "answer": "Answer: Whole-number literals are treated as int literals by default when they are within the int range. If the literal itself exceeds the int range, L or l is used so that the compiler treats it as a long literal. Example:\n\n```java\nlong value = 5000000000L;\n```\n\nFor a small value that already fits within int, Java can widen it to long automatically, so adding L is not necessary."
+    },
+    {
+      "question": "What is scientific notation for floating-point values?",
+      "answer": "Answer: Scientific notation represents a real number using an exponent. For example: 3.14 × 10³ can be represented using an exponent form. A positive exponent shifts the decimal point toward the right, while a negative exponent represents movement toward the left."
+    },
+    {
+      "question": "What is the difference between widening and narrowing type casting?",
+      "answer": "Answer: Widening: Smaller/compatible type → larger type Usually automatic Also called implicit type casting Example:\n\n```java\nbyte a = 10;\nint b = a;\n```\n\nNarrowing: Larger type → smaller type Requires explicit casting May cause data loss Also called explicit type casting Example:\n\n```java\nint a = 100;\nbyte b = (byte) a;\n```\n\nSo, widening is generally performed automatically, while narrowing requires the programmer to explicitly specify the conversion."
+    }
+  ]
+}
