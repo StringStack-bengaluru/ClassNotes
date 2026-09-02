@@ -1,0 +1,179 @@
+{
+  "title": "Notes Java Introduction To Data Types 2",
+  "itemsPerPage": 2,
+  "source": "notes-java-introduction-to-data-types-2.docx",
+  "items": [
+    {
+      "question": "How much memory do float and double occupy in Java?",
+      "answer": "Answer: float → 4 bytes = 32 bits\n\n```java\ndouble → 8 bytes = 64 bits\nfloat is used with single-precision representation, while double is used with double-precision representation.\n```"
+    },
+    {
+      "question": "How are the 32 bits of a float divided?",
+      "answer": "Answer: A float uses 32 bits divided as: 1 bit → Sign 8 bits → Exponent 23 bits → Mantissa"
+    },
+    {
+      "question": "How are the 64 bits of a double divided?",
+      "answer": "Answer: A double uses 64 bits divided as: 1 bit → Sign 11 bits → Exponent 52 bits → Mantissa"
+    },
+    {
+      "question": "What does the sign bit represent in floating-point representation?",
+      "answer": "Answer: The sign bit represents whether the number is positive or negative. 0 → Positive 1 → Negative"
+    },
+    {
+      "question": "What exponent bias is used for single-precision floating-point representation?",
+      "answer": "Answer: The exponent uses an excess-127 representation. If the actual exponent is 5, the stored exponent is calculated as: 5 + 127 = 132"
+    },
+    {
+      "question": "What exponent bias is used for double-precision floating-point representation?",
+      "answer": "Answer: The exponent uses an excess-1023 representation. The exponent field contains 11 bits."
+    },
+    {
+      "question": "How is the integer part of a real number converted to binary?",
+      "answer": "Answer: The integer part is repeatedly divided by 2, and the remainders are read from bottom to top. For example, the integer part 44 is converted separately before handling the fractional part."
+    },
+    {
+      "question": "How is the fractional part of a decimal number converted to binary?",
+      "answer": "Answer: The fractional part is repeatedly multiplied by 2. At each step, the integer part of the result is recorded and the remaining fractional part is multiplied by 2 again. For example: 0.17 × 2 = 0.34 → record 0 0.34 × 2 = 0.68 → record 0 0.68 × 2 = 1.36 → record 1 The process continues until enough binary digits are obtained."
+    },
+    {
+      "question": "Why are the integer and fractional parts converted separately when converting a real number to binary?",
+      "answer": "Answer: The two parts use different conversion techniques: Integer part → repeated division by 2 Fractional part → repeated multiplication by 2 After conversion, the two binary portions are combined."
+    },
+    {
+      "question": "What is the purpose of normalizing a binary floating-point number?",
+      "answer": "Answer: Normalization moves the binary point so that the value can be represented in a standard form consisting of: a sign, an exponent, and a mantissa. The number of positions the binary point moves determines the exponent."
+    },
+    {
+      "question": "Why does double provide greater precision than float?",
+      "answer": "Answer: ```java\ndouble has a larger mantissa field than float.\n```\n\nfloat → 23 mantissa bits\n\n```java\ndouble → 52 mantissa bits\n```\n\nTherefore, double can retain more precision in fractional values."
+    },
+    {
+      "question": "When should double be preferred over float?",
+      "answer": "Answer: Use double when greater precision is required. Use float when less precision is sufficient. The distinction is based on how much fractional precision needs to be preserved."
+    },
+    {
+      "question": "Why can the displayed value of a floating-point number differ slightly from the value written in the program?",
+      "answer": "Answer: Floating-point values are stored using a limited number of bits. When more fractional digits are supplied than the representation can retain precisely, some digits may be rounded."
+    },
+    {
+      "question": "What is the purpose of character encoding?",
+      "answer": "Answer: Character encoding assigns a unique binary code to each character so that characters can be stored and retrieved without ambiguity. If different characters used the same binary representation, the computer would not know which character the stored bits represent."
+    },
+    {
+      "question": "Why does the number of bits required for character encoding increase when the number of characters increases?",
+      "answer": "Answer: Every character requires a unique binary code. As the number of characters increases, more binary combinations are required. For example: 2 characters → 1 bit 4 characters → 2 bits 8 characters → 3 bits 16 characters → 4 bits"
+    },
+    {
+      "question": "How many unique values can be represented using n bits?",
+      "answer": "Answer: n bits can provide: 2^n unique binary combinations. Examples: 2^1 = 2 2^2 = 4 2^3 = 8 2^4 = 16"
+    },
+    {
+      "question": "What is ASCII?",
+      "answer": "Answer: ASCII stands for: American Standard Code for Information Interchange It assigns codes to a set of commonly used characters and symbols so that they can be represented in binary form."
+    },
+    {
+      "question": "How many symbols are associated with the ASCII character set in the explanation given?",
+      "answer": "Answer: ASCII is described with 128 symbols. These include: uppercase letters, lowercase letters, digits, punctuation, special symbols, spaces, and control-related characters."
+    },
+    {
+      "question": "Why are values such as 65 and 97 associated with characters?",
+      "answer": "Answer: Character encodings associate characters with numeric code values. Examples given include: 'A' → 65 'a' → 97 The numeric value corresponds to the code assigned to that character."
+    },
+    {
+      "question": "Why was a larger character representation needed beyond ASCII?",
+      "answer": "Answer: ASCII supports only a limited character set. Applications that need to work with many languages require a much larger collection of character codes so that characters from different languages can be represented uniquely."
+    },
+    {
+      "question": "What is the relationship between Java char and 16-bit character representation?",
+      "answer": "Answer: A Java char occupies: 2 bytes = 16 bits The character representation discussed uses 16 bits for a character code."
+    },
+    {
+      "question": "How much memory does a char variable occupy in Java?",
+      "answer": "Answer: A char variable occupies: 2 bytes = 16 bits Example:\n\n```java\nchar ch = 'A';\n```"
+    },
+    {
+      "question": "How should a character literal be written in Java?",
+      "answer": "Answer: A character literal must be enclosed in single quotes. Example:\n\n```java\nchar ch = 'A';\n```\n\nStrings use double quotes, while individual characters use single quotes."
+    },
+    {
+      "question": "What is the difference between 'A' and \"A\" in Java?",
+      "answer": "Answer: 'A' is a character literal. \"A\" is a String literal. A character uses single quotes, while a String uses double quotes."
+    },
+    {
+      "question": "How many primitive data types are there in Java?",
+      "answer": "Answer: Java has 8 primitive data types: byte short int long float\n\n```java\ndouble\n```\n\nchar boolean"
+    },
+    {
+      "question": "What is a keyword in Java?",
+      "answer": "Answer: A keyword is a reserved word whose meaning is already known to the compiler. Examples include:\n\n```java\npublic\nclass\nstatic\n```\n\nvoid boolean A keyword cannot simply be treated like an ordinary user-defined name because it already has a predefined meaning."
+    },
+    {
+      "question": "What is the difference between a Java keyword and library code?",
+      "answer": "Answer: A keyword has a predefined meaning that the compiler already understands. Library code contains predefined classes or functionality supplied through libraries. For example, public is treated as a keyword, while String is discussed separately from Java keywords."
+    },
+    {
+      "question": "How are decimal, octal, hexadecimal, and binary integer literals identified in Java?",
+      "answer": "Answer: The prefix determines the number system. 45 → Decimal 045 → Octal 0x45 → Hexadecimal 0b1101 → Binary A number with no special prefix is treated as decimal."
+    },
+    {
+      "question": "What is the output of the following code?",
+      "answer": "Answer: ```java\npublic class Main {\npublic static void main(String[] args) {\nint value = 0b1101;\nSystem.out.println(value);\n}\n}\n```\n\n13 Calculation: 1101₂ = 1×2³ + 1×2² + 0×2¹ + 1×2⁰ = 8 + 4 + 0 + 1 = 13"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "answer": "Answer: ```java\npublic class Main {\npublic static void main(String[] args) {\nint a = 45;\nint b = 045;\nint c = 0x45;\nint d = 0b1101;\nSystem.out.println(a);\nSystem.out.println(b);\nSystem.out.println(c);\nSystem.out.println(d);\n}\n}\n```\n\n45 37 69 13 Explanation: 45 → decimal 45 045 → octal 45 = decimal 37 0x45 → hexadecimal 45 = decimal 69 0b1101 → binary 1101 = decimal 13"
+    },
+    {
+      "question": "What can be used when an integer value is too large to fit in a long?",
+      "answer": "Answer: For integer values larger than the range supported by long, the BigInteger class can be used. BigInteger is not a primitive data type; it is a class, so values are handled through objects."
+    },
+    {
+      "question": "Is BigInteger a primitive data type in Java?",
+      "answer": "Answer: No. BigInteger is a non-primitive class used for handling integer values that cannot be represented using the primitive integer types. The primitive integer types are: byte short int long"
+    },
+    {
+      "question": "How many bits are required to uniquely represent 128 different characters?",
+      "answer": "Answer: Seven bits are required because: 2^7 = 128 Therefore, 7 bits can provide 128 unique binary combinations."
+    },
+    {
+      "question": "Why can ASCII characters be stored using one byte even though 128 values require only 7 bits?",
+      "answer": "Answer: Seven bits are sufficient to represent 128 different values, but one byte contains 8 bits. Therefore, an additional bit can be added so that the character representation occupies one complete byte. 7-bit code → 128 combinations 1 byte → 8 bits"
+    },
+    {
+      "question": "How many unique character codes can 16 bits represent?",
+      "answer": "Answer: Sixteen bits can represent: 2^16 = 65536 unique combinations. Therefore, a 16-bit character representation can provide 65,536 different codes."
+    },
+    {
+      "question": "What general rule determines how many bits are needed to represent a set of unique values?",
+      "answer": "Answer: If n bits are available, the maximum number of unique combinations is: 2^n So the number of bits must be large enough that: 2^n >= number of required values Examples: 1 bit → 2 values 2 bits → 4 values 3 bits → 8 values 4 bits → 16 values"
+    },
+    {
+      "question": "Why does Java use more character capacity than the basic ASCII character set?",
+      "answer": "Answer: ASCII represents a relatively small set of characters, mainly sufficient for basic English characters and symbols. Software intended for users across different languages requires a much larger character set so that characters from many languages can be represented."
+    },
+    {
+      "question": "What does UTF-16 represent in character storage?",
+      "answer": "Answer: UTF-16 is described as a character representation in which a character is represented using a 16-bit code. Since: 16 bits = 2 bytes a Java char occupies two bytes in this representation."
+    },
+    {
+      "question": "Why must every character have a unique binary code?",
+      "answer": "Answer: A unique code is necessary so that the computer can correctly identify which character a stored binary value represents. If two different characters had the same code, the computer could not distinguish between them when converting the stored value back into a character."
+    },
+    {
+      "question": "What happens to the leading 1 while storing the mantissa of a normalized floating-point value?",
+      "answer": "Answer: In the normalized representation discussed, the leading 1 is not stored as part of the mantissa. It is treated as an implied value and is considered again when reconstructing the number. This allows the available mantissa bits to be used for the remaining fractional information."
+    },
+    {
+      "question": "Why does double require more calculations when converting the fractional part of a real number to binary?",
+      "answer": "Answer: ```java\ndouble has a larger mantissa field:\n```\n\nfloat → 23 bits\n\n```java\ndouble → 52 bits\n```\n\nTherefore, more binary fractional digits may need to be generated to fill the larger mantissa of a double."
+    },
+    {
+      "question": "What is the difference between precision and memory usage for float and double?",
+      "answer": "Answer: float: 4 bytes Lower precision\n\n```java\ndouble:\n```\n\n8 bytes Higher precision\n\n```java\ndouble uses more memory but can preserve more fractional precision than float.\n```"
+    },
+    {
+      "question": "Is String a keyword in Java?",
+      "answer": "Answer: No. String is not a Java keyword. A keyword is a reserved word whose meaning is already recognized by the compiler, while String belongs to Java's predefined library classes"
+    }
+  ]
+}
