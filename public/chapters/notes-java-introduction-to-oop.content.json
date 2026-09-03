@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Introduction To Oop",
+  "itemsPerPage": 2,
+  "source": "notes-java-introduction-to-oop.docx",
+  "items": [
+    {
+      "question": "What is object-oriented programming?",
+      "answer": "Answer: Object-oriented programming is a programming approach intended to solve real-world problems by representing the solution using objects."
+    },
+    {
+      "question": "What does object orientation mean from an object perspective?",
+      "answer": "Answer: Object orientation means looking at the world from the perspective of objects. In object-oriented programming, the world can be viewed as a collection of objects."
+    },
+    {
+      "question": "What are the basic principles used to understand objects in OOP?",
+      "answer": "Answer: The principles are: The world is a collection of objects. Every object has a useful purpose. Every object belongs to a category or class. Objects interact with other objects. Every object has properties and behaviors."
+    },
+    {
+      "question": "What is the relationship between a class and an object?",
+      "answer": "Answer: A class acts as a blueprint used to create objects. The class defines the properties and behaviors that its objects can have."
+    },
+    {
+      "question": "Where is an object created when the new keyword is used?",
+      "answer": "Answer: When an object is created using new, memory for that object is allocated in the heap segment. Example:\n\n```java\nStudent s = new Student();\n```\n\nThe Student object is created in the heap."
+    },
+    {
+      "question": "What is the purpose of a reference variable?",
+      "answer": "Answer: A reference variable holds the reference of an object and is used to access that object. Example:\n\n```java\nStudent s = new Student();\n```\n\nHere, s is the reference variable used to access the Student object."
+    },
+    {
+      "question": "What are the four pillars of object-oriented programming?",
+      "answer": "Answer: The four pillars are: 1. Encapsulation 2. Inheritance 3. Polymorphism 4. Abstraction"
+    },
+    {
+      "question": "What is the main purpose of encapsulation?",
+      "answer": "Answer: Encapsulation is used to provide controlled access to important aspects of an object. It helps prevent important data from being accessed or modified directly in an uncontrolled manner."
+    },
+    {
+      "question": "Why is encapsulation important?",
+      "answer": "Answer: Encapsulation helps provide data security by preventing uncontrolled direct access to important data. Without proper encapsulation, important object data may be misused and the object may enter an invalid or unusable state."
+    },
+    {
+      "question": "What problem does inheritance help solve?",
+      "answer": "Answer: Inheritance supports code reusability. By reusing existing code, development time can be reduced instead of rewriting the same functionality repeatedly."
+    },
+    {
+      "question": "What is polymorphism?",
+      "answer": "Answer: Polymorphism means: A single entity taking multiple forms. It helps make code more flexible and can reduce the amount of code required for different forms of behavior."
+    },
+    {
+      "question": "What is the purpose of abstraction?",
+      "answer": "Answer: Abstraction helps hide implementation complexity and allows the user to work with an application without dealing with all of its internal details. It makes the application easier to use."
+    },
+    {
+      "question": "What advantages are associated with the four pillars of OOP?",
+      "answer": "Answer: The four pillars provide different advantages: Encapsulation → Data security Inheritance → Code reusability Polymorphism → Flexible and compact code Abstraction → Reduced complexity for the user"
+    },
+    {
+      "question": "What is controlled access in encapsulation?",
+      "answer": "Answer: Controlled access means important data is not accessed directly by outside code. Instead, access is provided indirectly through methods that control how the data is read or modified."
+    },
+    {
+      "question": "What are the basic steps used to implement encapsulation?",
+      "answer": "Answer: The steps are: Identify the important data of the object. Make that data private to restrict direct access. Provide controlled access using public methods."
+    },
+    {
+      "question": "What does the private access modifier do to a field?",
+      "answer": "Answer: Making a field private prevents outside code from directly accessing that field. Example:\n\n```java\nclass Book {\nprivate int pageNumber;\n}\n```\n\nOutside code cannot directly access pageNumber."
+    },
+    {
+      "question": "Why are public methods used with private fields?",
+      "answer": "Answer: Public methods provide controlled access to private fields. Instead of directly modifying the field, outside code communicates with the object through these methods."
+    },
+    {
+      "question": "What is a setter method?",
+      "answer": "Answer: A setter is a method used to assign or update the value of a private field. Example:\n\n```java\npublic void setPageNumber(int value) {\npageNumber = value;\n}\n```\n\nThe setter provides controlled write access to the private field."
+    },
+    {
+      "question": "What is a getter method?",
+      "answer": "Answer: A getter is a method used to retrieve the value of a private field. Example:\n\n```java\npublic int getPageNumber() {\nreturn pageNumber;\n}\n```\n\nThe getter provides controlled read access to the private field."
+    },
+    {
+      "question": "What is the difference between a getter and a setter?",
+      "answer": "Answer: A setter assigns a value to a private field.\n\n```java\nsetPageNumber(100);\n```\n\nA getter retrieves the value of a private field.\n\n```java\nint value = getPageNumber();\n```\n\nSo: Setter → writes data Getter → reads data"
+    },
+    {
+      "question": "Why should validation be added inside a setter?",
+      "answer": "Answer: A setter can validate the incoming value before storing it. For example, if a book's page count must be positive:\n\n```java\npublic void setPageNumber(int value) {\nif (value > 0) {\npageNumber = value;\n```\n\n} else {\n\n```java\nSystem.out.println(\"Invalid value\");\n}\n}\n```\n\nThis prevents invalid values such as negative page counts from being assigned to the object."
+    },
+    {
+      "question": "Why is making a field private alone not sufficient for complete controlled access?",
+      "answer": "Answer: Making a field private prevents direct access, but controlled access also requires methods that decide how the field can be read or modified. A setter can validate incoming data before assigning it, while a getter can provide access to the stored value."
+    },
+    {
+      "question": "What is another definition of encapsulation in terms of state and behavior?",
+      "answer": "Answer: Encapsulation can also be described as binding the state and behavior of an object into a single entity. The state is represented by fields or data members, while behavior is represented by methods or member functions."
+    },
+    {
+      "question": "What is the relationship between fields and methods in encapsulation?",
+      "answer": "Answer: Fields represent the state or properties of an object. Methods represent the behavior or functionality of the object. Encapsulation combines these states and behaviors within the same object and controls access to important data through methods."
+    },
+    {
+      "question": "What is a package in Java?",
+      "answer": "Answer: A package is used to group related program elements together. It can be thought of as a mechanism for organizing related classes or functionality under one logical group."
+    },
+    {
+      "question": "What is the difference between a normal folder and a Java package?",
+      "answer": "Answer: A normal folder may contain different kinds of unrelated files. A Java package is intended to group related Java elements together. For example, classes related to encapsulation can be grouped inside an encapsulation-related package."
+    },
+    {
+      "question": "What naming convention can be used for Java packages?",
+      "answer": "Answer: A package name can be organized using components such as the company's domain, company name, module name, and feature name. For example: com.companyname.module.encapsulation"
+    },
+    {
+      "question": "What problem can occur when an object's important field is directly accessible?",
+      "answer": "Answer: Outside code may assign an invalid value directly. For example:\n\n```java\nBook book = new Book();\nbook.pageNumber = -100;\n```\n\nA negative page count makes the object's state invalid. Encapsulation prevents such uncontrolled direct modification."
+    },
+    {
+      "question": "Write a Java class that encapsulates the page number of a book.",
+      "answer": "Answer: ```java\nclass Book {\nprivate int pageNumber;\npublic void setPageNumber(int value) {\nif (value > 0) {\npageNumber = value;\n```\n\n} else {\n\n```java\nSystem.out.println(\"Invalid value\");\n}\n}\npublic int getPageNumber() {\nreturn pageNumber;\n}\n}\npublic class BookApp {\npublic static void main(String[] args) {\nBook book = new Book();\nbook.setPageNumber(100);\nSystem.out.println(book.getPageNumber());\n}\n}\n```\n\nSample Input: pageNumber = 100 Output: 100 The private field cannot be modified directly from BookApp; the value is set and retrieved through public methods."
+    },
+    {
+      "question": "Write a Java class for a bank customer using encapsulation for important customer information.",
+      "answer": "Answer: ```java\nclass BankCustomer {\nint id;\nString name;\nprivate String accountNumber;\nprivate String password;\nprivate long balance;\npublic void setAccountNumber(String accountNumber) {\nthis.accountNumber = accountNumber;\n}\npublic String getAccountNumber() {\nreturn accountNumber;\n}\npublic void setPassword(String password) {\nthis.password = password;\n}\npublic String getPassword() {\nreturn password;\n}\npublic void setBalance(long balance) {\nthis.balance = balance;\n}\npublic long getBalance() {\nreturn balance;\n}\n}\n```\n\nSample Input: Account Number: ACC101 Password: pass123 Balance: 50000 Output: Account Number: ACC101 Password: pass123 Balance: 50000 The important fields identified are the account number, password, and balance, and they are accessed through methods rather than direct field access."
+    }
+  ]
+}
