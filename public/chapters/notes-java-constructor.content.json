@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Constructor",
+  "itemsPerPage": 2,
+  "source": "notes-java-constructor.docx",
+  "items": [
+    {
+      "question": "Does object creation involve a constructor even when no constructor is written explicitly?",
+      "answer": "Answer: Yes. Object creation involves a constructor. For example:\n\n```java\nDog dog = new Dog();\n```\n\nThe Dog() part represents a constructor call even if no constructor was explicitly written in the Dog class."
+    },
+    {
+      "question": "What is a default constructor?",
+      "answer": "Answer: A default constructor is a zero-parameter constructor supplied by the compiler when a class does not declare any constructor. For example, if Dog contains no constructor, Java provides a constructor equivalent to: Dog() {\n\n```java\nsuper();\n}\n```"
+    },
+    {
+      "question": "When does the compiler provide a default constructor?",
+      "answer": "Answer: The compiler provides a default constructor only when no constructor has been declared in the class. If the programmer declares at least one constructor, the compiler does not automatically provide the default zero-parameter constructor."
+    },
+    {
+      "question": "Is a default constructor parameterized?",
+      "answer": "Answer: No. A default constructor has zero parameters. Example: Dog() {\n\n```java\n}\n```"
+    },
+    {
+      "question": "What happens to new Dog() if Dog has no explicitly declared constructor?",
+      "answer": "Answer: The compiler supplies a default zero-parameter constructor, so:\n\n```java\nDog dog = new Dog();\n```\n\ncan create the object successfully."
+    },
+    {
+      "question": "What happens if a class has only a parameterized constructor and you try to call new Dog()?",
+      "answer": "Answer: It causes a compilation error because the zero-parameter constructor is not available. Example:\n\n```java\nclass Dog {\n```\n\nDog(String name, String breed, int cost) {\n\n```java\n}\n}\n```\n\nThis is invalid:\n\n```java\nDog dog = new Dog();\n```\n\nThe compiler does not automatically add a zero-parameter constructor after another constructor has been explicitly declared."
+    },
+    {
+      "question": "How can you create an object when a class has only a parameterized constructor?",
+      "answer": "Answer: You must call an available constructor with the required arguments. Example:\n\n```java\nDog dog = new Dog(\"Lobo\", \"Bulldog\", 20000);\n```\n\nThe arguments must match the constructor's parameter list."
+    },
+    {
+      "question": "How can a class support both new Dog() and new Dog(\"Lobo\", \"Bulldog\", 20000)?",
+      "answer": "Answer: Declare both a zero-parameter constructor and a parameterized constructor.\n\n```java\nclass Dog {\n```\n\nDog() {\n\n```java\n}\n```\n\nDog(String name, String breed, int cost) {\n\n```java\n}\n}\n```\n\nNow both forms of object creation are available."
+    },
+    {
+      "question": "What values do instance variables have when a zero-parameter constructor does not explicitly initialize them?",
+      "answer": "Answer: They retain their default values. For fields such as:\n\n```java\nString name;\nString breed;\nint cost;\n```\n\nthe values are: name → null breed → null cost → 0"
+    },
+    {
+      "question": "What is the output of the following code?",
+      "answer": "Answer: ```java\nclass Dog {\nString name;\nString breed;\nint cost;\n```\n\nDog() {\n\n```java\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nDog dog = new Dog();\nSystem.out.println(dog.name);\nSystem.out.println(dog.breed);\nSystem.out.println(dog.cost);\n}\n}\n```\n\nnull null 0 The constructor does not assign values to the fields, so their default values remain."
+    },
+    {
+      "question": "What is a parameterized constructor?",
+      "answer": "Answer: A parameterized constructor is a constructor that accepts one or more parameters. Example: Dog(String name, String breed, int cost) {\n\n```java\nthis.name = name;\nthis.breed = breed;\nthis.cost = cost;\n}\n```\n\nIt allows values to be supplied while creating the object."
+    },
+    {
+      "question": "What is the main benefit of a parameterized constructor?",
+      "answer": "Answer: It allows an object's instance variables to be initialized at the time of object creation. Example:\n\n```java\nDog dog = new Dog(\"Rocky\", \"German Shepherd\", 40000);\n```\n\nThe object receives its required state immediately."
+    },
+    {
+      "question": "What is the output of the following code?",
+      "answer": "Answer: ```java\nclass Dog {\nString name;\nString breed;\nint cost;\n```\n\nDog(String name, String breed, int cost) {\n\n```java\nthis.name = name;\nthis.breed = breed;\nthis.cost = cost;\n}\n}\npublic class Main {\npublic static void main(String[] args) {\n```\n\nDog dog =\n\n```java\nnew Dog(\"Rocky\", \"German Shepherd\", 40000);\nSystem.out.println(\ndog.name + \" \" + dog.breed + \" \" + dog.cost\n);\n}\n}\n```\n\nRocky German Shepherd 40000 The constructor initializes all three instance variables with the supplied arguments."
+    },
+    {
+      "question": "What is the relationship between a Java class and the Object class when no superclass is explicitly specified?",
+      "answer": "Answer: A class that does not explicitly extend another class is treated as having Object as its superclass. Conceptually:\n\n```java\nclass Dog extends Object {\n}\n```\n\nObject is the root class in Java's class hierarchy."
+    },
+    {
+      "question": "What does extends Object indicate?",
+      "answer": "Answer: It indicates that Object is the parent or superclass of the class. For example:\n\n```java\nclass Dog extends Object {\n}\n```\n\nmeans that Dog has Object as its superclass."
+    },
+    {
+      "question": "What does super() do inside a constructor?",
+      "answer": "Answer: super() invokes the constructor of the parent class. For example, when Dog directly extends Object: Dog() {\n\n```java\nsuper();\n}\n```\n\nsuper() invokes the Object class constructor."
+    },
+    {
+      "question": "What happens if super() is not explicitly written in a constructor?",
+      "answer": "Answer: For a constructor that does not explicitly invoke another constructor first, Java inserts an implicit call to the superclass's no-argument constructor. Example: Dog() {\n\n```java\n}\n```\n\nbehaves as though it begins with:\n\n```java\nsuper();\n```"
+    },
+    {
+      "question": "What happens in memory when a constructor is executed?",
+      "answer": "Answer: When a constructor is invoked during object creation: The object is created in heap memory. The constructor is called. A stack frame or activation record is created for the constructor. Constructor parameters exist in that activation record. The constructor initializes the object's instance variables. The constructor's activation record is removed when execution finishes."
+    },
+    {
+      "question": "Does a constructor get an activation record when it is called?",
+      "answer": "Answer: Yes. A constructor executes similarly to other executable members in this respect: when it is called, an activation record or stack frame is created for its execution. When the constructor finishes, that activation record is removed."
+    },
+    {
+      "question": "When is the reference to a newly created object assigned to the reference variable?",
+      "answer": "Answer: The object is created and its constructor executes first. After construction finishes, the reference to the object is assigned to the reference variable. For example:\n\n```java\nDog dog = new Dog();\n```\n\nAfter the object has been constructed, dog refers to that object."
+    },
+    {
+      "question": "What is constructor overloading?",
+      "answer": "Answer: Constructor overloading means defining multiple constructors in the same class with different signatures. Example: Fan() {\n\n```java\n}\n```\n\nFan(int wings) {\n\n```java\n}\n```\n\nFan(int wings, String color) {\n\n```java\n}\n```\n\nAll constructors have the class name Fan, but their parameter lists are different."
+    },
+    {
+      "question": "Can constructors be overloaded?",
+      "answer": "Answer: Yes. A class can contain multiple constructors provided their signatures are different. For example: Fan() Fan(int wings) Fan(int wings, String color) Fan(int wings, String color, int cost)"
+    },
+    {
+      "question": "How is constructor overloading different from method overloading?",
+      "answer": "Answer: Both involve multiple members with the same name but different signatures. For methods: display() display(int x) display(String value) This is method overloading. For constructors: Fan() Fan(int wings) Fan(int wings, String color) This is constructor overloading."
+    },
+    {
+      "question": "Can constructors with different numbers of parameters belong to the same class?",
+      "answer": "Answer: Yes. For example, a Fan class can have constructors accepting: 0 parameters 1 parameter 2 parameters 3 parameters 4 parameters Each constructor has a different signature."
+    },
+    {
+      "question": "Which constructor is selected for new Fan(4, \"White\")?",
+      "answer": "Answer: The constructor whose parameter list matches an integer followed by a String is selected. For example: Fan(int wings, String color) {\n\n```java\nthis.wings = wings;\nthis.color = color;\n}\n```\n\nThe arguments supplied during object creation determine which overloaded constructor is invoked."
+    },
+    {
+      "question": "What values remain in fields that are not initialized by a particular constructor?",
+      "answer": "Answer: Fields that are not explicitly initialized retain their default values. For example, suppose:\n\n```java\nclass Fan {\nint wings;\nString color;\nint cost;\nString brand;\n```\n\nFan(int wings, String color) {\n\n```java\nthis.wings = wings;\nthis.color = color;\n}\n}\n```\n\nAfter:\n\n```java\nFan fan = new Fan(4, \"White\");\n```\n\nthe remaining fields are: cost → 0 brand → null"
+    },
+    {
+      "question": "What is the difference between these two objects?",
+      "answer": "Answer: Dog dog1 =\n\n```java\nnew Dog(\"Lobo\", \"Bulldog\", 20000);\n```\n\nDog dog2 =\n\n```java\nnew Dog();\ndog1 is created using a parameterized constructor, so its fields receive the supplied values.\n```\n\nname → Lobo breed → Bulldog cost → 20000\n\n```java\ndog2 is created using a zero-parameter constructor that does not initialize those fields, so they retain default values:\n```\n\nname → null breed → null cost → 0"
+    },
+    {
+      "question": "Write a Fan class with zero-, one-, two-, three-, and four-parameter constructors.",
+      "answer": "Answer: ```java\nclass Fan {\nint wings;\nString color;\nint cost;\nString brand;\n```\n\nFan() {\n\n```java\n}\n```\n\nFan(int wings) {\n\n```java\nthis.wings = wings;\n}\n```\n\nFan(int wings, String color) {\n\n```java\nthis.wings = wings;\nthis.color = color;\n}\n```\n\nFan(int wings, String color, int cost) {\n\n```java\nthis.wings = wings;\nthis.color = color;\nthis.cost = cost;\n}\n```\n\nFan(int wings, String color, int cost, String brand) {\n\n```java\nthis.wings = wings;\nthis.color = color;\nthis.cost = cost;\nthis.brand = brand;\n}\n}\n```\n\nSample Input: 2 Red 6000 Usha Sample Output: 2 Red 6000 Usha The class provides five constructors with different parameter lists."
+    },
+    {
+      "question": "Write a Java program that creates a Fan using a four-parameter constructor and calls its behaviors.",
+      "answer": "Answer: ```java\nclass Fan {\nint wings;\nString color;\nint cost;\nString brand;\n```\n\nFan(int wings, String color, int cost, String brand) {\n\n```java\nthis.wings = wings;\nthis.color = color;\nthis.cost = cost;\nthis.brand = brand;\n}\n```\n\nvoid rotate() {\n\n```java\nSystem.out.println(\n```\n\nbrand + \" fan with \" + color + \" color is rotating\"\n\n```java\n);\n}\n```\n\nvoid giveAir() {\n\n```java\nSystem.out.println(\n```\n\nbrand + \" fan with \" + color + \" color is giving air\"\n\n```java\n);\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nFan fan = new Fan(2, \"Red\", 6000, \"Usha\");\nSystem.out.println(\n```\n\nfan.wings + \" \" + fan.color + \" \" + fan.cost + \" \" + fan.brand\n\n```java\n);\nfan.rotate();\nfan.giveAir();\n}\n}\n```\n\nSample Input: 2 Red 6000 Usha Output: 2 Red 6000 Usha Usha fan with Red color is rotating Usha fan with Red color is giving air"
+    },
+    {
+      "question": "Why can new Fan() fail after a parameterized constructor is declared?",
+      "answer": "Answer: Once a programmer declares a constructor such as: Fan(int wings, String color) {\n\n```java\n}\n```\n\nthe compiler does not automatically provide the default zero-parameter constructor. Therefore:\n\n```java\nFan fan = new Fan();\n```\n\nfails unless a zero-parameter constructor is explicitly declared: Fan() {\n\n```java\n}\n```"
+    }
+  ]
+}
