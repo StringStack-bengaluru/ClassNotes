@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Encapsulation",
+  "itemsPerPage": 2,
+  "source": "notes-java-encapsulation.docx",
+  "items": [
+    {
+      "question": "Why should validation be performed inside a setter method?",
+      "answer": "Answer: Validation ensures that only acceptable values are assigned to private fields. Example:\n\n```java\npublic void setBalance(long balance) {\nif (balance >= 0) {\nthis.balance = balance;\n```\n\n} else {\n\n```java\nthis.balance = 0;\n}\n}\n```\n\nA negative balance is rejected and a valid/default value is stored instead."
+    },
+    {
+      "question": "How can a setter prevent a null account number from being stored?",
+      "answer": "Answer: The setter can check whether the supplied value is null before assigning it.\n\n```java\npublic void setAccountNumber(String accountNumber) {\nif (accountNumber != null) {\nthis.accountNumber = accountNumber;\n```\n\n} else {\n\n```java\nthis.accountNumber = \"0000\";\n}\n}\n```"
+    },
+    {
+      "question": "How can a setter handle a null password?",
+      "answer": "Answer: The setter can validate the password before assigning it.\n\n```java\npublic void setPassword(String password) {\nif (password != null) {\nthis.password = password;\n```\n\n} else {\n\n```java\nthis.password = \"1111\";\n}\n}\n```\n\nThis prevents null from being stored as the intended password value."
+    },
+    {
+      "question": "Why can some fields be accessed directly while others require getters and setters?",
+      "answer": "Answer: Fields that are not private can be accessed directly when access rules permit it. Private fields cannot be accessed directly from outside their class, so public methods such as getters and setters are used to access them. For example: customer.id = 101; // possible if id is not private customer.setBalance(5000); // used when balance is private"
+    },
+    {
+      "question": "Can one setter method initialize multiple private fields?",
+      "answer": "Answer: Yes. A method can accept multiple parameters and assign values to multiple fields. Example:\n\n```java\npublic void setData(String accountNumber,\nString password,\nlong balance) {\nthis.accountNumber = accountNumber;\nthis.password = password;\nthis.balance = balance;\n}\n```\n\nA method can accept multiple parameters, so separate setter methods are not compulsory for every field."
+    },
+    {
+      "question": "What is the difference between using one setter and multiple setters?",
+      "answer": "Answer: Multiple setters update fields individually:\n\n```java\nsetAccountNumber(...);\nsetPassword(...);\nsetBalance(...);\n```\n\nA single setter can receive several values together:\n\n```java\nsetData(accountNumber, password, balance);\n```\n\nBoth approaches can be used depending on how the data needs to be assigned."
+    },
+    {
+      "question": "Why can a single method accept multiple values but return only one value directly?",
+      "answer": "Answer: A method can have multiple parameters, so it can receive several input values. However, a method directly returns a single value through its return statement. That is why one setter can accept several values, while separate getters may be used for fields having different return values or types."
+    },
+    {
+      "question": "Why might separate getters be required for accountNumber, password, and balance?",
+      "answer": "Answer: Each getter returns one value. For example:\n\n```java\npublic String getAccountNumber() {\nreturn accountNumber;\n}\npublic String getPassword() {\nreturn password;\n}\npublic long getBalance() {\nreturn balance;\n}\n```\n\nThis also allows each getter to have the return type required by its field."
+    },
+    {
+      "question": "What information can a class diagram represent?",
+      "answer": "Answer: A class diagram can represent: Class name Fields or properties Data types Access modifiers Methods or behaviors Method signatures Return types"
+    },
+    {
+      "question": "How is a class represented in a class diagram?",
+      "answer": "Answer: A class is represented using a rectangle divided into compartments. The compartments can show: Class name Fields or properties Methods or behaviors"
+    },
+    {
+      "question": "What does the first compartment of a class diagram represent?",
+      "answer": "Answer: The first compartment represents the class name. For a Student class, the first compartment contains: Student"
+    },
+    {
+      "question": "What does the second compartment of a class diagram represent?",
+      "answer": "Answer: The second compartment represents the state of the object, such as: Fields Attributes Properties For example: id name email phone"
+    },
+    {
+      "question": "What does the third compartment of a class diagram represent?",
+      "answer": "Answer: The third compartment represents the behaviors or functionalities of the class. These behaviors are implemented through methods."
+    },
+    {
+      "question": "What is an instance variable?",
+      "answer": "Answer: An instance variable is a variable declared inside a class but outside its methods. Example:\n\n```java\nclass Student {\nint id;\nString name;\nString email;\nlong phone;\n}\n```\n\nHere, id, name, email, and phone are instance variables."
+    },
+    {
+      "question": "Why are instance variables called instance variables?",
+      "answer": "Answer: An object is an instance of a class. Variables that belong to that instance are therefore called instance variables. Their memory is allocated as part of the object."
+    },
+    {
+      "question": "What is the difference between an instance variable and a local variable?",
+      "answer": "Answer: An instance variable is declared inside a class but outside methods. A local variable is declared inside a method.\n\n```java\nclass Student {\nint id;             // instance variable\n```\n\nvoid display() {\n\n```java\nint x = 10;     // local variable\n}\n}\n```"
+    },
+    {
+      "question": "Where do instance variables get memory?",
+      "answer": "Answer: Instance variables get memory inside the object when the object is created in the heap.\n\n```java\nStudent s = new Student();\n```\n\nWhen the Student object is created, its instance variables receive memory as part of that object."
+    },
+    {
+      "question": "Where do local variables get memory?",
+      "answer": "Answer: Local variables get memory inside the stack frame of the method in which they are declared. Their memory exists while that method's activation record exists."
+    },
+    {
+      "question": "When do instance variables receive memory?",
+      "answer": "Answer: Instance variables receive memory when an object is created. For example:\n\n```java\nStudent s = new Student();\n```\n\nThe creation of the Student object causes its instance variables to receive memory."
+    },
+    {
+      "question": "When do local variables receive memory?",
+      "answer": "Answer: Local variables receive memory when the method containing them is called and its stack frame is created."
+    },
+    {
+      "question": "What default values are assigned to instance variables?",
+      "answer": "Answer: Instance variables receive default values when an object is created. Examples: Integer types → 0 float/double → 0.0 boolean → false char → '\\u0000' Reference types → null"
+    },
+    {
+      "question": "What are the initial values of these fields when a Student object is created?",
+      "answer": "Answer: ```java\nclass Student {\nint id;\nString name;\nString email;\nlong phone;\n}\n```\n\nThe initial values are: id → 0 name → null email → null phone → 0 These are the default values assigned to the instance variables."
+    },
+    {
+      "question": "What happens to a method's parameters after the method finishes execution?",
+      "answer": "Answer: Parameters are local variables of the method. When the method finishes and its activation record is removed, the memory allocated for those parameters is also removed. For example, the parameters of a setter exist only while that setter is executing."
+    },
+    {
+      "question": "When does an object become eligible for garbage collection?",
+      "answer": "Answer: An object can become eligible for garbage collection when no reference variable is referring to it. For example, when the reference that was pointing to an object is no longer available, the object can become unreachable and eligible for garbage collection."
+    },
+    {
+      "question": "What is the main problem with assigning actual values only after object creation?",
+      "answer": "Answer: When an object is first created, its instance variables initially receive default values. The actual values are assigned later through another operation such as a setter. A constructor allows the required values to be supplied during object creation itself."
+    },
+    {
+      "question": "What is a constructor?",
+      "answer": "Answer: A constructor is a special member used during object creation. It has: The same name as the class No return type Example:\n\n```java\nclass Student {\n```\n\nStudent(int id, String name) {\n\n```java\n// initialization\n}\n}\n```"
+    },
+    {
+      "question": "How is a constructor different from an ordinary method?",
+      "answer": "Answer: A constructor has the same name as its class and does not have a return type. Example: Student(int id, String name) {\n\n```java\n}\n```\n\nAn ordinary method can have its own name and a return type such as void, int, or String."
+    },
+    {
+      "question": "When is a constructor executed?",
+      "answer": "Answer: A constructor is called during object creation or instantiation. Example:\n\n```java\nStudent s = new Student(101, \"Ravi\");\n```\n\nThe constructor associated with Student(...) executes while the object is being created."
+    },
+    {
+      "question": "What is the main use of a constructor?",
+      "answer": "Answer: A constructor is used to initialize an object's state at the time the object is created. Instead of creating the object first and assigning values later:\n\n```java\nStudent s = new Student();\ns.setData(101, \"Ravi\", \"ravi@gmail.com\", 9876543210L);\n```\n\nthe values can be supplied while creating the object: Student s =\n\n```java\nnew Student(101, \"Ravi\", \"ravi@gmail.com\", 9876543210L);\n```"
+    },
+    {
+      "question": "Write a Java program that initializes a Student object using a constructor.",
+      "answer": "Answer: ```java\nclass Student {\nprivate int id;\nprivate String name;\nprivate String email;\nprivate long phone;\n```\n\nStudent(int id, String name, String email, long phone) {\n\n```java\nthis.id = id;\nthis.name = name;\nthis.email = email;\nthis.phone = phone;\n}\npublic int getId() {\nreturn id;\n}\npublic String getName() {\nreturn name;\n}\npublic String getEmail() {\nreturn email;\n}\npublic long getPhone() {\nreturn phone;\n}\n}\npublic class StudentApp {\npublic static void main(String[] args) {\n```\n\nStudent student =\n\n```java\nnew Student(101, \"Ravi\", \"ravi@gmail.com\", 9876543210L);\nSystem.out.println(student.getId());\nSystem.out.println(student.getName());\nSystem.out.println(student.getEmail());\nSystem.out.println(student.getPhone());\n}\n}\n```\n\nSample Input: id = 101 name = Ravi email = ravi@gmail.com phone = 9876543210 Output: 101 Ravi ravi@gmail.com 9876543210"
+    }
+  ]
+}
