@@ -1,17 +1,29 @@
 name: Deploy Books to GitHub Pages
 
 # Deploy only from main (GitHub Pages environment blocks book/* branches).
-# Builds every book/* branch into its own live path under /ClassNotes/<slug>/.
+# Fast path: rebuild only the new/changed book and reuse the previous site cache.
+# Full rebuild: set input rebuild_all=true, or when site cache is missing.
 on:
   push:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      only_slug:
+        description: 'Build only this book slug (e.g. notes-java-constructor-2). Leave empty to auto-detect from commit.'
+        required: false
+        type: string
+      rebuild_all:
+        description: 'Force rebuild every book (slow)'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
   pages: write
   id-token: write
+  actions: read
 
 concurrency:
   group: pages
@@ -33,39 +45,150 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Install dependencies
+      - name: Install dependencies (once)
         run: npm ci
 
-      - name: Build every book branch into its own URL path
+      - name: Restore previous site cache
+        id: site-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: site
+          key: classnotes-site-${{ github.sha }}
+          restore-keys: |
+            classnotes-site-
+
+      - name: Build site (incremental or full)
+        env:
+          ONLY_SLUG: ${{ inputs.only_slug }}
+          REBUILD_ALL: ${{ inputs.rebuild_all }}
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
         run: |
           set -euo pipefail
           SITE_DIR="$PWD/site"
           mkdir -p "$SITE_DIR"
 
-          # Root: https://stringstack-bengaluru.github.io/ClassNotes/
-          export VITE_BASE=/ClassNotes/
-          npm run build
-          cp -R dist/. "$SITE_DIR/"
-          cp "$SITE_DIR/index.html" "$SITE_DIR/404.html"
+          remote_ref() {
+            local slug="$1"
+            if git rev-parse --verify -q "origin/book/${slug}" >/dev/null; then
+              echo "origin/book/${slug}"
+            elif git rev-parse --verify -q "stringstack/book/${slug}" >/dev/null; then
+              echo "stringstack/book/${slug}"
+            else
+              return 1
+            fi
+          }
 
-          # Per-book URLs, e.g.
-          # https://stringstack-bengaluru.github.io/ClassNotes/notes-java-datatypes-2/
-          for branch in $(git branch -r | sed 's|^[[:space:]]*origin/||' | grep '^book/' | sort -u); do
-            slug="${branch#book/}"
-            echo "::group::Building $branch → /ClassNotes/${slug}/"
-            git checkout -f "origin/$branch"
-            npm ci
+          list_all_slugs() {
+            git branch -r \
+              | sed -E 's|^[[:space:]]*||; s|^(origin|stringstack)/||' \
+              | grep '^book/' \
+              | sed 's|^book/||' \
+              | sort -u
+          }
+
+          detect_slugs_from_commit() {
+            local msg="${COMMIT_MSG:-}"
+            if [[ "$msg" =~ Register\ book\ ([a-z0-9-]+): ]]; then
+              echo "${BASH_REMATCH[1]}"
+              return
+            fi
+            if [[ "$msg" =~ Deploy\ books\ including\ ([a-z0-9-]+) ]]; then
+              echo "${BASH_REMATCH[1]}"
+              return
+            fi
+          }
+
+          build_root() {
+            echo "::group::Building root /ClassNotes/"
+            git checkout -f main
+            export VITE_BASE=/ClassNotes/
+            npm run build
+            cp -R dist/. "$SITE_DIR/"
+            cp "$SITE_DIR/index.html" "$SITE_DIR/404.html"
+            echo "::endgroup::"
+          }
+
+          build_slug() {
+            local slug="$1"
+            local ref
+            if ! ref="$(remote_ref "$slug")"; then
+              echo "::warning::No remote book/${slug} branch — skip"
+              return 0
+            fi
+            echo "::group::Building book/${slug} → /ClassNotes/${slug}/"
+            git checkout -f main
+            # Pull only book content — keep node_modules (no npm ci per book)
+            git checkout -f "$ref" -- \
+              content/book.config.json \
+              public/api/book-manifest.json \
+              public/chapters \
+              2>/dev/null || {
+                echo "::warning::Missing content paths on $ref — full checkout fallback"
+                git checkout -f "$ref"
+              }
             export VITE_BASE="/ClassNotes/${slug}/"
             npm run build
             mkdir -p "$SITE_DIR/$slug"
+            rm -rf "$SITE_DIR/$slug"/*
             cp -R dist/. "$SITE_DIR/$slug/"
             cp "$SITE_DIR/$slug/index.html" "$SITE_DIR/$slug/404.html"
+            git checkout -f main -- \
+              content/book.config.json \
+              public/api/book-manifest.json \
+              public/chapters \
+              2>/dev/null || git checkout -f main
             echo "::endgroup::"
+          }
+
+          build_root
+
+          CACHE_HIT="${{ steps.site-cache.outputs.cache-hit }}"
+          # actions/cache/restore sets cache-matched-key when any restore-key matched
+          HAS_PREV="${{ steps.site-cache.outputs.cache-matched-key }}"
+
+          SLUGS=()
+          if [[ "${REBUILD_ALL:-false}" == "true" ]]; then
+            echo "Full rebuild requested"
+            mapfile -t SLUGS < <(list_all_slugs)
+          elif [[ -n "${ONLY_SLUG:-}" ]]; then
+            SLUGS=("$ONLY_SLUG")
+          else
+            DETECTED="$(detect_slugs_from_commit || true)"
+            if [[ -n "$DETECTED" && -n "$HAS_PREV" ]]; then
+              echo "Incremental rebuild from commit: $DETECTED"
+              SLUGS=("$DETECTED")
+            elif [[ -n "$HAS_PREV" ]]; then
+              echo "No slug in commit message — rebuilding books missing from site cache"
+              mapfile -t ALL < <(list_all_slugs)
+              for s in "${ALL[@]}"; do
+                if [[ ! -f "$SITE_DIR/$s/index.html" ]]; then
+                  SLUGS+=("$s")
+                fi
+              done
+              if [[ ${#SLUGS[@]} -eq 0 ]]; then
+                echo "Site cache already has every book — root refreshed only"
+              fi
+            else
+              echo "No site cache — full rebuild (one-time slow run)"
+              mapfile -t SLUGS < <(list_all_slugs)
+            fi
+          fi
+
+          echo "Books to build (${#SLUGS[@]}): ${SLUGS[*]:-none}"
+          for slug in "${SLUGS[@]:-}"; do
+            [[ -z "$slug" ]] && continue
+            build_slug "$slug"
           done
 
           git checkout -f main
-          find "$SITE_DIR" -maxdepth 2 -type d
-          find "$SITE_DIR" -maxdepth 2 -type f -name index.html
+          echo "Site paths:"
+          find "$SITE_DIR" -maxdepth 2 -type f -name index.html | sort
+
+      - name: Save site cache
+        uses: actions/cache/save@v4
+        with:
+          path: site
+          key: classnotes-site-${{ github.sha }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
