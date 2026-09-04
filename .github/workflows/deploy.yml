@@ -117,26 +117,36 @@ jobs:
             fi
             echo "::group::Building book/${slug} → /ClassNotes/${slug}/"
             git checkout -f main
+            # Remove main placeholder chapters (e.g. Demo 2) so they cannot leak into this book
+            rm -rf public/chapters
+            mkdir -p public/chapters
             # Pull only book content — keep node_modules (no npm ci per book)
-            git checkout -f "$ref" -- \
+            if ! git checkout -f "$ref" -- \
               content/book.config.json \
               public/api/book-manifest.json \
-              public/chapters \
-              2>/dev/null || {
-                echo "::warning::Missing content paths on $ref — full checkout fallback"
-                git checkout -f "$ref"
-              }
+              public/chapters
+            then
+              echo "::warning::Sparse checkout failed on $ref — full checkout fallback"
+              git checkout -f "$ref"
+            fi
+            # Verify we did not keep demo content under a real book slug
+            if [[ -f public/chapters/02-demo-2.content.json || -f public/chapters/02-demo-2.pdf ]]; then
+              echo "::error::Demo 2 content still present while building ${slug}"
+              ls -la public/chapters || true
+              exit 1
+            fi
+            if [[ ! -f content/book.config.json ]]; then
+              echo "::error::Missing book.config.json for ${slug}"
+              exit 1
+            fi
             export VITE_BASE="/ClassNotes/${slug}/"
             npm run build
             mkdir -p "$SITE_DIR/$slug"
-            rm -rf "$SITE_DIR/$slug"/*
+            rm -rf "${SITE_DIR:?}/$slug"
+            mkdir -p "$SITE_DIR/$slug"
             cp -R dist/. "$SITE_DIR/$slug/"
             cp "$SITE_DIR/$slug/index.html" "$SITE_DIR/$slug/404.html"
-            git checkout -f main -- \
-              content/book.config.json \
-              public/api/book-manifest.json \
-              public/chapters \
-              2>/dev/null || git checkout -f main
+            git checkout -f main
             echo "::endgroup::"
           }
 
