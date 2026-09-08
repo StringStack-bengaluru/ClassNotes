@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Constructor 2",
+  "itemsPerPage": 2,
+  "source": "notes-java-constructor-2.docx",
+  "items": [
+    {
+      "question": "What is constructor overloading?",
+      "answer": "Answer: Constructor overloading means defining multiple constructors in the same class with different parameter lists. The constructors may differ by: Number of parameters Types of parameters Order of parameters Example: User() {\n\n```java\n}\n```\n\nUser(String id) {\n\n```java\n}\n```\n\nUser(String id, String name) {\n\n```java\n}\n```"
+    },
+    {
+      "question": "Why is constructor overloading useful?",
+      "answer": "Answer: Constructor overloading provides flexibility to initialize different objects with different amounts of data. For example, one object may be created with only an ID, while another may be created with an ID, name, phone number, and email. The caller can choose the constructor that matches the available data."
+    },
+    {
+      "question": "How does constructor overloading help when some object data is unavailable?",
+      "answer": "Answer: Different constructors can be provided for different combinations of available data. For example, if a customer's email is unavailable, a constructor that does not require email can be used. This prevents object creation from depending on values that are not currently available."
+    },
+    {
+      "question": "What does it mean to create objects with different states?",
+      "answer": "Answer: Different objects of the same class can be initialized with different sets of values. For example:\n\n```java\nBankCustomer c1 = new BankCustomer();\nBankCustomer c2 = new BankCustomer(101);\n```\n\nBankCustomer c3 =\n\n```java\nnew BankCustomer(101, \"Ravi\", 9876543210L);\n```\n\nEach object can begin with a different amount of initialized state."
+    },
+    {
+      "question": "What happens to fields that are not initialized by the selected constructor?",
+      "answer": "Answer: Those instance variables retain their default values. For example, if only id is initialized, fields such as name, email, or phone number remain at their respective default values until another value is assigned."
+    },
+    {
+      "question": "How does constructor overloading give flexibility to the caller?",
+      "answer": "Answer: The caller can select the constructor that matches the information currently available. For example:\n\n```java\nnew BankCustomer();\nnew BankCustomer(101);\nnew BankCustomer(101, \"Ravi\", 9876543210L);\n```\n\nThe caller is not forced to supply every possible property for every object."
+    },
+    {
+      "question": "Can overloaded constructors differ only in the number of parameters?",
+      "answer": "Answer: No. Constructors can be overloaded based on: Number of parameters Type of parameters Order of parameters Their parameter lists must be distinguishable."
+    },
+    {
+      "question": "Can two constructors with the same number of parameters still be overloaded?",
+      "answer": "Answer: Yes, if their parameter types or parameter order are different. For example: Demo(int a, String b) {\n\n```java\n}\n```\n\nDemo(String a, int b) {\n\n```java\n}\n```\n\nThe parameter order is different, so the signatures are different."
+    },
+    {
+      "question": "Why might a class contain both a zero-parameter constructor and parameterized constructors?",
+      "answer": "Answer: The zero-parameter constructor allows an object to be created without supplying initial values. Parameterized constructors allow the object to be created with selected initial values. Providing both gives the caller multiple initialization choices."
+    },
+    {
+      "question": "What is a constructor signature determined by?",
+      "answer": "Answer: A constructor signature is distinguished by its parameter list, including the: Number of parameters Parameter types Parameter order This allows multiple constructors to have the same class name while still being distinguishable."
+    },
+    {
+      "question": "What is the recommended naming convention when constructor parameters represent instance variables?",
+      "answer": "Answer: The constructor parameter names can be kept the same as the corresponding instance variable names. Example:\n\n```java\nclass Product {\nint id;\nString name;\nString description;\nint price;\n```\n\nProduct(int id, String name, String description, int price) {\n\n```java\n// assignments\n}\n}\n```\n\nThis makes it clear which parameter corresponds to which property."
+    },
+    {
+      "question": "What problem occurs when a local variable and an instance variable have the same name?",
+      "answer": "Answer: The local variable takes priority when the name is used without qualification. For example:\n\n```java\nclass Product {\nint id;\n```\n\nProduct(int id) {\n\n```java\nid = id;\n}\n}\n```\n\nBoth occurrences of id are interpreted as the local parameter, so the instance variable is not updated."
+    },
+    {
+      "question": "What is the shadowing problem in Java?",
+      "answer": "Answer: The shadowing problem occurs when a local variable or parameter has the same name as an instance variable, causing the local variable to hide or shadow the instance variable. As a result, an assignment such as:\n\n```java\nid = id;\ndoes not assign the parameter value to the object's id field.\n```"
+    },
+    {
+      "question": "Why does id = id; fail to initialize the instance variable when both names are the same?",
+      "answer": "Answer: Because the local variable has priority. In: Product(int id) {\n\n```java\nid = id;\n}\n```\n\nboth the left-hand and right-hand id refer to the constructor parameter. The instance variable remains unchanged."
+    },
+    {
+      "question": "What is the this keyword in Java?",
+      "answer": "Answer: this is a keyword that holds the reference of the current object in use. It can be used to explicitly access the current object's instance variables."
+    },
+    {
+      "question": "What does this.id represent?",
+      "answer": "Answer: this.id represents the id instance variable belonging to the current object. Example:\n\n```java\nthis.id = id;\n```\n\nHere: this.id → current object's instance variable id → local parameter"
+    },
+    {
+      "question": "How does this resolve the shadowing problem?",
+      "answer": "Answer: this explicitly identifies the instance variable. Example:\n\n```java\nclass Product {\nint id;\n```\n\nProduct(int id) {\n\n```java\nthis.id = id;\n}\n}\n```\n\nThe right-side id refers to the constructor parameter, while this.id refers to the object's instance variable."
+    },
+    {
+      "question": "What is the difference between id and this.id inside a constructor when a parameter is also named id?",
+      "answer": "Answer: id → local variable / constructor parameter this.id → current object's instance variable Example: Product(int id) {\n\n```java\nthis.id = id;\n}\n```\n\nThe parameter value is assigned to the object's field."
+    },
+    {
+      "question": "What does the following statement do?",
+      "answer": "Answer: ```java\nthis.name = name;\n```\n\nIt assigns the value stored in the local parameter name to the name instance variable of the current object. name → local parameter this.name → instance variable"
+    },
+    {
+      "question": "Why is this generally used with instance variables rather than local variables?",
+      "answer": "Answer: this refers to the current object, so it is used to identify members belonging to that object. For example: this.id this.name this.description this.price refer to the current object's instance variables."
+    },
+    {
+      "question": "Is it possible to use different names for constructor parameters and instance variables?",
+      "answer": "Answer: Yes. For example:\n\n```java\nclass Product {\nint id;\n```\n\nProduct(int value) {\n\n```java\nid = value;\n}\n}\n```\n\nThere is no ambiguity because the names are different. However, using matching names with this provides a clearer correspondence between parameters and fields."
+    },
+    {
+      "question": "What is the preferred assignment style when constructor parameters and fields use the same names?",
+      "answer": "Answer: Use this with the instance variable:\n\n```java\nthis.id = id;\nthis.name = name;\nthis.description = description;\nthis.price = price;\n```\n\nThis clearly distinguishes instance variables from local parameters."
+    },
+    {
+      "question": "Where are constructor parameters stored during constructor execution?",
+      "answer": "Answer: Constructor parameters are local variables, so they receive memory in the constructor's stack frame or activation record. The instance variables belong to the object instead."
+    },
+    {
+      "question": "Where are instance variables stored when an object is created?",
+      "answer": "Answer: Instance variables receive memory as part of the object in heap memory. Constructor parameters, on the other hand, are local variables and exist in the constructor's activation record."
+    },
+    {
+      "question": "What happens to constructor parameters after the constructor finishes?",
+      "answer": "Answer: The constructor's activation record is removed after constructor execution finishes. Therefore, its local parameters are also removed. The values assigned to the object's instance variables remain with the object."
+    },
+    {
+      "question": "Why does the following constructor leave the object's fields unchanged?",
+      "answer": "Answer: Product(int id, String name) {\n\n```java\nid = id;\nname = name;\n}\n```\n\nThe parameters shadow the instance variables. Both sides of each assignment refer to local parameters, so the object's fields are not updated. The correct assignments are:\n\n```java\nthis.id = id;\nthis.name = name;\n```"
+    },
+    {
+      "question": "What is the output of the following program?",
+      "answer": "Answer: ```java\nclass Product {\nint id;\nString name;\n```\n\nProduct(int id, String name) {\n\n```java\nid = id;\nname = name;\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nProduct p = new Product(101, \"Mobile\");\nSystem.out.println(p.id);\nSystem.out.println(p.name);\n}\n}\n```\n\n0 null The constructor parameters shadow the instance variables, and the assignments do not modify the object's fields."
+    },
+    {
+      "question": "What is the output after using this in the same program?",
+      "answer": "Answer: ```java\nclass Product {\nint id;\nString name;\n```\n\nProduct(int id, String name) {\n\n```java\nthis.id = id;\nthis.name = name;\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nProduct p = new Product(101, \"Mobile\");\nSystem.out.println(p.id);\nSystem.out.println(p.name);\n}\n}\n```\n\n101 Mobile this.id and this.name refer to the current object's instance variables, so the parameter values are stored correctly."
+    },
+    {
+      "question": "How are multiple overloaded constructors useful in a User class?",
+      "answer": "Answer: A User class can provide constructors for different combinations of data. For example: User() User(String id) User(String id, String name) User(String id, String name, int age) User(String id, String name, int age, String email) This allows different User objects to be initialized according to the information available for each object."
+    },
+    {
+      "question": "Write a Java program that uses constructor overloading and this to create users with different states.",
+      "answer": "Answer: ```java\nclass User {\nString id;\nString name;\nint age;\nString email;\n```\n\nUser() {\n\n```java\n}\n```\n\nUser(String id) {\n\n```java\nthis.id = id;\n}\n```\n\nUser(String id, String name) {\n\n```java\nthis.id = id;\nthis.name = name;\n}\n```\n\nUser(String id, String name, int age, String email) {\n\n```java\nthis.id = id;\nthis.name = name;\nthis.age = age;\nthis.email = email;\n}\n```\n\nvoid printDetails() {\n\n```java\nSystem.out.println(id + \" \" + name + \" \" + age + \" \" + email);\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nUser u1 = new User(\"U101\");\n```\n\nUser u2 =\n\n```java\nnew User(\"U102\", \"Ravi\");\n```\n\nUser u3 =\n\n```java\nnew User(\"U103\", \"Anu\", 22, \"anu@gmail.com\");\nu1.printDetails();\nu2.printDetails();\nu3.printDetails();\n}\n}\n```\n\nSample Input: U101 U102 Ravi U103 Anu 22 anu@gmail.com Output: U101 null 0 null U102 Ravi 0 null U103 Anu 22 anu@gmail.com"
+    }
+  ]
+}
