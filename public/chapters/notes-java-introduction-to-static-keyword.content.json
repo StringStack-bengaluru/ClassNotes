@@ -1,0 +1,167 @@
+{
+  "title": "Notes Java Introduction To Static Keyword",
+  "itemsPerPage": 2,
+  "source": "notes-java-introduction-to-static-keyword.docx",
+  "items": [
+    {
+      "question": "What is a copy constructor in Java?",
+      "answer": "Answer: A copy constructor is a user-defined constructor that creates a new object by copying the values or state of another object of the same class."
+    },
+    {
+      "question": "How can you identify a copy constructor?",
+      "answer": "Answer: A copy constructor has the same name as the class and accepts an object of that class as its parameter.\n\n```java\nclass Student {\nint id;\n```\n\nStudent(Student s) {\n\n```java\nid = s.id;\n}\n}\n```"
+    },
+    {
+      "question": "What are the six main types of members in a Java class?",
+      "answer": "Answer: The six main types of class members are: Static variables Static blocks Static methods Instance variables Instance blocks Instance methods"
+    },
+    {
+      "question": "What is a static variable?",
+      "answer": "Answer: A static variable is a variable declared using the static keyword. It belongs to the class rather than to individual objects.\n\n```java\nclass Demo {\nstatic int count = 10;\n}\n```"
+    },
+    {
+      "question": "What is an instance variable?",
+      "answer": "Answer: An instance variable is a variable declared without the static keyword. It belongs to an object and represents an attribute, field, or state of that object.\n\n```java\nclass Demo {\nint value = 100;\n}\n```"
+    },
+    {
+      "question": "What is a static block?",
+      "answer": "Answer: A static block is a block of code declared using the static keyword. It is used to initialize static variables and execute setup code once when the class is initialized by the JVM.\n\n```java\nclass Demo {\nstatic int value;\nstatic {\nvalue = 100;\n}\n}\n```"
+    },
+    {
+      "question": "What is an instance block?",
+      "answer": "Answer: An instance block is a block of code declared without the static keyword. It is used to initialize instance variables and executes during object creation before the constructor body.\n\n```java\nclass Demo {\nint value;\n{\nvalue = 100;\n}\n}\n```"
+    },
+    {
+      "question": "What is a static method?",
+      "answer": "Answer: A static method is a method declared using the static keyword. It belongs to the class and can be called using the class name without creating an object.\n\n```java\nclass Demo {\nstatic void display() {\nSystem.out.println(\"Static method\");\n}\npublic static void main(String[] args) {\nDemo.display();\n}\n}\n```\n\nOutput: Static method"
+    },
+    {
+      "question": "What is an instance method?",
+      "answer": "Answer: An instance method is a method declared without the static keyword. It belongs to an object and must generally be called using an object reference.\n\n```java\nclass Demo {\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Instance method\");\n}\npublic static void main(String[] args) {\nDemo d = new Demo();\nd.display();\n}\n}\n```\n\nOutput: Instance method"
+    },
+    {
+      "question": "What is the difference between static and instance members?",
+      "answer": "Answer: Static members belong to the class and can be accessed without creating an object. Instance members belong to individual objects and require an object for access. Static Members Instance Members Declared using static Declared without static Belong to the class Belong to an object Can be accessed using the class name Accessed using an object Static variables have shared class-level data Each object has its own instance variables Static methods cannot directly access instance variables Instance methods can access both static and instance variables"
+    },
+    {
+      "question": "Can a static block access a static variable?",
+      "answer": "Answer: Yes. A static block can access and initialize static variables.\n\n```java\nclass Demo {\nstatic int value;\nstatic {\nvalue = 100;\nSystem.out.println(value);\n}\n}\n```\n\nOutput: 100"
+    },
+    {
+      "question": "Can an instance block access a static variable?",
+      "answer": "Answer: Yes. An instance block can access static variables because static variables belong to the class and are available to objects.\n\n```java\nclass Demo {\nstatic int a = 100;\n{\na = 200;\nSystem.out.println(a);\n}\npublic static void main(String[] args) {\nnew Demo();\n}\n}\n```\n\nOutput: 200"
+    },
+    {
+      "question": "Can an instance method access a static variable?",
+      "answer": "Answer: Yes. An instance method can access both static and instance variables.\n\n```java\nclass Demo {\nstatic int a = 100;\nint b = 200;\n```\n\nvoid display() {\n\n```java\nSystem.out.println(a);\nSystem.out.println(b);\n}\npublic static void main(String[] args) {\nDemo d = new Demo();\nd.display();\n}\n}\n```\n\nOutput: 100 200"
+    },
+    {
+      "question": "Can a static method directly access an instance variable?",
+      "answer": "Answer: No. A static method cannot directly access an instance variable because an instance variable belongs to an object, and a static method can execute without an object.\n\n```java\nclass Demo {\nint value = 100;\nstatic void display() {\nSystem.out.println(value);\n}\n}\n```\n\nOutput: Demo.java:5: error: non-static variable value cannot be referenced from a static context"
+    },
+    {
+      "question": "Can a static block directly access an instance variable?",
+      "answer": "Answer: No. A static block cannot directly access an instance variable because the static block executes before an object is created.\n\n```java\nclass Demo {\nint value = 100;\nstatic {\nSystem.out.println(value);\n}\n}\n```\n\nOutput: Demo.java:5: error: non-static variable value cannot be referenced from a static context"
+    },
+    {
+      "question": "Why can static methods and static blocks access static variables but not instance variables?",
+      "answer": "Answer: Static members are initialized when the class is loaded, before any object is created. Instance variables are created only when an object is created. Therefore, static methods and static blocks cannot directly access instance variables."
+    },
+    {
+      "question": "How should a static method be called?",
+      "answer": "Answer: A static method should be called using the class name.\n\n```java\nclass Demo {\nstatic void display() {\nSystem.out.println(\"Static method called\");\n}\npublic static void main(String[] args) {\nDemo.display();\n}\n}\n```\n\nOutput: Static method called"
+    },
+    {
+      "question": "How should an instance method be called?",
+      "answer": "Answer: An instance method should be called by creating an object and using the object reference.\n\n```java\nclass Demo {\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Instance method called\");\n}\npublic static void main(String[] args) {\nDemo d = new Demo();\nd.display();\n}\n}\n```\n\nOutput: Instance method called"
+    },
+    {
+      "question": "Can a static method be called using an object?",
+      "answer": "Answer: Yes, Java allows a static method to be called using an object reference. However, the preferred approach is to call it using the class name because the method belongs to the class.\n\n```java\nclass Demo {\nstatic void display() {\nSystem.out.println(\"Hello\");\n}\npublic static void main(String[] args) {\nDemo d = new Demo();\nd.display();\n}\n}\n```\n\nOutput: Hello"
+    },
+    {
+      "question": "What is the purpose of a static block?",
+      "answer": "Answer: A static block is used to initialize static variables and execute one-time setup code. It executes once when the class is initialized by the JVM, before the main() method of that class begins execution.\n\n```java\nclass Demo {\nstatic int a;\nstatic int b;\nstatic {\na = 100;\nb = 200;\n}\npublic static void main(String[] args) {\nSystem.out.println(a);\nSystem.out.println(b);\n}\n}\n```\n\nOutput: 100 200"
+    },
+    {
+      "question": "What is the purpose of an instance block?",
+      "answer": "Answer: An instance block is used to initialize instance variables when an object is created. It executes before the constructor completes.\n\n```java\nclass Demo {\nint a;\nint b;\n{\na = 1000;\nb = 2000;\n}\npublic static void main(String[] args) {\nDemo d = new Demo();\nSystem.out.println(d.a);\nSystem.out.println(d.b);\n}\n}\n```\n\nOutput: 1000 2000"
+    },
+    {
+      "question": "Which executes first: the static block or the main method?",
+      "answer": "Answer: The static block executes first. After static variables are initialized and static blocks are executed, the JVM calls the main() method."
+    },
+    {
+      "question": "Which executes first: the instance block or the constructor?",
+      "answer": "Answer: The instance initialization block executes before the constructor body. During object creation, the superclass constructor executes first, followed by instance variable initializers and instance initialization blocks. After that, the remaining statements of the constructor execute."
+    },
+    {
+      "question": "What are the four memory segments in Java?",
+      "answer": "Answer: The four memory segments are: Code segment Stack segment Static segment Heap segment"
+    },
+    {
+      "question": "What is stored in the code segment?",
+      "answer": "Answer: The compiled Java bytecode is stored in the .class file. When the program runs, the JVM loads and executes the bytecode. The exact runtime memory organization depends on the JVM implementation."
+    },
+    {
+      "question": "What is stored in the stack segment?",
+      "answer": "Answer: The stack segment stores activation records created when methods are called. Local variables and method execution information are associated with these activation records."
+    },
+    {
+      "question": "What is an activation record?",
+      "answer": "Answer: An activation record is a memory structure created in the stack when a method is called. It contains information required for the execution of that method. When the method finishes, its activation record is removed."
+    },
+    {
+      "question": "What happens when a method is called?",
+      "answer": "Answer: When a method is called, an activation record is created in the stack, and control moves to the method body. After the method completes, control returns to the calling method and the activation record is deleted."
+    },
+    {
+      "question": "What is stored in the heap segment?",
+      "answer": "Answer: Objects are created and stored in the heap segment. Instance variables associated with those objects also receive memory in the heap.\n\n```java\nclass Demo {\nint value = 100;\npublic static void main(String[] args) {\nDemo d = new Demo();\nSystem.out.println(d.value);\n}\n}\n```\n\nOutput: 100"
+    },
+    {
+      "question": "What happens when an object is created?",
+      "answer": "Answer: When an object is created: Memory is allocated for the object in the heap. Instance variables receive their default values. Instance variable initializers and instance initialization blocks execute. The constructor executes. The object reference is assigned to the reference variable."
+    },
+    {
+      "question": "What is the execution order of a Java program containing static and instance members?",
+      "answer": "Answer: The general execution order is: The operating system loads the JVM. The JVM calls the class loader. The class loader loads the class and static elements. Memory is allocated for static variables. Static variables receive default values. Static blocks execute. The JVM calls the main() method. An activation record is created for main(). Static methods are executed when called. An object is created in the heap. Memory is allocated for instance variables. Instance variables receive default values. The constructor and instance block execute. The instance method is called. Activation records are deleted after method execution. Unreferenced objects become eligible for garbage collection."
+    },
+    {
+      "question": "What is the output of the following program?",
+      "answer": "Answer: ```java\nclass Demo {\nstatic int a;\nstatic int b;\nstatic {\na = 100;\nb = 200;\n}\nstatic void display1() {\nSystem.out.println(a);\nSystem.out.println(b);\n}\nint x;\nint y;\n{\nx = 1000;\ny = 2000;\na = 999;\nb = 9999;\n}\n```\n\nvoid display2() {\n\n```java\nSystem.out.println(x);\nSystem.out.println(y);\nSystem.out.println(a);\nSystem.out.println(b);\n}\n}\npublic class DemoApp {\npublic static void main(String[] args) {\nDemo.display1();\nDemo d = new Demo();\nd.display2();\n}\n}\n```\n\nOutput: 100 200 1000 2000 999 9999 The static block initially assigns 100 and 200 to the static variables. After the object is created, the instance block changes them to 999 and 9999. The instance method prints the instance and updated static values."
+    },
+    {
+      "question": "What happens to the stack after the program finishes?",
+      "answer": "Answer: After the main() method finishes, its activation record is deleted. Therefore, the stack becomes empty after program execution ends."
+    },
+    {
+      "question": "What happens to an object when its reference is removed?",
+      "answer": "Answer: When an object no longer has any reference pointing to it, it becomes eligible for garbage collection. The garbage collector may remove that object from the heap."
+    },
+    {
+      "question": "What is garbage collection?",
+      "answer": "Answer: Garbage collection is the process of removing objects from the heap that are no longer reachable through any reference variable."
+    },
+    {
+      "question": "What happens to memory when an application ends?",
+      "answer": "Answer: When an application ends, its code and static memory are removed, and the memory used by the application is released. Objects in the heap and activation records in the stack are also removed or become unavailable."
+    },
+    {
+      "question": "What is the difference between fixed memory and variable memory?",
+      "answer": "Answer: Static memory is associated with class-level data and remains available while the class is loaded. Dynamic memory is used during program execution for method calls and object creation. Stack memory changes when methods are called or completed, while heap memory changes when objects are created and garbage-collected."
+    },
+    {
+      "question": "Why does stack memory increase and decrease during execution?",
+      "answer": "Answer: Stack memory increases when methods are called because activation records are created. It decreases when methods finish because their activation records are deleted."
+    },
+    {
+      "question": "Why does heap memory increase and decrease during execution?",
+      "answer": "Answer: Heap memory increases when objects are created. It decreases when objects become unreachable and are removed by the garbage collector."
+    },
+    {
+      "question": "Why should a static method be called using the class name?",
+      "answer": "Answer: A static method should be called using the class name because it belongs to the class and does not depend on an object. Creating an object only to call a static method introduces unnecessary object dependency."
+    }
+  ]
+}
