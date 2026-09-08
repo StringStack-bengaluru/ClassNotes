@@ -1,0 +1,151 @@
+{
+  "title": "Notes Java Constructor Chaining",
+  "itemsPerPage": 2,
+  "source": "notes-java-constructor-chaining.docx",
+  "items": [
+    {
+      "question": "What is a constructor in Java?",
+      "answer": "Answer: A constructor is a special member of a class used to initialize objects. It has the same name as the class and no return type. It is called when an object is created using new."
+    },
+    {
+      "question": "What is a default constructor?",
+      "answer": "Answer: A default constructor is a no-argument constructor supplied by the compiler only when no constructor is declared in the class. If you declare any constructor, the compiler does not automatically add a no-argument constructor.\n\n```java\nclass Student {\nint id;\nString name;\n}\npublic class Main {\npublic static void main(String[] args) {\nStudent s = new Student();\nSystem.out.println(s.id + \" \" + s.name);\n}\n}\n```\n\nOutput: 0 null The compiler supplies a no-argument constructor. The instance variables receive their default values: 0 for int and null for String."
+    },
+    {
+      "question": "What is a parameterized constructor?",
+      "answer": "Answer: A parameterized constructor accepts arguments and uses them to initialize an object’s instance variables.\n\n```java\nclass Student {\nint id;\nString name;\n```\n\nStudent(int id, String name) {\n\n```java\nthis.id = id;\nthis.name = name;\n}\n}\n```"
+    },
+    {
+      "question": "What is constructor overloading?",
+      "answer": "Answer: Constructor overloading means defining multiple constructors in the same class with different parameter lists. The parameter lists must differ in number, type, or order.\n\n```java\nclass Student {\nint id;\nString name;\n```\n\nStudent() {\n\n```java\n}\n```\n\nStudent(int id) {\n\n```java\nthis.id = id;\n}\n```\n\nStudent(int id, String name) {\n\n```java\nthis.id = id;\nthis.name = name;\n}\n}\n```"
+    },
+    {
+      "question": "What are the rules for constructor overloading?",
+      "answer": "Answer: Two constructors can be overloaded if their parameter lists differ in at least one of these ways: Number of parameters Type of parameters Order of parameters Changing only the parameter names or return type does not create a different constructor.\n\n```java\nclass Test {\n```\n\nTest(int a) {\n\n```java\n}\n```\n\nTest(String a) {\n\n```java\n}\n```\n\nTest(int a, String b) {\n\n```java\n}\n}\n```"
+    },
+    {
+      "question": "What is variable shadowing in Java?",
+      "answer": "Answer: Variable shadowing occurs when a local variable or constructor parameter has the same name as an instance variable. Inside that scope, the local variable takes precedence, which can cause the intended instance variable assignment to fail.\n\n```java\nclass Student {\nint id;\n```\n\nStudent(int id) {\n\n```java\nid = id;\n}\n}\n```"
+    },
+    {
+      "question": "What happens if you assign a parameter to itself?",
+      "answer": "Answer: The assignment changes the parameter, not the instance variable, because both occurrences refer to the local parameter.\n\n```java\nclass Student {\nint id;\n```\n\nStudent(int id) {\n\n```java\nid = id;\n}\n```\n\nvoid printDetails() {\n\n```java\nSystem.out.println(id);\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nStudent s = new Student(10);\ns.printDetails();\n}\n}\n```\n\nOutput: 0 The instance variable id remains at its default value because id = id; assigns the parameter to itself."
+    },
+    {
+      "question": "How do you solve variable shadowing using this?",
+      "answer": "Answer: Use this to explicitly refer to the current object’s instance variable.\n\n```java\nclass Student {\nint id;\nString name;\n```\n\nStudent(int id, String name) {\n\n```java\nthis.id = id;\nthis.name = name;\n}\n```\n\nvoid printDetails() {\n\n```java\nSystem.out.println(id + \" \" + name);\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nStudent s = new Student(10, \"Ramesh\");\ns.printDetails();\n}\n}\n```\n\nOutput: 10 Ramesh this.id and this.name refer to the instance variables, while id and name on the right-hand side refer to the constructor parameters."
+    },
+    {
+      "question": "What is the this keyword in Java?",
+      "answer": "Answer: this keyword is a reference to the current object. It is used to access instance variables and methods, and to call another constructor in the same class.\n\n```java\nclass Student {\nint id;\n```\n\nStudent(int id) {\n\n```java\nthis.id = id;\n}\n}\n```"
+    },
+    {
+      "question": "Can this keyword be used with a local variable?",
+      "answer": "Answer: this keyword cannot directly refer to a local variable because local variables belong to a method or constructor scope, not to the object. It is used to refer to instance members of the current object.\n\n```java\nclass Test {\nint x = 10;\n```\n\nvoid show() {\n\n```java\nint x = 20;\nSystem.out.println(this.x);\nSystem.out.println(x);\n}\n}\n```\n\nOutput: 10 20 this.x refers to the instance variable, while x refers to the local variable."
+    },
+    {
+      "question": "What is the difference between this.id and id inside a constructor?",
+      "answer": "Answer: this.id refers to the instance variable of the current object. id refers to the constructor parameter when a parameter with that name exists.\n\n```java\nclass Student {\nint id;\n```\n\nStudent(int id) {\n\n```java\nthis.id = id;\n}\n}\n```"
+    },
+    {
+      "question": "Can this and super be used together as the first statement of a constructor?",
+      "answer": "Answer: No. A constructor can begin with either this(...) or super(...), but not both. Both are constructor calls, and only one explicit constructor call is allowed as the first statement.\n\n```java\nclass Student {\n```\n\nStudent() {\n\n```java\nthis(10);\n// super(); // Compilation error\n}\n```\n\nStudent(int id) {\n\n```java\n}\n}\n```\n\nThe compiler reports an error if both are placed in the same constructors."
+    },
+    {
+      "question": "What is constructor chaining?",
+      "answer": "Answer: Constructor chaining is the process of calling one constructor from another constructor. It helps reuse initialization code and avoid duplication. The two types covered in the lecture are: Super constructor chaining — using super(...) to call a parent-class constructor. Local constructor chaining — using this(...) to call another constructor in the same class."
+    },
+    {
+      "question": "What is super constructor chaining?",
+      "answer": "Answer: Super constructor chaining is the process of calling a parent-class constructor from a child-class constructor using super(...).\n\n```java\nclass Parent {\n```\n\nParent() {\n\n```java\nSystem.out.println(\"Parent constructor\");\n}\n}\nclass Child extends Parent {\n```\n\nChild() {\n\n```java\nsuper();\nSystem.out.println(\"Child constructor\");\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nnew Child();\n}\n}\n```\n\nOutput: Parent constructor Child constructor The parent constructor executes before the child constructor body."
+    },
+    {
+      "question": "What is local constructor chaining?",
+      "answer": "Answer: Local constructor chaining is the process of calling another constructor in the same class using this(...).\n\n```java\nclass Student {\nint id;\nString name;\n```\n\nStudent() {\n\n```java\nthis(10, \"Ramesh\");\n}\n```\n\nStudent(int id, String name) {\n\n```java\nthis.id = id;\nthis.name = name;\n}\n}\n```"
+    },
+    {
+      "question": "What is the difference between this(...) and super(...)?",
+      "answer": "Answer: this(...) super(...) Calls another constructor in the same class. Calls a constructor of the parent class. Used for local constructor chaining. Used for super constructor chaining. Must refer to a valid constructor in the current class. Must refer to an accessible constructor in the parent class."
+    },
+    {
+      "question": "What happens if no explicit constructor call is written?",
+      "answer": "Answer: The compiler implicitly inserts super() as the first statement of a constructor, provided that no explicit this(...) or super(...) call is present. This calls the no-argument constructor of the parent class.\n\n```java\nclass Parent {\n```\n\nParent() {\n\n```java\nSystem.out.println(\"Parent\");\n}\n}\nclass Child extends Parent {\n```\n\nChild() {\n\n```java\nSystem.out.println(\"Child\");\n}\n}\n```\n\nOutput: Parent Child The child constructor implicitly calls super() before executing its own body."
+    },
+    {
+      "question": "What happens if you call the same constructor using this(...)?",
+      "answer": "Answer: It causes a compilation error because a constructor cannot invoke itself directly.\n\n```java\nclass Student {\n```\n\nStudent() {\n\n```java\nthis();\n}\n}\n```\n\nOutput: Compilation error The compiler rejects the recursive constructor invocation."
+    },
+    {
+      "question": "Can a constructor call another constructor and also call super(...)?",
+      "answer": "Answer: A constructor cannot explicitly call both this(...) and super(...). However, the constructor called through this(...) can itself call super(...).\n\n```java\nclass Parent {\n```\n\nParent() {\n\n```java\nSystem.out.println(\"Parent\");\n}\n}\nclass Child extends Parent {\n```\n\nChild() {\n\n```java\nthis(10);\n}\n```\n\nChild(int id) {\n\n```java\nsuper();\nSystem.out.println(id);\n}\n}\n```\n\nOutput: Parent 10 The first constructor calls the second using this(10), and the second constructor calls the parent using super()."
+    },
+    {
+      "question": "What happens during object creation with a constructor?",
+      "answer": "Answer: When an object is created: Memory is allocated for the object. Instance variables receive their default values. The appropriate constructor is selected. The parent constructor is called, either explicitly or implicitly. The constructor body executes. The object reference is returned to the variable.\n\n```java\nclass Student {\nint id;\n```\n\nStudent(int id) {\n\n```java\nthis.id = id;\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nStudent s = new Student(10);\nSystem.out.println(s.id);\n}\n}\n```\n\nOutput: 10 The constructor initializes the instance variable before the object is used."
+    },
+    {
+      "question": "What happens if a class has no explicit extends clause?",
+      "answer": "Answer: The class implicitly extends Object, the root class of Java’s class hierarchy. Its constructors therefore ultimately invoke the Object constructor.\n\n```java\nclass Student {\n}\n```\n\nThis is equivalent to:\n\n```java\nclass Student extends Object {\n}\n```"
+    },
+    {
+      "question": "What is the execution order in constructor chaining?",
+      "answer": "Answer: The parent constructor executes first, followed by the child constructor body. If a constructor calls another constructor using this(...), that constructor executes first, and its parent constructor call occurs before its own body.\n\n```java\nclass Parent {\n```\n\nParent() {\n\n```java\nSystem.out.println(\"Parent\");\n}\n}\nclass Child extends Parent {\n```\n\nChild() {\n\n```java\nthis(10);\nSystem.out.println(\"Child no-arg\");\n}\n```\n\nChild(int id) {\n\n```java\nSystem.out.println(\"Child parameterized\");\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nnew Child();\n}\n}\n```\n\nOutput: Parent Child parameterized Child no-arg The no-argument constructor delegates to the parameterized constructor, which first calls the parent constructor."
+    },
+    {
+      "question": "What is encapsulation in Java?",
+      "answer": "Answer: Encapsulation is the process of binding data members and member functions together and controlling access to the data. It is commonly achieved by making fields private and providing public getters and setters."
+    },
+    {
+      "question": "How do you achieve encapsulation in Java?",
+      "answer": "Answer: Declare important instance variables as private. Provide public getter methods to read the values. Provide public setter methods to modify the values. Optionally add validation inside setters.\n\n```java\nclass Customer {\nprivate int id;\nprivate String password;\npublic int getId() {\nreturn id;\n}\npublic void setId(int id) {\nthis.id = id;\n}\npublic String getPassword() {\nreturn password;\n}\npublic void setPassword(String password) {\nthis.password = password;\n}\n}\n```"
+    },
+    {
+      "question": "What are getters and setters?",
+      "answer": "Answer: A getter is a public method used to retrieve the value of an instance variable. A setter is a public method used to assign or modify the value of an instance variable.\n\n```java\nclass Customer {\nprivate int id;\npublic int getId() {\nreturn id;\n}\npublic void setId(int id) {\nthis.id = id;\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nCustomer c = new Customer();\nc.setId(111);\nSystem.out.println(c.getId());\n}\n}\n```\n\nOutput: 111"
+    },
+    {
+      "question": "Why should important data members be private?",
+      "answer": "Answer: Making data members private prevents direct access from outside the class. Access can be controlled through methods, allowing validation and protecting the object’s state.\n\n```java\nclass Customer {\nprivate int id;\npublic void setId(int id) {\nif (id > 0) {\nthis.id = id;\n}\n}\n}\n```\n\nThe setter can reject invalid values instead of allowing unrestricted modification."
+    },
+    {
+      "question": "What is a copy constructor in Java?",
+      "answer": "Answer: A copy constructor is a constructor that accepts another object of the same class and copies its field values into a new object. It is useful when you want to preserve an object’s current state before modifying it. Java does not automatically provide a copy constructor; you define it yourself.\n\n```java\nclass Customer {\nint id;\nString password;\n```\n\nCustomer(int id, String password) {\n\n```java\nthis.id = id;\nthis.password = password;\n}\n```\n\nCustomer(Customer ref) {\n\n```java\nthis.id = ref.id;\nthis.password = ref.password;\n}\n}\n```"
+    },
+    {
+      "question": "What happens when you modify the copied object?",
+      "answer": "Answer: The copied object has its own field values. Changing its fields does not change the original object’s primitive fields or immutable String references.\n\n```java\nclass Customer {\nint id;\nString password;\n```\n\nCustomer(int id, String password) {\n\n```java\nthis.id = id;\nthis.password = password;\n}\n```\n\nCustomer(Customer ref) {\n\n```java\nthis.id = ref.id;\nthis.password = ref.password;\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nCustomer c1 = new Customer(1111, \"2222\");\nCustomer copy = new Customer(c1);\ncopy.id = 4321;\ncopy.password = \"3333\";\nSystem.out.println(c1.id + \" \" + c1.password);\nSystem.out.println(copy.id + \" \" + copy.password);\n}\n}\n```\n\nOutput: 1111 2222 4321 3333 The copy constructor creates a new object and copies the original values into it. Later changes affect only the copied object."
+    },
+    {
+      "question": "What is the difference between a copy constructor and reference assignment?",
+      "answer": "Answer: A copy constructor creates a new object with copied field values. Reference assignment does not create a new object; it makes two references point to the same object.\n\n```java\nclass Customer {\nint id;\n```\n\nCustomer(int id) {\n\n```java\nthis.id = id;\n}\n```\n\nCustomer(Customer ref) {\n\n```java\nthis.id = ref.id;\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nCustomer c1 = new Customer(1111);\nCustomer c2 = c1;\nCustomer c3 = new Customer(c1);\nc2.id = 4321;\nSystem.out.println(c1.id);\nSystem.out.println(c3.id);\n}\n}\n```\n\nOutput: 4321 1111 c2 and c1 refer to the same object, so changing c2.id changes c1.id. c3 refers to a separate object created by the copy constructor."
+    },
+    {
+      "question": "Write a Java program using a copy constructor to preserve the original object’s state.",
+      "answer": "Answer: The following program reads customer details, creates a copy, modifies the original object, and restores its values from the copy.\n\n```java\nimport java.util.Scanner;\nclass Customer {\nint id;\nString password;\n```\n\nCustomer(int id, String password) {\n\n```java\nthis.id = id;\nthis.password = password;\n}\n```\n\nCustomer(Customer ref) {\n\n```java\nthis.id = ref.id;\nthis.password = ref.password;\n}\n```\n\nvoid printDetails() {\n\n```java\nSystem.out.println(id + \" \" + password);\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nSystem.out.print(\"Enter id and password: \");\nint id = scan.nextInt();\nString password = scan.next();\nCustomer c1 = new Customer(id, password);\nCustomer copy = new Customer(c1);\nc1.id = 4321;\nc1.password = \"3333\";\nSystem.out.println(\"Modified:\");\nc1.printDetails();\nc1.id = copy.id;\nc1.password = copy.password;\nSystem.out.println(\"Restored:\");\nc1.printDetails();\nscan.close();\n}\n}\n```\n\nOutput: Enter id and password: 1111 2222 Modified: 4321 3333 Restored: 1111 2222 The copy constructor preserves the original values in a separate object. The values are then assigned back to the original object to restore its previous state."
+    },
+    {
+      "question": "How do you identify a copy constructor?",
+      "answer": "Answer: A copy constructor accepts a parameter whose type is the same as the class in which the constructor is declared.\n\n```java\nclass Book {\nString title;\n```\n\nBook(Book ref) {\n\n```java\nthis.title = ref.title;\n}\n}\n```\n\nHere, Book(Book ref) is a copy constructor because it accepts another Book object."
+    },
+    {
+      "question": "What are the advantages of a copy constructor?",
+      "answer": "Answer: A copy constructor makes it easier to: Create a new object with the same state as an existing object. Preserve a previous state before modifying an object. Avoid writing many individual assignments repeatedly. Copy objects with multiple attributes using a single constructor call.\n\n```java\nclass Book {\nString title;\nint pages;\n```\n\nBook(Book ref) {\n\n```java\nthis.title = ref.title;\nthis.pages = ref.pages;\n}\n}\n```\n\nInstead of assigning each field manually outside the class, the copy constructor centralizes the copying logic."
+    },
+    {
+      "question": "What happens if a copy constructor is not declared?",
+      "answer": "Answer: Java does not automatically create a copy constructor. You must declare one if you want to copy an object’s field values into a new object.\n\n```java\nclass Student {\nint id;\n```\n\nStudent(int id) {\n\n```java\nthis.id = id;\n}\n}\n```\n\nTo create a copy constructor, add: Student(Student ref) {\n\n```java\nthis.id = ref.id;\n}\n```"
+    },
+    {
+      "question": "Can a copy constructor accept an object of another class?",
+      "answer": "Answer: Yes, a constructor can accept an object of another class, but it is not a copy constructor of the current class unless the parameter type is the same as the current class.\n\n```java\nclass Student {\nint id;\n```\n\nStudent(Student ref) {\n\n```java\nthis.id = ref.id;\n}\n}\n```\n\nStudent(Student ref) is a copy constructor because the parameter type is Student."
+    },
+    {
+      "question": "What is the difference between a constructor and a normal method?",
+      "answer": "Answer: Constructor Normal method Used to initialize an object. Used to perform an operation. Has the same name as the class. Can have any valid name. Has no return type. Can have a return type, including void. Called automatically when an object is created. Called explicitly.\n\n```java\nclass Student {\n```\n\nStudent() {\n\n```java\nSystem.out.println(\"Constructor\");\n}\n```\n\nvoid printDetails() {\n\n```java\nSystem.out.println(\"Method\");\n}\n}\n```\n\nOutput: Constructor Method The constructor runs when the object is created, while the method runs when it is called."
+    },
+    {
+      "question": "What is the difference between a default constructor and a no-argument constructor?",
+      "answer": "Answer: A no-argument constructor is any constructor that takes no parameters. A default constructor specifically refers to the no-argument constructor automatically supplied by the compiler when no constructor is declared.\n\n```java\nclass Student {\n```\n\nStudent() {\n\n```java\nSystem.out.println(\"Explicit no-argument constructor\");\n}\n}\n```\n\nThis is an explicit no-argument constructor, not a compiler-supplied default constructor."
+    }
+  ]
+}
