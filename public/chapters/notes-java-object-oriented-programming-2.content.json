@@ -1,0 +1,143 @@
+{
+  "title": "Notes Java Object Oriented Programming 2",
+  "itemsPerPage": 2,
+  "source": "notes-java-object-oriented-programming-2.docx",
+  "items": [
+    {
+      "question": "What is a class in Java?",
+      "answer": "Answer: A class is a blueprint or template given to the JVM to create objects. It defines the structure and behavior that objects of that class will have. Example:\n\n```java\nclass Dog {\nString name;\nString breed;\nint cost;\n```\n\nvoid eat() {\n\n```java\nSystem.out.println(name + \" is eating\");\n}\n```\n\nvoid sleep() {\n\n```java\nSystem.out.println(name + \" is sleeping\");\n}\n```\n\nvoid bark() {\n\n```java\nSystem.out.println(name + \" is barking\");\n}\n}\n```\n\nHere, Dog is the class."
+    },
+    {
+      "question": "What does a class contain?",
+      "answer": "Answer: A class mainly contains: Variables Methods The variables represent the properties, attributes, or data members of the class. The methods represent the behaviors, functionalities, or member functions of the class. A class can also contain constructors, nested classes, static nested classes, and anonymous inner classes."
+    },
+    {
+      "question": "What are properties and behaviors in a class?",
+      "answer": "Answer: Properties describe the characteristics or data of an object. For example, a Dog object may have: Name Breed Cost Behaviors describe the actions performed by the object. For example, a Dog object may perform: Eating Sleeping Barking Example:\n\n```java\nclass Dog {\nString name;\nString breed;\nint cost;\n```\n\nvoid eat() {\n\n```java\nSystem.out.println(name + \" is eating\");\n}\n```\n\nvoid sleep() {\n\n```java\nSystem.out.println(name + \" is sleeping\");\n}\n```\n\nvoid bark() {\n\n```java\nSystem.out.println(name + \" is barking\");\n}\n}\n```"
+    },
+    {
+      "question": "What is an object in Java?",
+      "answer": "Answer: An object is an instance of a class. It is the actual existence of a class in memory. A class is only a blueprint, whereas an object is created from that blueprint and occupies memory in the heap. Example:\n\n```java\nDog dog1 = new Dog();\n```\n\nHere, dog1 refers to the object created from the Dog class."
+    },
+    {
+      "question": "What is meant by an instance of a class?",
+      "answer": "Answer: An instance means the existence of a class in the form of an object. When an object is created using the new keyword, memory is allocated for that object in the heap. Therefore, the object is called an instance of the class. Example:\n\n```java\nDog dog1 = new Dog();\n```\n\nThe object created by new Dog() is an instance of the Dog class."
+    },
+    {
+      "question": "What is the difference between a class and an object?",
+      "answer": "Answer: A class is a blueprint used to create objects. An object is the actual instance created from the class. A class defines the properties and behaviors, but an object occupies memory and can be used to access those properties and behaviors. For example, a house plan is similar to a class, and the actual house built using that plan is similar to an object."
+    },
+    {
+      "question": "Does a class occupy memory like an object?",
+      "answer": "Answer: The class acts as a blueprint. The actual instance variables of the class receive memory when an object is created. When an object is created, its instance variables such as name, breed, and cost receive memory in the heap. The object is therefore considered the actual existence of the class."
+    },
+    {
+      "question": "How do you create an object in Java?",
+      "answer": "Answer: An object is created using the new keyword. Syntax:\n\n```java\nClassName referenceVariable = new ClassName();\n```\n\nExample:\n\n```java\nDog dog1 = new Dog();\n```\n\nHere: Dog is the class name.\n\n```java\ndog1 is the reference variable.\nnew Dog() creates the object.\n```\n\nThe reference of the object is stored in dog1."
+    },
+    {
+      "question": "What is the meaning of the following statement?",
+      "answer": "Answer: ```java\nDog dog1 = new Dog();\n```\n\nThis statement performs two actions: It creates a new object of the Dog class. It stores the reference of that object in the reference variable dog1. The reference variable must be of the same type as the object it refers to."
+    },
+    {
+      "question": "Why is the reference variable declared using the class type?",
+      "answer": "Answer: The reference variable is declared using the class type because it stores the reference of an object belonging to that class. Example:\n\n```java\nDog dog1 = new Dog();\n```\n\nSince the object is of type Dog, the reference variable dog1 is also declared using the Dog type."
+    },
+    {
+      "question": "How can you assign values to the properties of an object?",
+      "answer": "Answer: The dot operator is used with the reference variable to access and assign values to the properties of an object. Example:\n\n```java\nDog dog1 = new Dog();\ndog1.name = \"Rocky\";\ndog1.breed = \"Bulldog\";\ndog1.cost = 9999;\n```\n\nHere, values are assigned to the name, breed, and cost properties of the object referred to by dog1."
+    },
+    {
+      "question": "How can you access the methods of an object?",
+      "answer": "Answer: The dot operator is used to access the methods of an object. Example:\n\n```java\ndog1.eat();\ndog1.sleep();\ndog1.bark();\n```\n\nThe methods are executed using the object reference stored in dog1."
+    },
+    {
+      "question": "What happens when a Dog object is created?",
+      "answer": "Answer: When the following statement is executed:\n\n```java\nDog dog1 = new Dog();\n```\n\nA Dog object is created in the heap. Memory is allocated for: name breed cost eat() sleep() bark() The instance variables are initialized with their default values before explicit values are assigned."
+    },
+    {
+      "question": "What are the default values of instance variables?",
+      "answer": "Answer: When an object is created, its instance variables are automatically initialized with default values based on their data types. The default values are: Data Type Default Value byte 0 short 0 int 0 long 0L float 0.0F\n\n```java\ndouble\n```\n\n0.0 char '\\u0000' boolean false Reference types null For example:\n\n```java\nclass Dog {\nString name;\nString breed;\nint cost;\n}\n```\n\nBefore assigning values: name is null. breed is null. cost is 0."
+    },
+    {
+      "question": "What happens when a method is called using an object reference?",
+      "answer": "Answer: When a method is called, control moves to the method body. A stack frame is created for that method in stack memory. After the method finishes execution, its stack frame is removed and control returns to the calling method. Example:\n\n```java\ndog1.eat();\n```\n\nThe eat() method executes and prints: Rocky is eating After execution, control returns to the main() method."
+    },
+    {
+      "question": "What happens in memory when the main method is executed?",
+      "answer": "Answer: The JVM calls the main() method. A stack frame is created for the main() method. When the statement below is executed:\n\n```java\nDog dog1 = new Dog();\n```\n\nThe Dog object is created in heap memory, and the reference variable dog1 is stored in the stack frame of the main() method. The reference variable points to the object in the heap."
+    },
+    {
+      "question": "Can multiple objects be created from the same class?",
+      "answer": "Answer: Yes, multiple objects can be created from the same class. Example:\n\n```java\nDog dog1 = new Dog();\nDog dog2 = new Dog();\n```\n\nHere, two separate Dog objects are created. Each object has its own memory for instance variables such as name, breed, and cost."
+    },
+    {
+      "question": "What happens when two objects are created from the same class?",
+      "answer": "Answer: When two objects are created, separate memory is allocated for each object. Example:\n\n```java\nDog dog1 = new Dog();\nDog dog2 = new Dog();\n```\n\nThe first object may be created at one memory location, and the second object may be created at another memory location. Both objects contain their own instance variables and can hold different values."
+    },
+    {
+      "question": "What is the purpose of collecting an object reference?",
+      "answer": "Answer: The reference of an object is collected when the object needs to be accessed multiple times. Example:\n\n```java\nDog dog1 = new Dog();\ndog1.name = \"Rocky\";\ndog1.breed = \"Bulldog\";\ndog1.cost = 9999;\ndog1.eat();\ndog1.sleep();\ndog1.bark();\n```\n\nThe object reference dog1 is used multiple times to access the properties and methods of the same object."
+    },
+    {
+      "question": "Is it necessary to collect a reference for every object?",
+      "answer": "Answer: No, it is not necessary to collect a reference if the object needs to be accessed only once. If an object is required only for one operation, it can be created and accessed directly. Example:\n\n```java\nnew Dog().bark();\n```\n\nHere, the object is created and the bark() method is called immediately without storing the object reference."
+    },
+    {
+      "question": "What are the two ways of creating and accessing an object?",
+      "answer": "Answer: The two ways are: Create the object, collect its reference, and access it multiple times. Create the object and access it directly without collecting its reference. Example of creating an object with a reference:\n\n```java\nDog dog1 = new Dog();\ndog1.eat();\ndog1.sleep();\ndog1.bark();\n```\n\nExample of creating an object without a reference:\n\n```java\nnew Dog().bark();\n```"
+    },
+    {
+      "question": "What is an anonymous object?",
+      "answer": "Answer: An anonymous object is an object whose reference is not stored in a reference variable. It is generally created when the object needs to be accessed only once. Example:\n\n```java\nnew Dog().bark();\n```\n\nThe object is created, the bark() method is accessed, and no reference is stored for future use."
+    },
+    {
+      "question": "Why is an object without a reference called an anonymous object?",
+      "answer": "Answer: It is called an anonymous object because the object does not have a reference variable through which it can be identified or accessed again. Example:\n\n```java\nnew Dog().bark();\n```\n\nThe object is created and used immediately. Since no reference is stored, the object cannot be accessed again through that reference."
+    },
+    {
+      "question": "Can an anonymous object be accessed more than once?",
+      "answer": "Answer: No, an anonymous object cannot be accessed again through a reference because no reference variable is stored for it. Example:\n\n```java\nnew Dog().bark();\n```\n\nThis object can be used for the current method call only. If the same statement is written again:\n\n```java\nnew Dog().bark();\n```\n\nA new object is created. It does not access the previously created object."
+    },
+    {
+      "question": "What happens if new Dog() is written again?",
+      "answer": "Answer: Every time new Dog() is written, a new Dog object is created. Example:\n\n```java\nnew Dog().bark();\nnew Dog().bark();\n```\n\nTwo different objects are created. The second statement does not access the object created by the first statement."
+    },
+    {
+      "question": "Can an object created without a reference be accessed later?",
+      "answer": "Answer: No, an object created without a reference cannot be accessed later through the program because its reference was not stored. If the object needs to be used again, its reference must be collected. Example:\n\n```java\nDog dog1 = new Dog();\n```\n\nNow the object can be accessed multiple times using dog1."
+    },
+    {
+      "question": "What will be the output of the following code?",
+      "answer": "Answer: ```java\nclass Dog {\nString name;\nString breed;\nint cost;\n```\n\nvoid bark() {\n\n```java\nSystem.out.println(name + \" Dog is barking\");\n}\n}\npublic class DogApp {\npublic static void main(String[] args) {\nnew Dog().bark();\n}\n}\n```\n\nOutput: null Dog is barking The name variable is an instance variable of type String. Since no value is assigned to it, its default value is null."
+    },
+    {
+      "question": "Why does the output contain null in the anonymous object example?",
+      "answer": "Answer: The name variable is a reference-type instance variable. When the object is created, the default value of name is null. Since no value is assigned before calling bark(), the output contains null."
+    },
+    {
+      "question": "What is the difference between an object with a reference and an anonymous object?",
+      "answer": "Answer: An object with a reference stores its reference in a variable and can be accessed multiple times. Example:\n\n```java\nDog dog1 = new Dog();\ndog1.eat();\ndog1.sleep();\ndog1.bark();\n```\n\nAn anonymous object does not store its reference and is normally used only once. Example:\n\n```java\nnew Dog().bark();\n```"
+    },
+    {
+      "question": "What is the difference between Dog dog1 = new Dog(); and new Dog().bark();?",
+      "answer": "Answer: In:\n\n```java\nDog dog1 = new Dog();\n```\n\nThe object is created and its reference is stored in dog1. The object can be accessed multiple times. In:\n\n```java\nnew Dog().bark();\n```\n\nThe object is created and the bark() method is called immediately. Its reference is not stored, so it cannot be accessed again through a variable."
+    },
+    {
+      "question": "How do you create a separate application class for the Dog class?",
+      "answer": "Answer: A separate application class can be created to contain the main() method. Example:\n\n```java\nclass Dog {\nString name;\nString breed;\nint cost;\n```\n\nvoid eat() {\n\n```java\nSystem.out.println(name + \" is eating\");\n}\n```\n\nvoid sleep() {\n\n```java\nSystem.out.println(name + \" is sleeping\");\n}\n```\n\nvoid bark() {\n\n```java\nSystem.out.println(name + \" is barking\");\n}\n}\npublic class DogApp {\npublic static void main(String[] args) {\nDog dog1 = new Dog();\ndog1.name = \"Rocky\";\ndog1.breed = \"Bulldog\";\ndog1.cost = 9999;\ndog1.eat();\ndog1.sleep();\ndog1.bark();\n}\n}\n```\n\nThe Dog class defines the properties and behaviors, while the DogApp class contains the main() method and creates the object."
+    },
+    {
+      "question": "What is the purpose of the DogApp class?",
+      "answer": "Answer: The DogApp class is used to execute the program. It contains the main() method, creates the Dog object, assigns values to its properties, and calls its methods. The Dog class defines the blueprint, while the DogApp class performs the execution."
+    },
+    {
+      "question": "What are the properties of a BankCustomer object?",
+      "answer": "Answer: A BankCustomer object can have the following properties: id of type int accountNumber of type int password of type String emailId of type String balance of type long Example:\n\n```java\nclass BankCustomer {\nint id;\nint accountNumber;\nString password;\nString emailId;\nlong balance;\n}\n```"
+    },
+    {
+      "question": "What behavior can a BankCustomer object have?",
+      "answer": "Answer: A BankCustomer object can have behaviors such as: Showing the customer profile Displaying account details Displaying the account balance Example:\n\n```java\nclass BankCustomer {\nint id;\nint accountNumber;\nString password;\nString emailId;\nlong balance;\n```\n\nvoid showProfile() {\n\n```java\nSystem.out.println(\"Customer ID: \" + id);\nSystem.out.println(\"Account Number: \" + accountNumber);\nSystem.out.println(\"Email ID: \" + emailId);\nSystem.out.println(\"Balance: \" + balance);\n}\n}\n```"
+    }
+  ]
+}
