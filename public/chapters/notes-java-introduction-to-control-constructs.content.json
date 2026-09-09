@@ -1,0 +1,179 @@
+{
+  "title": "Notes Java Introduction To Control Constructs",
+  "itemsPerPage": 2,
+  "source": "notes-java-introduction-to-control-constructs.docx",
+  "items": [
+    {
+      "question": "What are control constructs in Java?",
+      "answer": "Answer: Control constructs are statements used to control the flow of execution in a Java program according to a requirement or condition. By default, Java executes statements sequentially. Control constructs allow us to change this flow by: Executing selected statements Skipping statements Executing one block out of multiple blocks Repeating statements Jumping out of a control structure"
+    },
+    {
+      "question": "Why do we need control constructs?",
+      "answer": "Answer: Control constructs are required because every program does not need to execute all statements in a linear order. For example: Some statements may need to be skipped. Only one statement out of two may need to be executed. One block may need to be executed based on a condition. Different statements may need to execute multiple times. Control may need to move directly to another part of the program. Therefore, control constructs help us execute a program according to the situation and requirement."
+    },
+    {
+      "question": "What is linear or sequential execution?",
+      "answer": "Answer: Linear or sequential execution means that the statements of a program are executed one after another in the same order in which they are written. For example:\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nSystem.out.println(\"Hello\");\nSystem.out.println(\"World\");\nSystem.out.println(\"How are you\");\n}\n}\n```\n\nOutput: Hello World How are you The JVM calls the main() method, and the control executes each statement from top to bottom."
+    },
+    {
+      "question": "Explain the execution flow of a simple Java program.",
+      "answer": "Answer: When a Java program is executed: The JVM starts the program. The JVM calls the main() method. Control enters the main() method. The first statement is executed. Control moves to the next statement. Each statement is executed sequentially. When the closing brace of the method is reached, control returns to the JVM. This is called sequential or linear execution."
+    },
+    {
+      "question": "What are the three main types of control constructs in Java?",
+      "answer": "Answer: The three main types of control constructs are: Conditional control constructs Looping control constructs Jump statements"
+    },
+    {
+      "question": "What are the types of conditional control constructs in Java?",
+      "answer": "Answer: The four conditional control constructs discussed are: Simple if\n\n```java\nif-else\nelse-if ladder\nswitch\n```"
+    },
+    {
+      "question": "What are the types of looping control constructs in Java?",
+      "answer": "Answer: The standard looping control constructs are:\n\n```java\nfor loop\nwhile loop\ndo-while loop\n```\n\nOther types of loops include: Enhanced for loop or for-each loop Infinite loop Nested loop Labeled loop"
+    },
+    {
+      "question": "What are jump statements in Java?",
+      "answer": "Answer: Jump statements are used to transfer control from one part of a program to another part. The jump statements discussed are:\n\n```java\nbreak\ncontinue\nreturn\n```"
+    },
+    {
+      "question": "What is a simple if statement?",
+      "answer": "Answer: A simple if statement is a conditional control construct used when one statement or one block of statements should be executed only when a condition is true. If the condition is false, the statement or block is skipped. Syntax:\n\n```java\nif (condition) {\n// statements\n}\n```"
+    },
+    {
+      "question": "How does a simple if statement work?",
+      "answer": "Answer: A simple if statement works as follows: If the condition is true, the statement or block inside the if is executed. If the condition is false, the statement or block inside the if is skipped. After that, control continues with the next statement after the if block."
+    },
+    {
+      "question": "When should we use a simple if statement?",
+      "answer": "Answer: We should use a simple if statement when: There is one statement or one block of statements. That statement or block may need to be executed or skipped. No alternative statement is required when the condition is false. For example, checking whether a person is eligible to vote:\n\n```java\nif (age >= 18) {\nSystem.out.println(\"You are eligible for voting\");\n}\n```"
+    },
+    {
+      "question": "What happens if the condition of a simple if statement is false?",
+      "answer": "Answer: If the condition is false, the statement or block inside the if is skipped. For example:\n\n```java\nint age = 15;\nif (age >= 18) {\nSystem.out.println(\"You are eligible for voting\");\n}\n```\n\nOutput: No output is displayed because the condition is false."
+    },
+    {
+      "question": "Can a simple if statement contain more than one statement?",
+      "answer": "Answer: Yes. If more than one statement must be executed or skipped together, the statements should be placed inside curly braces. Example:\n\n```java\nif (age >= 18) {\nSystem.out.println(\"You are eligible for voting\");\nSystem.out.println(\"You can apply for a voter ID\");\n}\n```\n\nThe curly braces create a block of statements. The complete block is executed or skipped based on the condition."
+    },
+    {
+      "question": "What is a block in Java?",
+      "answer": "Answer: A block is a group of statements enclosed within opening and closing curly braces.\n\n```java\n{\n```\n\nstatement1; statement2; statement3;\n\n```java\n}\n```\n\nA block is treated as a single unit by control constructs such as if, else, and loops."
+    },
+    {
+      "question": "What is the difference between a statement and a block of statements?",
+      "answer": "Answer: A statement is a single executable instruction. Example:\n\n```java\nSystem.out.println(\"Hello\");\n```\n\nA block is a group of statements enclosed within curly braces. Example:\n\n```java\n{\nSystem.out.println(\"Hello\");\nSystem.out.println(\"World\");\n}\n```\n\nA control construct can execute or skip a complete block as one unit."
+    },
+    {
+      "question": "What is an if-else statement?",
+      "answer": "Answer: An if-else statement is a conditional control construct used when exactly one of two statements or blocks of statements must be executed. Syntax:\n\n```java\nif (condition) {\n// executes when condition is true\n```\n\n} else {\n\n```java\n// executes when condition is false\n}\n```"
+    },
+    {
+      "question": "How does an if-else statement work?",
+      "answer": "Answer: An if-else statement works as follows: If the condition is true, the if block is executed. If the condition is false, the else block is executed. Only one of the two blocks is executed at a time. Both blocks cannot be executed for the same condition evaluation."
+    },
+    {
+      "question": "When should we use an if-else statement?",
+      "answer": "Answer: We should use an if-else statement when: There are two possible statements or blocks. One block must be executed when the condition is true. The other block must be executed when the condition is false. Exactly one block should execute at a given point in time. Example:\n\n```java\nif (age >= 18) {\nSystem.out.println(\"You are eligible for voting\");\n```\n\n} else {\n\n```java\nSystem.out.println(\"You are not eligible for voting\");\n}\n```"
+    },
+    {
+      "question": "What is the output of the following program?",
+      "answer": "Answer: ```java\npublic class Demo {\npublic static void main(String[] args) {\nint age = 20;\nif (age >= 18) {\nSystem.out.println(\"You are eligible for voting\");\n```\n\n} else {\n\n```java\nSystem.out.println(\"You are not eligible for voting\");\n}\n}\n}\n```\n\nOutput: You are eligible for voting The condition age >= 18 is true, so the if block is executed."
+    },
+    {
+      "question": "What is the output if the age is 15?",
+      "answer": "Answer: ```java\nint age = 15;\nif (age >= 18) {\nSystem.out.println(\"You are eligible for voting\");\n```\n\n} else {\n\n```java\nSystem.out.println(\"You are not eligible for voting\");\n}\n```\n\nOutput: You are not eligible for voting The condition is false, so the else block is executed."
+    },
+    {
+      "question": "What is the difference between simple if and if-else?",
+      "answer": "Answer: Simple if\n\n```java\nif-else\n```\n\nUsed for one statement or one block Used for two statements or two blocks Executes the block when the condition is true Executes one block when true and another when false The block may be skipped One of the two blocks must execute No alternative block is available An alternative else block is available"
+    },
+    {
+      "question": "What is an else-if ladder?",
+      "answer": "Answer: An else-if ladder is a conditional control construct used when there are multiple conditions and multiple possible blocks of statements. The conditions are checked one by one. When a condition becomes true, its block is executed, and the remaining conditions are skipped. Syntax:\n\n```java\nif (condition1) {\n// statements\n```\n\n} else if (condition2) {\n\n```java\n// statements\n```\n\n} else if (condition3) {\n\n```java\n// statements\n```\n\n} else {\n\n```java\n// default statements\n}\n```"
+    },
+    {
+      "question": "When should we use an else-if ladder?",
+      "answer": "Answer: An else-if ladder should be used when: There are more than two possible conditions. Multiple blocks are available. Only one block should be executed at a given point in time. The selected block depends on the value or condition."
+    },
+    {
+      "question": "How does an else-if ladder execute?",
+      "answer": "Answer: The execution of an else-if ladder follows these steps: The first condition is checked. If it is true, its block is executed. The remaining conditions are skipped. If the first condition is false, the next condition is checked. This continues until a true condition is found. If no condition is true, the else block is executed, if present."
+    },
+    {
+      "question": "What is the purpose of the final else block in an else-if ladder?",
+      "answer": "Answer: The final else block is used to handle all values that do not satisfy any of the previous conditions. It acts as the default block. Example:\n\n```java\nif (number == 1) {\nSystem.out.println(\"Sunday\");\n```\n\n} else if (number == 2) {\n\n```java\nSystem.out.println(\"Monday\");\n```\n\n} else if (number == 3) {\n\n```java\nSystem.out.println(\"Tuesday\");\n```\n\n} else {\n\n```java\nSystem.out.println(\"Invalid day\");\n}\n```\n\nIf the number is not 1, 2, or 3, the else block is executed."
+    },
+    {
+      "question": "How can we display the day based on a number using an else-if ladder?",
+      "answer": "Answer: ```java\npublic class Demo {\npublic static void main(String[] args) {\nint number = 3;\nif (number == 1) {\nSystem.out.println(\"Sunday\");\n```\n\n} else if (number == 2) {\n\n```java\nSystem.out.println(\"Monday\");\n```\n\n} else if (number == 3) {\n\n```java\nSystem.out.println(\"Tuesday\");\n```\n\n} else if (number == 4) {\n\n```java\nSystem.out.println(\"Wednesday\");\n```\n\n} else if (number == 5) {\n\n```java\nSystem.out.println(\"Thursday\");\n```\n\n} else if (number == 6) {\n\n```java\nSystem.out.println(\"Friday\");\n```\n\n} else if (number == 7) {\n\n```java\nSystem.out.println(\"Saturday\");\n```\n\n} else {\n\n```java\nSystem.out.println(\"Invalid day\");\n}\n}\n}\n```\n\nOutput: Tuesday Only the block associated with number == 3 is executed."
+    },
+    {
+      "question": "What is the disadvantage of using a long else-if ladder?",
+      "answer": "Answer: In an else-if ladder, conditions are checked one after another. For example, if there are 100 conditions and the last condition is true, the program may need to check many previous conditions before reaching the last one. Therefore: Multiple comparisons may be required. The code becomes lengthy. It may be less efficient when many conditions compare the same variable with fixed values. The code may become difficult to maintain."
+    },
+    {
+      "question": "What is a switch statement?",
+      "answer": "Answer: A switch statement is a conditional control construct used to select one block of code from multiple possible cases based on the value of an expression. Syntax:\n\n```java\nswitch (expression) {\ncase value1:\n// statements\nbreak;\ncase value2:\n// statements\nbreak;\ndefault:\n// statements\n}\n```"
+    },
+    {
+      "question": "When should we use a switch statement?",
+      "answer": "Answer: A switch statement should be used when: There are multiple possible values. The value of one expression determines which block should execute. Only one case should normally execute. The same variable is compared against several fixed values. For example, selecting a day based on a number is suitable for a switch statement."
+    },
+    {
+      "question": "How does a switch statement work?",
+      "answer": "Answer: A switch statement works as follows: The expression is evaluated. The result is compared with the case values. Control moves directly to the matching case. The statements inside that case are executed. The break statement exits the switch. If no case matches, the default block is executed."
+    },
+    {
+      "question": "How can we display the day using a switch statement?",
+      "answer": "Answer: ```java\npublic class Demo {\npublic static void main(String[] args) {\nint number = 3;\nswitch (number) {\ncase 1:\nSystem.out.println(\"Sunday\");\nbreak;\ncase 2:\nSystem.out.println(\"Monday\");\nbreak;\ncase 3:\nSystem.out.println(\"Tuesday\");\nbreak;\ncase 4:\nSystem.out.println(\"Wednesday\");\nbreak;\ncase 5:\nSystem.out.println(\"Thursday\");\nbreak;\ncase 6:\nSystem.out.println(\"Friday\");\nbreak;\ncase 7:\nSystem.out.println(\"Saturday\");\nbreak;\ndefault:\nSystem.out.println(\"Invalid day\");\n}\n}\n}\n```\n\nOutput: Tuesday The value 3 matches case 3, so Tuesday is printed."
+    },
+    {
+      "question": "What is the purpose of the case label in a switch statement?",
+      "answer": "Answer: The case label represents a possible value of the switch expression. Example:\n\n```java\ncase 1:\nSystem.out.println(\"Sunday\");\nbreak;\n```\n\nIf the switch expression is equal to 1, control moves to this case."
+    },
+    {
+      "question": "What is the purpose of the default block in a switch statement?",
+      "answer": "Answer: The default block is executed when none of the case values matches the switch expression. Example:\n\n```java\nswitch (number) {\ncase 1:\nSystem.out.println(\"Sunday\");\nbreak;\ndefault:\nSystem.out.println(\"Invalid number\");\n}\n```\n\nIf number is 8, the output will be: Invalid number"
+    },
+    {
+      "question": "What happens if the break statement is not used in a switch case?",
+      "answer": "Answer: If break is not used, control does not stop after executing the matching case. Instead, control continues executing the statements of the following cases. This behavior is called fall-through. Example:\n\n```java\nint number = 2;\nswitch (number) {\ncase 1:\nSystem.out.println(\"Sunday\");\ncase 2:\nSystem.out.println(\"Monday\");\ncase 3:\nSystem.out.println(\"Tuesday\");\ndefault:\nSystem.out.println(\"Invalid day\");\n}\n```\n\nOutput: Monday Tuesday Invalid day The switch starts execution from case 2 and continues into the following cases because there are no break statements."
+    },
+    {
+      "question": "What is fall-through in a switch statement?",
+      "answer": "Answer: Fall-through is the behavior in which control continues executing the next case statements after a matching case because a break statement is missing. For example, if case 4 matches and there is no break, the statements in cases 5, 6, and 7 may also execute."
+    },
+    {
+      "question": "What is the purpose of the break statement?",
+      "answer": "Answer: The main purpose of the break statement is to bring control out of the current control construct. In a switch statement, break: Stops execution of the current case. Prevents execution of the following cases. Transfers control outside the switch statement."
+    },
+    {
+      "question": "How does break work in a switch statement?",
+      "answer": "Answer: ```java\nswitch (number) {\ncase 1:\nSystem.out.println(\"Sunday\");\nbreak;\ncase 2:\nSystem.out.println(\"Monday\");\nbreak;\ndefault:\nSystem.out.println(\"Invalid day\");\n}\n```\n\nWhen the matching case is executed, the break statement immediately brings control outside the switch."
+    },
+    {
+      "question": "What is the output of the following program?",
+      "answer": "Answer: ```java\npublic class Demo {\npublic static void main(String[] args) {\nint number = 4;\nswitch (number) {\ncase 1:\nSystem.out.println(\"Sunday\");\nbreak;\ncase 2:\nSystem.out.println(\"Monday\");\nbreak;\ncase 3:\nSystem.out.println(\"Tuesday\");\nbreak;\ncase 4:\nSystem.out.println(\"Wednesday\");\nbreak;\ncase 5:\nSystem.out.println(\"Thursday\");\nbreak;\ndefault:\nSystem.out.println(\"Invalid day\");\n}\n}\n}\n```\n\nOutput: Wednesday The switch directly selects case 4. After printing Wednesday, the break statement brings control outside the switch."
+    },
+    {
+      "question": "What is the difference between an else-if ladder and a switch statement?",
+      "answer": "Answer: ```java\nelse-if ladder\nswitch statement\n```\n\nChecks conditions one by one Selects a matching case based on an expression Can use relational and logical conditions Commonly compares one expression with fixed case values May require multiple comparisons Can directly select the matching case Suitable for ranges and complex conditions Suitable for fixed-value choices Does not require break Usually requires break to prevent fall-through"
+    },
+    {
+      "question": "When should we choose an else-if ladder instead of a switch?",
+      "answer": "Answer: Use an else-if ladder when: Conditions involve ranges. Conditions use relational operators such as >, <, >=, or <=. Conditions involve multiple variables. Conditions are complex. The decision is not based only on fixed values. Example:\n\n```java\nif (marks >= 90) {\nSystem.out.println(\"A grade\");\n```\n\n} else if (marks >= 75) {\n\n```java\nSystem.out.println(\"B grade\");\n```\n\n} else {\n\n```java\nSystem.out.println(\"C grade\");\n}\n```"
+    },
+    {
+      "question": "When should we choose a switch instead of an else-if ladder?",
+      "answer": "Answer: Use a switch statement when: One expression is being compared with multiple fixed values. The number or value determines the selected block. There are many possible choices. The code can be represented using cases. Example:\n\n```java\nswitch (number) {\ncase 1:\nSystem.out.println(\"Sunday\");\nbreak;\ncase 2:\nSystem.out.println(\"Monday\");\nbreak;\ndefault:\nSystem.out.println(\"Invalid day\");\n}\n```"
+    },
+    {
+      "question": "Why is switch considered more efficient than a long else-if ladder in the discussed example?",
+      "answer": "Answer: In the discussed example, the else-if ladder checks conditions one by one. For example:\n\n```java\nif (number == 1) {\n// ...\n```\n\n} else if (number == 2) {\n\n```java\n// ...\n```\n\n} else if (number == 3) {\n\n```java\n// ...\n}\n```\n\nIf the value is 3, the program checks the first and second conditions before reaching the third. With a switch statement, control selects the matching case based on the value of the expression. Therefore, it avoids the repeated comparison style shown in the long else-if ladder."
+    },
+    {
+      "question": "What is the main difference between break, continue, and return?",
+      "answer": "Answer: The break statement brings control completely out of the current control construct. The continue statement skips the remaining statements of the current loop iteration and moves to the next iteration of the loop. The return statement exits from the current method and returns control to the calling method."
+    }
+  ]
+}
