@@ -1,0 +1,123 @@
+{
+  "title": "Notes Java Object Oriented Programming",
+  "itemsPerPage": 2,
+  "source": "notes-java-object-oriented-programming.docx",
+  "items": [
+    {
+      "question": "What is object-oriented programming?",
+      "answer": "Answer: Object-oriented programming is a programming approach based on objects and classes. It helps us represent real-world entities in a program. An object contains: Properties or data Behaviors or methods For example, a Dog object may have properties such as name, age, and color. Its behaviors may include barking, running, and eating."
+    },
+    {
+      "question": "What are the main concepts of object-oriented programming?",
+      "answer": "Answer: The main concepts are: Class Object Encapsulation Inheritance Polymorphism Abstraction The main focus is on classes, objects, properties, behaviors, and object creation."
+    },
+    {
+      "question": "What is a class in Java?",
+      "answer": "Answer: A class is a blueprint or template used to create objects. A class defines the properties and behaviors that its objects will have. Example:\n\n```java\nclass Dog {\nString name;\nint age;\n```\n\nvoid bark() {\n\n```java\nSystem.out.println(\"Dog is barking\");\n}\n}\n```\n\nIn this example, Dog is a class. It contains two properties, name and age, and one behavior, bark()."
+    },
+    {
+      "question": "What are properties and behaviors?",
+      "answer": "Answer: Properties represent the data or characteristics of an object. In Java, properties are generally declared using variables. Behaviors represent the actions performed by an object. In Java, behaviors are declared using methods. Example:\n\n```java\nclass Student {\nString name;\nint age;\n```\n\nvoid study() {\n\n```java\nSystem.out.println(\"Student is studying\");\n}\n}\n```\n\nHere: name and age are properties. study() is a behavior."
+    },
+    {
+      "question": "What is an object in Java?",
+      "answer": "Answer: An object is an instance of a class. A class only defines the structure, while an object is the actual entity created from that class. Example:\n\n```java\nDog d1 = new Dog();\n```\n\nHere: Dog is the class. d1 is the reference variable.\n\n```java\nnew Dog() creates the object.\n```\n\nThe created object is an instance of the Dog class."
+    },
+    {
+      "question": "How do you create an object in Java?",
+      "answer": "Answer: An object is generally created using the new keyword. Syntax:\n\n```java\nClassName referenceVariable = new ClassName();\n```\n\nExample:\n\n```java\nDog d1 = new Dog();\n```\n\nThe new keyword creates memory for the object and returns its reference. That reference is stored in the reference variable d1."
+    },
+    {
+      "question": "What is the purpose of the new keyword?",
+      "answer": "Answer: The new keyword is used to create an object in Java. It performs the following actions: Allocates memory for the object. Initializes the object. Calls the constructor. Returns the reference of the object. Example:\n\n```java\nDog d1 = new Dog();\n```"
+    },
+    {
+      "question": "What is a constructor?",
+      "answer": "Answer: A constructor is a special block in a class that is used to initialize an object. A constructor: Has the same name as the class. Does not have a return type. Is automatically called when an object is created. Initializes the object. Example:\n\n```java\nclass Dog {\n```\n\nDog() {\n\n```java\nSystem.out.println(\"Dog object created\");\n}\n}\n```\n\nWhen the object is created:\n\n```java\nDog d1 = new Dog();\n```\n\nThe constructor executes automatically."
+    },
+    {
+      "question": "What happens when an object is created?",
+      "answer": "Answer: When an object is created, the following process takes place: The class is loaded if it is not already loaded. Static variables are initialized. Static blocks are executed. Memory is allocated for the object. Instance variables receive default values. Instance initialization blocks are executed. The constructor is executed. The object reference is returned and stored in the reference variable."
+    },
+    {
+      "question": "What is a static block?",
+      "answer": "Answer: A static block is a block declared using the static keyword. It is executed once when the class is initialized by the JVM. Example:\n\n```java\nclass Demo {\nstatic {\nSystem.out.println(\"Static block executed\");\n}\n}\n```\n\nThe static block is executed before the object is created, provided the class is initialized during that process."
+    },
+    {
+      "question": "What is an instance initialization block?",
+      "answer": "Answer: An instance initialization block is a block that executes whenever an object is created. It executes before the constructor body. Example:\n\n```java\nclass Demo {\n{\nSystem.out.println(\"Instance block executed\");\n}\n```\n\nDemo() {\n\n```java\nSystem.out.println(\"Constructor executed\");\n}\n}\n```\n\nOutput when an object is created: Instance block executed Constructor executed"
+    },
+    {
+      "question": "What is the execution order of a static block, instance block, and constructor?",
+      "answer": "Answer: The execution order is: Static block Instance initialization block Constructor Example:\n\n```java\nclass Demo {\nstatic {\nSystem.out.println(\"Static block\");\n}\n{\nSystem.out.println(\"Instance block\");\n}\n```\n\nDemo() {\n\n```java\nSystem.out.println(\"Constructor\");\n}\npublic static void main(String[] args) {\nDemo d1 = new Demo();\n}\n}\n```\n\nOutput: Static block Instance block Constructor The static block executes only once, while the instance block and constructor execute every time an object is created."
+    },
+    {
+      "question": "What is a reference variable?",
+      "answer": "Answer: A reference variable stores the reference or address of an object. Example:\n\n```java\nDog d1 = new Dog();\n```\n\nHere, d1 is not the actual object. It is a reference variable that points to the Dog object."
+    },
+    {
+      "question": "What is the difference between a primitive variable and a reference variable?",
+      "answer": "Answer: A primitive variable stores an actual value. Example:\n\n```java\nint age = 25;\n```\n\nA reference variable stores the reference of an object. Example:\n\n```java\nDog d1 = new Dog();\n```\n\nIn this example: age stores the value 25. d1 stores the reference of a Dog object."
+    },
+    {
+      "question": "What is the dot operator in Java?",
+      "answer": "Answer: The dot operator is used to access the properties and methods of an object. Example:\n\n```java\nclass Dog {\nString name;\n```\n\nvoid bark() {\n\n```java\nSystem.out.println(\"Dog is barking\");\n}\n}\nDog d1 = new Dog();\nd1.name = \"Tommy\";\nd1.bark();\n```\n\nHere, the dot operator is used to access: The name property. The bark() method."
+    },
+    {
+      "question": "Can we create multiple objects from one class?",
+      "answer": "Answer: Yes, we can create multiple objects from one class. Example:\n\n```java\nclass Dog {\nString name;\n```\n\nvoid bark() {\n\n```java\nSystem.out.println(name + \" is barking\");\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nDog d1 = new Dog();\nDog d2 = new Dog();\nd1.name = \"Tommy\";\nd2.name = \"Rocky\";\nd1.bark();\nd2.bark();\n}\n}\n```\n\nOutput: Tommy is barking Rocky is barking Each object has its own copy of instance variables."
+    },
+    {
+      "question": "What is the difference between a class and an object?",
+      "answer": "Answer: A class is a blueprint or template. An object is an actual instance created from that class. For example:\n\n```java\nclass Dog {\nString name;\n}\n```\n\nHere, Dog is the class.\n\n```java\nDog d1 = new Dog();\n```\n\nHere, d1 refers to the object created from the Dog class."
+    },
+    {
+      "question": "What is the role of the main() method?",
+      "answer": "Answer: The main() method is the entry point of a Java application. The JVM starts program execution from the main() method. Syntax:\n\n```java\npublic static void main(String[] args)\n```\n\nHere:\n\n```java\npublic allows the JVM to access the method.\nstatic allows the JVM to call it without creating an object.\n```\n\nvoid means the method does not return a value. main is the method name recognized by the JVM. String[] args stores command-line arguments."
+    },
+    {
+      "question": "Why is the main() method static?",
+      "answer": "Answer: The main() method is static because the JVM must call it without creating an object of the class. If the main() method were non-static, the JVM would first need to create an object to call it. Therefore, Java makes the main() method static so that execution can begin directly."
+    },
+    {
+      "question": "Can a static method directly access instance variables?",
+      "answer": "Answer: No, a static method cannot directly access instance variables because static methods belong to the class, while instance variables belong to objects. Example:\n\n```java\nclass Demo {\nint a = 10;\nstatic void display() {\n// System.out.println(a); // Error\n}\n}\n```\n\nTo access an instance variable inside a static method, we must create an object.\n\n```java\nclass Demo {\nint a = 10;\nstatic void display() {\nDemo d1 = new Demo();\nSystem.out.println(d1.a);\n}\n}\n```"
+    },
+    {
+      "question": "What are the commonly explained memory areas in Java?",
+      "answer": "Answer: For basic Java execution, memory is commonly explained using the following areas: Method area Heap Stack Program counter register The exact memory organization may differ depending on the JVM implementation."
+    },
+    {
+      "question": "What is the method area?",
+      "answer": "Answer: The method area stores class-level information. It may contain: Class metadata Method information Static variables Runtime constant pool Information required for method execution The method area is shared among threads."
+    },
+    {
+      "question": "What is the heap memory?",
+      "answer": "Answer: Heap memory is used to store objects and their instance data. Whenever an object is created using the new keyword, memory is allocated in the heap. Example:\n\n```java\nDog d1 = new Dog();\n```\n\nThe Dog object is created in heap memory. Heap memory is shared among threads and is managed by the garbage collector."
+    },
+    {
+      "question": "What is stack memory?",
+      "answer": "Answer: Stack memory is used for method execution. Each method call creates a stack frame. A stack frame contains information such as: Local variables Method parameters Intermediate results Return information When a method finishes execution, its stack frame is removed. For example, when the main() method executes, a stack frame is created for it."
+    },
+    {
+      "question": "What is the program counter register?",
+      "answer": "Answer: The program counter register stores the address of the instruction currently being executed by a thread. Each thread has its own program counter register. It helps the JVM keep track of the next instruction to execute."
+    },
+    {
+      "question": "Where are local variables stored?",
+      "answer": "Answer: Local variables are generally stored in the stack frame of the method in which they are declared. Example:\n\n```java\npublic static void main(String[] args) {\nint age = 25;\n}\n```\n\nHere, age is a local variable and is stored in the stack frame of the main() method."
+    },
+    {
+      "question": "Where are objects stored?",
+      "answer": "Answer: Objects are stored in heap memory. Example:\n\n```java\nDog d1 = new Dog();\n```\n\nThe object created using new Dog() is stored in the heap, while d1 is a reference variable stored in the current stack frame."
+    },
+    {
+      "question": "What happens to memory when the program ends?",
+      "answer": "Answer: When the Java program finishes execution, the JVM terminates. The stack frame of the main() method is removed, and the memory used by the JVM process is released by the operating system. Objects that are no longer referenced may also be removed earlier by the garbage collector."
+    },
+    {
+      "question": "What is the complete object creation example?",
+      "answer": "Answer: ```java\nclass Dog {\nString name;\nint age;\nstatic {\nSystem.out.println(\"Static block executed\");\n}\n{\nSystem.out.println(\"Instance block executed\");\n}\n```\n\nDog() {\n\n```java\nSystem.out.println(\"Constructor executed\");\n}\n```\n\nvoid bark() {\n\n```java\nSystem.out.println(name + \" is barking\");\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nDog d1 = new Dog();\nd1.name = \"Tommy\";\nd1.age = 3;\nd1.bark();\n}\n}\n```\n\nOutput: Static block executed Instance block executed Constructor executed Tommy is barking The static block executes once when the class is initialized. The instance block and constructor execute when the object is created. After that, the object’s properties and methods are accessed using the reference variable and dot operator."
+    }
+  ]
+}
