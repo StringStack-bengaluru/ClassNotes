@@ -1,0 +1,107 @@
+{
+  "title": "Notes Java Multiple Static And Instance Block",
+  "itemsPerPage": 2,
+  "source": "notes-java-multiple-static-and-instance-block.docx",
+  "items": [
+    {
+      "question": "When should a variable be made static?",
+      "answer": "Answer: A variable should be made static when its value is common to all objects of a class. A static variable has one common copy associated with the class rather than maintaining a separate copy for every object. For example, if a value needs to be shared by all objects, that variable can be declared as:\n\n```java\nstatic int count;\n```\n\nThis is especially useful when maintaining a common value such as the total number of objects created for a class."
+    },
+    {
+      "question": "When should a method be made static?",
+      "answer": "Answer: A method can be made static when it needs to be called without creating an object. A static method can be called using the class name. It is also appropriate when the method represents a generic operation that does not depend on a particular object's state. The main idea is that object creation is not required to call a static method."
+    },
+    {
+      "question": "What is the purpose of a static block?",
+      "answer": "Answer: A static block is mainly used for two purposes: To initialize static variables. To execute a set of statements before the main() method is executed. For example:\n\n```java\nclass Demo {\nstatic {\nSystem.out.println(\"Hello\");\n}\npublic static void main(String[] args) {\nSystem.out.println(\"World\");\n}\n}\n```\n\nOutput: Hello World The static block executes before main()."
+    },
+    {
+      "question": "What will be the output if a static block is present before the main method?",
+      "answer": "Answer: Consider:\n\n```java\nclass Demo {\nstatic {\nSystem.out.println(\"Hello\");\n}\npublic static void main(String[] args) {\nSystem.out.println(\"World\");\n}\n}\n```\n\nThe output is: Hello World The reason is that the static block executes before the main() method. An instance block would not execute in this situation because no object has been created."
+    },
+    {
+      "question": "Can a class contain multiple static blocks?",
+      "answer": "Answer: Yes, a Java class can contain multiple static blocks. For example:\n\n```java\nclass Demo {\nstatic {\nSystem.out.println(\"1\");\n}\nstatic {\nSystem.out.println(\"2\");\n}\nstatic {\nSystem.out.println(\"3\");\n}\n}\n```\n\nAll three static blocks are valid. There is no restriction that a class can contain only one static block."
+    },
+    {
+      "question": "In what order are multiple static blocks executed?",
+      "answer": "Answer: Multiple static blocks execute in the same order in which they are written in the class. For example:\n\n```java\nstatic {\nSystem.out.println(\"1\");\n}\nstatic {\nSystem.out.println(\"2\");\n}\nstatic {\nSystem.out.println(\"3\");\n}\n```\n\nThe output will be: 1 2 3 The execution follows a linear order: the first static block executes first, followed by the second and then the third."
+    },
+    {
+      "question": "Can a class contain multiple instance blocks?",
+      "answer": "Answer: Yes, a class can contain multiple instance blocks. For example:\n\n```java\nclass Demo {\n{\nSystem.out.println(\"1\");\n}\n{\nSystem.out.println(\"2\");\n}\n{\nSystem.out.println(\"3\");\n}\n}\n```\n\nMultiple instance blocks are allowed, and they execute when an object of the class is created. The instance blocks also execute in the order in which they are written."
+    },
+    {
+      "question": "When does an instance block execute?",
+      "answer": "Answer: An instance block executes when an object of the class is created. For example:\n\n```java\nclass Demo {\n{\nSystem.out.println(\"Instance Block\");\n}\n}\n```\n\nWhen:\n\n```java\nnew Demo();\n```\n\nis executed, the instance block runs. Simply declaring an instance block does not execute it. Object creation is required."
+    },
+    {
+      "question": "Does an object reference have to be stored for an instance block to execute?",
+      "answer": "Answer: No. The object reference does not have to be stored. For example:\n\n```java\nnew Demo();\n```\n\nEven though the reference is not assigned to a variable, an object is created and the instance block executes. Similarly:\n\n```java\nDemo d1 = new Demo();\n```\n\nalso creates the object and executes the instance block. The important point is object creation, not whether the reference is stored."
+    },
+    {
+      "question": "What is the difference between a static block and an instance block?",
+      "answer": "Answer: The main difference is when they execute. Static block: Associated with the class. Executes before main(). Does not require object creation. Instance block: Associated with object creation. Executes when an object is created. Requires an object to be created. Therefore: Static block → Class-level execution Instance block → Object-level execution This distinction is important when predicting the output of a Java program."
+    },
+    {
+      "question": "How can the number of objects created for a class be counted?",
+      "answer": "Answer: The number of objects can be counted by maintaining a count that is updated whenever an object is created. For example:\n\n```java\nDemo d1 = new Demo();\nDemo d2 = new Demo();\nDemo d3 = new Demo();\n```\n\nThree objects are created. The required output can be: Number of objects created for Demo class is 3 The important idea is to identify an event that occurs whenever an object is created and use that event to update the count."
+    },
+    {
+      "question": "Why can the constructor be used for counting objects?",
+      "answer": "Answer: A constructor is called at the time of object creation. For example:\n\n```java\nDemo d1 = new Demo();\n```\n\nWhen this object is created, the constructor executes. Therefore, every time a constructor executes for an object creation, the object count can be incremented. The relationship can be remembered as: Object creation → Constructor execution → Count increment If the constructor executes five times because five objects are created, the count can become five."
+    },
+    {
+      "question": "Can a constructor be called before object creation?",
+      "answer": "Answer: The constructor is associated with object creation. When an object is created, the constructor is called as part of that process. For example:\n\n```java\nDemo d1 = new Demo();\n```\n\nThe object is created and the constructor executes. Therefore, the constructor execution is directly associated with creating the object."
+    },
+    {
+      "question": "If a constructor is executed five times, how many objects are created?",
+      "answer": "Answer: If the constructor is executed five times as part of object creation, five objects have been created. For example: Constructor execution → Object creation 5 constructor executions → 5 objects This relationship can be used to design an object-counting program."
+    },
+    {
+      "question": "How should the object count variable be declared?",
+      "answer": "Answer: The count variable should be declared as static when the requirement is to maintain one common count for all objects. For example:\n\n```java\nclass Demo {\nstatic int count;\n```\n\nDemo() {\n\n```java\ncount++;\n}\n}\n```\n\nEvery object updates the same count variable. If three objects are created:\n\n```java\nDemo d1 = new Demo();\nDemo d2 = new Demo();\nDemo d3 = new Demo();\n```\n\nthe count becomes: 1 2 3 The final value is 3."
+    },
+    {
+      "question": "What happens if the object count variable is not static?",
+      "answer": "Answer: If the count variable is not static, it becomes an instance variable. For example:\n\n```java\nclass Demo {\nint count;\n```\n\nDemo() {\n\n```java\ncount++;\n}\n}\n```\n\nEvery object gets its own separate count. For three objects, the result would effectively be: Object 1 → count = 1 Object 2 → count = 1 Object 3 → count = 1 It cannot maintain one common total count because each object has its own copy of the variable."
+    },
+    {
+      "question": "Why does a static count maintain the total object count?",
+      "answer": "Answer: A static variable is common to all objects of the class. Therefore, when each object's creation updates the static variable, every object updates the same count. For example:\n\n```java\nstatic int count;\n```\n\nDemo() {\n\n```java\ncount++;\n}\n```\n\nThe sequence becomes: First object → count = 1 Second object → count = 2 Third object → count = 3 This gives the total number of objects created for the class."
+    },
+    {
+      "question": "What does getClass() return when called using an object reference?",
+      "answer": "Answer: getClass() can be used through an object reference to obtain the class of the object to which the reference is pointing. For example:\n\n```java\nDemo d3 = new Demo();\nSystem.out.println(d3.getClass());\n```\n\nHere, d3 refers to an object of the Demo class. Therefore, d3.getClass() gives the class information for that object, which results in the Demo class being printed as part of the output."
+    },
+    {
+      "question": "Why is the count accessed using the class when it is static?",
+      "answer": "Answer: When count is declared as static, it belongs to the class rather than to an individual object. Therefore, the common count can be accessed using the class name: Demo.count For example:\n\n```java\nSystem.out.println(Demo.count);\n```\n\nThis accesses the single common count maintained for the entire class."
+    },
+    {
+      "question": "Can an instance block access a static variable?",
+      "answer": "Answer: Yes. An instance block can access a static variable. For example:\n\n```java\nclass Demo {\nstatic int count;\n{\ncount++;\n}\n}\n```\n\nWhenever an object is created, the instance block executes and updates the common static count. Therefore, an instance block can be another approach for maintaining the object count."
+    },
+    {
+      "question": "What are the different components that can exist in a Java class?",
+      "answer": "Answer: A class can contain: Static variables Static blocks Static methods Non-static variables Non-static blocks Non-static methods Constructors It is not necessary to have all these components in every class. The components used depend on the requirement and the problem statement."
+    },
+    {
+      "question": "How are objects and references represented conceptually using stack and heap?",
+      "answer": "Answer: When multiple objects are created, the objects exist in the heap, while their references can point to those objects. For example:\n\n```java\nDemo d1 = new Demo();\nDemo d2 = new Demo();\nDemo d3 = new Demo();\n```\n\nConceptually, three different objects exist in the heap: Heap: Object 1 → Demo Object 2 → Demo Object 3 → Demo The references d1, d2, and d3 refer to those respective objects. The key point used in the class is that the objects themselves are in the heap, so the program does not directly count them by going into the heap. Instead, the creation process is used to maintain the count."
+    },
+    {
+      "question": "Why might object creation need to be restricted?",
+      "answer": "Answer: Normally, a class allows multiple objects to be created. For example:\n\n```java\nDemo d1 = new Demo();\nDemo d2 = new Demo();\nDemo d3 = new Demo();\n```\n\nThere is no normal rule that prevents creating more objects: 1 object 20 objects 300 objects 3000 objects However, some requirements may need only one object of a particular class. When such a requirement exists, object creation must be restricted according to a specific design approach."
+    },
+    {
+      "question": "What is a design pattern?",
+      "answer": "Answer: A design pattern is a set of rules to solve a particular problem. It provides a defined approach for solving a problem rather than creating an unrelated solution each time. Design Pattern = A set of rules to solve a particular problem. The design pattern itself represents the rules. Those rules are then followed while implementing the solution."
+    },
+    {
+      "question": "What is the Singleton Design Pattern and what problem does it solve?",
+      "answer": "Answer: The Singleton Design Pattern is used when a class should allow only one object to be created. Normally:\n\n```java\nDemo d1 = new Demo();\nDemo d2 = new Demo();\nDemo d3 = new Demo();\n```\n\ncreates three different objects. If the requirement is that the class should have only one object, the Singleton Design Pattern is used. The problem and solution are: Problem: Multiple objects can be created for a class. Requirement: Only one object should be created. Solution: Singleton Design Pattern. Singleton Design Pattern. Singleton provides a set of rules that a class follows so that more than one object cannot be created."
+    }
+  ]
+}
