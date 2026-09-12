@@ -1,0 +1,167 @@
+{
+  "title": "Notes Java Looping Control Constructs",
+  "itemsPerPage": 2,
+  "source": "notes-java-looping-control-constructs.docx",
+  "items": [
+    {
+      "question": "What is the purpose of a looping control construct in Java?",
+      "answer": "Answer: A looping control construct is used when a statement or a block of statements needs to be executed multiple times. Instead of writing the same statement repeatedly, we write it once inside a loop and allow the loop to execute it multiple times. This helps reduce code redundancy."
+    },
+    {
+      "question": "What is code redundancy?",
+      "answer": "Answer: Code redundancy means writing the same statement or set of statements repeatedly when the same operation can be performed using a more efficient approach. For example, if the same statement is written five times to print the same message, the code contains redundancy. A loop can be used to write the statement once and execute it five times."
+    },
+    {
+      "question": "Why should code redundancy be avoided?",
+      "answer": "Answer: Code redundancy should be avoided because the same code does not need to be written repeatedly. Instead, the redundant code can be identified, written only once, and executed multiple times using a looping control construct."
+    },
+    {
+      "question": "What are the standard types of looping control constructs in Java?",
+      "answer": "Answer: The three standard types of loops are:\n\n```java\nfor loop\nwhile loop\ndo-while loop\n```"
+    },
+    {
+      "question": "What are the three basic elements involved in a loop?",
+      "answer": "Answer: The three basic elements are: Initialization – specifies where to start. Condition checking – specifies until where to continue. Increment or decrement – specifies whether to move forward or backward. In simple terms: Initialization → From where to start Condition → Until where to go Increment/Decrement → Whether to go ahead or go behind"
+    },
+    {
+      "question": "How do you decide the initialization, condition, and increment or decrement of a loop?",
+      "answer": "Answer: It depends on how many times the statement needs to be executed and on the requirement of the problem. For example, if a statement has to execute five times from 1 to 5 in the forward direction:\n\n```java\nfor(int i = 1; i <= 5; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nHere: i = 1 → initialization i <= 5 → condition i++ → increment"
+    },
+    {
+      "question": "What does initialization mean in a loop?",
+      "answer": "Answer: Initialization specifies the starting value of the loop variable. For example:\n\n```java\nint i = 1;\n```\n\nmeans the loop starts with the value 1."
+    },
+    {
+      "question": "What does condition checking mean in a loop?",
+      "answer": "Answer: Condition checking determines whether the loop should continue executing. For example: i <= 5 means the loop continues as long as the value of i is less than or equal to 5. When the condition becomes false, the control comes out of the loop."
+    },
+    {
+      "question": "What is the purpose of increment and decrement in a loop?",
+      "answer": "Answer: Increment and decrement determine the direction in which the loop variable moves. i++ moves the value forward. i-- moves the value backward. For example: 1 → 2 → 3 → 4 → 5 uses increment. 1 → 0 → -1 → -2 → -3 uses decrement."
+    },
+    {
+      "question": "What is a for loop in Java?",
+      "answer": "Answer: A for loop is a looping control construct used to repeatedly execute a statement or block of statements. Its syntax is:\n\n```java\nfor(initialization; condition; increment/decrement) {\n// statements\n}\n```\n\nFor example:\n\n```java\nfor(int i = 1; i <= 5; i++) {\nSystem.out.println(\"String Stack\");\n}\n```"
+    },
+    {
+      "question": "How does the following for loop execute?",
+      "answer": "Answer: ```java\nfor(int i = 1; i <= 5; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nThe execution happens as follows: i = 1 → condition true → print i = 2 → condition true → print i = 3 → condition true → print i = 4 → condition true → print i = 5 → condition true → print i = 6 → condition false → exit Therefore, String Stack is printed five times."
+    },
+    {
+      "question": "What happens when the condition of a for loop becomes false?",
+      "answer": "Answer: When the condition becomes false, the loop stops executing and the control moves outside the loop. For example:\n\n```java\nfor(int i = 1; i <= 5; i++)\n```\n\nAfter the fifth execution, i becomes 6. The condition: 6 <= 5 is false, so the control comes out of the loop."
+    },
+    {
+      "question": "What is the difference between writing a statement multiple times and using a loop?",
+      "answer": "Answer: Suppose String Stack has to be printed five times. Without a loop, the statement would have to be written five times:\n\n```java\nSystem.out.println(\"String Stack\");\nSystem.out.println(\"String Stack\");\nSystem.out.println(\"String Stack\");\nSystem.out.println(\"String Stack\");\nSystem.out.println(\"String Stack\");\n```\n\nUsing a loop, the statement is written only once:\n\n```java\nfor(int i = 1; i <= 5; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nThe statement is written once but executed five times."
+    },
+    {
+      "question": "What is the execution flow of a for loop?",
+      "answer": "Answer: For a loop such as:\n\n```java\nfor(int i = 1; i <= 5; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nthe execution flow is: Initialize i to 1. Check the condition i <= 5. If the condition is true, execute the loop body. After completing the loop body, execute i++. Check the condition again. Repeat the process while the condition remains true. When the condition becomes false, exit the loop."
+    },
+    {
+      "question": "How does a for loop execute in the forward direction?",
+      "answer": "Answer: For forward execution, the loop variable is incremented. Example:\n\n```java\nfor(int i = 1; i <= 5; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nThe loop variable takes the values: 1 2 3 4 5 The loop starts from 1, goes until 5, and moves forward using i++."
+    },
+    {
+      "question": "How do you execute a for loop in the backward direction?",
+      "answer": "Answer: A decrement operator can be used when the loop needs to move backward. For example:\n\n```java\nfor(int i = 1; i >= -3; i--) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nThe loop variable takes the values: 1 0 -1 -2 -3 The loop starts at 1, goes until -3, and moves backward using i--."
+    },
+    {
+      "question": "What happens if the initial value and condition do not allow the loop to execute?",
+      "answer": "Answer: If the condition is false during the first condition check, the loop body will not execute even once. For example:\n\n```java\nfor(int i = 0; i <= -4; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nThe first condition is: 0 <= -4 which is false. Therefore, the loop does not execute even once."
+    },
+    {
+      "question": "What is an infinite loop?",
+      "answer": "Answer: An infinite loop is a loop whose condition remains true continuously, so the loop does not terminate normally. For example:\n\n```java\nfor(int i = -1; i >= -5; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nHere, i is incremented: -1 → 0 → 1 → 2 → 3 → ... The condition i >= -5 continues to remain true, so the loop keeps executing."
+    },
+    {
+      "question": "How can an incorrect increment or decrement cause an infinite loop?",
+      "answer": "Answer: The increment or decrement must move the loop variable toward the point where the condition becomes false. If the loop variable moves in the wrong direction, the condition may never become false. For example:\n\n```java\nfor(int i = -1; i >= -5; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nThe condition requires i to eventually become less than -5, but i++ keeps increasing the value. Therefore, the condition continues to remain true and the loop becomes infinite."
+    },
+    {
+      "question": "What is the purpose of a loop variable?",
+      "answer": "Answer: A loop variable stores the value used for initialization, condition checking, and increment or decrement. For example:\n\n```java\nfor(int i = 1; i <= 5; i++)\n```\n\nHere, i stores the current value of the iteration. The same variable is used to: Store the starting value. Check the condition. Move to the next value."
+    },
+    {
+      "question": "Why is a data type required for a loop variable?",
+      "answer": "Answer: A variable must be declared with a data type before it can be used. For example:\n\n```java\nint i = 1;\n```\n\nHere, int specifies that i stores an integer value. Values such as 1, 5, 50, and 100 used in the example are integer values."
+    },
+    {
+      "question": "What is the difference between writing a statement once and executing it multiple times?",
+      "answer": "Answer: Writing a statement once means the source code contains that statement only one time. Executing it multiple times means the same statement is performed repeatedly during program execution. For example:\n\n```java\nfor(int i = 1; i <= 5; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nThe println statement is written once but executed five times."
+    },
+    {
+      "question": "What is a while loop in Java?",
+      "answer": "Answer: A while loop repeatedly executes a statement or block of statements as long as its condition is true. The initialization and increment/decrement are written separately from the while statement. Example:\n\n```java\nint i = 1;\nwhile(i <= 5) {\nSystem.out.println(\"String Stack\");\ni++;\n}\n```\n\nIt can be read as: Start from i = 1. As long as i <= 5, perform the task. After completing the task, increment i."
+    },
+    {
+      "question": "How is the while loop different from the for loop?",
+      "answer": "Answer: Both for and while loops can perform repetitive tasks and both involve initialization, condition checking, and increment/decrement. The main difference is the placement of these elements. In a for loop:\n\n```java\nfor(int i = 1; i <= 5; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\ninitialization, condition, and increment are written together in the loop syntax. In a while loop:\n\n```java\nint i = 1;\nwhile(i <= 5) {\nSystem.out.println(\"String Stack\");\ni++;\n}\n```\n\nthey are written separately."
+    },
+    {
+      "question": "How can you explain the execution flow of a while loop?",
+      "answer": "Answer: A while loop can be explained as follows: Initialize i with 1. As long as the condition i <= 5 evaluates to true, execute the statements inside the loop. After each execution, increment the value of i by 1. When the condition becomes false, terminate the loop."
+    },
+    {
+      "question": "How does a while loop execute?",
+      "answer": "Answer: Consider:\n\n```java\nint i = 1;\nwhile(i <= 5) {\nSystem.out.println(\"String Stack\");\ni++;\n}\n```\n\nThe execution is: i = 1 → 1 <= 5 → print → i becomes 2 i = 2 → 2 <= 5 → print → i becomes 3 i = 3 → 3 <= 5 → print → i becomes 4 i = 4 → 4 <= 5 → print → i becomes 5 i = 5 → 5 <= 5 → print → i becomes 6 i = 6 → 6 <= 5 → false → exit Therefore, the statement executes five times."
+    },
+    {
+      "question": "What happens if the condition of a while loop is false initially?",
+      "answer": "Answer: If the condition is false during the first check, the body of the while loop does not execute even once. For example:\n\n```java\nint i = 6;\nwhile(i <= 5) {\nSystem.out.println(\"String Stack\");\ni++;\n}\n```\n\nThe condition: 6 <= 5 is false. Therefore, the statement is not executed."
+    },
+    {
+      "question": "What is a do-while loop in Java?",
+      "answer": "Answer: A do-while loop executes the loop body first and checks the condition afterward. Example:\n\n```java\nint i = 1;\ndo {\nSystem.out.println(\"String Stack\");\ni++;\n} while(i <= 5);\n```\n\nIt can be read as: Start from i = 1 and do the task. After doing the task, continue as long as i <= 5."
+    },
+    {
+      "question": "What is the main difference between while and do-while loops?",
+      "answer": "Answer: The main difference is when the condition is checked. In a while loop, the condition is checked before executing the loop body. In a do-while loop, the loop body executes before the condition is checked. Therefore, a do-while loop executes its body at least once."
+    },
+    {
+      "question": "What happens if the initial condition of a do-while loop is false?",
+      "answer": "Answer: Even if the condition is false after the first execution, the body of the do-while loop executes once because the condition is checked after the body. For example:\n\n```java\nint i = 10;\ndo {\nSystem.out.println(\"String Stack\");\ni++;\n} while(i <= 5);\n```\n\nThe statement is printed once. After that, i becomes 11. The condition: 11 <= 5 is false, so the loop terminates."
+    },
+    {
+      "question": "Why does a do-while loop execute at least once?",
+      "answer": "Answer: A do-while loop places the task before the condition. For example:\n\n```java\ndo {\nSystem.out.println(\"String Stack\");\ni++;\n} while(i <= 5);\n```\n\nThe control first executes the do block without checking the condition. Only after completing the task does it check the while condition. Therefore, the body executes at least once."
+    },
+    {
+      "question": "How does a do-while loop execute when i = 10?",
+      "answer": "Answer: Consider:\n\n```java\nint i = 10;\ndo {\nSystem.out.println(\"String Stack\");\ni++;\n} while(i <= 5);\n```\n\nExecution: i = 10 ↓ Execute the task ↓ Print \"String Stack\" ↓ i becomes 11 ↓ Check 11 <= 5 ↓ Condition is false ↓ Exit the loop Therefore, String Stack is printed once."
+    },
+    {
+      "question": "What happens if the starting value is 100 or 1000 in a do-while loop?",
+      "answer": "Answer: The task still executes once because the condition is checked only after the do block has executed. For example:\n\n```java\nint i = 1000;\ndo {\nSystem.out.println(\"String Stack\");\ni++;\n} while(i <= 5);\n```\n\nThe statement is printed once, then the condition is checked and found to be false."
+    },
+    {
+      "question": "Why are for, while, and do-while all required if they perform repetitive tasks?",
+      "answer": "Answer: All three loops can perform repetitive tasks, but their syntax and execution flow are different. The placement of initialization, condition checking, and increment/decrement differs between them. This allows a programmer to choose the loop structure that best represents the required logic."
+    },
+    {
+      "question": "What is common among for, while, and do-while loops?",
+      "answer": "Answer: All three loops can be used for repetitive execution. They involve the same fundamental concepts: Initialization Condition checking Increment or decrement The major difference is where these elements are written and how the condition is evaluated during execution."
+    },
+    {
+      "question": "What is the key difference in condition checking among the three loops?",
+      "answer": "Answer: The condition checking works differently:\n\n```java\nfor loop: initialization, condition, and increment/decrement are part of the loop structure.\nwhile loop: condition is checked before executing the body.\ndo-while loop: body executes first and condition is checked afterward.\n```\n\nBecause of this, a do-while loop executes its body at least once, whereas for and while loops may execute zero times if their initial condition is false."
+    },
+    {
+      "question": "How can you determine whether a loop should increment or decrement?",
+      "answer": "Answer: Look at the required sequence of values. If the values need to move forward: 1 → 2 → 3 → 4 → 5 use increment: i++ If the values need to move backward: 1 → 0 → -1 → -2 → -3 use decrement: i-- The direction must be chosen so that the loop eventually reaches a point where the condition becomes false."
+    },
+    {
+      "question": "How can you determine the number of iterations from a problem statement?",
+      "answer": "Answer: First identify: From where the loop should start. Until where the loop should continue. Whether the values should increase or decrease. For example, if the requirement is to execute five times starting from 1 and moving forward until 5:\n\n```java\nfor(int i = 1; i <= 5; i++)\n```\n\nThe values are: 1, 2, 3, 4, 5 Therefore, the loop executes five times."
+    },
+    {
+      "question": "How can debugging help in understanding loop execution?",
+      "answer": "Answer: Debugging allows you to observe how the loop variable changes during execution. For example, with:\n\n```java\nfor(int i = 1; i <= 5; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nyou can observe: i = 1 i = 2 i = 3 i = 4 i = 5 i = 6 At i = 6, the condition i <= 5 becomes false and the loop exits. This makes the control flow of the loop easier to understand."
+    },
+    {
+      "question": "What is the main purpose of looping control constructs?",
+      "answer": "Answer: The main purpose of looping control constructs is to execute a statement or block of statements repeatedly while avoiding unnecessary code redundancy. Instead of writing the same code again and again, the code can be written once and executed multiple times using a loop."
+    }
+  ]
+}
