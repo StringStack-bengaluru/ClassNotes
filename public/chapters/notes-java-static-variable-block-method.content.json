@@ -1,0 +1,139 @@
+{
+  "title": "Notes Java Static Variable Block Method",
+  "itemsPerPage": 2,
+  "source": "notes-java-static-variable-block-method.docx",
+  "items": [
+    {
+      "question": "Where can the static keyword be applied in Java?",
+      "answer": "Answer: The static keyword can be applied to: Variables Blocks Methods These are:\n\n```java\nstatic variable\nstatic block\nstatic method\n```\n\nEach has a different purpose and execution behavior."
+    },
+    {
+      "question": "When does a static variable get memory and how is it initialized?",
+      "answer": "Answer: A static variable gets memory in the static segment. When the class loader completes its task, the JVM provides memory for the static variables. The static variable is initially assigned its default value by the JVM. The sequence is: Class Loader completes ↓ Memory allocated to static variable ↓ Static variable gets default value ↓ Static block executes Therefore, static variables belong to the class-level memory area rather than being created separately for every object."
+    },
+    {
+      "question": "When is a static block executed?",
+      "answer": "Answer: A static block is executed before the main() method. After the JVM receives control back from the class loader, it checks for static elements. Static variables are initialized first, and the static block is executed before the main() method. Therefore: Static variable initialization ↓ Static block ↓ main() A static block can therefore be used when some initialization or statements need to execute before main()."
+    },
+    {
+      "question": "How can a static method be called?",
+      "answer": "Answer: A static method can be called using the class name without creating an object. Example:\n\n```java\nClassName.methodName();\n```\n\nAn object is not mandatory to call a static method. This is one of the important differences between static and instance methods."
+    },
+    {
+      "question": "What is the simple-interest example used to understand static variables?",
+      "answer": "Answer: Consider a banking application where businessmen take loans. Simple interest is calculated using: SI = P × T × R / 100 where: P = Principal T = Time R = Rate of Interest SI = Simple Interest Suppose a bank has many businessmen as customers. The principal amount can be different for every businessman. The loan period can also be different for every businessman. However, if the bank's rate of interest is common to all businessmen, there is no need to create a separate copy of the rate for every object. This situation demonstrates the purpose of a static variable."
+    },
+    {
+      "question": "Why should the rate of interest be made static in the banking example?",
+      "answer": "Answer: Suppose there are 500 businessman objects. For every object: Principal → different Time → different Rate → same If the rate is an instance variable, every object receives its own copy. That is unnecessary because the value is common to all objects. Instead, one shared copy can be maintained using static.\n\n```java\nstatic float r;\n```\n\nNow all objects of the class can use the same static variable. The important rule is: When one variable should be common to all objects of a class, make that variable static."
+    },
+    {
+      "question": "What is the difference between a static variable and an instance variable in the banking example?",
+      "answer": "Answer: Suppose the class contains: P T R SI P, T, and SI represent information that can differ for each businessman. Therefore, they are instance-level values. R represents the rate of interest, which is common to all businessmen. Therefore, R can be static. Conceptually: Object 1 → P, T, SI Object 2 → P, T, SI Object 3 → P, T, SI ... Common → R The static variable has one shared copy for the objects of the class."
+    },
+    {
+      "question": "Does static mean that the value of a variable cannot be changed?",
+      "answer": "Answer: No.\n\n```java\nstatic and final have different purposes.\n```\n\nIf a variable needs to be shared by all objects, it can be made static. If a variable's value should not be changed, final is relevant. Therefore:\n\n```java\nstatic → common/shared at class level\nfinal  → value cannot be reassigned\n```\n\nA variable can also be both:\n\n```java\nstatic final\n```\n\nwhen both characteristics are required."
+    },
+    {
+      "question": "How is a static variable initialized using a static block?",
+      "answer": "Answer: A static variable can be initialized inside a static block. Example:\n\n```java\nclass Businessman {\nstatic float r;\nstatic {\nr = 2.0f;\n}\n}\n```\n\nThe static variable receives memory during class initialization, and the static block assigns the required value. The execution sequence is: Class loading ↓ Static variable gets memory ↓ Default value assigned ↓ Static block executes ↓ r becomes 2.0"
+    },
+    {
+      "question": "What happens when the static rate of interest is used by multiple objects?",
+      "answer": "Answer: Suppose: Businessman 1 → P = 100, T = 2 Businessman 2 → P = 200, T = 2 R = 2.0 The first object calculates: 100 × 2 × 2 / 100 = 4.0 The second object calculates: 200 × 2 × 2 / 100 = 8.0 Both objects use the same static R. Therefore, the static variable provides one common copy that can be used by multiple objects."
+    },
+    {
+      "question": "What was the basic structure of the simple-interest program?",
+      "answer": "Answer: The program contains variables for: Principal Time Rate of Interest Simple Interest It also contains separate methods for separate responsibilities. The methods are conceptually: acceptData() calculateSI() displaySI() acceptData() takes the required input. calculateSI() performs: P × T × R / 100 displaySI() displays the calculated simple interest. An application class creates businessman objects and calls these methods."
+    },
+    {
+      "question": "How does JVM execution proceed when a Java program starts?",
+      "answer": "Answer: The execution flow described can be represented as: Operating System ↓ JVM ↓ Class Loader ↓ Static elements identified ↓ Static segment ↓ main() method ↓ Stack frame for main() ↓ Object creation ↓ Instance method execution The important memory areas mentioned are: Code segment Static segment Stack Heap"
+    },
+    {
+      "question": "What does the class loader do with static elements?",
+      "answer": "Answer: The class loader scans the code for static elements. For example, if a class contains:\n\n```java\npublic static void main(String[] args)\n```\n\nthe main() method is identified as a static element. Static elements are made available in the static segment during class initialization. After the class loader completes its work, control returns to the JVM. The JVM then performs the required static initialization and proceeds toward main()."
+    },
+    {
+      "question": "What happens when the JVM calls the main method?",
+      "answer": "Answer: When the JVM calls main(): An activation record/stack frame is created for main(). Control enters the body of main(). Statements inside main() execute sequentially. If an object is created, memory for its instance variables is allocated. The object reference is stored in the reference variable. Methods are invoked using the object reference. For example:\n\n```java\nBusinessman m = new Businessman();\n```\n\nThe object is created, and m stores its reference."
+    },
+    {
+      "question": "What happens during object creation?",
+      "answer": "Answer: When an object of Businessman is created, its instance variables receive memory. For example, if the class contains: P T SI each object receives its own instance-level copies. Their initial values are default values unless explicitly initialized. The reference variable in main() then refers to the newly created object. Conceptually: Stack ↓ m ─────────→ Heap Object P T SI"
+    },
+    {
+      "question": "What happens when an instance method is called?",
+      "answer": "Answer: Suppose the object calls:\n\n```java\nm.acceptData();\n```\n\nAn activation record is created for acceptData(). Control moves from main() into the body of acceptData(). The method performs its work, such as taking input. After the method finishes, its activation record is removed and control returns to the point from which the method was called. The same process occurs for: calculateSI() displaySI() Each method gets its own activation record during execution."
+    },
+    {
+      "question": "What happens to objects after the main method finishes?",
+      "answer": "Answer: When the main() method completes, its activation record is removed. The reference variables associated with that stack frame are also removed. If the heap objects no longer have active references pointing to them, they become eligible for garbage collection. Conceptually: main() finishes ↓ main stack frame removed ↓ references removed ↓ objects may become eligible for GC ↓ Garbage Collector can reclaim memory"
+    },
+    {
+      "question": "When should a variable be made static?",
+      "answer": "Answer: A variable should be made static when its value is common to all objects of a class or when the same variable needs to be shared among the objects. Example:\n\n```java\nclass Businessman {\nint p;\nint t;\nfloat si;\nstatic float r;\n}\n```\n\nHere: p can differ between objects. t can differ between objects. si can differ between objects. r can be common to all objects. Therefore, r can be static. The interview-ready definition is: A variable should be made static when its value is common to all objects of a class or when the variable needs to be shared among all objects."
+    },
+    {
+      "question": "When should a method be made static?",
+      "answer": "Answer: A method can be considered static when it can be called without creating an object. However, a method should not be made static merely because its formula or behavior is common. For example, the simple-interest calculation formula is common: P × T × R / 100 But the method uses P, T, and SI, which are instance variables. Therefore, making that method static would create a problem because a static method cannot directly depend on instance-specific state in that manner. The method needs an object and its instance variables."
+    },
+    {
+      "question": "Can a static method directly access non-static instance variables?",
+      "answer": "Answer: A static method cannot directly access instance variables because instance variables belong to an object and receive their memory when the object is created. A static method can exist without any object. Therefore, directly accessing an instance variable from a static context is not valid. For example:\n\n```java\nclass Demo {\nint x;\nstatic void test() {\n// System.out.println(x);  // invalid\n}\n}\n```\n\nx belongs to an object, while test() belongs to the class-level context. This is why a method that depends on instance variables should generally remain an instance method."
+    },
+    {
+      "question": "What are the two types of behavior represented by methods?",
+      "answer": "Answer: Methods can represent two types of behavior: Generic behavior Specific behavior Generic behavior is applicable generally and does not depend on a particular object's individual state. Specific behavior depends on the particular object. This distinction helps in deciding whether a method should be static or instance-level."
+    },
+    {
+      "question": "What is the difference between generic and specific behavior?",
+      "answer": "Answer: Consider human-related examples. An individual's heartbeat is specific to that individual. However, an average heartbeat value for humans represents a general or generic concept. Similarly: Individual blood pressure → specific Average/general value → generic Individual age → specific Miles-to-kilometers conversion → generic The important distinction is whether the behavior depends on one particular object's individual state."
+    },
+    {
+      "question": "Why is a miles-to-kilometers conversion method considered generic?",
+      "answer": "Answer: A method such as: milesToKilometer() performs a conversion. The conversion logic is not specific to one particular vehicle or person. The same conversion rule can be used regardless of whether the value comes from a car, motorcycle, bicycle, or another source. Therefore, the method represents generic behavior. A generic method can be considered for making static."
+    },
+    {
+      "question": "What is the relationship between generic behavior and static methods?",
+      "answer": "Answer: A generic method can be made static because its behavior does not depend on a particular object's state. For example:\n\n```java\nstatic double milesToKilometer(double miles) {\nreturn miles * 1.6;\n}\n```\n\nIt can be called using the class name:\n\n```java\nClassName.milesToKilometer(10);\n```\n\nNo object-specific state is required. In contrast, a method that performs behavior specific to an object should generally be an instance method."
+    },
+    {
+      "question": "What are the two important checks for deciding whether a method should be static?",
+      "answer": "Answer: Two important considerations are:"
+    },
+    {
+      "question": "First: Can the method be called using the class name without creating an object?",
+      "answer": "Answer: If yes, it can be considered for being static."
+    },
+    {
+      "question": "Second: Is the method generic or specific?",
+      "answer": "Answer: Generic behavior → static Specific/object-dependent behavior → instance Therefore, the decision should not be based only on whether the method's formula is common. The method's dependency on instance-specific data must also be considered."
+    },
+    {
+      "question": "What is a static initializer?",
+      "answer": "Answer: A static block is also called a static initializer. It is used for static initialization and can also be used when a set of statements needs to execute before the main() method. Basic structure:\n\n```java\nclass Demo {\nstatic {\nSystem.out.println(\"Hello\");\n}\npublic static void main(String[] args) {\nSystem.out.println(\"World\");\n}\n}\n```\n\nOutput: Hello World The static block executes before main()."
+    },
+    {
+      "question": "Why does the static block execute before main()?",
+      "answer": "Answer: During class initialization, the JVM processes static elements before entering the main() method. Therefore, when a class contains:\n\n```java\nstatic {\nSystem.out.println(\"Hello\");\n}\n```\n\nand:\n\n```java\npublic static void main(String[] args) {\nSystem.out.println(\"World\");\n}\n```\n\nthe output is: Hello World The reason is that the static block is executed before the main() method."
+    },
+    {
+      "question": "What happens when a program contains multiple classes with static blocks?",
+      "answer": "Answer: A class is not simply loaded and initialized merely because it exists somewhere in the code. The important execution point is class access. When a particular class is accessed, that class can be loaded and its static initialization takes place. Therefore, if a program contains multiple classes, it is important to determine: Which class is being accessed. When that class is accessed. When its static block executes. When its constructor or other code executes. The execution order must be traced from actual class access rather than assuming that every class is initialized immediately."
+    },
+    {
+      "question": "When is a class loaded during execution?",
+      "answer": "Answer: The execution discussed establishes that a class is loaded when it is accessed. For example, if the first executable statement accesses a particular class, that class is loaded at that point. A class that has not yet been accessed is not assumed to have already been loaded and initialized merely because it appears elsewhere in the code. Therefore, while solving output questions involving static blocks and multiple classes, always identify the point at which each class is accessed."
+    },
+    {
+      "question": "What is the execution order involving a static block and a constructor?",
+      "answer": "Answer: When an object of a class is created, static initialization occurs before instance-level object initialization. The relevant sequence is: Class is loaded/accessed ↓ Static block executes ↓ Object creation ↓ Constructor executes Therefore, when tracing a program containing a static block and constructor, the static block executes before the constructor for that class. The exact overall output still depends on which class is accessed and at what point in the program."
+    },
+    {
+      "question": "What are the key rules to about the static keyword?",
+      "answer": "Answer: The important rules are:\n\n```java\nstatic variable\n```\n\n↓ One shared class-level variable\n\n```java\nstatic method\n```\n\n↓ Can be called using the class name\n\n```java\nstatic block\n```\n\n↓ Executes during class initialization, before main() for the relevant class For variables: Common to all objects → static Value must not be reassigned → final For methods: Generic behavior → can be static Object-specific behavior → instance method Depends on instance variables → should remain instance-level For static initialization: Static variable initialization ↓ Static block ↓ main() The most important principle is to understand whether something belongs to the class as a whole or to an individual object. That distinction helps determine whether a variable or method should be static or non-static."
+    }
+  ]
+}
