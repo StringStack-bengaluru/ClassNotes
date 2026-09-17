@@ -1,0 +1,167 @@
+{
+  "title": "Notes Java Inheritence",
+  "itemsPerPage": 2,
+  "source": "notes-java-inheritence.docx",
+  "items": [
+    {
+      "question": "What is a Design Pattern?",
+      "answer": "Answer: A design pattern is a set of rules or a proven solution for a frequently occurring problem. It provides a standard way of solving a problem, but it is not itself an implementation. For example, when a requirement is to restrict a class to only one object, the Singleton Design Pattern provides a standard solution."
+    },
+    {
+      "question": "What is the Singleton Design Pattern?",
+      "answer": "Answer: Singleton Design Pattern is a design pattern used to restrict the number of objects created for a class to one. Multiple parts of an application can hold references to the same object, but only one object is created."
+    },
+    {
+      "question": "Why do we need to restrict object creation to one?",
+      "answer": "Answer: Some entities or resources logically require only one object to represent them. For example, if a class represents a Prime Minister, creating multiple Prime Minister objects does not represent the intended requirement. The requirement is to create one object and allow different references to access that same object."
+    },
+    {
+      "question": "What happens when an object is created using new?",
+      "answer": "Answer: When an object is created using new, a new object is created in memory.\n\n```java\nPrimeMinister modi = new PrimeMinister();\n```\n\nHere, one PrimeMinister object is created and modi refers to that object. If another object is created:\n\n```java\nPrimeMinister up = new PrimeMinister();\n```\n\nanother PrimeMinister object is created. Therefore:\n\n```java\nPrimeMinister modi = new PrimeMinister();\nPrimeMinister up = new PrimeMinister();\n```\n\ncreates two different objects with two different references."
+    },
+    {
+      "question": "What happens when an object is printed directly?",
+      "answer": "Answer: When an object is printed using System.out.println(), Java prints information representing the object's class and a hash-code-based value.\n\n```java\nSystem.out.println(modi);\n```\n\nThe output contains the class information followed by a hash-code-based value. It should not be considered the actual physical memory address."
+    },
+    {
+      "question": "How can object creation be restricted from an outside class?",
+      "answer": "Answer: The outside class must not be allowed to directly call the constructor. The constructor is made private.\n\n```java\nprivate PrimeMinister() {\n}\n```\n\nA private constructor cannot be accessed directly from another class. For example:\n\n```java\nclass Assembly {\npublic static void main(String[] args) {\nPrimeMinister pm = new PrimeMinister();\n}\n}\n```\n\nThis results in a compilation error because the constructor is private."
+    },
+    {
+      "question": "Why is the constructor made private in Singleton Design Pattern?",
+      "answer": "Answer: The constructor is made private so that an outside class cannot directly create an object using new. This keeps object creation under the control of the Singleton class."
+    },
+    {
+      "question": "If the constructor is private, how can the object be created?",
+      "answer": "Answer: The object can be created from inside the same class because the private constructor is accessible within that class. The class provides a public method through which an outside class can request the object. The method returns the object reference instead of allowing the outside class to directly call the constructor."
+    },
+    {
+      "question": "What should be the return type of a method that returns an object reference?",
+      "answer": "Answer: The return type should be the type of the object reference being returned.\n\n```java\nprivate static PrimeMinister ref;\npublic static PrimeMinister getPrimeMinister() {\nreturn ref;\n}\n```\n\nHere, ref is of type PrimeMinister, so getPrimeMinister() also has the return type PrimeMinister."
+    },
+    {
+      "question": "Why should the Singleton method be static?",
+      "answer": "Answer: The outside class needs to call the method without creating an object first. Therefore, the method is made static.\n\n```java\nPrimeMinister pm = PrimeMinister.getPrimeMinister();\n```\n\nThe method can be called using the class name. If the method were not static, an object would be required to call it. But creating the object itself is restricted by the private constructor."
+    },
+    {
+      "question": "Why should the reference variable be static?",
+      "answer": "Answer: If a static method needs to access the reference variable, the reference variable should also be static. A static method cannot directly access a non-static instance variable. Therefore:\n\n```java\nprivate static PrimeMinister ref;\n```\n\nis used instead of:\n\n```java\nprivate PrimeMinister ref;\n```"
+    },
+    {
+      "question": "Why is the reference variable initialized with null?",
+      "answer": "Answer: The reference variable is used to determine whether an object has already been created. Initially, no object exists, so the reference contains null.\n\n```java\nprivate static PrimeMinister ref = null;\n```\n\nThe method checks:\n\n```java\nif (ref == null)\n```\n\nIf ref is null, the object has not yet been created, so a new object is created. If ref is not null, an object already exists, so the existing reference is returned."
+    },
+    {
+      "question": "What is the complete logic of the Singleton Design Pattern?",
+      "answer": "Answer: The Singleton implementation follows these steps: Make the constructor private. Create a private static reference variable. Create a public static method that returns the object reference. Check whether the reference is null. If the reference is null, create the object. If the reference is not null, return the existing reference.\n\n```java\nclass PrimeMinister {\nprivate static PrimeMinister ref = null;\nprivate PrimeMinister() {\n}\npublic static PrimeMinister getPrimeMinister() {\nif (ref == null) {\nref = new PrimeMinister();\n}\nreturn ref;\n}\n}\n```\n\nThe object can be accessed from another class:\n\n```java\nclass Assembly {\npublic static void main(String[] args) {\n```\n\nPrimeMinister modi =\n\n```java\nPrimeMinister.getPrimeMinister();\n```\n\nPrimeMinister up =\n\n```java\nPrimeMinister.getPrimeMinister();\nSystem.out.println(modi);\nSystem.out.println(up);\n}\n}\n```\n\nOnly one object is created. Both modi and up refer to the same object."
+    },
+    {
+      "question": "If the Singleton method is called 10 times, how many objects are created?",
+      "answer": "Answer: Only one object is created. During the first call: ref == null is true, so the object is created. After that, ref contains the object reference. Every subsequent call finds that ref is not null and returns the existing reference.\n\n```java\nPrimeMinister p1 = PrimeMinister.getPrimeMinister();\nPrimeMinister p2 = PrimeMinister.getPrimeMinister();\nPrimeMinister p3 = PrimeMinister.getPrimeMinister();\n```\n\nAll three references point to the same object."
+    },
+    {
+      "question": "Can one object have multiple reference variables?",
+      "answer": "Answer: Yes. One object can have multiple reference variables.\n\n```java\nPrimeMinister p1 = PrimeMinister.getPrimeMinister();\nPrimeMinister p2 = PrimeMinister.getPrimeMinister();\n```\n\nHere, p1 and p2 are different reference variables, but both refer to the same object. Number of objects = 1 Number of references = 2 The number of references can increase without creating additional objects."
+    },
+    {
+      "question": "What happens if the Singleton condition ref == null is not checked?",
+      "answer": "Answer: If the condition is not checked and the method creates a new object every time, every method call can create another object.\n\n```java\npublic static PrimeMinister getPrimeMinister() {\nref = new PrimeMinister();\nreturn ref;\n}\n```\n\nIf this method is called 10 times, 10 objects can be created. Therefore, the null check is required to restrict object creation to one."
+    },
+    {
+      "question": "Why should the reference variable be private?",
+      "answer": "Answer: The reference variable should be private so that an outside class cannot directly access or modify it.\n\n```java\nprivate static PrimeMinister ref;\n```\n\nKeeping it private ensures that object creation and reference management remain controlled by the Singleton class."
+    },
+    {
+      "question": "What happens if the reference variable is public instead of private?",
+      "answer": "Answer: The outside class could directly access the reference variable. This would allow outside code to interfere with the reference and potentially change its value. Therefore, the reference variable should be private."
+    },
+    {
+      "question": "What happens if the Singleton constructor is not private?",
+      "answer": "Answer: If the constructor is accessible from outside the class, an external class can directly use new.\n\n```java\nPrimeMinister pm1 = new PrimeMinister();\nPrimeMinister pm2 = new PrimeMinister();\n```\n\nThis allows multiple objects to be created and breaks the Singleton requirement. Therefore, the constructor must be private."
+    },
+    {
+      "question": "What happens if the Singleton method is not public?",
+      "answer": "Answer: If the method is not accessible from outside the class, the outside class cannot call it. The method provides controlled access to the Singleton object, so it should be public. The standard combination is:\n\n```java\nprivate constructor\nprivate static reference\npublic static method\n```"
+    },
+    {
+      "question": "What happens if the Singleton method is not static?",
+      "answer": "Answer: The method would require an object to call it. However, the constructor is private, so the outside class cannot create the object required to call the method. Therefore, the method must be static."
+    },
+    {
+      "question": "What are the three essential steps for creating a Singleton class?",
+      "answer": "Answer: 1. Private constructor 2. Private static reference variable 3. Public static method that returns the object reference The method creates the object only when the reference is null. If the object already exists, the existing reference is returned."
+    },
+    {
+      "question": "How can the President class be converted into a Singleton class?",
+      "answer": "Answer: A normal President class can be converted into a Singleton class by adding a private static reference, making the constructor private, and providing a public static method.\n\n```java\nclass President {\nprivate int number;\nprivate String name;\nprivate int term;\npublic void passBill() {\nSystem.out.println(name + \" passing the bills\");\n}\nprivate static President ref = null;\nprivate President() {\n}\npublic static President getPresidentInstance() {\nif (ref == null) {\nref = new President();\n}\nreturn ref;\n}\n}\n```\n\nThe object is accessed using:\n\n```java\nPresident p = President.getPresidentInstance();\n```\n\nThe outside class cannot directly use:\n\n```java\nnew President();\n```"
+    },
+    {
+      "question": "How can a Singleton class support both a zero-parameterized constructor and a parameterized constructor?",
+      "answer": "Answer: Both constructors can be kept private.\n\n```java\nprivate President() {\n}\nprivate President(int number, String name, int term) {\nthis.number = number;\nthis.name = name;\nthis.term = term;\n}\n```\n\nThe public static method can accept parameters and decide which constructor should be used when the object is created.\n\n```java\npublic static President getPresidentInstance(\nint number,\nString name,\nint term) {\n```\n\nIf default values are supplied, the zero-parameterized constructor can be selected. If actual values are supplied, the parameterized constructor can be selected. Only one object is created."
+    },
+    {
+      "question": "How does the Singleton behave when the first call uses default values and the second call supplies data?",
+      "answer": "Answer: The first call creates the object because ref is initially null. President p1 =\n\n```java\nPresident.getPresidentInstance(0, null, 0);\n```\n\nA later call: President p2 =\n\n```java\nPresident.getPresidentInstance(15, \"Example\", 5);\ndoes not create another object because ref is already non-null.\n```\n\nThe existing object reference is returned. p1 → same object ← p2 Only one object exists."
+    },
+    {
+      "question": "If the second Singleton call contains different data, will the existing object's values change automatically?",
+      "answer": "Answer: No. The second call returns the existing object reference instead of creating another object. President p1 =\n\n```java\nPresident.getPresidentInstance(17, \"Draupadi\", 5);\n```\n\nPresident p2 =\n\n```java\nPresident.getPresidentInstance(15, \"Example\", 5);\n```\n\nBoth references point to the same object because the second call finds that an object already exists."
+    },
+    {
+      "question": "What is a POJO class?",
+      "answer": "Answer: POJO stands for Plain Old Java Object. A POJO class is a simple Java class used to represent objects with properties and behaviors. A typical POJO can contain private variables, constructors, getters, setters, and methods representing behaviors.\n\n```java\nclass Teacher {\nprivate int id;\nprivate String name;\nprivate String subject;\npublic Teacher(int id, String name, String subject) {\nthis.id = id;\nthis.name = name;\nthis.subject = subject;\n}\npublic int getId() {\nreturn id;\n}\npublic String getName() {\nreturn name;\n}\npublic String getSubject() {\nreturn subject;\n}\npublic void teach() {\nSystem.out.println(name + \" is teaching \" + subject);\n}\n}\n```"
+    },
+    {
+      "question": "What is the structure expected in a POJO class?",
+      "answer": "Answer: A POJO can contain private members, constructors, getters, setters, and required behaviors. Example:\n\n```java\nprivate int id;\nprivate String name;\nprivate String subject;\n```\n\nA behavior can be implemented as:\n\n```java\npublic void teach() {\nSystem.out.println(name + \" is teaching \" + subject);\n}\n```\n\nGetters and setters provide controlled access to private members."
+    },
+    {
+      "question": "Can a POJO class also be made a Singleton class?",
+      "answer": "Answer: Yes. A POJO class can also be converted into a Singleton class. For example:\n\n```java\nprivate static Teacher ref = null;\n```\n\nThe constructor can be private:\n\n```java\nprivate Teacher() {\n}\n```\n\nA public static method can provide access:\n\n```java\npublic static Teacher getTeacherInstance(\nint id,\nString name,\nString subject) {\nif (ref == null) {\nif (id == 0 && name == null && subject == null) {\nref = new Teacher();\n```\n\n} else {\n\n```java\nref = new Teacher(id, name, subject);\n}\n}\nreturn ref;\n}\n```\n\nThe attributes and behaviors can then be accessed through the returned reference."
+    },
+    {
+      "question": "What is inheritance?",
+      "answer": "Answer: Inheritance is the process of acquiring the properties and behaviors of one entity into another entity. From the class perspective, it means acquiring properties and behaviors from one class into another class. The concept can be understood as: One entity → Another entity One class → Another class One object → Another object"
+    },
+    {
+      "question": "Why is inheritance required?",
+      "answer": "Answer: The primary advantage of inheritance is code reusability. If common properties and behaviors have already been implemented in one class, another class can inherit them instead of rewriting the same code. This reduces development time because existing code is reused."
+    },
+    {
+      "question": "How does inheritance provide code reusability?",
+      "answer": "Answer: Suppose a Player class contains common properties and behaviors:\n\n```java\nclass Player {\nint id;\nString name;\nint age;\nString gender;\ndouble height;\ndouble weight;\n```\n\nvoid behavior1() {\n\n```java\n}\n```\n\nvoid behavior2() {\n\n```java\n}\n}\n```\n\nA HockeyPlayer requires these common properties along with hockey-specific properties. Instead of rewriting the common code, it can inherit from Player.\n\n```java\nclass HockeyPlayer extends Player {\nint goals;\nint fouls;\nString playerType;\nString level;\n}\n```\n\nHockeyPlayer reuses the common properties and behaviors of Player and adds its own specific properties and behaviors."
+    },
+    {
+      "question": "What is the real-world example used to explain inheritance?",
+      "answer": "Answer: A generic Player contains common information such as: ID Name Age Gender Height Weight Family Address Email Phone number Generic player behaviors A HockeyPlayer contains hockey-specific information such as: Number of goals Number of fouls Player type Level of player A hockey player is also a player, so the common player information can be reused. Similarly, a golf player can reuse the generic player information and add golf-specific information."
+    },
+    {
+      "question": "What does the extends keyword represent in Java?",
+      "answer": "Answer: The extends keyword represents inheritance between classes. Example:\n\n```java\nclass HockeyPlayer extends Player {\n}\n```\n\nThis means that HockeyPlayer inherits from Player. It can be read as: HockeyPlayer is a Player"
+    },
+    {
+      "question": "How can extends be understood using the HockeyPlayer example?",
+      "answer": "Answer: ```java\nclass Player {\n}\nclass HockeyPlayer extends Player {\n}\n```\n\nThe relationship can be understood as: HockeyPlayer is a Player HockeyPlayer receives the common properties and behaviors of Player and can add hockey-specific properties and behaviors. Similarly:\n\n```java\nclass GolfPlayer extends Player {\n}\n```\n\ncan be read as: GolfPlayer is a Player"
+    },
+    {
+      "question": "Does inheritance mean that the child class needs to rewrite the common code?",
+      "answer": "Answer: No. The purpose of inheritance is to reuse the already available common code. If Player already contains:\n\n```java\nint id;\nString name;\nint age;\nString gender;\n```\n\nthen HockeyPlayer does not need to rewrite those common members. It inherits the common functionality and adds only the functionality specific to HockeyPlayer."
+    },
+    {
+      "question": "What happens if a class does not explicitly use extends?",
+      "answer": "Answer: A Java class implicitly inherits from the Object class when no other superclass is explicitly specified. Conceptually:\n\n```java\nclass Student {\n}\n```\n\ncan be understood as:\n\n```java\nclass Student extends Object {\n}\n```\n\nTherefore, the class is part of the Object class hierarchy."
+    },
+    {
+      "question": "What is the biggest advantage of inheritance?",
+      "answer": "Answer: The biggest advantage is code reusability. Existing common code ↓ Parent class ↓ Inherited ↓ Child class ↓ Additional specific functionality The common implementation does not need to be written repeatedly, which also reduces development time."
+    },
+    {
+      "question": "What is the difference between a generic Player class and a specific HockeyPlayer class?",
+      "answer": "Answer: The Player class contains properties and behaviors common to all players. The HockeyPlayer class contains properties and behaviors specific to hockey players.\n\n```java\nclass Player {\nint id;\nString name;\nint age;\nString gender;\ndouble height;\ndouble weight;\n}\nclass HockeyPlayer extends Player {\nint goals;\nint fouls;\nString playerType;\nString level;\n}\n```\n\nThe child class reuses the common player information and adds hockey-specific information."
+    },
+    {
+      "question": "How did inheritance reduce development time in the example?",
+      "answer": "Answer: A generic Player class had already been created with common player information and behavior. When the GolfPlayer application was required, the common Player code did not need to be rewritten. The existing code could be inherited and reused, while only golf-specific functionality needed to be added. This reduced the amount of new code and development time."
+    }
+  ]
+}

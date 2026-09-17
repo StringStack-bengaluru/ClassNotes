@@ -1,0 +1,7563 @@
+{
+  "title": "Notes Java Inheritence",
+  "mode": "document",
+  "source": "notes-java-inheritence.docx",
+  "pageCount": 16,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1. What is a Design Pattern?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A design pattern is a set of rules or a proven solution for a frequently occurring problem. It provides a standard way of solving a problem, but it is not itself an implementation.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example, when a requirement is to restrict a class to only one object, the Singleton Design Pattern provides a standard solution.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2. What is the Singleton Design Pattern?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Singleton Design Pattern is a design pattern used to restrict the number of objects created for a class to one.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Multiple parts of an application can hold references to the same object, but only one object is created.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3. Why do we need to restrict object creation to one?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Some entities or resources logically require only one object to represent them.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example, if a class represents a Prime Minister, creating multiple Prime Minister objects does not represent the intended requirement. The requirement is to create one object and allow different references to access that same object.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "4. What happens when an object is created using new?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "When an object is created using new, a new object is created in memory.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "PrimeMinister modi = new PrimeMinister();"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Here, one ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "PrimeMinister",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " object is created and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "modi",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " refers to that object.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If another object is created:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "PrimeMinister up = new PrimeMinister();"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "another ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "PrimeMinister",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " object is created.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Therefore:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "PrimeMinister modi = new PrimeMinister();\nPrimeMinister up = new PrimeMinister();"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "creates two different objects with two different references.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "5. What happens when an object is printed directly?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "When an object is printed using ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "System.out.println",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(), Java prints information representing the object's class and a hash-code-based value.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "System.out.println(modi);"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The output contains the class information followed by a hash-code-based value. It should not be considered the actual physical memory address.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "6. How can object creation be restricted from an outside class?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The outside class must not be allowed to directly call the constructor.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The constructor is made private.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "private PrimeMinister() {\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A private constructor cannot be accessed directly from another class.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class Assembly {\n    public static void main(String[] args) {\n        PrimeMinister pm = new PrimeMinister();\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "This results in a compilation error because the constructor is private.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "7. Why is the constructor made private in Singleton Design Pattern?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The constructor is made private so that an outside class cannot directly create an object using new.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "This keeps object creation under the control of the Singleton class.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "8. If the constructor is private, how can the object be created?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The object can be created from inside the same class because the private constructor is accessible within that class.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The class provides a public method through which an outside class can request the object.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The method returns the object reference instead of allowing the outside class to directly call the constructor.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "9. What should be the return type of a method that returns an object reference?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The return type should be the type of the object reference being returned.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "private static PrimeMinister ref;\n\npublic static PrimeMinister getPrimeMinister() {\n    return ref;\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Here, ref is of type ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "PrimeMinister",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ", so ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "getPrimeMinister",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ") also has the return type ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "PrimeMinister",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ".",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "10. Why should the Singleton method be static?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The outside class needs to call the method without creating an object first.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Therefore, the method is made static.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "PrimeMinister pm = PrimeMinister.getPrimeMinister();"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The method can be called using the class name.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If the method were not static, an object would be required to call it. But creating the object itself is restricted by the private constructor.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "11. Why should the reference variable be static?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If a static method needs to access the reference variable, the reference variable should also be static.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A static method cannot directly access a non-static instance variable.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Therefore:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "private static PrimeMinister ref;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "is used instead of:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "private PrimeMinister ref;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "12. Why is the reference variable initialized with null?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The reference variable is used to determine whether an object has already been created.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Initially, no object exists, so the reference contains null.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "private static PrimeMinister ref = null;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The method checks:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "if (ref == null)"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If ref is null, the object has not yet been created, so a new object is created.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If ref is not null, an object already exists, so the existing reference is returned.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "13. What is the complete logic of the Singleton Design Pattern?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The Singleton implementation follows these steps:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        {
+          "runs": [
+            {
+              "text": "Make the constructor private.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "Create a private static reference variable.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "Create a public static method that returns the object reference.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "Check whether the reference is null.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "If the reference is null, create the object.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "If the reference is not null, return the existing reference.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "text": "class PrimeMinister {\n\n    private static PrimeMinister ref = null;\n\n    private PrimeMinister() {\n    }\n\n    public static PrimeMinister getPrimeMinister() {\n\n        if (ref == null) {\n            ref = new PrimeMinister();\n        }\n\n        return ref;\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The object can be accessed from another class:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class Assembly {\n\n    public static void main(String[] args) {\n\n        PrimeMinister modi =\n            PrimeMinister.getPrimeMinister();\n\n        PrimeMinister up =\n            PrimeMinister.getPrimeMinister();\n\n        System.out.println(modi);\n        System.out.println(up);\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Only one object is created. Both ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "modi",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " and up refer to the same object.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "14. If the Singleton method is called 10 times, how many objects are created?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Only one object is created.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "During the first call:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "ref == null",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "is true, so the object is created.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "After that, ref contains the object reference. Every subsequent call finds that ref is not null and returns the existing reference.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "PrimeMinister p1 = PrimeMinister.getPrimeMinister();\nPrimeMinister p2 = PrimeMinister.getPrimeMinister();\nPrimeMinister p3 = PrimeMinister.getPrimeMinister();"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "All three references point to the same object.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "15. Can one object have multiple reference variables?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Yes.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "One object can have multiple reference variables.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "PrimeMinister p1 = PrimeMinister.getPrimeMinister();\nPrimeMinister p2 = PrimeMinister.getPrimeMinister();"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Here, p1 and p2 are different reference variables, but both refer to the same object.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Number of objects = 1",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Number of references = 2",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The number of references can increase without creating additional objects.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "16. What happens if the Singleton condition ref == null is not checked?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If the condition is not checked and the method creates a new object every time, every method call can create another object.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "public static PrimeMinister getPrimeMinister() {\n    ref = new PrimeMinister();\n    return ref;\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If this method is called 10 times, 10 objects can be created.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Therefore, the null check is required to restrict object creation to one.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "17. Why should the reference variable be private?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The reference variable should be private so that an outside class cannot directly access or modify it.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "private static PrimeMinister ref;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Keeping it private ensures that object creation and reference management remain controlled by the Singleton class.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "18. What happens if the reference variable is public instead of private?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The outside class could directly access the reference variable.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "This would allow outside code to interfere with the reference and potentially change its value.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Therefore, the reference variable should be private.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "19. What happens if the Singleton constructor is not private?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If the constructor is accessible from outside the class, an external class can directly use new.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "PrimeMinister pm1 = new PrimeMinister();\nPrimeMinister pm2 = new PrimeMinister();"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "This allows multiple objects to be created and breaks the Singleton requirement.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Therefore, the constructor must be private.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "20. What happens if the Singleton method is not public?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If the method is not accessible from outside the class, the outside class cannot call it.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The method provides controlled access to the Singleton object, so it should be public.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The standard combination is:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "private constructor\nprivate static reference\npublic static method"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "21. What happens if the Singleton method is not static?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The method would require an object to call it.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "However, the constructor is private, so the outside class cannot create the object required to call the method.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Therefore, the method must be static.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "22. What are the three essential steps for creating a Singleton class?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1. Private constructor",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2. Private static reference variable",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3. Public static method that returns the object reference",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The method creates the object only when the reference is null. If the object already exists, the existing reference is returned.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "23. How can the President class be converted into a Singleton class?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A normal President class can be converted into a Singleton class by adding a private static reference, making the constructor private, and providing a public static method.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class President {\n\n    private int number;\n    private String name;\n    private int term;\n\n    public void passBill() {\n        System.out.println(name + \" passing the bills\");\n    }\n\n    private static President ref = null;\n\n    private President() {\n    }\n\n    public static President getPresidentInstance() {\n\n        if (ref == null) {\n            ref = new President();\n        }\n\n        return ref;\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The object is accessed using:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "President p = President.getPresidentInstance();"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The outside class cannot directly use:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "new President();"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "24. How can a Singleton class support both a zero-parameterized constructor and a parameterized constructor?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Both constructors can be kept private.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "private President() {\n}\n\nprivate President(int number, String name, int term) {\n    this.number = number;\n    this.name = name;\n    this.term = term;\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The public static method can accept parameters and decide which constructor should be used when the object is created.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "public static President getPresidentInstance(\n        int number,\n        String name,"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "        int term) {",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If default values are supplied, the zero-parameterized constructor can be selected.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If actual values are supplied, the parameterized constructor can be selected.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Only one object is created.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "25. How does the Singleton behave when the first call uses default values and the second call supplies data?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The first call creates the object because ref is initially null.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "President p1 =\n    President.getPresidentInstance(0, null, 0);"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A later call:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "President p2 =\n    President.getPresidentInstance(15, \"Example\", 5);"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "does not create another object because ref is already non-null.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The existing object reference is returned.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "p1 → same object ← p2",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Only one object exists.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "26. If the second Singleton call contains different data, will the existing object's values change automatically?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "No.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The second call returns the existing object reference instead of creating another object.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "President p1 =\n    President.getPresidentInstance(17, \"Draupadi\", 5);\n\nPresident p2 =\n    President.getPresidentInstance(15, \"Example\", 5);"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Both references point to the same object because the second call finds that an object already exists.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "27. What is a POJO class?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "POJO stands for Plain Old Java Object.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A POJO class is a simple Java class used to represent objects with properties and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ".",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A typical POJO can contain private variables, constructors, getters, setters, and methods representing ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ".",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class Teacher {\n\n    private int id;\n    private String name;\n    private String subject;\n\n    public Teacher(int id, String name, String subject) {\n        this.id = id;\n        this.name = name;\n        this.subject = subject;\n    }\n\n    public int getId() {\n        return id;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public String getSubject() {\n        return subject;\n    }\n\n    public void teach() {\n        System.out.println(name + \" is teaching \" + subject);\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "28. What is the structure expected in a POJO class?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A POJO can contain private members, constructors, getters, setters, and required ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ".",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "private int id;\nprivate String name;\nprivate String subject;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behavior",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " can be implemented as:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "public void teach() {\n    System.out.println(name + \" is teaching \" + subject);\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Getters and setters provide controlled access to private members.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "29. Can a POJO class also be made a Singleton class?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Yes.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A POJO class can also be converted into a Singleton class.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "private static Teacher ref = null;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The constructor can be private:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "private Teacher() {\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A public static method can provide access:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "public static Teacher getTeacherInstance(\n        int id,\n        String name,"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "        String subject) {",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "code",
+      "text": "    if (ref == null) {\n\n        if (id == 0 && name == null && subject == null) {\n            ref = new Teacher();\n        } else {\n            ref = new Teacher(id, name, subject);\n        }\n    }\n\n    return ref;\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The attributes and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " can then be accessed through the returned reference.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "30. What is inheritance?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Inheritance is the process of acquiring the properties and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " of one entity into another entity.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "From the class perspective, it means acquiring properties and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " from one class into another class.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The concept can be understood as:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "One entity → Another entity",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "One class → Another class",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "One object → Another object",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "31. Why is inheritance required?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The primary advantage of inheritance is code reusability.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If common properties and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " have already been implemented in one class, another class can inherit them instead of rewriting the same code.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "This reduces development time because existing code is reused.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "32. How does inheritance provide code reusability?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Suppose a Player class contains common properties and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ":",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class Player {\n\n    int id;\n    String name;\n    int age;\n    String gender;\n    double height;\n    double weight;\n\n    void behavior1() {\n    }\n\n    void behavior2() {\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "HockeyPlayer",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " requires these common properties along with hockey-specific properties.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Instead of rewriting the common code, it can inherit from Player.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class HockeyPlayer extends Player {\n\n    int goals;\n    int fouls;\n    String playerType;\n    String level;\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "HockeyPlayer",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " reuses the common properties and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " of Player and adds its own specific properties and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ".",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "33. What is the real-world example used to explain inheritance?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A generic Player contains common information such as:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "ID",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Name",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Age",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Gender",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Height",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Weight",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Family",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Address",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Email",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Phone number",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Generic player ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "HockeyPlayer",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " contains hockey-specific information such as:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Number of goals",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Number of fouls",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Player type",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Level of player",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A hockey player is also a player, so the common player information can be reused.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Similarly, a golf player can reuse the generic player information and add golf-specific information.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "34. What does the extends keyword represent in Java?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The extends keyword represents inheritance between classes.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class HockeyPlayer extends Player {\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "This means that ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "HockeyPlayer",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " inherits from Player.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "It can be read as:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "HockeyPlayer",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " is a Player",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "35. How can extends be understood using the ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "HockeyPlayer",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " example?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class Player {\n}\n\nclass HockeyPlayer extends Player {\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The relationship can be understood as:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "HockeyPlayer",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " is a Player",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "HockeyPlayer",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " receives the common properties and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " of Player and can add hockey-specific properties and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ".",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Similarly:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class GolfPlayer extends Player {\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "can be read as:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "GolfPlayer is a Player",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "36. Does inheritance mean that the child class needs to rewrite the common code?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "No.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The purpose of inheritance is to reuse the already available common code.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If Player already contains:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "int id;\nString name;\nint age;\nString gender;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "then ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "HockeyPlayer",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " does not need to rewrite those common members.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "It inherits the common functionality and adds only the functionality specific to ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "HockeyPlayer",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ".",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "37. What happens if a class does not explicitly use extends?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A Java class implicitly inherits from the Object class when no other superclass is explicitly specified.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Conceptually:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class Student {\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "can be understood as:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class Student extends Object {\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Therefore, the class is part of the Object class hierarchy.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "38. What is the biggest advantage of inheritance?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The biggest advantage is code reusability.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Existing common code",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "        ↓",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "Parent class"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "        ↓",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Inherited",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "        ↓",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "Child class"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "        ↓",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Additional specific functionality",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The common implementation does not need to be written repeatedly, which also reduces development time.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "39. What is the difference between a generic Player class and a specific ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "HockeyPlayer",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " class?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The Player class contains properties and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " common to all players.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "HockeyPlayer",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " class contains properties and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behaviors",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " specific to hockey players.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class Player {\n\n    int id;\n    String name;\n    int age;\n    String gender;\n    double height;\n    double weight;\n}\n\nclass HockeyPlayer extends Player {\n\n    int goals;\n    int fouls;\n    String playerType;\n    String level;\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The child class reuses the common player information and adds hockey-specific information.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "40. How did inheritance reduce development time in the example?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A generic Player class had already been created with common player information and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "behavior",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ".",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "When the GolfPlayer application was required, the common Player code did not need to be rewritten.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The existing code could be inherited and reused, while only golf-specific functionality needed to be added.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "This reduced the amount of new code and development time.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "blank"
+    }
+  ],
+  "pages": [
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1. What is a Design Pattern?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A design pattern is a set of rules or a proven solution for a frequently occurring problem. It provides a standard way of solving a problem, but it is not itself an implementation.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example, when a requirement is to restrict a class to only one object, the Singleton Design Pattern provides a standard solution.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2. What is the Singleton Design Pattern?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Singleton Design Pattern is a design pattern used to restrict the number of objects created for a class to one.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Multiple parts of an application can hold references to the same object, but only one object is created.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3. Why do we need to restrict object creation to one?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Some entities or resources logically require only one object to represent them.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example, if a class represents a Prime Minister, creating multiple Prime Minister objects does not represent the intended requirement. The requirement is to create one object and allow different references to access that same object.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "4. What happens when an object is created using new?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "When an object is created using new, a new object is created in memory.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "PrimeMinister modi = new PrimeMinister();"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Here, one ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "PrimeMinister",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " object is created and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "modi",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " refers to that object.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If another object is created:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "PrimeMinister up = new PrimeMinister();"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "another ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "PrimeMinister",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " object is created.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Therefore:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "PrimeMinister modi = new PrimeMinister();\nPrimeMinister up = new PrimeMinister();"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "creates two different objects with two different references.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "5. What happens when an object is printed directly?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "When an object is printed using ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "System.out.println",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(), Java prints information representing the object's class and a hash-code-based value.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "System.out.println(modi);"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The output contains the class information followed by a hash-code-based value. It should not be considered the actual physical memory address.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "6. How can object creation be restricted from an outside class?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The outside class must not be allowed to directly call the constructor.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The constructor is made private.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "private PrimeMinister() {\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A private constructor cannot be accessed directly from another class.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class Assembly {\n    public static void main(String[] args) {\n        PrimeMinister pm = new PrimeMinister();\n    }\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "This results in a compilation error because the constructor is private.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "7. Why is the constructor made private in Singleton Design Pattern?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The constructor is made private so that an outside class cannot directly create an object using new.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "This keeps object creation under the control of the Singleton class.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "8. If the constructor is private, how can the object be created?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The object can be created from inside the same class because the private constructor is accessible within that class.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The class provides a public method through which an outside class can request the object.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The method returns the object reference instead of allowing the outside class to directly call the constructor.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "9. What should be the return type of a method that returns an object reference?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The return type should be the type of the object reference being returned.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "private static PrimeMinister ref;\n\npublic static PrimeMinister getPrimeMinister() {\n    return ref;\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Here, ref is of type ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "PrimeMinister",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ", so ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "getPrimeMinister",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ") also has the return type ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "PrimeMinister",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ".",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "10. Why should the Singleton method be static?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The outside class needs to call the method without creating an object first.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Therefore, the method is made static.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "PrimeMinister pm = PrimeMinister.getPrimeMinister();"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The method can be called using the class name.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If the method were not static, an object would be required to call it. But creating the object itself is restricted by the private constructor.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "11. Why should the reference variable be static?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If a static method needs to access the reference variable, the reference variable should also be static.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A static method cannot directly access a non-static instance variable.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Therefore:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "private static PrimeMinister ref;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "is used instead of:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "private PrimeMinister ref;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "12. Why is the reference variable initialized with null?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The reference variable is used to determine whether an object has already been created.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Initially, no object exists, so the reference contains null.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "private static PrimeMinister ref = null;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The method checks:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "if (ref == null)"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If ref is null, the object has not yet been created, so a new object is created.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If ref is not null, an object already exists, so the existing reference is returned.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "13. What is the complete logic of the Singleton Design Pattern?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The Singleton implementation follows these steps:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          {
+            "runs": [
+              {
+                "text": "Make the constructor private.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "Create a private static reference variable.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "Create a public static method that returns the object reference.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "Check whether the reference is null.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "If the reference is null, create the object.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "If the reference is not null, return the existing reference.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "code",
+        "text": "class PrimeMinister {\n\n    private static PrimeMinister ref = null;\n\n    private PrimeMinister() {\n    }\n\n    public static PrimeMinister getPrimeMinister() {\n\n        if (ref == null) {\n            ref = new PrimeMinister();\n        }\n\n        return ref;\n    }\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The object can be accessed from another class:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class Assembly {\n\n    public static void main(String[] args) {\n\n        PrimeMinister modi =\n            PrimeMinister.getPrimeMinister();\n\n        PrimeMinister up =\n            PrimeMinister.getPrimeMinister();\n\n        System.out.println(modi);\n        System.out.println(up);\n    }\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Only one object is created. Both ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "modi",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " and up refer to the same object.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "14. If the Singleton method is called 10 times, how many objects are created?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Only one object is created.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "During the first call:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "ref == null",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "is true, so the object is created.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "After that, ref contains the object reference. Every subsequent call finds that ref is not null and returns the existing reference.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "PrimeMinister p1 = PrimeMinister.getPrimeMinister();\nPrimeMinister p2 = PrimeMinister.getPrimeMinister();\nPrimeMinister p3 = PrimeMinister.getPrimeMinister();"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "All three references point to the same object.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "15. Can one object have multiple reference variables?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Yes.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "One object can have multiple reference variables.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "PrimeMinister p1 = PrimeMinister.getPrimeMinister();\nPrimeMinister p2 = PrimeMinister.getPrimeMinister();"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Here, p1 and p2 are different reference variables, but both refer to the same object.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Number of objects = 1",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Number of references = 2",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The number of references can increase without creating additional objects.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "16. What happens if the Singleton condition ref == null is not checked?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If the condition is not checked and the method creates a new object every time, every method call can create another object.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "public static PrimeMinister getPrimeMinister() {\n    ref = new PrimeMinister();\n    return ref;\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If this method is called 10 times, 10 objects can be created.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Therefore, the null check is required to restrict object creation to one.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "17. Why should the reference variable be private?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The reference variable should be private so that an outside class cannot directly access or modify it.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "private static PrimeMinister ref;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Keeping it private ensures that object creation and reference management remain controlled by the Singleton class.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "18. What happens if the reference variable is public instead of private?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The outside class could directly access the reference variable.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "This would allow outside code to interfere with the reference and potentially change its value.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Therefore, the reference variable should be private.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "19. What happens if the Singleton constructor is not private?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If the constructor is accessible from outside the class, an external class can directly use new.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "PrimeMinister pm1 = new PrimeMinister();\nPrimeMinister pm2 = new PrimeMinister();"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "This allows multiple objects to be created and breaks the Singleton requirement.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Therefore, the constructor must be private.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "20. What happens if the Singleton method is not public?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If the method is not accessible from outside the class, the outside class cannot call it.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The method provides controlled access to the Singleton object, so it should be public.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The standard combination is:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "private constructor\nprivate static reference\npublic static method"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "21. What happens if the Singleton method is not static?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The method would require an object to call it.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "However, the constructor is private, so the outside class cannot create the object required to call the method.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Therefore, the method must be static.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "22. What are the three essential steps for creating a Singleton class?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1. Private constructor",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2. Private static reference variable",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3. Public static method that returns the object reference",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The method creates the object only when the reference is null. If the object already exists, the existing reference is returned.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "23. How can the President class be converted into a Singleton class?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A normal President class can be converted into a Singleton class by adding a private static reference, making the constructor private, and providing a public static method.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class President {\n\n    private int number;\n    private String name;\n    private int term;\n\n    public void passBill() {\n        System.out.println(name + \" passing the bills\");\n    }\n\n    private static President ref = null;\n\n    private President() {\n    }\n\n    public static President getPresidentInstance() {\n\n        if (ref == null) {\n            ref = new President();\n        }\n\n        return ref;\n    }\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The object is accessed using:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "President p = President.getPresidentInstance();"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The outside class cannot directly use:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "new President();"
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "24. How can a Singleton class support both a zero-parameterized constructor and a parameterized constructor?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Both constructors can be kept private.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "private President() {\n}\n\nprivate President(int number, String name, int term) {\n    this.number = number;\n    this.name = name;\n    this.term = term;\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The public static method can accept parameters and decide which constructor should be used when the object is created.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "public static President getPresidentInstance(\n        int number,\n        String name,"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "        int term) {",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If default values are supplied, the zero-parameterized constructor can be selected.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If actual values are supplied, the parameterized constructor can be selected.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Only one object is created.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "25. How does the Singleton behave when the first call uses default values and the second call supplies data?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The first call creates the object because ref is initially null.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "President p1 =\n    President.getPresidentInstance(0, null, 0);"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A later call:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "President p2 =\n    President.getPresidentInstance(15, \"Example\", 5);"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "does not create another object because ref is already non-null.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The existing object reference is returned.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "p1 → same object ← p2",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Only one object exists.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "26. If the second Singleton call contains different data, will the existing object's values change automatically?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "No.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The second call returns the existing object reference instead of creating another object.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "President p1 =\n    President.getPresidentInstance(17, \"Draupadi\", 5);\n\nPresident p2 =\n    President.getPresidentInstance(15, \"Example\", 5);"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Both references point to the same object because the second call finds that an object already exists.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "27. What is a POJO class?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "POJO stands for Plain Old Java Object.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A POJO class is a simple Java class used to represent objects with properties and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ".",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A typical POJO can contain private variables, constructors, getters, setters, and methods representing ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ".",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class Teacher {\n\n    private int id;\n    private String name;\n    private String subject;\n\n    public Teacher(int id, String name, String subject) {\n        this.id = id;\n        this.name = name;\n        this.subject = subject;\n    }\n\n    public int getId() {\n        return id;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public String getSubject() {\n        return subject;\n    }\n\n    public void teach() {\n        System.out.println(name + \" is teaching \" + subject);\n    }\n}"
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "28. What is the structure expected in a POJO class?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A POJO can contain private members, constructors, getters, setters, and required ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ".",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "private int id;\nprivate String name;\nprivate String subject;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behavior",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " can be implemented as:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "public void teach() {\n    System.out.println(name + \" is teaching \" + subject);\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Getters and setters provide controlled access to private members.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "29. Can a POJO class also be made a Singleton class?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Yes.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A POJO class can also be converted into a Singleton class.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "private static Teacher ref = null;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The constructor can be private:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "private Teacher() {\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A public static method can provide access:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "public static Teacher getTeacherInstance(\n        int id,\n        String name,"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "        String subject) {",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "code",
+        "text": "    if (ref == null) {\n\n        if (id == 0 && name == null && subject == null) {\n            ref = new Teacher();\n        } else {\n            ref = new Teacher(id, name, subject);\n        }\n    }\n\n    return ref;\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The attributes and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " can then be accessed through the returned reference.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "30. What is inheritance?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Inheritance is the process of acquiring the properties and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " of one entity into another entity.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "From the class perspective, it means acquiring properties and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " from one class into another class.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The concept can be understood as:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "One entity → Another entity",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "One class → Another class",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "One object → Another object",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "31. Why is inheritance required?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The primary advantage of inheritance is code reusability.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If common properties and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " have already been implemented in one class, another class can inherit them instead of rewriting the same code.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "This reduces development time because existing code is reused.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "32. How does inheritance provide code reusability?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Suppose a Player class contains common properties and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ":",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class Player {\n\n    int id;\n    String name;\n    int age;\n    String gender;\n    double height;\n    double weight;\n\n    void behavior1() {\n    }\n\n    void behavior2() {\n    }\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "HockeyPlayer",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " requires these common properties along with hockey-specific properties.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Instead of rewriting the common code, it can inherit from Player.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class HockeyPlayer extends Player {\n\n    int goals;\n    int fouls;\n    String playerType;\n    String level;\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "HockeyPlayer",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " reuses the common properties and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " of Player and adds its own specific properties and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ".",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "33. What is the real-world example used to explain inheritance?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A generic Player contains common information such as:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "ID",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Name",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Age",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Gender",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Height",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Weight",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Family",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Address",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Email",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Phone number",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Generic player ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "HockeyPlayer",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " contains hockey-specific information such as:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Number of goals",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Number of fouls",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Player type",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Level of player",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A hockey player is also a player, so the common player information can be reused.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Similarly, a golf player can reuse the generic player information and add golf-specific information.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "34. What does the extends keyword represent in Java?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The extends keyword represents inheritance between classes.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class HockeyPlayer extends Player {\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "This means that ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "HockeyPlayer",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " inherits from Player.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "It can be read as:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "HockeyPlayer",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " is a Player",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "35. How can extends be understood using the ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "HockeyPlayer",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " example?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class Player {\n}\n\nclass HockeyPlayer extends Player {\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The relationship can be understood as:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "HockeyPlayer",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " is a Player",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "HockeyPlayer",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " receives the common properties and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " of Player and can add hockey-specific properties and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ".",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Similarly:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class GolfPlayer extends Player {\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "can be read as:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "GolfPlayer is a Player",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "36. Does inheritance mean that the child class needs to rewrite the common code?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "No.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The purpose of inheritance is to reuse the already available common code.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If Player already contains:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "int id;\nString name;\nint age;\nString gender;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "then ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "HockeyPlayer",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " does not need to rewrite those common members.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "It inherits the common functionality and adds only the functionality specific to ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "HockeyPlayer",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ".",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "37. What happens if a class does not explicitly use extends?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A Java class implicitly inherits from the Object class when no other superclass is explicitly specified.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Conceptually:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class Student {\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "can be understood as:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class Student extends Object {\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Therefore, the class is part of the Object class hierarchy.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "38. What is the biggest advantage of inheritance?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The biggest advantage is code reusability.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Existing common code",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "        ↓",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "Parent class"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "        ↓",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Inherited",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "        ↓",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "Child class"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "        ↓",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Additional specific functionality",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The common implementation does not need to be written repeatedly, which also reduces development time.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "39. What is the difference between a generic Player class and a specific ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "HockeyPlayer",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " class?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The Player class contains properties and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " common to all players.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "HockeyPlayer",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " class contains properties and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behaviors",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " specific to hockey players.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class Player {\n\n    int id;\n    String name;\n    int age;\n    String gender;\n    double height;\n    double weight;\n}\n\nclass HockeyPlayer extends Player {\n\n    int goals;\n    int fouls;\n    String playerType;\n    String level;\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The child class reuses the common player information and adds hockey-specific information.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "40. How did inheritance reduce development time in the example?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A generic Player class had already been created with common player information and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "behavior",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ".",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "When the GolfPlayer application was required, the common Player code did not need to be rewritten.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The existing code could be inherited and reused, while only golf-specific functionality needed to be added.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "This reduced the amount of new code and development time.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ]
+  ]
+}
