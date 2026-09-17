@@ -1,0 +1,123 @@
+{
+  "title": "Notes Java Nested Loops",
+  "itemsPerPage": 2,
+  "source": "notes-java-nested-loops.docx",
+  "items": [
+    {
+      "question": "Why is a looping control construct used when a task has to be performed multiple times?",
+      "answer": "Answer: A looping control construct is used when the same task has to be executed repeatedly. For example, if a statement has to print the same text five times, writing the print statement five times creates redundancy in the code. Instead, the repeated statement can be written once inside a loop.\n\n```java\nfor (int i = 1; i <= 5; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nThis executes the print statement five times without repeating the same statement in the source code. The important idea is: Identify the repeated task. Write the task only once. Place it inside an appropriate loop. Use the loop control to determine how many times it should execute."
+    },
+    {
+      "question": "Why is writing the same statement multiple times considered code redundancy?",
+      "answer": "Answer: Suppose the requirement is to print \"String Stack\" five times. Writing:\n\n```java\nSystem.out.println(\"String Stack\");\nSystem.out.println(\"String Stack\");\nSystem.out.println(\"String Stack\");\nSystem.out.println(\"String Stack\");\nSystem.out.println(\"String Stack\");\n```\n\nproduces the required output, but the same code is unnecessarily repeated. A better implementation is:\n\n```java\nfor (int i = 1; i <= 5; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nThe loop removes the redundancy because the statement exists only once while the loop controls its repeated execution."
+    },
+    {
+      "question": "What task is performed by the following for loop?",
+      "answer": "Answer: ```java\nfor (int i = 1; i <= 5; i++) {\nSystem.out.println(\"String Stack\");\n}\n```\n\nThe specific task performed by this loop is: Printing \"String Stack\" five times. The loop itself is responsible for repeating the statement five times."
+    },
+    {
+      "question": "How can a repeated block of statements be further optimized when the entire block itself is repeated?",
+      "answer": "Answer: Consider a task where the following operation must be performed three times: Print \"String Stack\" five times. Print one additional line. If the complete block is written three times, the individual print statement may already be inside a loop, but the loop itself becomes redundant. The solution is to treat the complete block as one task and place that task inside another loop.\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 5; i++) {\nSystem.out.println(\"String Stack\");\n}\nSystem.out.println(\"-----\");\n}\n```\n\nHere: Inner loop → prints \"String Stack\" five times. println(\"-----\") → prints the additional line. Outer loop → repeats the complete task three times. This demonstrates that a loop can itself become part of a larger repeated task."
+    },
+    {
+      "question": "Why is another loop required even when the existing task already contains a loop?",
+      "answer": "Answer: A loop inside a task does not automatically repeat the entire task. For example, the inner loop may perform: Print String Stack five times But if the requirement is: Print String Stack five times Print a line Repeat the complete operation three times then the complete operation must itself be placed inside another loop. The inner loop handles one part of the task, while the outer loop handles repetition of the entire task. Therefore, when analyzing a program, each block should be viewed according to the job it performs, rather than simply looking at whether a loop already exists."
+    },
+    {
+      "question": "Why is a for loop suitable when the number of repetitions is known?",
+      "answer": "Answer: A for loop is suitable when the number of repetitions is known in advance. For example, if a task must be repeated exactly three times:\n\n```java\nfor (int j = 1; j <= 3; j++) {\n// task\n}\n```\n\nThe loop clearly represents: Start from 1 Continue until 3 Increment after every iteration A while or do-while loop can also perform the same task, but the for loop directly expresses a known repetition count."
+    },
+    {
+      "question": "Can nested loops use different types of loops?",
+      "answer": "Answer: Yes. Nested loops can be combinations of different loop types. A nested loop means a loop inside another loop. Possible combinations include:\n\n```java\nfor inside for\nwhile inside for\nfor inside while\ndo-while inside for\nfor inside do-while\nwhile inside do-while\n```\n\nFor example, an outer while loop can contain an inner for loop. The outer loop controls one level of repetition, while the inner loop performs another level of repetition."
+    },
+    {
+      "question": "What is a nested loop?",
+      "answer": "Answer: A nested loop is a loop placed inside another loop. Example:\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 5; i++) {\nSystem.out.println(\"String Stack\");\n}\n}\n```\n\nHere: The outer for loop is controlled by j. The inner for loop is controlled by i. For every value of j, the inner loop executes completely. Therefore, the inner loop executes five times for each value of j."
+    },
+    {
+      "question": "What happens when two statements are placed inside the same loop block?",
+      "answer": "Answer: If both statements are inside the loop block, both statements execute during every iteration of that loop. For example:\n\n```java\nfor (int i = 1; i <= 5; i++) {\nSystem.out.println(\"Hello\");\nSystem.out.println(\"World\");\n}\n```\n\nBoth \"Hello\" and \"World\" are printed five times. The block belonging to the loop is everything enclosed within its braces { }. If only one statement is inside the loop and another statement is outside it:\n\n```java\nfor (int i = 1; i <= 5; i++) {\nSystem.out.println(\"Hello\");\n}\nSystem.out.println(\"World\");\n```\n\nthen: Hello Hello Hello Hello Hello World Hello is printed five times, while World is printed only once."
+    },
+    {
+      "question": "How should the execution of a nested loop be traced?",
+      "answer": "Answer: When tracing nested loops, think like the program's control flow. Consider:\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 5; i++) {\nif (i == 2) {\nSystem.out.println(\"String Stack\");\n}\n}\n}\n```\n\nExecution begins with: j = 1 The inner loop starts: i = 1 The condition i == 2 is false. Then: i = 2 The condition becomes true, so \"String Stack\" is printed. The inner loop continues with: i = 3 i = 4 i = 5 After the inner loop finishes, j is incremented. The same process happens for: j = 2 j = 3 Therefore, the inner loop executes completely for every value of the outer-loop variable. The key rule is: For every value of the outer-loop variable, the inner loop starts again and executes from its initialization until its condition becomes false."
+    },
+    {
+      "question": "What happens to the inner-loop variable after the inner loop finishes?",
+      "answer": "Answer: When the inner loop completes, its loop variable is local to that loop's execution context. For example:\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 5; i++) {\n// task\n}\n}\n```\n\nAfter the inner loop completes, execution moves back to the outer loop. The inner-loop variable i is no longer available outside its scope. The outer-loop variable j then proceeds to its next iteration."
+    },
+    {
+      "question": "What does break do in Java?",
+      "answer": "Answer: The break statement immediately terminates the loop or switch construct in which it is placed. For example:\n\n```java\nfor (int i = 1; i <= 5; i++) {\nif (i == 2) {\nbreak;\n}\nSystem.out.println(\"String Stack\");\n}\n```\n\nExecution: i = 1 → condition false → print i = 2 → condition true → break The loop terminates immediately. Therefore, \"String Stack\" is printed only once."
+    },
+    {
+      "question": "Does break always exit the outermost control structure?",
+      "answer": "Answer: No.\n\n```java\nbreak exits the construct in which it is placed.\n```\n\nFor example:\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 5; i++) {\nif (i == 2) {\nbreak;\n}\nSystem.out.println(\"String Stack\");\n}\n}\n```\n\nHere, break is inside the inner loop. Therefore, it exits the inner loop, not the outer loop. After the inner loop terminates, control returns to the outer loop. The outer loop can then continue with its next iteration."
+    },
+    {
+      "question": "How does break behave in nested loops?",
+      "answer": "Answer: The location of the break statement determines which loop is terminated.\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 5; i++) {\nif (i == 2) {\nbreak;\n}\n}\n}\n```\n\nThe break belongs to the inner loop, so:\n\n```java\nbreak → exits inner loop\n```\n\n↓ control returns to outer loop ↓ outer loop continues If the break is required to terminate the outer loop directly while remaining physically inside the inner loop, a labeled loop can be used."
+    },
+    {
+      "question": "What is a labeled loop in Java?",
+      "answer": "Answer: A labeled loop is a loop that is given a name, or label. The label allows a jump statement such as break to specifically identify which loop should be terminated. Basic structure: outer:\n\n```java\nfor (...) {\nfor (...) {\nbreak outer;\n}\n}\n```\n\nHere, outer is the label assigned to the outer loop. When Java encounters:\n\n```java\nbreak outer;\n```\n\ncontrol exits the loop identified by outer."
+    },
+    {
+      "question": "How is a label assigned to a loop?",
+      "answer": "Answer: A label is written before the loop followed by a colon. Example: outer:\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 5; i++) {\n// statements\n}\n}\n```\n\nHere: outer: is the label. A label is a name assigned to the loop so that a labeled break can refer to that particular loop. The label must not be a Java keyword."
+    },
+    {
+      "question": "How can break terminate the outer loop from inside the inner loop?",
+      "answer": "Answer: Consider the requirement: The break must remain inside the inner loop. No additional line should be added to change the control flow. The desired behavior is to exit the outer loop. A label can be assigned to the outer loop. outer:\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 5; i++) {\nif (i == 1) {\nbreak outer;\n}\nSystem.out.println(\"String Stack\");\n}\n}\n```\n\nWhen the condition becomes true:\n\n```java\nbreak outer;\ndoes not simply exit the inner loop.\n```\n\nIt exits the loop identified by outer, which is the outer loop. Therefore: inner loop ↓\n\n```java\nbreak outer\n```\n\n↓ outer loop terminates"
+    },
+    {
+      "question": "Can labels be given to while and do-while loops?",
+      "answer": "Answer: Labels are not limited to for loops. The same concept can be applied to other loops such as while and do-while. The important idea is that the label identifies a particular loop, and a labeled break can use that label to exit that specific loop."
+    },
+    {
+      "question": "What is the difference between an ordinary break and a labeled break?",
+      "answer": "Answer: An ordinary break exits the loop or switch containing the statement. Example:\n\n```java\nfor (int i = 1; i <= 5; i++) {\nif (i == 2) {\nbreak;\n}\n}\n```\n\nThe loop containing the break is terminated. A labeled break specifies the exact labeled loop to terminate: outer:\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 5; i++) {\nif (i == 2) {\nbreak outer;\n}\n}\n}\n```\n\nHere, the outer loop is terminated even though the break statement is physically inside the inner loop."
+    },
+    {
+      "question": "What does continue do in Java?",
+      "answer": "Answer: The continue statement skips the remaining statements of the current iteration and transfers control back to the loop's continuation point. For a for loop, continue transfers control to the increment/decrement part of the loop. Example:\n\n```java\nfor (int i = 1; i <= 5; i++) {\nif (i == 2) {\ncontinue;\n}\nSystem.out.println(\"String Stack\");\n}\n```\n\nWhen i == 2, continue executes. The remaining statements for that iteration are skipped, and control goes to: i++ Then the next iteration begins."
+    },
+    {
+      "question": "What is the difference between break and continue?",
+      "answer": "Answer: ```java\nbreak terminates the loop completely.\ncontinue does not terminate the loop. It skips the current iteration and continues with the next iteration.\n```\n\nExample:\n\n```java\nfor (int i = 1; i <= 5; i++) {\nif (i == 2) {\nbreak;\n}\nSystem.out.println(\"String Stack\");\n}\n```\n\nOutput:\n\n```java\nString Stack\n```\n\nThe loop stops when i becomes 2. With continue:\n\n```java\nfor (int i = 1; i <= 5; i++) {\nif (i == 2) {\ncontinue;\n}\nSystem.out.println(\"String Stack\");\n}\n```\n\nOutput:\n\n```java\nString Stack\nString Stack\nString Stack\nString Stack\n```\n\nThe iteration where i == 2 is skipped, but the loop continues with i == 3, 4, and 5."
+    },
+    {
+      "question": "Where does continue transfer control in a for loop?",
+      "answer": "Answer: Consider:\n\n```java\nfor (int i = 1; i <= 5; i++) {\nif (i == 2) {\ncontinue;\n}\nSystem.out.println(\"String Stack\");\n}\n```\n\nWhen i == 2, continue executes. Control does not proceed to:\n\n```java\nSystem.out.println(\"String Stack\");\n```\n\nInstead, it goes back to the increment section: i++ Then the condition is checked again. The flow is:\n\n```java\ncontinue\n```\n\n↓ i++ ↓ condition check ↓ next iteration"
+    },
+    {
+      "question": "How does continue behave with different types of loops?",
+      "answer": "Answer: The exact point to which continue transfers control depends on the loop type. For a for loop, it proceeds toward the increment/decrement operation. For a while loop, control goes back toward the condition check. For a do-while loop, control proceeds toward the condition-checking part after the do block. Therefore, continue means: Skip the remaining part of the current iteration and continue the loop from its appropriate continuation point."
+    },
+    {
+      "question": "Why can a statement after break become unreachable code?",
+      "answer": "Answer: Consider:\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 5; i++) {\nif (i != 2) {\nbreak;\n}\nSystem.out.println(\"String Stack\");\n}\n}\n```\n\nWhen the inner loop begins: i = 1 The condition: i != 2 is true. Therefore, break executes immediately. Control leaves the inner loop before reaching the statement after the if. If the control flow guarantees that a statement can never be reached, the compiler/IDE may identify it as dead or unreachable code. The important point is to determine whether there is any possible execution path that can reach that statement."
+    },
+    {
+      "question": "How should output questions involving nested loops, break, and continue be solved?",
+      "answer": "Answer: Output should not be guessed. The execution should be traced step by step by treating yourself as the program's control. For nested loops: Identify the outer-loop variable. Initialize the outer loop. Enter the inner loop. Initialize the inner-loop variable. Check the inner-loop condition. Execute statements one by one. If break occurs, determine which loop contains it. If continue occurs, determine where control resumes. Complete the inner loop when appropriate. Return to the outer loop. Increment the outer variable. Repeat until the outer condition becomes false. This approach avoids guessing the output."
+    },
+    {
+      "question": "How do break and continue affect nested loops differently?",
+      "answer": "Answer: Consider a nested structure:\n\n```java\nfor (int j = 1; j <= 3; j++) {\nfor (int i = 1; i <= 5; i++) {\nif (i == 2) {\n// break or continue\n}\nSystem.out.println(\"String Stack\");\n}\n}\n```\n\nIf break is used:\n\n```java\nif (i == 2) {\nbreak;\n}\n```\n\nthe inner loop terminates for the current value of j. The outer loop can continue. If continue is used:\n\n```java\nif (i == 2) {\ncontinue;\n}\n```\n\nonly the current inner-loop iteration is skipped. The inner loop continues with the next value of i. Therefore:\n\n```java\nbreak    → terminate the current loop\ncontinue → skip current iteration and continue the loop\n```"
+    },
+    {
+      "question": "What are the three major categories of control constructs discussed?",
+      "answer": "Answer: The control constructs can be grouped into three major categories: 1. Conditional Control Construct Examples include:\n\n```java\nif\nif-else\nif-else-if ladder\nswitch\n```\n\n2. Looping Control Construct Examples include:\n\n```java\nfor\nwhile\ndo-while\n```\n\nnested loops labeled loops infinite loops 3. Jump Statements The jump statements discussed here are:\n\n```java\nbreak\ncontinue\n```\n\nThese constructs control the flow of execution within a Java program."
+    },
+    {
+      "question": "Why are break and continue called jump statements?",
+      "answer": "Answer: They are called jump statements because they change the normal sequential flow of control.\n\n```java\nbreak makes control jump out of the loop or switch construct.\nbreak\n```\n\n↓ control exits the construct\n\n```java\ncontinue makes control jump back to the loop's continuation point.\ncontinue\n```\n\n↓ loop continuation ↓ next iteration Therefore:\n\n```java\nbreak    → jump out\ncontinue → jump back/continue\n```"
+    },
+    {
+      "question": "How should the same break and continue examples be practiced with while and do-while loops?",
+      "answer": "Answer: The same logic used with for loops can be implemented using while and do-while loops. The important requirement is to preserve the same behavior while changing only the loop construct. For example, a for loop:\n\n```java\nfor (int i = 1; i <= 5; i++) {\nif (i == 2) {\ncontinue;\n}\nSystem.out.println(\"String Stack\");\n}\n```\n\ncan be converted conceptually into a while loop while preserving: initialization condition check increment\n\n```java\ncontinue behavior\n```\n\nThe same exercise can then be performed using a do-while loop. The objective is to understand that break and continue are jump statements whose behavior must be understood together with the control flow of the particular loop."
+    }
+  ]
+}
