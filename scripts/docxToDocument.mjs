@@ -712,6 +712,96 @@ with zipfile.ZipFile(path) as z:
             i += 1
         return out
 
+    def demo_tokens(line):
+        return re.findall(r"Demo\\d+", line or "")
+
+    def diagram_line_kind(line):
+        t = (line or "").strip()
+        names = demo_tokens(t)
+        if names and re.fullmatch(r"(?:Demo\\d+|\\s)+", t):
+            return ("nodes", names)
+        if t and re.fullmatch(r"[/\\\\|\\s]+", t):
+            return ("slashes", t)
+        if t and re.fullmatch(r"[↓↑→←\\s]+", t):
+            return ("arrows", t)
+        return ("other", t)
+
+    def normalize_inheritance_diagram(text):
+        """Rebuild Word trees. Docx spacing is for proportional fonts and breaks in mono."""
+        lines = [ln for ln in (text or "").split("\\n") if ln.strip()]
+        if not lines:
+            return text
+        kinds = [diagram_line_kind(ln) for ln in lines]
+        if any(k[0] == "other" for k in kinds):
+            return text
+        node_rows = [k[1] for k in kinds if k[0] == "nodes"]
+        has_slash = any(k[0] == "slashes" for k in kinds)
+        has_arrows = any(k[0] == "arrows" for k in kinds)
+        if not node_rows:
+            return text
+        counts = [len(r) for r in node_rows]
+        bs = chr(92)
+
+        if all(n == 1 for n in counts) and not has_slash and (has_arrows or len(node_rows) >= 2):
+            arrow = "↑" if any(k[0] == "arrows" and "↑" in k[1] for k in kinds) else "↓"
+            names = [r[0] for r in node_rows]
+            out = []
+            for i, name in enumerate(names):
+                out.append(name)
+                if i < len(names) - 1:
+                    out.append("  " + arrow)
+            return "\\n".join(out)
+
+        if has_slash and counts == [1, 2]:
+            parent, (left, right) = node_rows[0][0], node_rows[1]
+            if has_arrows:
+                return (
+                    "      " + parent + "\\n"
+                    "     /     " + bs + "\\n"
+                    "    ↓       ↓\\n"
+                    "  " + left + "   " + right
+                )
+            return (
+                "      " + parent + "\\n"
+                "     /     " + bs + "\\n"
+                "  " + left + "   " + right
+            )
+
+        if has_slash and counts == [1, 2, 2]:
+            parent = node_rows[0][0]
+            left, right = node_rows[1]
+            low_l, low_r = node_rows[2]
+            return (
+                "        " + parent + "\\n"
+                "       /     " + bs + "\\n"
+                "    " + left + "   " + right + "\\n"
+                "      ↓       ↓\\n"
+                "    " + low_l + "   " + low_r
+            )
+
+        if has_slash and counts == [2, 1]:
+            left, right = node_rows[0]
+            child = node_rows[1][0]
+            return (
+                left + "       " + right + "\\n"
+                "   " + bs + "         /\\n"
+                "    " + bs + "       /\\n"
+                "      " + child
+            )
+
+        return text
+
+    def normalize_diagrams(items):
+        out = []
+        for b in items:
+            if b.get("type") == "diagram":
+                nb = dict(b)
+                nb["text"] = normalize_inheritance_diagram(b.get("text") or "")
+                out.append(nb)
+            else:
+                out.append(b)
+        return out
+
     def attach_loose_bullets(items):
         """Turn stray prose next to a Word list into list items (Q2 / Q15)."""
         out = []
@@ -792,6 +882,7 @@ with zipfile.ZipFile(path) as z:
     merged = peel_sample_output_from_code(merged)
     merged = demote_misclassified_code(merged)
     merged = attach_tree_nodes_to_diagrams(merged)
+    merged = normalize_diagrams(merged)
     merged = attach_loose_bullets(merged)
     print(json.dumps(merged, ensure_ascii=True))
 `;

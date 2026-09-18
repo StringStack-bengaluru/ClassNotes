@@ -222,7 +222,7 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
                 <pre
                   key={index}
                   className={clsx(
-                    'mb-3 max-w-full overflow-x-auto whitespace-pre font-mono text-[12px] font-normal leading-snug md:text-[13px]',
+                    'mb-3 mx-auto w-fit max-w-full overflow-x-auto whitespace-pre font-mono text-[12px] font-normal leading-snug md:text-[13px]',
                     colors.text,
                   )}
                   style={{ fontWeight: 400 }}
