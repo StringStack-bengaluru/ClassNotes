@@ -29,6 +29,7 @@ export type DocumentBlock =
   | { type: 'quote'; runs: DocumentTextRun[]; align?: string }
   | { type: 'list'; ordered?: boolean; items: { runs: DocumentTextRun[] }[] }
   | { type: 'code'; text: string }
+  | { type: 'diagram'; text: string }
   | { type: 'table'; rows: string[][] }
   | { type: 'image'; src: string; alt?: string };
 

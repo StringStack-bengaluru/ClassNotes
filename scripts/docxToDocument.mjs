@@ -161,11 +161,33 @@ with zipfile.ZipFile(path) as z:
             return True
         return False
 
+    def is_ascii_diagram_line(s):
+        """Inheritance trees drawn with spaces, slashes, and arrows — not Java code."""
+        raw = (s or "").replace("\\u00a0", " ").replace("\\xa0", " ").replace("\u00a0", " ")
+        line = raw.strip()
+        if not line:
+            return False
+        if re.search(
+            r"[{};=]|\\b(class|extends|import|return|new|public|private|protected|void|int|if|else|for|while)\\b",
+            line,
+        ):
+            return False
+        if re.fullmatch(r"[/\\\\|_↓↑→←↗↘↙↖+\\-\\s]+", line):
+            return True
+        ident = r"(?:Demo\\d+|[A-Z][A-Za-z0-9]*)"
+        if re.match(r"^\\s{2,}", raw) and re.fullmatch(ident + r"(?:\\s+" + ident + r")*", line):
+            return True
+        if re.fullmatch(ident + r"(?:\\s{2,}" + ident + r")+", line):
+            return True
+        return False
+
     def is_code_line(s):
         line = (s or "").replace("\\u00a0", " ").replace("\\xa0", " ").strip()
         # Also normalize real NBSP if present in XML text
         line = line.replace("\u00a0", " ").strip()
         if not line:
+            return False
+        if is_ascii_diagram_line(s):
             return False
         # Numbered questions are never code: "16. What is the truth table of &&?"
         if re.match(r"^\\d+[G]?[.)]\\s+", line):
@@ -501,8 +523,13 @@ with zipfile.ZipFile(path) as z:
             if not text.strip():
                 continue
             level = heading_level(style)
-            looks_code = p_is_code_style(style) or is_code_line(text) or runs_are_mono(text_runs)
-            if level and not looks_code and is_question_or_title(text):
+            is_diagram = is_ascii_diagram_line(text)
+            looks_code = (not is_diagram) and (
+                p_is_code_style(style) or is_code_line(text) or runs_are_mono(text_runs)
+            )
+            if is_diagram:
+                blocks.append({"type": "diagramLine", "text": text.replace("\\r\\n", "\\n")})
+            elif level and not looks_code and is_question_or_title(text):
                 blocks.append({
                     "type": "heading",
                     "level": min(max(level, 1), 4),
@@ -584,6 +611,25 @@ with zipfile.ZipFile(path) as z:
                 else:
                     break
             merged.append({"type": "code", "text": "\\n".join(lines)})
+        elif b["type"] == "diagramLine":
+            lines = []
+            while i < len(blocks) and blocks[i]["type"] == "diagramLine":
+                lines.append(blocks[i]["text"])
+                i += 1
+            while i < len(blocks) and blocks[i]["type"] == "blank":
+                j = i + 1
+                while j < len(blocks) and blocks[j]["type"] == "blank":
+                    j += 1
+                if j < len(blocks) and blocks[j]["type"] == "diagramLine":
+                    while i < j:
+                        lines.append("")
+                        i += 1
+                    while i < len(blocks) and blocks[i]["type"] == "diagramLine":
+                        lines.append(blocks[i]["text"])
+                        i += 1
+                else:
+                    break
+            merged.append({"type": "diagram", "text": "\\n".join(lines)})
         else:
             merged.append(b)
             i += 1
@@ -609,6 +655,62 @@ with zipfile.ZipFile(path) as z:
         if is_code_line(st) or re.search(r"[{};]", st):
             return False
         return 2 <= len(st) <= 90
+
+    def is_tree_node_text(s):
+        return bool(re.fullmatch(r"Demo\\d+", (s or "").strip()))
+
+    def attach_tree_nodes_to_diagrams(items):
+        """Join Demo1 / arrow / Demo2 lines into one tree (vertical inheritance)."""
+        out = []
+        i = 0
+        while i < len(items):
+            b = items[i]
+            is_node = b.get("type") == "paragraph" and is_tree_node_text(para_text(b))
+            is_diag = b.get("type") == "diagram"
+            if not is_node and not is_diag:
+                out.append(b)
+                i += 1
+                continue
+            chunk = [b]
+            j = i + 1
+            while j < len(items):
+                nxt = items[j]
+                if nxt.get("type") == "blank":
+                    look = items[j + 1] if j + 1 < len(items) else None
+                    if look and (
+                        look.get("type") == "diagram"
+                        or (look.get("type") == "paragraph" and is_tree_node_text(para_text(look)))
+                    ):
+                        chunk.append(nxt)
+                        j += 1
+                        continue
+                    break
+                if nxt.get("type") == "diagram" or (
+                    nxt.get("type") == "paragraph" and is_tree_node_text(para_text(nxt))
+                ):
+                    chunk.append(nxt)
+                    j += 1
+                    continue
+                break
+            has_diag = any(x.get("type") == "diagram" for x in chunk)
+            has_node = any(
+                x.get("type") == "paragraph" and is_tree_node_text(para_text(x)) for x in chunk
+            )
+            if has_diag and has_node and len(chunk) > 1:
+                lines = []
+                for x in chunk:
+                    if x.get("type") == "blank":
+                        lines.append("")
+                    elif x.get("type") == "diagram":
+                        lines.append(x.get("text") or "")
+                    else:
+                        lines.append(para_text(x))
+                out.append({"type": "diagram", "text": "\\n".join(lines)})
+                i = j
+                continue
+            out.append(b)
+            i += 1
+        return out
 
     def attach_loose_bullets(items):
         """Turn stray prose next to a Word list into list items (Q2 / Q15)."""
@@ -644,7 +746,12 @@ with zipfile.ZipFile(path) as z:
             if b.get("type") != "code":
                 out.append(b)
                 continue
-            text = (b.get("text") or "").strip()
+            raw_text = b.get("text") or ""
+            diagram_lines = [ln for ln in raw_text.split("\\n") if ln.strip()]
+            if diagram_lines and all(is_ascii_diagram_line(ln) for ln in diagram_lines):
+                out.append({"type": "diagram", "text": raw_text})
+                continue
+            text = raw_text.strip()
             lines = [ln for ln in text.split("\\n") if ln.strip()]
             if len(lines) != 1:
                 out.append(b)
@@ -684,6 +791,7 @@ with zipfile.ZipFile(path) as z:
     merged = stitch_code_sandwiched_paragraphs(merged)
     merged = peel_sample_output_from_code(merged)
     merged = demote_misclassified_code(merged)
+    merged = attach_tree_nodes_to_diagrams(merged)
     merged = attach_loose_bullets(merged)
     print(json.dumps(merged, ensure_ascii=True))
 `;
@@ -728,6 +836,7 @@ function blockUnits(block) {
     case 'list':
       return Math.max(1.5, (block.items?.length ?? 1) * 1.5);
     case 'code':
+    case 'diagram':
       return Math.max(2.5, Math.ceil((block.text || '').split('\n').length * 1.0));
     case 'table':
       return Math.max(3, (block.rows?.length ?? 1) * 1.5);
@@ -743,7 +852,7 @@ const QUESTION_START =
 
 function blockPlainText(block) {
   if (!block) return '';
-  if (block.type === 'code') return block.text || '';
+  if (block.type === 'code' || block.type === 'diagram') return block.text || '';
   if (block.type === 'list') {
     return (block.items || []).map((item) => (item.runs || []).map((r) => r.text || '').join('')).join(' ');
   }

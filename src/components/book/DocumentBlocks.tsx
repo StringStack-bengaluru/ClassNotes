@@ -217,6 +217,19 @@ export function DocumentBlocks({ blocks, theme }: DocumentBlocksProps) {
                   <code className="whitespace-pre font-mono font-normal">{block.text}</code>
                 </pre>
               );
+            case 'diagram':
+              return (
+                <pre
+                  key={index}
+                  className={clsx(
+                    'mb-3 max-w-full overflow-x-auto whitespace-pre font-mono text-[12px] font-normal leading-snug md:text-[13px]',
+                    colors.text,
+                  )}
+                  style={{ fontWeight: 400 }}
+                >
+                  {block.text}
+                </pre>
+              );
             case 'table':
               return (
                 <div key={index} className="mb-3 max-w-full overflow-x-auto">
