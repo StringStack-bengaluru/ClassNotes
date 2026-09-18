@@ -1,0 +1,131 @@
+{
+  "title": "Notes Java Types Of Inheritance",
+  "itemsPerPage": 2,
+  "source": "notes-java-types-of-inheritance.docx",
+  "items": [
+    {
+      "question": "What is inheritance in Java?",
+      "answer": "Answer: Inheritance is the process of acquiring properties and behaviors from one class into another class. In Java, one class can acquire the properties and behaviors of another class using inheritance. The class whose properties and behaviors are inherited is called the parent class, while the class that inherits them is called the child class. Different terms can be used for the same relationship: Parent class → Child class Base class → Derived class Super class → Sub class Therefore, inheritance can be defined as: Inheritance is the process of acquiring properties and behaviors from a parent class to a child class."
+    },
+    {
+      "question": "How are the Human and Student classes related through inheritance?",
+      "answer": "Answer: Consider a Human class containing: Attributes: name age gender Behavior: eat() A Student class contains: Attributes: id email phoneNumber college degree Behavior: study() The Student class can inherit the properties and behaviors of the Human class. The relationship is: Human ├── name ├── age ├── gender └── eat() Student ├── id ├── email ├── phoneNumber ├── college ├── degree └── study() After inheritance, the Student class can access the properties and behavior inherited from Human."
+    },
+    {
+      "question": "How is inheritance implemented in Java?",
+      "answer": "Answer: Inheritance is implemented using the extends keyword. Example:\n\n```java\nclass Student extends Human {\n}\n```\n\nHere: Human → Parent class Student → Child class The Student class inherits properties and behaviors from Human."
+    },
+    {
+      "question": "Why can a Student class access properties defined in the Human class?",
+      "answer": "Answer: Suppose name, age, and gender are defined inside Human. Without inheritance, Student cannot directly use those properties because they are not defined in Student. When the following relationship is created:\n\n```java\nclass Student extends Human {\n}\n```\n\nthe properties and behaviors of Human become available to Student. Therefore, Student can use: name age gender eat() along with its own properties and behavior."
+    },
+    {
+      "question": "What happens when a Student object is created after inheritance?",
+      "answer": "Answer: Consider:\n\n```java\nStudent s = new Student();\n```\n\nThe Student class has five attributes of its own: id email phoneNumber college degree It also inherits three attributes from Human: name age gender Therefore, the object contains eight instance variables: Student attributes: id email phoneNumber college degree Inherited attributes: name age gender So: 5 Student attributes + 3 inherited attributes = 8 instance variables"
+    },
+    {
+      "question": "How can inherited properties be accessed using a child-class object?",
+      "answer": "Answer: After creating:\n\n```java\nStudent s = new Student();\n```\n\nproperties from both the parent and child classes can be accessed through s. Example:\n\n```java\ns.name = \"Ramesh\";\ns.age = 22;\ns.gender = \"Male\";\ns.id = 123;\ns.email = \"ram@ai\";\ns.phoneNumber = 12345;\ns.college = \"SS Institute of Technology\";\ns.degree = \"B.Tech\";\n```\n\nHere, name, age, and gender are inherited from Human. The remaining properties are defined in Student."
+    },
+    {
+      "question": "How can inherited and child-specific behaviors be called?",
+      "answer": "Answer: The Human class contains: void eat() {\n\n```java\nSystem.out.println(\"Ramesh is eating\");\n}\n```\n\nThe Student class contains: void study() {\n\n```java\nSystem.out.println(\"Ramesh is studying\");\n}\n```\n\nAfter creating:\n\n```java\nStudent s = new Student();\n```\n\nboth methods can be called:\n\n```java\ns.eat();\ns.study();\n```\n\nOutput: Ramesh is eating Ramesh is studying eat() is inherited from Human, while study() belongs to Student."
+    },
+    {
+      "question": "What are the different names used for a parent class and child class?",
+      "answer": "Answer: A parent class can also be called: Parent class Base class Super class A child class can also be called: Child class Derived class Sub class The equivalent relationships are: Parent ↔ Child Base ↔ Derived Super ↔ Sub"
+    },
+    {
+      "question": "How is inheritance represented in UML?",
+      "answer": "Answer: Inheritance is represented using an arrow in a UML diagram. The arrow points toward the parent class. Example: Human ↑ | Student UML stands for: Unified Modeling Language A UML class diagram can represent classes and relationships between classes."
+    },
+    {
+      "question": "What information can be obtained from a UML class diagram?",
+      "answer": "Answer: A UML class diagram can represent: Class names Attributes Behaviors Relationships between classes Inheritance relationships For example: Bird ├── color ├── cost └── fly() ↑ | Sparrow ├── name ├── type ├── eat() └── sleep() This can be represented in Java using:\n\n```java\nclass Sparrow extends Bird {\n}\n```"
+    },
+    {
+      "question": "How can a UML diagram containing Bird and Sparrow be converted into Java code?",
+      "answer": "Answer: Suppose the Bird class contains: color cost fly() and the Sparrow class contains: name type eat() sleep() If Sparrow inherits from Bird, the Java code is:\n\n```java\nclass Bird {\nString color;\nint cost;\n```\n\nvoid fly() {\n\n```java\nSystem.out.println(\"Bird is flying\");\n}\n}\nclass Sparrow extends Bird {\nString name;\nString type;\n```\n\nvoid eat() {\n\n```java\nSystem.out.println(\"Sparrow is eating\");\n}\n```\n\nvoid sleep() {\n\n```java\nSystem.out.println(\"Sparrow is sleeping\");\n}\n}\n```"
+    },
+    {
+      "question": "How is an object of Sparrow created and used?",
+      "answer": "Answer: An object can be created using:\n\n```java\nSparrow s = new Sparrow();\n```\n\nValues can be assigned to both inherited and child-specific attributes:\n\n```java\ns.color = \"Brown\";\ns.cost = 990;\ns.name = \"Sparrow\";\ns.type = \"Home Sparrow\";\n```\n\nMethods can then be called:\n\n```java\ns.eat();\ns.fly();\ns.sleep();\n```\n\nThe object can access color, cost, and fly() because they are inherited from Bird."
+    },
+    {
+      "question": "How can all the Sparrow details be printed using a method?",
+      "answer": "Answer: A method can be created inside Sparrow: void printDetails() {\n\n```java\nSystem.out.println(\n```\n\ncolor + \" \" + cost + \" \" + name + \" \" + type\n\n```java\n);\n}\n```\n\nThe method can be called using:\n\n```java\ns.printDetails();\n```\n\nFor example, the output can contain: Brown 990 Sparrow Home Sparrow The method can access both the attributes defined in Sparrow and the inherited attributes from Bird."
+    },
+    {
+      "question": "What does property mean in inheritance?",
+      "answer": "Answer: The term property can represent the information associated with an entity. It is not limited only to variables or attributes. Examples include: Money Land Jewelry Furniture In the context of inheritance, the properties and behaviors available in the parent class can become available to the child class through the inheritance relationship."
+    },
+    {
+      "question": "What is single inheritance?",
+      "answer": "Answer: Single inheritance occurs when one class inherits from one parent class. Example: Demo1 ↑ Demo2 If: Demo1 → A, B Demo2 → C, D then Demo2 can access: A B C D Java implementation:\n\n```java\nclass Demo1 {\nint A;\nint B;\n}\nclass Demo2 extends Demo1 {\nint C;\nint D;\n}\n```"
+    },
+    {
+      "question": "What is multilevel inheritance?",
+      "answer": "Answer: Multilevel inheritance occurs when inheritance exists through multiple levels. Example: Demo1 ↑ Demo2 ↑ Demo3 The relationship is:\n\n```java\nclass Demo2 extends Demo1 {\n}\nclass Demo3 extends Demo2 {\n}\n```\n\nSuppose: Demo1 → A, B Demo2 → C, D Demo3 → E, F A Demo3 object can access: A B C D E F because the properties are available through the inheritance chain."
+    },
+    {
+      "question": "What is hierarchical inheritance?",
+      "answer": "Answer: Hierarchical inheritance occurs when multiple child classes inherit from the same parent class. Example: Demo1 / \\ ↓ ↓ Demo2 Demo3 The Java structure is:\n\n```java\nclass Demo2 extends Demo1 {\n}\nclass Demo3 extends Demo1 {\n}\n```\n\nSuppose: Demo1 → A, B Demo2 → C, D Demo3 → E, F Both Demo2 and Demo3 inherit A and B from Demo1."
+    },
+    {
+      "question": "What is hybrid inheritance?",
+      "answer": "Answer: Hybrid inheritance is a combination of two or more types of inheritance. For example: Demo1 / \\ Demo2 Demo3 ↓ ↓ Demo4 Demo5 This structure contains hierarchical inheritance and multilevel inheritance. Therefore: Hybrid inheritance is a combination of two or more inheritance types."
+    },
+    {
+      "question": "What is multiple inheritance?",
+      "answer": "Answer: Multiple inheritance occurs when one class attempts to acquire properties from more than one parent class. Conceptually: Demo1 Demo2 \\ / \\ / Demo3 Here, Demo3 would have two parent classes: Demo1 Demo2 and would attempt to inherit properties from both."
+    },
+    {
+      "question": "What is cyclic inheritance?",
+      "answer": "Answer: Cyclic inheritance occurs when inheritance relationships form a cycle. Example: Demo1 ↓ Demo2 ↓ Demo3 ↓ Demo1 Here, the inheritance chain eventually returns to Demo1, creating a cycle. This is called cyclic inheritance."
+    },
+    {
+      "question": "What are the six types of inheritance?",
+      "answer": "Answer: The six types are: 1. Single inheritance 2. Multilevel inheritance 3. Hierarchical inheritance 4. Hybrid inheritance 5. Multiple inheritance 6. Cyclic inheritance In the Java class-inheritance model covered here, single, multilevel, hierarchical, and hybrid inheritance are permitted, while multiple and cyclic inheritance are not permitted."
+    },
+    {
+      "question": "How can you verify whether an inheritance type is supported?",
+      "answer": "Answer: The inheritance structure can be implemented in Java and compiled. For single inheritance: Demo1 ↓ Demo2 Create:\n\n```java\nclass Demo1 {\nint A;\nint B;\n}\nclass Demo2 extends Demo1 {\nint C;\nint D;\n}\n```\n\nThen create a Demo2 object and assign values to: A B C D If the program compiles and executes successfully, the structure is supported. The same approach can be used with other inheritance structures."
+    },
+    {
+      "question": "How can multilevel inheritance be tested using a Java program?",
+      "answer": "Answer: Create three classes:\n\n```java\nclass Demo1 {\nint A;\nint B;\n}\nclass Demo2 extends Demo1 {\nint C;\nint D;\n}\nclass Demo3 extends Demo2 {\nint E;\nint F;\n}\n```\n\nCreate an object of Demo3:\n\n```java\nDemo3 d = new Demo3();\n```\n\nAssign values to: A B C D E F Then print all six values. This demonstrates access to properties across multiple inheritance levels."
+    },
+    {
+      "question": "How can hierarchical inheritance be implemented in Java?",
+      "answer": "Answer: Create one parent class:\n\n```java\nclass Demo1 {\nint A;\nint B;\n}\n```\n\nCreate multiple child classes:\n\n```java\nclass Demo2 extends Demo1 {\nint C;\nint D;\n}\nclass Demo3 extends Demo1 {\nint E;\nint F;\n}\n```\n\nThe structure is: Demo1 / \\ Demo2 Demo3 Both child classes inherit the properties of Demo1."
+    },
+    {
+      "question": "How can hybrid inheritance be represented in Java?",
+      "answer": "Answer: A hybrid structure combines multiple inheritance patterns. For example: Demo1 / \\ Demo2 Demo3 ↓ ↓ Demo4 Demo5 The relationships can contain: Demo2 extends Demo1 Demo3 extends Demo1 Demo4 extends Demo2 Demo5 extends Demo3 The structure combines hierarchical and multilevel inheritance."
+    },
+    {
+      "question": "What happens when multiple inheritance is attempted using Java classes?",
+      "answer": "Answer: Multiple inheritance attempts to make one class inherit from more than one parent class. The conceptual structure is: Demo1 Demo2 \\ / \\ / Demo3 The class-inheritance model in Java does not permit a class to extend multiple classes. An attempt to represent this structure should be compiled so that the resulting compiler error can be examined."
+    },
+    {
+      "question": "What happens when cyclic inheritance is attempted?",
+      "answer": "Answer: Cyclic inheritance creates a circular relationship between classes. For example: Demo1 ↓ Demo2 ↓ Demo3 ↓ Demo1 This means a class eventually becomes part of its own inheritance chain. Java does not permit this type of inheritance. A program containing the circular extends relationship produces a compiler error."
+    },
+    {
+      "question": "Why are compiler errors useful when testing unsupported inheritance structures?",
+      "answer": "Answer: A compiler error identifies that the inheritance structure cannot be represented in the specified form. For unsupported structures, the error can be examined to understand the restriction. The testing process is: Create inheritance relationship ↓ Compile the program ↓ Check compiler result ↓ Analyze the error This approach can be used particularly for multiple and cyclic inheritance."
+    },
+    {
+      "question": "What topics are associated with inheritance in Java?",
+      "answer": "Answer: Inheritance involves several related areas: Types of methods in inheritance Constructors in inheritance super keyword\n\n```java\nfinal keyword\n```\n\nMethod overriding Upcasting Downcasting These topics describe how methods, constructors, keywords, and object references behave within inheritance relationships."
+    },
+    {
+      "question": "What is the basic syntax of inheritance in Java?",
+      "answer": "Answer: The basic syntax is:\n\n```java\nclass Child extends Parent {\n}\n```\n\nFor example:\n\n```java\nclass Human {\n}\nclass Student extends Human {\n}\n```\n\nHere: Human → Parent Student → Child extends → Establishes inheritance The child class can use the properties and behaviors available from the parent class."
+    },
+    {
+      "question": "What is the fundamental concept behind inheritance?",
+      "answer": "Answer: Inheritance establishes a parent-child relationship between classes. Parent Class ↓ Properties + Behaviors ↓ Child Class The child class can acquire properties and behaviors from the parent class. The Java keyword used to establish this relationship is: extends Example:\n\n```java\nclass Student extends Human {\n}\n```\n\nThis allows the Student class to use its own properties and behaviors together with the properties and behaviors inherited from Human."
+    }
+  ]
+}
