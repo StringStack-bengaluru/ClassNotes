@@ -1,0 +1,187 @@
+{
+  "title": "Notes Java Inherited Override Specialized Properties",
+  "itemsPerPage": 2,
+  "source": "notes-java-inherited-override-specialized-properties.docx",
+  "items": [
+    {
+      "question": "What are the types of inheritance in OOP?",
+      "answer": "Answer: The six types of inheritance are: Single inheritance Multilevel inheritance Hierarchical inheritance Hybrid inheritance Cyclic inheritance Multiple inheritance"
+    },
+    {
+      "question": "Which types of inheritance are permitted in Java?",
+      "answer": "Answer: The inheritance types identified for Java are: Single inheritance Multilevel inheritance Hierarchical inheritance Hybrid inheritance Multiple inheritance through classes and cyclic inheritance are not permitted in Java."
+    },
+    {
+      "question": "Why is multiple inheritance not permitted in Java?",
+      "answer": "Answer: Multiple inheritance can lead to the diamond-shaped problem, which can create ambiguity about which inherited implementation should be used."
+    },
+    {
+      "question": "Why is cyclic inheritance not permitted in Java?",
+      "answer": "Answer: Cyclic inheritance can lead to infinite constructor chaining. A class would indirectly depend on itself through its inheritance hierarchy, creating an invalid constructor execution chain."
+    },
+    {
+      "question": "What should be the first statement in a Java constructor?",
+      "answer": "Answer: For Java versions before JDK 25, the first statement of a constructor must be either this() or super() when an explicit constructor invocation is required. this() is used to call another constructor in the same class, while super() is used to call a constructor of the parent class."
+    },
+    {
+      "question": "Can super() appear as the second or third statement in a constructor?",
+      "answer": "Answer: For Java versions before JDK 25, an explicit super() constructor invocation must appear as the first statement of the constructor. The transcription identifies a change beginning with JDK 25 that provides flexibility to place super() after certain validation or statements."
+    },
+    {
+      "question": "What is the main purpose of a constructor?",
+      "answer": "Answer: The main purpose of a constructor is to initialize the instance variables of an object. Values can be received through local variables or constructor parameters and then assigned to instance variables."
+    },
+    {
+      "question": "From which JDK version can super() be placed after certain statements?",
+      "answer": "Answer: The transcription identifies JDK 25 as the version from which super() can be placed after certain validation or statements under the stated conditions. For versions before JDK 25, this flexibility is not available."
+    },
+    {
+      "question": "What happens when an object of the childmost class is created in an inheritance hierarchy?",
+      "answer": "Answer: When an object of the childmost class is created, constructors are executed through the inheritance hierarchy up to the parentmost class. The constructor execution proceeds from the child class toward the topmost parent class."
+    },
+    {
+      "question": "What is constructor chaining?",
+      "answer": "Answer: Constructor chaining is the process in which constructors are connected and executed through an inheritance hierarchy. When an object of the childmost class is created, the constructors of its parent classes are also invoked until the topmost parent constructor is reached."
+    },
+    {
+      "question": "What is the constructor execution flow in a hierarchy such as Object → Demo1 → Demo2 → Demo3?",
+      "answer": "Answer: If an object is created using:\n\n```java\nnew Demo3();\n```\n\nthe constructor execution follows the hierarchy toward the top: Demo3 → Demo2 → Demo1 → Object The childmost constructor initiates the chain, and the parent constructors are executed up to the topmost parent."
+    },
+    {
+      "question": "What is inherited behavior or an inherited property?",
+      "answer": "Answer: An inherited property or behavior is a property or method obtained from the parent class and used by the child class without changing its implementation. For example, if a child class inherits a fly() method from its parent and uses the same implementation, fly() is an inherited method."
+    },
+    {
+      "question": "What is an overridden property or behavior?",
+      "answer": "Answer: An overridden property or behavior is a method or behavior inherited from the parent class whose implementation is changed in the child class according to the child's requirement. The method name remains the same, but the implementation provided by the child class is different."
+    },
+    {
+      "question": "What is a specialized property or behavior?",
+      "answer": "Answer: A specialized property or behavior is a property or method that is present only in the child class and does not exist in the parent class. For example, a carryCargo() method can be specific to a CargoPlane class even though the parent Plane class does not have that method."
+    },
+    {
+      "question": "What are the three types of methods or behaviors that can occur in inheritance?",
+      "answer": "Answer: The three types are: Inherited methods Overridden methods Specialized methods"
+    },
+    {
+      "question": "How is an inherited method different from an overridden method?",
+      "answer": "Answer: An inherited method is used by the child exactly as it is defined in the parent. An overridden method is inherited from the parent but its implementation is changed in the child according to the child's requirement."
+    },
+    {
+      "question": "How is a specialized method different from an inherited method?",
+      "answer": "Answer: An inherited method exists in the parent and is available in the child. A specialized method does not exist in the parent and is introduced specifically in the child."
+    },
+    {
+      "question": "How can the three types of methods be represented using a Plane hierarchy?",
+      "answer": "Answer: A Plane class can contain two methods: fly() land() A CargoPlane class and a PassengerPlane class can extend Plane. Both child classes can: Inherit fly() Override land() Add their own specialized method For CargoPlane, the specialized method can be carryCargo(). For PassengerPlane, the specialized method can be carryPassenger()."
+    },
+    {
+      "question": "What methods can a CargoPlane class have when it extends Plane?",
+      "answer": "Answer: A CargoPlane can have three methods: fly() — inherited land() — overridden carryCargo() — specialized"
+    },
+    {
+      "question": "What methods can a PassengerPlane class have when it extends Plane?",
+      "answer": "Answer: A PassengerPlane can have three methods: fly() — inherited land() — overridden carryPassenger() — specialized"
+    },
+    {
+      "question": "How is the Plane class implemented in the example?",
+      "answer": "Answer: The Plane class contains two methods:\n\n```java\nclass Plane {\n```\n\nvoid fly() {\n\n```java\nSystem.out.println(\"Plane is flying\");\n}\n```\n\nvoid land() {\n\n```java\nSystem.out.println(\"Plane is landing\");\n}\n}\n```\n\nThe fly() method provides a general flying behavior, while land() provides a general landing behavior."
+    },
+    {
+      "question": "How is the CargoPlane class implemented?",
+      "answer": "Answer: CargoPlane extends Plane. It uses the inherited fly() method, overrides land(), and adds the specialized carryCargo() method.\n\n```java\nclass CargoPlane extends Plane {\n```\n\nvoid land() {\n\n```java\nSystem.out.println(\"Cargo plane is landing on huge runway\");\n}\n```\n\nvoid carryCargo() {\n\n```java\nSystem.out.println(\"Cargo plane is carrying cargo\");\n}\n}\n```\n\nThe land() implementation is changed because the landing requirement of a cargo plane is different."
+    },
+    {
+      "question": "Why is fly() an inherited method in CargoPlane?",
+      "answer": "Answer: CargoPlane does not provide a new implementation of fly(). Therefore, it directly uses the fly() method inherited from Plane."
+    },
+    {
+      "question": "Why is land() an overridden method in CargoPlane?",
+      "answer": "Answer: The Plane class already provides a land() method, but CargoPlane provides its own implementation: void land() {\n\n```java\nSystem.out.println(\"Cargo plane is landing on huge runway\");\n}\n```\n\nThe method name remains land(), but its implementation changes according to the requirement of CargoPlane."
+    },
+    {
+      "question": "Why is carryCargo() a specialized method in CargoPlane?",
+      "answer": "Answer: carryCargo() is specialized because the method is introduced in CargoPlane and is not available in the parent Plane class."
+    },
+    {
+      "question": "How is the PassengerPlane class implemented?",
+      "answer": "Answer: PassengerPlane extends Plane, uses the inherited fly() method, overrides land(), and adds the specialized carryPassenger() method.\n\n```java\nclass PassengerPlane extends Plane {\n```\n\nvoid land() {\n\n```java\nSystem.out.println(\"Passenger plane is landing on medium sized runway\");\n}\n```\n\nvoid carryPassenger() {\n\n```java\nSystem.out.println(\"Passenger plane is carrying passengers\");\n}\n}\n```"
+    },
+    {
+      "question": "Why is changing the implementation of a method called overriding?",
+      "answer": "Answer: A method represents a set of instructions that performs a particular task. When the child class keeps the same method name but changes the set of instructions to perform the task according to its own requirement, the method is overridden."
+    },
+    {
+      "question": "Does overriding require only a different System.out.println() statement?",
+      "answer": "Answer: No. The difference in implementation is not limited to a System.out.println() statement. A method may contain many instructions. If the child class changes the implementation of the inherited method according to its requirement, the method is overridden."
+    },
+    {
+      "question": "How can the CargoPlane object be created and its methods called?",
+      "answer": "Answer: The object can be created and its methods can be called as follows:\n\n```java\nCargoPlane cp = new CargoPlane();\ncp.fly();\ncp.carryCargo();\ncp.land();\n```\n\nHere: cp.fly() calls the inherited method. cp.carryCargo() calls the specialized method. cp.land() calls the overridden method."
+    },
+    {
+      "question": "How can the PassengerPlane object be created and its methods called?",
+      "answer": "Answer: The object can be created and its methods can be called as follows:\n\n```java\nPassengerPlane pp = new PassengerPlane();\npp.fly();\npp.carryPassenger();\npp.land();\n```\n\nHere: pp.fly() calls the inherited method. pp.carryPassenger() calls the specialized method. pp.land() calls the overridden method."
+    },
+    {
+      "question": "What is the output when the CargoPlane methods are called?",
+      "answer": "Answer: The output is: Plane is flying Cargo plane is carrying cargo Cargo plane is landing on huge runway The fly() output comes from the inherited parent method, carryCargo() comes from the specialized child method, and land() comes from the overridden child method."
+    },
+    {
+      "question": "What is the output when the PassengerPlane methods are called?",
+      "answer": "Answer: The output is: Plane is flying Passenger plane is carrying passengers Passenger plane is landing on medium sized runway The fly() method is inherited, while carryPassenger() is specialized and land() is overridden."
+    },
+    {
+      "question": "What is the difference between inherited, overridden, and specialized methods in the Plane example?",
+      "answer": "Answer: Method CargoPlane PassengerPlane fly() Inherited Inherited land() Overridden Overridden carryCargo() Specialized Not available carryPassenger() Not available Specialized"
+    },
+    {
+      "question": "How can a UML inheritance hierarchy be converted into Java code using inherited, overridden, and specialized methods?",
+      "answer": "Answer: The parent class is first created with its common methods. Child classes are then created using extends. Common methods can be inherited without modification. A child can provide a new implementation for a parent method to achieve overriding. Additional methods can be created directly inside the child class to represent specialized behavior."
+    },
+    {
+      "question": "What is the Teacher inheritance hierarchy used in the example?",
+      "answer": "Answer: The hierarchy contains one parent class and three child classes: Teacher / | \\ / | \\ PhysicsTeacher ChemistryTeacher BiologyTeacher PhysicsTeacher, ChemistryTeacher, and BiologyTeacher extend Teacher."
+    },
+    {
+      "question": "What methods or properties are present in the Teacher class?",
+      "answer": "Answer: The Teacher class contains behaviors related to: markAttendance() teach() These represent common behaviors shared by the child teacher classes."
+    },
+    {
+      "question": "What are the inherited, overridden, and specialized methods in PhysicsTeacher?",
+      "answer": "Answer: PhysicsTeacher has: markAttendance() — inherited teach() — overridden\n\n```java\ndoNewtonLawExperiment() — specialized\n```\n\nThe teach() method changes because a physics teacher has subject-specific teaching behavior."
+    },
+    {
+      "question": "What are the inherited, overridden, and specialized methods in ChemistryTeacher?",
+      "answer": "Answer: ChemistryTeacher has: markAttendance() — inherited teach() — overridden\n\n```java\ndoTitrationExperiment() — specialized\n```\n\nThe specialized experiment represents a behavior specific to the chemistry teacher."
+    },
+    {
+      "question": "What are the inherited, overridden, and specialized methods in BiologyTeacher?",
+      "answer": "Answer: BiologyTeacher has: markAttendance() — inherited teach() — overridden\n\n```java\ndoDissectionExperiment() — specialized\n```\n\nThe dissection experiment is specific to the biology teacher."
+    },
+    {
+      "question": "How can the Teacher class be represented in Java?",
+      "answer": "Answer: A simplified implementation is:\n\n```java\nclass Teacher {\n```\n\nvoid markAttendance() {\n\n```java\nSystem.out.println(\"Teacher is marking attendance\");\n}\n```\n\nvoid teach() {\n\n```java\nSystem.out.println(\"Teacher is teaching\");\n}\n}\n```\n\nThe child classes can inherit markAttendance(), override teach(), and add their own specialized methods."
+    },
+    {
+      "question": "How can PhysicsTeacher be represented in Java?",
+      "answer": "Answer: ```java\nclass PhysicsTeacher extends Teacher {\n```\n\nvoid teach() {\n\n```java\nSystem.out.println(\"Physics teacher is teaching physics\");\n}\n```\n\nvoid doNewtonLawExperiment() {\n\n```java\nSystem.out.println(\"Physics teacher is doing Newton's law experiment\");\n}\n}\n```\n\nmarkAttendance() is inherited, teach() is overridden, and doNewtonLawExperiment() is specialized."
+    },
+    {
+      "question": "How can ChemistryTeacher be represented in Java?",
+      "answer": "Answer: ```java\nclass ChemistryTeacher extends Teacher {\n```\n\nvoid teach() {\n\n```java\nSystem.out.println(\"Chemistry teacher is teaching chemistry\");\n}\n```\n\nvoid doTitrationExperiment() {\n\n```java\nSystem.out.println(\"Chemistry teacher is doing titration experiment\");\n}\n}\n```\n\nmarkAttendance() is inherited, teach() is overridden, and doTitrationExperiment() is specialized."
+    },
+    {
+      "question": "How can BiologyTeacher be represented in Java?",
+      "answer": "Answer: ```java\nclass BiologyTeacher extends Teacher {\n```\n\nvoid teach() {\n\n```java\nSystem.out.println(\"Biology teacher is teaching biology\");\n}\n```\n\nvoid doDissectionExperiment() {\n\n```java\nSystem.out.println(\"Biology teacher is doing a dissection experiment\");\n}\n}\n```\n\nmarkAttendance() is inherited, teach() is overridden, and doDissectionExperiment() is specialized."
+    },
+    {
+      "question": "How can objects of the three teacher classes be created?",
+      "answer": "Answer: Objects can be created as follows:\n\n```java\nPhysicsTeacher pt = new PhysicsTeacher();\nChemistryTeacher ct = new ChemistryTeacher();\nBiologyTeacher bt = new BiologyTeacher();\n```\n\nEach object can then access its inherited, overridden, and specialized methods."
+    },
+    {
+      "question": "What is the main concept demonstrated by the Teacher hierarchy?",
+      "answer": "Answer: The Teacher hierarchy demonstrates three types of behavior in inheritance: Common behavior inherited without modification. Common behavior whose implementation is changed in the child. New behavior introduced specifically by the child. This corresponds to inherited, overridden, and specialized methods."
+    }
+  ]
+}
