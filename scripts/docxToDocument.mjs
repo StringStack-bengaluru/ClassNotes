@@ -181,13 +181,44 @@ with zipfile.ZipFile(path) as z:
             return True
         return False
 
+    def is_tree_or_flow_line(s):
+        """ASCII/box-drawing branches: |-- method() → Inherited, └── child."""
+        raw = (s or "").replace("\\u00a0", " ").replace("\\xa0", " ").replace("\u00a0", " ")
+        line = raw.strip()
+        if not line:
+            return False
+        if re.search(r"\\bclass\\s+[A-Z]", line) or re.search(r"[{};]|\\b(import|return)\\b", line):
+            if not re.match(r"^[|└├]", line):
+                return False
+        if re.match(r"^\\|(?:-)+", line):
+            return True
+        if line.startswith("|") or "└" in line or "├" in line:
+            return True
+        if re.match(r"^→", line):
+            return True
+        return False
+
+    def is_pattern_output_line(s):
+        """Star/dollar sample output from pattern programs — not Java."""
+        raw = (s or "").replace("\\u00a0", " ").replace("\\xa0", " ").replace("\u00a0", " ")
+        line = raw.strip()
+        if not line:
+            return False
+        if re.search(r"[{};=]|System\\.|for\\s*\\(|class\\s+", line):
+            return False
+        if re.search(r"[A-Za-z]", line):
+            return False
+        if re.fullmatch(r"[\\s*$#]+", line) and re.search(r"[*$#]", line):
+            return True
+        return False
+
     def is_code_line(s):
         line = (s or "").replace("\\u00a0", " ").replace("\\xa0", " ").strip()
         # Also normalize real NBSP if present in XML text
         line = line.replace("\u00a0", " ").strip()
         if not line:
             return False
-        if is_ascii_diagram_line(s):
+        if is_ascii_diagram_line(s) or is_pattern_output_line(s) or is_tree_or_flow_line(s):
             return False
         # Numbered questions are never code: "16. What is the truth table of &&?"
         if re.match(r"^\\d+[G]?[.)]\\s+", line):
@@ -256,6 +287,8 @@ with zipfile.ZipFile(path) as z:
             return True
         # Field / chained access used as println continuation: bird1.cost
         if re.fullmatch(r"[A-Za-z_]\\w*(?:\\.[A-Za-z_]\\w*)+(?:\\(\\))?", line):
+            if re.search(r"\\.(java|class|txt|json|xml|html|css)$", line, re.I):
+                return False
             return True
         # } else {  |  else {  |  else if (...) {
         if re.match(r"^}\\s*else\\b", line) or re.match(r"^else(\\s+if\\b|\\s*\\{|\\s*$)", line):
@@ -523,7 +556,11 @@ with zipfile.ZipFile(path) as z:
             if not text.strip():
                 continue
             level = heading_level(style)
-            is_diagram = is_ascii_diagram_line(text)
+            is_diagram = (
+                is_ascii_diagram_line(text)
+                or is_pattern_output_line(text)
+                or is_tree_or_flow_line(text)
+            )
             looks_code = (not is_diagram) and (
                 p_is_code_style(style) or is_code_line(text) or runs_are_mono(text_runs)
             )
@@ -715,16 +752,67 @@ with zipfile.ZipFile(path) as z:
     def demo_tokens(line):
         return re.findall(r"Demo\\d+", line or "")
 
+    def node_tokens(line):
+        t = (line or "").strip()
+        demos = re.findall(r"Demo\\d+", t)
+        if demos and re.fullmatch(r"(?:Demo\\d+|\\s)+", t):
+            return demos
+        if t and re.fullmatch(r"(?:[A-Z][A-Za-z0-9]*)(?:\\s+[A-Z][A-Za-z0-9]*)*", t):
+            names = re.findall(r"[A-Z][A-Za-z0-9]*", t)
+            if names:
+                return names
+        return []
+
     def diagram_line_kind(line):
         t = (line or "").strip()
-        names = demo_tokens(t)
-        if names and re.fullmatch(r"(?:Demo\\d+|\\s)+", t):
+        names = node_tokens(t)
+        if names:
             return ("nodes", names)
         if t and re.fullmatch(r"[/\\\\|\\s]+", t):
             return ("slashes", t)
         if t and re.fullmatch(r"[↓↑→←\\s]+", t):
             return ("arrows", t)
         return ("other", t)
+
+    def layout_parent_children(parent, children):
+        gap = 2
+        child_line = (" " * gap).join(children)
+        centers = []
+        x = 0
+        for i, ch in enumerate(children):
+            centers.append(x + len(ch) // 2)
+            x += len(ch) + (gap if i < len(children) - 1 else 0)
+        pc = centers[len(centers) // 2] if len(centers) % 2 else (centers[0] + centers[-1]) // 2
+        parent_start = max(0, pc - len(parent) // 2)
+        width = max(len(child_line), parent_start + len(parent), max(centers) + 1)
+        bs = chr(92)
+
+        def row_with(chars):
+            row = [" "] * width
+            for idx, ch in chars:
+                if 0 <= idx < width:
+                    row[idx] = ch
+            return "".join(row).rstrip()
+
+        parent_line = (" " * parent_start) + parent
+        if len(children) == 1:
+            return "\\n".join([parent_line, row_with([(pc, "|")]), child_line])
+        if len(children) == 2:
+            li = (centers[0] + pc) // 2
+            ri = (centers[1] + pc) // 2
+            return "\\n".join([parent_line, row_with([(li, "/"), (ri, bs)]), child_line])
+
+        ca, cc = centers[0], centers[-1]
+        inner_l = pc + (ca - pc) * 3 // 5
+        inner_r = pc + (cc - pc) * 3 // 5
+        outer_l = pc + (ca - pc) * 9 // 10
+        outer_r = pc + (cc - pc) * 9 // 10
+        return "\\n".join([
+            parent_line,
+            row_with([(inner_l, "/"), (pc, "|"), (inner_r, bs)]),
+            row_with([(outer_l, "/"), (pc, "|"), (outer_r, bs)]),
+            child_line,
+        ])
 
     def normalize_inheritance_diagram(text):
         """Rebuild Word trees. Docx spacing is for proportional fonts and breaks in mono."""
@@ -761,11 +849,10 @@ with zipfile.ZipFile(path) as z:
                     "    ↓       ↓\\n"
                     "  " + left + "   " + right
                 )
-            return (
-                "      " + parent + "\\n"
-                "     /     " + bs + "\\n"
-                "  " + left + "   " + right
-            )
+            return layout_parent_children(parent, [left, right])
+
+        if has_slash and len(counts) == 2 and counts[0] == 1 and counts[1] >= 3:
+            return layout_parent_children(node_rows[0][0], node_rows[1])
 
         if has_slash and counts == [1, 2, 2]:
             parent = node_rows[0][0]
@@ -800,6 +887,93 @@ with zipfile.ZipFile(path) as z:
                 out.append(nb)
             else:
                 out.append(b)
+        return out
+
+    def is_soft_chart_label(s):
+        st = re.sub(r"\\s+", " ", (s or "")).strip()
+        if not st or re.match(r"^\\d+[G]?[.)]\\s+", st) or st.endswith("?"):
+            return False
+        if st.endswith(":"):
+            return False
+        if re.search(r"[{};]", st):
+            return False
+        if st.endswith(".") and len(st) > 20:
+            return False
+        if len(st) > 60:
+            return False
+        return True
+
+    def chart_block_text(b):
+        if b.get("type") == "diagram":
+            return b.get("text") or ""
+        if b.get("type") == "paragraph":
+            return para_text(b)
+        return ""
+
+    def is_hard_chart_block(b):
+        if b.get("type") == "diagram":
+            return True
+        if b.get("type") == "paragraph":
+            t = para_text(b)
+            return (
+                is_ascii_diagram_line(t)
+                or is_tree_or_flow_line(t)
+                or is_pattern_output_line(t)
+            )
+        return False
+
+    def is_soft_chart_block(b):
+        return b.get("type") == "paragraph" and is_soft_chart_label(para_text(b))
+
+    def attach_chart_blocks(items):
+        """Keep flowchart labels with their arrows, and tree labels with |-- branches."""
+        out = []
+        i = 0
+        n = len(items)
+        while i < n:
+            start = False
+            if is_hard_chart_block(items[i]):
+                start = True
+            elif is_soft_chart_block(items[i]):
+                j = i + 1
+                while j < n and items[j].get("type") == "blank":
+                    j += 1
+                if j < n and is_hard_chart_block(items[j]):
+                    start = True
+            if not start:
+                out.append(items[i])
+                i += 1
+                continue
+            chunk = []
+            j = i
+            while j < n:
+                b = items[j]
+                if b.get("type") == "blank":
+                    look = j + 1
+                    while look < n and items[look].get("type") == "blank":
+                        look += 1
+                    if look < n and (is_hard_chart_block(items[look]) or is_soft_chart_block(items[look])):
+                        chunk.append(b)
+                        j += 1
+                        continue
+                    break
+                if is_hard_chart_block(b) or is_soft_chart_block(b):
+                    chunk.append(b)
+                    j += 1
+                    continue
+                break
+            if len(chunk) >= 2 and any(is_hard_chart_block(x) for x in chunk):
+                lines = []
+                for x in chunk:
+                    if x.get("type") == "blank":
+                        lines.append("")
+                    else:
+                        lines.append(chart_block_text(x))
+                out.append({"type": "diagram", "text": "\\n".join(lines)})
+                i = j
+                continue
+            out.append(items[i])
+            i += 1
         return out
 
     def attach_loose_bullets(items):
@@ -881,6 +1055,7 @@ with zipfile.ZipFile(path) as z:
     merged = stitch_code_sandwiched_paragraphs(merged)
     merged = peel_sample_output_from_code(merged)
     merged = demote_misclassified_code(merged)
+    merged = attach_chart_blocks(merged)
     merged = attach_tree_nodes_to_diagrams(merged)
     merged = normalize_diagrams(merged)
     merged = attach_loose_bullets(merged)
