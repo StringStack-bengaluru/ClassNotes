@@ -1,0 +1,187 @@
+{
+  "title": "Notes Java Series Program",
+  "itemsPerPage": 2,
+  "source": "notes-java-series-program.docx",
+  "items": [
+    {
+      "question": "What is the basic approach used to solve number manipulation programs?",
+      "answer": "Answer: The number is taken as input and its digits are processed one by one using operations such as: Accessing the last digit Processing the digit Adding or multiplying the required value Removing the last digit Repeating until the number becomes 0"
+    },
+    {
+      "question": "How do you access the last digit of a number?",
+      "answer": "Answer: The last digit can be obtained using the modulus operator:\n\n```java\nint digit = n % 10;\n```\n\nFor example, if n is 1234, n % 10 gives 4."
+    },
+    {
+      "question": "How do you remove the last digit from a number?",
+      "answer": "Answer: The last digit can be removed using integer division by 10.\n\n```java\nn = n / 10;\n```\n\nFor example: 1234 → 123 123 → 12 12 → 1 1 → 0"
+    },
+    {
+      "question": "How do you count the number of digits in a given number?",
+      "answer": "Answer: A count variable is initialized and the last digit is repeatedly removed until n becomes 0. count = 0\n\n```java\nwhile n != 0\n```\n\nn = n / 10 count++ The final value of count gives the number of digits."
+    },
+    {
+      "question": "How can a separate method be created to find the digit count?",
+      "answer": "Answer: A method can accept the number as an argument, calculate the digit count, and return the count. The method performs only the task of finding the number of digits, allowing it to be reused wherever required."
+    },
+    {
+      "question": "How is a method from the Number Manipulation class called?",
+      "answer": "Answer: An object of the NumberManipulation class is created and the method is called using the object reference. For example:\n\n```java\nNumberManipulation nm = new NumberManipulation();\nint count = nm.getDigitCount(n);\n```"
+    },
+    {
+      "question": "What are the three basic steps used to reverse a number?",
+      "answer": "Answer: The reverse-number logic uses: Access the last digit. Add the digit to the reverse number. Remove the last digit from the original number. These steps are repeated until the number becomes 0."
+    },
+    {
+      "question": "How is the reverse number constructed from the extracted digits?",
+      "answer": "Answer: The extracted digit is added to the reverse number by shifting the existing value one position to the left. The basic operation is:\n\n```java\nreverse = reverse * 10 + digit;\n```\n\nFor input 1234, the final reverse number becomes: 4321"
+    },
+    {
+      "question": "Why should reverse-number logic be placed in a separate method?",
+      "answer": "Answer: The reverse operation represents a specific task. Placing it in a separate method allows the same logic to be reused by other number manipulation programs."
+    },
+    {
+      "question": "How can you find the sum of the digits of a number?",
+      "answer": "Answer: The last digit is extracted using % 10, added to sum, and then removed using / 10. digit = n % 10 sum = sum + digit n = n / 10 This continues until n becomes 0."
+    },
+    {
+      "question": "What is a palindrome number?",
+      "answer": "Answer: A number is a palindrome when it remains the same when read from left to right or right to left. For example: 1221 Its reverse is also: 1221 Therefore, it is a palindrome."
+    },
+    {
+      "question": "How can a palindrome number be checked using the reverse-number logic?",
+      "answer": "Answer: The original number is stored separately because the working variable changes while reversing. After calculating the reverse: reverse == original number If both values are equal, the number is a palindrome."
+    },
+    {
+      "question": "What is the purpose of storing the original number before manipulating n?",
+      "answer": "Answer: Operations such as digit extraction and division modify n. For example:\n\n```java\nn = n / 10;\n```\n\neventually makes n equal to 0. Therefore, the original value is stored separately so that the final result can be compared with the original input."
+    },
+    {
+      "question": "What is the purpose of a method in number manipulation programs?",
+      "answer": "Answer: A method is used to perform a particular task. Examples include methods for: Finding digit count Finding power Reversing a number Finding factorial Finding the sum of factors Separate methods make the logic reusable and keep the main program smaller."
+    },
+    {
+      "question": "Why should the main method contain mainly method calls?",
+      "answer": "Answer: The number-processing logic can be placed inside separate methods. The main method can then collect input, call the required methods, and process their returned values. This keeps the main method simple and avoids putting a large amount of logic into one place."
+    },
+    {
+      "question": "How can a power operation be reused in number manipulation programs?",
+      "answer": "Answer: A power method can accept a base and an exponent and return the calculated value. For example, while checking an Armstrong number, the extracted digit can be passed as the base and the digit count as the exponent."
+    },
+    {
+      "question": "What is an Armstrong number according to the program logic?",
+      "answer": "Answer: For an Armstrong number, each digit is raised to the power of the number of digits, and all the resulting values are added. If the final sum is equal to the original number, the number is considered an Armstrong number."
+    },
+    {
+      "question": "How is 153 checked as an Armstrong number?",
+      "answer": "Answer: 153 contains three digits. Therefore: 1³ + 5³ + 3³ The calculated sum is: 1 + 125 + 27 = 153 Since the result is equal to the original number 153, it is an Armstrong number."
+    },
+    {
+      "question": "How is an Armstrong number checked programmatically?",
+      "answer": "Answer: The program: Finds the number of digits. Stores the original number. Extracts each digit using % 10. Raises the digit to the digit count. Adds the result to sum. Removes the last digit using / 10. Compares sum with the original number."
+    },
+    {
+      "question": "Why is the original number required while checking an Armstrong number?",
+      "answer": "Answer: The variable containing the input number is repeatedly divided by 10, so it eventually becomes 0. The original number must therefore be stored separately for the final comparison: sum == original number"
+    },
+    {
+      "question": "What is the advantage of reusing the power method while checking an Armstrong number?",
+      "answer": "Answer: The power calculation does not need to be written repeatedly inside the Armstrong logic. The Armstrong method can simply call the existing power method with: base = digit exponent = digit count This separates the power calculation from the Armstrong calculation."
+    },
+    {
+      "question": "What is the += shorthand notation used in the program?",
+      "answer": "Answer: The statement:\n\n```java\nsum += value;\n```\n\nis shorthand for:\n\n```java\nsum = sum + value;\n```\n\nIt can be used to make the code shorter and readable."
+    },
+    {
+      "question": "What is a Strong Number?",
+      "answer": "Answer: A Strong Number is a number in which the sum of the factorials of its digits is equal to the original number. For example: 145 is a Strong Number because: 1! + 4! + 5! = 1 + 24 + 120 = 145"
+    },
+    {
+      "question": "What method is required to calculate the factorial of a digit?",
+      "answer": "Answer: A separate factorial method can accept one digit and return its factorial. For example, for 5: 1 × 2 × 3 × 4 × 5 = 120"
+    },
+    {
+      "question": "Why is the factorial variable initialized to 1 instead of 0?",
+      "answer": "Answer: Factorial calculation uses multiplication. If the variable were initialized to 0, every multiplication would produce 0. Therefore, the initial value is: fact = 1"
+    },
+    {
+      "question": "How can a factorial method be implemented using a for loop?",
+      "answer": "Answer: The loop can run from 1 to the given digit. fact = 1\n\n```java\nfor i = 1 to digit\n```\n\nfact = fact * i\n\n```java\nreturn fact\n```\n\nThe final value of fact is the factorial."
+    },
+    {
+      "question": "How is a Strong Number checked using the factorial method?",
+      "answer": "Answer: The program: Stores the original number. Extracts each digit. Passes the digit to the factorial method. Adds the returned factorial to sum. Removes the last digit. Compares sum with the original number. If both are equal, the number is a Strong Number."
+    },
+    {
+      "question": "What is a Perfect Number?",
+      "answer": "Answer: A Perfect Number is a number whose factors, excluding the number itself, add up to the original number. For example, the factors of 6 are: 1, 2, 3 Their sum is: 1 + 2 + 3 = 6 Therefore, 6 is a Perfect Number."
+    },
+    {
+      "question": "How are the factors of a number found using the brute-force approach?",
+      "answer": "Answer: A loop can start from 1 and continue up to the given number. For each value, the program checks whether it divides the number completely.\n\n```java\nif n % i == 0\n```\n\nIf the condition is true, i is a factor."
+    },
+    {
+      "question": "How is the sum of factors calculated for a Perfect Number?",
+      "answer": "Answer: A sum variable is initialized to 0. Whenever a factor is found, it is added to sum.\n\n```java\nsum += i;\n```\n\nAfter the loop, the sum is compared with the original number."
+    },
+    {
+      "question": "What loop range was used for finding factors in the brute-force approach?",
+      "answer": "Answer: The readable brute-force approach uses a loop from: 1 to n The transcript also mentions possible optimizations such as checking up to n / 2 or using a square-root-based approach."
+    },
+    {
+      "question": "What is a Friendly Pair?",
+      "answer": "Answer: Two numbers form a Friendly Pair when the ratio of the sum of their factors to each original number is equal. For example, the program calculates: sum of factors of n1 / n1 sum of factors of n2 / n2 If the two resulting values are equal, the numbers are treated as Friendly Pairs."
+    },
+    {
+      "question": "What is the logic for checking Friendly Pairs?",
+      "answer": "Answer: The program: Takes two numbers as input. Finds the sum of factors of the first number. Finds the sum of factors of the second number. Divides each sum by its corresponding original number. Compares the two results. If the results are equal, the numbers are Friendly Pairs."
+    },
+    {
+      "question": "How can the same sum-of-factors method be reused for two numbers?",
+      "answer": "Answer: A single method can accept a number and return its sum of factors. The method can then be called twice: sum1 = sumOfFactors(n1) sum2 = sumOfFactors(n2) The returned values can then be used for the Friendly Pair calculation."
+    },
+    {
+      "question": "What is an Amicable Number Pair?",
+      "answer": "Answer: For two numbers, the sum of the proper factors of the first number should be equal to the second number, and the sum of the proper factors of the second number should be equal to the first number. The transcript uses: 220 and 284 as an example."
+    },
+    {
+      "question": "What is the difference between Friendly Pairs and Amicable Numbers?",
+      "answer": "Answer: The comparison is different: Friendly Pair Amicable Numbers Compares ratios of factor sums to the original numbers Compares each factor sum with the other number sum1 / n1 == sum2 / n2 sum1 == n2 and sum2 == n1 The transcript treats these as different concepts."
+    },
+    {
+      "question": "How are 220 and 284 checked as Amicable Numbers?",
+      "answer": "Answer: The sum of the proper factors of 220 is: 284 The sum of the proper factors of 284 is: 220 Therefore, both conditions are satisfied."
+    },
+    {
+      "question": "Why is n / 2 sufficient when finding proper factors for Amicable Numbers?",
+      "answer": "Answer: The number itself is not included as a proper factor. For a positive number, no proper factor greater than half of the number is required for the calculation described. Therefore, the factor loop can stop at n / 2."
+    },
+    {
+      "question": "What is the purpose of separating the factor-sum logic into a method?",
+      "answer": "Answer: The same factor-sum calculation is required for Perfect Numbers, Friendly Pairs, and Amicable Numbers. A separate method avoids rewriting the same factor logic multiple times and allows the returned sum to be reused."
+    },
+    {
+      "question": "What is the formula for the nth term of an Arithmetic Progression?",
+      "answer": "Answer: The nth term of an Arithmetic Progression is calculated using: A + (n - 1) × D Where: A = first term D = common difference n = position of the required term"
+    },
+    {
+      "question": "How is the fifth term of an Arithmetic Progression calculated when the first term and common difference are both 2?",
+      "answer": "Answer: Using: A = 2 D = 2 n = 5 The formula becomes: 2 + (5 - 1) × 2 = 2 + 4 × 2 = 10 Therefore, the fifth term is 10."
+    },
+    {
+      "question": "What is the difference between finding the nth term and printing n terms of an Arithmetic Progression?",
+      "answer": "Answer: Finding the nth term produces only one value at a specific position. For example: A = 2, D = 2, n = 5 Output = 10 Printing n terms produces the sequence itself: 2 4 6 8 10"
+    },
+    {
+      "question": "How are n terms of an Arithmetic Progression generated?",
+      "answer": "Answer: The first term and common difference are taken as input. Starting from the first term, the common difference is repeatedly added to generate the required number of terms. For example: First term = 2 Difference = 2 Number of terms = 5 2 4 6 8 10"
+    },
+    {
+      "question": "What is the formula for the nth term of a Geometric Progression?",
+      "answer": "Answer: The nth term of a Geometric Progression is: A × R^(n - 1) Where: A = first term R = common ratio n = position of the required term"
+    },
+    {
+      "question": "What are the four series programs using Arithmetic Progression and Geometric Progression?",
+      "answer": "Answer: The four programs are: Nth term of Arithmetic Progression N terms of Arithmetic Progression Nth term of Geometric Progression N terms of Geometric Progression The Arithmetic Progression nth-term program uses: A + (n - 1) × D The Geometric Progression nth-term program uses: A × R^(n - 1) For the n-terms programs, the sequence values are generated and printed according to the given first term, difference or ratio, and number of terms."
+    }
+  ]
+}
