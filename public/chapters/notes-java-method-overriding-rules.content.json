@@ -1,0 +1,267 @@
+{
+  "title": "Notes Java Method Overriding Rules",
+  "itemsPerPage": 2,
+  "source": "notes-java-method-overriding-rules.docx",
+  "items": [
+    {
+      "question": "What are access specifiers in Java?",
+      "answer": "Answer: Access specifiers define where a class member, such as a variable or method, can be accessed. The four access specifiers are:\n\n```java\npublic\nprotected\ndefault\nprivate\n```"
+    },
+    {
+      "question": "Why are packages important when understanding access specifiers?",
+      "answer": "Answer: Access rules depend on whether the accessing class is in the same class, the same package, a different package, or a subclass in another package."
+    },
+    {
+      "question": "How can two packages be represented in a Java project?",
+      "answer": "Answer: Two packages can be created, for example:\n\n```java\npackage P1;\n```\n\nand\n\n```java\npackage P2;\n```\n\nHere, P1 and P2 represent two different packages."
+    },
+    {
+      "question": "How can a class containing variables be created inside package P1?",
+      "answer": "Answer: A class named Sample can be created inside package P1.\n\n```java\npackage P1;\npublic class Sample {\nint A = 10;\nint B = 20;\nint C = 30;\nint D = 40;\npublic void display1() {\nSystem.out.println(A);\nSystem.out.println(B);\nSystem.out.println(C);\nSystem.out.println(D);\n}\n}\n```\n\nThe class contains four variables: A, B, C, and D."
+    },
+    {
+      "question": "How can members of a class be accessed from another class in the same package without inheritance?",
+      "answer": "Answer: An object of the class can be created and its accessible members can be accessed using the reference variable.\n\n```java\nSample s = new Sample();\nSystem.out.println(s.A);\nSystem.out.println(s.B);\nSystem.out.println(s.C);\nSystem.out.println(s.D);\n```\n\nThe dot operator is used to access the members through the object reference."
+    },
+    {
+      "question": "How can members of a parent class be accessed directly by a subclass in the same package?",
+      "answer": "Answer: Inheritance can be used.\n\n```java\nclass Sample2 extends Sample {\npublic void display2() {\nSystem.out.println(A);\nSystem.out.println(B);\nSystem.out.println(C);\nSystem.out.println(D);\n}\n}\n```\n\nWhen Sample2 extends Sample, the accessible members of Sample can be directly accessed from Sample2."
+    },
+    {
+      "question": "How can a class from package P1 be accessed from another package P2?",
+      "answer": "Answer: The class must be imported if it belongs to another package.\n\n```java\nimport P1.Sample;\n```\n\nAfter importing the class, an object can be created:\n\n```java\nSample s = new Sample();\n```\n\nThe members that are permitted by their access specifiers can then be accessed."
+    },
+    {
+      "question": "What happens if a class from another package is used without importing it?",
+      "answer": "Answer: The compiler cannot resolve the class name because the class belongs to another package and has not been imported or referred to using its fully qualified name."
+    },
+    {
+      "question": "How can a class from another package be inherited?",
+      "answer": "Answer: The class can be imported and then extended.\n\n```java\nimport P1.Sample;\nclass Sample3 extends Sample {\npublic void display3() {\nSystem.out.println(A);\n}\n}\n```\n\nThe members accessible according to the access rules can be used by the subclass."
+    },
+    {
+      "question": "What are the four access levels demonstrated using variables A, B, C, and D?",
+      "answer": "Answer: The variables can be declared as follows:\n\n```java\npublic int A = 10;\nprotected int B = 20;\nint C = 30;\nprivate int D = 40;\n```\n\nHere: A is public. B is protected. C has default access. D is private."
+    },
+    {
+      "question": "Can public, protected, default, and private members be accessed inside the same class?",
+      "answer": "Answer: Yes. All four members can be accessed inside the class in which they are declared."
+    },
+    {
+      "question": "Can public, protected, default, and private members be accessed from another class in the same package?",
+      "answer": "Answer: Public: Yes Protected: Yes Default: Yes Private: No"
+    },
+    {
+      "question": "Can public, protected, default, and private members be accessed by a subclass in the same package?",
+      "answer": "Answer: Public: Yes Protected: Yes Default: Yes Private: No"
+    },
+    {
+      "question": "Can public, protected, default, and private members be accessed from an unrelated class in another package?",
+      "answer": "Answer: Public: Yes Protected: No Default: No Private: No"
+    },
+    {
+      "question": "Can public, protected, default, and private members be accessed from a subclass in another package?",
+      "answer": "Answer: Public: Yes Protected: Yes Default: No Private: No"
+    },
+    {
+      "question": "Where can a public member be accessed?",
+      "answer": "Answer: A public member can be accessed from anywhere, irrespective of the package or whether the accessing class is a subclass."
+    },
+    {
+      "question": "Where can a protected member be accessed?",
+      "answer": "Answer: A protected member can be accessed: Anywhere within the same package. From a subclass located in another package. It cannot be accessed from an unrelated class outside the package."
+    },
+    {
+      "question": "Where can a default member be accessed?",
+      "answer": "Answer: A default member can be accessed anywhere within the same package. It cannot be accessed from another package, whether the accessing class is a subclass or not."
+    },
+    {
+      "question": "Why is default access called package-level access?",
+      "answer": "Answer: Default access restricts access to the same package. Therefore, it is commonly referred to as package-level access."
+    },
+    {
+      "question": "Where can a private member be accessed?",
+      "answer": "Answer: A private member can be accessed only inside the class in which it is declared. It cannot be directly accessed from another class, subclass, or another package."
+    },
+    {
+      "question": "Where can a variable declared as public be accessed?",
+      "answer": "Answer: A public variable can be accessed everywhere."
+    },
+    {
+      "question": "Where can a member declared as protected be accessed?",
+      "answer": "Answer: A protected member can be accessed throughout the same package and from subclasses outside the package."
+    },
+    {
+      "question": "Where can a member declared with default access be accessed?",
+      "answer": "Answer: A default member can be accessed only within the same package."
+    },
+    {
+      "question": "Where can a member declared as private be accessed?",
+      "answer": "Answer: A private member can be accessed only within the class where it is declared."
+    },
+    {
+      "question": "Why are public, protected, default, and private called access specifiers?",
+      "answer": "Answer: They specify where a class member can be accessed. Therefore, they are called access specifiers."
+    },
+    {
+      "question": "Which access specifier provides the highest visibility?",
+      "answer": "Answer: ```java\npublic provides the highest visibility because it allows access from anywhere.\n```"
+    },
+    {
+      "question": "Which access specifier provides the lowest visibility?",
+      "answer": "Answer: ```java\nprivate provides the lowest visibility because it allows access only within the declaring class.\n```"
+    },
+    {
+      "question": "What is the visibility order of Java access specifiers?",
+      "answer": "Answer: From higher visibility to lower visibility:\n\n```java\npublic\nprotected\ndefault\nprivate\n```\n\nMoving from public toward private decreases visibility. Moving from private toward public increases visibility."
+    },
+    {
+      "question": "Which is more visible between protected and default?",
+      "answer": "Answer: ```java\nprotected provides greater visibility than default access because protected members can additionally be accessed by subclasses outside the package.\n```"
+    },
+    {
+      "question": "Which is more visible between public and protected?",
+      "answer": "Answer: ```java\npublic is more visible because it can be accessed everywhere, while protected has package and subclass restrictions.\n```"
+    },
+    {
+      "question": "What error occurs when a default member is accessed from another package?",
+      "answer": "Answer: The member is not accessible because default access is restricted to the same package."
+    },
+    {
+      "question": "What happens when a protected member is accessed from another package by a non-subclass?",
+      "answer": "Answer: The member is not accessible because protected access outside the package is permitted only through a subclass."
+    },
+    {
+      "question": "What is the basic access-specifier table in Java?",
+      "answer": "Answer: Access Specifier Same Class Same Package Subclass in Different Package Unrelated Class in Different Package\n\n```java\npublic\n```\n\nYes Yes Yes Yes\n\n```java\nprotected\n```\n\nYes Yes Yes No\n\n```java\ndefault\n```\n\nYes Yes No No\n\n```java\nprivate\n```\n\nYes No No No"
+    },
+    {
+      "question": "What is method overriding?",
+      "answer": "Answer: Method overriding is the process in which a child class provides its own implementation of a method inherited from the parent class."
+    },
+    {
+      "question": "What is the purpose of method overriding?",
+      "answer": "Answer: Method overriding allows a child class to change the implementation of an inherited method according to the child class's requirement."
+    },
+    {
+      "question": "What basic conditions are required for method overriding?",
+      "answer": "Answer: Method overriding requires: Inheritance between the parent and child classes. The same method name. The same parameter list. A compatible return type. The child method must not reduce the visibility of the parent method."
+    },
+    {
+      "question": "How can a parent class and child class demonstrate method overriding?",
+      "answer": "Answer: A parent class can contain a method:\n\n```java\nclass Demo {\npublic void display1() {\nSystem.out.println(\"Hello\");\n}\n}\n```\n\nThe child class can override it:\n\n```java\nclass Demo1 extends Demo {\npublic void display1() {\nSystem.out.println(\"Hello World\");\n}\n}\n```\n\nThe child class provides a different implementation of the same method."
+    },
+    {
+      "question": "Why can the visibility of an overriding method not be reduced?",
+      "answer": "Answer: The child class must not make an inherited method less accessible than it was in the parent class. For example, if the parent method is public, the child method cannot be protected or private."
+    },
+    {
+      "question": "Can an overriding method have the same visibility as the parent method?",
+      "answer": "Answer: Yes. For example:\n\n```java\nclass Demo {\npublic void display() {\nSystem.out.println(\"Hello\");\n}\n}\nclass Demo1 extends Demo {\npublic void display() {\nSystem.out.println(\"Hello World\");\n}\n}\n```\n\nBoth methods have public visibility."
+    },
+    {
+      "question": "Can an overriding method increase the visibility of the parent method?",
+      "answer": "Answer: Yes. For example, a method with protected visibility in the parent can be overridden with public visibility in the child.\n\n```java\nclass Demo {\nprotected void display() {\nSystem.out.println(\"Hello\");\n}\n}\nclass Demo1 extends Demo {\npublic void display() {\nSystem.out.println(\"Hello World\");\n}\n}\n```\n\nThe visibility is increased from protected to public."
+    },
+    {
+      "question": "Can a private method be overridden?",
+      "answer": "Answer: A private method cannot be overridden because it is not inherited by the child class."
+    },
+    {
+      "question": "Why can a private method not be overridden?",
+      "answer": "Answer: Method overriding requires inheritance of the parent method. A private member is accessible only inside its declaring class and is not inherited by the child class. Therefore, it cannot be overridden."
+    },
+    {
+      "question": "What happens if the child method has lower visibility than the parent method?",
+      "answer": "Answer: The compiler reports an error because reducing the visibility of an inherited method is not allowed. For example:\n\n```java\nclass Demo {\npublic void display() {\nSystem.out.println(\"Hello\");\n}\n}\nclass Demo1 extends Demo {\nprotected void display() {\nSystem.out.println(\"Hello World\");\n}\n}\n```\n\nThe child method attempts to reduce visibility from public to protected, which is not permitted."
+    },
+    {
+      "question": "Can the return type of an overriding method be changed?",
+      "answer": "Answer: The return type generally cannot be changed arbitrarily. A different return type is permitted when the new return type is a covariant return type."
+    },
+    {
+      "question": "What is a covariant return type?",
+      "answer": "Answer: A covariant return type is a return type where the child method returns a type that has a parent-child relationship with the return type of the parent method."
+    },
+    {
+      "question": "How can covariant return types be demonstrated using Animal and Tiger?",
+      "answer": "Answer: Suppose:\n\n```java\nclass Animal {\n}\nclass Tiger extends Animal {\n}\n```\n\nHere, Tiger is a child of Animal. Therefore: Tiger is an Animal Tiger and Animal can be used as covariant return types when overriding a method."
+    },
+    {
+      "question": "How can a parent method return an Animal object?",
+      "answer": "Answer: A method in the parent class can be written as:\n\n```java\npublic Animal display() {\nAnimal animal = new Animal();\nreturn animal;\n}\n```\n\nThe return type is Animal."
+    },
+    {
+      "question": "Can the child method return Tiger instead of Animal?",
+      "answer": "Answer: Yes, because Tiger is a subclass of Animal.\n\n```java\npublic Tiger display() {\nTiger t = new Tiger();\nreturn t;\n}\n```\n\nThis is permitted because Tiger is covariant with Animal."
+    },
+    {
+      "question": "Why is returning Tiger allowed when the parent method returns Animal?",
+      "answer": "Answer: Because Tiger has an is-a relationship with Animal. Tiger is an Animal Therefore, Tiger is a valid covariant return type for Animal."
+    },
+    {
+      "question": "Is the reverse relationship valid for a covariant return type?",
+      "answer": "Answer: No. If the parent method returns Tiger, the child method cannot change the return type to Animal. Tiger → Animal is a valid parent-child relationship for covariant return types. But: Animal → Tiger\n\n```java\ndoes not satisfy the required direction when the child method returns the broader parent type.\n```"
+    },
+    {
+      "question": "Why can a child method return Tiger when the parent method returns Animal, but not the reverse?",
+      "answer": "Answer: Because the overriding method's return type must remain compatible with the parent method's return type. A Tiger object is an Animal, so returning Tiger is safe when the parent expects Animal. However, every Animal is not necessarily a Tiger, so returning Animal when the parent method returns Tiger is not compatible."
+    },
+    {
+      "question": "What are the main rules for method overriding?",
+      "answer": "Answer: The important rules are: Inheritance must exist between the parent and child classes. The method name must be the same. The parameter list must be the same. The return type must be the same or covariant. Visibility cannot be reduced. An overriding method cannot be created by trying to override a private member because private members are not inherited."
+    },
+    {
+      "question": "Why is inheritance required for method overriding?",
+      "answer": "Answer: Method overriding changes the implementation of a method inherited from a parent class. Without inheritance, there is no inherited method to override."
+    },
+    {
+      "question": "Why must the method name remain the same during overriding?",
+      "answer": "Answer: Method overriding means replacing or providing a new implementation of an inherited method. Therefore, the method name must remain the same."
+    },
+    {
+      "question": "Why must the parameter list remain the same during overriding?",
+      "answer": "Answer: The child method must match the parent's method signature for overriding. Changing the parameter list results in a different method rather than an overriding method."
+    },
+    {
+      "question": "What is the difference between method overriding and method overloading?",
+      "answer": "Answer: Method overriding occurs when a child class provides a new implementation of an inherited method with the same method name and parameter list. Method overloading occurs when multiple methods have the same name but different parameter lists."
+    },
+    {
+      "question": "Can a private method be overloaded?",
+      "answer": "Answer: Yes. Although a private method cannot be overridden because it is not inherited, methods with the same name can be overloaded by using different parameter lists."
+    },
+    {
+      "question": "What is the relationship between method overriding and polymorphism?",
+      "answer": "Answer: Method overriding is a fundamental concept used in polymorphism because it allows a child class to provide its own implementation of a method inherited from a parent class."
+    },
+    {
+      "question": "What is the difference between an access specifier and an access modifier?",
+      "answer": "Answer: The four access specifiers are:\n\n```java\npublic\nprotected\ndefault\nprivate\n```\n\nThey specifically control accessibility. The term access modifier can be used more broadly for modifiers that affect the declaration or behavior of classes and members."
+    },
+    {
+      "question": "Are all Java modifiers access specifiers?",
+      "answer": "Answer: No.\n\n```java\npublic, protected, default, and private are access specifiers.\n```\n\nOther modifiers such as static, final, and abstract are modifiers but are not access specifiers because they do not directly define the access level of a member."
+    },
+    {
+      "question": "What are the three core structural rules for identifying method overriding?",
+      "answer": "Answer: The basic structure can be identified using: Inheritance Same method name Same parameter list Additional rules apply to return type and visibility."
+    },
+    {
+      "question": "What return-type rule must be followed during method overriding?",
+      "answer": "Answer: The return type must either be the same as the parent method's return type or be a covariant return type."
+    },
+    {
+      "question": "What visibility rule must be followed during method overriding?",
+      "answer": "Answer: The child method can maintain the same visibility or increase visibility, but it cannot reduce the visibility of the parent method."
+    },
+    {
+      "question": "What is the complete example of overriding with a covariant return type?",
+      "answer": "Answer: ```java\nclass Animal {\n}\nclass Tiger extends Animal {\n}\nclass Demo {\npublic Animal display() {\nAnimal animal = new Animal();\nreturn animal;\n}\n}\nclass Demo1 extends Demo {\npublic Tiger display() {\nTiger t = new Tiger();\nreturn t;\n}\n}\n```\n\nHere, Demo1 overrides display() from Demo. The parent method returns Animal, while the child method returns Tiger. Since Tiger extends Animal, the return types are covariant."
+    },
+    {
+      "question": "What should be checked when an overriding method produces a compiler error?",
+      "answer": "Answer: The following points should be checked:"
+    }
+  ]
+}
