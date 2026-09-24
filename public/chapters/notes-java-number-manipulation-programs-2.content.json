@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Number Manipulation Programs 2",
+  "itemsPerPage": 2,
+  "source": "notes-java-number-manipulation-programs-2.docx",
+  "items": [
+    {
+      "question": "How do you reverse a given number in Java?",
+      "answer": "Answer: To reverse a number, perform these three steps repeatedly: 1. Access the last digit. 2. Add the last digit to the reverse number. 3. Remove the last digit from the original number. Repeat these steps while: n != 0 When n becomes 0, the reverse number contains the complete reversed value."
+    },
+    {
+      "question": "How do you access the last digit of a number?",
+      "answer": "Answer: Use the modulus operator % with 10.\n\n```java\nint lastDigit = n % 10;\n```\n\nFor example, if: n = 1234 then: 1234 % 10 = 4 Therefore, the remainder obtained by dividing a number by 10 gives its last digit."
+    },
+    {
+      "question": "How do you remove the last digit from a number?",
+      "answer": "Answer: Divide the number by 10 and store the quotient back into the same variable.\n\n```java\nn = n / 10;\n```\n\nFor example: 1234 / 10 = 123 After assigning 123 back to n, the last digit 4 is removed. Therefore: n = n / 10 is used to remove the last digit when working with integer values."
+    },
+    {
+      "question": "Why can't you simply add the extracted digit to the reverse number?",
+      "answer": "Answer: Suppose the original number is: 1234 After extracting 4: reverse = 0 + 4 reverse = 4 When 3 is extracted, simply adding it gives: 4 + 3 = 7 But the required result is: 43 Therefore, the existing reverse number must first be shifted one decimal position to the left. This is achieved by multiplying it by 10:\n\n```java\nreverse = reverse * 10 + lastDigit;\n```\n\nFor example: 4 × 10 + 3 = 43"
+    },
+    {
+      "question": "What is the complete logic for reversing a number?",
+      "answer": "Answer: The three operations are:\n\n```java\nint lastDigit = n % 10;\nreverse = reverse * 10 + lastDigit;\nn = n / 10;\n```\n\nThese statements are repeated while:\n\n```java\nwhile (n != 0)\n```\n\nThe initial value of reverse is:\n\n```java\nint reverse = 0;\n```\n\nFor input 1234, the final result is: 4321"
+    },
+    {
+      "question": "Why should the number-reversing logic be placed inside a separate method?",
+      "answer": "Answer: The reversing logic should be separated from the main() method so that it can be reused. A separate class can contain:\n\n```java\nint reverseNumber(int n)\n```\n\nThe method performs the complete reversing operation and returns the reversed integer. The main() method can then handle: Input ↓ Method call ↓ Returned result ↓ Output"
+    },
+    {
+      "question": "How do you call the reverse-number method from another class?",
+      "answer": "Answer: Create an object of the class containing the method. For example:\n\n```java\nNumberManipulation manipulation = new NumberManipulation();\n```\n\nThen call:\n\n```java\nint result = manipulation.reverseNumber(n);\n```\n\nThe returned integer can then be printed. The flow is: Create object ↓ Call reverseNumber(n) ↓ Receive integer result ↓ Print result"
+    },
+    {
+      "question": "How do you find the square of a number using a method?",
+      "answer": "Answer: The square of a number is obtained by multiplying the number by itself. For example: 2² = 2 × 2 = 4 3² = 3 × 3 = 9 100² = 100 × 100 = 10000 A method can be created with the concept:\n\n```java\nint square(int n)\n```\n\nThe method returns the square of the supplied number."
+    },
+    {
+      "question": "How do you calculate the power of a number using a custom method?",
+      "answer": "Answer: Power calculation requires two values: base exponent For example: 2³ = 2 × 2 × 2 = 8 3⁴ = 3 × 3 × 3 × 3 = 81 A method can be designed as:\n\n```java\nint power(int base, int exponent)\n```\n\nThe method repeatedly multiplies the base according to the exponent value."
+    },
+    {
+      "question": "How can a while loop be used to calculate a power?",
+      "answer": "Answer: Initialize a result variable to 1.\n\n```java\nint result = 1;\n```\n\nThen repeatedly multiply the result by the base while the exponent is greater than zero. Conceptually:\n\n```java\nwhile (exponent > 0) {\nresult = result * base;\nexponent--;\n}\n```\n\nFinally:\n\n```java\nreturn result;\n```\n\nFor: base = 2 exponent = 4 the calculation becomes: 1 × 2 = 2 2 × 2 = 4 4 × 2 = 8 8 × 2 = 16 Therefore: 2⁴ = 16"
+    },
+    {
+      "question": "How can a for loop be used to calculate a power?",
+      "answer": "Answer: A for loop can execute exactly as many multiplication operations as the exponent specifies. The basic logic is:\n\n```java\nint result = 1;\nfor (int i = 1; i <= exponent; i++) {\nresult = result * base;\n}\n```\n\nIf: base = 3 exponent = 4 the loop performs four multiplications: 1 × 3 = 3 3 × 3 = 9 9 × 3 = 27 27 × 3 = 81 Therefore: 3⁴ = 81"
+    },
+    {
+      "question": "Why is the result variable initialized to 1 when calculating powers?",
+      "answer": "Answer: The multiplication starts with the identity value for multiplication: 1 For example: 1 × 3 = 3 3 × 3 = 9 9 × 3 = 27 If the result were initialized to 0, every multiplication would remain 0. Therefore:\n\n```java\nint result = 1;\n```\n\nis used for repeated multiplication."
+    },
+    {
+      "question": "How can the same power method be used for square and cube calculations?",
+      "answer": "Answer: Power is a general operation. Square: n² can be represented as: power(n, 2) Cube: n³ can be represented as: power(n, 3) Any base and exponent can be processed using the same power logic. Therefore, a general power method can handle square, cube, and other exponent calculations."
+    },
+    {
+      "question": "How can a static power method be called?",
+      "answer": "Answer: If the method is declared as static, an object is not required to call it. For example, if the method belongs to: NumberManipulation it can be called using the class name:\n\n```java\nNumberManipulation.power(base, exponent);\n```\n\nThe general structure is: ClassName.methodName(arguments)"
+    },
+    {
+      "question": "What is Math.pow() in Java?",
+      "answer": "Answer: Math.pow() is a built-in Java method used to calculate a number raised to a power. Its general form is: Math.pow(base, exponent) It returns the first argument raised to the power of the second argument. For example: Math.pow(2, 4) produces: 16.0 The method belongs to Java's Math class."
+    },
+    {
+      "question": "What is the return type of Math.pow()?",
+      "answer": "Answer: Math.pow() returns a double. For example:\n\n```java\ndouble result = Math.pow(2, 4);\n```\n\nThe result is: 16.0 If an integer value is required, the returned double can be explicitly converted to int. For example:\n\n```java\nint result = (int) Math.pow(2, 4);\n```\n\nThis is an example of explicit narrowing conversion from double to int."
+    },
+    {
+      "question": "What is the difference between a custom power method and Math.pow()?",
+      "answer": "Answer: A custom method can implement the power logic using loops and multiplication. For example: result = 1 repeat exponent times result = result × base Math.pow() provides a built-in implementation: Math.pow(base, exponent) Therefore, both approaches can calculate powers: Custom logic → Write the algorithm yourself Math.pow() → Use Java's built-in method"
+    },
+    {
+      "question": "How do you find the number of digits in a number?",
+      "answer": "Answer: The number of digits can be determined by repeatedly removing the last digit. The basic operation for removing the last digit is:\n\n```java\nn = n / 10;\n```\n\nEach division removes one digit from the right side. A counter can be incremented for every removed digit until the number becomes 0. For example: 1234 ↓ 123 ↓ 12 ↓ 1 ↓ 0 There are four digits."
+    },
+    {
+      "question": "How do you find the sum of the digits of a number?",
+      "answer": "Answer: Use the same digit-extraction technique used for number reversal. For every digit:\n\n```java\nint lastDigit = n % 10;\n```\n\nAdd it to a sum variable:\n\n```java\nsum = sum + lastDigit;\n```\n\nThen remove the last digit:\n\n```java\nn = n / 10;\n```\n\nRepeat until n becomes 0. For: 1234 the calculation is: 1 + 2 + 3 + 4 = 10"
+    },
+    {
+      "question": "What is the difference between reversing a number and finding the sum of its digits?",
+      "answer": "Answer: Both operations use the same digit-extraction process:\n\n```java\nint lastDigit = n % 10;\nn = n / 10;\n```\n\nThe difference is what happens after extracting the digit. For reversing:\n\n```java\nreverse = reverse * 10 + lastDigit;\n```\n\nFor digit sum:\n\n```java\nsum = sum + lastDigit;\n```\n\nTherefore, the same basic digit-manipulation technique can be reused for different problems."
+    },
+    {
+      "question": "What is a palindrome number?",
+      "answer": "Answer: A palindrome number remains the same when its digits are read from left to right or right to left. For example: 1221 Reversing it gives: 1221 Since the original number and reversed number are equal, it is a palindrome."
+    },
+    {
+      "question": "How do you check whether a number is a palindrome?",
+      "answer": "Answer: Store the original number separately. Then reverse the number. Finally compare: original number = reverse number If both values are equal: Palindrome Otherwise: Not palindrome The algorithm is: Read number ↓ Store original number ↓ Reverse number ↓ Compare original and reverse ↓ Equal → Palindrome Not equal → Not palindrome"
+    },
+    {
+      "question": "How do you find the sum of the squares of every digit?",
+      "answer": "Answer: Extract each digit one at a time. For every digit: 1. Extract the digit. 2. Find its square. 3. Add the square to sum. 4. Remove the digit. For: 1234 the calculation is: 1² + 2² + 3² + 4² which becomes: 1 + 4 + 9 + 16 = 30"
+    },
+    {
+      "question": "How can the power method be reused to find the square of every digit?",
+      "answer": "Answer: For each extracted digit, its square can be calculated using the power operation. For example: digit = 3 power(3, 2) produces: 9 The result can then be added to the running sum. This combines digit extraction with reusable power logic."
+    },
+    {
+      "question": "What is an Armstrong number?",
+      "answer": "Answer: An Armstrong number is a number where: The number of digits is determined. Every digit is raised to the power of the number of digits. All the resulting values are added. The sum is compared with the original number. If the sum equals the original number, the number satisfies the Armstrong-number condition described here."
+    },
+    {
+      "question": "How is 153 checked as an Armstrong number?",
+      "answer": "Answer: The number is: 153 It contains three digits. Therefore, each digit is raised to the power 3: 1³ + 5³ + 3³ The resulting values are added: 1 + 125 + 27 = 153 Since the calculated sum equals the original number: 153 the number satisfies the Armstrong-number condition."
+    },
+    {
+      "question": "How would you check a four-digit number for the Armstrong condition?",
+      "answer": "Answer: Suppose the number is: 1256 It contains four digits. Therefore, calculate: 1⁴ + 2⁴ + 5⁴ + 6⁴ Add the results and compare the sum with: 1256 If the calculated sum equals 1256, the number satisfies the Armstrong-number condition; otherwise, it does not."
+    },
+    {
+      "question": "What are the important number-manipulation problems that use digit extraction?",
+      "answer": "Answer: Several problems can be solved using the same basic digit-processing technique: Reverse a number Count the digits Find the sum of digits Check palindrome Find the sum of squares of digits Check Armstrong number The common pattern is: Extract last digit ↓ Perform required operation ↓ Remove last digit ↓ Repeat until n becomes 0"
+    },
+    {
+      "question": "Why should separate methods be used for separate number-manipulation tasks?",
+      "answer": "Answer: Each method can represent one specific operation. For example: reverseNumber() square() power() sumOfDigits() isPalindrome() This keeps each piece of logic independent and reusable. A program can then call the required method instead of rewriting the same logic. For example: isPalindrome() ↓ reverseNumber() A palindrome-checking method can use number-reversing logic rather than duplicating the complete reversal algorithm."
+    },
+    {
+      "question": "What is the common problem-solving pattern behind these number programs?",
+      "answer": "Answer: Most of these programs can be solved by identifying the operation required for each digit. The general structure is: Input number ↓ Process one digit ↓ Perform required operation ↓ Remove processed digit ↓ Repeat ↓ Produce final result The operation changes according to the problem: Reverse → Build reversed number Digit sum → Add digits Digit square → Square and add Palindrome → Compare with reverse Armstrong → Raise digits to digit count and add This makes digit extraction and integer division important building blocks for number-manipulation programs."
+    }
+  ]
+}
