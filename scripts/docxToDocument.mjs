@@ -196,6 +196,27 @@ with zipfile.ZipFile(path) as z:
             return True
         if re.match(r"^→", line):
             return True
+        if re.fullmatch(r"[┌┐└┘─│┴┬├┤╭╮╯╰\\s]+", line) and re.search(r"[┌┐└┘─│┴┬├┤]", line):
+            return True
+        return False
+
+    def is_flow_label_line(s):
+        """Short flowchart labels that Word often marks as Consolas — not Java."""
+        st = re.sub(r"\\s+", " ", (s or "").replace("\\u00a0", " ").replace("\\xa0", " ").replace("\u00a0", " ")).strip()
+        if not st:
+            return False
+        if re.search(r"[{}]", st):
+            return False
+        if re.fullmatch(r"(?:Demo\\d+|Child|Parent|Object)\\s+constructor", st, re.I):
+            return True
+        if re.fullmatch(r"super\\(\\.{3}\\)|super\\(\\)|this\\(\\)", st):
+            return True
+        if re.fullmatch(r"(?:this|super)\\.variable", st):
+            return True
+        if re.fullmatch(r"\\.(?:java|class)", st, re.I):
+            return True
+        if st in ("...", "…"):
+            return True
         return False
 
     def is_pattern_output_line(s):
@@ -218,7 +239,12 @@ with zipfile.ZipFile(path) as z:
         line = line.replace("\u00a0", " ").strip()
         if not line:
             return False
-        if is_ascii_diagram_line(s) or is_pattern_output_line(s) or is_tree_or_flow_line(s):
+        if (
+            is_ascii_diagram_line(s)
+            or is_pattern_output_line(s)
+            or is_tree_or_flow_line(s)
+            or is_flow_label_line(s)
+        ):
             return False
         # Numbered questions are never code: "16. What is the truth table of &&?"
         if re.match(r"^\\d+[G]?[.)]\\s+", line):
@@ -560,6 +586,7 @@ with zipfile.ZipFile(path) as z:
                 is_ascii_diagram_line(text)
                 or is_pattern_output_line(text)
                 or is_tree_or_flow_line(text)
+                or is_flow_label_line(text)
             )
             looks_code = (not is_diagram) and (
                 p_is_code_style(style) or is_code_line(text) or runs_are_mono(text_runs)
@@ -768,7 +795,8 @@ with zipfile.ZipFile(path) as z:
     def is_flow_arrow_line(s):
         t = (s or "").replace("\\u00a0", " ").replace("\\xa0", " ").replace("\u00a0", " ")
         t = t.replace("\\t", " ").replace("\t", " ").strip()
-        return bool(t) and all(c in FLOW_ARROWS + " " for c in t)
+        box = "┌┐└┘─│┴┬├┤╭╮╯╰-_"
+        return bool(t) and (not re.search(r"[A-Za-z0-9]", t)) and all(c in FLOW_ARROWS + box + " " for c in t)
 
     def flow_labels(s):
         raw = (s or "").replace("\\u00a0", " ").replace("\\xa0", " ").replace("\u00a0", " ")
@@ -782,7 +810,7 @@ with zipfile.ZipFile(path) as z:
         lines = [ln for ln in (text or "").split("\\n") if ln.strip()]
         if len(lines) < 3:
             return False
-        if re.search(r"[{};]|\\bclass\\s+", text or ""):
+        if re.search(r"[{};]|\\bclass\\s+\\w+\\s*\\{|[├└]──\\s+\\S", text or ""):
             return False
         arrows = sum(1 for ln in lines if is_flow_arrow_line(ln))
         labels = sum(1 for ln in lines if flow_labels(ln))
@@ -806,7 +834,7 @@ with zipfile.ZipFile(path) as z:
         if not label_rows:
             return None
         triple_idxs = [i for i, labs in enumerate(label_rows) if len(labs) == 3]
-        if any(len(labs) not in (1, 3) for labs in label_rows):
+        if any(len(labs) not in (1, 2, 3) for labs in label_rows):
             return None
 
         if not triple_idxs and all(len(labs) == 1 for labs in label_rows):
@@ -819,9 +847,11 @@ with zipfile.ZipFile(path) as z:
                     out.append("↓".center(width).rstrip())
             return "\\n".join(out)
 
-        if len(triple_idxs) != 1:
+        double_idxs = [i for i, labs in enumerate(label_rows) if len(labs) == 2]
+        branch_idxs = triple_idxs or double_idxs
+        if len(branch_idxs) != 1:
             return None
-        ti = triple_idxs[0]
+        ti = branch_idxs[0]
         before = [label_rows[i][0] for i in range(ti)]
         branch = label_rows[ti]
         after = [label_rows[i][0] for i in range(ti + 1, len(label_rows))]
@@ -834,7 +864,7 @@ with zipfile.ZipFile(path) as z:
         for i, ch in enumerate(branch):
             centers.append(x + len(ch) // 2)
             x += len(ch) + (gap if i < len(branch) - 1 else 0)
-        spine = centers[1]
+        spine = centers[len(centers) // 2] if len(centers) != 2 else (centers[0] + centers[1]) // 2
         labels = before + after
         width = max(
             len(child_line),
@@ -858,10 +888,16 @@ with zipfile.ZipFile(path) as z:
             out.append(label_row(lab))
             if i < len(before) - 1:
                 out.append(row_chars([(spine, "↓")]))
-        out.append(row_chars([(centers[0], "↙"), (spine, "↓"), (centers[2], "↘")]))
+        if len(branch) == 3:
+            out.append(row_chars([(centers[0], "↙"), (spine, "↓"), (centers[2], "↘")]))
+        else:
+            out.append(row_chars([(centers[0], "↙"), (centers[1], "↘")]))
         out.append(child_line)
         if after:
-            out.append(row_chars([(centers[0], "↖"), (spine, "↓"), (centers[2], "↙")]))
+            if len(branch) == 3:
+                out.append(row_chars([(centers[0], "↖"), (spine, "↓"), (centers[2], "↙")]))
+            else:
+                out.append(row_chars([(centers[0], "↘"), (centers[1], "↙")]))
             for i, lab in enumerate(after):
                 out.append(label_row(lab))
                 if i < len(after) - 1:
@@ -984,6 +1020,32 @@ with zipfile.ZipFile(path) as z:
                 "      " + child
             )
 
+        if has_slash and counts == [1, 2, 1]:
+            parent = node_rows[0][0]
+            left, right = node_rows[1]
+            child = node_rows[2][0]
+            gap = 4
+            child_line = left + (" " * gap) + right
+            lc = len(left) // 2
+            rc = len(left) + gap + len(right) // 2
+            pc = (lc + rc) // 2
+            width = max(len(child_line), pc + len(parent) // 2 + 1, len(child) + max(0, pc - len(child) // 2))
+
+            def row_with(chars):
+                row = [" "] * width
+                for idx, ch in chars:
+                    if 0 <= idx < width:
+                        row[idx] = ch
+                return "".join(row).rstrip()
+
+            return "\\n".join([
+                (" " * max(0, pc - len(parent) // 2)) + parent,
+                row_with([(pc + (lc - pc) * 3 // 5, "/"), (pc + (rc - pc) * 3 // 5, bs)]),
+                child_line,
+                row_with([(pc + (lc - pc) * 3 // 5, bs), (pc + (rc - pc) * 3 // 5, "/")]),
+                (" " * max(0, pc - len(child) // 2)) + child,
+            ])
+
         return text
 
     def normalize_diagrams(items):
@@ -1001,6 +1063,8 @@ with zipfile.ZipFile(path) as z:
         st = re.sub(r"\\s+", " ", (s or "")).strip()
         if not st or re.match(r"^\\d+[G]?[.)]\\s+", st) or st.endswith("?"):
             return False
+        if st.startswith("//") or st.startswith("@Override"):
+            return False
         if st.endswith(":"):
             return False
         if re.search(r"[{};]", st):
@@ -1012,7 +1076,7 @@ with zipfile.ZipFile(path) as z:
         return True
 
     def chart_block_text(b):
-        if b.get("type") == "diagram":
+        if b.get("type") in ("diagram", "code"):
             return b.get("text") or ""
         if b.get("type") == "paragraph":
             return para_text(b)
@@ -1021,17 +1085,19 @@ with zipfile.ZipFile(path) as z:
     def is_hard_chart_block(b):
         if b.get("type") == "diagram":
             return True
-        if b.get("type") == "paragraph":
-            t = para_text(b)
-            return (
-                is_ascii_diagram_line(t)
-                or is_tree_or_flow_line(t)
-                or is_pattern_output_line(t)
-            )
-        return False
+        t = chart_block_text(b)
+        return bool(t) and (
+            is_ascii_diagram_line(t)
+            or is_tree_or_flow_line(t)
+            or is_pattern_output_line(t)
+            or is_flow_arrow_line(t)
+        )
 
     def is_soft_chart_block(b):
-        return b.get("type") == "paragraph" and is_soft_chart_label(para_text(b))
+        t = chart_block_text(b)
+        if t.strip() in ("@Override", "this", "super"):
+            return True
+        return bool(t) and (is_soft_chart_label(t) or is_flow_label_line(t))
 
     def attach_chart_blocks(items):
         """Keep flowchart labels with their arrows, and tree labels with |-- branches."""
