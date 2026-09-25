@@ -1,0 +1,223 @@
+{
+  "title": "Notes Java Multiple Cyclic Inheritance",
+  "itemsPerPage": 2,
+  "source": "notes-java-multiple-cyclic-inheritance.docx",
+  "items": [
+    {
+      "question": "What is Inheritance in Java?",
+      "answer": "Answer: Inheritance is a mechanism in Java in which a child class acquires properties and behavior from a parent class. It promotes code reuse and is implemented using the extends keyword."
+    },
+    {
+      "question": "What are the different types of Inheritance?",
+      "answer": "Answer: The six types of inheritance covered are: Single Inheritance Multilevel Inheritance Hierarchical Inheritance Hybrid Inheritance Multiple Inheritance Cyclic Inheritance"
+    },
+    {
+      "question": "Which types of Inheritance are supported by Java through classes?",
+      "answer": "Answer: Java supports: Single Inheritance Multilevel Inheritance Hierarchical Inheritance Hybrid Inheritance Multiple Inheritance and Cyclic Inheritance are not supported through classes."
+    },
+    {
+      "question": "What is the standard naming convention for a Java package?",
+      "answer": "Answer: A package name can follow the structure:\n\n```java\ndomain.companyname.projectname.module\n```"
+    },
+    {
+      "question": "How can a Java class be renamed in an IDE?",
+      "answer": "Answer: A class can be renamed by selecting the class and using the Refactor → Rename option."
+    },
+    {
+      "question": "What is Single Inheritance?",
+      "answer": "Answer: Single Inheritance is a type of inheritance in which one child class inherits from one parent class. Parent ↓ Child"
+    },
+    {
+      "question": "How is Single Inheritance implemented in Java?",
+      "answer": "Answer: ```java\nclass Demo1 {\nint a = 10;\nint b = 20;\n}\nclass Demo2 extends Demo1 {\nint c = 30;\nint d = 40;\n}\n```\n\nHere, Demo2 is the child class and Demo1 is the parent class."
+    },
+    {
+      "question": "What members can a child class access through inheritance?",
+      "answer": "Answer: A child class can access inherited members according to their access level. Non-private members can be inherited and accessed according to Java access-control rules, while private members are not directly accessible in the child class."
+    },
+    {
+      "question": "What output is produced when the inherited and child members are printed in Single Inheritance?",
+      "answer": "Answer: For:\n\n```java\nclass Demo1 {\nint a = 10;\nint b = 20;\n}\nclass Demo2 extends Demo1 {\nint c = 30;\nint d = 40;\n}\n```\n\nthe output is: 10 20 30 40"
+    },
+    {
+      "question": "What is Multilevel Inheritance?",
+      "answer": "Answer: Multilevel Inheritance is a type of inheritance in which one class inherits from another class and a third class inherits from the second class. Demo3 ↓ Demo4 ↓ Demo5"
+    },
+    {
+      "question": "How is Multilevel Inheritance implemented in Java?",
+      "answer": "Answer: ```java\nclass Demo3 {\nint a = 10;\nint b = 20;\n}\nclass Demo4 extends Demo3 {\nint c = 30;\nint d = 40;\n}\nclass Demo5 extends Demo4 {\nint e = 50;\nint f = 60;\n}\n```"
+    },
+    {
+      "question": "Which members can the derived class access in multilevel inheritance?",
+      "answer": "Answer: For the hierarchy: Demo3 → Demo4 → Demo5 Demo5 can access: a, b, c, d, e, f The members are available through the inheritance chain."
+    },
+    {
+      "question": "What is Hierarchical Inheritance?",
+      "answer": "Answer: Hierarchical Inheritance is a type of inheritance in which multiple child classes inherit from the same parent class. Sample / \\ Sample1 Sample2"
+    },
+    {
+      "question": "How is Hierarchical Inheritance implemented in Java?",
+      "answer": "Answer: ```java\nclass Sample {\nint a = 100;\nint b = 200;\n}\nclass Sample1 extends Sample {\nint c = 300;\n}\nclass Sample2 extends Sample {\nint d = 400;\n}\n```"
+    },
+    {
+      "question": "What members can the child classes access in Hierarchical Inheritance?",
+      "answer": "Answer: Sample1 can access: a, b, c Sample2 can access: a, b, d"
+    },
+    {
+      "question": "What is the output of the hierarchical inheritance example?",
+      "answer": "Answer: The values are: 100 200 300 100 200 400"
+    },
+    {
+      "question": "What is Hybrid Inheritance?",
+      "answer": "Answer: Hybrid Inheritance is a combination of two or more types of inheritance. A combination of hierarchical and multilevel inheritance can form a hybrid structure. Sample / \\ Sample1 Sample2 | | Sample3 Sample4"
+    },
+    {
+      "question": "How is Hybrid Inheritance implemented in Java?",
+      "answer": "Answer: ```java\nclass Sample {\nint a = 100;\nint b = 200;\n}\nclass Sample1 extends Sample {\nint c = 300;\n}\nclass Sample2 extends Sample {\nint d = 400;\n}\nclass Sample3 extends Sample1 {\nint e = 999;\n}\nclass Sample4 extends Sample2 {\nint f = 888;\n}\n```"
+    },
+    {
+      "question": "What members can Sample3 and Sample4 access in Hybrid Inheritance?",
+      "answer": "Answer: Sample3 can access: a, b, c, e Sample4 can access: a, b, d, f"
+    },
+    {
+      "question": "What is Multiple Inheritance?",
+      "answer": "Answer: Multiple Inheritance is a type of inheritance in which one child class attempts to inherit from more than one parent class. Parent1 Parent2 \\ / Child"
+    },
+    {
+      "question": "Does Java support Multiple Inheritance through classes?",
+      "answer": "Answer: No. Java does not support Multiple Inheritance through classes. A class cannot directly extend two classes.\n\n```java\nclass Child extends Parent1, Parent2 {\n}\n```\n\nThis is not valid Java syntax."
+    },
+    {
+      "question": "Why does Java not support Multiple Inheritance through classes?",
+      "answer": "Answer: Multiple Inheritance through classes can create ambiguity when different parent classes provide members with the same name. For example:\n\n```java\nclass Parent1 {\nString color = \"black\";\n}\nclass Parent2 {\nString color = \"white\";\n}\n```\n\nIf a child class inherited both color members, it would be unclear which value should be used."
+    },
+    {
+      "question": "What is the Diamond Problem?",
+      "answer": "Answer: The Diamond Problem refers to ambiguity that can arise when a child class receives the same member through multiple inheritance paths. Parent / \\ Parent1 Parent2 \\ / Child"
+    },
+    {
+      "question": "How can Multiple Inheritance create ambiguity?",
+      "answer": "Answer: If two parent classes define a member with the same name, the child class would have multiple possible sources for that member. For example:\n\n```java\nclass Parent1 {\nString color = \"black\";\n}\nclass Parent2 {\nString color = \"white\";\n}\n```\n\nThe child would have an ambiguity when accessing color."
+    },
+    {
+      "question": "What happens when a Java class attempts to extend two classes?",
+      "answer": "Answer: A Java class cannot extend two classes.\n\n```java\nclass Child extends Parent1, Parent2 {\n}\n```\n\nThis causes a compilation error."
+    },
+    {
+      "question": "What is Cyclic Inheritance?",
+      "answer": "Answer: Cyclic Inheritance occurs when classes form a circular inheritance relationship. System1 → System2 → System3 → System1"
+    },
+    {
+      "question": "How does Cyclic Inheritance occur in Java?",
+      "answer": "Answer: A cyclic hierarchy can be created using declarations such as:\n\n```java\nclass System1 extends System3 {\n}\nclass System2 extends System1 {\n}\nclass System3 extends System2 {\n}\n```\n\nThis creates a cycle in the type hierarchy."
+    },
+    {
+      "question": "What errors can indicate Cyclic Inheritance?",
+      "answer": "Answer: Errors associated with a cyclic hierarchy include: hierarchy is inconsistent cycle detected a cycle exists in the type hierarchy"
+    },
+    {
+      "question": "Why is Cyclic Inheritance not permitted in Java?",
+      "answer": "Answer: Cyclic Inheritance is not permitted because it can lead to infinite constructor chaining. For example: Demo2 constructor ↓ Demo1 constructor ↓ Demo2 constructor ↓ Demo1 constructor ↓ ..."
+    },
+    {
+      "question": "What are the main problems associated with Multiple and Cyclic Inheritance?",
+      "answer": "Answer: Multiple Inheritance can lead to ambiguity through the Diamond Problem. Cyclic Inheritance can lead to infinite constructor chaining."
+    },
+    {
+      "question": "What is a constructor in Java?",
+      "answer": "Answer: A constructor is a special member of a class used for initializing an object. It is executed when an object is created."
+    },
+    {
+      "question": "Which members do not participate in inheritance?",
+      "answer": "Answer: Two important categories are: Constructors Private members Constructors are not inherited, and private members are not directly accessible in the child class."
+    },
+    {
+      "question": "What is constructor chaining in inheritance?",
+      "answer": "Answer: Constructor chaining is the process in which the execution of a child class constructor causes the parent class constructor to execute through super(). For example:\n\n```java\nclass Demo1 {\n```\n\nDemo1() {\n\n```java\nSystem.out.println(\"This is Demo1 constructor execution\");\n}\n}\nclass Demo2 extends Demo1 {\n```\n\nDemo2() {\n\n```java\nSystem.out.println(\"This is Demo2 constructor execution\");\n}\n}\n```\n\nWhen a Demo2 object is created, the Demo1 constructor executes before the Demo2 constructor."
+    },
+    {
+      "question": "What is the purpose of super() in constructor chaining?",
+      "answer": "Answer: super() is used to invoke the constructor of the parent class. It ensures that the parent constructor executes before the child constructor."
+    },
+    {
+      "question": "What is the execution order of constructors in an inheritance hierarchy?",
+      "answer": "Answer: Constructors execute from the topmost superclass toward the child class. For example: Object ↓ Demo1 ↓ Demo2 The order is: Object constructor Demo1 constructor Demo2 constructor"
+    },
+    {
+      "question": "What happens when an object of a child class is created?",
+      "answer": "Answer: When a child object is created: Memory is allocated for the object. The child constructor is invoked. Constructor chaining moves control to the parent constructor. Parent constructors execute. Control returns toward the child constructor. The child constructor executes."
+    },
+    {
+      "question": "What output is produced when both parent and child constructors print messages?",
+      "answer": "Answer: For:\n\n```java\nclass Demo1 {\n```\n\nDemo1() {\n\n```java\nSystem.out.println(\"This is Demo1 constructor execution\");\n}\n}\nclass Demo2 extends Demo1 {\n```\n\nDemo2() {\n\n```java\nSystem.out.println(\"This is Demo2 constructor execution\");\n}\n}\n```\n\nand:\n\n```java\nDemo2 d2 = new Demo2();\n```\n\nthe output is: This is Demo1 constructor execution This is Demo2 constructor execution"
+    },
+    {
+      "question": "What is the relationship between the Object class and other Java classes?",
+      "answer": "Answer: Object is the top-level superclass in the Java class hierarchy. A class that does not explicitly extend another class implicitly has Object as its superclass."
+    },
+    {
+      "question": "When is extends Object implicitly provided?",
+      "answer": "Answer: If a class does not explicitly extend another class, it is implicitly treated as a subclass of Object. For example:\n\n```java\nclass Demo1 {\n}\n```\n\nhas the hierarchy: Object ↓ Demo1"
+    },
+    {
+      "question": "What happens when a class already extends another class?",
+      "answer": "Answer: If a class already extends another class, it does not directly extend Object. For example:\n\n```java\nclass Demo1 {\n}\nclass Demo2 extends Demo1 {\n}\n```\n\nThe hierarchy becomes: Object ↓ Demo1 ↓ Demo2"
+    },
+    {
+      "question": "How are inherited variables initialized during constructor chaining?",
+      "answer": "Answer: If a parent class contains a non-private variable and its constructor performs the initialization, the parent constructor must execute as part of constructor chaining. For example:\n\n```java\nclass Demo1 {\nString name = \"Raju\";\n```\n\nDemo1() {\n\n```java\n// parent initialization\n}\n}\nclass Demo2 extends Demo1 {\n}\n```\n\nThe parent constructor is responsible for parent-level initialization."
+    },
+    {
+      "question": "Are constructors inherited by subclasses?",
+      "answer": "Answer: No. Constructors are not inherited by subclasses. However, a parent constructor executes when a child object is created because of constructor chaining."
+    },
+    {
+      "question": "Are private members directly accessible in subclasses?",
+      "answer": "Answer: No. Private members are not directly accessible in the child class. For example:\n\n```java\nclass Demo1 {\nprivate int accountNumber;\nprivate int password;\n}\nclass Demo2 extends Demo1 {\n}\n```\n\nDemo2 cannot directly access accountNumber and password."
+    },
+    {
+      "question": "What happens to parent private members when a child object is created?",
+      "answer": "Answer: The child class cannot directly access the private members of the parent. The parent class constructor can still execute its own initialization as part of the constructor chain. The important distinction is that private members are not directly available to the child through inheritance."
+    },
+    {
+      "question": "What is variable shadowing in a parameterized constructor?",
+      "answer": "Answer: Variable shadowing occurs when constructor parameters have the same names as instance variables.\n\n```java\nclass Demo {\nint a;\nint b;\n```\n\nDemo(int a, int b) {\n\n```java\nthis.a = a;\nthis.b = b;\n}\n}\n```"
+    },
+    {
+      "question": "How is variable shadowing resolved using the this keyword?",
+      "answer": "Answer: The this keyword refers to the current object's instance variable.\n\n```java\nthis.a = a;\nthis.b = b;\n```\n\nThe left side refers to the instance variables, while the right side refers to the constructor parameters."
+    },
+    {
+      "question": "When does the compiler provide a default no-argument constructor?",
+      "answer": "Answer: The compiler provides a default no-argument constructor only when no constructor is declared in the class. If a class already contains a constructor, the compiler does not automatically add another no-argument constructor."
+    },
+    {
+      "question": "What happens when a class contains only a parameterized constructor?",
+      "answer": "Answer: A no-argument object creation is not valid. For example:\n\n```java\nclass Demo {\n```\n\nDemo(int a, int b) {\n\n```java\n}\n}\n```\n\nThe following statement results in a compilation error:\n\n```java\nDemo d = new Demo();\n```\n\nThe required parameters must be supplied."
+    },
+    {
+      "question": "What happens when a child constructor implicitly calls super() but the parent class has only a parameterized constructor?",
+      "answer": "Answer: The child constructor attempts to invoke a no-argument parent constructor through super(). If the parent class has only a parameterized constructor, there is no matching no-argument constructor, so compilation fails."
+    },
+    {
+      "question": "Why does the compiler not automatically provide arguments to a parameterized parent constructor?",
+      "answer": "Answer: The compiler follows predefined rules and does not assume which values should be passed to a parameterized constructor. Therefore, the required arguments must be supplied explicitly."
+    },
+    {
+      "question": "How can a child constructor explicitly invoke a parameterized parent constructor?",
+      "answer": "Answer: The child constructor can call the parent constructor using super(...).\n\n```java\nclass Demo {\nint a;\nint b;\n```\n\nDemo(int a, int b) {\n\n```java\nthis.a = a;\nthis.b = b;\n}\n}\nclass Demo1 extends Demo {\nint c;\nint d;\n```\n\nDemo1(int c, int d) {\n\n```java\nsuper(10, 20);\nthis.c = c;\nthis.d = d;\n}\n}\n```\n\nHere, super(10, 20) invokes the parameterized constructor of Demo."
+    },
+    {
+      "question": "What happens when the parent class has only a parameterized constructor and the child does not explicitly call it?",
+      "answer": "Answer: Consider:\n\n```java\nclass Demo {\nint a;\nint b;\n```\n\nDemo(int a, int b) {\n\n```java\nthis.a = a;\nthis.b = b;\n}\n}\nclass Demo1 extends Demo {\nint c;\nint d;\n```\n\nDemo1(int c, int d) {\n\n```java\nthis.c = c;\nthis.d = d;\n}\n}\n```\n\nThe child constructor requires a superclass constructor call. Java attempts an implicit super() call, but Demo does not have a no-argument constructor. Therefore, the code results in a compilation error."
+    },
+    {
+      "question": "What is the correct order for analyzing constructor execution in inheritance?",
+      "answer": "Answer: The constructor flow should be followed from the child toward the parent and then back toward the child: Child constructor ↓ super(...) ↓ Parent constructor ↓ super(...) ↓ Object constructor ↓ Return toward child The parent constructors complete before the child constructor continues."
+    },
+    {
+      "question": "What is the key rule of constructor execution in inheritance?",
+      "answer": "Answer: The superclass constructor must execute before the subclass constructor. Constructor chaining through super() establishes this execution order and allows parent-class initialization to occur before child-class initialization."
+    }
+  ]
+}
