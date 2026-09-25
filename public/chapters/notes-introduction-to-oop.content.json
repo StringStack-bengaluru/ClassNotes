@@ -1,0 +1,71 @@
+{
+  "title": "Notes Introduction To Oop",
+  "itemsPerPage": 2,
+  "source": "notes-introduction-to-oop.docx",
+  "items": [
+    {
+      "question": "What are the four number-manipulation programs?",
+      "answer": "Answer: The four programs are: Finding the nth term of an Arithmetic Progression. Finding the nth term of a Geometric Progression. Printing n terms of an Arithmetic Progression. Printing n terms of a Geometric Progression."
+    },
+    {
+      "question": "What is the formula for finding the nth term of an Arithmetic Progression?",
+      "answer": "Answer: The nth term of an Arithmetic Progression is calculated using:\n\n```java\nnthTerm = A + (N - 1) * D;\n```\n\nWhere: A is the first term. D is the common difference. N is the position of the required term. For example, if A = 2, D = 2, and N = 5: nthTerm = 2 + (5 - 1) * 2 = 2 + 8 = 10 Therefore, the fifth term is 10."
+    },
+    {
+      "question": "How can the nth term of an Arithmetic Progression be implemented using a Java method?",
+      "answer": "Answer: A method can accept the first term, common difference, and position and return the required term.\n\n```java\nint AP(int A, int D, int N) {\nreturn A + (N - 1) * D;\n}\n```\n\nThe method can be called from main() using an object:\n\n```java\nNumberManipulation manipulation = new NumberManipulation();\nint term = manipulation.AP(A, D, N);\nSystem.out.println(term);\n```"
+    },
+    {
+      "question": "How can n terms of an Arithmetic Progression be printed using a loop?",
+      "answer": "Answer: The first term is stored in a variable, and the common difference is added after printing each term.\n\n```java\nint term = A;\nfor (int i = 0; i < N; i++) {\nSystem.out.println(term);\nterm += D;\n}\n```\n\nFor A = 2, D = 2, and N = 5, the output is: 2 4 6 8 10 The loop executes N times, so exactly N terms are printed."
+    },
+    {
+      "question": "What is another approach for printing n terms of an Arithmetic Progression?",
+      "answer": "Answer: Each term can be calculated directly using the loop index:\n\n```java\nfor (int i = 0; i < N; i++) {\nSystem.out.println(A + i * D);\n}\n```\n\nFor A = 2, D = 2, and N = 5, the output is: 2 4 6 8 10 This approach does not require a separate variable to store the current term."
+    },
+    {
+      "question": "What is a Fibonacci series and how are its terms calculated?",
+      "answer": "Answer: A Fibonacci series starts with 0 and 1. From the third term onward, each term is the sum of the previous two terms. 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ... The rule is: Next term = Previous two terms added together For example: 0 + 1 = 1 1 + 1 = 2 1 + 2 = 3 2 + 3 = 5 3 + 5 = 8"
+    },
+    {
+      "question": "How are the first two Fibonacci values initialized in Java?",
+      "answer": "Answer: The first two values can be stored in two variables:\n\n```java\nint fib1 = 0;\nint fib2 = 1;\n```\n\nfib1 contains the first value and fib2 contains the second value. These values are used to calculate subsequent terms."
+    },
+    {
+      "question": "How is the next Fibonacci term calculated and how are the variables updated?",
+      "answer": "Answer: The next term is calculated by adding the two current Fibonacci values:\n\n```java\nint term = fib1 + fib2;\n```\n\nAfter calculating the term, the variables must be shifted forward:\n\n```java\nfib1 = fib2;\nfib2 = term;\n```\n\nFor example: fib1 = 0 fib2 = 1 term = 0 + 1 = 1 After updating: fib1 = 1 fib2 = 1 The next calculation becomes: 1 + 1 = 2"
+    },
+    {
+      "question": "How can n Fibonacci terms be printed using a Java program?",
+      "answer": "Answer: The first two terms are handled separately, and a for loop calculates the remaining terms. void fibonacci(int n) {\n\n```java\nint fib1 = 0;\nint fib2 = 1;\nif (n == 1) {\nSystem.out.println(fib1);\n}\nelse if (n == 2) {\nSystem.out.println(fib1 + \" \" + fib2);\n}\nelse {\nSystem.out.print(fib1 + \" \" + fib2);\nfor (int i = 3; i <= n; i++) {\nint term = fib1 + fib2;\nSystem.out.print(\" \" + term);\nfib1 = fib2;\nfib2 = term;\n}\n}\n}\n```\n\nFor example, if n = 5, the output is: 0 1 1 2 3 The loop starts from 3 because the first two terms are already known."
+    },
+    {
+      "question": "Why does the Fibonacci loop start from the third term?",
+      "answer": "Answer: The first two Fibonacci terms are predefined: 1st term = 0 2nd term = 1 Therefore, no calculation is required for them. Calculation begins with the third term.\n\n```java\nfor (int i = 3; i <= n; i++)\n```\n\nFor n = 10, the first two terms are already available, so the loop performs 8 calculations."
+    },
+    {
+      "question": "How can the nth Fibonacci term be found?",
+      "answer": "Answer: Only the required term needs to be calculated. The intermediate terms are generated internally but are not printed.\n\n```java\nint fibonacciNthTerm(int n) {\nint fib1 = 0;\nint fib2 = 1;\nif (n == 1) {\nreturn fib1;\n}\nif (n == 2) {\nreturn fib2;\n}\nint term = 0;\nfor (int i = 3; i <= n; i++) {\nterm = fib1 + fib2;\nfib1 = fib2;\nfib2 = term;\n}\nreturn fib2;\n}\n```\n\nFor example: 1st term = 0 2nd term = 1 5th term = 3 10th term = 34"
+    },
+    {
+      "question": "What is the difference between finding the nth Fibonacci term and printing n Fibonacci terms?",
+      "answer": "Answer: When finding the nth term, only the required term is returned. For example, if n = 5: 5th term = 3 When printing n terms, all terms from the first through the nth term are displayed: 0 1 1 2 3 The calculation logic is similar, but the output requirement is different. 13. Demonstrate a complete, object-oriented approach to computing the Fibonacci series, highlighting the class definition and entry-point (main) method.\n\n```java\nimport java.util.Scanner;\nclass NumberManipulation {\nint fibonacciNthTerm(int n) {\nint fib1 = 0;\nint fib2 = 1;\nif (n == 1) {\nreturn fib1;\n}\nif (n == 2) {\nreturn fib2;\n}\nint term = 0;\nfor (int i = 3; i <= n; i++) {\nterm = fib1 + fib2;\nfib1 = fib2;\nfib2 = term;\n}\nreturn fib2;\n}\n```\n\nvoid fibonacci(int n) {\n\n```java\nint fib1 = 0;\nint fib2 = 1;\nif (n == 1) {\nSystem.out.println(fib1);\n}\nelse if (n == 2) {\nSystem.out.println(fib1 + \" \" + fib2);\n}\nelse {\nSystem.out.print(fib1 + \" \" + fib2);\nfor (int i = 3; i <= n; i++) {\nint term = fib1 + fib2;\nSystem.out.print(\" \" + term);\nfib1 = fib2;\nfib2 = term;\n}\nSystem.out.println();\n}\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nScanner scan = new Scanner(System.in);\nNumberManipulation manipulation = new NumberManipulation();\nSystem.out.print(\"Enter n for nth Fibonacci term: \");\nint n = scan.nextInt();\nint result = manipulation.fibonacciNthTerm(n);\nSystem.out.println(\"Nth Fibonacci term = \" + result);\nSystem.out.print(\"Enter number of Fibonacci terms to print: \");\nn = scan.nextInt();\nSystem.out.print(\"Fibonacci series: \");\nmanipulation.fibonacci(n);\nscan.close();\n}\n}\n```\n\nThis program demonstrates both operations: finding a specific Fibonacci term and printing the first n Fibonacci terms."
+    },
+    {
+      "question": "What happens when Fibonacci values exceed the range of the int data type?",
+      "answer": "Answer: Fibonacci values increase rapidly. When a value exceeds the range supported by int, integer overflow can occur, producing incorrect or negative values. For larger Fibonacci values, long can be used instead of int.\n\n```java\nlong fib1 = 0;\nlong fib2 = 1;\n```"
+    },
+    {
+      "question": "What are the five basic rules of object orientation?",
+      "answer": "Answer: The five basic rules are: The entire world is a collection of objects. Every object is useful. Every object interacts with other objects. Every object belongs to a category, type, or class. Every object has properties and exhibits behaviors."
+    },
+    {
+      "question": "What basic concepts of classes and objects should be understood before learning encapsulation?",
+      "answer": "Answer: The required concepts are: Creating a class. Creating an object. Creating an object with a reference. Creating an object without a reference. Understanding when an object can be created without a reference."
+    },
+    {
+      "question": "What object-oriented concepts follow encapsulation?",
+      "answer": "Answer: The concepts listed are: Encapsulation Constructors Inheritance Polymorphism Abstraction Interface Collections"
+    }
+  ]
+}
