@@ -763,6 +763,111 @@ with zipfile.ZipFile(path) as z:
                 return names
         return []
 
+    FLOW_ARROWS = "↓↑→←↗↘↙↖"
+
+    def is_flow_arrow_line(s):
+        t = (s or "").replace("\\u00a0", " ").replace("\\xa0", " ").replace("\u00a0", " ")
+        t = t.replace("\\t", " ").replace("\t", " ").strip()
+        return bool(t) and all(c in FLOW_ARROWS + " " for c in t)
+
+    def flow_labels(s):
+        raw = (s or "").replace("\\u00a0", " ").replace("\\xa0", " ").replace("\u00a0", " ")
+        raw = raw.replace("\\t", "  ").replace("\t", "  ")
+        if not raw.strip() or is_flow_arrow_line(raw):
+            return []
+        parts = re.split(r" {2,}", raw.strip())
+        return [re.sub(r" +", " ", p).strip() for p in parts if p.strip()]
+
+    def looks_like_vertical_flow(text):
+        lines = [ln for ln in (text or "").split("\\n") if ln.strip()]
+        if len(lines) < 3:
+            return False
+        if re.search(r"[{};]|\\bclass\\s+", text or ""):
+            return False
+        arrows = sum(1 for ln in lines if is_flow_arrow_line(ln))
+        labels = sum(1 for ln in lines if flow_labels(ln))
+        return arrows >= 2 and labels >= 2
+
+    def normalize_vertical_flow_diagram(text):
+        """Rebuild Word flowcharts. Leading spaces/tabs were for proportional fonts."""
+        if not looks_like_vertical_flow(text):
+            return None
+        lines = [ln for ln in (text or "").split("\\n") if ln.strip()]
+        rows = []
+        for ln in lines:
+            if is_flow_arrow_line(ln):
+                rows.append(("arrows", ln.strip()))
+                continue
+            labs = flow_labels(ln)
+            if not labs:
+                return None
+            rows.append(("labels", labs))
+        label_rows = [r[1] for r in rows if r[0] == "labels"]
+        if not label_rows:
+            return None
+        triple_idxs = [i for i, labs in enumerate(label_rows) if len(labs) == 3]
+        if any(len(labs) not in (1, 3) for labs in label_rows):
+            return None
+
+        if not triple_idxs and all(len(labs) == 1 for labs in label_rows):
+            names = [labs[0] for labs in label_rows]
+            width = max(len(n) for n in names)
+            out = []
+            for i, name in enumerate(names):
+                out.append(name.center(width).rstrip())
+                if i < len(names) - 1:
+                    out.append("↓".center(width).rstrip())
+            return "\\n".join(out)
+
+        if len(triple_idxs) != 1:
+            return None
+        ti = triple_idxs[0]
+        before = [label_rows[i][0] for i in range(ti)]
+        branch = label_rows[ti]
+        after = [label_rows[i][0] for i in range(ti + 1, len(label_rows))]
+        if not before:
+            return None
+        gap = 3
+        child_line = (" " * gap).join(branch)
+        centers = []
+        x = 0
+        for i, ch in enumerate(branch):
+            centers.append(x + len(ch) // 2)
+            x += len(ch) + (gap if i < len(branch) - 1 else 0)
+        spine = centers[1]
+        labels = before + after
+        width = max(
+            len(child_line),
+            max(len(lab) + max(0, spine - len(lab) // 2) for lab in labels),
+            max(centers) + 1,
+        )
+
+        def row_chars(pairs):
+            row = [" "] * width
+            for idx, ch in pairs:
+                if 0 <= idx < width:
+                    row[idx] = ch
+            return "".join(row).rstrip()
+
+        def label_row(lab):
+            start = max(0, spine - len(lab) // 2)
+            return (" " * start) + lab
+
+        out = []
+        for i, lab in enumerate(before):
+            out.append(label_row(lab))
+            if i < len(before) - 1:
+                out.append(row_chars([(spine, "↓")]))
+        out.append(row_chars([(centers[0], "↙"), (spine, "↓"), (centers[2], "↘")]))
+        out.append(child_line)
+        if after:
+            out.append(row_chars([(centers[0], "↖"), (spine, "↓"), (centers[2], "↙")]))
+            for i, lab in enumerate(after):
+                out.append(label_row(lab))
+                if i < len(after) - 1:
+                    out.append(row_chars([(spine, "↓")]))
+        return "\\n".join(out)
+
     def diagram_line_kind(line):
         t = (line or "").strip()
         names = node_tokens(t)
@@ -770,7 +875,7 @@ with zipfile.ZipFile(path) as z:
             return ("nodes", names)
         if t and re.fullmatch(r"[/\\\\|\\s]+", t):
             return ("slashes", t)
-        if t and re.fullmatch(r"[↓↑→←\\s]+", t):
+        if t and re.fullmatch(r"[↓↑→←↗↘↙↖\\s]+", t):
             return ("arrows", t)
         return ("other", t)
 
@@ -816,6 +921,9 @@ with zipfile.ZipFile(path) as z:
 
     def normalize_inheritance_diagram(text):
         """Rebuild Word trees. Docx spacing is for proportional fonts and breaks in mono."""
+        flowed = normalize_vertical_flow_diagram(text)
+        if flowed:
+            return flowed
         lines = [ln for ln in (text or "").split("\\n") if ln.strip()]
         if not lines:
             return text
