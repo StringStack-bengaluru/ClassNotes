@@ -1,0 +1,135 @@
+{
+  "title": "Notes Java Super Final Keyword",
+  "itemsPerPage": 2,
+  "source": "notes-java-super-final-keyword.docx",
+  "items": [
+    {
+      "question": "What is an annotation in Java?",
+      "answer": "Answer: An annotation is additional information written along with Java source code to communicate information about a program element. In Java, an annotation begins with the @ symbol. For example:\n\n```java\n@Override\n```\n\nAn annotation is not a normal executable statement. It provides additional information that can be used by the compiler, JVM-related mechanisms, development tools, or other programmers working with the code."
+    },
+    {
+      "question": "What is the basic meaning of notation?",
+      "answer": "Answer: Notation means communicating information to someone in written form. For example, a written note can communicate an instruction or message even when the person who wrote it is not physically present. The same basic idea can be related to programming annotations: information is written along with the program so that the intended information is available to the relevant person or software component."
+    },
+    {
+      "question": "How is an annotation different from an ordinary written comment?",
+      "answer": "Answer: An ordinary comment is written mainly for human-readable explanation and is not treated as an instruction to the compiler. An annotation has a defined meaning in Java and is associated with a program element. For example:\n\n```java\n// This is a comment\n@Override\n```\n\nvoid display() {\n\n```java\n}\n```\n\nThe comment is simply explanatory text, whereas @Override identifies a specific intention about the display() method."
+    },
+    {
+      "question": "What is the syntax of an annotation in Java?",
+      "answer": "Answer: The general syntax begins with the @ symbol followed by the annotation name. Example:\n\n```java\n@Override\n```\n\nThe annotation is normally placed before the program element to which it applies. For example:\n\n```java\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Child display\");\n}\n```"
+    },
+    {
+      "question": "What is @Override in Java?",
+      "answer": "Answer: ```java\n@Override is an annotation used with a method that is intended to override a method inherited from a parent class.\n```\n\nExample:\n\n```java\nclass Demo {\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"From Demo\");\n}\n}\nclass Demo1 extends Demo {\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"From Demo1\");\n}\n}\n```\n\nHere, Demo1 inherits display() from Demo and provides its own implementation."
+    },
+    {
+      "question": "Why is @Override used with an overriding method?",
+      "answer": "Answer: ```java\n@Override communicates that the method is intended to override a method from the parent class.\n```\n\nIt also helps the compiler verify that the method actually satisfies the rules required for overriding. For example:\n\n```java\nclass Demo {\n```\n\nvoid display() {\n\n```java\n}\n}\nclass Demo1 extends Demo {\n@Override\n```\n\nvoid display() {\n\n```java\n}\n}\n```\n\nThe annotation makes the programmer's intention explicit and helps identify an incorrect method declaration if it does not actually override a parent method."
+    },
+    {
+      "question": "What is method overriding in Java?",
+      "answer": "Answer: Method overriding occurs when a child class inherits a method from its parent class and provides its own implementation of that method. The child method must follow the rules required for overriding. Example:\n\n```java\nclass Demo {\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"From Demo\");\n}\n}\nclass Demo1 extends Demo {\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"From Demo1\");\n}\n}\n```\n\nHere, display() exists in the parent class and is reimplemented in the child class."
+    },
+    {
+      "question": "What is the inheritance relationship required for method overriding?",
+      "answer": "Answer: Method overriding requires inheritance. A parent class must contain the method, and the child class must inherit that method before providing a new implementation. The inheritance relationship is created using extends. Example:\n\n```java\nclass Demo {\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Parent\");\n}\n}\nclass Demo1 extends Demo {\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Child\");\n}\n}\n```\n\nDemo1 is the child class and Demo is the parent class."
+    },
+    {
+      "question": "What rules must be followed when overriding a method?",
+      "answer": "Answer: The important method-overriding rules demonstrated are: The method name must remain the same. The parameter list must remain the same. The visibility cannot be reduced. The return type must remain compatible with the parent method. For an ordinary method such as void display(), the return type remains void. The method must actually be inherited from the parent class. Example:\n\n```java\nclass Demo {\npublic void display() {\n}\n}\nclass Demo1 extends Demo {\n@Override\npublic void display() {\n}\n}\n```\n\nThe child method has the same name, same parameter list, compatible return type, and valid visibility."
+    },
+    {
+      "question": "Can the visibility of an overridden method be reduced?",
+      "answer": "Answer: No. The visibility of an overridden method cannot be reduced in the child class. For example, if the parent method is:\n\n```java\npublic void display() {\n}\n```\n\nthe child cannot override it as:\n\n```java\nprivate void display() {\n}\n```\n\nThe child method can retain the same visibility, and Java allows increased accessibility where applicable."
+    },
+    {
+      "question": "What happens to the return type when a method is overridden?",
+      "answer": "Answer: The return type of the overriding method must be compatible with the return type of the parent method. For example, if the parent method is: void display() {\n\n```java\n}\n```\n\nthe child method must also use: void display() {\n\n```java\n}\n```\n\nFor reference types, Java also permits a covariant return type, where the child method returns a more specific compatible type."
+    },
+    {
+      "question": "What is a covariant return type in method overriding?",
+      "answer": "Answer: A covariant return type allows an overriding method to return a more specific reference type than the return type declared by the parent method. For example:\n\n```java\nclass Parent {\n```\n\nObject getValue() {\n\n```java\nreturn new Object();\n}\n}\nclass Child extends Parent {\n@Override\nString getValue() {\nreturn \"Hello\";\n}\n}\nString is a more specific reference type than Object, so this is a covariant return type.\n```"
+    },
+    {
+      "question": "What must remain the same for a method to correctly override a parent method?",
+      "answer": "Answer: The method name and parameter list must match the inherited method. For example:\n\n```java\nclass Demo {\n```\n\nvoid display() {\n\n```java\n}\n}\nclass Demo1 extends Demo {\n@Override\n```\n\nvoid display() {\n\n```java\n}\n}\n```\n\nThe child method is correctly matched with the parent method because both methods are named display() and have the same parameter list. The visibility and return type must also satisfy the overriding rules."
+    },
+    {
+      "question": "What is the difference between inheritance and method overriding?",
+      "answer": "Answer: Inheritance allows a child class to acquire accessible members from a parent class. Method overriding allows the child class to provide a different implementation of an inherited method. For example:\n\n```java\nclass Demo {\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Parent implementation\");\n}\n}\nclass Demo1 extends Demo {\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Child implementation\");\n}\n}\n```\n\nextends establishes inheritance, while the redefinition of display() demonstrates overriding."
+    },
+    {
+      "question": "What is the output when an overridden method is called using a child-class object?",
+      "answer": "Answer: When an object of the child class calls an overridden method, the child-class implementation is executed. Example:\n\n```java\nclass Demo {\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"From Demo\");\n}\n}\nclass Demo1 extends Demo {\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"From Demo1\");\n}\n}\npublic class App {\npublic static void main(String[] args) {\nDemo1 d1 = new Demo1();\nd1.display();\n}\n}\n```\n\nOutput: From Demo1 The object d1 belongs to Demo1, so the overridden display() method in Demo1 executes."
+    },
+    {
+      "question": "How can a parent class and child class be structured to demonstrate method overriding?",
+      "answer": "Answer: A basic structure is:\n\n```java\nclass Demo {\nint a = 10;\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"From Demo a value is \" + a);\n}\n}\nclass Demo1 extends Demo {\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"From Demo1 a value is \" + a);\n}\n}\n```\n\nThe child class Demo1 inherits the variable a and the method display() from Demo, then overrides display() with its own implementation."
+    },
+    {
+      "question": "How can the overridden method be executed from a separate application class?",
+      "answer": "Answer: A separate class can contain the main() method, create an object of the child class, and invoke the overridden method. Example:\n\n```java\nclass Demo {\nint a = 10;\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"From Demo a value is \" + a);\n}\n}\nclass Demo1 extends Demo {\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"From Demo1 a value is \" + a);\n}\n}\npublic class App {\npublic static void main(String[] args) {\nDemo1 d1 = new Demo1();\nd1.display();\n}\n}\n```\n\nOutput: From Demo1 a value is 10"
+    },
+    {
+      "question": "Can an inherited variable be reassigned in a child-class object?",
+      "answer": "Answer: Yes. If the inherited variable is accessible and is not declared final, its value can be reassigned through the child-class object. Example:\n\n```java\nclass Demo {\nint a = 10;\n}\nclass Demo1 extends Demo {\n}\npublic class App {\npublic static void main(String[] args) {\nDemo1 d1 = new Demo1();\nd1.a = 20;\nSystem.out.println(d1.a);\n}\n}\n```\n\nOutput: 20 The variable a is inherited from Demo, but its value can be changed through the Demo1 object."
+    },
+    {
+      "question": "What happens to the value of an inherited variable after reassignment?",
+      "answer": "Answer: The variable contains the newly assigned value. For example:\n\n```java\nclass Demo {\nint a = 10;\n}\nclass Demo1 extends Demo {\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"From Demo1 a value is \" + a);\n}\n}\npublic class App {\npublic static void main(String[] args) {\nDemo1 d1 = new Demo1();\nd1.display();\nd1.a = 20;\nd1.display();\n}\n}\n```\n\nOutput: From Demo1 a value is 10 From Demo1 a value is 20 Reassignment changes the value stored in the inherited variable."
+    },
+    {
+      "question": "What is constructor chaining in Java?",
+      "answer": "Answer: Constructor chaining is the process of one constructor calling another constructor so that common initialization logic can be reused. Constructor chaining within the same class is performed using this(). Example:\n\n```java\nclass Mobile {\n```\n\nMobile() {\n\n```java\nthis(\"Samsung\");\n}\n```\n\nMobile(String brand) {\n\n```java\nthis(brand, \"Galaxy\", 50000);\n}\n```\n\nMobile(String brand, String model, double price) {\n\n```java\nSystem.out.println(brand);\nSystem.out.println(model);\nSystem.out.println(price);\n}\n}\n```\n\nThe zero-parameter constructor calls the one-parameter constructor, and the one-parameter constructor calls the three-parameter constructor."
+    },
+    {
+      "question": "Why is constructor chaining useful?",
+      "answer": "Answer: Constructor chaining avoids writing the same initialization logic repeatedly in multiple constructors. For example, instead of separately initializing all mobile details in every constructor, one constructor can delegate to another: Mobile() {\n\n```java\nthis(\"Samsung\");\n}\n```\n\nMobile(String brand) {\n\n```java\nthis(brand, \"Galaxy\", 50000);\n}\n```\n\nMobile(String brand, String model, double price) {\n\n```java\n// Common initialization\n}\n```\n\nThis keeps the initialization logic centralized."
+    },
+    {
+      "question": "Which keyword is used for constructor chaining within the same class?",
+      "answer": "Answer: The this keyword is used for constructor chaining within the same class. Examples:\n\n```java\nthis();\n```\n\ncalls the zero-parameter constructor.\n\n```java\nthis(brand);\n```\n\ncalls a constructor with one parameter.\n\n```java\nthis(brand, model, price);\n```\n\ncalls a constructor with three parameters."
+    },
+    {
+      "question": "What is the difference between this and this() in Java?",
+      "answer": "Answer: this refers to the current object. this() is a constructor call used to invoke another constructor of the same class. Example:\n\n```java\nclass Mobile {\nString brand;\n```\n\nMobile(String brand) {\n\n```java\nthis.brand = brand;\n}\n}\n```\n\nHere, this.brand refers to the instance variable. In: Mobile() {\n\n```java\nthis(\"Samsung\");\n}\n```\n\nthis(\"Samsung\") calls another constructor of the same class."
+    },
+    {
+      "question": "What types of constructors can be used in a constructor-chaining example?",
+      "answer": "Answer: A constructor-chaining example can contain constructors with different parameter counts. For example: Mobile() Mobile(String brand) Mobile(String brand, String model, double price) The first constructor has zero parameters, the second has one parameter, and the third has three parameters."
+    },
+    {
+      "question": "How can a mobile management system be implemented using constructor chaining?",
+      "answer": "Answer: A mobile management system can contain mobile information such as brand, model, and price. Three constructors can provide different initialization options:\n\n```java\nclass Mobile {\nString brand;\nString model;\ndouble price;\n```\n\nMobile() {\n\n```java\nthis(\"Unknown\");\n}\n```\n\nMobile(String brand) {\n\n```java\nthis(brand, \"Unknown\", 0.0);\n}\n```\n\nMobile(String brand, String model, double price) {\n\n```java\nthis.brand = brand;\nthis.model = model;\nthis.price = price;\n}\n```\n\nvoid displayDetails() {\n\n```java\nSystem.out.println(\"Brand : \" + brand);\nSystem.out.println(\"Model : \" + model);\nSystem.out.println(\"Price : \" + price);\n}\n}\n```\n\nThe constructors reuse one another through this() and finally reach the constructor containing the complete initialization logic."
+    },
+    {
+      "question": "How can different constructors be tested using different objects?",
+      "answer": "Answer: Different objects can be created using different constructors.\n\n```java\npublic class App {\npublic static void main(String[] args) {\nMobile m1 = new Mobile();\nMobile m2 = new Mobile(\"Samsung\");\nMobile m3 = new Mobile(\"Samsung\", \"Galaxy\", 50000);\nm1.displayDetails();\nm2.displayDetails();\nm3.displayDetails();\n}\n}\n```\n\nEach object is initialized according to the constructor used during object creation. The zero-parameter object receives default values, the one-parameter object receives the specified brand, and the three-parameter object receives the complete details."
+    },
+    {
+      "question": "What is the purpose of a display method in the mobile management example?",
+      "answer": "Answer: The display method is used to show the values stored in the object. Example: void displayDetails() {\n\n```java\nSystem.out.println(\"Brand : \" + brand);\nSystem.out.println(\"Model : \" + model);\nSystem.out.println(\"Price : \" + price);\n}\n```\n\nIt separates object initialization from displaying the stored data."
+    },
+    {
+      "question": "What is the super keyword in Java?",
+      "answer": "Answer: The super keyword is used in a child class to refer specifically to members of its immediate parent class. It can be used when access to the parent implementation or parent member is required. For example: super.a refers to the parent-class variable a."
+    },
+    {
+      "question": "How can super be used to access a parent-class variable?",
+      "answer": "Answer: The syntax is: super.variableName; For example:\n\n```java\nclass Demo {\nint a = 10;\n}\nclass Demo1 extends Demo {\n```\n\nvoid display() {\n\n```java\nSystem.out.println(super.a);\n}\n}\n```\n\nHere, super.a explicitly accesses the a variable inherited from the parent class."
+    },
+    {
+      "question": "What is the difference between this and super?",
+      "answer": "Answer: this refers to the current class object or current class context. super refers to the immediate parent class. Their common uses in the concepts covered are: this() → Calls another constructor of the same class this.variable → Refers to the current object's variable super.variable → Refers to the parent-class variable Example:\n\n```java\nclass Demo {\nint a = 10;\n}\nclass Demo1 extends Demo {\nint a = 20;\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Child value  : \" + this.a);\nSystem.out.println(\"Parent value : \" + super.a);\n}\n}\n```\n\nOutput: Child value : 20 Parent value : 10"
+    },
+    {
+      "question": "What does the extends keyword do in Java?",
+      "answer": "Answer: The extends keyword establishes an inheritance relationship between two classes. Example:\n\n```java\nclass Demo {\n}\nclass Demo1 extends Demo {\n}\n```\n\nHere, Demo1 is the child class and Demo is the parent class. The child class can access the inherited members that are accessible to it."
+    },
+    {
+      "question": "What is the complete relationship among inheritance, overriding, @Override, constructor chaining, this, and super?",
+      "answer": "Answer: These concepts serve different purposes in object-oriented Java programming: Inheritance ↓ Creates a parent-child class relationship Method Overriding ↓ Child provides its own implementation of an inherited method\n\n```java\n@Override\n```\n\n↓ Marks the method as an intended overriding method this() ↓ Calls another constructor of the same class this ↓ Refers to the current object/current class context super ↓ Refers to the immediate parent class A combined example can contain both overriding and parent-member access:\n\n```java\nclass Demo {\nint a = 10;\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Parent value is \" + a);\n}\n}\nclass Demo1 extends Demo {\nint a = 20;\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Child value is \" + this.a);\nSystem.out.println(\"Parent value is \" + super.a);\n}\n}\npublic class App {\npublic static void main(String[] args) {\nDemo1 d1 = new Demo1();\nd1.display();\n}\n}\n```\n\nOutput: Child value is 20 Parent value is 10 Here, inheritance connects Demo and Demo1, @Override identifies the overridden method, this.a accesses the child-class variable, and super.a accesses the parent-class variable."
+    }
+  ]
+}
