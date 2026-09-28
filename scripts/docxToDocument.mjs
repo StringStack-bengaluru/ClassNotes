@@ -173,7 +173,13 @@ with zipfile.ZipFile(path) as z:
         ):
             return False
         if re.fullmatch(r"[/\\\\|_↓↑→←↗↘↙↖+\\-\\s]+", line):
-            return True
+            if re.search(r"[↓↑→←↗↘↙↖]", line):
+                return True
+            if "/" in line and "\\\\" in line:
+                return True
+            if "|" in line and not re.fullmatch(r"\\|+", line):
+                return True
+            return False
         ident = r"(?:Demo\\d+|[A-Z][A-Za-z0-9]*)"
         if re.match(r"^\\s{2,}", raw) and re.fullmatch(ident + r"(?:\\s+" + ident + r")*", line):
             return True
@@ -192,7 +198,9 @@ with zipfile.ZipFile(path) as z:
                 return False
         if re.match(r"^\\|(?:-)+", line):
             return True
-        if line.startswith("|") or "└" in line or "├" in line:
+        if "└" in line or "├" in line:
+            return True
+        if re.match(r"^\\|\\s", line) or re.match(r"^\\|-", line):
             return True
         if re.match(r"^→", line):
             return True
@@ -230,7 +238,9 @@ with zipfile.ZipFile(path) as z:
         if re.search(r"[A-Za-z]", line):
             return False
         if re.fullmatch(r"[\\s*$#]+", line) and re.search(r"[*$#]", line):
-            return True
+            if line.count("*") + line.count("$") + line.count("#") >= 2:
+                return True
+            return False
         return False
 
     def is_code_line(s):
@@ -257,11 +267,11 @@ with zipfile.ZipFile(path) as z:
         ):
             return False
         # English answer sentences mis-styled as mono in Word
-        if line.endswith(".") and len(line) > 30 and re.search(
-            r"\\b(is|are|was|were|can|uses|use|than|more|less|when|because|while|provides|represents|means|allows|since|therefore)\\b",
+        if line.endswith(".") and re.search(
+            r"\\b(is|are|was|were|can|uses|use|than|more|less|when|because|while|provides|represents|means|allows|since|therefore|produces)\\b",
             line,
             re.I,
-        ) and not re.search(r"[{}();]", line):
+        ) and not re.search(r"[{}();]", line) and " " in line:
             return False
         # Sample outputs / short English labels — never code
         # e.g. "Grade B", "Child Ticket", "Invalid Day", "Not divisible"
@@ -307,7 +317,11 @@ with zipfile.ZipFile(path) as z:
         if re.fullmatch(r"[A-Za-z_]\\w*\\s*(?:==|!=|<=|>=)\\s*\\d+", line):
             return True
         # Continuation lines inside expressions / println args — not English sentences
-        if re.match(r"^[+*/,.]\\s*", line) and not re.search(r"\\bis\\b", line, re.I):
+        if re.match(r"^[+*/,.]\\s*", line) and not re.search(
+            r"\\b(is|are|produces|uses)\\b",
+            line,
+            re.I,
+        ):
             return True
         if '"' in line and "+" in line:
             return True
@@ -419,7 +433,11 @@ with zipfile.ZipFile(path) as z:
                     continue
                 if nxt.get("type") == "paragraph" and code_looks_open(text):
                     para = "".join((r.get("text") or "") for r in (nxt.get("runs") or []))
-                    if is_expression_fragment(para) or text.rstrip().endswith(("+", "=", "&&", "||")):
+                    if is_expression_fragment(para) and not re.search(
+                        r"\\b(logical|operator|uses|produces)\\b",
+                        para,
+                        re.I,
+                    ):
                         if not (para.strip().endswith(".") and " " in para.strip() and len(para.strip()) > 40):
                             text += "\\n" + para
                             j += 1
