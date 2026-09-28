@@ -1,0 +1,183 @@
+{
+  "title": "Notes Java Object Oriented Programming 1",
+  "itemsPerPage": 2,
+  "source": "notes-java-object-oriented-programming-1.docx",
+  "items": [
+    {
+      "question": "How is the series generated using A, B, and N?",
+      "answer": "Answer: The series is generated using the formula: First term = A + (2^0 × B) Second term = A + (2^0 + 2^1) × B Third term = A + (2^0 + 2^1 + 2^2) × B The same pattern continues until N terms are generated. For each query, the values of A, B, and N are given, and the corresponding N terms must be printed on one line separated by spaces."
+    },
+    {
+      "question": "What does Q represent in the series-generation problem?",
+      "answer": "Answer: Q represents the number of queries. Each query contains three values: A, B, and N. For every query, the required series must be generated independently."
+    },
+    {
+      "question": "What do A, B, and N represent in the input?",
+      "answer": "Answer: A represents the starting value. B is the value multiplied by the powers of 2. N represents the number of terms to generate. For example, if A = 5, B = 3, and N = 5, five terms must be generated."
+    },
+    {
+      "question": "What are the five basic rules of object orientation?",
+      "answer": "Answer: The five basic rules are: The entire world is considered a collection of objects. Every object has some purpose or usefulness. Every object belongs to a particular category, type, or class. Every object interacts with one or more other objects. Every object has properties and exhibits behaviors."
+    },
+    {
+      "question": "How is an object created in Java?",
+      "answer": "Answer: An object is created using the new keyword. For example:\n\n```java\nEmployee employee1 = new Employee();\n```\n\nThe new keyword creates an object, and the reference variable employee1 holds the reference to that object."
+    },
+    {
+      "question": "What is a class?",
+      "answer": "Answer: A class is a blueprint used to define the structure and behavior of objects. A class can contain: Data members or attributes Member functions or methods Properties Behaviors or functionalities The class defines what an object will contain and what it can do."
+    },
+    {
+      "question": "What is an object?",
+      "answer": "Answer: An object is an instance or physical existence of a class. A class defines the blueprint, while an object represents an actual instance created from that blueprint. For example, Employee can be a class, while employee1 and employee2 can be objects of that class."
+    },
+    {
+      "question": "How can an Employee class be designed using properties and behaviors?",
+      "answer": "Answer: An Employee class can contain the following properties: id name salary department It can also contain behaviors such as: work() eat() sleep() The properties describe the employee, while the methods represent the employee's behaviors."
+    },
+    {
+      "question": "How can two Employee objects be created and populated using keyboard input?",
+      "answer": "Answer: Two Employee objects can be created using the new keyword, and their property values can be assigned using values obtained from a Scanner. The general structure is:\n\n```java\nEmployee employee1 = new Employee();\nEmployee employee2 = new Employee();\nemployee1.id = scan.nextInt();\nemployee1.name = scan.next();\nemployee1.salary = scan.nextInt();\nemployee1.department = scan.next();\n```\n\nThe same process can be followed for employee2."
+    },
+    {
+      "question": "What is the purpose of the Employee methods work(), eat(), and sleep()?",
+      "answer": "Answer: These methods represent the behaviors of an Employee object. For example: void work() {\n\n```java\nSystem.out.println(name + \" is working\");\n}\n```\n\nvoid eat() {\n\n```java\nSystem.out.println(name + \" is eating\");\n}\n```\n\nvoid sleep() {\n\n```java\nSystem.out.println(name + \" is sleeping\");\n}\n```\n\nThe methods can use the object's properties such as id, name, salary, and department while performing their respective behaviors."
+    },
+    {
+      "question": "Why is a separate EmployeeApp class used?",
+      "answer": "Answer: The EmployeeApp class is used to contain the main() method and execute the program. The Employee class defines the properties and behaviors, while the application class creates the objects, accepts input, assigns values, and calls the methods."
+    },
+    {
+      "question": "How is Scanner used to take Employee details from the keyboard?",
+      "answer": "Answer: A Scanner object can be created using:\n\n```java\nScanner scan = new Scanner(System.in);\n```\n\nThe program can then use methods such as nextInt() and next() to obtain values from the keyboard. For example:\n\n```java\nemployee1.id = scan.nextInt();\nemployee1.name = scan.next();\nemployee1.salary = scan.nextInt();\nemployee1.department = scan.next();\n```"
+    },
+    {
+      "question": "How are the behaviors of an Employee object called?",
+      "answer": "Answer: After creating the object and assigning its property values, its methods can be called using the reference variable. For example:\n\n```java\nemployee1.eat();\nemployee1.sleep();\nemployee1.work();\n```\n\nThe same methods can be called for employee2."
+    },
+    {
+      "question": "How does the program demonstrate that two different Employee objects can exist?",
+      "answer": "Answer: Two objects are created using two separate new operations:\n\n```java\nEmployee employee1 = new Employee();\nEmployee employee2 = new Employee();\n```\n\nEach object gets its own memory in the heap and can contain different values for id, name, salary, and department."
+    },
+    {
+      "question": "What are the four memory segments mentioned in the execution model?",
+      "answer": "Answer: The four segments mentioned are: Code segment Static segment Stack segment Heap segment The explanation specifically focuses on the stack and heap segments for object and method execution."
+    },
+    {
+      "question": "What happens when the JVM starts executing the main() method?",
+      "answer": "Answer: When the JVM starts execution, an activation record or stack frame is created for the main() method. The control then moves to the body of the main() method, and its statements are executed. A stack frame is associated with the execution of a method."
+    },
+    {
+      "question": "What is a stack frame or activation record?",
+      "answer": "Answer: A stack frame, also called an activation record, is the memory structure associated with a method while that method is executing. When a method is called, its stack frame is created. When the method completes execution, its stack frame is removed."
+    },
+    {
+      "question": "What happens in memory when an Employee object is created using new?",
+      "answer": "Answer: When:\n\n```java\nEmployee employee1 = new Employee();\n```\n\nis executed, an Employee object is created in the heap. The instance variables defined inside the Employee class receive memory as part of the object, and the reference variable employee1 refers to that object."
+    },
+    {
+      "question": "What is an instance variable?",
+      "answer": "Answer: An instance variable is a variable declared inside a class but outside a method. For example:\n\n```java\nclass Employee {\nint id;\nString name;\nint salary;\nString department;\n}\n```\n\nHere, id, name, salary, and department are instance variables."
+    },
+    {
+      "question": "Where are instance variables stored in memory?",
+      "answer": "Answer: Instance variables receive memory when the object is created. Their memory is associated with the object in the heap. Each object has its own instance variables and therefore can contain different values."
+    },
+    {
+      "question": "What happens when a method such as eat(), sleep(), or work() is called?",
+      "answer": "Answer: When a method is called, a stack frame or activation record is created for that method. After the method completes execution, its activation record is removed. For example:\n\n```java\nemployee1.eat();\nemployee1.sleep();\nemployee1.work();\n```\n\nEach method gets its own execution context on the stack."
+    },
+    {
+      "question": "What happens when the main() method finishes execution?",
+      "answer": "Answer: When the main() method finishes, its activation record is removed from the stack. The local reference variables associated with that stack frame are also removed. If an object no longer has any reference pointing to it, it becomes eligible for garbage collection."
+    },
+    {
+      "question": "What is garbage collection?",
+      "answer": "Answer: Garbage collection is the JVM mechanism that identifies objects in the heap that are no longer reachable through references and removes them to reclaim memory. An object without any reference pointing to it is eligible for garbage collection."
+    },
+    {
+      "question": "When does an object become eligible for garbage collection?",
+      "answer": "Answer: An object becomes eligible for garbage collection when no reference variable refers to it. For example, if:\n\n```java\nEmployee employee1 = new Employee();\n```\n\nis the only reference to the object and employee1 is removed when its stack frame disappears, the object no longer has a reference and becomes eligible for garbage collection."
+    },
+    {
+      "question": "What is the difference between an instance variable and a local variable?",
+      "answer": "Answer: An instance variable is declared inside a class but outside a method, whereas a local variable is declared inside a method or block. Feature Instance Variable Local Variable Declaration Inside class, outside method Inside method or block Memory Associated with object in heap Associated with method's stack frame Allocation When object is created When method/block execution occurs Access Accessible by appropriate methods of the class Accessible only within its method/block Initialization Gets default value Must be initialized before use"
+    },
+    {
+      "question": "When is memory allocated for an instance variable and a local variable?",
+      "answer": "Answer: Memory for an instance variable is allocated when its object is created in the heap. Memory for a local variable is associated with the stack frame of the method in which the variable is declared and is created during method execution."
+    },
+    {
+      "question": "When is the memory of an instance variable and a local variable released?",
+      "answer": "Answer: The memory associated with an object becomes available for reclamation when the object becomes eligible for garbage collection. A local variable's memory is released when the method's execution completes and its stack frame is removed."
+    },
+    {
+      "question": "Where can instance variables and local variables be accessed?",
+      "answer": "Answer: Instance variables can be accessed by methods belonging to the class, subject to access rules. A local variable can be accessed only inside the method or block in which it is declared. For example, a variable declared inside an if block cannot be accessed outside that block."
+    },
+    {
+      "question": "What are the default values assigned to instance variables?",
+      "answer": "Answer: Instance variables are automatically initialized with default values when an object is created. Example: int → 0 float → 0.0\n\n```java\ndouble → 0.0\n```\n\nchar → \\u0000\n\n```java\nString or reference types → null\n```\n\nbyte → 0 short → 0 long → 0L"
+    },
+    {
+      "question": "Why must a local variable be initialized before it is used?",
+      "answer": "Answer: A local variable does not automatically receive a default value in the same way an instance variable does. Therefore, it must be explicitly initialized before it is used. For example:\n\n```java\nint a;\nSystem.out.println(a);   // Not permitted\n```\n\nAfter initialization:\n\n```java\nint a = 10;\nSystem.out.println(a);   // Valid\n```"
+    },
+    {
+      "question": "What is an anonymous object?",
+      "answer": "Answer: An anonymous object is an object created without storing its reference in a reference variable. For example:\n\n```java\nnew Student();\n```\n\nThe object is created, but no reference variable is used to hold it."
+    },
+    {
+      "question": "Why are anonymous objects used?",
+      "answer": "Answer: An anonymous object is used when an object is required only for a limited, typically one-time use. For example:\n\n```java\nnew Student().study();\n```\n\nThe object is created and the method is called without storing the object reference."
+    },
+    {
+      "question": "What happens to an anonymous object after it is used?",
+      "answer": "Answer: Because no reference variable is retained for the object, it can become eligible for garbage collection after it is no longer reachable. The same anonymous object cannot be reused through a reference variable because no reference to it was stored."
+    },
+    {
+      "question": "What are the four advanced pillars of object orientation?",
+      "answer": "Answer: The four advanced pillars are: Encapsulation Inheritance Polymorphism Abstraction These are presented as the four major pillars supporting object-oriented programming."
+    },
+    {
+      "question": "What is the main advantage of encapsulation?",
+      "answer": "Answer: Encapsulation promotes data security by preventing direct access to important aspects of an object and providing controlled access instead."
+    },
+    {
+      "question": "How does inheritance help in software development?",
+      "answer": "Answer: Inheritance promotes code reusability. When common properties and behaviors are already available in one class, another class can inherit them instead of rewriting the same code. This reduces development time."
+    },
+    {
+      "question": "How does polymorphism help in object-oriented programming?",
+      "answer": "Answer: Polymorphism allows one entity to take multiple forms. The lecture connects this with code compactness and flexibility. Without multiple forms, more separate code may be required, increasing the amount of code and potentially increasing compilation and execution work."
+    },
+    {
+      "question": "What is abstraction?",
+      "answer": "Answer: Abstraction means hiding complex implementation details from the user and exposing the required functionality. For example, when a user transfers money through an application, the user performs the transfer without needing to know the internal implementation that processes the transaction."
+    },
+    {
+      "question": "How do the four pillars contribute to an object-oriented application?",
+      "answer": "Answer: The lecture connects each pillar with a particular benefit: Encapsulation → data security Inheritance → code reusability and reduced development time Polymorphism → flexibility and code compactness Abstraction → hiding complex implementation from the user Together, these concepts provide important characteristics for building object-oriented applications."
+    },
+    {
+      "question": "What is encapsulation as an object-oriented concept?",
+      "answer": "Answer: Encapsulation means giving controlled or indirect access to a very important aspect of an object rather than allowing direct access to it. The important aspect is protected while the required functionality is made available through controlled access."
+    },
+    {
+      "question": "Why should direct access to an important aspect of an object be avoided?",
+      "answer": "Answer: An object may contain aspects that are critical to its proper functioning. Directly accessing or modifying such an aspect can damage the object or make it unusable. The lecture uses examples such as the filament of a bulb and the motor of a fan to explain why important internal components are protected."
+    },
+    {
+      "question": "How does a bulb demonstrate the concept of encapsulation?",
+      "answer": "Answer: The filament is an important internal part of a bulb, but users do not directly access it. Instead, a switch is provided as an indirect way to control the bulb. The internal filament remains protected while its required functionality is exposed through controlled access."
+    },
+    {
+      "question": "How does a fan demonstrate the concept of encapsulation?",
+      "answer": "Answer: The motor is an important internal part of a fan, but users do not directly access the motor. Instead, controls such as a switch and regulator provide indirect access. The user can turn the fan on or adjust its speed without directly manipulating the motor."
+    },
+    {
+      "question": "How is encapsulation related to the idea of a capsule?",
+      "answer": "Answer: A medicine capsule contains the important medicine inside a protective covering. The medicine is not directly exposed; instead, it is accessed through the capsule. Similarly, encapsulation protects an important aspect of an object and provides controlled or indirect access to it. Therefore, encapsulation can be understood as giving indirect or controlled access to an important aspect of an object rather than exposing it directly."
+    }
+  ]
+}
