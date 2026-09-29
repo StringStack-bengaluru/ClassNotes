@@ -1,0 +1,203 @@
+{
+  "title": "Notes Java Unary Operator",
+  "itemsPerPage": 2,
+  "source": "notes-java-unary-operator.docx",
+  "items": [
+    {
+      "question": "What are operators in Java?",
+      "answer": "Answer: Operators are symbols used to perform operations on variables and values. Based on the number of operands they work with, operators are classified as unary, binary, and ternary operators. Unary operator – works with one operand. Binary operator – works with two operands. Ternary operator – works with three parts/operands. Examples of unary operators include ++, --, and !."
+    },
+    {
+      "question": "What is a unary operator?",
+      "answer": "Answer: A unary operator is an operator that works on only one operand. Examples:\n\n```java\na++;\n++a;\na--;\n--a;\n```\n\n!a; Here, only one variable is involved in each operation, so these are unary operations."
+    },
+    {
+      "question": "What are the increment and decrement operators in Java?",
+      "answer": "Answer: The increment operator ++ increases a value by 1, while the decrement operator -- decreases a value by 1.\n\n```java\na++;\na--;\n++a;\n--a;\n```\n\nFor example, if a = 10, incrementing it makes a = 11, while decrementing it makes a = 9."
+    },
+    {
+      "question": "Why are increment and decrement operators called unary operators?",
+      "answer": "Answer: They are called unary operators because they operate on only one operand. For example:\n\n```java\na++;\n```\n\nThe ++ operator works only on a. Similarly:\n\n```java\n--a;\n```\n\nThe -- operator works only on a. Therefore, both are unary operators."
+    },
+    {
+      "question": "What is the difference between pre-increment and post-increment?",
+      "answer": "Answer: The difference is the position of the ++ operator. ++a; // pre-increment a++; // post-increment In pre-increment, the value is incremented first and then used. In post-increment, the current value is used first and then the variable is incremented."
+    },
+    {
+      "question": "What is post-increment?",
+      "answer": "Answer: Post-increment is represented as:\n\n```java\na++;\n```\n\nThe current value of a is used first, and after that a is increased by 1. Example:\n\n```java\nint a = 10;\nint b = a++;\n```\n\nExecution: b receives the current value 10. a is then increased to 11. Final values: a = 11 b = 10"
+    },
+    {
+      "question": "What is pre-increment?",
+      "answer": "Answer: Pre-increment is represented as:\n\n```java\n++a;\n```\n\nThe value of a is increased first, and the updated value is then used. Example:\n\n```java\nint a = 10;\nint b = ++a;\n```\n\nExecution: a becomes 11. b receives 11. Final values: a = 11 b = 11"
+    },
+    {
+      "question": "What is post-decrement?",
+      "answer": "Answer: Post-decrement is represented as:\n\n```java\na--;\n```\n\nThe current value of a is used first, and then a is decreased by 1. Example:\n\n```java\nint a = 10;\nint b = a--;\n```\n\nFinal values: a = 9 b = 10"
+    },
+    {
+      "question": "What is pre-decrement?",
+      "answer": "Answer: Pre-decrement is represented as:\n\n```java\n--a;\n```\n\nThe value of a is decreased first, and the updated value is then used. Example:\n\n```java\nint a = 10;\nint b = --a;\n```\n\nFinal values: a = 9 b = 9"
+    },
+    {
+      "question": "What is the difference between a++ and ++a?",
+      "answer": "Answer: Both operators increase a by 1, but they differ in when the updated value is used. a++; // use first, increment later ++a; // increment first, use later For example:\n\n```java\nint a = 10;\nint b = a++;\n```\n\nproduces: a = 11 b = 10 Whereas:\n\n```java\nint a = 10;\nint b = ++a;\n```\n\nproduces: a = 11 b = 11"
+    },
+    {
+      "question": "What is the difference between a-- and --a?",
+      "answer": "Answer: Both operators decrease a by 1, but they differ in when the updated value is used. a--; // use first, decrement later --a; // decrement first, use later For example:\n\n```java\nint a = 10;\nint b = a--;\n```\n\nproduces: a = 9 b = 10 Whereas:\n\n```java\nint a = 10;\nint b = --a;\n```\n\nproduces: a = 9 b = 9"
+    },
+    {
+      "question": "What happens when a++ or ++a is used independently?",
+      "answer": "Answer: When the increment operation is used independently, both ultimately increase a by 1. For example:\n\n```java\nint a = 10;\na++;\n```\n\nresults in: a = 11 Similarly:\n\n```java\nint a = 10;\n++a;\n```\n\nalso results in: a = 11 The difference between pre-increment and post-increment becomes important when the operator is part of a larger expression."
+    },
+    {
+      "question": "What happens when a-- or --a is used independently?",
+      "answer": "Answer: Both ultimately decrease a by 1.\n\n```java\nint a = 10;\na--;\n```\n\nresults in: a = 9 Similarly:\n\n```java\nint a = 10;\n--a;\n```\n\nalso results in: a = 9 The difference becomes important when the value is being used in another expression."
+    },
+    {
+      "question": "How does assignment work with increment and decrement operators?",
+      "answer": "Answer: Consider:\n\n```java\nint a = 10;\nint b = a++;\n```\n\nThe right-hand side expression is evaluated, and its result is assigned to b. Because a++ is post-increment: The current value of a is used. That value is assigned to b. a is incremented. Therefore: a = 11 b = 10"
+    },
+    {
+      "question": "How does the assignment operator = work in an expression?",
+      "answer": "Answer: The assignment operator assigns the value of the right-hand-side expression to the variable on the left. Example:\n\n```java\nint a = 10;\nint b = a++;\n```\n\nThe expression on the right is evaluated first, and the resulting value is assigned to b. This is important when expressions contain pre-increment, post-increment, pre-decrement, or post-decrement."
+    },
+    {
+      "question": "What does right-to-left associativity mean for the assignment operator?",
+      "answer": "Answer: The assignment operator = is associated from right to left. For example:\n\n```java\na = b = 10;\n```\n\nThe right-side assignment is evaluated first: b = 10 Then: a = 10 When solving expressions involving assignment and unary operators, the expression on the right side must be evaluated carefully before assigning the result."
+    },
+    {
+      "question": "What is the output of the following program?",
+      "answer": "Answer: ```java\nint a = 10;\nint b = a++;\n```\n\nThe output values are: a = 11 b = 10 a++ is post-increment, so the old value 10 is assigned to b, and then a becomes 11."
+    },
+    {
+      "question": "What is the output of the following program?",
+      "answer": "Answer: ```java\nint a = 10;\nint b = ++a;\n```\n\nThe output values are: a = 11 b = 11 ++a first increments a from 10 to 11, and then the updated value is assigned to b."
+    },
+    {
+      "question": "What is the output of the following program?",
+      "answer": "Answer: ```java\nint a = 10;\nint b = a--;\n```\n\nThe output values are: a = 9 b = 10 a-- first uses the current value 10, assigns it to b, and then decreases a to 9."
+    },
+    {
+      "question": "What is the output of the following program?",
+      "answer": "Answer: ```java\nint a = 10;\nint b = --a;\n```\n\nThe output values are: a = 9 b = 9 --a first decreases a from 10 to 9, and then the updated value is assigned to b."
+    },
+    {
+      "question": "How should a complex expression containing increment and decrement operators be solved?",
+      "answer": "Answer: A complex expression should be solved step by step instead of trying to calculate everything at once. The following points should be tracked carefully: Identify whether each operator is pre or post. For post operators, use the current value first. For pre operators, change the value first. Perform the arithmetic operation. Update the variable after each operation. Continue until the complete expression is evaluated. This prevents mistakes when the same variable appears multiple times."
+    },
+    {
+      "question": "What is the result of a++ + a++ when a starts at 10?",
+      "answer": "Answer: Consider:\n\n```java\nint a = 10;\nint b = a++ + a++;\n```\n\nThe first a++ uses 10, then a becomes 11. The second a++ uses 11, then a becomes 12. Therefore: b = 10 + 11 = 21 a = 12 Final result: a = 12 b = 21"
+    },
+    {
+      "question": "What is the result of ++a + ++a when a starts at 10?",
+      "answer": "Answer: Consider:\n\n```java\nint a = 10;\nint b = ++a + ++a;\n```\n\nThe first ++a changes a from 10 to 11 and uses 11. The second ++a changes a from 11 to 12 and uses 12. Therefore: b = 11 + 12 = 23 a = 12 Final result: a = 12 b = 23"
+    },
+    {
+      "question": "What is the result of a-- + a-- when a starts at 10?",
+      "answer": "Answer: Consider:\n\n```java\nint a = 10;\nint b = a-- + a--;\n```\n\nThe first a-- uses 10, then a becomes 9. The second a-- uses 9, then a becomes 8. Therefore: b = 10 + 9 = 19 a = 8 Final result: a = 8 b = 19"
+    },
+    {
+      "question": "What is the result of --a + --a when a starts at 10?",
+      "answer": "Answer: Consider:\n\n```java\nint a = 10;\nint b = --a + --a;\n```\n\nThe first --a changes a from 10 to 9 and uses 9. The second --a changes a from 9 to 8 and uses 8. Therefore: b = 9 + 8 = 17 a = 8 Final result: a = 8 b = 17"
+    },
+    {
+      "question": "What is the difference between pre and post operators in complex expressions?",
+      "answer": "Answer: The main difference is the timing of the value change. For post operators:\n\n```java\na++;\na--;\n```\n\nthe existing value is used first, and the variable is changed afterward. For pre operators:\n\n```java\n++a;\n--a;\n```\n\nthe variable is changed first, and the updated value is used. This difference becomes especially important when the same variable occurs multiple times in one expression."
+    },
+    {
+      "question": "What do the terms “pre” and “post” mean in increment and decrement operators?",
+      "answer": "Answer: Pre means that the operator appears before the variable.\n\n```java\n++a;\n--a;\n```\n\nPost means that the operator appears after the variable.\n\n```java\na++;\na--;\n```\n\nThe position determines whether the value is changed before or after it is used."
+    },
+    {
+      "question": "What does “post” mean in a post-increment or post-decrement operation?",
+      "answer": "Answer: Post means that the current value of the variable is used first and the increment or decrement happens afterward. Example:\n\n```java\nint a = 10;\nint b = a++;\n```\n\nHere, 10 is used for b, and then a becomes 11."
+    },
+    {
+      "question": "What does “pre” mean in a pre-increment or pre-decrement operation?",
+      "answer": "Answer: Pre means that the variable is changed first and the updated value is then used. Example:\n\n```java\nint a = 10;\nint b = ++a;\n```\n\nHere, a first becomes 11, and then 11 is used for b."
+    },
+    {
+      "question": "How should a large expression containing several unary operators be evaluated?",
+      "answer": "Answer: A large expression should be broken into smaller operations. For every occurrence of ++ or --: Identify whether it is pre or post. Write the current value. Apply the required change. Record the value that participates in the arithmetic operation. Continue to the next operator. For example, if a variable is used several times, its value must be updated after every applicable increment or decrement. This step-by-step approach avoids losing track of the changing value."
+    },
+    {
+      "question": "Why are increment and decrement expressions important when solving output-based questions?",
+      "answer": "Answer: Increment and decrement operators can change the value of a variable while the expression is being evaluated. For example:\n\n```java\nint a = 10;\nint b = a++ + ++a;\n```\n\nThe value of a changes during the evaluation itself. Therefore, simply looking at the initial value is not enough. The value after every operation must be tracked carefully."
+    },
+    {
+      "question": "What is the important approach when solving complex a, b, and c expressions?",
+      "answer": "Answer: The important approach is to evaluate every operation one at a time and maintain the current value of each variable. If an expression contains: a b c along with ++, --, and arithmetic operators, do not calculate the entire expression mentally. Instead: Start with the initial values. Evaluate the first operation. Update the affected variable. Continue to the next operation. Perform the required arithmetic. Record the final values of a, b, and c. This approach gives the final result without losing track of variable changes."
+    },
+    {
+      "question": "What is the logical NOT operator in Java?",
+      "answer": "Answer: The logical NOT operator is represented by: ! It is a unary logical operator because it works with one operand. The operand must be a boolean value. It reverses the boolean value: true → false false → true"
+    },
+    {
+      "question": "What is the result of applying ! to true and false?",
+      "answer": "Answer: The logical NOT operator reverses the boolean value. !true produces: false and: !false produces: true"
+    },
+    {
+      "question": "What type of operand can be used with the logical NOT operator?",
+      "answer": "Answer: The logical NOT operator ! works with a boolean operand. Example:\n\n```java\nboolean a = true;\nboolean b = !a;\n```\n\nHere: a = true b = false The result of !a is also a boolean."
+    },
+    {
+      "question": "Why is the logical NOT operator called a unary operator?",
+      "answer": "Answer: The logical NOT operator is unary because it operates on only one operand. Example: !a There is only one operand, a, and the ! operator reverses its boolean value."
+    },
+    {
+      "question": "What is the output of the following Java program?",
+      "answer": "Answer: Program:\n\n```java\npublic class Demo13 {public static void main(String[] args) {int a = 10;int b;\nb = a++ + a++ + a++;\nSystem.out.println(a);\nSystem.out.println(b);\n}\n}\n```\n\nOutput: 1333 The post-increment operator (a++) first uses the current value of a and then increases a by 1. First a++ → uses 10, then a becomes 11Second a++ → uses 11, then a becomes 12Third a++ → uses 12, then a becomes 13 Therefore: b = 10 + 11 + 12b = 33 Final value of a = 13"
+    },
+    {
+      "question": "What is the output of the following Java program?",
+      "answer": "Answer: Program:\n\n```java\npublic class Demo14 {public static void main(String[] args) {int a = 10;int b;\nb = ++a + ++a + ++a;\nSystem.out.println(a);\nSystem.out.println(b);\n}\n}\n```\n\nOutput: 1336 Explanation: The pre-increment operator (++a) first increases a by 1 and then uses the updated value. First ++a → a becomes 11, uses 11Second ++a → a becomes 12, uses 12Third ++a → a becomes 13, uses 13 Therefore: b = 11 + 12 + 13b = 36 Final value of a = 13"
+    },
+    {
+      "question": "What is shorthand assignment in Java?",
+      "answer": "Answer: Shorthand assignment operators provide a shorter way to write an operation where a variable is modified using its existing value. For example:\n\n```java\na = a + 10;\n```\n\ncan be written as:\n\n```java\na += 10;\n```\n\nBoth perform the same basic operation."
+    },
+    {
+      "question": "What is the output of the following Java program?",
+      "answer": "Answer: Program:\n\n```java\npublic class Demo15 {public static void main(String[] args) {int a = 10;int b;\nb = a++ + a++ + a-- + --a;\nSystem.out.println(a);\nSystem.out.println(b);\n}\n}\n```\n\nOutput: 1043 Explanation: The expression is evaluated from left to right. a++ → uses 10, then a becomes 11a++ → uses 11, then a becomes 12a-- → uses 12, then a becomes 11--a → a becomes 10, then uses 10 Therefore: b = 10 + 11 + 12 + 10b = 43 Final value of a = 10"
+    },
+    {
+      "question": "What is the output of the following Java program?",
+      "answer": "Answer: Program:\n\n```java\npublic class Demo16 {public static void main(String[] args) {int a = 10;int b;\nb = a++ + a++ + --a + --a + a-- + a++ + a-- - a++;\nSystem.out.println(a);\nSystem.out.println(b);\n}\n}\n```\n\nOutput: 1062 Explanation: The expression is evaluated from left to right. a++ → uses 10, then a becomes 11a++ → uses 11, then a becomes 12--a → a becomes 11, uses 11--a → a becomes 10, uses 10a-- → uses 10, then a becomes 9a++ → uses 9, then a becomes 10a-- → uses 10, then a becomes 9a++ → uses 9, then a becomes 10 Therefore: b = 10 + 11 + 11 + 10 + 10 + 9 + 10 - 9b = 62 Final value of a = 10"
+    },
+    {
+      "question": "What is the equivalent shorthand form of a = a + 10?",
+      "answer": "Answer: The shorthand form is:\n\n```java\na += 10;\n```\n\nFor example:\n\n```java\nint a = 10;\na += 10;\n```\n\nThe operation is equivalent to:\n\n```java\na = a + 10;\n```\n\nTherefore: a = 20"
+    },
+    {
+      "question": "What are the common arithmetic shorthand assignment operators?",
+      "answer": "Answer: The arithmetic shorthand assignment operators include: += -=\n\n```java\n*=\n```\n\n/= %= They combine an arithmetic operator with the assignment operator. Examples:\n\n```java\na += b;\na -= b;\na *= b;\na /= b;\na %= b;\n```"
+    },
+    {
+      "question": "What does a += b mean?",
+      "answer": "Answer: The statement:\n\n```java\na += b;\n```\n\nis equivalent to:\n\n```java\na = a + b;\n```\n\nThe current value of a is taken, b is added to it, and the result is stored back in a."
+    },
+    {
+      "question": "What does b -= a mean?",
+      "answer": "Answer: The statement:\n\n```java\nb -= a;\n```\n\nis equivalent to:\n\n```java\nb = b - a;\n```\n\nFor example:\n\n```java\nint a = 10;\nint b = 20;\nb -= a;\n```\n\nThe calculation is: b = 20 - 10 b = 10"
+    },
+    {
+      "question": "What does a *= b mean?",
+      "answer": "Answer: The statement:\n\n```java\na *= b;\n```\n\nis equivalent to:\n\n```java\na = a * b;\n```\n\nFor example:\n\n```java\nint a = 10;\nint b = 20;\na *= b;\n```\n\nThe calculation is: a = 10 * 20 a = 200"
+    },
+    {
+      "question": "What does b /= a mean?",
+      "answer": "Answer: The statement:\n\n```java\nb /= a;\n```\n\nis equivalent to:\n\n```java\nb = b / a;\n```\n\nFor example:\n\n```java\nint a = 10;\nint b = 20;\nb /= a;\n```\n\nThe calculation is: b = 20 / 10 b = 2"
+    },
+    {
+      "question": "How can shorthand assignment operators be read easily?",
+      "answer": "Answer: A shorthand assignment operator can be understood by starting with the variable on the left. For example:\n\n```java\na += b;\n```\n\nmeans: Take a + b Store the result back in a Similarly:\n\n```java\na -= b;\n```\n\nmeans: Take a - b Store the result back in a The same pattern applies to multiplication, division, and modulus."
+    },
+    {
+      "question": "What is the ternary operator?",
+      "answer": "Answer: The ternary operator is an operator category that works with three parts. It is represented using: ? :"
+    }
+  ]
+}
