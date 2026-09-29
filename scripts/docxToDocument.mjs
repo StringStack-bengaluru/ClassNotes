@@ -381,10 +381,16 @@ with zipfile.ZipFile(path) as z:
         t = (text or "").rstrip()
         if not t:
             return False
+        # Lone operator tokens (+, -, *, /, &&, ||) are complete — do not glue the next line.
+        last = t.splitlines()[-1].strip() if t else ""
+        if re.fullmatch(
+            r"(?:[+\\-*/%]=?|==|!=|<=|>=|>>>|<<|>>|<|>|&&|\\|\\||!|\\+\\+|--)",
+            last,
+        ):
+            return False
         if t.endswith(("(", "+", ",", ".", "=", "&&", "||", "&", "|")):
             return True
         # Split for-header: for (int divisor = 2;  /  divisor * divisor <= number;
-        last = t.splitlines()[-1].strip() if t else ""
         if last.endswith(";") and t.count("(") > t.count(")"):
             return True
         # Unbalanced parentheses only — braces stay open for whole classes
@@ -813,8 +819,11 @@ with zipfile.ZipFile(path) as z:
     def is_flow_arrow_line(s):
         t = (s or "").replace("\\u00a0", " ").replace("\\xa0", " ").replace("\u00a0", " ")
         t = t.replace("\\t", " ").replace("\t", " ").strip()
-        box = "┌┐└┘─│┴┬├┤╭╮╯╰-_"
-        return bool(t) and (not re.search(r"[A-Za-z0-9]", t)) and all(c in FLOW_ARROWS + box + " " for c in t)
+        # Use box-drawing dash (─), not ASCII "-", so bare operators stay code/text.
+        box = "┌┐└┘─│┴┬├┤╭╮╯╰"
+        return bool(t) and (not re.search(r"[A-Za-z0-9_\\-+*/%=<>!&|]", t)) and all(
+            c in FLOW_ARROWS + box + " " for c in t
+        )
 
     def flow_labels(s):
         raw = (s or "").replace("\\u00a0", " ").replace("\\xa0", " ").replace("\u00a0", " ")
