@@ -1,0 +1,95 @@
+{
+  "title": "Notes Encapsulation",
+  "itemsPerPage": 2,
+  "source": "notes-encapsulation.docx",
+  "items": [
+    {
+      "question": "What is encapsulation in Java?",
+      "answer": "Answer: Encapsulation is the process of giving controlled access to the important aspects of an object. It involves: Identifying the important data of an object. Making that data private to prevent direct access. Providing controlled access using public setter and getter methods. This prevents outsiders from directly modifying the important data of an object."
+    },
+    {
+      "question": "Why is encapsulation required?",
+      "answer": "Answer: Encapsulation is required to prevent the improper or unwanted modification of important data. For example, consider a Book object having a pageNumber. If the page number is directly accessible, an outside class can assign an invalid value such as -100.\n\n```java\nbook.pageNumber = -100;\n```\n\nThis makes the data invalid because a book cannot logically have -100 pages. Therefore, direct access is prevented and controlled access is provided through methods."
+    },
+    {
+      "question": "What is direct access to a data member?",
+      "answer": "Answer: Direct access means accessing or modifying a data member directly from outside the class using the object. For example:\n\n```java\nbook.pageNumber = 100;\n```\n\nHere, pageNumber is directly accessed using the book object. If the data member is important and should not be directly modified, it should be declared as private."
+    },
+    {
+      "question": "How is encapsulation implemented in Java?",
+      "answer": "Answer: Encapsulation can be implemented using the following steps: Identify the important data members. Declare those data members as private. Provide public setter methods to set or modify the data. Provide public getter methods to retrieve the data. Apply validation inside the setter methods wherever required. The private member prevents direct access, while the public methods provide controlled access."
+    },
+    {
+      "question": "What is the purpose of making a data member private?",
+      "answer": "Answer: A private data member cannot be directly accessed from outside its class. For example:\n\n```java\nclass Book {\nprivate int pageNumber;\n}\n```\n\nThe following access from another class is not allowed:\n\n```java\nbook.pageNumber = 100;\n```\n\nThe access must be provided through a method. The compiler reports an error indicating that the field is not visible."
+    },
+    {
+      "question": "How does a public method provide controlled access to a private member?",
+      "answer": "Answer: A public method can be called from outside the class, while the actual data member remains private. For example:\n\n```java\npublic void setPageNumber(int a) {\npageNumber = a;\n}\npublic int getPageNumber() {\nreturn pageNumber;\n}\n```\n\nHere: setPageNumber() is used to provide a value to pageNumber. getPageNumber() is used to retrieve the value of pageNumber. Therefore, the data remains private while access is provided through public methods."
+    },
+    {
+      "question": "What is a setter method?",
+      "answer": "Answer: A setter is a method used to set or modify the value of a private data member. For example:\n\n```java\npublic void setPageNumber(int a) {\npageNumber = a;\n}\n```\n\nHere, setPageNumber() accepts a value through the parameter a and assigns it to the private variable pageNumber."
+    },
+    {
+      "question": "What is a getter method?",
+      "answer": "Answer: A getter is a method used to retrieve the value of a private data member. For example:\n\n```java\npublic int getPageNumber() {\nreturn pageNumber;\n}\n```\n\nHere, getPageNumber() returns the current value stored in pageNumber."
+    },
+    {
+      "question": "Differentiate between a setter and a getter.",
+      "answer": "Answer: A setter is used to set the data, whereas a getter is used to get the data. Example:\n\n```java\npublic void setPageNumber(int a) {\npageNumber = a;\n}\npublic int getPageNumber() {\nreturn pageNumber;\n}\n```\n\nsetPageNumber() changes the value, while getPageNumber() returns the value."
+    },
+    {
+      "question": "Write a Java program to demonstrate encapsulation using a Book object.",
+      "answer": "Answer: ```java\nclass Book {\nprivate int pageNumber;\npublic void setPageNumber(int a) {\npageNumber = a;\n}\npublic int getPageNumber() {\nreturn pageNumber;\n}\n}\npublic class BookStore {\npublic static void main(String[] args) {\nBook javaBook = new Book();\njavaBook.setPageNumber(100);\nSystem.out.println(\"Page number is \" + javaBook.getPageNumber());\n}\n}\n```\n\nOutput: Page number is 100 Here, pageNumber is private. Therefore, it cannot be accessed directly from BookStore. The setter and getter methods provide controlled access."
+    },
+    {
+      "question": "What happens if an invalid value is directly assigned to a data member?",
+      "answer": "Answer: If the data member is directly accessible, an invalid value can be assigned. For example:\n\n```java\njavaBook.pageNumber = -100;\n```\n\nThe value -100 can be stored if direct access is allowed. However, a book cannot logically have a negative number of pages. This demonstrates why important data should not be directly exposed to outside classes."
+    },
+    {
+      "question": "Why is making a member private alone not sufficient for encapsulation?",
+      "answer": "Answer: Making a member private only prevents direct access. It does not provide access to the data. For example:\n\n```java\nprivate int pageNumber;\n```\n\nNow outside classes cannot access pageNumber directly. To make the data useful, controlled access must also be provided using public methods such as: setPageNumber() getPageNumber() Therefore, encapsulation requires both prevention of direct access and controlled access."
+    },
+    {
+      "question": "How can validation be applied using a setter method?",
+      "answer": "Answer: Validation can be performed inside the setter before assigning the value to the private member. For example, the page number should be greater than zero:\n\n```java\npublic void setPageNumber(int a) {\nif (a > 0) {\npageNumber = a;\n```\n\n} else {\n\n```java\nSystem.out.println(\"Default page number given\");\npageNumber = 0;\n}\n}\n```\n\nIf the user provides 100, it is accepted. If the user provides -100, it is rejected and the default value is assigned."
+    },
+    {
+      "question": "Write a program to demonstrate validation in encapsulation.",
+      "answer": "Answer: ```java\nclass Book {\nprivate int pageNumber;\npublic void setPageNumber(int a) {\nif (a > 0) {\npageNumber = a;\n```\n\n} else {\n\n```java\nSystem.out.println(\"Default page number given\");\npageNumber = 0;\n}\n}\npublic int getPageNumber() {\nreturn pageNumber;\n}\n}\npublic class BookStore {\npublic static void main(String[] args) {\nBook javaBook = new Book();\njavaBook.setPageNumber(100);\nSystem.out.println(\"Page number is \" + javaBook.getPageNumber());\njavaBook.setPageNumber(-100);\nSystem.out.println(\"Page number is \" + javaBook.getPageNumber());\n}\n}\n```\n\nOutput: Page number is 100 Default page number given Page number is 0 The setter controls which values are allowed to enter the private member."
+    },
+    {
+      "question": "What is the relationship between private members and public setters and getters?",
+      "answer": "Answer: The private member prevents direct access, while the public setter and getter provide controlled access. For example:\n\n```java\nprivate int pageNumber;\n```\n\nprevents direct access.\n\n```java\npublic void setPageNumber(int a)\n```\n\nsets the value.\n\n```java\npublic int getPageNumber()\n```\n\ngets the value. Therefore, these three parts work together to implement encapsulation."
+    },
+    {
+      "question": "How is encapsulation applied to a Student object?",
+      "answer": "Answer: A Student object can have important data members such as:\n\n```java\nprivate int id;\nprivate String name;\nprivate String password;\n```\n\nAll three members are made private so that they cannot be directly accessed from outside the Student class. Public setter and getter methods are then provided for controlled access."
+    },
+    {
+      "question": "Write a Java program to encapsulate a Student object using setters and getters.",
+      "answer": "Answer: ```java\nclass Student {\nprivate int id;\nprivate String name;\nprivate String password;\npublic void setId(int a) {\nif (a > 0) {\nid = a;\n```\n\n} else {\n\n```java\nSystem.out.println(\"Default ID given\");\n}\n}\npublic void setName(String b) {\nif (b != null) {\nname = b;\n```\n\n} else {\n\n```java\nname = \"Rama\";\nSystem.out.println(\"Default name given\");\n}\n}\npublic void setPassword(String c) {\nif (c != null) {\npassword = c;\n```\n\n} else {\n\n```java\npassword = \"1111\";\nSystem.out.println(\"Default password given\");\n}\n}\npublic int getId() {\nreturn id;\n}\npublic String getName() {\nreturn name;\n}\npublic String getPassword() {\nreturn password;\n}\n}\npublic class StudentApp {\npublic static void main(String[] args) {\nStudent s = new Student();\ns.setId(10);\ns.setName(\"Rama\");\ns.setPassword(\"QWERTY123\");\nSystem.out.println(\n```\n\ns.getId() + \" \" + s.getName() + \" \" + s.getPassword()\n\n```java\n);\n}\n}\n```\n\nOutput: 10 Rama QWERTY123 The id, name, and password variables cannot be accessed directly because they are private. They are accessed through their respective setters and getters."
+    },
+    {
+      "question": "What happens if a private member is accessed directly from another class?",
+      "answer": "Answer: Consider:\n\n```java\nStudent s = new Student();\ns.id = 10;\n```\n\nThis will produce a compilation error because id is declared as private. The field is not visible outside the Student class. The correct approach is:\n\n```java\ns.setId(10);\n```\n\nThis accesses the private member through the public setter."
+    },
+    {
+      "question": "Can one setter method accept multiple values?",
+      "answer": "Answer: Yes. A method can accept multiple parameters. Therefore, instead of having three separate setters, one setter can be created to accept all three values. For example:\n\n```java\npublic void setData(int a, String b, String c) {\nif (a > 0) {\nid = a;\n}\nif (b != null) {\nname = b;\n}\nif (c != null) {\npassword = c;\n}\n}\n```\n\nIt can be called as:\n\n```java\ns.setData(10, \"Rama\", \"QWERTY123\");\n```\n\nThe method receives all three values and assigns them to the corresponding private members."
+    },
+    {
+      "question": "Why can we have one setter but multiple getters?",
+      "answer": "Answer: A setter method can accept multiple parameters. For example: setData(int a, String b, String c) can accept three values. However, a method can return only one value using its return type. Therefore, one getter cannot separately return three independent values in the same way. Hence, multiple getters can be used: getId() getName() getPassword()\n\n```java\nwhile one setter can accept all three values:\n```\n\nsetData(int a, String b, String c) This is why the example uses one setter and multiple getters."
+    },
+    {
+      "question": "How can input be taken from the keyboard and passed to the setter?",
+      "answer": "Answer: The Scanner class can be used to take input from the keyboard. Example:\n\n```java\nScanner scan = new Scanner(System.in);\nSystem.out.println(\"Enter id, name and password\");\n```\n\ns.setData( scan.nextInt(), scan.next(), scan.next()\n\n```java\n);\n```\n\nHere: scan.nextInt() reads the ID. scan.next() reads the name. The second scan.next() reads the password. All three values are directly passed to setData(). Example input: 10 Rama QWERTY The values are stored through the setter and can later be retrieved using the getters."
+    },
+    {
+      "question": "What are the two definitions of encapsulation?",
+      "answer": "Answer: Encapsulation can be understood in two ways. Conceptual definition: Encapsulation is the process of giving controlled access to the important aspects of an object. Programmatic definition: Encapsulation is binding the data members with the member methods as a single unit. Both describe the same concept from different perspectives. In Java, private data members and public setters/getters are used to achieve this controlled access."
+    }
+  ]
+}

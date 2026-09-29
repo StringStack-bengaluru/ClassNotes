@@ -1,0 +1,5227 @@
+{
+  "title": "Notes Encapsulation",
+  "mode": "document",
+  "source": "notes-encapsulation.docx",
+  "pageCount": 11,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1. What is encapsulation in Java?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Encapsulation is the process of giving controlled access to the important aspects of an object.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "It involves:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        {
+          "runs": [
+            {
+              "text": "Identifying the important data of an object.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "Making that data private to prevent direct access.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "Providing controlled access using public setter and getter methods.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "This prevents outsiders from directly modifying the important data of an object.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2. Why is encapsulation required?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Encapsulation is required to prevent the improper or unwanted modification of important data.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example, consider a Book object having a ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "pageNumber",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ". If the page number is directly accessible, an outside class can assign an invalid value such as -100.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "book.pageNumber = -100;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "This makes the data invalid because a book cannot logically have -100 pages.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Therefore, direct access is prevented and controlled access is provided through methods.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3. What is direct access to a data member?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Direct access means accessing or modifying a data member directly from outside the class using the object.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "book.pageNumber = 100;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Here, ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "pageNumber",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " is directly accessed using the book object.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If the data member is important and should not be directly modified, it should be declared as private.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "4. How is encapsulation implemented in Java?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Encapsulation can be implemented using the following steps:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        {
+          "runs": [
+            {
+              "text": "Identify the important data members.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "Declare those data members as private.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "Provide public setter methods to set or modify the data.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "Provide public getter methods to retrieve the data.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "Apply validation inside the setter methods wherever required.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The private member prevents direct access, while the public methods provide controlled access.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "5. What is the purpose of making a data member private?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A private data member cannot be directly accessed from outside ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "its",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " class.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class Book {\n    private int pageNumber;\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The following access from another class is not allowed:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "book.pageNumber = 100;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The access must be provided through a method.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The compiler reports an error indicating that the field is not visible.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "6. How does a public method provide controlled access to a private member?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A public method can be called from outside the class, while the actual data member remains private.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "public void setPageNumber(int a) {\n    pageNumber = a;\n}\n\npublic int getPageNumber() {\n    return pageNumber;\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Here:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        {
+          "runs": [
+            {
+              "text": "setPageNumber",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": "(",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": ") is used to provide a value to ",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": "pageNumber",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": ".",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "getPageNumber",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": "(",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": ") is used to retrieve the value of ",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": "pageNumber",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": ".",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "Therefore, the data remains private while access is provided through public methods.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "7. What is a setter method?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A setter is a method used to set or modify the value of a private data member.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "public void setPageNumber(int a) {\n    pageNumber = a;\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Here, ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "setPageNumber",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ") accepts a value through the parameter ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "a and",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " assigns it to the private variable ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "pageNumber",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ".",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "8. What is a getter method?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A getter is a method used to retrieve the value of a private data member.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "public int getPageNumber() {\n    return pageNumber;\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Here, ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "getPageNumber",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ") returns the current value stored in ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "pageNumber",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ".",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "9. Differentiate between a setter and a getter.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A setter is used to ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "set the data",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ", whereas a getter is used to ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "get the data",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ".",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "public void setPageNumber(int a) {\n    pageNumber = a;\n}\n\npublic int getPageNumber() {\n    return pageNumber;\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "setPageNumber",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ") changes the value, while ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "getPageNumber",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ") returns the value.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "10. Write a Java program to demonstrate encapsulation using a Book object.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class Book {\n\n    private int pageNumber;\n\n    public void setPageNumber(int a) {\n        pageNumber = a;\n    }\n\n    public int getPageNumber() {\n        return pageNumber;\n    }\n}\n\npublic class BookStore {\n\n    public static void main(String[] args) {\n\n        Book javaBook = new Book();\n\n        javaBook.setPageNumber(100);\n\n        System.out.println(\"Page number is \" + javaBook.getPageNumber());\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Output:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Page number is 100",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Here, ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "pageNumber",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " is private. Therefore, it cannot be accessed directly from ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "BookStore",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ". The setter and getter methods provide controlled access.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "11. What happens if an invalid value is directly assigned to a data member?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If the data member is directly accessible, an invalid value can be assigned.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "javaBook.pageNumber = -100;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The value -100 can be stored if direct access is allowed.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "However, a book cannot logically have a negative number of pages. This demonstrates why important data should not be directly exposed to outside classes.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "12. Why is making a member private alone not sufficient for encapsulation?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Making a member private only prevents direct access. It does not provide access to the data.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "private int pageNumber;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Now outside classes cannot access ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "pageNumber",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " directly.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "To make the data useful, controlled access must also be provided using public methods such as:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "setPageNumber",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ")",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "getPageNumber",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ")",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Therefore, encapsulation requires both ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "prevention of direct access",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " and ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "controlled access",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ".",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "13. How can validation be applied using a setter method?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Validation can be performed inside the setter before assigning the value to the private member.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example, the page number should be greater than zero:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "public void setPageNumber(int a) {\n\n    if (a > 0) {\n        pageNumber = a;\n    } else {\n        System.out.println(\"Default page number given\");\n        pageNumber = 0;\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If the user provides 100, it is accepted.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If the user provides -100, it is rejected and the default value is assigned.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "14. Write a program to demonstrate validation in encapsulation.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class Book {\n\n    private int pageNumber;\n\n    public void setPageNumber(int a) {\n\n        if (a > 0) {\n            pageNumber = a;\n        } else {\n            System.out.println(\"Default page number given\");\n            pageNumber = 0;\n        }\n    }\n\n    public int getPageNumber() {\n        return pageNumber;\n    }\n}\n\npublic class BookStore {\n\n    public static void main(String[] args) {\n\n        Book javaBook = new Book();\n\n        javaBook.setPageNumber(100);\n        System.out.println(\"Page number is \" + javaBook.getPageNumber());\n\n        javaBook.setPageNumber(-100);\n        System.out.println(\"Page number is \" + javaBook.getPageNumber());\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Output:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Page number is 100",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Default page number given",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Page number is 0",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The setter controls which values are allowed to enter the private member.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "15. What is the relationship between private members and public setters and getters?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The private member prevents direct access, while the public setter and getter provide controlled access.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "private int pageNumber;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "prevents direct access.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "public void setPageNumber(int a)"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "sets the value.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "public int getPageNumber()"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "gets the value.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Therefore, these three parts work together to implement encapsulation.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "16. How is encapsulation applied to a ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "Student",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " object?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A Student object can have important data members such as:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "private int id;\nprivate String name;\nprivate String password;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "All three members are made private so that they cannot be directly accessed from outside the ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "Student",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " class.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Public setter and getter methods are then provided for controlled access.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "17. Write a Java program to encapsulate a ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "Student",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " object using setters and getters.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class Student {\n\n    private int id;\n    private String name;\n    private String password;\n\n    public void setId(int a) {\n        if (a > 0) {\n            id = a;\n        } else {\n            System.out.println(\"Default ID given\");\n        }\n    }\n\n    public void setName(String b) {\n        if (b != null) {\n            name = b;\n        } else {\n            name = \"Rama\";\n            System.out.println(\"Default name given\");\n        }\n    }\n\n    public void setPassword(String c) {\n        if (c != null) {\n            password = c;\n        } else {\n            password = \"1111\";\n            System.out.println(\"Default password given\");\n        }\n    }\n\n    public int getId() {\n        return id;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public String getPassword() {\n        return password;\n    }\n}\n\npublic class StudentApp {\n\n    public static void main(String[] args) {\n\n        Student s = new Student();\n\n        s.setId(10);\n        s.setName(\"Rama\");\n        s.setPassword(\"QWERTY123\");\n\n        System.out.println(\n            s.getId() + \" \" +\n            s.getName() + \" \" +\n            s.getPassword()\n        );\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Output:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "10 Rama QWERTY123",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The id, name, and password variables cannot be accessed directly because they are private. They are accessed through their respective setters and getters.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "18. What happens if a private member is accessed directly from another class?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Consider:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "Student s = new Student();\n\ns.id = 10;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "This will produce a compilation error because ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "id",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " is declared as private.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The field is not visible outside the ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "Student",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " class.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The correct approach is:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "s.setId(10);"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "This accesses the private member through the public setter.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "19. Can one setter method accept multiple values?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Yes. A method can accept multiple parameters.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Therefore, instead of having three separate setters, one setter can be created to accept all three values.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "public void setData(int a, String b, String c) {\n\n    if (a > 0) {\n        id = a;\n    }\n\n    if (b != null) {\n        name = b;\n    }\n\n    if (c != null) {\n        password = c;\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "It can be called as:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "s.setData(10, \"Rama\", \"QWERTY123\");"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The method receives all three values and assigns them to the corresponding private members.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "20. Why can we have one setter but multiple getters?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A setter method can accept multiple parameters.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "setData",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "int a, String b, String c)",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "can accept three values.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "However, a method can return only one value using its return type. Therefore, one getter cannot separately return three independent values in the same way.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Hence, multiple getters can be used:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "getId",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ")",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "getName",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ")",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "getPassword",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ")",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "while one setter can accept all three values:"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "setData",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "int a, String b, String c)",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "This is why the example uses one setter and multiple getters.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "21. How can input be taken from the keyboard and passed to the setter?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The Scanner class can be used to take input from the keyboard.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Example:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "Scanner scan = new Scanner(System.in);\n\nSystem.out.println(\"Enter id, name and password\");\n\ns.setData("
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "    ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "scan.nextInt",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(),",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "    ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "scan.next",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(),",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "    scan.next()\n);"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Here:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        {
+          "runs": [
+            {
+              "text": "scan.nextInt",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": "() reads the ID.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "scan.next",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": "() reads the name.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "The second ",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": "scan.next",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": "() reads the password.",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        },
+        {
+          "runs": [
+            {
+              "text": "All three values are directly passed to ",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": "setData",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": "(",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            },
+            {
+              "text": ").",
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "mono": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Example input:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "10",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Rama",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "QWERTY",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The values are stored through the setter and can later be retrieved using the getters.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "22. What are the two definitions of encapsulation?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Encapsulation can be understood in two ways.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Conceptual definition:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Encapsulation is the process of giving controlled access to the important aspects of an object.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Programmatic definition:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Encapsulation is ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "binding",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " the data members with the member methods as a single unit.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Both describe the same concept from different perspectives. In Java, private data members and public setters/getters are used to achieve this controlled access.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "blank"
+    }
+  ],
+  "pages": [
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1. What is encapsulation in Java?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Encapsulation is the process of giving controlled access to the important aspects of an object.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "It involves:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          {
+            "runs": [
+              {
+                "text": "Identifying the important data of an object.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "Making that data private to prevent direct access.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "Providing controlled access using public setter and getter methods.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "This prevents outsiders from directly modifying the important data of an object.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2. Why is encapsulation required?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Encapsulation is required to prevent the improper or unwanted modification of important data.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example, consider a Book object having a ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "pageNumber",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ". If the page number is directly accessible, an outside class can assign an invalid value such as -100.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "book.pageNumber = -100;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "This makes the data invalid because a book cannot logically have -100 pages.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Therefore, direct access is prevented and controlled access is provided through methods.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3. What is direct access to a data member?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Direct access means accessing or modifying a data member directly from outside the class using the object.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "book.pageNumber = 100;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Here, ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "pageNumber",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " is directly accessed using the book object.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If the data member is important and should not be directly modified, it should be declared as private.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "4. How is encapsulation implemented in Java?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Encapsulation can be implemented using the following steps:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          {
+            "runs": [
+              {
+                "text": "Identify the important data members.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "Declare those data members as private.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "Provide public setter methods to set or modify the data.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "Provide public getter methods to retrieve the data.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "Apply validation inside the setter methods wherever required.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The private member prevents direct access, while the public methods provide controlled access.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "5. What is the purpose of making a data member private?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A private data member cannot be directly accessed from outside ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "its",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " class.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class Book {\n    private int pageNumber;\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The following access from another class is not allowed:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "book.pageNumber = 100;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The access must be provided through a method.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The compiler reports an error indicating that the field is not visible.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "6. How does a public method provide controlled access to a private member?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A public method can be called from outside the class, while the actual data member remains private.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "public void setPageNumber(int a) {\n    pageNumber = a;\n}\n\npublic int getPageNumber() {\n    return pageNumber;\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Here:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          {
+            "runs": [
+              {
+                "text": "setPageNumber",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": "(",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": ") is used to provide a value to ",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": "pageNumber",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": ".",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "getPageNumber",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": "(",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": ") is used to retrieve the value of ",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": "pageNumber",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": ".",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "Therefore, the data remains private while access is provided through public methods.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "7. What is a setter method?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A setter is a method used to set or modify the value of a private data member.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "public void setPageNumber(int a) {\n    pageNumber = a;\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Here, ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "setPageNumber",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ") accepts a value through the parameter ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "a and",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " assigns it to the private variable ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "pageNumber",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ".",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "8. What is a getter method?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A getter is a method used to retrieve the value of a private data member.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "public int getPageNumber() {\n    return pageNumber;\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Here, ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "getPageNumber",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ") returns the current value stored in ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "pageNumber",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ".",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "9. Differentiate between a setter and a getter.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A setter is used to ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "set the data",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ", whereas a getter is used to ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "get the data",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ".",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "public void setPageNumber(int a) {\n    pageNumber = a;\n}\n\npublic int getPageNumber() {\n    return pageNumber;\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "setPageNumber",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ") changes the value, while ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "getPageNumber",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ") returns the value.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "10. Write a Java program to demonstrate encapsulation using a Book object.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class Book {\n\n    private int pageNumber;\n\n    public void setPageNumber(int a) {\n        pageNumber = a;\n    }\n\n    public int getPageNumber() {\n        return pageNumber;\n    }\n}\n\npublic class BookStore {\n\n    public static void main(String[] args) {\n\n        Book javaBook = new Book();\n\n        javaBook.setPageNumber(100);\n\n        System.out.println(\"Page number is \" + javaBook.getPageNumber());\n    }\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Output:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Page number is 100",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Here, ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "pageNumber",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " is private. Therefore, it cannot be accessed directly from ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "BookStore",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ". The setter and getter methods provide controlled access.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "11. What happens if an invalid value is directly assigned to a data member?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If the data member is directly accessible, an invalid value can be assigned.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "javaBook.pageNumber = -100;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The value -100 can be stored if direct access is allowed.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "However, a book cannot logically have a negative number of pages. This demonstrates why important data should not be directly exposed to outside classes.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "12. Why is making a member private alone not sufficient for encapsulation?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Making a member private only prevents direct access. It does not provide access to the data.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "private int pageNumber;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Now outside classes cannot access ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "pageNumber",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " directly.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "To make the data useful, controlled access must also be provided using public methods such as:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "setPageNumber",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ")",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "getPageNumber",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ")",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Therefore, encapsulation requires both ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "prevention of direct access",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " and ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "controlled access",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ".",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "13. How can validation be applied using a setter method?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Validation can be performed inside the setter before assigning the value to the private member.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example, the page number should be greater than zero:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "public void setPageNumber(int a) {\n\n    if (a > 0) {\n        pageNumber = a;\n    } else {\n        System.out.println(\"Default page number given\");\n        pageNumber = 0;\n    }\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If the user provides 100, it is accepted.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If the user provides -100, it is rejected and the default value is assigned.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "14. Write a program to demonstrate validation in encapsulation.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class Book {\n\n    private int pageNumber;\n\n    public void setPageNumber(int a) {\n\n        if (a > 0) {\n            pageNumber = a;\n        } else {\n            System.out.println(\"Default page number given\");\n            pageNumber = 0;\n        }\n    }\n\n    public int getPageNumber() {\n        return pageNumber;\n    }\n}\n\npublic class BookStore {\n\n    public static void main(String[] args) {\n\n        Book javaBook = new Book();\n\n        javaBook.setPageNumber(100);\n        System.out.println(\"Page number is \" + javaBook.getPageNumber());\n\n        javaBook.setPageNumber(-100);\n        System.out.println(\"Page number is \" + javaBook.getPageNumber());\n    }\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Output:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Page number is 100",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Default page number given",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Page number is 0",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The setter controls which values are allowed to enter the private member.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "15. What is the relationship between private members and public setters and getters?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The private member prevents direct access, while the public setter and getter provide controlled access.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "private int pageNumber;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "prevents direct access.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "public void setPageNumber(int a)"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "sets the value.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "public int getPageNumber()"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "gets the value.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Therefore, these three parts work together to implement encapsulation.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "16. How is encapsulation applied to a ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "Student",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " object?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A Student object can have important data members such as:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "private int id;\nprivate String name;\nprivate String password;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "All three members are made private so that they cannot be directly accessed from outside the ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "Student",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " class.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Public setter and getter methods are then provided for controlled access.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "17. Write a Java program to encapsulate a ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "Student",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " object using setters and getters.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class Student {\n\n    private int id;\n    private String name;\n    private String password;\n\n    public void setId(int a) {\n        if (a > 0) {\n            id = a;\n        } else {\n            System.out.println(\"Default ID given\");\n        }\n    }\n\n    public void setName(String b) {\n        if (b != null) {\n            name = b;\n        } else {\n            name = \"Rama\";\n            System.out.println(\"Default name given\");\n        }\n    }\n\n    public void setPassword(String c) {\n        if (c != null) {\n            password = c;\n        } else {\n            password = \"1111\";\n            System.out.println(\"Default password given\");\n        }\n    }\n\n    public int getId() {\n        return id;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public String getPassword() {\n        return password;\n    }\n}\n\npublic class StudentApp {\n\n    public static void main(String[] args) {\n\n        Student s = new Student();\n\n        s.setId(10);\n        s.setName(\"Rama\");\n        s.setPassword(\"QWERTY123\");\n\n        System.out.println(\n            s.getId() + \" \" +\n            s.getName() + \" \" +\n            s.getPassword()\n        );\n    }\n}"
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Output:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "10 Rama QWERTY123",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The id, name, and password variables cannot be accessed directly because they are private. They are accessed through their respective setters and getters.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "18. What happens if a private member is accessed directly from another class?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Consider:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "Student s = new Student();\n\ns.id = 10;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "This will produce a compilation error because ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "id",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " is declared as private.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The field is not visible outside the ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "Student",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " class.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The correct approach is:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "s.setId(10);"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "This accesses the private member through the public setter.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "19. Can one setter method accept multiple values?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Yes. A method can accept multiple parameters.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Therefore, instead of having three separate setters, one setter can be created to accept all three values.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "public void setData(int a, String b, String c) {\n\n    if (a > 0) {\n        id = a;\n    }\n\n    if (b != null) {\n        name = b;\n    }\n\n    if (c != null) {\n        password = c;\n    }\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "It can be called as:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "s.setData(10, \"Rama\", \"QWERTY123\");"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The method receives all three values and assigns them to the corresponding private members.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "20. Why can we have one setter but multiple getters?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A setter method can accept multiple parameters.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "setData",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "int a, String b, String c)",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "can accept three values.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "However, a method can return only one value using its return type. Therefore, one getter cannot separately return three independent values in the same way.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Hence, multiple getters can be used:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "getId",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ")",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "getName",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ")",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "getPassword",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ")",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "while one setter can accept all three values:"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "setData",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "int a, String b, String c)",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "This is why the example uses one setter and multiple getters.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "21. How can input be taken from the keyboard and passed to the setter?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The Scanner class can be used to take input from the keyboard.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Example:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "Scanner scan = new Scanner(System.in);\n\nSystem.out.println(\"Enter id, name and password\");\n\ns.setData("
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "    ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "scan.nextInt",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(),",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "    ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "scan.next",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(),",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "    scan.next()\n);"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Here:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          {
+            "runs": [
+              {
+                "text": "scan.nextInt",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": "() reads the ID.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "scan.next",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": "() reads the name.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "The second ",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": "scan.next",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": "() reads the password.",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          },
+          {
+            "runs": [
+              {
+                "text": "All three values are directly passed to ",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": "setData",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": "(",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              },
+              {
+                "text": ").",
+                "bold": false,
+                "italic": false,
+                "underline": false,
+                "mono": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Example input:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "10",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Rama",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "QWERTY",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The values are stored through the setter and can later be retrieved using the getters.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "22. What are the two definitions of encapsulation?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Encapsulation can be understood in two ways.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Conceptual definition:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Encapsulation is the process of giving controlled access to the important aspects of an object.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Programmatic definition:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Encapsulation is ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "binding",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " the data members with the member methods as a single unit.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Both describe the same concept from different perspectives. In Java, private data members and public setters/getters are used to achieve this controlled access.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ]
+  ]
+}
