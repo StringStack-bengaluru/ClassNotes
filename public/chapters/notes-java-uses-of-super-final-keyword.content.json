@@ -1,0 +1,123 @@
+{
+  "title": "Notes Java Uses Of Super Final Keyword",
+  "itemsPerPage": 2,
+  "source": "notes-java-uses-of-super-final-keyword.docx",
+  "items": [
+    {
+      "question": "What is the final keyword in Java, and where can it be applied?",
+      "answer": "Answer: The final keyword is used to restrict modification in Java. It can be applied to three things: Class Method Variable When applied to a class, it prevents inheritance. When applied to a method, it prevents overriding. When applied to a variable, its value cannot be reassigned after initialization. Therefore, final is mainly associated with restricting a value or an implementation."
+    },
+    {
+      "question": "What happens when the final keyword is applied to a class, method, and variable?",
+      "answer": "Answer: When a class is declared as final, no other class can inherit from it. When a method is declared as final, a child class cannot override that method. When a variable is declared as final, its value cannot be reassigned after it has been initialized. A class is normally made final when it should not have any subclasses. In an inheritance hierarchy, leaf classes can be declared as final. For example:\n\n```java\nfinal class HomeSparrow extends Sparrow {\n}\n```\n\nAnother class cannot extend HomeSparrow."
+    },
+    {
+      "question": "How does a final method affect method overriding, and can a final method be overloaded?",
+      "answer": "Answer: A final method cannot be overridden in a child class. It is used when the implementation of a method should remain unchanged in subclasses. For example:\n\n```java\nclass Demo {\npublic final void display() {\nSystem.out.println(\"Hello\");\n}\n}\nclass Demo1 extends Demo {\npublic void display() {\nSystem.out.println(\"Hello World\");\n}\n}\n```\n\nThe display() method in Demo1 produces a compilation error because the method in Demo is final. A final method can still be overloaded. Method overloading means defining multiple methods with the same name but different signatures. For example:\n\n```java\nclass Demo {\nfinal void display() {\nSystem.out.println(\"Hello\");\n}\nfinal void display(int a) {\nSystem.out.println(a);\n}\n}\n```\n\nThe methods are overloaded because their parameter lists are different."
+    },
+    {
+      "question": "What happens when a variable is declared as final, and how do final local and instance variables differ in initialization?",
+      "answer": "Answer: A final variable cannot be assigned a new value after it has been initialized. For example:\n\n```java\nclass Sample {\npublic static void main(String[] args) {\nfinal int a = 10;\nSystem.out.println(a);\na = 20;\nSystem.out.println(a);\n}\n}\n```\n\nThe statement a = 20; causes a compilation error because a has already been initialized. A final local variable can be declared first and initialized later:\n\n```java\nfinal int a;\na = 20;\n```\n\nThis is valid because the variable is initialized only once. A final instance variable cannot be left uninitialized in its declaration and assigned arbitrarily later through a method. It must be properly initialized as part of instance initialization, such as through its declaration or constructor. For example:\n\n```java\nclass Sample {\nfinal int a = 100;\n}\n```\n\nAfter initialization, a cannot be reassigned."
+    },
+    {
+      "question": "Which combinations involving final were examined, and what are their valid uses?",
+      "answer": "Answer: A static method can be declared as final. A static variable can be declared as final. A method parameter can be declared as final. A setter or getter can be declared as final because they are methods. A constructor cannot be declared as final. An instance block cannot be declared as final. A local variable cannot be declared as static, even when it is declared inside a static method. Any variable declared inside a method is a local variable, and local variables cannot be static. The final keyword applies to values or implementations; it is not applied to method names, keywords, brackets, or symbols."
+    },
+    {
+      "question": "What is the difference between local, instance, and static variables in Java?",
+      "answer": "Answer: A local variable is declared inside a method. An instance variable is declared inside a class but outside a method without using static. A static variable is declared inside a class but outside a method using the static keyword. Variable Declaration Memory allocation Local variable Inside a method When the method is called Instance variable Inside a class, outside a method When the object is created Static variable Inside a class, outside a method using static When the class is loaded A local variable is associated with the method's stack frame. An instance variable is associated with the object in heap memory. A static variable is associated with the static area."
+    },
+    {
+      "question": "Why can a local variable not be declared as static?",
+      "answer": "Answer: A local variable belongs to a method and is created when the method is called. A static variable belongs to the class and is created when the class is loaded. Since a variable declared inside a method is always a local variable, it cannot be declared as static. This rule is the same whether the method itself is static or instance-based. For example, the following concept is not valid:\n\n```java\nstatic void display() {\nstatic int a = 10;\n}\n```\n\nThe variable a is a local variable because it is declared inside the method, so it cannot be static."
+    },
+    {
+      "question": "What are the main components of a Java method?",
+      "answer": "Answer: A method is a block of code used to perform a particular task. A method can contain: Access specifier Modifier Method name Return type Parameter list Method body For example:\n\n```java\npublic static int add(int a, int b) {\nreturn a + b;\n}\n```\n\nHere:\n\n```java\npublic is the access specifier.\nstatic is the modifier.\nint is the return type.\n```\n\nadd is the method name. a and b are parameters.\n\n```java\nreturn a + b; is part of the method body.\n```"
+    },
+    {
+      "question": "How are static and instance methods called in Java?",
+      "answer": "Answer: An instance method is called using an object reference.\n\n```java\nDemo d = new Demo();\nd.display();\n```\n\nA static method is normally called using the class name.\n\n```java\nDemo.display();\n```\n\nA static method can technically be called using an object reference, but this is not the standard way of calling it. An instance method cannot be called directly using the class name. The purpose of making a method static is to allow it to be called without creating an object."
+    },
+    {
+      "question": "Can a void method contain a return statement in Java?",
+      "answer": "Answer: Yes. A method with a void return type can contain a return statement, but it cannot return a value. For example: void display() {\n\n```java\nSystem.out.println(\"Hello\");\nreturn;\n}\n```\n\nThe return statement simply terminates the method. The following is invalid: void display() {\n\n```java\nreturn 10;\n}\n```\n\nA void method cannot return a value."
+    },
+    {
+      "question": "What are the main types of control constructs in Java?",
+      "answer": "Answer: Java control constructs are mainly divided into three categories: Conditional control constructs Looping control constructs Jump statements Conditional constructs include:\n\n```java\nif\nif-else\nelse-if\nswitch\n```\n\nLooping constructs include:\n\n```java\nfor\nwhile\ndo-while\n```\n\nJump statements include:\n\n```java\nbreak\ncontinue\nreturn\n```"
+    },
+    {
+      "question": "What is object-oriented programming, and what are the roles of a class and an object?",
+      "answer": "Answer: Object-oriented programming is a programming paradigm used to solve real-world problems by representing entities as objects. A class is a blueprint given to the JVM for creating objects. An object is an instance of a class and represents the physical existence of the class in memory. For example:\n\n```java\nclass Student {\nString name;\n}\nStudent s = new Student();\n```\n\nHere, Student is the class and s refers to an object created from that class."
+    },
+    {
+      "question": "What members can be present inside a Java class?",
+      "answer": "Answer: A Java class can contain: Static variables Instance variables Static methods Instance methods Static blocks Instance blocks Constructors Static variables and methods belong to the class, while instance variables and methods are associated with objects."
+    },
+    {
+      "question": "When should a variable be static, instance, or static final?",
+      "answer": "Answer: A variable should be static when its value is common to all objects of the class. A variable should be instance-based when its value is specific to an individual object. A variable can be declared as static final when its value is common to the class and should not change. For example:\n\n```java\nclass College {\nstatic final int FEES = 50000;\n}\n```\n\nThe static keyword provides one common class-level copy, while final prevents the value from being changed. A static variable by itself is not a constant. The unchangeable property comes from final."
+    },
+    {
+      "question": "When should a method be declared as static, and what are utility methods?",
+      "answer": "Answer: A method is declared as static when it can be called without creating an object. Generic operations that do not depend on a particular object's state can be implemented as static methods. Static methods are commonly called utility methods. For example:\n\n```java\nclass MathUtility {\nstatic int add(int a, int b) {\nreturn a + b;\n}\n}\n```\n\nThe method can be called as:\n\n```java\nint result = MathUtility.add(10, 20);\n```"
+    },
+    {
+      "question": "What is the purpose of a static block in Java?",
+      "answer": "Answer: A static block is used when a group of statements must execute during class initialization before the main() method executes. It can also be used to initialize static variables. For example:\n\n```java\nclass Demo {\nstatic int a;\nstatic {\na = 10;\nSystem.out.println(\"Static block executed\");\n}\npublic static void main(String[] args) {\nSystem.out.println(a);\n}\n}\n```\n\nA static block is also called a static initializer."
+    },
+    {
+      "question": "What are instance blocks and constructors used for, and how do they differ?",
+      "answer": "Answer: An instance block is used for instance-level initialization, particularly when common initialization logic needs to be executed for objects. A constructor is also used to initialize an object and is specifically associated with object construction. A constructor can accept parameters and can be overloaded, whereas an instance block does not have constructor-style parameterization or overloading."
+    },
+    {
+      "question": "What is constructor overloading, and what happens when no constructor is defined?",
+      "answer": "Answer: Constructor overloading means defining multiple constructors in the same class with the same name but different signatures. The signature can differ in: Number of parameters Type of parameters Order of parameters For example:\n\n```java\nclass Student {\n```\n\nStudent() {\n\n```java\n}\n```\n\nStudent(int age) {\n\n```java\n}\n```\n\nStudent(String name) {\n\n```java\n}\n```\n\nStudent(int age, String name) {\n\n```java\n}\n}\n```\n\nIf no constructor is explicitly defined in a class, the compiler provides a zero-parameter constructor called the default constructor. The default constructor contains a call to the parent class constructor."
+    },
+    {
+      "question": "What are this() and super() in constructors, and what is constructor chaining?",
+      "answer": "Answer: this() is used to call another constructor of the same class. super() is used to call the constructor of the immediate parent class. A constructor begins with a constructor invocation involving this() or super(). For example:\n\n```java\nclass Student {\n```\n\nStudent() {\n\n```java\nthis(20);\nSystem.out.println(\"No-argument constructor\");\n}\n```\n\nStudent(int age) {\n\n```java\nSystem.out.println(age);\n}\n}\n```\n\nHere, this(20) calls another constructor of the same class. This is called local constructor chaining. When a child constructor calls the parent constructor using super(), it is constructor chaining between the child and parent classes."
+    },
+    {
+      "question": "What is the shadowing problem in Java, and how does the this keyword solve it?",
+      "answer": "Answer: Shadowing occurs when a local variable or parameter has the same name as an instance variable. For example:\n\n```java\nclass Student {\nint age;\n```\n\nStudent(int age) {\n\n```java\nage = age;\n}\n}\n```\n\nHere, both age references refer to the constructor parameter. The instance variable is not properly assigned. The this keyword represents the current object and is used to distinguish the instance variable from the parameter.\n\n```java\nclass Student {\nint age;\n```\n\nStudent(int age) {\n\n```java\nthis.age = age;\n}\n}\n```\n\nHere, this.age refers to the instance variable, while age refers to the constructor parameter."
+    },
+    {
+      "question": "What is encapsulation in Java, and how is it achieved?",
+      "answer": "Answer: Encapsulation is the binding of data members and methods into a single unit while providing controlled access to the data. Encapsulation is achieved using both: Private data members Getter and setter methods For example:\n\n```java\nclass Student {\nprivate int age;\npublic void setAge(int age) {\nthis.age = age;\n}\npublic int getAge() {\nreturn age;\n}\n}\n```\n\nThe private keyword restricts direct access to the variable, while getter and setter methods provide controlled access. The main advantage of encapsulation is data security."
+    },
+    {
+      "question": "What are the access specifiers in Java?",
+      "answer": "Answer: Java provides four access levels:\n\n```java\npublic\nprotected\n```\n\nDefault\n\n```java\nprivate\npublic provides the widest visibility, while private provides the most restricted visibility.\nprotected and default provide intermediate access based on the package and inheritance relationship.\n```"
+    },
+    {
+      "question": "What is inheritance in Java, and what are the alternative names for parent and child classes?",
+      "answer": "Answer: Inheritance is the mechanism through which properties and behavior are acquired from a parent class by a child class. The parent class is also called: Superclass Base class The child class is also called: Subclass Derived class The extends keyword is used to perform class inheritance. For example:\n\n```java\nclass Parent {\n}\nclass Child extends Parent {\n}\n```"
+    },
+    {
+      "question": "What are the types of inheritance, and which types are supported through Java classes?",
+      "answer": "Answer: The commonly identified types of inheritance are: Single inheritance Multilevel inheritance Hierarchical inheritance Multiple inheritance Hybrid inheritance Cyclic inheritance Multiple inheritance is not supported through Java classes because it can lead to ambiguity when multiple parent classes provide the same behavior. Cyclic inheritance is also not permitted because it would create an infinite inheritance and constructor chain."
+    },
+    {
+      "question": "What is the role of the Object class in Java inheritance?",
+      "answer": "Answer: Object is the default root class of the Java class hierarchy. If a class does not explicitly extend another class, it ultimately inherits from Object. Therefore, the inheritance hierarchy of Java classes ultimately leads to the Object class."
+    },
+    {
+      "question": "Why is cyclic inheritance not permitted in Java?",
+      "answer": "Answer: Cyclic inheritance occurs when classes form a circular inheritance relationship. For example: A extends B B extends A Such a structure would result in an infinite inheritance and constructor chain. Therefore, cyclic inheritance is not permitted."
+    },
+    {
+      "question": "What happens to the parent constructor when an object of a child class is created?",
+      "answer": "Answer: When an object of a child class is created, the parent class constructor is also executed through constructor chaining. For example:\n\n```java\nclass Parent {\n```\n\nParent() {\n\n```java\nSystem.out.println(\"Parent\");\n}\n}\nclass Child extends Parent {\n```\n\nChild() {\n\n```java\nSystem.out.println(\"Child\");\n}\n}\nclass Demo {\npublic static void main(String[] args) {\nChild c = new Child();\n}\n}\n```\n\nOutput: Parent Child The parent constructor executes before the child constructor. In a multilevel hierarchy, constructor execution proceeds from the top-level parent toward the child. For example: Object | Class1 | Class2 | Class3 | Class4 When a Class4 object is created, Class4 calls Class3, Class3 calls Class2, Class2 calls Class1, and Class1 ultimately calls the Object constructor."
+    },
+    {
+      "question": "Why is constructor chaining important in inheritance?",
+      "answer": "Answer: Constructor chaining ensures that the initialization performed by parent classes is completed before the child class is initialized. For example, if a parent class initializes properties such as A and B, the child class can acquire those initialized properties through inheritance instead of initializing them again. This supports code reusability, which is an important purpose of inheritance."
+    },
+    {
+      "question": "What are inherited, overridden, and specialized methods in Java inheritance?",
+      "answer": "Answer: From the perspective of inheritance, methods can be classified into three types: Inherited methods Overridden methods Specialized methods An inherited method is acquired from the parent class and used by the child without changing its implementation. An overridden method is inherited from the parent class but its implementation is changed in the child according to the child's requirement. A specialized method is present only in the child class and is not present in the parent class. For example:\n\n```java\nclass Parent {\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Parent\");\n}\n}\nclass Child extends Parent {\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Child\");\n}\n```\n\nvoid specialOperation() {\n\n```java\nSystem.out.println(\"Special operation\");\n}\n}\n```\n\nHere: display() is an overridden method. The inherited display() from Parent is changed in Child. specialOperation() is a specialized method because it exists only in Child."
+    }
+  ]
+}
