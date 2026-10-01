@@ -410,6 +410,12 @@ with zipfile.ZipFile(path) as z:
             return False
         if re.match(r"^\\d+[.)]\\s*", st):
             return False
+        # Ternary / comparison continuation inside System.out.println(
+        if "?" in st and ":" in st:
+            return True
+        if re.search(r"[<>!=]=?", st) and (chr(34) in st or chr(39) in st):
+            if len(st) < 120 and not st.endswith("?"):
+                return True
         # Identifiers / dotted paths / partial expressions
         if re.fullmatch(r"[A-Za-z_][\\w.]*", st):
             return True
