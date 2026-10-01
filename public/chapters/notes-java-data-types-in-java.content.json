@@ -1,0 +1,187 @@
+{
+  "title": "Notes Java Data Types In Java",
+  "itemsPerPage": 2,
+  "source": "notes-java-data-types-in-java.docx",
+  "items": [
+    {
+      "question": "What is the ternary operator in Java?",
+      "answer": "Answer: The ternary operator is a conditional operator represented by ? :. It evaluates a condition and selects one of two expressions based on whether the condition is true or false. Syntax:\n\n```java\ncondition ? expression1 : expression2;\n```\n\nIf the condition is true, expression1 is selected. If the condition is false, expression2 is selected."
+    },
+    {
+      "question": "How is the ternary operator used to determine eligibility based on age?",
+      "answer": "Answer: The example uses an integer variable A and checks whether its value is greater than 18.\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nint A = 20;\nString B = A > 18\n```\n\n? \"You are eligible\"\n\n```java\n: \"You are not eligible\";\nSystem.out.println(B);\n}\n}\n```\n\nOutput: You are eligible If A is changed to 16, the condition A > 18 becomes false and the output is: You are not eligible"
+    },
+    {
+      "question": "What is the purpose of the question mark and colon in a ternary expression?",
+      "answer": "Answer: The question mark separates the condition from the expression selected when the condition is true, while the colon separates the true expression from the false expression. For example:\n\n```java\nA > 18 ? \"You are eligible\" : \"You are not eligible\";\n```\n\nHere: A > 18 is the condition. \"You are eligible\" is selected when the condition is true. \"You are not eligible\" is selected when the condition is false."
+    },
+    {
+      "question": "How can the ternary operator be used directly inside a System.out.println() statement?",
+      "answer": "Answer: The ternary expression can be placed directly inside System.out.println() when the selected value does not need to be stored in a variable.\n\n```java\nint A = 20;\nSystem.out.println(\n```\n\nA > 18 ? \"You are eligible\" : \"You are not eligible\"\n\n```java\n);\n```\n\nOutput: You are eligible Only one of the two expressions is selected for printing."
+    },
+    {
+      "question": "How is the ternary operator used with integer values?",
+      "answer": "Answer: The ternary operator can select between integer values based on a condition.\n\n```java\nint A = 20;\nint b = 30;\nint c = 40;\nSystem.out.println(A > 18 ? b : c);\n```\n\nSince A is 20, the condition A > 18 is true, so 30 is printed. Output: 30 If A is changed to 12, the condition becomes false and 40 is printed."
+    },
+    {
+      "question": "Can values be written directly in a ternary expression instead of using variables?",
+      "answer": "Answer: Yes. The values can be written directly in the ternary expression.\n\n```java\nint A = 20;\nSystem.out.println(A > 18 ? 30 : 40);\n```\n\nSince A > 18 is true, the output is: 30"
+    },
+    {
+      "question": "How is the ternary operator used with boolean values?",
+      "answer": "Answer: A ternary expression can select between boolean values.\n\n```java\nint A = 20;\nSystem.out.println(A > 18 ? true : false);\n```\n\nOutput: true The selected result depends on the condition."
+    },
+    {
+      "question": "What is the difference between types of data and data types?",
+      "answer": "Answer: Types of data describe the kinds of information that exist in the real world, while data types specify how such data is represented and handled in a programming language. For example, whole numbers are a type of data that can be represented using Java integer data types such as byte, short, int, and long."
+    },
+    {
+      "question": "Why is binary representation required for storing data in computer memory?",
+      "answer": "Answer: Computer memory stores data in terms of binary values, represented by 0 and 1. Therefore, data such as the decimal value 25 must be represented in binary form before it can be stored in memory. Data types provide the mechanism for representing data in binary form and storing it in computer memory."
+    },
+    {
+      "question": "What are the integer data types available in Java?",
+      "answer": "Answer: Java provides four integer data types for representing whole-number values: byte short int long They differ mainly in the amount of memory allocated and the range of integer values they can represent."
+    },
+    {
+      "question": "How are byte, short, int, and long different in terms of memory?",
+      "answer": "Answer: The four integer data types use different amounts of memory: Data Type Memory Bits byte 1 byte 8 bits short 2 bytes 16 bits int 4 bytes 32 bits long 8 bytes 64 bits The amount of memory determines the range of values that can be represented."
+    },
+    {
+      "question": "What is the general range formula for a signed integer using n bits?",
+      "answer": "Answer: For a signed integer represented using n bits: Minimum = -2^(n-1) Maximum = 2^(n-1) - 1 This formula is used to determine the minimum and maximum values that can be represented using a particular number of bits."
+    },
+    {
+      "question": "What is the range of the Java byte data type?",
+      "answer": "Answer: A byte occupies 1 byte, which is equal to 8 bits. Using the signed integer range formula: Minimum = -2^(8-1) = -128 Maximum = 2^(8-1) - 1 = 127 Therefore, the range of byte is: -128 to 127"
+    },
+    {
+      "question": "Which values can be stored in a byte variable?",
+      "answer": "Answer: A byte variable can store values from -128 through 127. For example:\n\n```java\nbyte A = 0;\nbyte B = 10;\nbyte C = -128;\nbyte D = 127;\n```\n\nAll these values are within the valid range of byte."
+    },
+    {
+      "question": "What is integer underflow?",
+      "answer": "Answer: Integer underflow occurs when an attempt is made to store a value smaller than the minimum value supported by an integer data type. For byte, the minimum value is -128. Therefore, attempting to store -129 exceeds the lower limit of byte and results in underflow.\n\n```java\nbyte A = -129;\n```\n\nThe value cannot be represented by a byte."
+    },
+    {
+      "question": "What is integer overflow?",
+      "answer": "Answer: Integer overflow occurs when an attempt is made to store a value greater than the maximum value supported by an integer data type. For byte, the maximum value is 127. Therefore, attempting to store 128 exceeds the upper limit of byte.\n\n```java\nbyte A = 128;\n```\n\nThe value cannot be represented by a byte."
+    },
+    {
+      "question": "Which data type should be used when a value does not fit into byte?",
+      "answer": "Answer: A larger integer data type should be selected when the value exceeds the range of byte. For example, 128 cannot be represented by byte, so a larger type such as short can be used.\n\n```java\nshort A = 128;\n```\n\nThe selection of an integer data type depends on the magnitude of the value that needs to be stored."
+    },
+    {
+      "question": "How much memory does the short data type occupy?",
+      "answer": "Answer: The short data type occupies 2 bytes, which is equal to 16 bits. Its range is determined using: Minimum = -2^(16-1) Maximum = 2^(16-1) - 1"
+    },
+    {
+      "question": "How much memory does the int data type occupy, and what is its range?",
+      "answer": "Answer: The int data type occupies 4 bytes, which is equal to 32 bits. Its range is: -2147483648 to 2147483647 For example:\n\n```java\nint A = 2147483647;\n```\n\nThe value is within the maximum range of int. A value exceeding the maximum supported value cannot be represented by int."
+    },
+    {
+      "question": "When should the long data type be used?",
+      "answer": "Answer: The long data type is used when an integer value is larger than the range supported by int. A long occupies 8 bytes, which is equal to 64 bits.\n\n```java\nlong A = 9223372036854775807L;\n```\n\nThe suffix L identifies the literal as a long value."
+    },
+    {
+      "question": "Why is L or l used with a long integer literal?",
+      "answer": "Answer: A large integer literal can be explicitly represented as a long by adding L or l at the end. For example:\n\n```java\nlong A = 10000000000L;\n```\n\nBoth L and l are accepted, although uppercase L is clearer because lowercase l can visually resemble the number 1."
+    },
+    {
+      "question": "Why are multiple integer data types provided in Java?",
+      "answer": "Answer: Integer values can have different magnitudes. A small value does not require the same amount of memory as a very large value. For example, the value 10 can be represented using byte, while a much larger value may require int or long. Choosing an appropriate data type helps avoid unnecessary memory usage while providing enough range for the required value."
+    },
+    {
+      "question": "How does the choice of integer data type help reduce memory usage?",
+      "answer": "Answer: Suppose an application needs to store the value 10. The value fits within the range of byte, so using byte requires less memory than using long. The choice depends on the expected range of the data. For example:\n\n```java\nbyte age = 20;\n```\n\nFor a value requiring a larger range:\n\n```java\nlong value = 10000000000L;\n```\n\nThe data type should provide sufficient range without unnecessarily allocating a much larger storage size."
+    },
+    {
+      "question": "What is base 2 representation?",
+      "answer": "Answer: Base 2 representation is the binary representation of a value using only two digits: 0 and 1 Decimal numbers are represented using base 10, while binary numbers are represented using base 2. For example, the decimal value 126 is represented in 8-bit binary as: 01111110"
+    },
+    {
+      "question": "How is the decimal value 126 converted to binary?",
+      "answer": "Answer: The decimal value is repeatedly divided by 2, and the remainders are recorded. 126 / 2 = 63 remainder 0 63 / 2 = 31 remainder 1 31 / 2 = 15 remainder 1 15 / 2 = 7 remainder 1 7 / 2 = 3 remainder 1 3 / 2 = 1 remainder 1 1 / 2 = 0 remainder 1 Reading the remainders from bottom to top gives: 1111110 Since byte uses 8 bits, a leading zero is added: 01111110 Therefore: 126₁₀ = 01111110₂"
+    },
+    {
+      "question": "How is the positive value 126 stored using a byte?",
+      "answer": "Answer: A byte occupies 8 bits. The decimal value 126 is converted to binary as: 01111110 The first bit is the most significant bit. 0 1 1 1 1 1 1 0 ↑ ↑ MSB LSB The most significant bit is 0, indicating a positive value in the signed representation."
+    },
+    {
+      "question": "What are MSB and LSB?",
+      "answer": "Answer: MSB stands for Most Significant Bit. It is the leftmost bit in a binary representation. LSB stands for Least Significant Bit. It is the rightmost bit. For example: 01111110 ↑ ↑ MSB LSB For the signed integer representation used in the example, the MSB indicates whether the value is positive or negative."
+    },
+    {
+      "question": "What does the most significant bit indicate in signed integer representation?",
+      "answer": "Answer: In the signed binary representation: MSB = 0 → positive number MSB = 1 → negative number For example: 01111110 has an MSB of 0, so it represents a positive number."
+    },
+    {
+      "question": "How are negative integers represented in binary?",
+      "answer": "Answer: Negative integers are represented using the two's complement representation. The two's complement of a binary number is obtained by: Finding its one's complement. Adding 1 to the result. This representation allows positive and negative integers to be handled using binary arithmetic."
+    },
+    {
+      "question": "What is one's complement?",
+      "answer": "Answer: One's complement is obtained by changing every 0 to 1 and every 1 to 0. For example: Original: 01111110 One's complement: 10000001 Every bit is inverted."
+    },
+    {
+      "question": "What is two's complement?",
+      "answer": "Answer: Two's complement is obtained by taking the one's complement of a binary number and adding 1. Two's complement = One's complement + 1 For example: 126 in 8-bit binary: 01111110 One's complement: 10000001 Add 1: 10000010 Therefore, the 8-bit two's complement representation of -126 is: 10000010"
+    },
+    {
+      "question": "How is -126 represented using two's complement?",
+      "answer": "Answer: First represent the positive value 126 in 8-bit binary: 01111110 Find the one's complement: 10000001 Add 1: 10000001 + 1 --------- 10000010 Therefore: -126 = 10000010 The MSB is 1, indicating a negative number in the signed representation."
+    },
+    {
+      "question": "How are integer values stored and retrieved from computer memory?",
+      "answer": "Answer: Integer values are stored internally in binary form. For example: Decimal 126 ↓ Binary 01111110 ↓ Stored in memory When the value is displayed to the programmer, it is represented in decimal form. Thus, the representation used for storage is binary, while the displayed value is normally decimal."
+    },
+    {
+      "question": "Why can the decimal value 128 not be represented as a positive byte value?",
+      "answer": "Answer: A signed byte uses 8 bits and has the range: -128 to 127 The value 128 is greater than the maximum positive value 127. Its 8-bit binary representation is: 10000000 The MSB is 1, which is interpreted as a negative value in signed two's complement representation. Therefore, 128 cannot be represented as positive 128 in a Java byte."
+    },
+    {
+      "question": "What happens when a value greater than 127 is assigned to a byte?",
+      "answer": "Answer: A signed byte cannot represent a positive value greater than 127. Therefore, a value such as:\n\n```java\nbyte A = 128;\n```\n\nis outside the valid range and cannot be assigned to the variable as a valid byte value. A larger integer data type must be selected."
+    },
+    {
+      "question": "Why is understanding integer ranges important in software development?",
+      "answer": "Answer: Integer ranges determine whether a value can be represented by a particular data type. Choosing an insufficient data type can cause overflow and lead to incorrect program behavior or serious application failures."
+    },
+    {
+      "question": "How should an appropriate integer data type be selected?",
+      "answer": "Answer: The integer data type should be selected according to the expected range of values. Requirement Data Type Small integer values within byte range byte Larger values requiring 16 bits short Values requiring 32 bits int Values requiring 64 bits long The selected type must be large enough to represent the complete expected range of values."
+    },
+    {
+      "question": "Write a program to demonstrates the maximum values of the four integer data types.",
+      "answer": "Answer: The four variables using byte, short, int, and long, with each variable assigned the maximum value supported by its type.\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nbyte A = 127;\nshort B = 32767;\nint C = 2147483647;\nlong D = 9223372036854775807L;\nSystem.out.println(A);\nSystem.out.println(B);\nSystem.out.println(C);\nSystem.out.println(D);\n}\n}\n```\n\nThe program demonstrates that different integer data types provide different storage capacities and value ranges."
+    },
+    {
+      "question": "What happens when an integer value exceeds the range of its data type?",
+      "answer": "Answer: When an integer value exceeds the maximum range of the selected data type, integer overflow occurs. When a value goes below the minimum range, integer underflow occurs. For example, for byte: Minimum = -128 Maximum = 127 Therefore: 128 → exceeds the maximum → overflow -129 → goes below the minimum → underflow"
+    },
+    {
+      "question": "What is the main purpose of using byte, short, int, and long for integer data?",
+      "answer": "Answer: The four integer data types allow Java programs to represent whole numbers of different magnitudes. The choice of type depends on: the expected value range, the amount of memory required, and whether the selected type can safely represent all expected values. Using the appropriate data type prevents range-related errors and avoids unnecessary memory usage."
+    },
+    {
+      "question": "What is the relationship between the number of bits and the range of an integer data type?",
+      "answer": "Answer: The number of available bits determines how many different binary combinations can be represented. For a signed integer using n bits: Minimum = -2^(n-1) Maximum = 2^(n-1) - 1 Therefore, increasing the number of bits increases the range of values that can be represented. For example: byte → 8 bits short → 16 bits int → 32 bits long → 64 bits"
+    },
+    {
+      "question": "What is the relationship between data type, variable, and literal in an integer declaration?",
+      "answer": "Answer: Consider:\n\n```java\nbyte A = 10;\n```\n\nHere:\n\n```java\nbyte is the data type.\n```\n\nA is the variable. 10 is the integer literal. The data type determines how the value is represented and the range of values that the variable can hold."
+    },
+    {
+      "question": "What does a variable represent in terms of memory?",
+      "answer": "Answer: A variable is a name associated with a memory location used to store a value. When a variable is declared with a particular data type, an appropriate amount of memory is allocated for that variable. For example:\n\n```java\nbyte A = 10;\n```\n\nThe variable A is associated with storage sufficient for a byte, which occupies 1 byte."
+    },
+    {
+      "question": "What is the difference between storage representation and displayed representation of an integer?",
+      "answer": "Answer: An integer is stored internally using binary representation. For example: Decimal value: 126 Binary representation: 01111110 When the value is retrieved and displayed using System.out.println(), the value is shown as: 126 Therefore, the internal storage representation and the representation normally displayed to the programmer are different."
+    },
+    {
+      "question": "What is the key principle for working with Java integer data types?",
+      "answer": "Answer: The data type must match the expected magnitude of the integer value. The four Java integer data types provide different storage sizes: byte → 8 bits short → 16 bits int → 32 bits long → 64 bits The range formula determines the values that can be represented. Values outside the supported range result in overflow or underflow, while negative integers are represented using two's complement."
+    }
+  ]
+}
