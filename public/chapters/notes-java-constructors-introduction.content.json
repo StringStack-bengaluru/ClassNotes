@@ -1,0 +1,123 @@
+{
+  "title": "Notes Java Constructors Introduction",
+  "itemsPerPage": 2,
+  "source": "notes-java-constructors-introduction.docx",
+  "items": [
+    {
+      "question": "What is encapsulation in Java, and how is it achieved?",
+      "answer": "Answer: Encapsulation is the process of binding variables and methods together as a single unit and providing controlled access to important data. Encapsulation is achieved by: Declaring important data members as private. Providing public setter methods to assign values. Providing public getter methods to retrieve values. Using only private does not complete encapsulation because it only restricts direct access. Similarly, using only getters and setters without making the variables private does not provide proper encapsulation. The main advantage of encapsulation is data security. Example:\n\n```java\nclass Student {\nprivate int id;\nprivate String name;\npublic void setData(int a, String b) {\nid = a;\nname = b;\n}\npublic int getId() {\nreturn id;\n}\npublic String getName() {\nreturn name;\n}\n}\n```\n\nThe object can be created and accessed through the public methods:\n\n```java\nclass Demo {\npublic static void main(String[] args) {\nStudent s = new Student();\ns.setData(10, \"Ramesh\");\nSystem.out.println(s.getId() + \" \" + s.getName());\n}\n}\n```\n\nOutput: 10 Ramesh"
+    },
+    {
+      "question": "How does the execution of an encapsulated Student object work in memory?",
+      "answer": "Answer: When the statement\n\n```java\nStudent s = new Student();\n```\n\nis executed, the new Student() part creates the Student object in heap memory. Suppose the object is created at address 1000. The instance variables id and name receive memory inside the object. Initially, they contain their default values: id → 0 name → null The references is stored in the main method's stack frame and refers to the Student object. When:\n\n```java\ns.setData(10, \"Ramesh\");\n```\n\nis executed, a stack frame for setData() is created. The parameters receive: a → 10 b → Ramesh The method then assigns:\n\n```java\nid = a;\nname = b;\n```\n\nTherefore: id → 10 name → Ramesh After the setter finishes execution, its activation record is removed from the stack. The reference s continues referring to the Student object. Finally: s.getId() s.getName() retrieve the values 10 and Ramesh."
+    },
+    {
+      "question": "What is a constructor in Java?",
+      "answer": "Answer: A constructor is a specialized method-like member that: Has the same name as the class. Does not have a return type. Is executed at the time of object creation. Is used for object creation and initialization of instance variables. For example:\n\n```java\nclass Student {\nint id;\nString name;\n```\n\nStudent(int a, String b) {\n\n```java\nid = a;\nname = b;\n}\n}\n```\n\nThe constructor is: Student(int a, String b) because its name is the same as the class name and it has no return type. A constructor is executed when an object is created:\n\n```java\nStudent s = new Student(10, \"Ramesh\");\n```\n\nThis allows the instance variables to be initialized during object creation instead of requiring a separate setter call."
+    },
+    {
+      "question": "How does a constructor initialize instance variables during object creation?",
+      "answer": "Answer: Consider:\n\n```java\nclass Student {\nint id;\nString name;\n```\n\nStudent(int a, String b) {\n\n```java\nid = a;\nname = b;\n}\n}\n```\n\nThe object can be created as:\n\n```java\nStudent s = new Student(10, \"Ramesh\");\n```\n\nThe object is first created in heap memory. The constructor is then called with 10 and \"Ramesh\". Inside the constructor: a → 10 b → Ramesh The values are assigned:\n\n```java\nid = a;\nname = b;\n```\n\nTherefore, the object is completely initialized before the reference is assigned to s. This is different from creating the object first and then calling a setter:\n\n```java\nStudent s = new Student();\ns.setData(10, \"Ramesh\");\n```\n\nThe constructor allows the required values to be supplied directly during object creation."
+    },
+    {
+      "question": "What is the difference between a constructor and a normal setter?",
+      "answer": "Answer: A normal setter is a method used to assign values after an object has been created. Example:\n\n```java\nStudent s = new Student();\ns.setData(10, \"Ramesh\");\n```\n\nA constructor is executed during object creation itself. Example:\n\n```java\nStudent s = new Student(10, \"Ramesh\");\n```\n\nThe important difference is the time of execution: Constructor Setter Executed during object creation Called after object creation Same name as the class Can have any valid method name Has no return type Can have a return type Used for object creation and initialization Used to modify/set data The constructor can therefore be viewed as a specialized setter because it initializes instance data at the time of object creation."
+    },
+    {
+      "question": "What is a default constructor in Java?",
+      "answer": "Answer: If a class does not contain any constructor, the compiler adds a zero-parameterized constructor. This compiler-added zero-parameterized constructor is called the default constructor. For example:\n\n```java\nclass Fan {\nint numberOfWings;\nString brand;\n}\n```\n\nThe compiler conceptually provides a constructor similar to: Fan() {\n\n```java\nsuper();\n}\n```\n\nTherefore, this object creation is possible:\n\n```java\nFan fan = new Fan();\n```\n\nThe instance variables receive their default values: numberOfWings → 0 brand → null"
+    },
+    {
+      "question": "When does the compiler add a default constructor?",
+      "answer": "Answer: The compiler adds a default constructor only when the class does not contain any constructor. For example:\n\n```java\nclass Fan {\nint numberOfWings;\nString brand;\n}\n```\n\nA default constructor is added. However, if a constructor is explicitly written:\n\n```java\nclass Fan {\nint numberOfWings;\nString brand;\n```\n\nFan(int a, String b) {\n\n```java\nnumberOfWings = a;\nbrand = b;\n}\n}\n```\n\nthe compiler does not add a zero-parameterized default constructor. Therefore:\n\n```java\nFan fan = new Fan();\n```\n\nwill produce a constructor-related compilation error. The available constructor must be called with the required parameters:\n\n```java\nFan fan = new Fan(10, \"Ramesh\");\n```"
+    },
+    {
+      "question": "What is constructor overloading in Java?",
+      "answer": "Answer: Constructor overloading means having multiple constructors in the same class with the same class name but different parameter signatures. The difference can be based on: Number of parameters Type of parameters Order of parameters Example:\n\n```java\nclass Fan {\n```\n\nFan() {\n\n```java\n}\n```\n\nFan(int wings) {\n\n```java\n}\n```\n\nFan(int wings, String brand) {\n\n```java\n}\n}\n```\n\nAll these constructors have the same name, Fan, but different parameter lists."
+    },
+    {
+      "question": "What is the role of super() inside a constructor?",
+      "answer": "Answer: super() is used to call the constructor of the parent class. For example:\n\n```java\nclass Fan {\n```\n\nFan() {\n\n```java\nsuper();\n}\n}\n```\n\nIf Fan does not explicitly extend another class, its parent is Object. Therefore, super() in the Fan constructor calls the constructor of the Object class."
+    },
+    {
+      "question": "What is the first statement of a Java constructor?",
+      "answer": "Answer: A constructor can begin with either:\n\n```java\nthis();\n```\n\nor:\n\n```java\nsuper();\n```\n\nIf this() is explicitly written, super() cannot also be the first constructor call. Similarly, if super() is written, this() cannot be used as another constructor call in the same position."
+    },
+    {
+      "question": "What is constructor chaining in Java?",
+      "answer": "Answer: Constructor chaining is the process of calling one constructor from another constructor. Two forms were identified: Calling a parent-class constructor from a child-class constructor using super(). Calling another constructor in the same class using this(). Example of parent constructor chaining:\n\n```java\nclass Parent {\n```\n\nParent() {\n\n```java\nSystem.out.println(\"Parent\");\n}\n}\nclass Child extends Parent {\n```\n\nChild() {\n\n```java\nsuper();\nSystem.out.println(\"Child\");\n}\n}\n```\n\nWhen a Child object is created, the parent constructor is executed through super()."
+    },
+    {
+      "question": "What is local constructor chaining?",
+      "answer": "Answer: Local constructor chaining means calling another constructor present in the same class using this(). Example:\n\n```java\nclass Student {\n```\n\nStudent() {\n\n```java\nthis(10);\n}\n```\n\nStudent(int id) {\n\n```java\nSystem.out.println(id);\n}\n}\n```\n\nHere, the no-argument constructor calls the parameterized constructor of the same class using:\n\n```java\nthis(10);\n```\n\nThis is different from super(), which is used to call a parent-class constructor."
+    },
+    {
+      "question": "What is the shadowing problem in Java, and how does this solve it?",
+      "answer": "Answer: Shadowing occurs when a local variable or parameter has the same name as an instance variable. Example:\n\n```java\nclass Student {\nint id;\n```\n\nStudent(int id) {\n\n```java\nid = id;\n}\n}\n```\n\nHere, both id references inside the constructor refer to the parameter. Therefore, the instance variable does not receive the intended value. The this keyword is used to refer to the current object's instance variable:\n\n```java\nclass Student {\nint id;\n```\n\nStudent(int id) {\n\n```java\nthis.id = id;\n}\n}\n```\n\nHere: this.id → instance variable id → local parameter The this keyword represents the current object."
+    },
+    {
+      "question": "What are the main members that can be present inside a Java class?",
+      "answer": "Answer: The class can contain different types of members, including: Static variables Instance variables Static methods Instance methods Static blocks Instance blocks Constructors Static and instance variables are the two types of data members highlighted in the material."
+    },
+    {
+      "question": "When should a variable be declared as static, instance, or static final?",
+      "answer": "Answer: A variable should be declared static when its value is common to all objects of the class. A variable should be declared as an instance variable when its value is specific to each object. A variable can be declared static final when the value should remain constant and the same value should be shared by all objects. Static final variables are called constants. The final keyword provides the property that the value cannot be changed, while static provides a single shared copy."
+    },
+    {
+      "question": "What is a static block, and when is it used?",
+      "answer": "Answer: A static block contains statements that should execute before the main() method executes. Example:\n\n```java\nclass Demo {\nstatic {\nSystem.out.println(\"Static block\");\n}\npublic static void main(String[] args) {\nSystem.out.println(\"Main method\");\n}\n}\n```\n\nThe static block is also called a static initializer. It can be used to initialize static variables."
+    },
+    {
+      "question": "What is an instance block, and when is it used?",
+      "answer": "Answer: An instance block is a block associated with an object and is used for initializing instance variables. The material identifies the instance block and constructor as mechanisms that can perform instance-variable initialization. The distinction between when an instance block should be used instead of a constructor was raised as an important conceptual point."
+    },
+    {
+      "question": "What is the relationship between a setter, constructor, and instance block?",
+      "answer": "Answer: A setter, constructor, and instance block can all be involved in initializing instance variables, but they operate in different ways. A setter is a normal method used to set data, generally after object creation. A constructor executes during object creation and can initialize instance variables. An instance block is used for instance initialization associated with object creation. The important distinction is understanding when each mechanism is executed and why one is selected for a particular initialization requirement."
+    },
+    {
+      "question": "What are the access specifiers in Java?",
+      "answer": "Answer: Java has four access specifiers:\n\n```java\npublic\nprotected\ndefault\nprivate\n```\n\nTheir visibility decreases from broader access to more restricted access. The order from highest visibility to lowest visibility is:\n\n```java\npublic → protected → default → private\n```"
+    },
+    {
+      "question": "What is inheritance in Java?",
+      "answer": "Answer: Inheritance is the process of acquiring properties from a parent class into a child class. The parent class can also be called: Superclass Base class The child class can also be called: Subclass Derived class Java uses the extends keyword to establish inheritance between classes."
+    },
+    {
+      "question": "What are the types of inheritance considered in Java?",
+      "answer": "Answer: The inheritance forms identified for object-oriented programming are: Single inheritance Multilevel inheritance Hierarchical inheritance Hybrid inheritance Multiple inheritance Cyclic inheritance For Java classes, the four types identified as supported through classes are: Single Multilevel Hierarchical Hybrid Multiple inheritance is not permitted through Java classes because it can lead to ambiguity or confusion."
+    },
+    {
+      "question": "Why is multiple inheritance not permitted through Java classes?",
+      "answer": "Answer: Multiple inheritance means a class would inherit from more than one parent class. The issue identified is that this can lead to ambiguity or confusion when the same members are available through multiple parent classes. Therefore, multiple inheritance is not permitted through Java classes. The material also distinguishes classes from interfaces, which are introduced as a separate mechanism for understanding this area."
+    },
+    {
+      "question": "What is the Object class in Java?",
+      "answer": "Answer: Object is the default parent class of a Java class when no other parent class is explicitly specified. For example:\n\n```java\nclass Fan {\n}\n```\n\nThe compiler conceptually treats this as:\n\n```java\nclass Fan extends Object {\n}\n```\n\nTherefore, Fan inherits from Object. The Object class is an inbuilt Java class and contains its own constructor and other members."
+    },
+    {
+      "question": "What happens when a class does not explicitly extend another class?",
+      "answer": "Answer: If no parent class is specified after the class name, the class implicitly extends Object. For example:\n\n```java\nclass Fan {\nint numberOfWings;\nString brand;\n}\n```\n\nis conceptually treated as:\n\n```java\nclass Fan extends Object {\nint numberOfWings;\nString brand;\n}\n```\n\nTherefore, Object becomes the parent of Fan."
+    },
+    {
+      "question": "Why is cyclic inheritance not permitted in Java?",
+      "answer": "Answer: Cyclic inheritance occurs when classes form a circular inheritance relationship. For example, if one class ultimately becomes its own parent through a chain of inheritance, constructor chaining would become infinite. Therefore, cyclic inheritance is not permitted because it would lead to infinite constructor chaining."
+    },
+    {
+      "question": "Is the parent constructor executed when an object of a child class is created?",
+      "answer": "Answer: Yes. When an object of a child class is created, the parent constructor is also executed through constructor chaining. For example, if the inheritance hierarchy is: Object ↓ Class A ↓ Class B ↓ Class C and an object of Class C is created, constructor execution proceeds upward: Class C constructor ↓ Class B constructor ↓ Class A constructor ↓ Object constructor The constructors are executed through constructor chaining."
+    },
+    {
+      "question": "Why is constructor chaining important in inheritance?",
+      "answer": "Answer: Constructor chaining ensures that the initialization performed by parent classes is completed before the child class object is fully initialized. For example, suppose a parent class contains:\n\n```java\nclass Demo {\nint a;\nint b;\n```\n\nDemo() {\n\n```java\na = 10;\nb = 20;\n}\n}\n```\n\nIf a child class inherits these properties, the parent constructor initializes them. This supports code reusability because the child class does not need to duplicate the parent's initialization logic. Without constructor chaining, the purpose of inheriting and reusing the parent's initialization would be weakened."
+    },
+    {
+      "question": "What are the three types of methods in the context of inheritance?",
+      "answer": "Answer: In the context of inheritance, methods can be classified as: Inherited method Overridden method Specialized method An inherited method is acquired from the parent class and used in the child class without changing its implementation. An overridden method is inherited from the parent class, but its implementation is changed in the child class according to the child's requirement. A specialized method is a method that exists only in the child class and is not present in the parent class."
+    },
+    {
+      "question": "What is the output of the below example when a parameterized constructor is used?",
+      "answer": "Answer: Consider:\n\n```java\nclass Fan {\nint numberOfWings;\nString brand;\n```\n\nFan(int a, String b) {\n\n```java\nnumberOfWings = a;\nbrand = b;\n}\n}\nclass FanApp {\npublic static void main(String[] args) {\nFan fan = new Fan(10, \"Ramesh\");\nSystem.out.println(fan.numberOfWings + \" \" + fan.brand);\n}\n}\n```\n\nOutput: 10 Ramesh The values are assigned during constructor execution: a → 10 b → Ramesh numberOfWings → 10 brand → Ramesh The object is created by calling the parameterized constructor, and the initialized values are then accessed through the fan reference."
+    }
+  ]
+}
