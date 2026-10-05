@@ -1,0 +1,67 @@
+{
+  "title": "Notes Java Introduction To Has A Relationship",
+  "itemsPerPage": 2,
+  "source": "notes-java-introduction-to-has-a-relationship.docx",
+  "items": [
+    {
+      "question": "What is a Has-A relationship in Java?",
+      "answer": "Answer: A Has-A relationship represents a relationship in which one object contains or uses another object. For example, a mobile has a charger and a mobile has an operating system. Mobile ├── Charger └── OS The statements can be read as: Mobile has a Charger Mobile has an OS A Has-A relationship is different from an Is-A relationship, which represents inheritance. For example: Mobile has a Charger Mobile has an OS is a Has-A relationship, whereas: Car is a Vehicle represents an Is-A relationship."
+    },
+    {
+      "question": "What are aggregation and composition in Java?",
+      "answer": "Answer: Aggregation and composition are two forms of Has-A relationships. Aggregation represents a loosely bound Has-A relationship. Composition represents a tightly bound Has-A relationship. The Mobile example contains both: Mobile has a Charger → Aggregation Mobile has an OS → Composition The main difference is the dependency between the objects. In aggregation, the dependent object can exist independently of the enclosing object. In composition, the dependent object is strongly associated with the enclosing object and is accessed through it."
+    },
+    {
+      "question": "What is aggregation in Java?",
+      "answer": "Answer: Aggregation is a loosely bound Has-A relationship in which the aggregate object can exist independently of the enclosing object. The example is: Mobile has a Charger The charger exists separately from the mobile. Therefore, even if the mobile is lost, the charger can still exist and can be accessed directly. Mobile ─────── Charger The charger is created outside the mobile and its reference can later be provided to the mobile. This makes the charger an aggregate object."
+    },
+    {
+      "question": "What is composition in Java?",
+      "answer": "Answer: Composition is a tightly bound Has-A relationship in which the dependent object is strongly associated with the enclosing object. The example is: Mobile has an OS The OS object is created inside the Mobile object. Mobile └── OS The OS is accessed through the mobile: mobile.os.type mobile.os.name Therefore, the OS is a composite object of Mobile."
+    },
+    {
+      "question": "What is the difference between aggregation and composition?",
+      "answer": "Answer: Aggregation Composition Loosely bound Has-A relationship Tightly bound Has-A relationship Dependent object can exist independently Dependent object is strongly associated with enclosing object Aggregate object is created outside the enclosing object Composite object is created inside the enclosing object Example: Mobile has a Charger Example: Mobile has an OS Charger can be accessed independently OS is accessed through Mobile The Mobile example clearly demonstrates the difference: Mobile → Charger = Aggregation Mobile → OS = Composition"
+    },
+    {
+      "question": "How are aggregation and composition represented in UML?",
+      "answer": "Answer: Both relationships are represented using a diamond symbol. Aggregation → Hollow diamond Composition → Solid diamond Conceptually: Aggregation: Mobile ◇──── Charger Composition: Mobile ◆──── OS The diamond is placed toward the enclosing object. Therefore: Mobile ◇──── Charger is read as: Mobile has a Charger and: Mobile ◆──── OS is read as: Mobile has an OS"
+    },
+    {
+      "question": "How are aggregation and composition implemented using Java objects?",
+      "answer": "Answer: The example contains three classes: Charger OS Mobile Charger contains its own properties: color brand OS contains: type name Mobile contains: color brand OS Charger reference The OS object is created inside Mobile, while the Charger object is created separately. A simplified structure is:\n\n```java\nclass Charger {\nString color;\nString brand;\n}\nclass OS {\nint type;\nString name;\n}\nclass Mobile {\nString color;\nString brand;\n```\n\nOS os; Charger ref;\n\n```java\n}\n```\n\nHere: OS os; represents the composition relationship, while: Charger ref; represents the aggregation relationship."
+    },
+    {
+      "question": "How is the OS object created in the Mobile example?",
+      "answer": "Answer: The OS object is created inside the Mobile object. The example creates an OS with:\n\n```java\nOS os = new OS(32, \"Android\");\n```\n\nThe OS contains: type → 32 name → Android The Mobile object maintains a reference to this OS object. When the Mobile object is created, the OS object is also created as part of the Mobile's composition relationship. Therefore, the OS is an internal dependent object of Mobile."
+    },
+    {
+      "question": "How is the Charger object associated with the Mobile object in aggregation?",
+      "answer": "Answer: The Charger is first created separately:\n\n```java\nCharger charger = new Charger(\"White\", \"Samsung\");\n```\n\nThe charger object exists outside the Mobile object. The Mobile contains a reference variable: Charger ref; The charger reference is then assigned to the Mobile:\n\n```java\nmobile.ref = charger;\n```\n\nAfter this assignment: charger ↓ Charger object mobile.ref ↓ same Charger object The Mobile can therefore access the charger's properties through: mobile.ref.color mobile.ref.brand This is aggregation because the Charger object was created independently and then supplied to Mobile."
+    },
+    {
+      "question": "Write a complete java program to illustrate the real-world difference between Aggregation and Composition relationships using a Mobile Phone ecosystem.",
+      "answer": "Answer: The example creates a Mobile object with a color and brand. The OS object is created as part of the Mobile object, while the Charger object is created separately. A simplified version of the example is:\n\n```java\nclass Charger {\nString color;\nString brand;\n```\n\nCharger(String color, String brand) {\n\n```java\nthis.color = color;\nthis.brand = brand;\n}\n}\nclass OS {\nint type;\nString name;\n```\n\nOS(int type, String name) {\n\n```java\nthis.type = type;\nthis.name = name;\n}\n}\nclass Mobile {\nString color;\nString brand;\n```\n\nOS os; Charger ref; Mobile(String color, String brand) {\n\n```java\nthis.color = color;\nthis.brand = brand;\nthis.os = new OS(32, \"Android\");\n}\n}\npublic class MobileApp {\npublic static void main(String[] args) {\nMobile mobile = new Mobile(\"Saffron\", \"iPhone\");\nCharger charger = new Charger(\"White\", \"Samsung\");\nmobile.ref = charger;\nSystem.out.println(\n```\n\nmobile.color + \" \" + mobile.brand\n\n```java\n);\nSystem.out.println(\n```\n\nmobile.os.type + \" \" + mobile.os.name\n\n```java\n);\nSystem.out.println(\n```\n\nmobile.ref.color + \" \" + mobile.ref.brand\n\n```java\n);\n}\n}\n```\n\nThe important object relationships are: Mobile ├── OS → Composition └── Charger → Aggregation The OS is created inside Mobile:\n\n```java\nthis.os = new OS(32, \"Android\");\n```\n\nThe Charger is created separately:\n\n```java\nCharger charger = new Charger(\"White\", \"Samsung\");\n```\n\nand then supplied to Mobile:\n\n```java\nmobile.ref = charger;\n```"
+    },
+    {
+      "question": "How does object access differ between aggregation and composition?",
+      "answer": "Answer: For composition, the OS is accessed through the Mobile object: mobile.os.type mobile.os.name The Mobile object is required to reach the OS object. For aggregation, the Charger can be accessed directly using its own reference: charger.color charger.brand It can also be accessed through Mobile after assigning the reference: mobile.ref.color mobile.ref.brand Therefore: Composition: Mobile → OS Aggregation: Mobile → Charger ↑ independent object This difference demonstrates the stronger dependency of composition compared with aggregation."
+    },
+    {
+      "question": "What happens to the OS and Charger when the Mobile reference becomes null?",
+      "answer": "Answer: Consider:\n\n```java\nmobile = null;\n```\n\nThe Mobile reference no longer refers to the Mobile object. Since the OS is composed inside the Mobile object, the OS cannot be accessed through: mobile.os because the Mobile reference itself is null. The Charger is different because it has its own independent reference: charger Therefore, the Charger can still be accessed:\n\n```java\nSystem.out.println(\n```\n\ncharger.color + \" \" + charger.brand\n\n```java\n);\n```\n\nThis demonstrates the difference between composition and aggregation: Mobile lost ↓ OS cannot be accessed through Mobile Mobile lost ↓ Charger can still be accessed independently The Charger exists independently of the Mobile object, while the OS is accessed through the Mobile object."
+    },
+    {
+      "question": "How can an aggregated object be passed to an enclosing object?",
+      "answer": "Answer: An aggregate object can be provided to the enclosing object through a reference. For example:\n\n```java\nCharger charger = new Charger(\"White\", \"Samsung\");\nmobile.ref = charger;\n```\n\nAnother approach is to pass the Charger reference through a method:\n\n```java\npublic void plugCharger(Charger charger) {\nSystem.out.println(\n```\n\n\"Charger plugged: \" + charger.color + \" \" + charger.brand\n\n```java\n);\n}\n```\n\nThe Charger reference is then available inside the method. The aggregation relationship can therefore be handled either through an instance reference variable or by passing the aggregate object as a method parameter."
+    },
+    {
+      "question": "What are common real-world examples of aggregation and composition?",
+      "answer": "Answer: The following examples represent the relationships described: Aggregation: Department has a Professor Playlist has a Song Mobile has a Charger The contained object can exist independently. Composition: Book has a Chapter Car has an Engine Mobile has an OS The contained object is strongly associated with the enclosing object. For example, a chapter is considered part of its book, and an engine is treated as a component of its car in the examples. The key distinction is whether the dependent object can exist independently of the enclosing object."
+    },
+    {
+      "question": "What is the main difference between an aggregate object and a composite object?",
+      "answer": "Answer: An aggregate object is an independently existing object that can be associated with another object. Example: Mobile → Charger The Charger is created separately and can still exist when the Mobile object is no longer available. A composite object is strongly associated with its enclosing object. Example: Mobile → OS The OS is created as part of the Mobile object and is accessed through Mobile. Therefore: Aggregate object → exists independently Composite object → strongly depends on enclosing object This distinction forms the basis for understanding aggregation and composition in Java."
+    }
+  ]
+}
