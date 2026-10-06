@@ -1,0 +1,71 @@
+{
+  "title": "Notes Java Handling Real Number Data",
+  "itemsPerPage": 2,
+  "source": "notes-java-handling-real-number-data.docx",
+  "items": [
+    {
+      "question": "What is the basic structure of a Java program?",
+      "answer": "Answer: A Java program contains a class and a main() method. Program execution begins from the main() method. The basic program used in the example is:\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nSystem.out.println(\"Hello World\");\n}\n}\n```\n\nOutput: Hello World The System.out.println() statement is used to display output on the console."
+    },
+    {
+      "question": "What is the difference between print() and println() in Java?",
+      "answer": "Answer: Both print() and println() are used to display output. print() keeps the cursor on the same line after printing, whereas println() moves the cursor to the next line. Example:\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nSystem.out.print(\"Hello \");\nSystem.out.print(\"World\");\n}\n}\n```\n\nOutput: Hello World Here, both values are printed on the same line. Using println():\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nSystem.out.println(\"Hello\");\nSystem.out.println(\"World\");\n}\n}\n```\n\nOutput: Hello World Therefore: print() → prints and keeps the cursor on the same line println() → prints and moves the cursor to the next line"
+    },
+    {
+      "question": "What is a variable in Java?",
+      "answer": "Answer: A variable is a name given to a memory location for storing and retrieving data. For example:\n\n```java\nint A = 10;\n```\n\nHere:\n\n```java\nint specifies the type of data.\n```\n\nA is the variable. 10 is the value stored in the variable. The value stored in A can be accessed using the variable name:\n\n```java\nSystem.out.print(A);\n```\n\nOutput: 10 If A is written inside double quotes:\n\n```java\nSystem.out.print(\"A\");\n```\n\nthe output is: A Double quotes indicate that the text should be printed exactly as written. Without double quotes, A refers to the variable and its stored value is printed."
+    },
+    {
+      "question": "How can the value stored in a variable be processed and stored in another variable?",
+      "answer": "Answer: The value of one variable can be used in an expression, and the result can be stored in another variable. The example uses:\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nint A = 10;\nint C = A + 10;\nSystem.out.println(\"Some value\");\nSystem.out.println(C);\n}\n}\n```\n\nOutput: Some value 20 Here: A = 10 C = A + 10 C = 20 The expression A + 10 processes the value stored in A, and the resulting value 20 is stored in C. The + operator also has another use when one operand is a string. For example:\n\n```java\nSystem.out.println(\"Some value \" + C);\n```\n\nOutput: Some value 20 Here, + joins the string and the value of C."
+    },
+    {
+      "question": "What is type inference?",
+      "answer": "Answer: Type inference is the process of determining the type of a variable based on the value assigned to it. For example, if a variable A is assigned: 10 it can be identified as an integer. If it is assigned: 10.1 it can be identified as a real-number type. If it is assigned: \"Ramu\" it can be identified as a string. The idea can be represented as: 10 → integer 10.1 → real number \"Ramu\" → string However, explicitly declaring the data type is the standard approach in Java. For example:\n\n```java\nint A = 10;\n```\n\nHere, the type of A is clearly known from the declaration itself."
+    },
+    {
+      "question": "What are the primitive data types in Java?",
+      "answer": "Answer: Java has eight primitive data types: Category Data Types Integer byte, short, int, long Real number float, double Character char Boolean boolean Therefore: byte short int long float\n\n```java\ndouble\n```\n\nchar boolean are the eight primitive data types in Java."
+    },
+    {
+      "question": "How are integer data types represented and stored in Java?",
+      "answer": "Answer: Java provides four integer data types: byte short int long Integer values are stored internally in binary, using 0 and 1. The memory sizes are: Data Type Memory Bits byte 1 byte 8 bits short 2 bytes 16 bits int 4 bytes 32 bits long 8 bytes 64 bits For a signed integer using n bits, the range is: Minimum = -2^(n-1) Maximum = 2^(n-1) - 1 For example, byte has 8 bits: Minimum = -2^7 = -128 Maximum = 2^7 - 1 = 127 Therefore: byte → -128 to 127"
+    },
+    {
+      "question": "What are integer overflow and integer underflow?",
+      "answer": "Answer: Integer underflow occurs when a value smaller than the minimum value supported by a variable is assigned to it. For example, the range of byte is: -128 to 127 Therefore:\n\n```java\nbyte A = -129;\n```\n\nattempts to store a value below the minimum limit and results in an underflow-related compilation error. Integer overflow occurs when a value greater than the maximum value supported by a variable is assigned to it. For example:\n\n```java\nbyte A = 128;\n```\n\nattempts to store a value greater than 127, so it is outside the range of byte. The definitions are: Underflow → value is below the minimum supported limit Overflow → value is above the maximum supported limit"
+    },
+    {
+      "question": "How are short, int, and long selected according to the value range?",
+      "answer": "Answer: The data type should be selected according to the size of the integer value. For example, 128 cannot be stored in a byte, but it can be stored in a short:\n\n```java\nshort A = 128;\n```\n\nA short occupies 2 bytes or 16 bits. The correct signed range of short is: -32768 to 32767 If a value is larger than the short range, int can be used.\n\n```java\nint A = 32068;\n```\n\nAn int occupies 4 bytes or 32 bits and has the range: -2147483648 to 2147483647 For values larger than the int range, long is used:\n\n```java\nlong A = 2147483648L;\n```\n\nA long occupies 8 bytes or 64 bits. A large long literal is written using the L suffix:\n\n```java\nlong A = 9223372036854775807L;\n```"
+    },
+    {
+      "question": "How are positive and negative integers stored in binary?",
+      "answer": "Answer: Integer values are stored in base-2 representation, using 0 and 1. For example, the positive value 126 can be represented using 8 bits as: 01111110 The leftmost bit is called the Most Significant Bit (MSB), and the rightmost bit is called the Least Significant Bit (LSB). 0 1 1 1 1 1 1 0 ↑ ↑ MSB LSB For signed integer representation: MSB = 0 → positive number MSB = 1 → negative number Negative integers are represented using two's complement. For 126: Positive value: 01111110 One's complement: 10000001 Add 1: 10000010 Therefore: -126 = 10000010 The process for two's complement is: One's complement + 1 = Two's complement"
+    },
+    {
+      "question": "Why can 128 not be stored as a positive byte value?",
+      "answer": "Answer: A Java byte uses 8 bits and has the signed range: -128 to 127 The binary representation of 128 using eight bits is: 10000000 The leftmost bit is the MSB. A value with MSB 1 represents a negative value in signed two's complement representation. Therefore, 128 cannot be represented as positive 128 in a Java byte. The maximum positive byte value is: 127 For example:\n\n```java\nbyte A = 127;\n```\n\nis valid, whereas:\n\n```java\nbyte A = 128;\n```\n\nis outside the valid range."
+    },
+    {
+      "question": "How can an integer larger than the long range be stored in Java?",
+      "answer": "Answer: When an integer is larger than the maximum range of long, the BigInteger class can be used. The class belongs to: java.math.BigInteger A BigInteger is a non-primitive type and is used for integers that cannot be represented by the primitive integer types. The basic example is:\n\n```java\nimport java.math.BigInteger;\npublic class Demo {\npublic static void main(String[] args) {\nBigInteger A = new BigInteger(\"9223372036854775808\");\nSystem.out.println(A);\n}\n}\n```\n\nThis allows integers larger than the long range to be represented without being restricted to the fixed 64-bit long range."
+    },
+    {
+      "question": "What are the float and double data types used for?",
+      "answer": "Answer: ```java\nfloat and double are used to store real-number values.\n```\n\nJava provides: float → 4 bytes\n\n```java\ndouble → 8 bytes\n```\n\nExamples such as: 3.147 3.14765832937213 Both are real numbers, but the second value contains more digits after the decimal point and therefore represents greater precision. The general selection is: Less precision → float More precision → double The float can represent up to about 7 digits of precision and double up to about 15 digits of precision."
+    },
+    {
+      "question": "What suffix is used for float and long literals in Java?",
+      "answer": "Answer: The suffix L or l is used to explicitly identify a long literal. Example:\n\n```java\nlong A = 10000000000L;\n```\n\nThe suffix F or f is used to identify a float literal. The example is:\n\n```java\nfloat A = 44.17F;\n```\n\nTherefore: long → L or l float → F or f A double literal does not require an F suffix. For example:\n\n```java\ndouble A = 44.17;\n```"
+    },
+    {
+      "question": "How is a real number such as 44.17 represented in floating-point format?",
+      "answer": "Answer: IEEE floating-point representation. First, the value is converted into binary. The integer part: 44 is converted to binary: 101100 The fractional part: 0.17 is converted by repeatedly multiplying the fraction by 2 and taking the integer part of each result. The resulting binary representation is then normalized so that the binary point appears after the first significant bit. For example, the value is represented in a form similar to: 1.xxxxx × 2^n For a float, the IEEE 754 single-precision format contains: 1 bit → Sign 8 bits → Exponent 23 bits → Mantissa For a double, the IEEE 754 double-precision format contains: 1 bit → Sign 11 bits → Exponent 52 bits → Mantissa"
+    },
+    {
+      "question": "What is the difference between integer storage and floating-point storage in Java?",
+      "answer": "Answer: Integer values and real-number values are both stored using binary digits, but they use different representations. For integers: byte short int long the value is stored using binary integer representation, with negative values represented using two's complement. For real numbers: float\n\n```java\ndouble\n```\n\nthe value is stored using IEEE 754 floating-point representation. The important formats are: Integer → Base-2 integer representation float → IEEE 754 single precision\n\n```java\ndouble  → IEEE 754 double precision\n```\n\nTherefore, the same 0 and 1 are used internally, but the format determines how those bits are interpreted."
+    }
+  ]
+}
