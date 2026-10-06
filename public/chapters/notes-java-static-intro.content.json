@@ -1,0 +1,71 @@
+{
+  "title": "Notes Java Static Intro",
+  "itemsPerPage": 2,
+  "source": "notes-java-static-intro.docx",
+  "items": [
+    {
+      "question": "What is the shadowing problem in Java?",
+      "answer": "Answer: Shadowing occurs when a local variable or constructor parameter has the same name as an instance variable. For example:\n\n```java\nclass Demo {\nint a;\nint b;\n```\n\nDemo(int a, int b) {\n\n```java\na = a;\nb = b;\n}\n}\n```\n\nHere, the constructor parameters a and b have the same names as the instance variables. The statements:\n\n```java\na = a;\nb = b;\n```\n\nrefer to the local parameters on both sides. Therefore, the values are not assigned to the instance variables. This is called the shadowing problem. The this keyword is used to resolve this problem."
+    },
+    {
+      "question": "How does the this keyword resolve the shadowing problem?",
+      "answer": "Answer: The this keyword refers to the current object. Therefore, this.a and this.b refer to the instance variables of the current object. The corrected constructor is:\n\n```java\nclass Demo {\nint a;\nint b;\n```\n\nDemo(int a, int b) {\n\n```java\nthis.a = a;\nthis.b = b;\n}\n}\n```\n\nHere: this.a → instance variable a → constructor parameter this.b → instance variable b → constructor parameter Therefore, the values received by the constructor are correctly assigned to the instance variables."
+    },
+    {
+      "question": "What is constructor chaining in Java?",
+      "answer": "Answer: Constructor chaining is the process of calling one constructor from another constructor. Within the same class, constructor chaining is performed using this(). For example:\n\n```java\nclass Demo {\nint a;\nint b;\n```\n\nDemo() {\n\n```java\nthis(10, 20);\n}\n```\n\nDemo(int a, int b) {\n\n```java\nthis.a = a;\nthis.b = b;\n}\n}\n```\n\nHere, the no-argument constructor calls the parameterized constructor using:\n\n```java\nthis(10, 20);\n```\n\nThe control is transferred to the constructor that accepts two parameters."
+    },
+    {
+      "question": "Why can this() not be used to create recursive constructor chaining?",
+      "answer": "Answer: this() must call another constructor of the same class, but the constructor chain must eventually terminate. For example, this is invalid:\n\n```java\nclass Demo {\n```\n\nDemo() {\n\n```java\nthis(10);\n}\n```\n\nDemo(int a) {\n\n```java\nthis();\n}\n}\n```\n\nThe constructors continuously call each other: Demo() ↓ Demo(int) ↓ Demo() ↓ Demo(int) ↓ ... This creates recursive constructor invocation. Java reports this as a recursive constructor invocation error. Therefore, at least one constructor in the chain must eventually stop the this() chain."
+    },
+    {
+      "question": "What is the use of constructor overloading?",
+      "answer": "Answer: Constructor overloading allows different objects of the same class to be initialized with different sets of values. For example:\n\n```java\nclass Demo {\nint a;\nint b;\n```\n\nDemo() {\n\n```java\nthis.a = 10;\nthis.b = 20;\n}\n```\n\nDemo(int a, int b) {\n\n```java\nthis.a = a;\nthis.b = b;\n}\n}\n```\n\nDifferent objects can now be initialized in different ways. Constructor overloading is useful when different objects require different initial states."
+    },
+    {
+      "question": "What is a copy constructor in Java?",
+      "answer": "Answer: A copy constructor is a constructor that accepts an object of the same class type as its parameter. It is used to create a new object by copying values from an existing object. For example:\n\n```java\nclass Student {\nint id;\n```\n\nStudent(int id) {\n\n```java\nthis.id = id;\n}\n```\n\nStudent(Student s) {\n\n```java\nthis.id = s.id;\n}\n}\n```\n\nThe copy constructor is: Student(Student s) The parameter s is of the same type as the class, Student. An object can be copied as follows:\n\n```java\nStudent s1 = new Student(101);\nStudent s2 = new Student(s1);\n```\n\nHere, the values of s1 are copied into s2."
+    },
+    {
+      "question": "What are the six static and instance elements of a Java class?",
+      "answer": "Answer: A class can contain the following six static and instance elements: 1. Static variable 2. Static block 3. Static method 4. Instance variable 5. Instance block 6. Instance method A constructor is also an important member associated with object creation and initialization."
+    },
+    {
+      "question": "Which members can access static and instance variables?",
+      "answer": "Answer: The access relationship can be summarized as follows: Member Static Variable Instance Variable Static block Yes No Static method Yes No Instance block Yes Yes Instance method Yes Yes A static member can directly access another static member because both belong to the class. An instance member can access both static and instance members because it executes in the context of an object. A static block cannot directly access an instance variable because an instance variable belongs to an object, while the static block executes when the class is loaded, before an object is created."
+    },
+    {
+      "question": "Why can a static block not directly access an instance variable?",
+      "answer": "Answer: A static block is executed when the class is loaded. At that stage, an object may not have been created yet. Instance variables receive their memory when an object is created. The execution sequence is therefore: Class loading ↓ Static elements are initialized ↓ Static block executes ↓ main() executes ↓ Object may be created ↓ Instance variables receive memory Since an instance variable does not belong to the class itself and an object may not yet exist when the static block executes, the static block cannot directly access that instance variable."
+    },
+    {
+      "question": "In what order are static block, static method, instance block, constructor, and instance method executed?",
+      "answer": "Answer: Consider a class containing all these elements:\n\n```java\nclass Sample {\nstatic int a = 10;\nstatic int b = 20;\nstatic {\nSystem.out.println(\"Static block executed\");\n}\nstatic void display1() {\nSystem.out.println(\"Static method executed\");\nSystem.out.println(a + \" \" + b);\n}\nint x;\nint y;\n{\nx = 100;\ny = 200;\nSystem.out.println(\"Instance block executed\");\n}\n```\n\nSample() {\n\n```java\nSystem.out.println(\"Constructor executed\");\n}\n```\n\nvoid display2() {\n\n```java\nSystem.out.println(\"Instance method executed\");\n}\n}\n```\n\nIf the application contains:\n\n```java\nclass SampleApp {\npublic static void main(String[] args) {\nSample.display1();\nSample sample = new Sample();\nsample.display2();\n}\n}\n```\n\nThe execution order is: Static block executed Static method executed 10 20 Instance block executed Constructor executed Instance method executed The static block executes during class loading. The static method is then called without creating an object. When the object is created, the instance block executes before the constructor. Finally, the instance method executes when it is called."
+    },
+    {
+      "question": "Does the position of an instance block and constructor in the class change their execution order?",
+      "answer": "Answer: No. The position of the constructor and instance block in the source code does not change their execution order during object creation. When an object is created: Instance block ↓ Constructor The instance block executes before the constructor. Therefore, moving the constructor above the instance block in the source code does not make the constructor execute first."
+    },
+    {
+      "question": "What is the difference between an instance block and a constructor?",
+      "answer": "Answer: Both can be used for initializing instance variables, but they are used for different purposes. Consider a Student class having: name id gender maritalStatus Suppose name, id, and gender are different for every student, while maritalStatus should initially be false for every student. The constructor can initialize values that are specific to each object:\n\n```java\nclass Student {\nString name;\nint id;\nString gender;\nboolean maritalStatus;\n```\n\nStudent(String name, int id, String gender) {\n\n```java\nthis.name = name;\nthis.id = id;\nthis.gender = gender;\n}\n}\n```\n\nThe instance block can initialize a value that should receive the same initial value whenever an object is created:\n\n```java\n{\nmaritalStatus = false;\n}\n```\n\nThus: Object-specific values → Constructor Common initial instance values → Instance block The constructor receives object-specific values through parameters, whereas the instance block executes automatically whenever an object is created."
+    },
+    {
+      "question": "When should a variable be declared as static?",
+      "answer": "Answer: A variable should be declared as static when its value is common to all objects of the class. For example, the value of PI is common when calculating the area of different shapes.\n\n```java\nclass Shape {\nstatic double PI = 3.147;\n}\n```\n\nThe same value can be used by objects representing different shapes. Another example is nationality when every object represents a person with the same nationality:\n\n```java\nstatic String nationality = \"Indian\";\n```\n\nThe important rule is: Value common to all objects → static variable Value specific to an object → instance variable"
+    },
+    {
+      "question": "How can the number of objects created for a class be counted?",
+      "answer": "Answer: A static variable can be used to maintain the count because the count must be common to all objects. The constructor can increment the count whenever an object is created.\n\n```java\nclass Demo {\nstatic int count = 0;\n```\n\nDemo() {\n\n```java\ncount++;\n}\n}\nclass DemoApp {\npublic static void main(String[] args) {\nDemo d1 = new Demo();\nDemo d2 = new Demo();\nDemo d3 = new Demo();\nSystem.out.println(Demo.count);\n}\n}\n```\n\nOutput: 3 The variable count is static, so only one common copy is maintained for the class. Every time the constructor executes, count is incremented. The static variable should be accessed using the class name: Demo.count rather than through an object reference."
+    },
+    {
+      "question": "What is a Singleton design pattern?",
+      "answer": "Answer: A Singleton design pattern is a predefined set of rules used to ensure that only one object of a class is created. The three main rules given for the Singleton implementation are: 1. Make the constructor private. 2. Create a private static reference variable to hold the object reference. 3. Provide a public static method that creates and returns the object\n\n```java\nif it does not already exist, or returns the existing object.\n```\n\nThe private constructor prevents code outside the class from directly creating objects. The static reference stores the single object reference and can be accessed by the static method."
+    },
+    {
+      "question": "How is the ChiefMinister class converted into a Singleton class?",
+      "answer": "Answer: Suppose the class contains a name, term, and constructor:\n\n```java\nclass ChiefMinister {\nString name;\nint term;\n```\n\nChiefMinister(String name, int term) {\n\n```java\nthis.name = name;\nthis.term = term;\n}\n}\n```\n\nTo convert it into a Singleton class, the constructor is made private and a private static reference is created.\n\n```java\nclass ChiefMinister {\nString name;\nint term;\nprivate ChiefMinister(String name, int term) {\nthis.name = name;\nthis.term = term;\n}\nprivate static ChiefMinister ref;\npublic static ChiefMinister getInstance(String name, int term) {\nif (ref == null) {\nref = new ChiefMinister(name, term);\n}\nreturn ref;\n}\n}\n```\n\nThe object is obtained through the static method:\n\n```java\nChiefMinister cm = ChiefMinister.getInstance(\"ABC\", 10);\n```\n\nThe constructor cannot be called directly from outside the class:\n\n```java\nChiefMinister cm = new ChiefMinister(\"ABC\", 10);\n```\n\nbecause the constructor is private. If the object already exists, getInstance() returns the existing reference instead of creating another object."
+    }
+  ]
+}
