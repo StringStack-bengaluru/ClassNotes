@@ -1,0 +1,71 @@
+{
+  "title": "Notes Type Casting",
+  "itemsPerPage": 2,
+  "source": "notes-type-casting.docx",
+  "items": [
+    {
+      "question": "What are the eight primitive data types in Java?",
+      "answer": "Answer: Java provides eight primitive data types: byte short int long float\n\n```java\ndouble\n```\n\nchar boolean They can be grouped as follows: Integer types: byte, short, int, long Real-number types: float, double Character type: char Boolean type: boolean All primitive data is ultimately represented in the form of 0s and 1s in computer memory."
+    },
+    {
+      "question": "How are integer and real-number values represented in Java?",
+      "answer": "Answer: Integer values such as byte, short, int, and long are represented in base-2 format. Negative integers are represented using two's complement. Real numbers are handled using float and double. A float is used when comparatively less precision is required, while double is used when greater precision is required. For example:\n\n```java\nfloat A = 33.15983F;\ndouble B = 33.1598363543219;\n```\n\nA float uses IEEE single-precision representation, while a double uses IEEE double-precision representation."
+    },
+    {
+      "question": "What is the difference between float and double in terms of precision?",
+      "answer": "Answer: ```java\nfloat is used for real numbers requiring comparatively less precision, while double is used when more precision is required.\n```\n\nFor example:\n\n```java\nfloat A = 33.15983F;\ndouble B = 33.1598363543219;\n```\n\nThe value stored in B contains many more digits after the decimal point, so double is preferred.\n\n```java\nfloat uses IEEE single-precision format\ndouble uses IEEE double-precision format\nfloat occupies 4 bytes = 32 bits\ndouble occupies 8 bytes = 64 bits\n```\n\nFor IEEE single precision, the 32 bits are divided into: 1 bit → Sign 8 bits → Exponent 23 bits → Mantissa For IEEE double precision: 1 bit → Sign 11 bits → Exponent 52 bits → Mantissa The exponent uses excess 127 for single precision and excess 1023 for double precision."
+    },
+    {
+      "question": "What is a character set?",
+      "answer": "Answer: A character set is a collection of characters in which every character is assigned a unique binary code. For example, if there are only two characters: A → 0 B → 1 One bit is sufficient because: 2¹ = 2 If there are four characters: A → 00 B → 01 C → 10 D → 11 Two bits are sufficient because: 2² = 4 Similarly: 2 characters → 1 bit 4 characters → 2 bits 8 characters → 3 bits 16 characters → 4 bits Therefore, as the number of characters increases, more bits are required to assign a unique binary code to every character."
+    },
+    {
+      "question": "What is ASCII?",
+      "answer": "Answer: ASCII stands for American Standard Code for Information Interchange. It is a character set containing 128 English symbols, including uppercase letters, lowercase letters, digits, punctuation marks, and other symbols. Since: 128 = 2⁷ 7 bits are mathematically sufficient to represent 128 unique characters. However, the character representation occupies one byte, which is 8 bits. Therefore, an additional bit is used so that the character occupies the complete byte. An 8-bit binary representation of characters, although the original 128-character set requires only 7 bits for unique codes."
+    },
+    {
+      "question": "Why does Java use UTF-16 instead of ASCII for char representation?",
+      "answer": "Answer: ASCII is limited to 128 English symbols. It is therefore not sufficient for applications that need to represent characters from many different languages. Java was designed for applications that could be used internationally. Therefore, it uses a character representation capable of supporting a much larger set of characters. Java follows UTF-16 for character representation. UTF provides a much larger character set, with each character assigned a unique code. Therefore, Java can represent characters beyond the limited English character set supported by ASCII."
+    },
+    {
+      "question": "How many bytes does a char occupy in Java?",
+      "answer": "Answer: A Java char occupies 2 bytes, which is equal to 16 bits. 1 byte = 8 bits 2 bytes = 16 bits For example:\n\n```java\nchar A = 'A';\n```\n\nThe character is represented internally using the UTF-16 character representation. Therefore: char → 16 bits → 2 bytes The main reason is that Java needs a larger character representation than the one-byte ASCII representation."
+    },
+    {
+      "question": "What is a character literal in Java?",
+      "answer": "Answer: A character literal represents a single character and is written inside single quotation marks. Examples: 'A' 'B' '6' 'R' A character literal must represent only one character. For example:\n\n```java\nchar A = 'R';\n```\n\nis valid. But:\n\n```java\nchar A = 'RA';\n```\n\nis not a character literal because it contains more than one character. Similarly: 'A' is a character, whereas: \"A\" is a string."
+    },
+    {
+      "question": "How does a character participate in arithmetic operations in Java?",
+      "answer": "Answer: A character has a numeric character code. Therefore, when a character participates in an arithmetic expression, its numeric value is used. For example:\n\n```java\nSystem.out.println('B' + 10);\n```\n\n'B' has the numeric value 66. Therefore: 66 + 10 = 76 Output: 76 Similarly:\n\n```java\nSystem.out.println('C' + 10);\n```\n\nSince 'C' has the value 67: 67 + 10 = 77 Output: 77 This is why a character can be used in arithmetic expressions."
+    },
+    {
+      "question": "What is the difference between a character digit and an integer digit in Java?",
+      "answer": "Answer: 6 and '6' are different values and different data types. 6 is an integer literal. '6' is a character literal. The character '6' has the numeric character code 54. For example:\n\n```java\nchar A = '6';\nint B = A;\nSystem.out.println(B);\n```\n\nOutput: 54 The character codes for digits are: '0' → 48 '1' → 49 '2' → 50 '3' → 51 '4' → 52 '5' → 53 '6' → 54 Therefore, '6' does not represent the integer value 6; it represents a character whose numeric code is 54."
+    },
+    {
+      "question": "How are uppercase and lowercase English characters represented numerically?",
+      "answer": "Answer: The character codes are: 'A' → 65 'B' → 66 'C' → 67 ... 'Z' → 90 Lowercase characters follow: 'a' → 97 'b' → 98 ... 'z' → 122 For example:\n\n```java\nchar A = 'A';\nint B = A;\nSystem.out.println(B);\n```\n\nOutput: 65 The characters between 90 and 97 are special characters."
+    },
+    {
+      "question": "What is type casting in Java?",
+      "answer": "Answer: Type casting is the process of converting data from one data type to another data type. Primitive type casting has two forms: Implicit type casting Explicit type casting byte → short → int → long → float → double Conversion from a smaller type toward a larger type is implicit or widening, while conversion from a larger type toward a smaller type is explicit or narrowing."
+    },
+    {
+      "question": "What is implicit type casting or widening in Java?",
+      "answer": "Answer: Implicit type casting is the automatic conversion of a lower data type into a higher data type. It is also called widening. byte → short → int → long → float → double For example:\n\n```java\nbyte A = 10;\nshort B = A;\n```\n\nHere, the byte value is automatically converted to short. Another example is:\n\n```java\nint A = 20;\ndouble B = A;\n```\n\nThe value is converted from: 20 → 20.0 No explicit cast operator is required for these conversions."
+    },
+    {
+      "question": "What is explicit type casting or narrowing in Java?",
+      "answer": "Answer: Explicit type casting is the conversion of a higher data type into a lower data type. It is also called narrowing. The cast operator is used to explicitly perform the conversion. For example:\n\n```java\nshort A = 120;\nbyte B = (byte) A;\nSystem.out.println(B);\n```\n\nOutput: 120 The value remains 120 because it can be represented by byte. However, narrowing conversion may result in data loss when the original value cannot be represented by the destination type. Therefore, the possibility of data loss is an important characteristic of explicit type casting."
+    },
+    {
+      "question": "How is a char converted to an int, and how is an int converted to a char?",
+      "answer": "Answer: A char can be converted to an int implicitly because the character has a corresponding numeric value. Example:\n\n```java\nchar A = 'A';\nint B = A;\nSystem.out.println(B);\n```\n\nOutput: 65 The reverse conversion from int to char is performed using explicit casting. Example:\n\n```java\nint A = 91;\nchar B = (char) A;\nSystem.out.println(B);\n```\n\nThe values demonstrated are: 91 → [ 92 → \\ 93 → ] 94 → ^ 95 → _ 96 → ` Therefore, character-to-integer conversion can happen implicitly, while integer-to-character conversion in this example uses explicit casting."
+    },
+    {
+      "question": "Why does '6' + 10 produce 64 in Java?",
+      "answer": "Answer: The character '6' has the numeric character code 54. Therefore, when it participates in arithmetic:\n\n```java\nSystem.out.println('6' + 10);\n```\n\nJava performs the calculation using the character's numeric value: '6' + 10 54 + 10 64 Output: 64 This demonstrates that a character can be treated as its corresponding numeric value during arithmetic operations."
+    }
+  ]
+}
