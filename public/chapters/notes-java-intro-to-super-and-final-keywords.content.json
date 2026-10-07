@@ -1,0 +1,87 @@
+{
+  "title": "Notes Java Intro To Super And Final Keywords",
+  "itemsPerPage": 2,
+  "source": "notes-java-intro-to-super-and-final-keywords.docx",
+  "items": [
+    {
+      "question": "What is the super keyword in Java?",
+      "answer": "Answer: The super keyword refers to the immediate parent class. It is mainly used to access parent class variables and methods when they are hidden or overridden in the child class.\n\n```java\nclass Demo1\n{\nint a = 10;\n```\n\nvoid display()\n\n```java\n{\nSystem.out.println(\"This display is from Demo1\");\n}\n}\nclass Demo2 extends Demo1\n{\nint a = 50;\n```\n\nvoid display()\n\n```java\n{\nSystem.out.println(\"Child a = \" + a);\nSystem.out.println(\"Parent a = \" + super.a);\nsuper.display();\n}\n}\n```\n\nHere, a refers to the child class variable, while super.a refers to the parent class variable."
+    },
+    {
+      "question": "How can a child class access a parent class variable when both have the same variable name?",
+      "answer": "Answer: The child class variable hides the parent class variable. The parent class variable can be accessed using super. For example, if both classes contain a variable named a, then:\n\n```java\nSystem.out.println(a);       // Child variable\nSystem.out.println(super.a); // Parent variable\n```"
+    },
+    {
+      "question": "How is the super keyword used to call a parent class method?",
+      "answer": "Answer: The super keyword can be used to call the immediate parent class version of a method.\n\n```java\nclass Demo1\n{\n```\n\nvoid display()\n\n```java\n{\nSystem.out.println(\"Parent display\");\n}\n}\nclass Demo2 extends Demo1\n{\n```\n\nvoid display()\n\n```java\n{\nsuper.display();\nSystem.out.println(\"Child display\");\n}\n}\n```\n\nsuper.display() executes the method defined in the parent class."
+    },
+    {
+      "question": "What is variable hiding in Java?",
+      "answer": "Answer: Variable hiding occurs when a child class declares a variable with the same name as a variable in its parent class. The child variable hides the parent variable within the child class. The parent variable can still be accessed using the super keyword."
+    },
+    {
+      "question": "Which class does the super keyword refer to?",
+      "answer": "Answer: The super keyword always refers to the immediate parent class of the current class. It cannot be used as super.super to directly access a grandparent class."
+    },
+    {
+      "question": "What is the final keyword in Java?",
+      "answer": "Answer: The final keyword is used to restrict modification in Java. It can be applied to a class, method, or variable. A final class cannot be inherited. A final method cannot be overridden. A final variable cannot be reassigned after initialization."
+    },
+    {
+      "question": "What is a final class in Java?",
+      "answer": "Answer: A final class is a class that cannot be inherited by another class. It is used when further inheritance from a particular class should not be allowed.\n\n```java\nfinal class SerpentEagle\n{\n```\n\nvoid fly()\n\n```java\n{\nSystem.out.println(\"Eagle is flying very high.\");\n}\n}\nclass Lion extends SerpentEagle\n{\n// Compilation error\n}\n```\n\nLion cannot extend SerpentEagle because SerpentEagle is declared as final."
+    },
+    {
+      "question": "What is a final method in Java?",
+      "answer": "Answer: A final method can be inherited by a child class, but it cannot be overridden.\n\n```java\nclass Eagle\n{\nfinal void fly()\n{\nSystem.out.println(\"Eagle is flying very high.\");\n}\n}\nclass SerpentEagle extends Eagle\n{\n// fly() cannot be overridden here\n}\n```\n\nIf SerpentEagle tries to provide another implementation of fly(), the compiler reports an error."
+    },
+    {
+      "question": "What is the difference between a final class and a final method?",
+      "answer": "Answer: A final class prevents inheritance completely. A final method allows inheritance, but prevents the child class from overriding that particular method."
+    },
+    {
+      "question": "What is method overriding in Java?",
+      "answer": "Answer: Method overriding occurs when a child class provides its own implementation of a method that is already defined in its parent class. The bird hierarchy:\n\n```java\nclass Bird\n{\n```\n\nvoid fly()\n\n```java\n{\nSystem.out.println(\"Bird is flying\");\n}\n}\nclass Eagle extends Bird\n{\n```\n\nvoid fly()\n\n```java\n{\nSystem.out.println(\"Eagle is flying very high.\");\n}\n}\nclass Sparrow extends Bird\n{\n```\n\nvoid fly()\n\n```java\n{\nSystem.out.println(\"Sparrow is flying very low.\");\n}\n}\n```\n\nHere, Eagle and Sparrow override the fly() method inherited from Bird."
+    },
+    {
+      "question": "How does inheritance work in the SerpentEagle and WedgedSparrow classes?",
+      "answer": "Answer: SerpentEagle inherits from Eagle, while WedgedSparrow inherits from Sparrow. Therefore, SerpentEagle gets the fly() behavior from Eagle, and WedgedSparrow gets the fly() behavior from Sparrow. Both classes can provide their own implementations of other inherited methods such as eat() and sleep()."
+    },
+    {
+      "question": "Why is a class declared as final in an inheritance hierarchy?",
+      "answer": "Answer: A class is declared as final when inheritance should stop at that class. It prevents another class from extending it and continuing the hierarchy. For example:\n\n```java\nfinal class SerpentEagle extends Eagle\n{\n}\n```\n\nAnother class cannot extend SerpentEagle."
+    },
+    {
+      "question": "What is a final variable in Java?",
+      "answer": "Answer: A final variable can be assigned only once. After initialization, its value cannot be changed.\n\n```java\nfinal int age = 10;\n// age = 20;  // Compilation error\n```"
+    },
+    {
+      "question": "Can a final local variable be initialized after declaration?",
+      "answer": "Answer: Yes. A final local variable can be declared first and initialized later, as long as it is assigned before it is used.\n\n```java\nfinal int age;\nage = 20;\nSystem.out.println(age);\n```\n\nAfter the first assignment, it cannot be assigned another value."
+    },
+    {
+      "question": "What is a final instance variable?",
+      "answer": "Answer: A final instance variable is an instance variable whose value cannot be changed after initialization. It must be initialized appropriately before it is used.\n\n```java\nclass Student\n{\nfinal int age = 20;\n```\n\nvoid display()\n\n```java\n{\nSystem.out.println(age);\n}\n}\n```"
+    },
+    {
+      "question": "What naming convention is followed for constants in Java?",
+      "answer": "Answer: Constants are generally written using uppercase letters. When a constant contains multiple words, the words are separated using underscores. Example:\n\n```java\nstatic final int BIRD_AGE = 20;\n```\n\nThis naming convention makes constants easily identifiable in a program."
+    },
+    {
+      "question": "Why is static final commonly used for constants in Java?",
+      "answer": "Answer: ```java\nstatic final is commonly used when a value should be constant and shared by the class rather than maintained separately for each object.\nclass Bird\n{\nstatic final int BIRD_AGE = 20;\n}\nstatic makes it a class-level member, while final prevents its value from being changed.\n```"
+    },
+    {
+      "question": "What are Integer.MAX_VALUE and Integer.MIN_VALUE?",
+      "answer": "Answer: Integer.MAX_VALUE represents the maximum value that can be stored in an int, while Integer.MIN_VALUE represents the minimum value.\n\n```java\nSystem.out.println(Integer.MAX_VALUE);\nSystem.out.println(Integer.MIN_VALUE);\n```\n\nOutput: 2147483647 -2147483648 They are predefined constants provided by the Integer class."
+    },
+    {
+      "question": "What is the difference between a final class, final method, and final variable?",
+      "answer": "Answer: Type Purpose\n\n```java\nfinal class\n```\n\nPrevents inheritance\n\n```java\nfinal method\n```\n\nPrevents overriding\n\n```java\nfinal variable\n```\n\nPrevents reassignment The effect of final depends on the element to which it is applied."
+    },
+    {
+      "question": "What is the difference between final and static final?",
+      "answer": "Answer: A final variable cannot be reassigned, but it can be an instance variable, meaning each object can have its own value. A static final variable belongs to the class and has one shared constant value. Therefore, static final is commonly used for class-level constants."
+    }
+  ]
+}
