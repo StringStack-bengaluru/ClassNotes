@@ -1,0 +1,87 @@
+{
+  "title": "Notes Java Methods Intro",
+  "itemsPerPage": 2,
+  "source": "notes-java-methods-intro.docx",
+  "items": [
+    {
+      "question": "What is a method in Java?",
+      "answer": "Answer: A method is a block of code used to perform a particular task. Instead of writing the logic directly inside the main() method, the logic for a particular task can be kept inside a separate method. For example:\n\n```java\nclass Demo\n{\npublic static void addition()\n{\nint a = 10;\nint b = 20;\nint sum = a + b;\nSystem.out.println(\"Sum is \" + sum);\n}\n}\n```\n\nHere, the statements inside addition() perform the task of addition."
+    },
+    {
+      "question": "Why should a task be written inside a separate method instead of keeping all the logic inside main()?",
+      "answer": "Answer: A separate method allows the logic for a particular task to be organized independently. Each method can represent a specific task, making the program easier to understand and execute when required. For example, addition can be kept inside addition() and multiplication can be kept inside multiply()."
+    },
+    {
+      "question": "What are the main components of a method?",
+      "answer": "Answer: A method has four main components: Method name Return type Parameter list Method body or implementation For example:\n\n```java\npublic static void addition()\n{\nint a = 10;\nint b = 20;\nint sum = a + b;\nSystem.out.println(\"Sum is \" + sum);\n}\n```\n\nHere, addition is the method name, void is the return type, there are no parameters, and the statements inside { } form the method body."
+    },
+    {
+      "question": "What is the purpose of the method name, parameters, return type, and method body?",
+      "answer": "Answer: Method name identifies the method. Parameters represent the input accepted by the method. Return type specifies the type of result returned by the method. Method body contains the statements that perform the required task. A method may or may not accept input and may or may not produce a return value."
+    },
+    {
+      "question": "What is the meaning of void as a method return type?",
+      "answer": "Answer: void indicates that the method does not return a value to the calling code. For example:\n\n```java\npublic static void addition()\n{\nint a = 10;\nint b = 20;\nint sum = a + b;\nSystem.out.println(\"Sum is \" + sum);\n}\n```\n\nThe method performs the addition and prints the result, but it does not return the result to the caller. Therefore, its return type is void."
+    },
+    {
+      "question": "Can a method execute automatically just because it is written in a class?",
+      "answer": "Answer: No. A method must be called for its code to execute. For example:\n\n```java\nclass Demo\n{\npublic static void addition()\n{\nint a = 10;\nint b = 20;\nint sum = a + b;\nSystem.out.println(\"Sum is \" + sum);\n}\npublic static void main(String[] args)\n{\naddition();\n}\n}\n```\n\nWhen addition() is called from main(), its statements are executed. If the method is not called, its body is not executed."
+    },
+    {
+      "question": "Why is the main() method executed when a Java program starts?",
+      "answer": "Answer: The JVM is designed to call the main() method when a Java application starts. After the JVM calls main(), the statements inside main() are executed. If another method such as addition() needs to execute, it must be explicitly called from main() or from another method."
+    },
+    {
+      "question": "How does method calling work with example?",
+      "answer": "Answer: For example:\n\n```java\nclass Demo\n{\npublic static void addition()\n{\nint a = 10;\nint b = 20;\nint sum = a + b;\nSystem.out.println(\"Sum is \" + sum);\n}\npublic static void main(String[] args)\n{\naddition();\n}\n}\n```\n\nWhen the program starts: JVM calls main(). main() executes the statement addition(). The addition() method is called. A stack frame is created for addition(). Control moves to the body of addition(). The statements are executed and Sum is 30 is printed. Control returns to main() after addition() finishes."
+    },
+    {
+      "question": "What is a stack frame or activation record?",
+      "answer": "Answer: A stack frame, also called an activation record, is a chunk of memory allocated for a method when that method is called. For example, when main() is called, a stack frame is created for main(). When addition() is called from main(), another stack frame is created for addition(). The activation record contains the memory required while that method is executing."
+    },
+    {
+      "question": "What happens to a method's activation record when the method finishes execution?",
+      "answer": "Answer: When control reaches the closing brace of a method, control returns to the place from which the method was called. The activation record created for that method is then removed. For example, after addition() completes, its activation record is deleted and control returns to main(). When main() finishes, its activation record is also removed and program execution ends."
+    },
+    {
+      "question": "What is the difference between writing a method and calling a method?",
+      "answer": "Answer: Writing a method means defining the task that the method should perform. Calling a method means requesting the program to execute that method. For example:\n\n```java\npublic static void addition()\n{\nint a = 10;\nint b = 20;\nint sum = a + b;\nSystem.out.println(\"Sum is \" + sum);\n}\n```\n\nThis defines the method.\n\n```java\naddition();\n```\n\nThis calls the method. A method can be written without being executed. It executes only when it is called."
+    },
+    {
+      "question": "How can multiple methods be called from the main() method?",
+      "answer": "Answer: Multiple methods can be defined separately and called from main() according to the required execution order.\n\n```java\nclass Demo\n{\npublic static void addition()\n{\nint a = 10;\nint b = 20;\nint sum = a + b;\nSystem.out.println(\"Sum is \" + sum);\n}\npublic static void multiply()\n{\nint a = 10;\nint b = 5;\nint product = a * b;\nSystem.out.println(\"Product is \" + product);\n}\npublic static void main(String[] args)\n{\naddition();\nmultiply();\n}\n}\n```\n\nOutput: Sum is 30 Product is 50 The execution first goes to addition(), returns to main(), and then goes to multiply()."
+    },
+    {
+      "question": "What is the purpose of the multiply() method?",
+      "answer": "Answer: The multiply() method contains the statements required to perform multiplication.\n\n```java\npublic static void multiply()\n{\nint a = 10;\nint b = 5;\nint product = a * b;\nSystem.out.println(\"Product is \" + product);\n}\n```\n\nThe method performs 10 * 5 and prints: Product is 50 Different tasks can therefore be separated into different methods."
+    },
+    {
+      "question": "Why must a method be defined inside a class in Java?",
+      "answer": "Answer: Java requires methods to be defined within a class. For example:\n\n```java\nclass Demo\n{\npublic static void addition()\n{\nint a = 10;\nint b = 20;\nint sum = a + b;\nSystem.out.println(\"Sum is \" + sum);\n}\n}\n```\n\nHere, addition() is defined inside the Demo class."
+    },
+    {
+      "question": "What is a method call, and what happens when a method is called?",
+      "answer": "Answer: A method call is a statement used to invoke a method. For example:\n\n```java\naddition();\n```\n\nWhen this statement is executed: The method is called. A stack frame or activation record is created for that method. Control moves to the method body. The statements inside the method are executed. When the method finishes, control returns to the calling method. The method's activation record is removed."
+    },
+    {
+      "question": "What is the role of the stack segment during method execution?",
+      "answer": "Answer: The stack segment is used during method execution to hold the stack frames or activation records of methods that are currently executing. When main() is called, its activation record is created. When main() calls addition(), another activation record is created for addition(). When addition() finishes, its activation record is removed and control returns to main()."
+    },
+    {
+      "question": "What is a breakpoint in Eclipse debugging?",
+      "answer": "Answer: A breakpoint is a point in the program where execution can be paused during debugging. In Eclipse, a breakpoint can be added to a particular line using Toggle Breakpoint. When the program is executed in debug mode, control stops at that breakpoint, allowing the execution to be observed step by step."
+    },
+    {
+      "question": "What is the difference between Step Over and Step Into in Eclipse debugging?",
+      "answer": "Answer: Step Over (F6) executes the current statement and moves to the next statement without entering a method being called. Step Into (F5) enters the called method so that its internal execution can be observed line by line. For example, when the debugger reaches:\n\n```java\naddition();\n```\n\nusing Step Into moves control into the addition() method, where its activation record and statements can be observed."
+    },
+    {
+      "question": "What happens when control reaches the closing brace of a method?",
+      "answer": "Answer: When control reaches the closing brace of a method, the method has completed its execution. Control returns to the place from which the method was called, and the activation record of that method is removed. For example, after addition() completes, control returns to main()."
+    },
+    {
+      "question": "What is the complete execution flow of the addition() and multiply() example?",
+      "answer": "Answer: The execution flow is: JVM ↓ main() ↓ addition() ↓ Addition completes ↓ Return to main() ↓ multiply() ↓ Multiplication completes ↓ Return to main() ↓ main() completes ↓ Program execution ends The output is: Sum is 30 Product is 50 A method executes only when it is called, while the JVM calls main() when the program starts."
+    }
+  ]
+}
