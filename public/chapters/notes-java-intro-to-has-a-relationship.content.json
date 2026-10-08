@@ -1,0 +1,103 @@
+{
+  "title": "Notes Java Intro To Has A Relationship",
+  "itemsPerPage": 2,
+  "source": "notes-java-intro-to-has-a-relationship.docx",
+  "items": [
+    {
+      "question": "What is a “has-a” relationship in Java?",
+      "answer": "Answer: A “has-a” relationship represents a relationship where one object contains or is associated with another object. For example: Mobile has a Charger. Mobile has an OS. Student has a Book. Student has a Brain. Mobile and Charger are separate objects, but they are related through a “has-a” relationship."
+    },
+    {
+      "question": "What are the two types of “has-a” relationships?",
+      "answer": "Answer: There are two types of “has-a” relationships: Aggregation – a loosely bound “has-a” relationship. Composition – a tightly bound “has-a” relationship. Aggregation and composition describe how strongly the objects are related."
+    },
+    {
+      "question": "What is aggregation in Java?",
+      "answer": "Answer: Aggregation is a loosely bound “has-a” relationship. In aggregation, the aggregate object exists separately from the enclosing object. Therefore, the aggregate object can still be accessed even when the enclosing object is no longer available. For example, a Mobile has a Charger. The charger is outside the mobile and can exist independently."
+    },
+    {
+      "question": "What is composition in Java?",
+      "answer": "Answer: Composition is a tightly bound “has-a” relationship. In composition, the composite object is inside the enclosing object. The composite object is accessed through the enclosing object. For example, a Mobile has an OS. The OS is treated as a composite object inside the Mobile."
+    },
+    {
+      "question": "What is the difference between aggregation and composition?",
+      "answer": "Answer: Aggregation Composition Loosely bound relationship Tightly bound relationship Aggregate object exists outside the enclosing object Composite object exists inside the enclosing object Aggregate object can be accessed independently Composite object is accessed through the enclosing object Example: Mobile → Charger Example: Mobile → OS"
+    },
+    {
+      "question": "Where is the aggregate object present in aggregation?",
+      "answer": "Answer: The aggregate object is present outside the enclosing object. For example, the Charger object exists separately from the Mobile object. The Mobile has a mechanism, such as a reference, through which the Charger can be associated with it."
+    },
+    {
+      "question": "Where is the composite object present in composition?",
+      "answer": "Answer: The composite object is present inside the enclosing object. For example, OS is treated as a composite object inside Mobile. Therefore, to access the OS, the Mobile object must be accessed first."
+    },
+    {
+      "question": "How can you access an object involved in aggregation?",
+      "answer": "Answer: In aggregation, the aggregate object can be accessed independently without accessing the enclosing object. For example, if Mobile has a Charger and Mobile is no longer available, the Charger can still be accessed because the Charger exists separately. Mobile → Charger Mobile is lost ↓ Charger can still be accessed"
+    },
+    {
+      "question": "How can you access an object involved in composition?",
+      "answer": "Answer: In composition, the composite object must be accessed through the enclosing object. For example:\n\n```java\nmobile.getOS().getName();\nmobile.getOS().getType();\n```\n\nHere, OS is accessed through mobile. Without the Mobile object, the OS cannot be accessed through that relationship."
+    },
+    {
+      "question": "What happens if the Mobile object is lost in the Mobile–OS–Charger example?",
+      "answer": "Answer: If the Mobile reference becomes null, the Mobile object can no longer be accessed. The OS cannot be accessed through Mobile because the enclosing object is no longer available. However, the Charger can still be accessed because it is an aggregate object and has its own reference.\n\n```java\nmobile = null;\n```\n\nAfter this, the Mobile reference holds null. The Charger can still be accessed independently."
+    },
+    {
+      "question": "What is an orphan object in the Mobile–Charger example?",
+      "answer": "Answer: When the Mobile reference becomes null, the Mobile object may no longer have a reference pointing to it. The object then becomes an orphan object. The garbage collector can remove such an object when it is no longer reachable. The Charger object is not removed merely because the Mobile object is lost, because the Charger has its own reference."
+    },
+    {
+      "question": "How are aggregation and composition represented in a UML diagram?",
+      "answer": "Answer: Aggregation is represented using a hollow diamond/rhombus. Composition is represented using a solid diamond/rhombus. The diamond points towards the enclosing object."
+    },
+    {
+      "question": "What are the objects and attributes in the Mobile–Charger–OS example?",
+      "answer": "Answer: The objects and their attributes are: Charger – color and brand OS – name and type Mobile – brand, color and price Mobile also has Charger and OS as dependent objects. Charger is the aggregate object, while OS is the composite object."
+    },
+    {
+      "question": "How are the Charger, OS, and Mobile classes created?",
+      "answer": "Answer: The Charger class contains color and brand. The OS class contains name and type. The Mobile class contains brand, color, and price, along with references to Charger and OS. The fields are made private and constructors, getters, and setters are used."
+    },
+    {
+      "question": "Why are getters and setters used for the private fields?",
+      "answer": "Answer: Private fields cannot be accessed directly from outside their class. For example, if brand in Mobile is private, it cannot be accessed directly using: m.brand Instead, its getter is used: m.getBrand() Similarly, a setter can be used to assign a value to a private field."
+    },
+    {
+      "question": "How is the OS object handled inside Mobile?",
+      "answer": "Answer: The OS object is treated as a composite object. It is created and associated with the Mobile. For example:\n\n```java\nOS os = new OS(\"android\", 32);\n```\n\nThe OS is then associated with Mobile. To access its details, Mobile is used first:\n\n```java\nmobile.getOS().getName();\nmobile.getOS().getType();\n```\n\nThis represents the composition relationship between Mobile and OS."
+    },
+    {
+      "question": "How is the Charger object associated with Mobile?",
+      "answer": "Answer: The Charger object is created separately because it is an aggregate object.\n\n```java\nCharger charger = new Charger(\"white\", \"Samsung charger\");\n```\n\nThe Charger reference is then given to Mobile using the setter:\n\n```java\nmobile.setCharger(charger);\n```\n\nThe Mobile now holds a reference to the Charger object."
+    },
+    {
+      "question": "How can Charger details be accessed through Mobile?",
+      "answer": "Answer: Since Mobile contains a reference to Charger, the Charger details can be accessed through Mobile.\n\n```java\nmobile.getCharger().getColor();\nmobile.getCharger().getBrand();\n```\n\nThe Charger object itself remains outside Mobile, which represents aggregation."
+    },
+    {
+      "question": "What is the difference in object accessibility between Mobile–OS and Mobile–Charger?",
+      "answer": "Answer: For Mobile and OS:\n\n```java\nmobile.getOS().getName();\n```\n\nThe OS must be accessed through Mobile because it is a composite object. For Mobile and Charger:\n\n```java\ncharger.getColor();\ncharger.getBrand();\n```\n\nThe Charger can be accessed directly because it is an aggregate object and has its own reference. Therefore: Composition: enclosing object is required. Aggregation: aggregate object can exist and be accessed independently."
+    },
+    {
+      "question": "What is the Student–Book–Brain relationship?",
+      "answer": "Answer: A Student has a Book and a Brain. The Book is an aggregate object because it exists outside the Student and can be accessed independently. The Brain is a composite object because it is inside the Student and must be accessed through the Student. Therefore: Student → Book Aggregation Student → Brain Composition"
+    },
+    {
+      "question": "What is the Human–Heart–Car–Engine relationship?",
+      "answer": "Answer: Human has: Name Age Height Weight Heart Car Heart has: Color Weight Car has: Color Cost Engine Engine has: BHP Fuel type The nested objects can be accessed through their respective references. For example:\n\n```java\nhuman.getCar().getEngine().getBHP();\nhuman.getCar().getEngine().getFuelType();\n```\n\nThis represents multiple levels of object relationships."
+    },
+    {
+      "question": "How does inheritance combine with aggregation and composition?",
+      "answer": "Answer: Student is a Human, so Student extends Human. Human contains attributes such as name, age, height, and weight, along with Heart and Car. Student additionally has ID, email, marks, college, Book, and Brain. Student also gets the Human-related members through inheritance. The resulting design contains both an is-a relationship through inheritance and has-a relationships through aggregation and composition."
+    },
+    {
+      "question": "What objects and details are required in the Student scenario?",
+      "answer": "Answer: The Student object contains: Name Age Height Weight ID Email Marks College Book Brain Heart Car The required details include: Student → name, age, height, weight Student → ID, email, marks, college Student → Book → author, name, price Student → Brain → color, weight Student → Heart → color, weight Student → Car → color, cost Student → Car → Engine → BHP, fuel type"
+    },
+    {
+      "question": "How can nested objects be accessed in Java?",
+      "answer": "Answer: Nested objects can be accessed by following their object references step by step. For example:\n\n```java\nhuman.getCar().getEngine().getBHP();\n```\n\nHere: getCar() accesses the Car object. getEngine() accesses the Engine object inside Car. getBHP() accesses the BHP value from Engine. The same approach is used for the Student, Book, Brain, Heart, Car, and Engine relationships."
+    }
+  ]
+}
