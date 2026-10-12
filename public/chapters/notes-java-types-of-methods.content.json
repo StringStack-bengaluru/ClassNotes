@@ -1,0 +1,103 @@
+{
+  "title": "Notes Java Types Of Methods",
+  "itemsPerPage": 2,
+  "source": "notes-java-types-of-methods.docx",
+  "items": [
+    {
+      "question": "What is a method in Java?",
+      "answer": "Answer: A method in Java is a set of instructions used to perform a particular task. Instead of writing all the instructions directly inside the main method, we can organize them into separate methods and call them whenever required. For example, the instructions needed to add two numbers can be written inside an add() method. The method executes when it is called."
+    },
+    {
+      "question": "What are the four components of a method?",
+      "answer": "Answer: A method has four main components: Method name Return type Parameters Method body or implementation The method name identifies the method, the return type specifies the type of value returned, parameters receive input values, and the method body contains the instructions to perform the task."
+    },
+    {
+      "question": "What is a method signature?",
+      "answer": "Answer: In the terminology used in this lesson, a method signature consists of the return type, method name, and parameters. These components describe the method's declaration and the input it accepts. For example:\n\n```java\npublic static int add(int a, int b)\n```\n\nHere, int is the return type, add is the method name, and int a, int b are the parameters."
+    },
+    {
+      "question": "What are the four types of methods in Java based on parameters and return values?",
+      "answer": "Answer: Methods are classified into four types based on whether they accept parameters and return values. A method that does not accept parameters and does not return a value. A method that accepts parameters but does not return a value. A method that does not accept parameters but returns a value. A method that accepts parameters and returns a value. These four types help us decide how a method receives input and provides its result."
+    },
+    {
+      "question": "What is a method that does not accept parameters and does not return a value?",
+      "answer": "Answer: This type of method does not receive input through parameters and does not return a value to the calling method. Its return type is void. Example:\n\n```java\npublic static void add() {\nint a = 10;\nint b = 20;\nint c = a + b;\nSystem.out.println(c);\n}\n```\n\nThe method performs addition and prints the result directly. Since it does not accept parameters or return a value, it belongs to the first type of method."
+    },
+    {
+      "question": "How do you call a static method in Java?",
+      "answer": "Answer: A static method can be called using the class name followed by the method name. This is the standard approach demonstrated in the lesson. Example:\n\n```java\npublic class Sample {\npublic static void add() {\nint a = 10;\nint b = 20;\nint c = a + b;\nSystem.out.println(c);\n}\npublic static void main(String[] args) {\nSample.add();\n}\n}\n```\n\nHere, add() is a static method declared inside Sample. Therefore, it is called using Sample.add(). The output is 30."
+    },
+    {
+      "question": "What is an activation record or stack frame?",
+      "answer": "Answer: An activation record, also called a stack frame, is a portion of memory allocated for a particular method during its execution. When the JVM starts executing the program, an activation record is created for main(). When main() calls another method, a separate activation record is created for that method. The activation record holds the method's execution-related information, including its local variables. When the method finishes and control returns to the caller, its activation record is removed."
+    },
+    {
+      "question": "Explain the execution flow when main() calls add().",
+      "answer": "Answer: Consider the following method call:\n\n```java\nSample.add();\n```\n\nThe execution flow is as follows: The JVM begins program execution by calling main(). An activation record is created for main(). When control encounters Sample.add(), the add() method is called. An activation record is created for add(). The local variables a, b, and c are assigned their values. The addition result, 30, is printed. When add() finishes, control returns to main(). The activation record for add() is removed. After main() finishes, its activation record is also removed and program execution ends."
+    },
+    {
+      "question": "What is a method that accepts parameters but does not return a value?",
+      "answer": "Answer: This type of method receives input through parameters but does not return a value. Its return type is void. Example:\n\n```java\npublic static void add(int a, int b) {\nint c = a + b;\nSystem.out.println(c);\n}\npublic static void main(String[] args) {\nSample.add(10, 20);\n}\n```\n\nHere, 10 and 20 are passed to the method and received by a and b. The method calculates the sum and prints 30. Since it does not return the result to the calling method, its return type is void."
+    },
+    {
+      "question": "What is the difference between parameters and arguments?",
+      "answer": "Answer: Parameters are the variables declared in a method declaration to receive values. Arguments are the actual values passed when calling the method. Example:\n\n```java\npublic static void sub(int a, int b) {\nSystem.out.println(a - b);\n}\npublic static void main(String[] args) {\nSample.sub(20, 10);\n}\n```\n\nIn this example, a and b are parameters. The values 20 and 10 are arguments. The method receives 20 in a and 10 in b, subtracts them, and prints 10."
+    },
+    {
+      "question": "What are formal parameters and actual parameters?",
+      "answer": "Answer: Formal parameters are the variables declared in a method declaration to receive values. Actual parameters, also called arguments, are the values supplied in the method call. For example:\n\n```java\nSample.sub(20, 10);\n```\n\nHere, 20 and 10 are actual parameters or arguments. The variables a and b in the method declaration are formal parameters. The values passed during the method call are received by the formal parameters and used to perform the operation."
+    },
+    {
+      "question": "What is a method that does not accept parameters but returns a value?",
+      "answer": "Answer: This type of method does not receive input through parameters but returns a value to the calling method. Its return type must match the type of value it returns. Example:\n\n```java\npublic static int add() {\nint a = 10;\nint b = 20;\nint c = a + b;\nreturn c;\n}\npublic static void main(String[] args) {\nint result = Sample.add();\nSystem.out.println(result);\n}\n```\n\nHere, add() does not accept parameters. It calculates the sum and returns c, whose value is 30. The calling method stores the returned value in result and prints it."
+    },
+    {
+      "question": "What is the purpose of the return statement?",
+      "answer": "Answer: The return statement ends the current method's execution and transfers control back to the calling method. It can also send a value back to the caller. For example:\n\n```java\npublic static int add() {\nint a = 10;\nint b = 20;\nint c = a + b;\nreturn c;\n}\n```\n\nThe statement return c; returns the value stored in c, which is 30. The calling method can collect this value in an integer variable."
+    },
+    {
+      "question": "Why must the return type match the returned value?",
+      "answer": "Answer: The return type specifies the type of value that a method returns. Therefore, the value returned must be compatible with the declared return type. For example:\n\n```java\npublic static int add() {\nint a = 10;\nint b = 20;\nreturn a + b;\n}\n```\n\nThe method returns an integer, so its return type is int. If the method returns a string, the corresponding return type should be String. A method that does not return a value uses void."
+    },
+    {
+      "question": "What is a method that accepts parameters and returns a value?",
+      "answer": "Answer: This type of method receives input through parameters, performs an operation, and returns the result to the calling method. Example:\n\n```java\npublic static int add(int a, int b) {\nint c = a + b;\nreturn c;\n}\npublic static void main(String[] args) {\nint x = 10;\nint y = 20;\nint result = Sample.add(x, y);\nSystem.out.println(result);\n}\n```\n\nHere, add() accepts two integer parameters and returns an integer. The values of x and y are passed to the method, and the returned result is stored in result. The output is 30."
+    },
+    {
+      "question": "What is the difference between printing a value and returning a value?",
+      "answer": "Answer: Printing a value displays it on the console. Returning a value transfers it to the calling method so that the caller can use it. For example, in the following method, the result is printed directly:\n\n```java\npublic static void add() {\nint a = 10;\nint b = 20;\nSystem.out.println(a + b);\n}\n```\n\nIn the following method, the result is returned:\n\n```java\npublic static int add() {\nint a = 10;\nint b = 20;\nreturn a + b;\n}\n```\n\nThe first method displays the result directly. The second method returns the result, allowing the calling method to store it, print it, or use it in another operation."
+    },
+    {
+      "question": "What is the difference between a calling method and a called method?",
+      "answer": "Answer: The calling method is the method that invokes another method. The called method is the method being invoked. For example:\n\n```java\npublic static void main(String[] args) {\nSample.add();\n}\n```\n\nHere, main() is the calling method because it calls add(). The add() method is the called method because main() invokes it. When add() completes, control returns to the calling method."
+    },
+    {
+      "question": "What is the difference between a method signature, method definition, and method call?",
+      "answer": "Answer: A method signature identifies the method declaration through its return type, name, and parameters as described in this lesson. The method definition includes the method declaration and its body, where the instructions are written. A method call invokes the method for execution. For example:\n\n```java\npublic static int add(int a, int b) {\nreturn a + b;\n}\n```\n\nThis is the method definition, including its signature and body.\n\n```java\nSample.add(10, 20);\n```\n\nThis is the method call. Here, 10 and 20 are the arguments passed to the method."
+    },
+    {
+      "question": "Write a Java program using all four types of methods.",
+      "answer": "Answer: The following program demonstrates the four types using addition.\n\n```java\npublic class Sample {\npublic static void add() {\nint a = 10;\nint b = 20;\nSystem.out.println(a + b);\n}\npublic static void sub(int a, int b) {\nSystem.out.println(a - b);\n}\npublic static int mul() {\nint a = 10;\nint b = 20;\nreturn a * b;\n}\npublic static int div(int a, int b) {\nreturn a / b;\n}\npublic static void main(String[] args) {\nSample.add();\nSample.sub(20, 10);\nint product = Sample.mul();\nSystem.out.println(product);\nint quotient = Sample.div(10, 2);\nSystem.out.println(quotient);\n}\n}\n```\n\nThe program demonstrates these four types: add() accepts no parameters and returns no value. sub() accepts parameters and returns no value. mul() accepts no parameters and returns a value. div() accepts parameters and returns a value. The outputs are 30, 10, 200, and 5, respectively."
+    },
+    {
+      "question": "What is the purpose of the ternary operator in the number-comparison method?",
+      "answer": "Answer: The ternary operator is used to choose between two expressions based on a condition. In the lesson, it is used to compare two integers and return a string indicating which number is greater. Example:\n\n```java\npublic static String compareIntegers(int a, int b) {\nreturn (a > b) ? \"A is greater\" : \"B is greater\";\n}\n```\n\nIf a is greater than b, the method returns \"A is greater\". Otherwise, it returns \"B is greater\". The returned string can be collected and printed by the calling method."
+    },
+    {
+      "question": "Write a Java program to compare two integers using a method and the ternary operator.",
+      "answer": "Answer: ```java\npublic class Sample {\npublic static String compareIntegers(int a, int b) {\nreturn (a > b) ? \"A is greater\" : \"B is greater\";\n}\npublic static void main(String[] args) {\nString result = Sample.compareIntegers(10, 20);\nSystem.out.println(result);\n}\n}\n```\n\nOutput: B is greater The method accepts two integers, compares them using the ternary operator, and returns a string. The main() method collects and prints the returned string."
+    },
+    {
+      "question": "How can a method perform a left-shift operation and return the result?",
+      "answer": "Answer: A method can accept the number and the number of positions to shift as parameters, perform the left-shift operation, and return the result. Example:\n\n```java\npublic static int leftShift(int number, int k) {\nint result = number << k;\nreturn result;\n}\n```\n\nThe method accepts two integer parameters: number and k. The expression number << k performs the left-shift operation, and the result is returned to the caller. For example, leftShift(2, 1) returns 4. A left shift by one position corresponds to multiplying the number by two."
+    },
+    {
+      "question": "How do you collect and print the value returned by a method?",
+      "answer": "Answer: When a method returns a value, the calling method can store it in a variable whose type matches the returned value. For example:\n\n```java\nint result = Sample.add();\nSystem.out.println(result);\n```\n\nHere, Sample.add() returns an integer. The returned value is stored in result, and the println() statement displays it. If the method returns a String, the receiving variable should be of type String. If the method returns an int, the receiving variable should be of type int."
+    },
+    {
+      "question": "Why is it important to understand method execution step by step?",
+      "answer": "Answer: Understanding method execution helps explain how control moves between methods, how parameters receive arguments, how local variables are used, and how return values reach the calling method. When a method is called, its activation record is created and control moves to its body. After the method completes, control returns to the caller. If the method returns a value, the caller can collect that value in a variable. Following this sequence makes it easier to understand programs containing multiple methods and to identify where calculations and outputs occur."
+    }
+  ]
+}
