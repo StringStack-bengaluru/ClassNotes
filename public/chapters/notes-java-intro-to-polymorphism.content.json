@@ -1,0 +1,95 @@
+{
+  "title": "Notes Java Intro To Polymorphism",
+  "itemsPerPage": 2,
+  "source": "notes-java-intro-to-polymorphism.docx",
+  "items": [
+    {
+      "question": "What is polymorphism in Java?",
+      "answer": "Answer: Polymorphism means one thing having many forms. The word poly means many, and morphism means forms. In Java, polymorphism allows the same method name to represent different behaviours in different classes. For example, the Dog, Cat, and Parrot classes can have the same ownerComesHome() method, but each class can implement it differently."
+    },
+    {
+      "question": "What are some real-world examples of polymorphism?",
+      "answer": "Answer: Water: Water exists in solid, liquid, and gaseous states. Carbon: Carbon can exist in different forms, such as coal, carbon dioxide, and diamond. God: Different people understand or represent God in different forms, such as an idol, a superpower, or forms associated with nature. Human beings: A person can be a son, brother, or husband depending on the relationship. These examples explain the basic meaning of polymorphism: one thing having many forms."
+    },
+    {
+      "question": "Why are aggregation and composition concepts available in Java?",
+      "answer": "Answer: Java is an object-oriented programming language that represents real-world relationships through objects and classes. Aggregation and composition help represent relationships between objects. Composition: Represents a strong dependency between objects. For example, a mobile phone has an operating system. Aggregation: Represents a relationship in which the related objects can exist independently. For example, a mobile phone and its charger can exist separately. These concepts help model different types of relationships between objects in Java."
+    },
+    {
+      "question": "What is the relationship between object-oriented programming and polymorphism?",
+      "answer": "Answer: Object-oriented programming represents a system using classes and objects. It includes concepts such as encapsulation, inheritance, polymorphism, and abstraction. Polymorphism allows one method name or common type to be associated with different behaviours. In Java, inheritance and method overriding are important concepts for understanding the polymorphism example using Animal, Dog, Cat, and Parrot."
+    },
+    {
+      "question": "What is tight coupling in Java?",
+      "answer": "Answer: In the example used to introduce tight coupling, a child object is created and a reference variable of the same child type refers to that object. For example:\n\n```java\nDog d = new Dog();\n```\n\nHere, the object is created from the Dog class, and the reference variable d is also declared with the type Dog. This combination is described as tight coupling in the example."
+    },
+    {
+      "question": "What is loose coupling, and why is it connected to polymorphism?",
+      "answer": "Answer: Loose coupling is the next concept to understand after tight coupling. The sequence is to understand tight coupling first, then loose coupling, and then how polymorphism is achieved in Java. The different reference type required to understand loose coupling is the next step after the child-object and child-reference example."
+    },
+    {
+      "question": "What is inheritance in Java?",
+      "answer": "Answer: Inheritance is the process by which one class acquires properties and behaviours from another class. In Java, properties generally refer to variables, while behaviours refer to methods. The class that provides the members is called the parent class, and the class that inherits them is called the child class. The extends keyword establishes the inheritance relationship."
+    },
+    {
+      "question": "What are the different types of inheritance?",
+      "answer": "Answer: The inheritance types covered are: Hierarchical inheritance: One parent class has multiple child classes. Multilevel inheritance: Inheritance forms a chain, such as Grandparent → Parent → Child → Grandchild. Hybrid inheritance: A combination of two or more inheritance structures. Multiple inheritance: A class inherits from more than one parent type. Java does not support multiple inheritance through classes. Multiple interfaces can be implemented by a class."
+    },
+    {
+      "question": "What type of inheritance is used in the Animal example?",
+      "answer": "Answer: The animal example demonstrates hierarchical inheritance because one parent class has multiple child classes. Animal is the parent class, and Dog, Cat, and Parrot are the child classes. All three child classes extend the same parent class and provide their own implementations of the ownerComesHome() method."
+    },
+    {
+      "question": "What is the difference between hierarchical, multilevel, and hybrid inheritance?",
+      "answer": "Answer: Hierarchical inheritance: One parent has multiple children, such as Animal having Dog, Cat, and Parrot. Multilevel inheritance: Classes form an inheritance chain, such as Grandparent → Parent → Child. Hybrid inheritance: Two or more inheritance structures are combined. These types describe how parent and child classes are arranged in a Java program."
+    },
+    {
+      "question": "Does Java support multiple inheritance through classes?",
+      "answer": "Answer: No. Java does not allow a class to extend multiple classes directly. However, a class can implement multiple interfaces. Interfaces provide another way for a class to follow multiple type contracts."
+    },
+    {
+      "question": "How do you create the Animal parent class?",
+      "answer": "Answer: The Animal class is created first. It contains the ownerComesHome() method, which displays a message when called. The method uses void because it does not return a value, and it has no parameters.\n\n```java\nclass Animal {\n```\n\nvoid ownerComesHome() {\n\n```java\nSystem.out.println(\"Animal welcomes the owner\");\n}\n}\n```\n\nThe child classes extend Animal and override this method to define their own behaviours."
+    },
+    {
+      "question": "How do you create the Dog class using inheritance?",
+      "answer": "Answer: The Dog class extends Animal using the extends keyword. It overrides the ownerComesHome() method to describe how the dog welcomes the owner.\n\n```java\nclass Dog extends Animal {\n@Override\n```\n\nvoid ownerComesHome() {\n\n```java\nSystem.out.println(“Dog welcomes by jumping, spinning, and                revolving around the owner\");\n}\n}\n```\n\nThe @Override annotation indicates that the method is intended to override an inherited method."
+    },
+    {
+      "question": "How do the Cat and Parrot classes override the same method?",
+      "answer": "Answer: Both classes extend Animal and provide their own implementations of ownerComesHome().\n\n```java\nclass Cat extends Animal {\n@Override\n```\n\nvoid ownerComesHome() {\n\n```java\nSystem.out.println(\"Cat welcomes by sleeping\");\n}\n}\nclass Parrot extends Animal {\n@Override\n```\n\nvoid ownerComesHome() {\n\n```java\nSystem.out.println(\"Parrot welcomes by screaming\");\n}\n}\n```\n\nThe method name is the same in all the child classes, but the implementation differs. The cat welcomes the owner by sleeping, while the parrot welcomes the owner by screaming."
+    },
+    {
+      "question": "Why do we need to create objects to use the child classes?",
+      "answer": "Answer: A class defines the structure and behaviour of objects. Since the ownerComesHome() methods in the example are non-static instance methods, we create objects to call them.\n\n```java\nDog d = new Dog();\nCat c = new Cat();\nParrot p = new Parrot();\n```\n\nThe new keyword creates each object, and the reference to that object is assigned to a variable. The variables d, c, and p are then used to call the respective methods."
+    },
+    {
+      "question": "What is the role of the main() method in Java?",
+      "answer": "Answer: The main() method is the entry point for a standard Java application. Program execution begins through this method, and statements written inside it can create objects and call methods. In the animal example, the objects of Dog, Cat, and Parrot are created inside main(). Their ownerComesHome() methods are then called to display the different messages."
+    },
+    {
+      "question": "What is the role of the JVM in object creation?",
+      "answer": "Answer: The JVM, or Java Virtual Machine, executes Java bytecode. When execution reaches a statement such as new Dog(), Java creates a Dog object and invokes the appropriate constructor. A reference to the object is then assigned to the reference variable. For example, in Dog d = new Dog();, the variable d receives the reference to the newly created object."
+    },
+    {
+      "question": "What is a reference variable in Java?",
+      "answer": "Answer: A reference variable holds a reference to an object and allows the program to access that object's accessible members. For example:\n\n```java\nDog d = new Dog();\n```\n\nHere, Dog is the declared type, new Dog() creates the object, and d is the reference variable. Similarly, c refers to the Cat object, and p refers to the Parrot object."
+    },
+    {
+      "question": "How do you call an instance method using a reference variable?",
+      "answer": "Answer: The dot (.) operator is used to access and call an instance method through a reference variable.\n\n```java\nd.ownerComesHome();\nc.ownerComesHome();\np.ownerComesHome();\n```\n\nEach statement calls the ownerComesHome() method through the corresponding reference. The implementation defined in the respective child class executes."
+    },
+    {
+      "question": "What is the difference between static and non-static methods?",
+      "answer": "Answer: A static method belongs to the class and can generally be accessed using the class name without creating an object, subject to access rules. A non-static method is associated with an object and is normally called through an object reference. In the animal example, the ownerComesHome() methods are non-static. Therefore, objects are created to call them."
+    },
+    {
+      "question": "What happens when the complete Animal program is executed?",
+      "answer": "Answer: The program creates three child objects and calls the same method on each object. Since each child class overrides the method, each call displays a different message.\n\n```java\nclass Animal {\n```\n\nvoid ownerComesHome() {\n\n```java\nSystem.out.println(\"Animal welcomes the owner\");\n}\n}\nclass Dog extends Animal {\n@Override\n```\n\nvoid ownerComesHome() {\n\n```java\nSystem.out.println(\"Dog welcomes by jumping, spinning, and revolving around the owner\");\n}\n}\nclass Cat extends Animal {\n@Override\n```\n\nvoid ownerComesHome() {\n\n```java\nSystem.out.println(\"Cat welcomes by sleeping\");\n}\n}\nclass Parrot extends Animal {\n@Override\n```\n\nvoid ownerComesHome() {\n\n```java\nSystem.out.println(\"Parrot welcomes by screaming\");\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nDog d = new Dog();\nCat c = new Cat();\nParrot p = new Parrot();\nd.ownerComesHome();\nc.ownerComesHome();\np.ownerComesHome();\n}\n}\n```\n\nOutput: Dog welcomes by jumping, spinning, and revolving around the owner Cat welcomes by sleeping Parrot welcomes by screaming"
+    },
+    {
+      "question": "How do you identify tight coupling from an object-creation statement?",
+      "answer": "Answer: Consider the following statements:\n\n```java\nDog d = new Dog();\nCat c = new Cat();\nParrot p = new Parrot();\n```\n\nThe objects are created from the child classes, and the reference variables are declared using the same child types. Dog object with Dog reference. Cat object with Cat reference. Parrot object with Parrot reference. This is the child-object and child-reference combination used to identify tight coupling in the example."
+    }
+  ]
+}
