@@ -330,6 +330,29 @@ with zipfile.ZipFile(path) as z:
             if re.search(r"\\.(java|class|txt|json|xml|html|css)$", line, re.I):
                 return False
             return True
+        # Method/assignment statements, optionally with a trailing // comment
+        # e.g. ref.methodFour(); // Compilation error
+        if re.match(
+            r"^(?:[A-Za-z_]\\w*(?:\\.[A-Za-z_]\\w*)*|\\)\\s*[;}])",
+            line,
+        ) and re.search(r"[;{}()=]|\\b(new|return|class|public|private|void|int)\\b", line):
+            if re.search(r"//", line) or line.rstrip().endswith((";", "{", "}", ");", "};")):
+                if not (
+                    line.endswith(".")
+                    and " " in line
+                    and re.search(
+                        r"\\b(is|are|was|were|can|because|therefore|however|therefore)\\b",
+                        line,
+                        re.I,
+                    )
+                    and not re.search(r"[(){};=]", line.split("//")[0])
+                ):
+                    code_prefix = line.split("//")[0].strip()
+                    if code_prefix and (
+                        re.search(r"[;{}()=]", code_prefix)
+                        or re.search(r"\\b(new|return|class)\\b", code_prefix)
+                    ):
+                        return True
         # } else {  |  else {  |  else if (...) {
         if re.match(r"^}\\s*else\\b", line) or re.match(r"^else(\\s+if\\b|\\s*\\{|\\s*$)", line):
             return True
