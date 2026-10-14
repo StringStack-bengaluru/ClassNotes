@@ -1,0 +1,99 @@
+{
+  "title": "Notes Java Creation Of Objects",
+  "itemsPerPage": 2,
+  "source": "notes-java-creation-of-objects.docx",
+  "items": [
+    {
+      "question": "What is Object-Oriented Programming (OOP)?",
+      "answer": "Answer: Object-Oriented Programming is a programming paradigm that represents real-world entities as objects. It helps developers solve real-world problems by identifying objects, their properties, and their behaviors."
+    },
+    {
+      "question": "What are the basic principles of object orientation?",
+      "answer": "Answer: The basic rules of object orientation are: The world can be viewed as a collection of objects. Objects have purposes within the problem being solved. Every object belongs to a particular category, type, or class. Objects interact with other objects. Every object has properties and exhibits behaviors. For example, in a university scenario, students, teachers, and classrooms can be represented as objects."
+    },
+    {
+      "question": "What is a class in Java, and why is it required to create an object?",
+      "answer": "Answer: A class is a blueprint that defines the properties and behaviors of objects. The JVM needs this definition to understand the structure of an object that the programmer wants to create. For example, a Student class defines the information a student has and the actions a student performs. Using this class, multiple Student objects can be created."
+    },
+    {
+      "question": "What is an object in Java?",
+      "answer": "Answer: An object is an instance of a class created in memory. It contains its own instance data and can perform the behaviors defined by its class. For example, two Student objects can have different names and marks even though both are created from the same Student class."
+    },
+    {
+      "question": "How can a Student class be created using properties and behaviors?",
+      "answer": "Answer: A Student class can define properties such as name, gender, age, and marks, along with behaviors such as eating, sleeping, and studying.\n\n```java\nclass Student {\nString name;\nString gender;\nint age;\nint marks;\n```\n\nvoid eat() {\n\n```java\nSystem.out.println(name + \" is eating\");\n}\n```\n\nvoid sleep() {\n\n```java\nSystem.out.println(name + \" is sleeping\");\n}\n```\n\nvoid study() {\n\n```java\nSystem.out.println(name + \" is studying\");\n}\n}\n```\n\nExplanation: name and gender are String fields. age and marks are int fields. eat(), sleep(), and study() are instance methods representing behaviors.\n\n```java\nSystem.out.println() displays a message when a method executes.\n```\n\nThe name field identifies the student performing the activity."
+    },
+    {
+      "question": "What is a method in Java, and what are its main components?",
+      "answer": "Answer: A method represents an action or functionality. A method declaration generally includes a name, parameter list, return type, and body. For example: void eat() {\n\n```java\nSystem.out.println(\"Student is eating\");\n}\n```\n\nHere, eat is the method name, () represents an empty parameter list, void indicates that the method returns no value, and the statements inside { } form the method body."
+    },
+    {
+      "question": "Why are Student behavior methods non-static?",
+      "answer": "Answer: Methods such as eat(), sleep(), and study() describe the behavior of individual Student objects. They are therefore defined as instance methods. For example, s1.eat() uses the data of the object referred to by s1. If another object has a different name, calling its eat() method can produce a different message. Static methods belong to the class rather than to an individual object. Instance methods are appropriate for the individual object behaviors demonstrated here."
+    },
+    {
+      "question": "What is the purpose of the new keyword in Java?",
+      "answer": "Answer: The new keyword is used to create an object.\n\n```java\nnew Student();\n```\n\nWhen this expression executes, Java creates a Student object and initializes its instance fields to their default values. The expression does not store the reference in a named variable. To access the object repeatedly, its reference can be stored in a reference variable."
+    },
+    {
+      "question": "What are the default values of instance variables in Java?",
+      "answer": "Answer: When an object is created, its instance variables receive default values if explicit initial values have not been provided. Data type Default value byte, short, int 0 long 0L float, double 0.0 char '\\u0000' boolean false Reference types such as String null Therefore, in the Student class, name and gender initially contain null, while age and marks initially contain 0. These defaults apply to instance fields. Local variables must be assigned values before they can be used."
+    },
+    {
+      "question": "How are Java objects stored in memory?",
+      "answer": "Answer: Java objects are generally allocated in heap memory managed by the JVM.\n\n```java\nStudent s1 = new Student();\n```\n\nIn this statement, new Student() creates an object, and s1 stores a reference to it. Memory addresses such as 1000 or 2000 in diagrams are illustrative examples; the actual memory management is handled by the JVM."
+    },
+    {
+      "question": "How can multiple objects be created from the same class?",
+      "answer": "Answer: A single class can be used to create multiple independent objects.\n\n```java\nStudent s1 = new Student();\nStudent s2 = new Student();\n```\n\nHere, s1 and s2 refer to separate Student objects. Each object maintains its own instance field values."
+    },
+    {
+      "question": "What is a reference variable, and how does it help access an object?",
+      "answer": "Answer: A reference variable stores a reference to an object, allowing the program to access its fields and methods.\n\n```java\nStudent s1 = new Student();\nStudent s2 = new Student();\n```\n\nBoth variables have the type Student, but each refers to a different object. If an object must be accessed repeatedly, storing its reference in a variable makes it possible to perform multiple operations on that object."
+    },
+    {
+      "question": "How can an object's properties and behaviors be accessed using the dot operator?",
+      "answer": "Answer: The dot operator (.) is used to access an object's accessible fields and methods through a reference variable.\n\n```java\nStudent s1 = new Student();\ns1.name = \"Omkar\";\ns1.gender = \"Male\";\ns1.age = 22;\ns1.marks = 99;\ns1.eat();\ns1.sleep();\ns1.study();\n```\n\nThe assignments initialize the fields with the specified values. The method calls execute the corresponding behaviors on the object referred to by s1."
+    },
+    {
+      "question": "How can two Student objects be assigned different values and execute the same methods?",
+      "answer": "Answer: Each object can be initialized independently, and the same methods can be invoked on both objects.\n\n```java\nStudent s1 = new Student();\nStudent s2 = new Student();\ns1.name = \"Omkar\";\ns1.gender = \"Male\";\ns1.age = 22;\ns1.marks = 99;\ns2.name = \"Prahlad\";\ns2.gender = \"Male\";\ns2.age = 21;\ns2.marks = 100;\ns1.eat();\ns1.sleep();\ns1.study();\ns2.eat();\ns2.sleep();\ns2.study();\n```\n\nThe methods operate on the object through which they are called. Therefore, the first student produces messages containing Omkar, while the second produces messages containing Prahlad."
+    },
+    {
+      "question": "What is the purpose of the main() method in Java?",
+      "answer": "Answer: The main() method is the standard entry point for launching a Java application.\n\n```java\npublic static void main(String[] args) {\n// Program logic\n}\npublic allows the JVM to access the method.\nstatic allows the method to be invoked without creating an instance of its class.\n```\n\nvoid indicates that the method returns no value. main is the recognized entry-point method name. String[] args receives command-line arguments. The statements that perform the application's main task, such as creating objects and invoking methods, are placed inside main()."
+    },
+    {
+      "question": "Why should the Student class and the class containing main() be separated?",
+      "answer": "Answer: The Student class defines the structure and behaviors of Student objects, whereas the application class controls program execution. Separating these responsibilities improves readability and keeps the code organized. A Student class does not need a main() method to describe what a student has and does. For example, the following design uses two separate classes. Student.java:\n\n```java\nclass Student {\nString name;\nString gender;\nint age;\nint marks;\n```\n\nvoid eat() {\n\n```java\nSystem.out.println(name + \" is eating\");\n}\n```\n\nvoid sleep() {\n\n```java\nSystem.out.println(name + \" is sleeping\");\n}\n```\n\nvoid study() {\n\n```java\nSystem.out.println(name + \" is studying\");\n}\n}\n```\n\nLaunch.java:\n\n```java\npublic class Launch {\npublic static void main(String[] args) {\nStudent s1 = new Student();\nStudent s2 = new Student();\ns1.name = \"Omkar\";\ns1.gender = \"Male\";\ns1.age = 22;\ns1.marks = 99;\ns2.name = \"Prahlad\";\ns2.gender = \"Male\";\ns2.age = 21;\ns2.marks = 100;\ns1.eat();\ns1.sleep();\ns1.study();\ns2.eat();\ns2.sleep();\ns2.study();\n}\n}\n```\n\nRun the Launch class as a Java application because it contains the main() method. The Student class supplies the blueprint for the objects."
+    },
+    {
+      "question": "How can a real-world Dog entity be represented as a Java class?",
+      "answer": "Answer: A Dog class can be created by identifying what a dog has and what it does. Properties: Name Breed Cost Behaviors: Eat Sleep Bark Bite In program it can be written as\n\n```java\nclass Dog {\nString name;\nString breed;\nint cost;\n```\n\nvoid eat() {\n\n```java\nSystem.out.println(name + \" is eating\");\n}\n```\n\nvoid sleep() {\n\n```java\nSystem.out.println(name + \" is sleeping\");\n}\n```\n\nvoid bark() {\n\n```java\nSystem.out.println(name + \" is barking\");\n}\n```\n\nvoid bite() {\n\n```java\nSystem.out.println(name + \" is biting\");\n}\n}\n```\n\nHere, name and breed use the String type, while cost uses the int type."
+    },
+    {
+      "question": "How can a Dog object be created, initialized, and used?",
+      "answer": "Answer: A Dog object can be created using new Dog(), assigned to a reference variable, initialized through its fields, and used to invoke its methods.\n\n```java\nclass DogApp {\npublic static void main(String[] args) {\nDog d1 = new Dog();\nd1.name = \"Rucky\";\nd1.breed = \"Husky\";\nd1.cost = 100000;\nd1.eat();\nd1.sleep();\nd1.bark();\nd1.bite();\n}\n}\n```\n\nThe reference variable d1 provides access to the Dog object's fields and behaviors."
+    },
+    {
+      "question": "What is a class diagram, and how are properties and methods represented in it?",
+      "answer": "Answer: A class diagram is a visual representation of a class used in object-oriented modeling and design. A basic class diagram contains three compartments: Class name. Attributes or properties. Behaviors or methods. For the Dog class, the attributes can be represented as: name : String breed : String cost : int The methods can be represented as: eat() : void sleep() : void bark() : void bite() : void The notation eat() : void represents a method named eat that returns no value. In Java code, it is written as void eat()."
+    },
+    {
+      "question": "What happens when an object's property values are changed after creation?",
+      "answer": "Answer: The object stores the latest assigned values in its fields. When an instance method accesses those fields, it uses their current values.\n\n```java\nDog d1 = new Dog();\nd1.name = \"Rucky\";\nd1.breed = \"Husky\";\nd1.cost = 100000;\nd1.name = \"Lobo\";\nd1.breed = \"Bulldog\";\nd1.cost = 50000;\nd1.eat();\nd1.bark();\n```\n\nOutput: Lobo is eating Lobo is barking The new assignments replace the previous values. Therefore, the methods print Lobo, not Rucky."
+    },
+    {
+      "question": "What is an anonymous object in Java?",
+      "answer": "Answer: An anonymous object is an object created without storing its reference in a named variable. Example:\n\n```java\nnew Dog().bark();\n```\n\nHere, new Dog() creates a Dog object, and .bark() invokes its method immediately. No named reference variable stores the object's reference. Anonymous objects are useful when an object is needed for a single operation. If the same object must be accessed repeatedly, a reference variable is more appropriate."
+    },
+    {
+      "question": "What is the difference between a named reference and an anonymous object?",
+      "answer": "Answer: A named reference allows repeated access to an object, whereas an anonymous object is used directly without storing its reference in a named variable. Named reference:\n\n```java\nDog d1 = new Dog();\nd1.eat();\nd1.sleep();\nd1.bark();\nd1.bite();\n```\n\nAnonymous object:\n\n```java\nnew Dog().bark();\n```\n\nIn the first example, the same Dog object can be accessed through d1 for multiple operations. In the second, the newly created object is used directly to invoke bark()."
+    },
+    {
+      "question": "How can a real-world problem be converted into an object-oriented Java program?",
+      "answer": "Answer: The problem can be converted into a Java program by following these steps: Identify the real-world entities in the problem. Identify what each entity has, such as name, age, or cost. Identify what each entity does, such as eating, sleeping, or barking. Define a class containing the corresponding fields and methods. Create objects using the new keyword. Store object references in variables when repeated access is required. Assign field values and invoke methods through the reference variables. This approach applies the concepts of classes, objects, properties, behaviors, and references to represent real-world entities in Java."
+    }
+  ]
+}
