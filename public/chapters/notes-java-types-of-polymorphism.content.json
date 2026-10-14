@@ -1,0 +1,119 @@
+{
+  "title": "Notes Java Types Of Polymorphism",
+  "itemsPerPage": 2,
+  "source": "notes-java-types-of-polymorphism.docx",
+  "items": [
+    {
+      "question": "What is tight coupling in Java?",
+      "answer": "Answer: Tight coupling occurs when a child object is created and accessed using a child-type reference. Example:\n\n```java\nChild c = new Child();\n```\n\nHere, both the object type and the reference type are Child. The program directly depends on the specific child class."
+    },
+    {
+      "question": "What is loose coupling in Java?",
+      "answer": "Answer: Loose coupling can be achieved by creating a child object and assigning its reference to a parent-type reference. Example:\n\n```java\nParent ref = new Child();\n```\n\nHere, the object is of type Child, but the reference is of type Parent. This allows the program to work with different child objects through the same parent-type reference."
+    },
+    {
+      "question": "What is the difference between tight coupling and loose coupling?",
+      "answer": "Answer: Tight coupling uses a child object with a child-type reference, whereas loose coupling uses a child object with a parent-type reference. Child c = new Child(); // Tight coupling Parent ref = new Child(); // Loose coupling Loose coupling reduces dependency on a specific child implementation and supports polymorphic behavior."
+    },
+    {
+      "question": "What is inheritance in Java, and how is it implemented?",
+      "answer": "Answer: Inheritance allows a child class to acquire accessible members from a parent class. It is implemented using the extends keyword. Example:\n\n```java\nclass Parent {\n```\n\nvoid methodOne() {\n\n```java\nSystem.out.println(\"Hi\");\n}\n```\n\nvoid methodTwo() {\n\n```java\nSystem.out.println(\"Hello\");\n}\n```\n\nvoid methodThree() {\n\n```java\nSystem.out.println(\"How are you?\");\n}\n}\nclass Child extends Parent {\n}\n```\n\nThe Child class inherits the accessible methods of Parent. It can use these methods without defining them again."
+    },
+    {
+      "question": "What is method overriding in Java?",
+      "answer": "Answer: Method overriding occurs when a child class provides its own implementation of an inherited instance method using the same method signature and a compatible return type. Example:\n\n```java\nclass Parent {\n```\n\nvoid methodOne() {\n\n```java\nSystem.out.println(\"Hi\");\n}\n}\nclass Child extends Parent {\n@Override\n```\n\nvoid methodOne() {\n\n```java\nSystem.out.println(\"Hi, how are you?\");\n}\n}\n```\n\nThe child class changes the implementation of methodOne() while retaining the method's signature."
+    },
+    {
+      "question": "What is the difference between inherited, overridden, and specialized methods?",
+      "answer": "Answer: Inherited methods are accessible methods obtained from the parent class without a new implementation in the child class. Overridden methods are inherited methods for which the child class provides a new implementation. Specialized methods are methods defined exclusively in the child class and not inherited from the parent. For example, if Parent defines methodOne(), methodTwo(), and methodThree(), and Child overrides methodOne() and adds methodFour(), the child has access to all four methods. methodOne() is overridden, methodTwo() and methodThree() remain inherited, and methodFour() is specialized."
+    },
+    {
+      "question": "How can a child object be created in Java?",
+      "answer": "Answer: A child object can be created using the new keyword.\n\n```java\nChild c = new Child();\n```\n\nThe expression new Child() creates a Child object. The reference variable c stores a reference to that object. If no constructor is explicitly declared in the class and the class is eligible for a default constructor, the Java compiler provides a default constructor."
+    },
+    {
+      "question": "Why can a parent-type reference access inherited and overridden methods but not directly access specialized methods?",
+      "answer": "Answer: A parent-type reference can access the members declared in the parent class that are available through that reference. It can also invoke overridden instance methods, in which case Java executes the implementation belonging to the actual object. However, a specialized method exists only in the child class and is not declared in the parent class. Therefore, the compiler does not allow the specialized method to be called directly through a parent-type reference. Example:\n\n```java\nclass Parent {\n```\n\nvoid methodOne() {\n\n```java\nSystem.out.println(\"Parent method\");\n}\n}\nclass Child extends Parent {\n@Override\n```\n\nvoid methodOne() {\n\n```java\nSystem.out.println(\"Child method\");\n}\n```\n\nvoid methodFour() {\n\n```java\nSystem.out.println(\"Specialized method\");\n}\n}\nclass Launch {\npublic static void main(String[] args) {\nParent ref = new Child();\nref.methodOne();\n```\n\nref.methodFour(); // Compilation error\n\n```java\n}\n}\n```\n\nThe call to methodOne() is valid because the method is declared in Parent. The call to methodFour() is invalid because that method is declared only in Child."
+    },
+    {
+      "question": "What is downcasting in Java?",
+      "answer": "Answer: Downcasting is the process of converting a reference of a parent type into a reference of a child type. Example:\n\n```java\nParent ref = new Child();\nChild c = (Child) ref;\nc.methodFour();\n```\n\nHere, ref refers to a Child object. The cast (Child) ref converts the reference to the child type, allowing access to child-specific methods. Downcasting is valid only when the object referred to is compatible with the target child type. An incompatible cast causes a ClassCastException at runtime."
+    },
+    {
+      "question": "What is the syntax for downcasting in Java?",
+      "answer": "Answer: The syntax is:\n\n```java\nChild c = (Child) ref;\n```\n\nThe expression (Child) specifies the target reference type, and ref is the reference being cast. The parentheses around Child are required for the cast syntax. The cast does not create a new object; it changes how the existing object's reference is treated by the compiler."
+    },
+    {
+      "question": "Why is it called downcasting?",
+      "answer": "Answer: It is called downcasting because the reference type is converted from a parent type to a more specific child type in the inheritance hierarchy. For example:\n\n```java\nParent ref = new Child();\nChild c = (Child) ref;\n```\n\nThe reference initially has the type Parent. It is then cast to Child, which is lower in the inheritance hierarchy."
+    },
+    {
+      "question": "How can downcasting be demonstrated using parent and child classes?",
+      "answer": "Answer: The following program demonstrates inheritance, method overriding, specialized methods, and downcasting.\n\n```java\nclass Parent {\n```\n\nvoid methodOne() {\n\n```java\nSystem.out.println(\"Hi\");\n}\n```\n\nvoid methodTwo() {\n\n```java\nSystem.out.println(\"Hello\");\n}\n```\n\nvoid methodThree() {\n\n```java\nSystem.out.println(\"How are you?\");\n}\n}\nclass Child extends Parent {\n@Override\n```\n\nvoid methodOne() {\n\n```java\nSystem.out.println(\"Hi, how are you?\");\n}\n```\n\nvoid methodFour() {\n\n```java\nSystem.out.println(\"Hello students\");\n}\n}\npublic class LaunchTwo {\npublic static void main(String[] args) {\nParent ref = new Child();\nref.methodOne();\nref.methodTwo();\nref.methodThree();\nChild c = (Child) ref;\nc.methodFour();\n}\n}\n```\n\nOutput:"
+    },
+    {
+      "question": "Hi, how are you?",
+      "answer": "Answer: Hello"
+    },
+    {
+      "question": "How are you?",
+      "answer": "Answer: Hello students Explanation: Parent ref = new Child(); creates a Child object and assigns its reference to a Parent variable. ref.methodOne() executes the overridden implementation in Child. ref.methodTwo() and ref.methodThree() execute the inherited implementations. Child c = (Child) ref; downcasts the reference. c.methodFour() accesses the specialized method defined in Child."
+    },
+    {
+      "question": "What is upcasting in Java?",
+      "answer": "Answer: Upcasting is the process of treating a child object through a parent-type reference. Example:\n\n```java\nParent ref = new Child();\n```\n\nA Child object is created, but the reference type is Parent. The assignment is valid because a Child object is also a Parent through inheritance. Upcasting is generally performed implicitly, so an explicit cast is not required."
+    },
+    {
+      "question": "Why is upcasting associated with loose coupling?",
+      "answer": "Answer: Upcasting allows a parent-type reference to refer to objects of different child classes. This reduces dependency on a particular child implementation. For example:\n\n```java\nParent ref = new Child();\n```\n\nThe variable ref is declared using the parent type. Another child class that extends Parent can also be assigned to a compatible parent reference. This makes it possible to write code that works with different implementations through a common parent type."
+    },
+    {
+      "question": "Why is upcasting called upcasting?",
+      "answer": "Answer: It is called upcasting because a child object is accessed through a reference of its parent type, which is higher in the inheritance hierarchy.\n\n```java\nParent ref = new Child();\n```\n\nThe actual object is a Child object, but the reference type is Parent. The reference is therefore treated at a higher level of the hierarchy."
+    },
+    {
+      "question": "What is the difference between upcasting and downcasting?",
+      "answer": "Answer: Upcasting Downcasting Uses a parent-type reference for a child object. Converts a parent-type reference to a child-type reference. Usually happens implicitly. Requires an explicit cast. Supports access through the parent type. Allows access to child-specific members after a valid cast.\n\n```java\nExample: Parent ref = new Child();\nExample: Child c = (Child) ref;\n```\n\nUpcasting is commonly used to achieve loose coupling. Downcasting is useful when child-specific functionality is required and the referenced object is compatible with that child type."
+    },
+    {
+      "question": "Can upcasting be written in one statement instead of multiple statements?",
+      "answer": "Answer: Yes. Upcasting can be performed directly in one statement. Instead of writing:\n\n```java\nChild c = new Child();\nParent ref = c;\n```\n\nYou can write:\n\n```java\nParent ref = new Child();\n```\n\nBoth approaches make ref refer to a Child object through the Parent type. The single-statement version is concise and commonly used."
+    },
+    {
+      "question": "What happens when an object reference is passed to a method?",
+      "answer": "Answer: When an object reference is passed to a method, Java passes the value of that reference. The receiving parameter can then refer to the same object. Example:\n\n```java\nclass Parent {\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Parent method\");\n}\n}\nclass Child extends Parent {\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Child method\");\n}\n}\npublic class Launch {\nstatic void show(Parent ref) {\nref.display();\n}\npublic static void main(String[] args) {\nChild c = new Child();\nshow(c);\n}\n}\n```\n\nOutput: Child method The parameter ref has the type Parent, but it refers to a Child object. Therefore, the overridden method in Child executes."
+    },
+    {
+      "question": "How can loose coupling reduce code duplication?",
+      "answer": "Answer: When a method accepts a parent-type parameter, it can work with multiple child objects without requiring a separate method for every child class. For example:\n\n```java\nclass Parent {\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Parent\");\n}\n}\nclass Dog extends Parent {\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Dog\");\n}\n}\nclass Cat extends Parent {\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Cat\");\n}\n}\nclass Parrot extends Parent {\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Parrot\");\n}\n}\npublic class Launch {\nstatic void show(Parent ref) {\nref.display();\n}\npublic static void main(String[] args) {\nshow(new Dog());\nshow(new Cat());\nshow(new Parrot());\n}\n}\n```\n\nOutput: Dog Cat Parrot The same show() method handles all three object types. Without this approach, separate methods could be written for Dog, Cat, and Parrot."
+    },
+    {
+      "question": "What is polymorphism in Java?",
+      "answer": "Answer: Polymorphism means one thing having many forms. In Java, it allows the same method call or reference type to work with different implementations. For example, a parent-type reference can refer to Dog, Cat, and Parrot objects. If each child overrides the same method, calling that method produces behavior specific to the actual object. Loose coupling using a parent reference is one way to achieve runtime polymorphism."
+    },
+    {
+      "question": "How does runtime polymorphism work with a parent reference?",
+      "answer": "Answer: Runtime polymorphism occurs when an overridden instance method is selected according to the actual object's type at runtime. Example:\n\n```java\nParent ref = new Child();\nref.methodOne();\n```\n\nAlthough the reference type is Parent, the object is of type Child. If Child overrides methodOne(), the child's implementation executes. The reference type determines which members can be accessed at compile time, while the actual object's type determines which overridden instance method implementation executes at runtime."
+    },
+    {
+      "question": "What are the two types of polymorphism in Java?",
+      "answer": "Answer: The two types are: Compile-time polymorphism: Achieved through method overloading, where the compiler determines which overloaded method to call based on the method arguments. Runtime polymorphism: Achieved through method overriding, where the implementation to execute is determined by the actual object's type at runtime. These concepts explain how Java can support different behaviors through the same method name or a common parent-type reference."
+    },
+    {
+      "question": "What is compile-time polymorphism in Java?",
+      "answer": "Answer: Compile-time polymorphism occurs when the compiler determines which method implementation to call during compilation. Method overloading is a common example. The compiler selects the appropriate overloaded method based on the number, types, and order of the supplied arguments."
+    },
+    {
+      "question": "What is method overloading in Java?",
+      "answer": "Answer: Method overloading means defining multiple methods with the same name in the same class but with different parameter lists. The parameter lists can differ in: Number of parameters. Types of parameters. Order of parameter types. Example:\n\n```java\nclass Calculator {\nint add(int a, int b) {\nreturn a + b;\n}\nint add(int a, int b, int c) {\nreturn a + b + c;\n}\ndouble add(double a, double b) {\nreturn a + b;\n}\n}\n```\n\nThe three methods share the name add, but their parameter lists differ. The compiler selects the appropriate method based on the arguments supplied. Changing only the return type does not constitute method overloading."
+    },
+    {
+      "question": "What is the difference between method overloading and method overriding?",
+      "answer": "Answer: Method overloading defines multiple methods with the same name but different parameter lists. Method overriding provides a new implementation of an inherited instance method in a child class. Method overloading Method overriding Usually occurs within the same class. Requires inheritance between classes. Method names are the same, but parameter lists differ. The method signature must match, with a compatible return type. Associated with compile-time polymorphism. Associated with runtime polymorphism. The compiler selects an overload based on the arguments. The actual object's type determines the overridden implementation."
+    },
+    {
+      "question": "How should downcasting and polymorphism be explained in a technical interview?",
+      "answer": "Answer: Start by defining the concept, draw a parent-child inheritance diagram, and explain the reference type and actual object type. For downcasting, demonstrate how a parent-type reference that refers to a child object can be explicitly converted to a child-type reference to access a specialized method. For polymorphism, explain how a single parent-type reference or method can work with different child objects and invoke their respective overridden methods. Support the explanation with a small Java program and describe its output clearly."
+    }
+  ]
+}
