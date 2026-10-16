@@ -1,0 +1,111 @@
+{
+  "title": "Notes Java Types Of Polymorphism 2",
+  "itemsPerPage": 2,
+  "source": "notes-java-types-of-polymorphism-2.docx",
+  "items": [
+    {
+      "question": "What is polymorphism in Java?",
+      "answer": "Answer: Polymorphism means one name having many forms. In Java, the same method name can behave differently depending on how it is defined or which implementation is executed. Java polymorphism is commonly divided into two types: Compile-time polymorphism Runtime polymorphism"
+    },
+    {
+      "question": "What are the two types of polymorphism in Java?",
+      "answer": "Answer: Compile-time polymorphism: Achieved through method overloading. Runtime polymorphism: Achieved through method overriding. Compile-time polymorphism Runtime polymorphism Achieved through method overloading Achieved through method overriding The compiler selects the overloaded method The JVM determines the overridden implementation at runtime Also called static polymorphism Also called dynamic polymorphism"
+    },
+    {
+      "question": "What is method overloading?",
+      "answer": "Answer: Method overloading means defining multiple methods with the same name but different parameter lists within the same class. The methods can differ in: Number of parameters Types of parameters Order of parameter types It allows programmers to use one meaningful method name for related operations instead of remembering several different names."
+    },
+    {
+      "question": "Why is method overloading useful?",
+      "answer": "Answer: Imagine a Calculator class that performs addition. We may need to add two integers, an integer and a float, or three integers. Without overloading, we might create methods such as addOne(), addTwo() and addThree(). Remembering many method names becomes difficult as the application grows. With method overloading, we can use the same method name, add(), for all these operations. The parameter lists distinguish the methods."
+    },
+    {
+      "question": "Write a Java program to demonstrate method overloading.",
+      "answer": "Answer: ```java\nclass Calculator {\n```\n\nvoid add(int a, int b) {\n\n```java\nSystem.out.println(a + b);\n}\n```\n\nvoid add(int a, float b) {\n\n```java\nSystem.out.println(a + b);\n}\n```\n\nvoid add(int a, int b, int c) {\n\n```java\nSystem.out.println(a + b + c);\n}\n}\npublic class LaunchThree {\npublic static void main(String[] args) {\nCalculator c = new Calculator();\nc.add(10, 20);\nc.add(10, 20.5f);\nc.add(10, 20, 30);\n}\n}\n```\n\nOutput: 30 30.5 60 All three methods are named add(), but their parameter lists are different. Java selects the appropriate method for each call."
+    },
+    {
+      "question": "How does the Java compiler select an overloaded method?",
+      "answer": "Answer: During method overloading, the compiler examines the method call to find a suitable method. Method name: Find methods with the called name. Number of parameters: Check how many arguments are passed. Parameter types: Match the argument types with the declared parameter types. Implicit type conversion: Consider permitted implicit conversions when an exact match is unavailable. For example, when c.add(10, 20) is called, Java selects add(int a, int b) because the arguments match its parameter list."
+    },
+    {
+      "question": "Why is method overloading called compile-time polymorphism?",
+      "answer": "Answer: Method overloading is called compile-time polymorphism because the compiler determines which overloaded method is suitable during compilation, based on the method call and its arguments. For example:\n\n```java\nc.add(10, 20);\n```\n\nThe compiler identifies the matching add(int, int) method. It is called polymorphism because the same method name, add, is used with different parameter lists or forms."
+    },
+    {
+      "question": "Why is method overloading called early binding?",
+      "answer": "Answer: Binding means connecting a method call to the method that should execute. Method overloading is called early binding because the appropriate overloaded method is selected during compilation, before the program executes. The compiler determines the overloaded method first, so the binding happens early."
+    },
+    {
+      "question": "Why is method overloading called static binding?",
+      "answer": "Answer: Method overloading is also known as static binding because the compiler determines the suitable method at compile time. Here, “static” means the method selection is determined before runtime, rather than being selected according to the actual object's overridden implementation during execution."
+    },
+    {
+      "question": "What are the different names for method overloading?",
+      "answer": "Answer: Method overloading is also called: Compile-time polymorphism Early binding Static binding Static polymorphism These names emphasize that the overloaded method is selected during compilation."
+    },
+    {
+      "question": "What is the difference between the Java compiler and the JVM?",
+      "answer": "Answer: The Java compiler and the JVM perform different responsibilities. Java compiler (javac): Compiles Java source code. Converts source code into bytecode. Checks method calls and selects suitable overloaded methods during compilation. Java Virtual Machine (JVM): Executes Java bytecode. Uses the underlying execution environment to run the program. Determines the appropriate overridden instance-method implementation at runtime."
+    },
+    {
+      "question": "How does a Java program execute?",
+      "answer": "Answer: The basic execution process as follows: Java Source Code (.java) | v Java Compiler | v Bytecode (.class) | v JVM | v Machine-level execution | v Output The compiler converts source code into bytecode stored in a .class file. The JVM executes the bytecode, using the facilities of the underlying platform."
+    },
+    {
+      "question": "What is method overriding?",
+      "answer": "Answer: Method overriding occurs when a child class provides its own implementation of an inherited instance method from its parent class, using the same method signature. It allows a child class to provide behavior appropriate to that child while retaining the method name defined by the parent."
+    },
+    {
+      "question": "What is runtime polymorphism?",
+      "answer": "Answer: Runtime polymorphism occurs when a method call is resolved to the appropriate overridden instance method during program execution. For example, a parent reference can refer to a child object. If the child overrides an instance method, calling that method through the parent reference executes the child's implementation.\n\n```java\nclass Parent {\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Parent display\");\n}\n}\nclass Child extends Parent {\n@Override\n```\n\nvoid display() {\n\n```java\nSystem.out.println(\"Child display\");\n}\n}\npublic class Demo {\npublic static void main(String[] args) {\nParent ref = new Child();\nref.display();\n}\n}\n```\n\nOutput: Child display The reference is of type Parent, but the actual object is a Child. Because display() is overridden, the child's implementation executes."
+    },
+    {
+      "question": "Why is method overriding called runtime polymorphism?",
+      "answer": "Answer: Method overriding is called runtime polymorphism because the JVM determines which overridden instance-method implementation executes at runtime, based on the actual object. For example, if a parent reference points to a child object, the call executes the child's overridden method. Overloading: compiler selects the method during compilation. Overriding: JVM dispatches the call to the appropriate implementation at runtime."
+    },
+    {
+      "question": "What is late binding?",
+      "answer": "Answer: Late binding means the method implementation is determined at runtime rather than being fully selected during compilation. For overridden instance methods, the JVM uses the actual object's class to determine which implementation should execute."
+    },
+    {
+      "question": "What are the different names for method overriding?",
+      "answer": "Answer: Method overriding is associated with: Runtime polymorphism Dynamic polymorphism Late binding Dynamic binding These terms describe runtime method selection for overridden instance methods."
+    },
+    {
+      "question": "What is the difference between early binding and late binding?",
+      "answer": "Answer: Early binding Late binding Method selection occurs at compile time Overridden implementation is determined at runtime Also called static binding Also called dynamic binding Also called compile-time polymorphism Also called runtime polymorphism"
+    },
+    {
+      "question": "What is the difference between method overloading and method overriding?",
+      "answer": "Answer: Method overloading Method overriding Same method name with different parameter lists Child class redefines an inherited instance method with the same signature Commonly occurs within the same class Requires inheritance Associated with compile-time polymorphism Associated with runtime polymorphism Compiler selects the suitable overload JVM dispatches to the appropriate overridden implementation Also called static binding Also called dynamic binding"
+    },
+    {
+      "question": "What is method hiding in Java?",
+      "answer": "Answer: Method hiding occurs when a child class declares a static method with the same signature as an inherited static method in its parent class. The child class's static method hides the parent's static method when accessed through the child class. Unlike instance-method overriding, static methods are not overridden through runtime polymorphism."
+    },
+    {
+      "question": "How can method hiding be demonstrated in Java?",
+      "answer": "Answer: ```java\nclass ParentOne {\nstatic void display() {\nSystem.out.println(\"Parent display\");\n}\n}\nclass ChildOne extends ParentOne {\nstatic void display() {\nSystem.out.println(\"Child display\");\n}\n}\npublic class Demo {\npublic static void main(String[] args) {\nChildOne.display();\nParentOne.display();\n}\n}\n```\n\nOutput: Child display Parent display Both classes declare a static display() method. Calling the method using each class name accesses the corresponding declaration."
+    },
+    {
+      "question": "Why is method hiding different from method overriding?",
+      "answer": "Answer: Method hiding applies to static methods, whereas method overriding applies to instance methods. Overriding: The actual object's class determines which overridden instance method executes. Hiding: The method accessed is determined by the class used to qualify the static method call. A static method cannot be overridden in the runtime-polymorphism sense."
+    },
+    {
+      "question": "What happens when a parent reference is used to access a hidden static method?",
+      "answer": "Answer: Consider this example:\n\n```java\nclass ParentOne {\nstatic void display() {\nSystem.out.println(\"Hello from Parent\");\n}\n}\nclass ChildOne extends ParentOne {\nstatic void display() {\nSystem.out.println(\"Hello from Child\");\n}\n}\npublic class Demo {\npublic static void main(String[] args) {\nParentOne ref = new ChildOne();\nref.display();\n}\n}\n```\n\nOutput: Hello from Parent Although ref refers to a ChildOne object, the reference variable is declared as ParentOne. Static method access is resolved using the reference's declared type in this example. The compiler may issue a warning because static methods should normally be accessed using the class name, such as ParentOne.display()."
+    },
+    {
+      "question": "What is the relationship between inheritance, loose coupling and upcasting in this example?",
+      "answer": "Answer: The loose coupling using a child object and a parent reference:\n\n```java\nParentOne ref = new ChildOne();\nnew ChildOne() creates a child object.\n```\n\nParentOne is the reference type. Assigning the child object to a parent reference is upcasting. However, the reference type limits which members can be accessed at compile time. Also, static methods should generally be accessed through the class name rather than an object reference."
+    },
+    {
+      "question": "Why are warnings important in Java?",
+      "answer": "Answer: A warning does not always prevent a program from compiling or executing, but it can indicate code that should be reviewed. In real applications, developers should investigate warnings rather than automatically ignoring them, because warnings can point to code-quality or reliability concerns."
+    },
+    {
+      "question": "How is polymorphism useful in real-world applications?",
+      "answer": "Answer: An online shopping payment system as a real-world use case. When a customer checks out, the customer may choose among several payment options, such as: UPI Cash Net banking Credit card Debit card Polymorphism can help design a common payment interface or parent type with different implementations for each payment method. This lets the application work with different payment options through a common contract."
+    }
+  ]
+}
