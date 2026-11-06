@@ -1,0 +1,127 @@
+{
+  "title": "Notes Polymorphism In Real World Project",
+  "itemsPerPage": 2,
+  "source": "notes-polymorphism-in-real-world-project.docx",
+  "items": [
+    {
+      "question": "What is polymorphism in Java?",
+      "answer": "Answer: Polymorphism means the ability to represent something in multiple forms. In Java, different objects can provide different implementations of the same method. For example, a payment operation can be performed through UPI, a debit card, a wallet, or net banking."
+    },
+    {
+      "question": "Why is polymorphism important in Java applications?",
+      "answer": "Answer: Polymorphism helps make applications flexible and easier to extend. For example, a payment application can support a new payment option without requiring changes to the existing checkout implementation."
+    },
+    {
+      "question": "Which concept is an example of compile-time polymorphism?",
+      "answer": "Answer: Method overloading is an example of compile-time polymorphism. It allows multiple methods to have the same name with different parameter lists."
+    },
+    {
+      "question": "What are the other names for compile-time polymorphism?",
+      "answer": "Answer: Compile-time polymorphism is also known as: Static polymorphism Static binding Early binding"
+    },
+    {
+      "question": "Why is method overloading called compile-time polymorphism?",
+      "answer": "Answer: Because the compiler determines which overloaded method should be called during compilation. The selection is based on the method arguments and the available method signatures."
+    },
+    {
+      "question": "Which concept is an example of runtime polymorphism?",
+      "answer": "Answer: Method overriding is an example of runtime polymorphism. A child class provides its own implementation of a method inherited from its parent class."
+    },
+    {
+      "question": "What are the other names for runtime polymorphism?",
+      "answer": "Answer: Runtime polymorphism is also known as: Dynamic polymorphism Dynamic binding Late binding Dynamic method dispatch"
+    },
+    {
+      "question": "Why is method overriding called runtime polymorphism?",
+      "answer": "Answer: Because the JVM determines which overridden method to execute at runtime based on the actual object being referred to. For example:\n\n```java\nPayment payment = new UPI();\npayment.pay(1000);\n```\n\nAlthough the reference type is Payment, the UPI implementation executes."
+    },
+    {
+      "question": "What is the difference between compile-time and runtime polymorphism?",
+      "answer": "Answer: Compile-time polymorphism Runtime polymorphism Achieved through method overloading Achieved through method overriding Method selection happens at compile time Overridden method selection happens at runtime Also called static binding Also called dynamic binding Also called early binding Also called late binding Pasted text(20261103-070404).txt"
+    },
+    {
+      "question": "What services can an e-commerce application provide?",
+      "answer": "Answer: An e-commerce application can provide services such as: User login User logout Product browsing Adding products to the cart Viewing the cart Making payments Each service provides a particular functionality to customers."
+    },
+    {
+      "question": "What payment options can be provided in an e-commerce application?",
+      "answer": "Answer: The payment system can provide different payment options, such as: UPI Debit or credit card Wallet Net banking Each option can have its own payment implementation."
+    },
+    {
+      "question": "What is the responsibility of a Checkout class in a payment application?",
+      "answer": "Answer: The Checkout class coordinates the payment process. It receives the selected payment option and the amount, then triggers the appropriate payment operation."
+    },
+    {
+      "question": "Why should the payment amount be passed as a method parameter?",
+      "answer": "Answer: Because the payment amount can change for every transaction. Passing it as a parameter allows the same payment method to process different amounts. Example:\n\n```java\npayment(1000);\npayment(2500);\npayment(5000);\n```"
+    },
+    {
+      "question": "Why is int more suitable than byte or short for a large payment amount in this example?",
+      "answer": "Answer: The byte data type can store values from -128 to 127, while short can store values from -32,768 to 32,767. If the payment amount is 1,00,000, neither byte nor short can represent it. Therefore, int is more suitable for this example."
+    },
+    {
+      "question": "What happens if a payment application calls every payment method instead of the selected one?",
+      "answer": "Answer: Every payment implementation may execute, even though the customer wants to use only one payment option. For example, a customer selecting UPI should not also be charged through a card and wallet. Only the selected payment operation should execute."
+    },
+    {
+      "question": "How can an application execute only the payment method selected by the customer?",
+      "answer": "Answer: An if-else statement can check the selected payment option and execute the corresponding payment method. Example:\n\n```java\nif (paymentOption.equals(\"UPI\")) {\n// Execute UPI payment\n```\n\n} else if (paymentOption.equals(\"CARD\")) {\n\n```java\n// Execute card payment\n```\n\n} else if (paymentOption.equals(\"WALLET\")) {\n\n```java\n// Execute wallet payment\n}\n```"
+    },
+    {
+      "question": "Why should equals() be used to compare payment-option Strings?",
+      "answer": "Answer: The equals() method compares the actual contents of two String objects. Example:\n\n```java\nString paymentOption = \"UPI\";\nif (paymentOption.equals(\"UPI\")) {\nSystem.out.println(\"UPI selected\");\n}\n```\n\nThe == operator compares object references rather than String contents."
+    },
+    {
+      "question": "What problem can occur when an application contains too many if-else statements?",
+      "answer": "Answer: The code can become lengthy and difficult to maintain. If an application supports many payment options, adding more conditions makes the code increasingly complicated. Pasted text(20261103-070404).txt Pasted text(20261103-070404).txt"
+    },
+    {
+      "question": "What are four problems that can occur in a payment application without a flexible polymorphic design?",
+      "answer": "Answer: Four problems are: Typing mistakes: Incorrect payment-option names can cause the application to execute the wrong branch or report an invalid option. Changing existing code: Modifying working code to add a feature can introduce new errors. Too many conditions: A large number of if-else statements makes the code difficult to maintain. Multiple developers accessing the same code: Different developers modifying the same shared code can create conflicts and mistakes."
+    },
+    {
+      "question": "What is the purpose of a parent Payment class?",
+      "answer": "Answer: The Payment class provides a common parent for different payment implementations. For example: UPI Card Wallet NetBanking Each of these classes can extend Payment and provide its own payment implementation."
+    },
+    {
+      "question": "What is loose coupling?",
+      "answer": "Answer: Loose coupling means reducing direct dependency between classes. In the payment application, the Checkout class works with a common Payment reference instead of depending directly on individual payment classes such as UPI, Card, and Wallet."
+    },
+    {
+      "question": "How does a parent reference hold a child object in Java?",
+      "answer": "Answer: A parent-class reference can refer to an object of its child class. Example:\n\n```java\nPayment payment = new UPI();\n```\n\nHere: Payment is the parent reference type. UPI is the child class.\n\n```java\nnew UPI() creates the child object.\n```"
+    },
+    {
+      "question": "How does inheritance help achieve loose coupling in a payment application?",
+      "answer": "Answer: Inheritance allows different payment classes to extend the common Payment class. For example:\n\n```java\nclass UPI extends Payment {\n}\nclass Card extends Payment {\n}\nclass Wallet extends Payment {\n}\nclass NetBanking extends Payment {\n}\n```\n\nAll these child classes can be handled through a common parent reference."
+    },
+    {
+      "question": "Why should each payment class override the pay() method?",
+      "answer": "Answer: Each payment option has its own implementation. For example: UPI processes a UPI payment. Card processes a card payment. Wallet processes a wallet payment. NetBanking processes a net-banking payment. Method overriding allows every child class to provide its own implementation of the common payment operation."
+    },
+    {
+      "question": "What is the advantage of passing a Payment reference to the Checkout class?",
+      "answer": "Answer: The Checkout class can work with different payment objects through the same reference type. It does not need separate payment-processing methods for UPI, Card, Wallet, and NetBanking. Example:\n\n```java\nPayment payment = new UPI();\n```\n\nThe same Checkout method can receive other child objects as well."
+    },
+    {
+      "question": "Is creating an object restricted to the main() method in Java?",
+      "answer": "Answer: No. Objects can be created inside other methods and classes as well. The appropriate location depends on where the object is needed and how the classes depend on one another. For example, a Checkout method can create a payment object when that is appropriate for its design."
+    },
+    {
+      "question": "How can a new payment option be added without modifying the existing Checkout implementation?",
+      "answer": "Answer: Create a new child class that extends Payment and overrides the payment method. Example:\n\n```java\nclass NetBanking extends Payment {\n@Override\n```\n\nvoid pay(int amount) {\n\n```java\nSystem.out.println(\n```\n\n\"Payment completed using NetBanking: Rs. \" + amount\n\n```java\n);\n}\n}\n```\n\nThen create a NetBanking object and pass it through the existing Payment reference."
+    },
+    {
+      "question": "How does polymorphism help multiple developers work on different payment options?",
+      "answer": "Answer: Different developers can work on separate payment implementations. For example: One developer works on UPI. Another works on Card. Another works on Wallet. Another works on NetBanking. Each implementation can extend the common Payment class, reducing the need for every developer to modify the same Checkout implementation."
+    },
+    {
+      "question": "What happens when a new NetBanking class is added to an application using polymorphism?",
+      "answer": "Answer: The new class can extend Payment and override its payment method. The application can then create a NetBanking object and pass it to the existing Checkout method. The existing payment implementations do not need to be rewritten just because a new payment option has been added. Pasted text(20261103-070404).txt Pasted text(20261103-070404).txt"
+    },
+    {
+      "question": "Write a Java program demonstrating runtime polymorphism using a payment application.",
+      "answer": "Answer: ```java\nclass Payment {\n```\n\nvoid pay(int amount) {\n\n```java\nSystem.out.println(\"Processing payment\");\n}\n}\nclass UPI extends Payment {\n@Override\n```\n\nvoid pay(int amount) {\n\n```java\nSystem.out.println(\n```\n\n\"Payment completed using UPI: Rs. \" + amount\n\n```java\n);\n}\n}\nclass Card extends Payment {\n@Override\n```\n\nvoid pay(int amount) {\n\n```java\nSystem.out.println(\n```\n\n\"Payment completed using Card: Rs. \" + amount\n\n```java\n);\n}\n}\nclass NetBanking extends Payment {\n@Override\n```\n\nvoid pay(int amount) {\n\n```java\nSystem.out.println(\n```\n\n\"Payment completed using NetBanking: Rs. \" + amount\n\n```java\n);\n}\n}\nclass Checkout {\n```\n\nvoid processPayment(Payment payment, int amount) {\n\n```java\npayment.pay(amount);\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nCheckout checkout = new Checkout();\nPayment selectedPayment = new UPI();\ncheckout.processPayment(selectedPayment, 1000);\n}\n}\n```\n\nSample Input: Payment type: UPI Amount: 1000 Sample Output: Payment completed using UPI: Rs. 1000"
+    }
+  ]
+}
