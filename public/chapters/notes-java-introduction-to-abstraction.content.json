@@ -1,0 +1,75 @@
+{
+  "title": "Notes Java Introduction To Abstraction",
+  "itemsPerPage": 2,
+  "source": "notes-java-introduction-to-abstraction.docx",
+  "items": [
+    {
+      "question": "What are the four pillars of object orientation?",
+      "answer": "Answer: The four pillars are encapsulation, inheritance, polymorphism and abstraction. Encapsulation, inheritance and polymorphism were learned earlier, and abstraction is the new concept. All four can be used together in one program, for example private members for encapsulation, inheritance, polymorphism and abstraction."
+    },
+    {
+      "question": "What is abstraction?",
+      "answer": "Answer: Abstraction is hiding the implementation and showing only the essential things to the user."
+    },
+    {
+      "question": "Explain abstraction with the ATM example.",
+      "answer": "Answer: At an ATM you insert the card, enter your PIN, choose a transaction such as withdraw, enter the amount, and receive the cash. Behind the screen there is the ATM computer, a bank server, and continuous communication between them. All of this is hidden from you, and you do not need to know it. What is important for you is that you put the card in the machine and get your money. The implementation is hidden, and only the essential part is shown."
+    },
+    {
+      "question": "Explain abstraction with the television example.",
+      "answer": "Answer: At home you sit on the couch, take the remote and change the channel. How the signals come, how the connection works and how the channel moves internally is hidden. What matters to you is that the channel changes when you press the button. Showing the result and hiding how it works internally is abstraction."
+    },
+    {
+      "question": "Explain abstraction with the human body example.",
+      "answer": "Answer: When a person moves a hand or a leg, it happens because of the brain, neurons, electrical signals and muscles. Nobody thinks about how this works internally; the implementation is hidden, and what is important is that the hand moves. This is also abstraction."
+    },
+    {
+      "question": "What are method signature and method implementation?",
+      "answer": "Answer: A method has two parts. The method signature is the declaration line (return type, name and parentheses with parameters). The method body inside the curly braces is the method implementation. void sum(int a, int b) // method signature\n\n```java\n{\nSystem.out.println(a + b);               // method implementation (body)\n}\n```"
+    },
+    {
+      "question": "In Java, what is the essential part and what is hidden in abstraction?",
+      "answer": "Answer: In the real world the essential part is what the user needs to see, such as the ATM screen, and how it works is hidden. In Java, the method implementation (body) is hidden, and the method signature is the essential part that is visible."
+    },
+    {
+      "question": "Why would the parent class give up the method body in the payment system example?",
+      "answer": "Answer: In the payment system, the parent class Payment has a pay() method with a body, and the child classes UPI, Card and Wallet each extend Payment and give their own body for pay(). The body given by the parent is not used by the children, because each child changes it. So the parent should not give a body at all; it keeps only the method signature, and each child provides its own implementation."
+    },
+    {
+      "question": "What errors do you get when you remove the body of the parent method, and how do you fix them?",
+      "answer": "Answer: Step 1: remove the body of pay(). Java expects a semicolon after a method that has no body.\n\n```java\nabstract class Payment {\nabstract void pay(int amount)       // no semicolon\n}\n```\n\nCompilation error: error: ';' expected Step 2: add the semicolon but not the abstract keyword. A method with only a signature must be marked abstract.\n\n```java\nclass Payment {\nvoid pay(int amount);\n}\n```\n\nCompilation error: error: missing method body, or declare abstract Step 3: add the abstract keyword to the method. Now the class must also be declared abstract.\n\n```java\nclass Payment {\nabstract void pay(int amount);\n}\n```\n\nCompilation error: error: Payment is not abstract and does not override abstract method pay(int) in Payment Step 4: declare the class abstract.\n\n```java\nabstract class Payment {\nabstract void pay(int amount);\n}\n```"
+    },
+    {
+      "question": "What is an abstract method, and what is the rule about the class that contains it?",
+      "answer": "Answer: An abstract method is a method that has only the method signature and no body. If a class in Java has an abstract method, the class must also be declared abstract. The child classes then compulsorily give the body (implementation) for that method."
+    },
+    {
+      "question": "Where is abstraction present in the payment program?",
+      "answer": "Answer: The implementation of pay() is hidden in the child classes UPI, Card and Wallet, and the only thing visible in the parent class Payment is the method signature, which is the essential part according to Java.\n\n```java\nabstract class Payment {\nabstract void pay(int amount);\n}\nclass UPI extends Payment {\n```\n\nvoid pay(int amount) {\n\n```java\nSystem.out.println(\"Paid \" + amount + \" using UPI\");\n}\n}\nclass Card extends Payment {\n```\n\nvoid pay(int amount) {\n\n```java\nSystem.out.println(\"Paid \" + amount + \" using Card\");\n}\n}\nclass Wallet extends Payment {\n```\n\nvoid pay(int amount) {\n\n```java\nSystem.out.println(\"Paid \" + amount + \" using Wallet\");\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nPayment p1 = new UPI();\nPayment p2 = new Card();\nPayment p3 = new Wallet();\np1.pay(500);\np2.pay(1000);\np3.pay(1500);\n}\n}\n```\n\nOutput: Paid 500 using UPI Paid 1000 using Card Paid 1500 using Wallet Explanation: each child object runs its own pay() body. The Payment object itself is never created."
+    },
+    {
+      "question": "Can you create an object of an abstract class?",
+      "answer": "Answer: No, never. This is a very important interview question. In Eclipse the error says \"Cannot instantiate the type Payment\".\n\n```java\nabstract class Payment {\nabstract void pay(int amount);\n}\npublic class Main {\npublic static void main(String[] args) {\n```\n\nPayment p = new Payment(); // compilation error\n\n```java\n}\n}\n```\n\nCompilation error: error: Payment is abstract; cannot be instantiated"
+    },
+    {
+      "question": "Why can you not create an object of an abstract class?",
+      "answer": "Answer: An abstract class has abstract methods, which have only the method signature and no body, so the class is incomplete. A complete method has a signature and a body. Java does not allow you to create an object of something that is incomplete in nature."
+    },
+    {
+      "question": "What does \"instantiate\" mean, and why is it called an instance?",
+      "answer": "Answer: To instantiate means to create an object. An object is also called an instance, and a variable that gets its memory inside the object (in the heap) is called an instance variable, that is, an object variable. So \"cannot instantiate\" means \"cannot create the object\"."
+    },
+    {
+      "question": "Write the Bird, Ostrich and Eagle program. What is the output?",
+      "answer": "Answer: The parent class Bird has a fly() method. An ostrich does not fly and an eagle flies high, so the children change the body. Because the children do not use the parent body, Bird keeps only the signature and is declared abstract.\n\n```java\nabstract class Bird {\nabstract void fly();\n}\nclass Ostrich extends Bird {\n```\n\nvoid fly() {\n\n```java\nSystem.out.println(\"Ostrich cannot fly\");\n}\n}\nclass Eagle extends Bird {\n```\n\nvoid fly() {\n\n```java\nSystem.out.println(\"Eagle flies high\");\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nBird b1 = new Ostrich();\nBird b2 = new Eagle();\nb1.fly();\nb2.fly();\n}\n}\n```\n\nOutput: Ostrich cannot fly Eagle flies high Explanation: new Bird() would give an error because Bird is abstract, so the objects of Ostrich and Eagle are created and the Bird reference points to them."
+    },
+    {
+      "question": "What happens if a child class does not give the body of the abstract method of its parent?",
+      "answer": "Answer: Java gives an error, because the method is abstract and the body must compulsorily be given in the child class.\n\n```java\nabstract class Bird {\nabstract void fly();\n}\nclass Eagle extends Bird {      // fly() body is missing\n}\n```\n\nCompilation error: error: Eagle is not abstract and does not override abstract method fly() in Bird"
+    },
+    {
+      "question": "Can an abstract class extend a normal class, and can a normal class extend an abstract class?",
+      "answer": "Answer: Yes, all of these are possible in Java: a normal class extends an abstract class, an abstract class extends a normal class, and an abstract class extends another abstract class.\n\n```java\nabstract class Demo1 { }\nclass Demo2 extends Demo1 { }              // normal extends abstract\nclass Demo3 { }\nabstract class Demo4 extends Demo3 { }     // abstract extends normal\nabstract class Demo5 extends Demo1 { }     // abstract extends abstract\n```"
+    }
+  ]
+}
