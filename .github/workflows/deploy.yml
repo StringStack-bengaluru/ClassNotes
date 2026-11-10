@@ -135,3 +135,6 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # The full site is ~80 MB. The default 10 minute copy limit aborts while files are still syncing.
+          timeout: 1800000
