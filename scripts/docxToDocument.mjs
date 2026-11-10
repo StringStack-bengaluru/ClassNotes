@@ -330,6 +330,17 @@ with zipfile.ZipFile(path) as z:
             if re.search(r"\\.(java|class|txt|json|xml|html|css)$", line, re.I):
                 return False
             return True
+        # Cast / call that starts with "(" and may end in a // comment.
+        # ((Calculator1) c).subtract(10, 5); // downcasting
+        if "//" in line or line.lstrip().startswith("("):
+            code_prefix = line.split("//", 1)[0].strip()
+            if code_prefix and re.search(r"[;{}()]", code_prefix):
+                if not re.search(
+                    r"\\b(is|are|was|were|because|therefore|however|explains|means|allows|provides)\\b",
+                    code_prefix,
+                    re.I,
+                ):
+                    return True
         # Method/assignment statements, optionally with a trailing // comment
         # e.g. ref.methodFour(); // Compilation error
         if re.match(
