@@ -1,0 +1,1491 @@
+{
+  "title": "Notes Java Interfaces",
+  "mode": "document",
+  "source": "notes-java-interfaces.docx",
+  "pageCount": 7,
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "1. How do you achieve pure abstraction in Java?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "code",
+      "text": "Abstraction can be achieved in two ways: with abstract classes and with interfaces. Abstract classes have a limitation when you want pure abstraction (100% abstraction), so to achieve pure abstraction you use an interface."
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "2. What is an interface?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "An interface is declared with the interface keyword instead of the class keyword. It gives pure abstraction and also standardization. The class that uses it writes implements and is called the implementing class.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "interface Calculator {\n    void add(int a, int b);\n}"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "3. What problem occurs when different classes do the same work with different method names?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Suppose Calculator1, Calculator2 and Calculator3 all perform addition, but each class uses a different method name. A developer has to remember the method name of every class, and with 300 classes it is impossible to remember all of them.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class Calculator1 { void add(int a, int b) { } }\nclass Calculator2 { void sum(int a, int b) { } }\nclass Calculator3 { void addition(int a, int b) { } }"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "4. What is standardization, and how does an interface give it?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Standardization means that all the classes use the same method signature. The interface declares one abstract method, and every class that implements it must follow that same signature, so developers have to remember only one name. Standardization comes automatically when you go for pure abstraction, just like gravy comes complimentary with a biryani in a restaurant.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "5. Solve the Calculator1, Calculator2 and Calculator3 problem with an interface. What is the output?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "code",
+      "text": "interface Calculator {\n    void add(int a, int b);\n}\nclass Calculator1 implements Calculator {\n    public void add(int a, int b) {\n        System.out.println(\"Calculator1 sum: \" + (a + b));\n    }\n}\nclass Calculator2 implements Calculator {\n    public void add(int a, int b) {\n        System.out.println(\"Calculator2 sum: \" + (a + b));\n    }\n}\nclass Calculator3 implements Calculator {\n    public void add(int a, int b) {\n        System.out.println(\"Calculator3 sum: \" + (a + b));\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Calculator c1 = new Calculator1();\n        Calculator c2 = new Calculator2();\n        Calculator c3 = new Calculator3();\n        c1.add(10, 20);\n        c2.add(10, 20);\n        c3.add(10, 20);\n    }\n}"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Calculator1 sum: 30",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Calculator2 sum: 30",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Calculator3 sum: 30",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Explanation: every class has the same add() signature, so the same call works for all of them, and each class gives its own body.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "6. Are interfaces abstract by default? Do you need to write the abstract keyword?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Yes. Interfaces are abstract by default, and the methods inside an interface are public abstract by default. Writing abstract is not required, because Java adds it for you. Sometimes interviewers ask this question. Remember: methods inside an interface are public abstract by default.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "interface Calculator {\n    void add(int a, int b);                       // same as the line below\n    public abstract void sub(int a, int b);\n}"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "7. What is the default access modifier of a method inside an interface?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If you write nothing, a normal class method would get package (default) access, but inside an interface Java adds public. So the method is public and abstract by default.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "8. What happens if the implementing class does not use public while overriding an interface method?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "You get an error. When you override a method you must maintain the same access modifier; you can increase the visibility but you cannot decrease it. The interface method is public, which is the highest accessibility, so the implementing class must also write public.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "interface Calculator {\n    void add(int a, int b);\n}\nclass Calculator1 implements Calculator {\n    void add(int a, int b) { }     // compilation error\n}"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Compilation error: error: add(int,int) in Calculator1 cannot implement add(int,int) in Calculator ... attempting to assign weaker access privileges; was public",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "9. Can you create an object of an interface? Can you create a reference?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "You cannot create an object of an interface, because it is abstract by default, and you cannot create an object of something abstract. But you can create a reference of the interface type.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "Calculator c = new Calculator();      // compilation error: object of interface\nCalculator c;                         // valid: only a reference"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Compilation error: error: Calculator is abstract; cannot be instantiated",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "10. What is the difference between tight coupling and loose coupling?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "In tight coupling the reference type is the child (implementing) class type, so the child object is referred to by its own class type. In loose coupling the reference type is the interface type and the object is the child class object. Loose coupling is polymorphism, and it is also known as upcasting.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "Calculator1 c1 = new Calculator1();    // tight coupling\nCalculator  c2 = new Calculator1();    // loose coupling (upcasting)"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "11. What can you access using an interface-type reference?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Only the methods that are declared in the interface and overridden by the implementing class. A specialized method that exists only in the child class cannot be accessed directly through the interface reference.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "interface Calculator {\n    void add(int a, int b);\n}\nclass Calculator1 implements Calculator {\n    public void add(int a, int b) { }\n    void subtract(int a, int b) { }       // specialized method\n}\npublic class Main {\n    public static void main(String[] args) {\n        Calculator c = new Calculator1();\n        c.subtract(10, 5);                // compilation error\n    }\n}"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Compilation error: error: cannot find symbol ... symbol: method subtract(int,int) ... location: variable c of type Calculator",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "12. How do you access the specialized method of the child class through an interface reference? What is the output?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Use downcasting. You convert the interface-type reference back to the child class type, and then the specialized method can be called. Upcasting and downcasting are very important interview topics, so you should be able to explain them.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "interface Calculator {\n    void add(int a, int b);\n}\nclass Calculator1 implements Calculator {\n    public void add(int a, int b) {\n        System.out.println(\"Sum: \" + (a + b));\n    }\n    void subtract(int a, int b) {\n        System.out.println(\"Difference: \" + (a - b));\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Calculator c = new Calculator1();   // upcasting\n        c.add(10, 5);"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "        ((Calculator1) c).subtract(10, 5);  // downcasting",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "    }\n}"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sum: 15",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Difference: 5",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "13. What happens if a class implements an interface but implements only some of its methods?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The class implements the interface partially. For example, if the interface has five abstract methods and the class implements only three, the remaining abstract methods are still in the class, so you must declare that class abstract. Without that, you get an error.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "interface Calculator {\n    void add(int a, int b);\n    void subtract(int a, int b);\n}\nclass Calculator1 implements Calculator {\n    public void add(int a, int b) { }     // subtract() is missing\n}"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Compilation error: error: Calculator1 is not abstract and does not override abstract method subtract(int,int) in Calculator",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Fix: declare Calculator1 as abstract, and let another class extend it and implement the remaining methods:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "abstract class Calculator1 implements Calculator {\n    public void add(int a, int b) {\n        System.out.println(\"Sum: \" + (a + b));\n    }\n}\nclass Calculator2 extends Calculator1 {\n    public void subtract(int a, int b) {\n        System.out.println(\"Difference: \" + (a - b));\n    }\n}"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "14. Can a class extend a class and implement an interface at the same time? What is the order? What is the output?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Yes. A class can implement an interface and extend a class at the same time. The extends clause must come first, and the implements clause comes later. To remember: in the alphabet e (extends) comes before i (implements). The class gets the inherited method from the parent class and must implement the interface method.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "interface Calculator {\n    void add(int a, int b);\n}\nclass Demo {\n    void multiply(int a, int b) {\n        System.out.println(\"Product: \" + (a * b));\n    }\n}\nclass Calculator1 extends Demo implements Calculator {\n    public void add(int a, int b) {\n        System.out.println(\"Sum: \" + (a + b));\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Calculator1 c = new Calculator1();\n        c.add(2, 3);\n        c.multiply(2, 3);\n    }\n}"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sum: 5",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Product: 6",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If you write implements before extends, the code does not compile:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class Calculator1 implements Calculator extends Demo { }   // compilation error"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Compilation error: error: '{' expected",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    }
+  ],
+  "pages": [
+    [
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "1. How do you achieve pure abstraction in Java?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "code",
+        "text": "Abstraction can be achieved in two ways: with abstract classes and with interfaces. Abstract classes have a limitation when you want pure abstraction (100% abstraction), so to achieve pure abstraction you use an interface."
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "2. What is an interface?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "An interface is declared with the interface keyword instead of the class keyword. It gives pure abstraction and also standardization. The class that uses it writes implements and is called the implementing class.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "interface Calculator {\n    void add(int a, int b);\n}"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "3. What problem occurs when different classes do the same work with different method names?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Suppose Calculator1, Calculator2 and Calculator3 all perform addition, but each class uses a different method name. A developer has to remember the method name of every class, and with 300 classes it is impossible to remember all of them.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class Calculator1 { void add(int a, int b) { } }\nclass Calculator2 { void sum(int a, int b) { } }\nclass Calculator3 { void addition(int a, int b) { } }"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "4. What is standardization, and how does an interface give it?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Standardization means that all the classes use the same method signature. The interface declares one abstract method, and every class that implements it must follow that same signature, so developers have to remember only one name. Standardization comes automatically when you go for pure abstraction, just like gravy comes complimentary with a biryani in a restaurant.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "5. Solve the Calculator1, Calculator2 and Calculator3 problem with an interface. What is the output?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "code",
+        "text": "interface Calculator {\n    void add(int a, int b);\n}\nclass Calculator1 implements Calculator {\n    public void add(int a, int b) {\n        System.out.println(\"Calculator1 sum: \" + (a + b));\n    }\n}\nclass Calculator2 implements Calculator {\n    public void add(int a, int b) {\n        System.out.println(\"Calculator2 sum: \" + (a + b));\n    }\n}\nclass Calculator3 implements Calculator {\n    public void add(int a, int b) {\n        System.out.println(\"Calculator3 sum: \" + (a + b));\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Calculator c1 = new Calculator1();\n        Calculator c2 = new Calculator2();\n        Calculator c3 = new Calculator3();\n        c1.add(10, 20);\n        c2.add(10, 20);\n        c3.add(10, 20);\n    }\n}"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Calculator1 sum: 30",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Calculator2 sum: 30",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Calculator3 sum: 30",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Explanation: every class has the same add() signature, so the same call works for all of them, and each class gives its own body.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "6. Are interfaces abstract by default? Do you need to write the abstract keyword?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Yes. Interfaces are abstract by default, and the methods inside an interface are public abstract by default. Writing abstract is not required, because Java adds it for you. Sometimes interviewers ask this question. Remember: methods inside an interface are public abstract by default.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "interface Calculator {\n    void add(int a, int b);                       // same as the line below\n    public abstract void sub(int a, int b);\n}"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "7. What is the default access modifier of a method inside an interface?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If you write nothing, a normal class method would get package (default) access, but inside an interface Java adds public. So the method is public and abstract by default.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "8. What happens if the implementing class does not use public while overriding an interface method?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "You get an error. When you override a method you must maintain the same access modifier; you can increase the visibility but you cannot decrease it. The interface method is public, which is the highest accessibility, so the implementing class must also write public.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "interface Calculator {\n    void add(int a, int b);\n}\nclass Calculator1 implements Calculator {\n    void add(int a, int b) { }     // compilation error\n}"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Compilation error: error: add(int,int) in Calculator1 cannot implement add(int,int) in Calculator ... attempting to assign weaker access privileges; was public",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "9. Can you create an object of an interface? Can you create a reference?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "You cannot create an object of an interface, because it is abstract by default, and you cannot create an object of something abstract. But you can create a reference of the interface type.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "Calculator c = new Calculator();      // compilation error: object of interface\nCalculator c;                         // valid: only a reference"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Compilation error: error: Calculator is abstract; cannot be instantiated",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "10. What is the difference between tight coupling and loose coupling?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "In tight coupling the reference type is the child (implementing) class type, so the child object is referred to by its own class type. In loose coupling the reference type is the interface type and the object is the child class object. Loose coupling is polymorphism, and it is also known as upcasting.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "Calculator1 c1 = new Calculator1();    // tight coupling\nCalculator  c2 = new Calculator1();    // loose coupling (upcasting)"
+      }
+    ],
+    [
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "11. What can you access using an interface-type reference?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Only the methods that are declared in the interface and overridden by the implementing class. A specialized method that exists only in the child class cannot be accessed directly through the interface reference.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "interface Calculator {\n    void add(int a, int b);\n}\nclass Calculator1 implements Calculator {\n    public void add(int a, int b) { }\n    void subtract(int a, int b) { }       // specialized method\n}\npublic class Main {\n    public static void main(String[] args) {\n        Calculator c = new Calculator1();\n        c.subtract(10, 5);                // compilation error\n    }\n}"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Compilation error: error: cannot find symbol ... symbol: method subtract(int,int) ... location: variable c of type Calculator",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "12. How do you access the specialized method of the child class through an interface reference? What is the output?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Use downcasting. You convert the interface-type reference back to the child class type, and then the specialized method can be called. Upcasting and downcasting are very important interview topics, so you should be able to explain them.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "interface Calculator {\n    void add(int a, int b);\n}\nclass Calculator1 implements Calculator {\n    public void add(int a, int b) {\n        System.out.println(\"Sum: \" + (a + b));\n    }\n    void subtract(int a, int b) {\n        System.out.println(\"Difference: \" + (a - b));\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Calculator c = new Calculator1();   // upcasting\n        c.add(10, 5);"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "        ((Calculator1) c).subtract(10, 5);  // downcasting",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "    }\n}"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sum: 15",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Difference: 5",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "13. What happens if a class implements an interface but implements only some of its methods?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The class implements the interface partially. For example, if the interface has five abstract methods and the class implements only three, the remaining abstract methods are still in the class, so you must declare that class abstract. Without that, you get an error.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "interface Calculator {\n    void add(int a, int b);\n    void subtract(int a, int b);\n}\nclass Calculator1 implements Calculator {\n    public void add(int a, int b) { }     // subtract() is missing\n}"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Compilation error: error: Calculator1 is not abstract and does not override abstract method subtract(int,int) in Calculator",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Fix: declare Calculator1 as abstract, and let another class extend it and implement the remaining methods:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "abstract class Calculator1 implements Calculator {\n    public void add(int a, int b) {\n        System.out.println(\"Sum: \" + (a + b));\n    }\n}\nclass Calculator2 extends Calculator1 {\n    public void subtract(int a, int b) {\n        System.out.println(\"Difference: \" + (a - b));\n    }\n}"
+      }
+    ],
+    [
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "14. Can a class extend a class and implement an interface at the same time? What is the order? What is the output?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Yes. A class can implement an interface and extend a class at the same time. The extends clause must come first, and the implements clause comes later. To remember: in the alphabet e (extends) comes before i (implements). The class gets the inherited method from the parent class and must implement the interface method.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "interface Calculator {\n    void add(int a, int b);\n}\nclass Demo {\n    void multiply(int a, int b) {\n        System.out.println(\"Product: \" + (a * b));\n    }\n}\nclass Calculator1 extends Demo implements Calculator {\n    public void add(int a, int b) {\n        System.out.println(\"Sum: \" + (a + b));\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Calculator1 c = new Calculator1();\n        c.add(2, 3);\n        c.multiply(2, 3);\n    }\n}"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sum: 5",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Product: 6",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If you write implements before extends, the code does not compile:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class Calculator1 implements Calculator extends Demo { }   // compilation error"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Compilation error: error: '{' expected",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ]
+  ]
+}

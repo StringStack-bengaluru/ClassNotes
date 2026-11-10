@@ -1,0 +1,63 @@
+{
+  "title": "Notes Java Interfaces",
+  "itemsPerPage": 2,
+  "source": "notes-java-interfaces.docx",
+  "items": [
+    {
+      "question": "How do you achieve pure abstraction in Java?",
+      "answer": "Answer: Abstraction can be achieved in two ways: with abstract classes and with interfaces. Abstract classes have a limitation when you want pure abstraction (100% abstraction), so to achieve pure abstraction you use an interface."
+    },
+    {
+      "question": "What is an interface?",
+      "answer": "Answer: An interface is declared with the interface keyword instead of the class keyword. It gives pure abstraction and also standardization. The class that uses it writes implements and is called the implementing class.\n\n```java\ninterface Calculator {\nvoid add(int a, int b);\n}\n```"
+    },
+    {
+      "question": "What problem occurs when different classes do the same work with different method names?",
+      "answer": "Answer: Suppose Calculator1, Calculator2 and Calculator3 all perform addition, but each class uses a different method name. A developer has to remember the method name of every class, and with 300 classes it is impossible to remember all of them.\n\n```java\nclass Calculator1 { void add(int a, int b) { } }\nclass Calculator2 { void sum(int a, int b) { } }\nclass Calculator3 { void addition(int a, int b) { } }\n```"
+    },
+    {
+      "question": "What is standardization, and how does an interface give it?",
+      "answer": "Answer: Standardization means that all the classes use the same method signature. The interface declares one abstract method, and every class that implements it must follow that same signature, so developers have to remember only one name. Standardization comes automatically when you go for pure abstraction, just like gravy comes complimentary with a biryani in a restaurant."
+    },
+    {
+      "question": "Solve the Calculator1, Calculator2 and Calculator3 problem with an interface. What is the output?",
+      "answer": "Answer: ```java\ninterface Calculator {\nvoid add(int a, int b);\n}\nclass Calculator1 implements Calculator {\npublic void add(int a, int b) {\nSystem.out.println(\"Calculator1 sum: \" + (a + b));\n}\n}\nclass Calculator2 implements Calculator {\npublic void add(int a, int b) {\nSystem.out.println(\"Calculator2 sum: \" + (a + b));\n}\n}\nclass Calculator3 implements Calculator {\npublic void add(int a, int b) {\nSystem.out.println(\"Calculator3 sum: \" + (a + b));\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nCalculator c1 = new Calculator1();\nCalculator c2 = new Calculator2();\nCalculator c3 = new Calculator3();\nc1.add(10, 20);\nc2.add(10, 20);\nc3.add(10, 20);\n}\n}\n```\n\nOutput: Calculator1 sum: 30 Calculator2 sum: 30 Calculator3 sum: 30 Explanation: every class has the same add() signature, so the same call works for all of them, and each class gives its own body."
+    },
+    {
+      "question": "Are interfaces abstract by default? Do you need to write the abstract keyword?",
+      "answer": "Answer: Yes. Interfaces are abstract by default, and the methods inside an interface are public abstract by default. Writing abstract is not required, because Java adds it for you. Sometimes interviewers ask this question. Remember: methods inside an interface are public abstract by default.\n\n```java\ninterface Calculator {\n```\n\nvoid add(int a, int b); // same as the line below\n\n```java\npublic abstract void sub(int a, int b);\n}\n```"
+    },
+    {
+      "question": "What is the default access modifier of a method inside an interface?",
+      "answer": "Answer: If you write nothing, a normal class method would get package (default) access, but inside an interface Java adds public. So the method is public and abstract by default."
+    },
+    {
+      "question": "What happens if the implementing class does not use public while overriding an interface method?",
+      "answer": "Answer: You get an error. When you override a method you must maintain the same access modifier; you can increase the visibility but you cannot decrease it. The interface method is public, which is the highest accessibility, so the implementing class must also write public.\n\n```java\ninterface Calculator {\nvoid add(int a, int b);\n}\nclass Calculator1 implements Calculator {\n```\n\nvoid add(int a, int b) { } // compilation error\n\n```java\n}\n```\n\nCompilation error: error: add(int,int) in Calculator1 cannot implement add(int,int) in Calculator ... attempting to assign weaker access privileges; was public"
+    },
+    {
+      "question": "Can you create an object of an interface? Can you create a reference?",
+      "answer": "Answer: You cannot create an object of an interface, because it is abstract by default, and you cannot create an object of something abstract. But you can create a reference of the interface type. Calculator c = new Calculator(); // compilation error: object of interface Calculator c; // valid: only a reference Compilation error: error: Calculator is abstract; cannot be instantiated"
+    },
+    {
+      "question": "What is the difference between tight coupling and loose coupling?",
+      "answer": "Answer: In tight coupling the reference type is the child (implementing) class type, so the child object is referred to by its own class type. In loose coupling the reference type is the interface type and the object is the child class object. Loose coupling is polymorphism, and it is also known as upcasting. Calculator1 c1 = new Calculator1(); // tight coupling Calculator c2 = new Calculator1(); // loose coupling (upcasting)"
+    },
+    {
+      "question": "What can you access using an interface-type reference?",
+      "answer": "Answer: Only the methods that are declared in the interface and overridden by the implementing class. A specialized method that exists only in the child class cannot be accessed directly through the interface reference.\n\n```java\ninterface Calculator {\nvoid add(int a, int b);\n}\nclass Calculator1 implements Calculator {\npublic void add(int a, int b) { }\n```\n\nvoid subtract(int a, int b) { } // specialized method\n\n```java\n}\npublic class Main {\npublic static void main(String[] args) {\nCalculator c = new Calculator1();\n```\n\nc.subtract(10, 5); // compilation error\n\n```java\n}\n}\n```\n\nCompilation error: error: cannot find symbol ... symbol: method subtract(int,int) ... location: variable c of type Calculator"
+    },
+    {
+      "question": "How do you access the specialized method of the child class through an interface reference? What is the output?",
+      "answer": "Answer: Use downcasting. You convert the interface-type reference back to the child class type, and then the specialized method can be called. Upcasting and downcasting are very important interview topics, so you should be able to explain them.\n\n```java\ninterface Calculator {\nvoid add(int a, int b);\n}\nclass Calculator1 implements Calculator {\npublic void add(int a, int b) {\nSystem.out.println(\"Sum: \" + (a + b));\n}\n```\n\nvoid subtract(int a, int b) {\n\n```java\nSystem.out.println(\"Difference: \" + (a - b));\n}\n}\npublic class Main {\npublic static void main(String[] args) {\n```\n\nCalculator c = new Calculator1(); // upcasting\n\n```java\nc.add(10, 5);\n```\n\n((Calculator1) c).subtract(10, 5); // downcasting\n\n```java\n}\n}\n```\n\nOutput: Sum: 15 Difference: 5"
+    },
+    {
+      "question": "What happens if a class implements an interface but implements only some of its methods?",
+      "answer": "Answer: The class implements the interface partially. For example, if the interface has five abstract methods and the class implements only three, the remaining abstract methods are still in the class, so you must declare that class abstract. Without that, you get an error.\n\n```java\ninterface Calculator {\nvoid add(int a, int b);\nvoid subtract(int a, int b);\n}\nclass Calculator1 implements Calculator {\npublic void add(int a, int b) { }     // subtract() is missing\n}\n```\n\nCompilation error: error: Calculator1 is not abstract and does not override abstract method subtract(int,int) in Calculator Fix: declare Calculator1 as abstract, and let another class extend it and implement the remaining methods:\n\n```java\nabstract class Calculator1 implements Calculator {\npublic void add(int a, int b) {\nSystem.out.println(\"Sum: \" + (a + b));\n}\n}\nclass Calculator2 extends Calculator1 {\npublic void subtract(int a, int b) {\nSystem.out.println(\"Difference: \" + (a - b));\n}\n}\n```"
+    },
+    {
+      "question": "Can a class extend a class and implement an interface at the same time? What is the order? What is the output?",
+      "answer": "Answer: Yes. A class can implement an interface and extend a class at the same time. The extends clause must come first, and the implements clause comes later. To remember: in the alphabet e (extends) comes before i (implements). The class gets the inherited method from the parent class and must implement the interface method.\n\n```java\ninterface Calculator {\nvoid add(int a, int b);\n}\nclass Demo {\n```\n\nvoid multiply(int a, int b) {\n\n```java\nSystem.out.println(\"Product: \" + (a * b));\n}\n}\nclass Calculator1 extends Demo implements Calculator {\npublic void add(int a, int b) {\nSystem.out.println(\"Sum: \" + (a + b));\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nCalculator1 c = new Calculator1();\nc.add(2, 3);\nc.multiply(2, 3);\n}\n}\n```\n\nOutput: Sum: 5 Product: 6 If you write implements before extends, the code does not compile:\n\n```java\nclass Calculator1 implements Calculator extends Demo { }   // compilation error\n```\n\nCompilation error: error: '{' expected"
+    }
+  ]
+}
