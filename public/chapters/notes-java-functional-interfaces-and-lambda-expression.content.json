@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Functional Interfaces And Lambda Expression",
+  "itemsPerPage": 2,
+  "source": "notes-java-functional-interfaces-and-lambda-expression.docx",
+  "items": [
+    {
+      "question": "What is a functional interface in Java?",
+      "answer": "Answer: A functional interface is an interface that contains exactly one abstract method. It is also known as a Single Abstract Method (SAM) interface."
+    },
+    {
+      "question": "How many abstract methods can a functional interface contain?",
+      "answer": "Answer: A functional interface can contain only one abstract method."
+    },
+    {
+      "question": "Can a functional interface contain default, static, and private methods?",
+      "answer": "Answer: Yes. A functional interface can contain default, static, private, and private static methods in addition to its single abstract method. These additional methods do not change its functional-interface status."
+    },
+    {
+      "question": "What is the purpose of the @FunctionalInterface annotation?",
+      "answer": "Answer: The @FunctionalInterface annotation identifies an interface as a functional interface. It also allows the compiler to check that the interface satisfies the functional-interface rule."
+    },
+    {
+      "question": "Is the @FunctionalInterface annotation compulsory?",
+      "answer": "Answer: No. An interface with exactly one abstract method can be used as a functional interface without this annotation. However, adding the annotation is a useful way to make the intention clear and let the compiler validate it."
+    },
+    {
+      "question": "What happens if an interface marked with @FunctionalInterface declares two abstract methods?",
+      "answer": "Answer: The compiler reports an error because the interface does not satisfy the functional-interface rule of having exactly one abstract method."
+    },
+    {
+      "question": "What are the four approaches used to implement a functional interface?",
+      "answer": "Answer: A functional interface can be implemented using a separate named class, an inner class, an anonymous inner class, or a lambda expression."
+    },
+    {
+      "question": "How do you implement a functional interface using a separate class?",
+      "answer": "Answer: Create a class that uses the implements keyword with the interface name, then provide the body for its abstract method. Create an object of that class and call the method through the object or an interface reference."
+    },
+    {
+      "question": "Write a Java program that implements a functional interface using a separate class.",
+      "answer": "Answer: The DisplayImpl class implements the Display interface and provides the body for display().Sample Input: No input.Sample Output:Hello from DisplayImpl.\n\n```java\ninterface Display {\nvoid display();\n}\nclass DisplayImpl implements Display {\n@Override\npublic void display() {\nSystem.out.println(\"Hello from DisplayImpl.\");\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nDisplay displayRef = new DisplayImpl();\ndisplayRef.display();\n}\n}\n```"
+    },
+    {
+      "question": "Why can an interface reference refer to an object of an implementing class?",
+      "answer": "Answer: A reference can use the interface type while referring to an object of a class that implements that interface. This allows the code to work with the interface contract instead of depending directly on a particular implementation class."
+    },
+    {
+      "question": "What is loose coupling in the context of interface references?",
+      "answer": "Answer: Loose coupling means that code depends on an abstraction, such as an interface, rather than being tightly connected to one specific implementation class. Different implementing objects can be used through the same interface reference."
+    },
+    {
+      "question": "What is an inner class in Java?",
+      "answer": "Answer: An inner class is a class declared inside another class. It can be used to organize related implementation logic within the enclosing class."
+    },
+    {
+      "question": "How can an inner class implement a functional interface?",
+      "answer": "Answer: Declare a class inside another class, make the inner class implement the functional interface, and provide the body for its abstract method. Create an instance of the inner class and access the implemented method through an interface reference."
+    },
+    {
+      "question": "Write a Java program that implements a functional interface using an inner class.",
+      "answer": "Answer: The DisplayImpl class is declared inside Launch and implements Display. An instance of the inner class is assigned to a Display reference.Sample Input: No input.Sample Output:Hello from inner class.\n\n```java\ninterface Display {\nvoid display();\n}\nclass Launch {\nclass DisplayImpl implements Display {\n@Override\npublic void display() {\nSystem.out.println(\"Hello from inner class.\");\n}\n}\npublic static void main(String[] args) {\nLaunch launch = new Launch();\nDisplay displayRef = launch.new DisplayImpl();\ndisplayRef.display();\n}\n}\n```"
+    },
+    {
+      "question": "What is an anonymous inner class in Java?",
+      "answer": "Answer: An anonymous inner class is a class declared and instantiated without giving the class a name. It can be used to provide an implementation of an interface at the point where an object is created."
+    },
+    {
+      "question": "Why is it called an anonymous inner class?",
+      "answer": "Answer: It is called anonymous because the class does not have an explicit class name. The implementation and object creation are written together."
+    },
+    {
+      "question": "How can an anonymous inner class implement a functional interface?",
+      "answer": "Answer: Create an object using the interface type followed by a class body. Inside that body, provide the implementation of the interface's abstract method. The resulting object can be assigned to a reference of the interface type."
+    },
+    {
+      "question": "Write a Java program that implements a functional interface using an anonymous inner class.",
+      "answer": "Answer: The anonymous class provides the implementation of display() without declaring a separate class name.Sample Input: No input.Sample Output:Hello from anonymous class.\n\n```java\ninterface Display {\nvoid display();\n}\npublic class Main {\npublic static void main(String[] args) {\n```\n\nDisplay displayRef = new Display() {\n\n```java\n@Override\npublic void display() {\nSystem.out.println(\"Hello from anonymous class.\");\n}\n};\ndisplayRef.display();\n}\n}\n```"
+    },
+    {
+      "question": "What is the reference type when an anonymous class implements the Display interface?",
+      "answer": "Answer: The reference can be declared using the Display interface type, even though the actual object is created from the unnamed anonymous class that implements Display."
+    },
+    {
+      "question": "How do you call an implemented method through an interface reference?",
+      "answer": "Answer: Use the interface reference followed by the dot operator and the method name. For example, displayRef.display() calls the implementation of display() on the object referenced by displayRef."
+    },
+    {
+      "question": "What is a lambda expression in Java?",
+      "answer": "Answer: A lambda expression is a concise way to provide an implementation for the single abstract method of a functional interface. It reduces the amount of code required compared with using a separate implementing class or an anonymous inner class."
+    },
+    {
+      "question": "In which Java version were lambda expressions introduced?",
+      "answer": "Answer: Lambda expressions were introduced in Java 8."
+    },
+    {
+      "question": "What is the general syntax of a lambda expression?",
+      "answer": "Answer: A lambda expression uses a parameter list, the arrow operator, and an expression or block containing the implementation.Example:() -> { System.out.println(\"Hello\"); }"
+    },
+    {
+      "question": "What does the arrow operator (->) represent in a lambda expression?",
+      "answer": "Answer: The arrow operator separates the parameter list from the implementation body. The expression or block after the arrow provides the behavior for the functional interface's abstract method."
+    },
+    {
+      "question": "How does a lambda expression reduce code compared with an anonymous inner class?",
+      "answer": "Answer: A lambda expression avoids writing the anonymous class structure and the explicit method declaration. It allows the implementation of the single abstract method to be written in a shorter form."
+    },
+    {
+      "question": "Can a lambda expression be used with any Java interface?",
+      "answer": "Answer: No. A lambda expression can be used with a functional interface, which has exactly one abstract method."
+    },
+    {
+      "question": "Why must a functional interface have exactly one abstract method to be used with a lambda expression?",
+      "answer": "Answer: A lambda expression supplies the implementation for one abstract method. Having exactly one abstract method gives Java a single method contract to associate with the lambda expression."
+    },
+    {
+      "question": "Write a Java program that implements a functional interface using a lambda expression.",
+      "answer": "Answer: The lambda expression provides the implementation of display() and is assigned directly to a Display reference.Sample Input: No input.Sample Output:Hello from lambda.\n\n```java\ninterface Display {\nvoid display();\n}\npublic class Main {\npublic static void main(String[] args) {\n```\n\nDisplay displayRef = () -> {\n\n```java\nSystem.out.println(\"Hello from lambda.\");\n};\ndisplayRef.display();\n}\n}\n```"
+    },
+    {
+      "question": "Can the same functional interface be implemented using different approaches?",
+      "answer": "Answer: Yes. The same functional interface can be implemented using a separate class, an inner class, an anonymous inner class, or a lambda expression. Each approach can provide different code for the same abstract method."
+    },
+    {
+      "question": "What is the relationship between functional interfaces, lambda expressions, and the Stream API?",
+      "answer": "Answer: Functional interfaces provide the single-method contract, and lambda expressions provide concise implementations of that contract. The Stream API can use lambda expressions when performing operations on collections, such as sorting or processing elements. The Stream API itself requires further study beyond this introductory connection."
+    }
+  ]
+}
