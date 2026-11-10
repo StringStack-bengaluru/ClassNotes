@@ -1,0 +1,1284 @@
+{
+  "title": "Notes Java Features Of Interfaces",
+  "mode": "document",
+  "source": "notes-java-features-of-interfaces.docx",
+  "pageCount": 4,
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "1. What is multiple inheritance? Can a class do it in Java?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Multiple inheritance means a child gets the content from multiple parents at the same time. In Java it is not possible with classes: a class cannot extend two classes. It can be achieved through interfaces.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "2. What happens if a class tries to extend two cl",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "asses?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "code",
+      "text": "class Calculator1 { void add(int a, int b) { } }\nclass Calculator2 { void subtract(int a, int b) { } }\nclass Demo extends Calculator1, Calculator2 { }    // compilation error"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Compilation error: error: '{' expected",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Java does not allow this. It is a ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "very important interview point.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "3. How can you achieve multiple inheritance in Java? What is the output?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Change the classes into interfaces, and let one class implement both of them.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "interface Calculator1 {\n    void add(int a, int b);\n}\ninterface Calculator2 {\n    void subtract(int a, int b);\n}\nclass Demo implements Calculator1, Calculator2 {\n    public void add(int a, int b) {\n        System.out.println(\"Sum: \" + (a + b));\n    }\n    public void subtract(int a, int b) {\n        System.out.println(\"Difference: \" + (a - b));\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Demo d = new Demo();\n        d.add(10, 5);\n        d.subtract(10, 5);\n    }\n}"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sum: 15",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Difference: 5",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Explanation",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ": Demo gets the contents of both interfaces, so multiple inheritance is achieved through interfaces and not through classes.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "4. What is the diamond problem?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "It is also called the diamond-shaped problem. Every class in Java has a parent, and the top parent is the Object class. If a class could extend two classes that both extend the same parent, the diagram looks like a diamond: the parent on top, two classes i",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "n the middle and the child at the bottom. This causes confusion for the child, and that is why Java does not allow multiple inheritance through classes. It is also known as the diamond-shaped multiple inheritance problem.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "5. What is the Object class?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Objec",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "t is the root of all the classes in Java, the top parent of every class. It was created by the Java developers and exists from the beginning of Java. If a class does not extend any class, it extends Object. In Eclipse you can open it with Ctrl + click on O",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "bject.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "6. How many constructors and methods does the Object class have?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The Object class has one constructor (a public no-argument constructor) and 11 methods. Some of them are toString(), wait() and notify(); the wait() and notify() methods are used for c",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ommunication between threads, and one of the methods is related to garbage collection. Because every class inherits from Object, all classes get these methods.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "7. Why does the diamond problem not occur with interfaces?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Interfaces do not have an Object clas",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "s as their parent, so the diamond shape does not form. The diamond problem comes when you work with classes. A normal class has a parent, but an interface does not have the Object class as its parent, and its methods are abstract. So interfaces never bring",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " the diamond-shaped problem, and multiple inheritance can be achieved through interfaces.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "8. Can you create variables inside an interface? What are they by default?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Yes. A variable inside an interface is public static final by default, just like the methods are public abstract by default. Java adds these modifiers even if you do not write them.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "interface Calculator {\n    int x = 10;      // same as: public static final int x = 10;\n}"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "9. What happens if you do not give a value to an interface variable, and what happens if you try to change it?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The variable is final, so it must be initialized when it is declared, and its value can never be changed. Trying to change it is",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " an error.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "interface Calculator {\n    int x;           // compilation error: must be initialized\n}"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Compilation error: error: = expected",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "interface Calculator {\n    int x = 10;\n}\nclass Demo implements Calculator {\n    void change() {\n        x = 20;      // compilation error\n    }\n}"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Compilation error: error: cannot assign a value to static final variable x",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "10. How do you access an interface variable? What is the output?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The variable is static, so it can be accessed with the interface name, and it can also b",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "e accessed with the name of the implementing class.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "interface Calculator {\n    int x = 10;\n}\nclass Demo implements Calculator { }\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Calculator.x);\n        System.out.println(Demo.x);\n    }\n}"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "10",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "10",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Explanation: both expressions read the same public static final variable.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "11. Why were variables created inside interfaces in the past?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Long ago, developers used an interface to create constants, ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "because its variables are public static final by default. Today nobody uses interfaces for this; constants are created in classes.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "runs": [
+        {
+          "text": "12. Can an interface be empty? What is it called?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Yes, an interface can be empty. An empty interface is also known as a marke",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "r interface. A well-known example is Serializable, which is used in serialization.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "interface Calculator {\n}"
+    },
+    {
+      "type": "blank"
+    }
+  ],
+  "pages": [
+    [
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "1. What is multiple inheritance? Can a class do it in Java?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Multiple inheritance means a child gets the content from multiple parents at the same time. In Java it is not possible with classes: a class cannot extend two classes. It can be achieved through interfaces.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "2. What happens if a class tries to extend two cl",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "asses?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "code",
+        "text": "class Calculator1 { void add(int a, int b) { } }\nclass Calculator2 { void subtract(int a, int b) { } }\nclass Demo extends Calculator1, Calculator2 { }    // compilation error"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Compilation error: error: '{' expected",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Java does not allow this. It is a ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "very important interview point.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "3. How can you achieve multiple inheritance in Java? What is the output?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Change the classes into interfaces, and let one class implement both of them.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "interface Calculator1 {\n    void add(int a, int b);\n}\ninterface Calculator2 {\n    void subtract(int a, int b);\n}\nclass Demo implements Calculator1, Calculator2 {\n    public void add(int a, int b) {\n        System.out.println(\"Sum: \" + (a + b));\n    }\n    public void subtract(int a, int b) {\n        System.out.println(\"Difference: \" + (a - b));\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Demo d = new Demo();\n        d.add(10, 5);\n        d.subtract(10, 5);\n    }\n}"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sum: 15",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Difference: 5",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Explanation",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ": Demo gets the contents of both interfaces, so multiple inheritance is achieved through interfaces and not through classes.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "4. What is the diamond problem?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "It is also called the diamond-shaped problem. Every class in Java has a parent, and the top parent is the Object class. If a class could extend two classes that both extend the same parent, the diagram looks like a diamond: the parent on top, two classes i",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "n the middle and the child at the bottom. This causes confusion for the child, and that is why Java does not allow multiple inheritance through classes. It is also known as the diamond-shaped multiple inheritance problem.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "5. What is the Object class?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Objec",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "t is the root of all the classes in Java, the top parent of every class. It was created by the Java developers and exists from the beginning of Java. If a class does not extend any class, it extends Object. In Eclipse you can open it with Ctrl + click on O",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "bject.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "6. How many constructors and methods does the Object class have?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The Object class has one constructor (a public no-argument constructor) and 11 methods. Some of them are toString(), wait() and notify(); the wait() and notify() methods are used for c",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ommunication between threads, and one of the methods is related to garbage collection. Because every class inherits from Object, all classes get these methods.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "7. Why does the diamond problem not occur with interfaces?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Interfaces do not have an Object clas",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "s as their parent, so the diamond shape does not form. The diamond problem comes when you work with classes. A normal class has a parent, but an interface does not have the Object class as its parent, and its methods are abstract. So interfaces never bring",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " the diamond-shaped problem, and multiple inheritance can be achieved through interfaces.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "8. Can you create variables inside an interface? What are they by default?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Yes. A variable inside an interface is public static final by default, just like the methods are public abstract by default. Java adds these modifiers even if you do not write them.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "interface Calculator {\n    int x = 10;      // same as: public static final int x = 10;\n}"
+      }
+    ],
+    [
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "9. What happens if you do not give a value to an interface variable, and what happens if you try to change it?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The variable is final, so it must be initialized when it is declared, and its value can never be changed. Trying to change it is",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " an error.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "interface Calculator {\n    int x;           // compilation error: must be initialized\n}"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Compilation error: error: = expected",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "interface Calculator {\n    int x = 10;\n}\nclass Demo implements Calculator {\n    void change() {\n        x = 20;      // compilation error\n    }\n}"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Compilation error: error: cannot assign a value to static final variable x",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "10. How do you access an interface variable? What is the output?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The variable is static, so it can be accessed with the interface name, and it can also b",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "e accessed with the name of the implementing class.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "interface Calculator {\n    int x = 10;\n}\nclass Demo implements Calculator { }\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Calculator.x);\n        System.out.println(Demo.x);\n    }\n}"
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "10",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "10",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "blank"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Explanation: both expressions read the same public static final variable.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "11. Why were variables created inside interfaces in the past?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Long ago, developers used an interface to create constants, ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "because its variables are public static final by default. Today nobody uses interfaces for this; constants are created in classes.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "heading",
+        "level": 3,
+        "runs": [
+          {
+            "text": "12. Can an interface be empty? What is it called?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Yes, an interface can be empty. An empty interface is also known as a marke",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "r interface. A well-known example is Serializable, which is used in serialization.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "interface Calculator {\n}"
+      }
+    ]
+  ]
+}

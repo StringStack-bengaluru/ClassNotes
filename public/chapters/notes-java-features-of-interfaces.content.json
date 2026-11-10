@@ -1,0 +1,55 @@
+{
+  "title": "Notes Java Features Of Interfaces",
+  "itemsPerPage": 2,
+  "source": "notes-java-features-of-interfaces.docx",
+  "items": [
+    {
+      "question": "What is multiple inheritance? Can a class do it in Java?",
+      "answer": "Answer: Multiple inheritance means a child gets the content from multiple parents at the same time. In Java it is not possible with classes: a class cannot extend two classes. It can be achieved through interfaces."
+    },
+    {
+      "question": "What happens if a class tries to extend two classes?",
+      "answer": "Answer: ```java\nclass Calculator1 { void add(int a, int b) { } }\nclass Calculator2 { void subtract(int a, int b) { } }\nclass Demo extends Calculator1, Calculator2 { }    // compilation error\n```\n\nCompilation error: error: '{' expected Java does not allow this. It is a very important interview point."
+    },
+    {
+      "question": "How can you achieve multiple inheritance in Java? What is the output?",
+      "answer": "Answer: Change the classes into interfaces, and let one class implement both of them.\n\n```java\ninterface Calculator1 {\nvoid add(int a, int b);\n}\ninterface Calculator2 {\nvoid subtract(int a, int b);\n}\nclass Demo implements Calculator1, Calculator2 {\npublic void add(int a, int b) {\nSystem.out.println(\"Sum: \" + (a + b));\n}\npublic void subtract(int a, int b) {\nSystem.out.println(\"Difference: \" + (a - b));\n}\n}\npublic class Main {\npublic static void main(String[] args) {\nDemo d = new Demo();\nd.add(10, 5);\nd.subtract(10, 5);\n}\n}\n```\n\nOutput: Sum: 15 Difference: 5 Explanation: Demo gets the contents of both interfaces, so multiple inheritance is achieved through interfaces and not through classes."
+    },
+    {
+      "question": "What is the diamond problem?",
+      "answer": "Answer: It is also called the diamond-shaped problem. Every class in Java has a parent, and the top parent is the Object class. If a class could extend two classes that both extend the same parent, the diagram looks like a diamond: the parent on top, two classes in the middle and the child at the bottom. This causes confusion for the child, and that is why Java does not allow multiple inheritance through classes. It is also known as the diamond-shaped multiple inheritance problem."
+    },
+    {
+      "question": "What is the Object class?",
+      "answer": "Answer: Object is the root of all the classes in Java, the top parent of every class. It was created by the Java developers and exists from the beginning of Java. If a class does not extend any class, it extends Object. In Eclipse you can open it with Ctrl + click on Object."
+    },
+    {
+      "question": "How many constructors and methods does the Object class have?",
+      "answer": "Answer: The Object class has one constructor (a public no-argument constructor) and 11 methods. Some of them are toString(), wait() and notify(); the wait() and notify() methods are used for communication between threads, and one of the methods is related to garbage collection. Because every class inherits from Object, all classes get these methods."
+    },
+    {
+      "question": "Why does the diamond problem not occur with interfaces?",
+      "answer": "Answer: Interfaces do not have an Object class as their parent, so the diamond shape does not form. The diamond problem comes when you work with classes. A normal class has a parent, but an interface does not have the Object class as its parent, and its methods are abstract. So interfaces never bring the diamond-shaped problem, and multiple inheritance can be achieved through interfaces."
+    },
+    {
+      "question": "Can you create variables inside an interface? What are they by default?",
+      "answer": "Answer: Yes. A variable inside an interface is public static final by default, just like the methods are public abstract by default. Java adds these modifiers even if you do not write them.\n\n```java\ninterface Calculator {\nint x = 10;      // same as: public static final int x = 10;\n}\n```"
+    },
+    {
+      "question": "What happens if you do not give a value to an interface variable, and what happens if you try to change it?",
+      "answer": "Answer: The variable is final, so it must be initialized when it is declared, and its value can never be changed. Trying to change it is an error.\n\n```java\ninterface Calculator {\nint x;           // compilation error: must be initialized\n}\n```\n\nCompilation error: error: = expected\n\n```java\ninterface Calculator {\nint x = 10;\n}\nclass Demo implements Calculator {\n```\n\nvoid change() { x = 20; // compilation error\n\n```java\n}\n}\n```\n\nCompilation error: error: cannot assign a value to static final variable x"
+    },
+    {
+      "question": "How do you access an interface variable? What is the output?",
+      "answer": "Answer: The variable is static, so it can be accessed with the interface name, and it can also be accessed with the name of the implementing class.\n\n```java\ninterface Calculator {\nint x = 10;\n}\nclass Demo implements Calculator { }\npublic class Main {\npublic static void main(String[] args) {\nSystem.out.println(Calculator.x);\nSystem.out.println(Demo.x);\n}\n}\n```\n\nOutput: 10 10 Explanation: both expressions read the same public static final variable."
+    },
+    {
+      "question": "Why were variables created inside interfaces in the past?",
+      "answer": "Answer: Long ago, developers used an interface to create constants, because its variables are public static final by default. Today nobody uses interfaces for this; constants are created in classes."
+    },
+    {
+      "question": "Can an interface be empty? What is it called?",
+      "answer": "Answer: Yes, an interface can be empty. An empty interface is also known as a marker interface. A well-known example is Serializable, which is used in serialization.\n\n```java\ninterface Calculator {\n}\n```"
+    }
+  ]
+}
