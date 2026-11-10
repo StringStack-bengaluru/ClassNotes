@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java New Features Of Interfaces",
+  "itemsPerPage": 2,
+  "source": "notes-java-new-features-of-interfaces.docx",
+  "items": [
+    {
+      "question": "What types of methods can be declared inside a Java interface?",
+      "answer": "Answer: A Java interface can contain abstract methods, default methods, static methods, and private methods. Private static methods can also be declared to support shared logic inside the interface."
+    },
+    {
+      "question": "What is a default method in a Java interface?",
+      "answer": "Answer: A default method is an interface method that has an implementation body. It is declared using the default keyword and provides behavior that implementing classes can use without writing their own implementation."
+    },
+    {
+      "question": "In which Java version were default methods introduced?",
+      "answer": "Answer: Default methods were introduced in Java 8."
+    },
+    {
+      "question": "Why were default methods introduced in Java interfaces?",
+      "answer": "Answer: Default methods allow new functionality to be added to an existing interface without forcing every existing implementing class to provide a new method implementation. This helps maintain backward compatibility."
+    },
+    {
+      "question": "What is backward compatibility in Java?",
+      "answer": "Answer: Backward compatibility means that an application or existing code continues to work after a new feature or change is introduced, without requiring unnecessary changes to code that was already working."
+    },
+    {
+      "question": "What problem can occur when an abstract method is added to an existing interface?",
+      "answer": "Answer: Every concrete class that implements the interface must provide an implementation for the new abstract method. In a large application with many implementing classes, this can require changes in many places and may cause compilation errors until those classes are updated."
+    },
+    {
+      "question": "How does a default method help when a new feature is added to an existing interface?",
+      "answer": "Answer: A default method provides a ready-made implementation inside the interface. Existing implementing classes can use that implementation without being forced to add the method themselves."
+    },
+    {
+      "question": "Is a default method inherited by a class that implements the interface?",
+      "answer": "Answer: Yes. An implementing class can use the default method provided by the interface, even when the class does not declare that method itself."
+    },
+    {
+      "question": "Can an implementing class override a default method?",
+      "answer": "Answer: Yes. An implementing class can provide its own method body with the same method signature. The class-specific implementation is then used instead of the interface's default implementation."
+    },
+    {
+      "question": "How do you override a default method in an implementing class?",
+      "answer": "Answer: Declare a method with the same signature in the implementing class and provide the required body. The @Override annotation can be used to indicate that the method is being overridden."
+    },
+    {
+      "question": "Can the default keyword be used to declare a default method inside a normal class?",
+      "answer": "Answer: No. In this context, the default keyword is used to declare a default method inside an interface. A normal class declares its concrete methods with a method body without using the default keyword."
+    },
+    {
+      "question": "What happens if a method body is added to an interface method without using an appropriate method declaration?",
+      "answer": "Answer: A concrete instance method in an interface must be declared as a default method. Without the required declaration, the compiler reports an error because the method body is not valid for an ordinary abstract interface method."
+    },
+    {
+      "question": "How does the SeaAnimal example demonstrate a default method?",
+      "answer": "Answer: The SeaAnimal interface declares swim() as an abstract method and communicate() as a default method. Shark and Dolphin implement swim(), while they can use the default communicate() implementation provided by the interface."
+    },
+    {
+      "question": "Write a Java program in which Shark and Dolphin use a default method from the SeaAnimal interface.",
+      "answer": "Answer: The SeaAnimal interface declares swim() as an abstract method and communicate() as a default method. Shark overrides communicate(), while Dolphin uses the default implementation. Sample Output:Shark swims.Shark communicates in its own way.Dolphin swims.Sea animals communicate.\n\n```java\ninterface SeaAnimal {\nvoid swim();\ndefault void communicate() {\nSystem.out.println(\"Sea animals communicate.\");\n}\n}\nclass Shark implements SeaAnimal {\npublic void swim() { System.out.println(\"Shark swims.\"); }\n@Override\npublic void communicate() { System.out.println(\"Shark communicates in its own way.\"); }\n}\nclass Dolphin implements SeaAnimal {\npublic void swim() { System.out.println(\"Dolphin swims.\"); }\n}\nclass Main {\npublic static void main(String[] args) {\nSeaAnimal shark = new Shark(), dolphin = new Dolphin();\nshark.swim();\nshark.communicate();\ndolphin.swim();\ndolphin.communicate();\n}\n}\n```"
+    },
+    {
+      "question": "What is a static method in a Java interface?",
+      "answer": "Answer: A static method is a method that belongs to the interface itself rather than to an implementing object. It has a method body and can be called using the interface name."
+    },
+    {
+      "question": "In which Java version were static methods introduced in interfaces?",
+      "answer": "Answer: Static methods in interfaces were introduced in Java 8."
+    },
+    {
+      "question": "Why are static methods provided inside interfaces?",
+      "answer": "Answer: They allow functionality or utility behavior related to the interface to be accessed directly through the interface name, without requiring an implementing class object."
+    },
+    {
+      "question": "How do you call a static method declared inside an interface?",
+      "answer": "Answer: Call it by using the interface name followed by the method name, such as Calculator.showInfo()."
+    },
+    {
+      "question": "Are static methods declared in an interface inherited by implementing classes?",
+      "answer": "Answer: No. An interface's static methods are not inherited by the classes that implement it. They are accessed through the interface name."
+    },
+    {
+      "question": "What is the difference between a default method and a static method in an interface?",
+      "answer": "Answer: A default method is inherited by implementing classes and can be overridden by them. A static method belongs to the interface itself, is called using the interface name, and is not inherited by implementing classes."
+    },
+    {
+      "question": "Can an interface contain private methods?",
+      "answer": "Answer: Yes. An interface can contain private methods. They provide internal helper logic that can be reused by other methods declared in the same interface."
+    },
+    {
+      "question": "In which Java version were private methods introduced in interfaces?",
+      "answer": "Answer: Private methods in interfaces were introduced in Java 9."
+    },
+    {
+      "question": "Why were private methods introduced in interfaces?",
+      "answer": "Answer: Private methods help remove duplicated code. When multiple default methods need to perform the same internal steps, those steps can be placed in one private method and called from each default method."
+    },
+    {
+      "question": "Can an implementing class inherit or directly call a private interface method?",
+      "answer": "Answer: No. A private interface method is intended for use inside the interface. It is not inherited by implementing classes and cannot be called directly from outside the interface."
+    },
+    {
+      "question": "Can a default method inside an interface call a private instance method?",
+      "answer": "Answer: Yes. A default method can call a private instance method declared in the same interface. This allows multiple default methods to reuse common instance-level logic."
+    },
+    {
+      "question": "What is a private static method in a Java interface?",
+      "answer": "Answer: A private static method is a static helper method declared with the private access modifier inside an interface. It can be used by other suitable static methods within that same interface."
+    },
+    {
+      "question": "Why would an interface use a private static method?",
+      "answer": "Answer: A private static method can hold common logic used by multiple static methods in the interface. It reduces duplicated code while keeping the helper method hidden from implementing classes and external callers."
+    },
+    {
+      "question": "Why must a private helper method be static when it is called from a static interface method?",
+      "answer": "Answer: A static method cannot directly call a non-static instance method because it does not operate on an instance. A private static helper can be called from a static interface method."
+    },
+    {
+      "question": "Write a Java interface that uses a private method to avoid duplicating logic in two default methods.",
+      "answer": "Answer: Both default methods call the same private helper method. The shared steps are written once, which avoids repeating the same code in both methods.Sample Output:Student wakes up and checks the mobile.Personal life activities.Student wakes up and checks the mobile.Professional life activities.\n\n```java\ninterface Student {\ndefault void personalLife() {\ndailyRoutine();\nSystem.out.println(\"Personal life activities.\");\n}\ndefault void professionalLife() {\ndailyRoutine();\nSystem.out.println(\"Professional life activities.\");\n}\nprivate void dailyRoutine() {\nSystem.out.println(\"Student wakes up and checks the mobile.\");\n}\n}\nclass Learner implements Student { }\nclass Main {\npublic static void main(String[] args) {\nStudent student = new Learner();\nstudent.personalLife();\nstudent.professionalLife();\n}\n}\n```"
+    },
+    {
+      "question": "Write a Java interface that uses a private static method from two static methods.",
+      "answer": "Answer: The two public static methods call a common private static helper. The helper remains accessible only within the interface.Sample Output:Common interface logic.First static operation completed.Common interface logic.Second static operation completed.\n\n```java\ninterface InterfaceUtility {\nstatic void firstOperation() {\ncommonLogic();\nSystem.out.println(\"First static operation completed.\");\n}\nstatic void secondOperation() {\ncommonLogic();\nSystem.out.println(\"Second static operation completed.\");\n}\nprivate static void commonLogic() {\nSystem.out.println(\"Common interface logic.\");\n}\n}\nclass Main {\npublic static void main(String[] args) {\nInterfaceUtility.firstOperation();\nInterfaceUtility.secondOperation();\n}\n}\n```"
+    }
+  ]
+}
