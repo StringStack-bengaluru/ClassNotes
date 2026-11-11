@@ -1,0 +1,203 @@
+{
+  "title": "Notes Java Knowing About Exception Family",
+  "itemsPerPage": 2,
+  "source": "notes-java-knowing-about-exception-family.docx",
+  "items": [
+    {
+      "question": "Why are an exception and an error not considered synonyms in Java?",
+      "answer": "Answer: An exception and an error are different categories of problems represented by different classes in Java. Both belong to the Throwable family, but Exception and Error are separate branches. An exception commonly represents a condition an application may handle, while an Error generally represents a serious problem affecting the running environment or available resources."
+    },
+    {
+      "question": "What is a compile-time error?",
+      "answer": "Answer: A compile-time error is reported while Java source code is being compiled. It commonly occurs when the code does not follow Java syntax or language rules, such as a missing semicolon, a missing brace, or an invalid method declaration."
+    },
+    {
+      "question": "How should a missing semicolon or brace be corrected?",
+      "answer": "Answer: The source code must be corrected by adding the missing symbol or fixing the syntax. A try-catch block does not repair invalid Java syntax because the program must compile successfully before it can run."
+    },
+    {
+      "question": "What is a runtime error?",
+      "answer": "Answer: A runtime error is a problem that occurs while the Java program is executing. The program may compile successfully and then encounter a problem during execution, such as exhausting the call stack or running out of available memory."
+    },
+    {
+      "question": "Are all problems that occur at runtime exceptions?",
+      "answer": "Answer: No. A runtime problem may be represented by an Exception object or by an Error object. StackOverflowError and OutOfMemoryError are examples of runtime errors, not subclasses of Exception."
+    },
+    {
+      "question": "What is the Error class in Java?",
+      "answer": "Answer: Error is a class in Java's Throwable hierarchy. It represents serious problems that an application generally is not expected to recover from through ordinary exception handling. StackOverflowError and OutOfMemoryError are examples of Error subclasses."
+    },
+    {
+      "question": "How does Java represent a runtime problem as an object?",
+      "answer": "Answer: Java represents many runtime problems through objects created from predefined classes. When a problem occurs, the JVM or Java runtime can create an appropriate Throwable object, such as an ArithmeticException or StackOverflowError, and make it available for handling or reporting."
+    },
+    {
+      "question": "What is a StackOverflowError?",
+      "answer": "Answer: StackOverflowError occurs when a thread needs more call-stack space than is available. A common cause is repeated method calls, especially recursion that continues without reaching a terminating condition."
+    },
+    {
+      "question": "What is the call stack in Java?",
+      "answer": "Answer: The call stack is the memory structure used to manage active method invocations for a thread. It tracks the methods that have been called and have not yet completed."
+    },
+    {
+      "question": "What is a stack frame?",
+      "answer": "Answer: A stack frame is the stack entry associated with a method invocation. It holds the information needed for that method call, including its local execution state. A new frame is created when a method is invoked."
+    },
+    {
+      "question": "What happens to the call stack when one method calls another method?",
+      "answer": "Answer: The new method invocation receives its own stack frame. When the called method completes, its frame is removed and execution returns to the calling method."
+    },
+    {
+      "question": "How can repeated recursive calls cause a StackOverflowError?",
+      "answer": "Answer: Each recursive method invocation creates another stack frame. If the method keeps calling itself without reaching a base case, the stack continues to grow until its available space is exhausted, causing StackOverflowError."
+    },
+    {
+      "question": "Why can the call stack not grow without limit?",
+      "answer": "Answer: The call stack uses a finite amount of memory allocated for the thread. It cannot create an unlimited number of stack frames, so excessive nested or recursive calls can exhaust the available stack space."
+    },
+    {
+      "question": "What is an OutOfMemoryError?",
+      "answer": "Answer: OutOfMemoryError is an Error that can occur when the Java runtime cannot allocate the memory required for an operation. It indicates that the runtime could not satisfy a memory request with the memory available to it."
+    },
+    {
+      "question": "What is the difference between StackOverflowError and OutOfMemoryError?",
+      "answer": "Answer: StackOverflowError is associated with exhausting the space available for a thread's call stack, often because of excessive method calls. OutOfMemoryError is associated with the runtime being unable to allocate required memory."
+    },
+    {
+      "question": "Can a try-catch statement be used to catch an Error?",
+      "answer": "Answer: Yes. A try-catch statement can catch an Error when the catch parameter's declared type is compatible with the actual Error object. For example, catch (StackOverflowError e) can catch a StackOverflowError. Catching an Error does not mean the underlying resource problem has been repaired."
+    },
+    {
+      "question": "Why does catch (Exception e) not catch a StackOverflowError?",
+      "answer": "Answer: StackOverflowError belongs to the Error branch of the Throwable hierarchy, while Exception belongs to a separate branch. StackOverflowError is not a subclass of Exception, so catch (Exception e) does not match it."
+    },
+    {
+      "question": "What is the role of the Throwable class in Java?",
+      "answer": "Answer: Throwable is the common superclass for Java's Exception and Error classes. Objects that can be thrown and caught in Java belong to this hierarchy."
+    },
+    {
+      "question": "What is the basic inheritance relationship among Object, Throwable, Exception, and RuntimeException?",
+      "answer": "Answer: Object is the root superclass. Throwable extends Object, Exception extends Throwable, and RuntimeException extends Exception. Specific unchecked exception classes, such as ArithmeticException, extend RuntimeException."
+    },
+    {
+      "question": "How are Exception and Error related to each other?",
+      "answer": "Answer: Exception and Error are sibling branches under Throwable. Both extend Throwable, but Error does not extend Exception and Exception does not extend Error."
+    },
+    {
+      "question": "Where does RuntimeException appear in the exception hierarchy?",
+      "answer": "Answer: RuntimeException is a subclass of Exception. Many commonly encountered unchecked exceptions, including ArithmeticException, NullPointerException, InputMismatchException, and ArrayIndexOutOfBoundsException, belong to the RuntimeException branch."
+    },
+    {
+      "question": "What are examples of checked exception classes?",
+      "answer": "Answer: Examples of checked exception classes include IOException, FileNotFoundException, ClassNotFoundException, and SQLException. These exception types are subject to Java's catch-or-declare requirement."
+    },
+    {
+      "question": "What makes an exception checked?",
+      "answer": "Answer: A checked exception is one that the compiler requires the programmer to handle or declare. A method that may propagate a checked exception must catch it or declare it using throws."
+    },
+    {
+      "question": "What makes an exception unchecked?",
+      "answer": "Answer: An unchecked exception is not subject to the compiler's mandatory catch-or-declare rule. Many unchecked exceptions are subclasses of RuntimeException and occur when an invalid condition is encountered during execution."
+    },
+    {
+      "question": "Why is division by zero a useful example of an unchecked exception?",
+      "answer": "Answer: The compiler can compile a division expression when the divisor is obtained from user input because the divisor's value is not known in advance. If the user enters zero, the program encounters an ArithmeticException during execution."
+    },
+    {
+      "question": "What happens when a user enters a valid nonzero denominator in an integer division program?",
+      "answer": "Answer: The division can complete normally, and the calculated quotient is stored and can be displayed. For example, 100 divided by 10 produces 10, while 100 divided by 20 produces 5."
+    },
+    {
+      "question": "What happens when a user enters zero as the denominator in an integer division program?",
+      "answer": "Answer: The division operation throws an ArithmeticException at runtime because integer division by zero is not valid. Control transfers to a compatible catch block, if one is present."
+    },
+    {
+      "question": "How can an ArithmeticException caused by user input be handled?",
+      "answer": "Answer: Place the division operation inside a try block and provide a catch block for ArithmeticException. The following program reads two integers and handles a zero denominator.\n\n```java\nimport java.util.Scanner;public class DivisionExceptionDemo {    public static void main(String[] args) {        Scanner scan = new Scanner(System.in);        System.out.print(\"Enter numerator: \");        int numerator = scan.nextInt();        System.out.print(\"Enter denominator: \");        int denominator = scan.nextInt();        try {            int result = numerator / denominator;            System.out.println(\"Result: \" + result);        } catch (ArithmeticException e) {            System.out.println(\"Cannot divide by zero.\");        }        scan.close();    }}\n```\n\nSample Input: 1000Sample Output:Enter numerator: 100Enter denominator: 0Cannot divide by zero."
+    },
+    {
+      "question": "Why does the Java compiler not detect every unchecked exception before the program runs?",
+      "answer": "Answer: The compiler does not know every value that will be supplied or every runtime condition that will occur. For example, a denominator may be nonzero for one execution and zero for another. The resulting ArithmeticException is therefore detected when the operation executes."
+    },
+    {
+      "question": "Why are exception classes described as one inheritance family?",
+      "answer": "Answer: Exception classes are related through inheritance. Specific exception classes extend broader exception classes, and those classes ultimately belong to the common Throwable hierarchy. This relationship allows a parent type to represent objects of its child types."
+    },
+    {
+      "question": "Why can catch (Exception e) handle an ArithmeticException?",
+      "answer": "Answer: ArithmeticException is a subclass of RuntimeException, and RuntimeException is a subclass of Exception. A catch parameter declared as Exception can therefore refer to an ArithmeticException object through the parent type."
+    },
+    {
+      "question": "Why can a parent exception type catch multiple specific exception types?",
+      "answer": "Answer: A parent type can refer to instances of its subclasses. Because many specific exception classes inherit from Exception, a catch parameter declared as Exception can receive different exception objects from that branch of the hierarchy."
+    },
+    {
+      "question": "Why can catch (RuntimeException e) handle ArithmeticException but not IOException?",
+      "answer": "Answer: ArithmeticException is a subclass of RuntimeException, so the catch type is a parent of the thrown object. IOException is not a subclass of RuntimeException; it belongs to a different branch under Exception."
+    },
+    {
+      "question": "What happens when the catch parameter type is not compatible with the thrown object?",
+      "answer": "Answer: The catch block does not match that thrown object. The exception continues searching for another compatible handler, and if no handler is found, it propagates to the caller or remains uncaught."
+    },
+    {
+      "question": "How does polymorphism relate to the type used in a catch parameter?",
+      "answer": "Answer: A catch parameter can be declared using a parent class while receiving an object created from one of its child classes. This is the same parent-reference/child-object relationship used in polymorphism and upcasting."
+    },
+    {
+      "question": "Why is using a parent exception type in a catch block described as loose coupling?",
+      "answer": "Answer: The catch block can work with multiple child exception types without being tied to one specific subclass. The code depends on the parent type, while the actual exception object can be an instance of any compatible child class."
+    },
+    {
+      "question": "Why is a generic Exception catch block useful?",
+      "answer": "Answer: A catch block declared with Exception can handle many checked and unchecked exception classes that inherit from Exception. It can serve as a broader fallback after more specific catch blocks, but it does not catch Error objects."
+    },
+    {
+      "question": "What does the getMessage() method provide?",
+      "answer": "Answer: getMessage() returns the detail message associated with a Throwable object. It is useful when the programmer needs a concise explanation of why an exception or error occurred."
+    },
+    {
+      "question": "Why is getMessage() useful when debugging a large application?",
+      "answer": "Answer: A large application may contain many instructions and many possible failure points. The message returned by getMessage() can reveal the reason associated with the thrown object and help narrow down what needs to be investigated."
+    },
+    {
+      "question": "What does the printStackTrace() method display?",
+      "answer": "Answer: printStackTrace() prints the Throwable's description and stack trace. The stack trace shows the sequence of method calls involved and identifies locations in the code associated with the failure."
+    },
+    {
+      "question": "What three kinds of information can be obtained from printStackTrace()?",
+      "answer": "Answer: It provides the exception or error description, the type or class of the Throwable object, and the stack trace showing where the problem occurred in the call sequence."
+    },
+    {
+      "question": "Why can printStackTrace() be more useful than getMessage() when locating a problem?",
+      "answer": "Answer: getMessage() provides the detail message, but it does not show the full call path. printStackTrace() also shows the exception type and the method/line locations involved, which can make it easier to locate a problem in a large application."
+    },
+    {
+      "question": "What is the return type of printStackTrace()?",
+      "answer": "Answer: printStackTrace() has a void return type. It prints the stack-trace information directly and does not return a value that can be passed to another method."
+    },
+    {
+      "question": "Why should printStackTrace() not be written as System.out.println(e.printStackTrace())?",
+      "answer": "Answer: printStackTrace() returns void, not a String or another printable value. It performs the printing itself, so it should be called directly as e.printStackTrace()."
+    },
+    {
+      "question": "How can getMessage() and printStackTrace() be used together while handling an exception?",
+      "answer": "Answer: Call getMessage() to print the concise detail message, then call printStackTrace() to display the exception type and call path. Both methods can be called on the caught Throwable reference.\n\n```java\npublic class ExceptionDetailsDemo {    public static void main(String[] args) {        try {            int result = 10 / 0;            System.out.println(result);        } catch (ArithmeticException e) {            System.out.println(\"Message: \" + e.getMessage());            e.printStackTrace();        }    }}\n```\n\nSample Input: No input.Sample Output:Message: / by zerojava.lang.ArithmeticException: / by zero at ExceptionDetailsDemo.main(ExceptionDetailsDemo.java:5)(The exact line number depends on the file.)"
+    },
+    {
+      "question": "Why are getMessage() and printStackTrace() available on both Exception and Error objects?",
+      "answer": "Answer: Both Exception and Error inherit from Throwable. These methods are defined in the Throwable class, so objects from either branch inherit them and can use them."
+    },
+    {
+      "question": "What is the difference between a built-in exception and a custom exception?",
+      "answer": "Answer: A built-in exception class is already provided by Java. A custom exception is a class created by the application developer to represent a condition specific to the application's own requirements."
+    },
+    {
+      "question": "Why might an application need a custom exception?",
+      "answer": "Answer: A built-in exception may not describe a particular business rule or application-specific condition clearly enough. A developer can define a custom exception type to represent that requirement in a meaningful way."
+    },
+    {
+      "question": "What does the term custom exception mean in Java?",
+      "answer": "Answer: A custom exception is an exception class created by the programmer rather than one supplied as a built-in Java exception class. It allows an application to define its own exception type for a particular need."
+    }
+  ]
+}
