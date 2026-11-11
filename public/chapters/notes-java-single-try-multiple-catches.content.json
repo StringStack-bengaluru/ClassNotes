@@ -1,0 +1,107 @@
+{
+  "title": "Notes Java Single Try Multiple Catches",
+  "itemsPerPage": 2,
+  "source": "notes-java-single-try-multiple-catches.docx",
+  "items": [
+    {
+      "question": "Which additional exception types can occur in a program that performs division and array operations?",
+      "answer": "Answer: The program can encounter ArithmeticException, NegativeArraySizeException, InputMismatchException, and ArrayIndexOutOfBoundsException. Each exception represents a different problem during execution."
+    },
+    {
+      "question": "What is NegativeArraySizeException in Java?",
+      "answer": "Answer: NegativeArraySizeException occurs when a program attempts to create an array using a negative size."
+    },
+    {
+      "question": "When does Java throw NegativeArraySizeException?",
+      "answer": "Answer: Java throws NegativeArraySizeException when an array is created with a negative length, such as `new int[-5]`. An array length cannot be negative."
+    },
+    {
+      "question": "What is ArrayIndexOutOfBoundsException in Java?",
+      "answer": "Answer: ArrayIndexOutOfBoundsException occurs when a program tries to access an array position that is outside the array's valid index range."
+    },
+    {
+      "question": "How are valid indexes determined for a Java array?",
+      "answer": "Answer: For an array with `length` elements, the valid indexes start at 0 and end at `length - 1`. For example, an array of size 5 has valid indexes 0, 1, 2, 3, and 4."
+    },
+    {
+      "question": "What is InputMismatchException in Java?",
+      "answer": "Answer: InputMismatchException occurs when the input received by a Scanner method does not match the type of value expected by that method."
+    },
+    {
+      "question": "When can Scanner.nextInt() throw InputMismatchException?",
+      "answer": "Answer: Scanner.nextInt() expects an integer value. If the user enters a value such as `hello` instead of an integer, Scanner throws InputMismatchException."
+    },
+    {
+      "question": "Why can one Java program produce different types of exceptions?",
+      "answer": "Answer: A program can contain several operations that can fail for different reasons. Integer division, array creation, reading typed input, and accessing an array element can each produce a different exception."
+    },
+    {
+      "question": "What is the purpose of using one try block with multiple catch blocks?",
+      "answer": "Answer: It allows a group of risky statements to be monitored in one try block while providing separate handling code for different exception types."
+    },
+    {
+      "question": "What is the difference between a generic catch block and a specific catch block?",
+      "answer": "Answer: A generic catch block handles a broad exception type and can display a general message. A specific catch block handles a particular exception type and can display a message suited to that problem."
+    },
+    {
+      "question": "Why are multiple specific catch blocks useful?",
+      "answer": "Answer: Different exceptions can require different responses. Separate catch blocks allow the program to display a meaningful message for each problem, such as asking for a valid integer or a non-negative array size."
+    },
+    {
+      "question": "How does Java decide which catch block should handle an exception?",
+      "answer": "Answer: Java checks the catch blocks in their written order. It executes the first catch block whose declared exception type is compatible with the exception object."
+    },
+    {
+      "question": "Can more than one catch block execute for a single exception thrown from a try block?",
+      "answer": "Answer: No. Only the first compatible catch block executes for that exception. The remaining catch blocks are skipped."
+    },
+    {
+      "question": "What does it mean for a catch block's exception type to be compatible with an exception object?",
+      "answer": "Answer: A catch block is compatible when its declared type can receive the thrown exception object. A catch parameter can use the exact exception class or an appropriate superclass of that class."
+    },
+    {
+      "question": "Why should specific catch blocks be placed before a general catch block?",
+      "answer": "Answer: A general catch type such as Exception can also match many specific exception objects. Placing it first can prevent the later specific catch blocks from being reached."
+    },
+    {
+      "question": "What happens if catch(Exception e) is placed before catch(ArithmeticException e)?",
+      "answer": "Answer: The later ArithmeticException catch block becomes unreachable because the earlier Exception catch block already matches ArithmeticException. Java reports a compilation error for the unreachable catch block."
+    },
+    {
+      "question": "Where should a general catch(Exception e) block be placed when specific catch blocks are also present?",
+      "answer": "Answer: Place the general catch block after the specific catch blocks. This allows Java to check the specific handlers first and use the general handler only when none of them matches."
+    },
+    {
+      "question": "What happens when an exception occurs inside a try block?",
+      "answer": "Answer: Execution leaves the try block at the point where the exception occurs. The remaining statements in that try block are skipped, and Java looks for a compatible catch block."
+    },
+    {
+      "question": "What happens after a matching catch block finishes execution?",
+      "answer": "Answer: Execution continues with the statements that appear after the complete try-catch structure, provided the application has no other condition that stops it."
+    },
+    {
+      "question": "What is the purpose of the exception variable declared in a catch block?",
+      "answer": "Answer: The variable receives the exception object. The catch block can use that object to access information about the exception or decide what message to display."
+    },
+    {
+      "question": "What is risky code in Java exception handling?",
+      "answer": "Answer: Risky code is an instruction that may generate an exception depending on the input or runtime condition. Examples include dividing by a value that may be zero, creating an array using a user-provided size, and accessing an array using a user-provided index."
+    },
+    {
+      "question": "Which statements should be placed inside a try block?",
+      "answer": "Answer: Place the related statements that have a possibility of generating an exception inside the try block. The try block should focus on code that needs exception monitoring rather than enclosing unrelated instructions."
+    },
+    {
+      "question": "Why should a separate try block not be added around every individual statement?",
+      "answer": "Answer: Using too many try blocks increases the amount of code and makes the program harder to read. Related risky instructions can be grouped inside one try block and handled with multiple catch blocks."
+    },
+    {
+      "question": "What is the difference between NegativeArraySizeException and ArrayIndexOutOfBoundsException?",
+      "answer": "Answer: NegativeArraySizeException occurs when an array is created with a negative size. ArrayIndexOutOfBoundsException occurs when an existing array is accessed using an index outside its valid range."
+    },
+    {
+      "question": "Write a Java program that handles arithmetic, negative array size, input mismatch, and invalid array index exceptions using one try block and multiple catch blocks.",
+      "answer": "Answer: The program reads integer values, performs division, creates an array, and stores a value at a selected index. Each specific catch block handles one type of exception and displays a suitable message. A final statement shows that execution can continue after the exception is handled.Sample Input 1:100 0Sample Output 1:Cannot divide by zero.Program continues after exception handling.Sample Input 2:100 10 -5Sample Output 2:Result: 10Array size cannot be negative.Program continues after exception handling.Sample Input 3:100 10 5 helloSample Output 3:Result: 10Please enter integer values only.Program continues after exception handling.Sample Input 4:100 10 5 200 7Sample Output 4:Result: 10Index is outside the valid array range.Program continues after exception handling.Sample Input 5:100 10 5 200 2Sample Output 5:Result: 10Stored value: 200Program continues after exception handling.\n\n```java\nimport java.util.InputMismatchException;\nimport java.util.Scanner;\npublic class MultipleCatchDemo {\npublic static void main(String[] args) {\nScanner scanner = new Scanner(System.in);\ntry {\nint numerator = scanner.nextInt();\nint denominator = scanner.nextInt();\nint result = numerator / denominator;\nSystem.out.println(\"Result: \" + result);\nint size = scanner.nextInt();\nint[] numbers = new int[size];\nint value = scanner.nextInt();\nint index = scanner.nextInt();\nnumbers[index] = value;\nSystem.out.println(\"Stored value: \" + numbers[index]);\n```\n\n} catch (ArithmeticException e) {\n\n```java\nSystem.out.println(\"Cannot divide by zero.\");\n```\n\n} catch (NegativeArraySizeException e) {\n\n```java\nSystem.out.println(\"Array size cannot be negative.\");\n```\n\n} catch (InputMismatchException e) {\n\n```java\nSystem.out.println(\"Please enter integer values only.\");\n```\n\n} catch (ArrayIndexOutOfBoundsException e) {\n\n```java\nSystem.out.println(\"Index is outside the valid array range.\");\n```\n\n} catch (Exception e) {\n\n```java\nSystem.out.println(\"An unexpected error occurred.\");\n}\nSystem.out.println(\"Program continues after exception handling.\");\nscanner.close();\n}\n}\n```"
+    }
+  ]
+}
