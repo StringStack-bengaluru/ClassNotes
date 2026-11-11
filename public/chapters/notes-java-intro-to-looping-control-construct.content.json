@@ -1,0 +1,67 @@
+{
+  "title": "Notes Java Intro To Looping Control Construct",
+  "itemsPerPage": 2,
+  "source": "notes-java-intro-to-looping-control-construct.docx",
+  "items": [
+    {
+      "question": "What is a statement in Java, and in what order are statements executed?",
+      "answer": "Answer: A statement is one complete instruction in a program, such as printing something or declaring a variable. Execution always starts from the main method, and the statements run one below the other, in the same order in which they are written. This is why Eclipse shows line numbers: the control moves line by line. In the program below, the main method has one statement that prints StringStack.\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nSystem.out.println(\"StringStack\");\n}\n}\n```\n\nOutput: StringStack"
+    },
+    {
+      "question": "What is the difference between a built-in class and a user-defined class?",
+      "answer": "Answer: A user-defined class is a class that you write yourself, such as Student or Employee. A built-in class (also called a predefined class) is a class already written by the Java developers and kept in the Java library, such as System, String and Scanner. You can use built-in classes in your programs without writing them."
+    },
+    {
+      "question": "What is a package, and how does the Java library relate to it?",
+      "answer": "Answer: The Java library is like a book library. A library keeps books in different sections (animation, biography, medical and so on) and each section may have sub-sections. In the same way, Java keeps its built-in classes in sections called packages, such as java.lang and java.util. In Eclipse you can see them under JRE System Library in your project."
+    },
+    {
+      "question": "How can you find details of a built-in class such as System?",
+      "answer": "Answer: You do not have to memorise built-in classes. Search for the class in the official Java documentation (the Java API documentation), for example \"System class\". It shows the package of the class, its variables (fields) and its methods with descriptions. You only need to read the syntax and apply your logic. It is a good idea to bookmark it."
+    },
+    {
+      "question": "Explain each part of System.out.println(\"StringStack\").",
+      "answer": "Answer: System is a built-in class in the java.lang package. out is a static variable declared inside the System class, so it is accessed with the class name (System.out). The type of out is PrintStream, which is also a class. println is a method of the PrintStream class that prints the given value on the console. So the statement means: go to the System class, take its out variable (a PrintStream object) and call its println method.\n\n```java\nSystem.out.println(\"StringStack\");\n```"
+    },
+    {
+      "question": "Which variables does the System class contain?",
+      "answer": "Answer: The System class contains three static variables: in, out and err. They are static, so they are always accessed through the class name, as in System.out. The out variable is used to print normal output on the console."
+    },
+    {
+      "question": "How does a variable or a method belong to a class? Relate it to System.out.println().",
+      "answer": "Answer: When you create a variable inside a class, it belongs to that class. For example, the variable marks of type int is created inside the Demo class. A method created inside the class also belongs to that class, and it is called by its name from the main method. In the same way, the Java developers created the variable out inside the System class, and the println method inside the PrintStream class. That is why System.out.println() works the same way as the variables and methods you write yourself.\n\n```java\npublic class Demo {\nint marks = 90;                       // variable belongs to the Demo class\nstatic void myMethod() {              // method belongs to the Demo class\nSystem.out.println(\"method\");\n}\npublic static void main(String[] args) {\nmyMethod();\n}\n}\n```\n\nOutput: method"
+    },
+    {
+      "question": "Can a method return an object instead of a simple value?",
+      "answer": "Answer: Yes. A method can return a primitive value such as an int, but it can also return an object of a class (or of an interface). The out variable of System is an example of an object: its type is the PrintStream class, and we call methods such as println on it."
+    },
+    {
+      "question": "Is Java a purely object-oriented language?",
+      "answer": "Answer: No. A language is purely object oriented only if everything in it is an object. Java supports primitive data types (int, float and so on), which are not objects, so Java is not purely object oriented. Primitives can be treated as objects with the help of wrapper classes, which are covered later."
+    },
+    {
+      "question": "What is the difference between print() and println()?",
+      "answer": "Answer: println() prints the value and then moves the cursor to the next line, because it terminates the current line by writing a line separator. print() prints the value and keeps the cursor on the same line, so the next output continues on that line. This is what the official documentation describes for both methods."
+    },
+    {
+      "question": "What problem occurs when the same statement has to be executed five times?",
+      "answer": "Answer: The simple solution is to copy and paste the statement five times. It works, but it has a limitation: if the same task has to be repeated 100 or 1000 times, you would need that many copies of the code. Duplicating the same code like this is called code redundancy. Redundant code is hard to maintain and should be avoided; a task that repeats should never be written again and again.\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nSystem.out.println(\"StringStack\");\nSystem.out.println(\"StringStack\");\nSystem.out.println(\"StringStack\");\nSystem.out.println(\"StringStack\");\nSystem.out.println(\"StringStack\");\n}\n}\n```\n\nOutput: StringStack StringStack StringStack StringStack StringStack"
+    },
+    {
+      "question": "What is a loop (looping control construct), and why do we use it?",
+      "answer": "Answer: A loop repeats the same task again and again. We use it to avoid code duplication (redundancy). Analogy: if someone asks you to go and bring a box and come back, you do it once; if you are asked to do the same task ten times, a human can do it, but a machine should not be given ten copies of the instruction. Instead you tell it to repeat the task ten times, and that is a loop."
+    },
+    {
+      "question": "What types of loops are available in Java?",
+      "answer": "Answer: Java has three loops: the for loop, the while loop and the do-while loop. The do-while loop is the while loop with the extra keyword do. Any of them can be used to repeat a task, but each one has its own use, which is discussed in the later classes."
+    },
+    {
+      "question": "What three things must you know to write any loop?",
+      "answer": "Answer: You must know (1) the starting point, from where the repetition begins; (2) the end point or condition, until where to go; and (3) the direction, whether to move forward (increase) or backward (decrease). Analogy: if you are asked to go from the fifth floor to the ground floor and come back ten times, you must know the starting floor, how far to go, and whether you are going down or up. Once these three are clear, any looping problem can be solved."
+    },
+    {
+      "question": "Which operators move a loop forward or backward?",
+      "answer": "Answer: The increment operator (++) increases a value by 1 and moves the loop forward. The decrement operator (--) decreases a value by 1 and moves the loop backward. Increment means increase and decrement means decrease; which one to use depends on whether the loop must go forward or backward."
+    }
+  ]
+}
