@@ -367,6 +367,9 @@ with zipfile.ZipFile(path) as z:
         # } else {  |  else {  |  else if (...) {
         if re.match(r"^}\\s*else\\b", line) or re.match(r"^else(\\s+if\\b|\\s*\\{|\\s*$)", line):
             return True
+        # } catch (Type e) {  |  catch (Type e) {  |  } finally {  |  try {
+        if re.match(r"^\\}?\\s*(?:catch|finally)\\b", line) or re.match(r"^try\\s*[({]", line):
+            return True
         # for-loop increment continuation split onto its own line: divisor++) {
         if re.search(r"(?:\\+\\+|--)", line) and re.search(r"[){};]", line):
             return True
