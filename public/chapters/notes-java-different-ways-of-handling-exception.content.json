@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Different Ways Of Handling Exception",
+  "itemsPerPage": 2,
+  "source": "notes-java-different-ways-of-handling-exception.docx",
+  "items": [
+    {
+      "question": "What happens when an instance variable is not explicitly initialized in Java?",
+      "answer": "Answer: Java assigns a default value to an instance variable according to its data type. The programmer does not have to assign an initial value explicitly for an instance field."
+    },
+    {
+      "question": "What are the default values of numeric instance variables in Java?",
+      "answer": "Answer: Integer types such as byte, short, int, and long receive the default value 0. Floating-point types such as float and double receive the default value 0.0."
+    },
+    {
+      "question": "What is the default value of a boolean instance variable?",
+      "answer": "Answer: The default value of a boolean instance variable is false."
+    },
+    {
+      "question": "What is the default value of a char instance variable?",
+      "answer": "Answer: The default value of a char instance variable is the null character, represented as '\\u0000'."
+    },
+    {
+      "question": "What is the default value of an instance variable whose type is a class or array?",
+      "answer": "Answer: A reference-type instance variable receives the default value null. This means it does not refer to an object."
+    },
+    {
+      "question": "What does null mean in Java?",
+      "answer": "Answer: null is a special literal used to indicate that a reference variable does not currently refer to an object."
+    },
+    {
+      "question": "What happens when an array reference is assigned null?",
+      "answer": "Answer: The reference stops referring to the array object. The array can no longer be accessed through that reference unless the reference is assigned a valid array again."
+    },
+    {
+      "question": "Does assigning null to an array reference immediately destroy the array object?",
+      "answer": "Answer: No. Assigning null only removes that particular reference. If another live reference still points to the array, the object can still be accessed. If no live references remain, the object becomes eligible for garbage collection."
+    },
+    {
+      "question": "What is the role of the garbage collector in Java?",
+      "answer": "Answer: The garbage collector reclaims heap memory occupied by objects that are no longer reachable through live references. This helps Java manage memory automatically."
+    },
+    {
+      "question": "What is NullPointerException in Java?",
+      "answer": "Answer: NullPointerException is a runtime exception that occurs when code attempts to use a reference that is null as though it referred to an object."
+    },
+    {
+      "question": "When can NullPointerException occur while working with an array?",
+      "answer": "Answer: It can occur when an array reference is null and the program tries to access an element through that reference, such as using array[index]."
+    },
+    {
+      "question": "Why does accessing an array through a null reference cause NullPointerException?",
+      "answer": "Answer: The reference does not point to an array object. Since there is no array object to access, Java throws NullPointerException when the program tries to use the reference."
+    },
+    {
+      "question": "What is the difference between NullPointerException and ArrayIndexOutOfBoundsException?",
+      "answer": "Answer: NullPointerException occurs when the array reference itself is null. ArrayIndexOutOfBoundsException occurs when a valid array object is accessed using an index outside its valid range."
+    },
+    {
+      "question": "Why might existing specific catch blocks fail to handle a NullPointerException?",
+      "answer": "Answer: A catch block handles only exception objects compatible with its declared type. Catch blocks for ArithmeticException, NegativeArraySizeException, InputMismatchException, or ArrayIndexOutOfBoundsException do not match a NullPointerException."
+    },
+    {
+      "question": "What is the purpose of a generic catch block in Java?",
+      "answer": "Answer: A generic catch block provides a fallback handler for exception types that are not handled by the preceding specific catch blocks."
+    },
+    {
+      "question": "What types of exceptions can catch(Exception e) handle?",
+      "answer": "Answer: It can handle exception objects whose classes are subclasses of Exception, including runtime exceptions such as NullPointerException. It does not catch objects that are subclasses of Error."
+    },
+    {
+      "question": "Why is a generic catch block useful even when specific catch blocks are present?",
+      "answer": "Answer: A program may encounter an exception that the programmer did not anticipate. A generic catch block provides a final fallback so that such an exception can be handled instead of remaining uncaught by the program's handlers."
+    },
+    {
+      "question": "Where should a generic catch block be placed when a try block has specific catch blocks?",
+      "answer": "Answer: The generic catch block should be placed after all the specific catch blocks so that the specific handlers get the opportunity to match their exception types first."
+    },
+    {
+      "question": "What happens if catch(Exception e) is placed before a specific catch block?",
+      "answer": "Answer: The earlier catch(Exception e) can already handle the exception type intended for the later specific catch block. The later catch block becomes unreachable, and the compiler reports an error."
+    },
+    {
+      "question": "Why does Java report an unreachable catch block when a general catch block comes first?",
+      "answer": "Answer: The general catch type Exception is a superclass of many specific exception classes. Once it appears first, a later catch block for one of its subclasses can never be selected."
+    },
+    {
+      "question": "Should specific catch blocks be removed when a generic catch block is added?",
+      "answer": "Answer: No. Specific catch blocks should be retained when different exceptions need different handling or messages. The generic catch block should be added last as a fallback."
+    },
+    {
+      "question": "What happens if none of the catch blocks in a method can handle an exception?",
+      "answer": "Answer: The exception propagates to the method that called the current method. Java continues looking for a matching handler up the call stack. If no handler is found, the default exception handling mechanism processes the uncaught exception."
+    },
+    {
+      "question": "What is exception propagation in Java?",
+      "answer": "Answer: Exception propagation is the process in which an exception that is not handled in the method where it occurs moves back to the calling method. It can continue through the call chain until a matching catch block is found."
+    },
+    {
+      "question": "How does Java search for a handler when an exception occurs inside a called method?",
+      "answer": "Answer: Java first looks for a matching handler in the method where the exception occurred. If none is found, the method exits abruptly and the exception is passed to its caller. The process continues through the callers until a handler is found or the call stack is exhausted."
+    },
+    {
+      "question": "Can a method that calls another method handle an exception thrown by that method?",
+      "answer": "Answer: Yes. If the called method does not handle the exception, the calling method can catch it with a compatible catch block around the method call."
+    },
+    {
+      "question": "Must every method in a call chain contain its own try-catch block?",
+      "answer": "Answer: No. A method can allow an exception to propagate to its caller. A matching try-catch block in a caller can handle the exception instead."
+    },
+    {
+      "question": "Where is a practical place to handle an exception in a multi-method program?",
+      "answer": "Answer: A useful place is the method that understands how to respond to the problem. Handling it close to the statement that causes the exception can make the response clear, but a caller can handle it when that caller is better suited to decide what should happen."
+    },
+    {
+      "question": "What is the relationship between the method call stack and exception propagation?",
+      "answer": "Answer: Each method call creates an execution frame on the call stack. When an exception is not handled in the current method, that method's execution is unwound and control returns to its caller while Java searches for a matching exception handler."
+    },
+    {
+      "question": "Write a Java program that handles NullPointerException using a generic catch block.",
+      "answer": "Answer: The array reference is deliberately assigned null before the program attempts to access an element. The specific catch blocks do not match NullPointerException, so the final catch(Exception e) handles it.Sample Input: No input.Sample Output:Handled exception: NullPointerExceptionProgram continues after exception handling.\n\n```java\npublic class NullPointerDemo {    public static void main(String[] args) {        int[] numbers = new int[5];        numbers = null;        try {            System.out.println(numbers[0]);        } catch (ArithmeticException e) {            System.out.println(\"Arithmetic problem.\");        } catch (ArrayIndexOutOfBoundsException e) {            System.out.println(\"Invalid array index.\");        } catch (Exception e) {            System.out.println(                \"Handled exception: \" + e.getClass().getSimpleName()            );        }        System.out.println(\"Program continues after exception handling.\");    }}\n```"
+    },
+    {
+      "question": "Write a Java program that catches an exception in the calling method when it occurs in a separate method.",
+      "answer": "Answer: The alpha() method contains the division that causes ArithmeticException. The exception is not handled inside alpha(), beta(), or gamma(). It propagates to main(), where the catch block handles it.Sample Input: No input.Sample Output:ArithmeticException handled in main().Program continues normally.\n\n```java\nclass ExceptionFlowDemo {    static void alpha() {        int result = 100 / 0;    }    static void beta() {        alpha();    }    static void gamma() {        beta();    }    public static void main(String[] args) {        try {            gamma();        } catch (ArithmeticException e) {            System.out.println(\"ArithmeticException handled in main().\");        }        System.out.println(\"Program continues normally.\");    }}\n```"
+    }
+  ]
+}
