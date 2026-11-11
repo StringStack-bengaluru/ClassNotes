@@ -1,0 +1,195 @@
+{
+  "title": "Notes Java Exception Family",
+  "itemsPerPage": 2,
+  "source": "notes-java-exception-family.docx",
+  "items": [
+    {
+      "question": "What are the three approaches to dealing with an exception in Java?",
+      "answer": "Answer: The three approaches are handling an exception with try-catch, rethrowing an exception with the throw keyword, and ducking or propagating an exception with the throws keyword. A program can use these approaches depending on which method is responsible for handling the problem."
+    },
+    {
+      "question": "What does rethrowing an exception mean?",
+      "answer": "Answer: Rethrowing means catching an exception in one method and then throwing the same exception object again so that the method that called it can take responsibility for handling it."
+    },
+    {
+      "question": "Which keyword is used to rethrow an exception?",
+      "answer": "Answer: The throw keyword is used to throw an exception object. Inside a catch block, the caught exception reference can be passed to throw again, as in throw e;."
+    },
+    {
+      "question": "What happens inside a catch block when an exception is rethrown?",
+      "answer": "Answer: The catch block first receives the exception object. The method can perform an action, such as displaying a message, and then use throw with the caught exception reference to send that same exception onward."
+    },
+    {
+      "question": "To whom is a rethrown exception normally passed?",
+      "answer": "Answer: It is passed to the method that called the method where the exception was caught and rethrown. The calling method can then handle the exception with its own try-catch block."
+    },
+    {
+      "question": "Why might a method rethrow an exception after catching it?",
+      "answer": "Answer: The method may recognize the exception but may not be the right place to complete the handling. It can rethrow the exception so that the caller, which has more context or responsibility, can decide what to do."
+    },
+    {
+      "question": "What happens to the remaining statements in a method after it executes throw?",
+      "answer": "Answer: When throw transfers control out of the current method, the remaining statements in that execution path are skipped. Control moves to the caller while Java searches for a matching exception handler."
+    },
+    {
+      "question": "Why might a statement such as \"Connection terminated\" not execute after an exception is rethrown?",
+      "answer": "Answer: If the statement appears after the throw statement in the same method, control leaves that method before reaching it. The statement is therefore skipped unless it is placed in a suitable finally block."
+    },
+    {
+      "question": "What happens if the calling method does not catch a rethrown exception?",
+      "answer": "Answer: The exception continues propagating to the next method in the call stack. If no suitable handler is found, the exception remains uncaught and the program can terminate abruptly."
+    },
+    {
+      "question": "How can a method catch an exception, rethrow it, and allow main() to handle it?",
+      "answer": "Answer: The method can catch the exception and execute throw e;. The caller places the method call inside a try block and catches the propagated exception. The following example uses division by zero to demonstrate this flow.\n\n```java\nclass Alpha {    void connect() {        System.out.println(\"Connection established.\");        try {            int result = 100 / 0;            System.out.println(result);        } catch (ArithmeticException e) {            System.out.println(\"Caught in alpha; rethrowing.\");            throw e;        }        System.out.println(\"Connection terminated.\");    }}public class RethrowDemo {    public static void main(String[] args) {        Alpha alpha = new Alpha();        try {            alpha.connect();        } catch (ArithmeticException e) {            System.out.println(\"Handled in main.\");        }        System.out.println(\"Program continues in main.\");    }}\n```\n\nSample Input: No input.Sample Output:Connection established.Caught in alpha; rethrowing.Handled in main.Program continues in main."
+    },
+    {
+      "question": "What is the purpose of the throws keyword in a method declaration?",
+      "answer": "Answer: The throws keyword declares that a method may pass an exception to its caller instead of handling it inside the method. It informs the caller that the method can complete by propagating the declared exception."
+    },
+    {
+      "question": "Where is the throws clause written in Java?",
+      "answer": "Answer: The throws clause is written in the method declaration, after the parameter list and before the method body. For example: void readData() throws IOException { ... }."
+    },
+    {
+      "question": "What does a throws declaration communicate to the calling method?",
+      "answer": "Answer: It communicates that the method may propagate the declared exception. The caller should be prepared to handle that exception or, where permitted, declare that it will pass the exception farther up the call stack."
+    },
+    {
+      "question": "Does the throws keyword itself handle an exception?",
+      "answer": "Answer: No. throws does not catch or resolve an exception. It declares that the method may pass the exception to its caller. A try-catch block is needed at a method that actually handles it."
+    },
+    {
+      "question": "How can a calling method respond to an exception declared by the method it calls?",
+      "answer": "Answer: The calling method can place the method call inside a try block and provide a matching catch block. Alternatively, it can declare the exception with its own throws clause and pass the responsibility to its caller."
+    },
+    {
+      "question": "What is the difference between throw and throws in Java?",
+      "answer": "Answer: ```java\nthrow is a statement used to throw a particular exception object, for example throw e;. throws is part of a method declaration and lists exception types that the method may propagate, for example void process() throws IOException.\n```"
+    },
+    {
+      "question": "What is ducking an exception in Java?",
+      "answer": "Answer: Ducking an exception means choosing not to handle it in the current method and passing the responsibility to the calling method. The method declares the exception with throws so that the caller is informed."
+    },
+    {
+      "question": "Why is exception propagation through throws described as ducking?",
+      "answer": "Answer: The current method is avoiding local handling and passing the responsibility to another method. It is not silently ignoring the exception; it is declaring that the caller must take responsibility for it."
+    },
+    {
+      "question": "Does ducking an exception mean that the exception has been handled?",
+      "answer": "Answer: No. Ducking only transfers the responsibility. The exception still needs to be handled by a caller or propagated farther until a suitable handler is reached."
+    },
+    {
+      "question": "When must a Java method handle a checked exception or declare it with throws?",
+      "answer": "Answer: A method must either catch a checked exception or declare it in its throws clause. The compiler checks this requirement and reports an error when neither option is provided."
+    },
+    {
+      "question": "What can happen if a checked exception is neither caught nor declared?",
+      "answer": "Answer: The program will fail compilation because Java requires checked exceptions to be handled or declared. The compiler prevents the method from leaving that checked-exception obligation unresolved."
+    },
+    {
+      "question": "What is the purpose of the finally block in Java?",
+      "answer": "Answer: The finally block contains instructions that should run after the try and any applicable catch block complete. It is commonly used for cleanup tasks that should be performed whether the try block completes normally or an exception occurs."
+    },
+    {
+      "question": "When does a finally block normally execute?",
+      "answer": "Answer: A finally block normally executes after the try block finishes, whether the try block completes successfully or an exception is handled or propagated. It runs before control leaves the associated try-catch-finally construct."
+    },
+    {
+      "question": "Why does code placed after a throw statement fail to execute in the same method?",
+      "answer": "Answer: The throw statement transfers control away from the remaining statements in that execution path. Java does not continue with the next ordinary statement after the exception has been thrown."
+    },
+    {
+      "question": "How can a statement be made to run during exception handling even when an exception interrupts the try block?",
+      "answer": "Answer: Place the statement inside the finally block associated with the try statement. The finally block is intended for actions that must normally be performed even when the try block exits because of an exception."
+    },
+    {
+      "question": "What kinds of operations are suitable for a finally block?",
+      "answer": "Answer: Cleanup operations are suitable for a finally block. Examples include closing a Scanner or releasing a resource after the program has finished using it."
+    },
+    {
+      "question": "What does a resource leak warning indicate when a Scanner is created?",
+      "answer": "Answer: It indicates that the Scanner is an open resource that has not been closed. The warning reminds the programmer to close the resource after its work is complete."
+    },
+    {
+      "question": "Why should a Scanner object be closed after it is no longer needed?",
+      "answer": "Answer: Closing the Scanner releases the input resource it was using. It also makes the end of the resource's use explicit instead of leaving it open after the program has finished with it."
+    },
+    {
+      "question": "How can a finally block be used to close a Scanner?",
+      "answer": "Answer: Create the Scanner before the try block, perform the input operation inside try, and call scan.close() inside finally. This places the cleanup action in the block that normally executes whether the input operation succeeds or an exception occurs.\n\n```java\nimport java.util.InputMismatchException;import java.util.Scanner;public class ScannerCleanupDemo {    public static void main(String[] args) {        Scanner scan = new Scanner(System.in);        try {            System.out.print(\"Enter a number: \");            int number = scan.nextInt();            System.out.println(\"Value: \" + number);        } catch (InputMismatchException e) {            System.out.println(\"Invalid input.\");        } finally {            scan.close();            System.out.println(\"Scanner closed.\");        }    }}\n```\n\nSample Input: 25Sample Output:Enter a number: 25Value: 25Scanner closed."
+    },
+    {
+      "question": "What is the difference between final, finally, and finalize() in Java?",
+      "answer": "Answer: ```java\nfinal is a keyword used with variables, methods, and classes. finally is a block used with exception handling for cleanup instructions. finalize() is a method defined in the Object class and historically associated with garbage collection. These three terms have different purposes.\n```"
+    },
+    {
+      "question": "What does the final keyword mean when it is applied to a variable?",
+      "answer": "Answer: A final variable can be assigned only once. After it receives its value, the variable cannot be reassigned. When the variable is a reference, the reference cannot be changed to point to another object, although the referenced object may still be mutable."
+    },
+    {
+      "question": "What happens when the final keyword is applied to a method?",
+      "answer": "Answer: A final method cannot be overridden by a subclass. The method's implementation is protected from being replaced through method overriding."
+    },
+    {
+      "question": "What happens when the final keyword is applied to a class?",
+      "answer": "Answer: A final class cannot be extended. Another class cannot inherit from it."
+    },
+    {
+      "question": "What is finalize() in Java?",
+      "answer": "Answer: ```java\nfinalize() is a method defined in the Object class and historically associated with garbage collection. It is different from a finally block: finalize() is a method related to an object's lifecycle, while finally is part of a try statement.\n```"
+    },
+    {
+      "question": "How are exception objects related to exception classes in Java?",
+      "answer": "Answer: An exception object is an object created from an exception class. The class defines the type of exception, and the object represents a particular exception occurrence during program execution."
+    },
+    {
+      "question": "Which built-in exception classes are examples of different problems in Java?",
+      "answer": "Answer: Examples include ArithmeticException for an arithmetic problem such as integer division by zero, NegativeArraySizeException for creating an array with a negative size, InputMismatchException for input that does not match the expected Scanner type, NullPointerException for using a null reference, and ArrayIndexOutOfBoundsException for accessing an invalid array index."
+    },
+    {
+      "question": "What are the two broad categories of exceptions introduced in Java?",
+      "answer": "Answer: The two broad categories are checked exceptions and unchecked exceptions. They differ mainly in whether the compiler requires the programmer to handle or declare them."
+    },
+    {
+      "question": "What is a checked exception in Java?",
+      "answer": "Answer: A checked exception is an exception type for which Java requires the programmer to provide a handling or propagation path. The method must catch it or declare it with throws, and the compiler checks that requirement."
+    },
+    {
+      "question": "Does a checked exception necessarily occur while the program is compiling?",
+      "answer": "Answer: No. The exception itself occurs during program execution if the relevant condition happens. It is called checked because the compiler checks whether the code handles or declares the possibility of that exception."
+    },
+    {
+      "question": "What is an unchecked exception in Java?",
+      "answer": "Answer: An unchecked exception is not subject to the compiler's mandatory catch-or-declare rule. The programmer may still catch it, but Java does not require every method that can produce it to handle or declare it."
+    },
+    {
+      "question": "What is the difference between checked and unchecked exceptions in terms of compiler enforcement?",
+      "answer": "Answer: For checked exceptions, the compiler requires a method to catch the exception or declare it with throws. For unchecked exceptions, the compiler does not impose that requirement, even though the exception may still occur at runtime."
+    },
+    {
+      "question": "Which Java class provides the sleep() method used to pause a thread?",
+      "answer": "Answer: The Thread class provides the static sleep() method. It can be called using the class name, as in Thread.sleep(3000), without creating a Thread object just to invoke this static method."
+    },
+    {
+      "question": "What does the argument passed to Thread.sleep() represent?",
+      "answer": "Answer: The argument represents a duration in milliseconds. For example, 3000 milliseconds is equal to 3 seconds."
+    },
+    {
+      "question": "Why can calling Thread.sleep() produce a checked-exception compilation error?",
+      "answer": "Answer: Thread.sleep() can throw InterruptedException, which is a checked exception. The calling code must catch InterruptedException or declare it with throws; otherwise, the compiler reports an error."
+    },
+    {
+      "question": "How can a program handle the checked exception produced by Thread.sleep()?",
+      "answer": "Answer: The code that calls Thread.sleep() can place the call inside a try block and catch InterruptedException. Another method can declare throws InterruptedException and pass the responsibility to its caller, where it can be handled."
+    },
+    {
+      "question": "How can a method declare the exception from Thread.sleep() and let main() handle it?",
+      "answer": "Answer: A helper method can declare throws InterruptedException and call Thread.sleep(3000). The main method can call that helper inside try and catch InterruptedException. This demonstrates ducking the checked exception in one method and handling it in the caller.\n\n```java\npublic class SleepExample {    static void waitForThreeSeconds() throws InterruptedException {        Thread.sleep(3000);    }    public static void main(String[] args) {        try {            System.out.println(\"Waiting...\");            waitForThreeSeconds();            System.out.println(\"Finished waiting.\");        } catch (InterruptedException e) {            System.out.println(\"Waiting was interrupted.\");        }    }}\n```\n\nSample Input: No input.Sample Output:Waiting...Finished waiting. (printed after approximately 3 seconds, if the sleep is not interrupted)"
+    },
+    {
+      "question": "How can Thread.sleep() add a delay between successive characters displayed by a loop?",
+      "answer": "Answer: A loop can print one character at a time and call Thread.sleep(3000) between iterations. The method pauses the current thread for the requested interval. Because sleep can throw InterruptedException, the call must be placed inside try-catch or declared with throws.\n\n```java\npublic class DelayedCharacters {    public static void main(String[] args) {        for (char letter = 'A'; letter <= 'E'; letter++) {            System.out.println(letter);            if (letter < 'E') {                try {                    Thread.sleep(3000);                } catch (InterruptedException e) {                    System.out.println(\"Printing interrupted.\");                    break;                }            }        }    }}\n```\n\nSample Input: No input. Sample Output:A(wait approximately 3 seconds)B(wait approximately 3 seconds)C(wait approximately 3 seconds)D(wait approximately 3 seconds)E"
+    }
+  ]
+}
