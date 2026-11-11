@@ -1,0 +1,111 @@
+{
+  "title": "Notes Java Intro To Exception Handling",
+  "itemsPerPage": 2,
+  "source": "notes-java-intro-to-exception-handling.docx",
+  "items": [
+    {
+      "question": "What is an exception in Java?",
+      "answer": "Answer: An exception is an unusual event that occurs while a program is running and interrupts its normal flow of execution."
+    },
+    {
+      "question": "What is the difference between a usual event and an unusual event during program execution?",
+      "answer": "Answer: A usual event allows the application to continue through its expected steps. An unusual event is an unexpected situation during execution, such as invalid input or an attempt to divide an integer by zero."
+    },
+    {
+      "question": "What can happen when an exception occurs and is not handled?",
+      "answer": "Answer: The program may stop executing abruptly instead of completing its remaining instructions normally."
+    },
+    {
+      "question": "What is the difference between normal termination and abrupt termination?",
+      "answer": "Answer: Normal termination occurs when the program completes its intended execution. Abrupt termination occurs when an unhandled exception interrupts the program before it can finish normally."
+    },
+    {
+      "question": "How does an incorrect PIN code or address in an e-commerce application illustrate an exception?",
+      "answer": "Answer: An application may process a purchase normally until it encounters an unexpected or invalid value. If the code does not handle that situation, the application may stop responding or terminate instead of displaying a useful message."
+    },
+    {
+      "question": "What is exception handling in Java?",
+      "answer": "Answer: Exception handling is the process of managing unusual conditions that occur during program execution so that the application can respond appropriately instead of terminating abruptly."
+    },
+    {
+      "question": "What is the main purpose of exception handling?",
+      "answer": "Answer: Its main purpose is to handle an exception gracefully and allow the application to continue its execution where possible, rather than stopping unexpectedly."
+    },
+    {
+      "question": "What does it mean to handle an exception gracefully?",
+      "answer": "Answer: It means responding to the exceptional situation with suitable handling, such as displaying a meaningful message, instead of allowing the application to terminate abruptly."
+    },
+    {
+      "question": "What is an exception object?",
+      "answer": "Answer: An exception object is an object created by Java at runtime to represent an exceptional condition. It carries information about the exception that occurred."
+    },
+    {
+      "question": "What information can be shown in an exception report?",
+      "answer": "Answer: An exception report can show the exception type and description, along with details such as the package, class, and line where the exception occurred."
+    },
+    {
+      "question": "What is Java's default exception handler?",
+      "answer": "Answer: The default exception handler is Java's built-in mechanism for dealing with an exception that has not been handled by the program. It displays details about the unhandled exception."
+    },
+    {
+      "question": "What happens when an exception is not handled by a try-catch statement?",
+      "answer": "Answer: The exception is passed to Java's default exception handler. The handler displays the exception information, and the program terminates abnormally."
+    },
+    {
+      "question": "Which two blocks are used together to handle an exception in the basic Java example?",
+      "answer": "Answer: The two blocks are the try block and the catch block."
+    },
+    {
+      "question": "What is a try block in Java?",
+      "answer": "Answer: A try block contains statements that may cause an exception during execution. Java monitors the execution of these statements for an exceptional condition."
+    },
+    {
+      "question": "What is a catch block in Java?",
+      "answer": "Answer: A catch block contains the handling code for an exception. It receives the exception object when a matching exception occurs in the associated try block."
+    },
+    {
+      "question": "How do the try and catch blocks work together?",
+      "answer": "Answer: The program executes the statements inside the try block. If an exception occurs, Java creates an exception object and transfers it to a matching catch block. The catch block then executes its handling statements."
+    },
+    {
+      "question": "What is the purpose of the exception parameter in a catch block?",
+      "answer": "Answer: The parameter receives a reference to the exception object. The handling code can use that reference to access information about the exception."
+    },
+    {
+      "question": "When does a catch block execute?",
+      "answer": "Answer: A catch block executes when an exception of a matching type occurs while the associated try block is running."
+    },
+    {
+      "question": "What happens to the catch block when no exception occurs inside the try block?",
+      "answer": "Answer: The catch block is skipped. The program continues with the statements that follow the try-catch structure."
+    },
+    {
+      "question": "What happens after an exception is handled by the catch block?",
+      "answer": "Answer: After the catch block finishes, execution can continue with the statements that follow the try-catch structure."
+    },
+    {
+      "question": "What is risky code in exception handling?",
+      "answer": "Answer: Risky code is a statement that may cause an exception depending on the values or conditions encountered during execution. For example, an integer division operation may cause an exception if its divisor is zero."
+    },
+    {
+      "question": "Why should only statements that may cause an exception be placed inside a try block?",
+      "answer": "Answer: Keeping the try block focused on risky statements makes the code easier to read and understand. It avoids unnecessarily enclosing unrelated instructions."
+    },
+    {
+      "question": "Why can placing every statement inside a separate try block reduce code readability?",
+      "answer": "Answer: Using too many try blocks increases the number of instructions and makes the program harder to read. A focused try block can group the related statements that need exception monitoring."
+    },
+    {
+      "question": "What is an ArithmeticException in Java?",
+      "answer": "Answer: ArithmeticException is an exception that can occur during an invalid arithmetic operation, such as attempting to divide an integer by zero."
+    },
+    {
+      "question": "Why does dividing an integer by zero cause an exception in Java?",
+      "answer": "Answer: Java does not allow an integer division operation with zero as the divisor. When the program attempts that operation, an ArithmeticException occurs."
+    },
+    {
+      "question": "Write a Java program that handles an ArithmeticException when dividing two integers by zero.",
+      "answer": "Answer: The program reads two integers and performs the division inside a try block. If the second number is zero, the catch block handles the ArithmeticException and displays a message. The statement after the try-catch structure shows that execution can continue after the exception has been handled.Sample Input:100 0Sample Output:Cannot divide by zero.Execution continues.\n\n```java\nimport java.util.Scanner;public class ExceptionHandlingDemo {    public static void main(String[] args) {        Scanner scanner = new Scanner(System.in);        int firstNumber = scanner.nextInt();        int secondNumber = scanner.nextInt();        try {            int result = firstNumber / secondNumber;            System.out.println(\"Result: \" + result);        } catch (ArithmeticException exception) {            System.out.println(\"Cannot divide by zero.\");        }        System.out.println(\"Execution continues.\");        scanner.close();    }}\n```\n\nFor Sample Input 100 10, the output is:Result: 10Execution continues."
+    }
+  ]
+}
