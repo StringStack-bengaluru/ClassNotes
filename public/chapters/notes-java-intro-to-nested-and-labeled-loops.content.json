@@ -1,0 +1,31 @@
+{
+  "title": "Notes Java Intro To Nested And Labeled Loops",
+  "itemsPerPage": 2,
+  "source": "notes-java-intro-to-nested-and-labeled-loops.docx",
+  "items": [
+    {
+      "question": "What is a nested loop?",
+      "answer": "Answer: A nested loop is a loop written inside another loop. The loop that contains the other is the outer loop, and the loop inside it is the inner loop. Loops can be nested to more than one level, with a loop inside a loop inside a loop."
+    },
+    {
+      "question": "How does a nested loop execute?",
+      "answer": "Answer: The control enters the outer loop for its first iteration, and then the inner loop runs completely, from its start to the point where its condition becomes false. Only after that does the outer loop move to its next iteration, and the inner loop starts again from its initialization. So the inner statements execute (number of outer repetitions) x (number of inner repetitions) times. For example, if the outer loop repeats 3 times and the inner loop repeats 5 times, the innermost statement executes 15 times."
+    },
+    {
+      "question": "How can you understand the flow of a nested loop easily?",
+      "answer": "Answer: Use debug mode. Put a breakpoint, run with Debug As > Java Application, and press F6 to move one line at a time. Watch the values of the outer variable (i) and the inner variable (j) in the Variables view. You will see that j goes through all its values for every single value of i."
+    },
+    {
+      "question": "Write a program that prints the following star pattern using nested loops.",
+      "answer": "Answer: The pattern has 5 lines, and the number of stars in each line starts from 1 and increases by one per line. The outer loop controls the lines and the inner loop controls the stars in the current line (from 1 up to the line number). After the inner loop finishes a line, println() moves the output to the next line.\n\n```java\npublic class Pattern {\npublic static void main(String[] args) {\nfor (int i = 1; i <= 5; i++) {\nfor (int j = 1; j <= i; j++) {\nSystem.out.print(\"*\");\n}\nSystem.out.println();\n}\n}\n}\n```\n\nOutput:\n\n```java\n*\n**\n***\n****\n*****\n```"
+    },
+    {
+      "question": "Why is System.out.print() used inside the inner loop and System.out.println() after it?",
+      "answer": "Answer: print() keeps the cursor on the same line, so the stars of one line are printed side by side. println() after the inner loop moves the cursor to the next line, so each iteration of the outer loop produces one new line. If println() were used inside the inner loop, every star would appear on its own line."
+    },
+    {
+      "question": "What is an infinite loop, and why does it happen?",
+      "answer": "Answer: An infinite loop is a loop that never stops. It happens when the loop condition never becomes false, for example because the value used in the condition is never changed in the right direction, so the loop keeps executing the task again and again. Every loop must have a point where it stops. Analogy: when you go shopping, you must decide when to stop; if there is no stopping condition, you would keep shopping forever. Always check that the condition and the increment or decrement are consistent so that the condition eventually becomes false."
+    }
+  ]
+}
