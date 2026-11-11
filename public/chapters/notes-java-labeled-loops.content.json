@@ -1,0 +1,59 @@
+{
+  "title": "Notes Java Labeled Loops",
+  "itemsPerPage": 2,
+  "source": "notes-java-labeled-loops.docx",
+  "items": [
+    {
+      "question": "What is a nested loop? (recap)",
+      "answer": "Answer: A nested loop is a loop inside another loop. Multiple loops can be placed inside one loop, and this can continue to more than one level."
+    },
+    {
+      "question": "What are jump statements? Name them.",
+      "answer": "Answer: Jump statements change the normal flow of execution by moving the control from one place to another. The statements covered here are break, continue and return."
+    },
+    {
+      "question": "What does the return statement do inside a loop? Give the output.",
+      "answer": "Answer: ```java\nreturn sends the control back to the place from where it came. In the main method, the control came from the JVM, so as soon as return executes, the control goes back to the JVM and the program ends. The loop below could run more than once, but the statement after the print is return, so the message is printed only once.\npublic class Demo {\npublic static void main(String[] args) {\nfor (int i = 1; i < 3; i++) {\nSystem.out.println(\"StringStack Technologies\");\nreturn;\n}\n}\n}\n```\n\nOutput: StringStack Technologies"
+    },
+    {
+      "question": "What does the break statement do, and where can it be used?",
+      "answer": "Answer: ```java\nbreak brings the control out of the construct in which it is placed, and the execution continues with the statement after that construct. break can be used only inside loops (for, while, do-while) and inside a switch. Using it anywhere else is a compile-time error.\n```"
+    },
+    {
+      "question": "What is the output of the following program?",
+      "answer": "Answer: The control enters the loop, prints Hello, and break immediately takes the control out of the loop. The statement after the loop then prints World. The loop does not run again.\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nfor (int i = 1; i <= 5; i++) {\nSystem.out.println(\"Hello\");\nbreak;\n}\nSystem.out.println(\"World\");\n}\n}\n```\n\nOutput: Hello World"
+    },
+    {
+      "question": "What does the continue statement do?",
+      "answer": "Answer: ```java\ncontinue takes the control back to the loop, skipping the remaining statements of the current iteration. The loop then moves on with the next iteration (increment and condition check). The difference from break is that break ends the loop completely, while continue only skips the rest of the current iteration. In the program below, \"How are you\" is skipped when i is 2.\npublic class Demo {\npublic static void main(String[] args) {\nfor (int i = 1; i <= 3; i++) {\nSystem.out.println(\"Hello\");\nif (i == 2) {\ncontinue;\n}\nSystem.out.println(\"How are you\");\n}\n}\n}\n```\n\nOutput: Hello How are you Hello Hello How are you"
+    },
+    {
+      "question": "What is the difference between break and continue?",
+      "answer": "Answer: ```java\nbreak brings the control out of the loop (or switch) in which it is placed. continue does not leave the loop; it takes the control back to the loop to start the next iteration without executing the remaining statements. break can be used in loops and switch, while continue is used in loops.\n```"
+    },
+    {
+      "question": "What is the output of the following nested loop program?",
+      "answer": "Answer: The outer loop repeats 3 times. In every iteration it prints Hello, then the inner loop prints World twice, and then How are you is printed. So the group Hello, World, World, How are you is repeated three times.\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nfor (int i = 1; i <= 3; i++) {\nSystem.out.println(\"Hello\");\nfor (int j = 1; j <= 2; j++) {\nSystem.out.println(\"World\");\n}\nSystem.out.println(\"How are you\");\n}\n}\n}\n```\n\nOutput: Hello World World How are you Hello World World How are you Hello World World How are you"
+    },
+    {
+      "question": "What happens when break is added to the inner loop of a nested loop?",
+      "answer": "Answer: ```java\nbreak brings the control out of the loop in which it is present, so it comes out of the inner loop only, and the outer loop continues. In the program below the inner loop is written for 3 repetitions, but when j becomes 2 the break executes, so the inner loop runs only 2 times (World is printed twice). The output is exactly the same as in the previous program, although the loop was written differently.\npublic class Demo {\npublic static void main(String[] args) {\nfor (int i = 1; i <= 3; i++) {\nSystem.out.println(\"Hello\");\nfor (int j = 1; j <= 3; j++) {\nSystem.out.println(\"World\");\nif (j == 2) {\nbreak;\n}\n}\nSystem.out.println(\"How are you\");\n}\n}\n}\n```\n\nOutput: Hello World World How are you Hello World World How are you Hello World World How are you"
+    },
+    {
+      "question": "How can you make the control come out of the outer loop from inside the inner loop?",
+      "answer": "Answer: A plain break leaves only the loop it is written in, so it cannot leave the outer loop. To leave the outer loop, you name (label) the outer loop and use break with that label. This is the concept of labeled loops."
+    },
+    {
+      "question": "What is a labeled loop?",
+      "answer": "Answer: A label means a name. Analogy: when someone is called a bad name in front of others, that person has been labeled. In the same way, you can give a name to a loop by writing the name and a colon before the loop. The label can then be used with break or continue to say exactly which loop the statement should apply to."
+    },
+    {
+      "question": "Write a program that uses a labeled break and give its output.",
+      "answer": "Answer: The outer loop is given the label outer. When j becomes 2, break outer; brings the control out of the outer loop, not just the inner loop, and the program ends. Trace: i = 1 prints Hello; j = 1 is not 2, so 1 is printed; j becomes 2, the condition is true, and the control jumps out of the outer loop to the end of the program.\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\n```\n\nouter:\n\n```java\nfor (int i = 1; i <= 3; i++) {\nSystem.out.println(\"Hello\");\nfor (int j = 1; j <= 3; j++) {\nif (j == 2) {\nbreak outer;\n}\nSystem.out.println(j);\n}\n}\n}\n}\n```\n\nOutput: Hello 1"
+    },
+    {
+      "question": "Can a label be used with continue?",
+      "answer": "Answer: Yes. Labels can be used with both break and continue. continue followed by the label of the outer loop skips the rest of the current iteration of the inner loop and also the rest of the outer loop body, and moves the control to the next iteration of the labeled outer loop. In short: break label ends the labeled loop, and continue label goes on to the next iteration of the labeled loop."
+    }
+  ]
+}
