@@ -1,0 +1,55 @@
+{
+  "title": "Notes Java For While And Do While Loops",
+  "itemsPerPage": 2,
+  "source": "notes-java-for-while-and-do-while-loops.docx",
+  "items": [
+    {
+      "question": "What is the while loop, and where do initialization, condition and increment go?",
+      "answer": "Answer: The while loop repeats a block while its condition is true. The loop variable is initialized before the loop, the condition is written in the parentheses of while, and the increment or decrement is written inside the loop block (there is no separate place for it as in the for loop).\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nint i = 1;                 // initialization\nwhile (i <= 5) {           // condition\nSystem.out.println(i);\n```\n\ni++; // increment\n\n```java\n}\n}\n}\n```\n\nOutput: 1 2 3 4 5"
+    },
+    {
+      "question": "What is the do-while loop? Write the syntax with an example.",
+      "answer": "Answer: The do-while loop is the while loop with the extra keyword do. The block after do is performed first, and only after that the condition is checked. The initialization is written before the loop, the increment is written inside the do block, and the condition is written after the block with while and ends with a semicolon.\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nint i = 1;                 // initialization\ndo {\nSystem.out.println(i);\n```\n\ni++; // increment } while (i <= 5); // condition\n\n```java\n}\n}\n```\n\nOutput: 1 2 3 4 5"
+    },
+    {
+      "question": "Is do-while a single keyword? Where can the condition be written?",
+      "answer": "Answer: No. do and while are two separate keywords; do-while is the combination of the do block with while. The condition cannot be placed inside the do block, because the task must be performed before the condition is checked; it is always written after the block with while. If the semicolon after while(condition) is missed, the program does not compile."
+    },
+    {
+      "question": "Explain the execution flow of a do-while loop printing 1 to 5.",
+      "answer": "Answer: First, int i = 1 is created in memory. The control enters the do block, prints the current value and increases i. Only then does it reach while (i <= 5) and check the condition. If the condition is true, the control goes back to the do block; if it is false, the loop ends and the control moves to the next statement after the loop. After printing 5, i becomes 6, the condition 6 <= 5 is false, and the loop stops."
+    },
+    {
+      "question": "What is the difference between the while loop and the do-while loop?",
+      "answer": "Answer: In a while loop the condition is checked first, and the task is performed only if the condition is true. In a do-while loop the task is performed first, and the condition is checked afterwards. So a do-while loop always executes its body at least once, while a while loop may not execute its body at all if the condition is false at the start."
+    },
+    {
+      "question": "When should you use a do-while loop instead of a while loop?",
+      "answer": "Answer: Use do-while when a task has to be performed at least once and the condition is applied only after that. Use while when the condition decides whether the task should be performed at all."
+    },
+    {
+      "question": "How do you decide between the for loop and the while or do-while loop?",
+      "answer": "Answer: Any loop can repeat a task, but the for loop is convenient when you know the starting point, the end point and the direction (for example, 1 to 5). The while and do-while loops are used when you do not know where to start or how many times to repeat, but you do know the condition on whose basis the repetition should stop."
+    },
+    {
+      "question": "What happens if you forget the increment inside a while loop?",
+      "answer": "Answer: The loop variable never changes, so the condition stays true forever and the loop never ends (an infinite loop). In a while or do-while loop the increment is not part of the loop header, so you must remember to write it inside the block."
+    },
+    {
+      "question": "What is pseudo code, and why should you write it before the program?",
+      "answer": "Answer: Pseudo code is the list of steps of the solution written in plain language, independent of any programming language. Before writing code, first understand the requirement, write the steps (what to store, where to start, where to stop, which operation to repeat), and then convert each step into Java code. For one problem there are many ways to solve it; you can choose any approach that works for you."
+    },
+    {
+      "question": "What is the factorial of a number, and what steps are needed to find it?",
+      "answer": "Answer: The factorial of a number is the product of all the numbers from 1 up to that number. For example, the factorial of 5 is 5 x 4 x 3 x 2 x 1 = 120, and the factorial of 3 is 3 x 2 x 1 = 6. It can be calculated starting from 1 and moving up, or from the number and moving down; the result is the same. The steps are: store the number in a variable, store the result in another variable, repeat from 1 to the number, and multiply the result by the current value each time."
+    },
+    {
+      "question": "Why is the variable that stores the factorial initialized with 1 and not 0?",
+      "answer": "Answer: The factorial is a repeated multiplication, and anything multiplied by 0 is 0. If the result variable started at 0, the answer would always be 0. Starting with 1 does not change the product, so it is the correct starting value."
+    },
+    {
+      "question": "Write a program to find the factorial of a number using a for loop.",
+      "answer": "Answer: Follow the pseudo code: store the number in a variable (here 5), store the result in a variable fact starting from 1, start the loop from 1, and keep multiplying fact by the current value of i until the number is reached. The trace for 5 is: fact becomes 1, 2, 6, 24 and finally 120.\n\n```java\npublic class Factorial {\npublic static void main(String[] args) {\nint number = 5;\nint fact = 1;\nfor (int i = 1; i <= number; i++) {\nfact = fact * i;\n}\nSystem.out.println(fact);\n}\n}\n```\n\nOutput: 120"
+    }
+  ]
+}
