@@ -1,0 +1,47 @@
+{
+  "title": "Notes Java Introduction To Looping Control Construct 2",
+  "itemsPerPage": 2,
+  "source": "notes-java-introduction-to-looping-control-construct-2.docx",
+  "items": [
+    {
+      "question": "What is the syntax of the for loop, and what are its parts?",
+      "answer": "Answer: The statements to be repeated are kept inside a block of code, and the for loop has three parts inside its parentheses, separated by semicolons: (1) initialization, where the loop starts; (2) condition, until where it should go; and (3) increment or decrement, how the value changes on every repetition. for is a reserved keyword in Java.\n\n```java\nfor (initialization; condition; increment/decrement) {\n// statements to repeat\n}\n```"
+    },
+    {
+      "question": "Write a program that prints \"StringStack\" five times using a for loop.",
+      "answer": "Answer: Start from 1, go until 5, and increase by 1 each time. Instead of five copies of the statement, only one is written inside the loop block.\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nfor (int i = 1; i <= 5; i++) {\nSystem.out.println(\"StringStack\");\n}\n}\n}\n```\n\nOutput: StringStack StringStack StringStack StringStack StringStack"
+    },
+    {
+      "question": "Why can't we write only numbers in a for loop, and why do we declare a variable such as i?",
+      "answer": "Answer: The compiler does not understand plain numbers such as 1 and 5 in the loop header, so it reports an error. The starting value has to be stored in a variable, and the type is mentioned, here int because it is a whole number. The variable is conventionally named i (for iteration), but any valid variable name can be used.\n\n```java\nfor (1; 5; ++) {                  // compile-time error\nSystem.out.println(\"StringStack\");\n}\nfor (int i = 1; i <= 5; i++) {    // correct\nSystem.out.println(\"StringStack\");\n}\n```"
+    },
+    {
+      "question": "Explain the role of initialization, condition and increment/decrement with the example for (int i = 1; i <= 5; i++).",
+      "answer": "Answer: ```java\nint i = 1 is the initialization: the loop starts from 1. i <= 5 is the condition: the loop continues while i is less than or equal to 5, so it goes until 5. i++ is the increment: i increases by 1 after each repetition, so the loop moves forward. To start from a different number, change the initialization; to stop earlier or later, change the condition; to move backward, use a decrement.\n```"
+    },
+    {
+      "question": "Write a program to print the numbers from 1 to 10.",
+      "answer": "Answer: Instead of printing a fixed string, print the value of the loop variable. Its value changes in every repetition.\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nfor (int i = 1; i <= 10; i++) {\nSystem.out.println(i);\n}\n}\n}\n```\n\nOutput: 1 2 3 4 5 6 7 8 9 10"
+    },
+    {
+      "question": "Write a program to print the numbers from 10 to 1. What changes compared with the previous program?",
+      "answer": "Answer: Three things change: the loop starts from 10, the condition becomes i >= 1 (greater than or equal, because the value is decreasing), and the update becomes i-- (decrement) instead of i++.\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nfor (int i = 10; i >= 1; i--) {\nSystem.out.println(i);\n}\n}\n}\n```\n\nOutput: 10 9 8 7 6 5 4 3 2 1"
+    },
+    {
+      "question": "What happens if the condition or the direction is wrong?",
+      "answer": "Answer: If the condition is false at the start, the loop body never executes. If the direction does not move towards the end of the condition, the loop does not finish in a reasonable time. So the condition must match the direction: use <= (or <) when the value increases and >= (or >) when it decreases, and always keep the increment/decrement consistent with it.\n\n```java\nfor (int i = 10; i <= 1; i--) {   // condition is false at the start: nothing is printed\nSystem.out.println(i);\n}\n```"
+    },
+    {
+      "question": "What is a compound assignment operator?",
+      "answer": "Answer: A compound assignment operator combines an arithmetic operation with assignment. i++ is the same as i = i + 1. In the same way, i += 2 is the same as i = i + 2, and i -= 2 is the same as i = i - 2. They are used when the value must change by a number other than 1."
+    },
+    {
+      "question": "Write a program to print 20, 18, 16, ... down to 2 (skipping the odd numbers).",
+      "answer": "Answer: Start from 20, continue while i >= 2, and decrease by 2 on each repetition using the compound assignment operator i -= 2 (which means i = i - 2).\n\n```java\npublic class Demo {\npublic static void main(String[] args) {\nfor (int i = 20; i >= 2; i -= 2) {\nSystem.out.println(i);\n}\n}\n}\n```\n\nOutput: 20 18 16 14 12 10 8 6 4 2"
+    },
+    {
+      "question": "Why should you solve looping problems by first identifying the start, end and direction?",
+      "answer": "Answer: Every looping problem can be converted into a for loop once you know the three things: where to start, where to go, and whether to increase or decrease. For example, printing 1 to 10 starts at 1 and ends at 10 with an increase; printing 10 to 1 starts at 10 and ends at 1 with a decrease; printing 20 to 2 with only even numbers starts at 20, ends at 2 and decreases by 2. Write these down first, then convert them into the three parts of the for loop."
+    }
+  ]
+}
