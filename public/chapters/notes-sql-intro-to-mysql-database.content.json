@@ -1,0 +1,91 @@
+{
+  "title": "Notes Sql Intro To Mysql Database",
+  "itemsPerPage": 2,
+  "source": "notes-sql-intro-to-mysql-database.docx",
+  "items": [
+    {
+      "question": "Q1. What is a database, and why is it kept on a server?",
+      "answer": "Answer: Ans: A database is an organised collection of data that an application stores permanently so that it can be retrieved, changed and reused later. It is kept on a database server, which is a large computer that runs round the clock (24x7), so that users and applications can reach the data whenever they need it."
+    },
+    {
+      "question": "Q2. What are a DBMS and an RDBMS, and how are databases classified?",
+      "answer": "Answer: Ans: A DBMS (Database Management System) is the software that creates, stores, manages and retrieves the data in a database. Databases are classified into different types depending on how the data is stored. In a Relational DBMS (RDBMS) the data is stored in the form of tables made of rows and columns, and relations can be established between those tables. MySQL is an example of an RDBMS."
+    },
+    {
+      "question": "Q3. What is SQL and what is it used for?",
+      "answer": "Answer: Ans: SQL (Structured Query Language) is the language used to communicate with a relational database. Every instruction written in SQL, such as creating a table or fetching data, is called a statement or a query. The database server executes it and returns the result."
+    },
+    {
+      "question": "Q4. Who installs and sets up the database in an organisation, and what is the developer's role?",
+      "answer": "Answer: Ans: In an organisation the database software and server are installed and maintained by an admin team, so a developer does not have to worry about installation. The developer connects to the database that is already available and talks to it by writing queries. A new database is created from scratch only when the project requirement asks for it, for example when a new project is deployed and needs its own database."
+    },
+    {
+      "question": "Q5. What are the categories of SQL commands?",
+      "answer": "Answer: Ans: SQL commands are grouped by what they do. DDL (Data Definition Language) defines structures such as databases and tables; its commands are CREATE, ALTER and DROP. DML (Data Manipulation Language) changes the data inside existing structures; its commands include INSERT and UPDATE. DQL (Data Query Language) retrieves data; SELECT is the only command in this category. Q6. Classify CREATE DATABASE, CREATE TABLE, INSERT, UPDATE, SELECT and DROP TABLE as DDL, DML or DQL. Ans: CREATE DATABASE, CREATE TABLE and DROP TABLE define or remove structures, so they are DDL. INSERT and UPDATE change the data stored in a table, so they are DML. SELECT only reads data, so it is DQL."
+    },
+    {
+      "question": "Q7. What is the difference between DDL and DML?",
+      "answer": "Answer: Ans: DDL commands define the structure. Creating a database or a table is a definition task. DML commands work on the data placed inside that structure. Inserting a row or updating a value is a manipulation task. For example, CREATE TABLE person defines the table (DDL), whereas INSERT INTO person adds a record to it (DML). Creating a table does not add any data; the data is added separately using DML."
+    },
+    {
+      "question": "Q8. What is MySQL Workbench, and what must be done each time the system is restarted?",
+      "answer": "Answer: Ans: MySQL Workbench is the graphical client in which SQL queries are written and executed and their results are viewed. Databases and tables that were already created stay stored on the MySQL server. After the computer is switched off and on again, the connection to the server must be opened again by selecting the connection and entering the password, and the required database must be selected again before queries are run on it. Q9. How do you create a database in MySQL? Write a query to create a database named september_october. Ans: Use the CREATE DATABASE statement followed by the name of the database. The statement is DDL because it defines a new database. CREATE DATABASE september_october; Sample Input: No input Sample Output: 1 row(s) affected"
+    },
+    {
+      "question": "Q10. Are SQL keywords case-sensitive, and which writing convention is followed?",
+      "answer": "Answer: Ans: Keywords and commands are case-insensitive, so create database, CREATE DATABASE and Create Database all work in the same way. There is no enforced standard, but the common convention is to write keywords in uppercase so that queries are easier to read and keywords stand out from table and column names. It is a convention, not a rule."
+    },
+    {
+      "question": "Q11. What is the role of the semicolon at the end of a SQL statement?",
+      "answer": "Answer: Ans: The semicolon marks the end of a statement. For a single statement it can be left out and the statement still runs. When several statements are written one after another, the semicolon is needed to separate them. It is therefore good practice to end every statement with a semicolon."
+    },
+    {
+      "question": "Q12. How do you execute only one statement when the editor contains several statements?",
+      "answer": "Answer: Ans: Highlight (select) the required statement and click the execute (lightning) icon. Only the highlighted statement is executed. This matters because an editor usually holds many queries, and statements written earlier should not be run again by mistake."
+    },
+    {
+      "question": "Q13. How do you read the Action Output shown after a statement is executed?",
+      "answer": "Answer: Ans: The Action Output area at the bottom of Workbench lists the statement that was executed, whether it succeeded, a message and the time taken. A success mark with a message such as \"1 row(s) affected\" means the statement worked. For statements that change data, the number shows how many rows were affected, that is inserted, updated or deleted. If a statement fails, the area shows an error message, and reading that message carefully explains what went wrong."
+    },
+    {
+      "question": "Q14. What does the duration shown in the Action Output indicate?",
+      "answer": "Answer: Ans: The duration is the time the server took to execute the statement, for example 0.0016 sec. For a small table it is almost zero. On a huge database or with a heavy query the duration increases, and a high value shows that the query is putting a lot of load on the database."
+    },
+    {
+      "question": "Q15. After CREATE DATABASE is executed, how do you confirm that the database exists?",
+      "answer": "Answer: Ans: Click the refresh button in the Schemas section of Workbench. The new database then appears in the list. Without refreshing, the list may not show the newly created database."
+    },
+    {
+      "question": "Q16. What are database objects?",
+      "answer": "Answer: Ans: Anything that is created and stored in a database is a database object. When a database is expanded in Workbench it shows Tables, Views, Stored Procedures and Functions, and each of these is a kind of database object. The database itself is also an object. Creating a table means creating a table object. These are database objects and not the objects of a programming language such as Java, although the idea of an object is similar."
+    },
+    {
+      "question": "Q17. What does a table consist of, and what appears under a table in Workbench?",
+      "answer": "Answer: Ans: A table stores data as rows and columns. Each column has a name and describes one attribute of the data, and each row is one record. When a table is expanded in Workbench it shows Columns, Indexes, Foreign Keys and Triggers. The columns are the part used first, and the other items are covered later. Q18. What does the USE statement do? Write a query to select the september_october database. Ans: USE tells the server which database the following statements should work on. USE september_october; Sample Input: No input Sample Output: 0 row(s) affected After it runs, september_october is highlighted (shown in bold) in the Schemas list as the selected database."
+    },
+    {
+      "question": "Q19. Why must a database be selected before a table is created?",
+      "answer": "Answer: Ans: A server can hold many databases, and a CREATE TABLE statement alone does not say which database the table belongs to. The database must therefore be selected with USE. The selection has to be repeated whenever Workbench is opened again after the system was switched off. If no database is selected, MySQL reports the error \"No database selected\" (Error Code 1046) and the table is not created. Q20. Write a query to create a table person with the columns id, name, dob, city and weight. Ans: CREATE TABLE is followed by the table name, and the columns are defined inside round brackets, each as a column name followed by its data type. The data types used here are explained separately. CREATE TABLE person ( id INT, name VARCHAR(20),\n\n```java\ndob DATE,\n```\n\ncity VARCHAR(20), weight DECIMAL(5,2)\n\n```java\n);\n```\n\nSample Input: No input Sample Output: 0 row(s) affected The table object person now exists in the september_october database after the Schemas list is refreshed."
+    },
+    {
+      "question": "Q21. What are the rules for writing the column definitions in CREATE TABLE?",
+      "answer": "Answer: Ans: The definitions are written inside round brackets, and each one is a column name followed by its data type. Definitions are separated by commas, so every column except the last is followed by a comma. The last column has no comma after it. The statement ends with a semicolon. The number of columns is decided by the requirement. Q22. What happens when a comma is placed after the last column? Show with a query. CREATE TABLE person ( id INT, name VARCHAR(20),\n\n```java\ndob DATE,\n```\n\ncity VARCHAR(20), weight DECIMAL(5,2),\n\n```java\n);\n```\n\nAns: Sample Input: No input Sample Output: Error Code: 1064. You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 7 The comma after the last column makes the statement invalid, so the table is not created. Workbench also marks the line with an error indicator. Removing the comma after weight fixes it."
+    },
+    {
+      "question": "Q23. What does SELECT * FROM person do, and why does a newly created table return no rows?",
+      "answer": "Answer: Ans: SELECT starts a query, the asterisk (*) means all columns, and FROM names the table to read. The result of a query is always displayed in the form of a table, with the column names as headings. A table that has just been created has only its structure. CREATE TABLE defines the columns but adds no data, and the data is added separately with INSERT. SELECT * FROM person; Sample Input: person table created and no data inserted Sample Output: id | name | dob | city | weight 0 row(s) returned Q24. How do you insert a record into the person table? Write the query and view the result. Ans: INSERT INTO is followed by the table name, because a database can contain many tables and the server must be told which one receives the data. The VALUES keyword is followed by the values inside round brackets. The values are written in the same order as the columns were defined. Text and date values are enclosed in single quotes, and numbers are written without quotes. The date is written in year-month-day form. SELECT * FROM person; Sample Input: person table created and empty Sample Output: 1 row(s) affected id | name | dob | city | weight"
+    },
+    {
+      "question": "Q25. How can several rows be inserted with a single INSERT statement?",
+      "answer": "Answer: Ans: INSERT INTO and the table name are written once, and each row is written as a separate group of values inside brackets, with the groups separated by commas. A semicolon is placed after the last group only. This avoids repeating INSERT INTO for every row, and writing each group on its own line keeps the query readable. INSERT INTO person VALUES (2, 'Rahul', '2006-09-15', 'Calcutta', 86),\n\n```java\n(3, 'Meena', '2000-01-20', 'Mysuru', 55.5);\n```\n\nSELECT * FROM person; Sample Input: person table already contains the row with id 1 from the previous insert Sample Output: 2 row(s) affected Records: 2 Duplicates: 0 Warnings: 0 id | name | dob | city | weight 2 | Rahul | 2006-09-15 | Calcutta | 86.00 3 | Meena | 2000-01-20 | Mysuru | 55.50"
+    },
+    {
+      "question": "Q26. How do you remove a table from a database?",
+      "answer": "Answer: Ans: The DROP TABLE statement, a DDL command, removes the table from the database. The table disappears from the Schemas list after it is refreshed, and the data that was stored in it is removed with it. It is used to clear a table so that it can be created again. DROP TABLE person; Sample Input: person table exists Sample Output: 0 row(s) affected"
+    },
+    {
+      "question": "Q27. What is the sequence of steps to store and view data in MySQL, starting from nothing?",
+      "answer": "Answer: Ans: First a database is created with CREATE DATABASE. Then the database is selected with USE so that the server knows where to work. Next a table is created with CREATE TABLE, defining its columns. Then rows are added with INSERT INTO. Finally the data is viewed with SELECT. The first three steps are DDL, INSERT is DML and SELECT is DQL."
+    }
+  ]
+}
