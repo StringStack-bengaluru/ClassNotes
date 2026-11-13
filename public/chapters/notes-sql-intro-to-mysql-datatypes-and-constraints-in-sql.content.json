@@ -1,0 +1,127 @@
+{
+  "title": "Notes Sql Intro To Mysql Datatypes And Constraints In Sql",
+  "itemsPerPage": 2,
+  "source": "notes-sql-intro-to-mysql-datatypes-and-constraints-in-sql.docx",
+  "items": [
+    {
+      "question": "Q1. What is a data type in SQL, and why must every column have one?",
+      "answer": "Answer: Ans: A data type tells the database what kind of data a column can store, such as a whole number, text, a decimal number or a date. When a table is created, every column must be given a name and a data type, because the database has to know in advance what type of value will be inserted into that column."
+    },
+    {
+      "question": "Q2. Which data types are commonly used in MySQL?",
+      "answer": "Answer: Ans: INT stores whole numbers. VARCHAR(n) stores variable-length text. DECIMAL stores numbers with decimal places. DATE stores a date. DATETIME stores a date together with the time. Each column is declared with the type that matches the data it will hold."
+    },
+    {
+      "question": "Q3. Which data type stores whole numbers, and does the storage size of the type matter to a developer?",
+      "answer": "Answer: Ans: INT is used for numbers without a decimal part, such as an id or an age. The amount of memory an integer occupies is only additional information. It does not change how the column is used, and it is not something a developer must remember. What matters is choosing the type that matches the data: if the value is a whole number, INT is used."
+    },
+    {
+      "question": "Q4. What is VARCHAR, and what does the number in VARCHAR(20) mean?",
+      "answer": "Answer: Ans: VARCHAR stands for variable-length character. It stores text such as names, email ids and city names, and the value is written inside single quotes. The number in brackets is the maximum number of characters the column can accept, and it is chosen according to the requirement, for example 20, 30 or 50. A first-name column may be declared VARCHAR(40) because first names will not be longer than that. Because the length is variable, the space used depends on the length of the value stored, up to the declared maximum."
+    },
+    {
+      "question": "Q5. When is DECIMAL used instead of INT?",
+      "answer": "Answer: Ans: DECIMAL is used when the value has a decimal point, such as 46.65 or 56.6516. It stores fixed-point numbers with a specified number of decimal places. Its precision and scale settings are studied later together with functions. For now the rule is that whole numbers use INT and numbers with decimal places use DECIMAL."
+    },
+    {
+      "question": "Q6. What is the DATE data type, and which format does MySQL expect?",
+      "answer": "Answer: Ans: DATE stores a calendar date. An Indian-style date is written as day-month-year, but MySQL follows the order year, then month, then day. The value is written as 'YYYY-MM-DD' inside single quotes, for example '1996-06-06'."
+    },
+    {
+      "question": "Q7. What is the difference between DATE and DATETIME?",
+      "answer": "Answer: Ans: DATE stores only the date, for example '1996-06-06'. DATETIME stores the date along with the time (hours, minutes and seconds), for example '1996-06-06 09:38:45'. DATE is used when only the day is needed, and DATETIME when the time stamp is also needed."
+    },
+    {
+      "question": "Q8. Which data types need single quotes around their values and which do not?",
+      "answer": "Answer: Ans: Text values (VARCHAR), dates (DATE) and date-time values (DATETIME) are enclosed in single quotes. Numeric values (INT and DECIMAL) are written without quotes. If a value that needs quotes is written without them, MySQL cannot interpret it and the statement fails with an error."
+    },
+    {
+      "question": "Q9. Are data type names the same in every database?",
+      "answer": "Answer: Ans: The idea of giving each column a data type is the same in all relational databases, but the names can differ. Oracle, for example, uses NUMBER for numeric values and VARCHAR2 for text. When working with another database, its documentation gives the type names to use. Q10. Write a query to create a table person_1 with the columns id, name, dob, city and weight, each with a suitable data type. Ans: id and weight hold whole numbers, so they are INT. name and city hold text, so they are VARCHAR with a maximum length. dob holds a date, so it is DATE. CREATE TABLE person_1 ( id INT, name VARCHAR(20),\n\n```java\ndob DATE,\n```\n\ncity VARCHAR(20), weight INT\n\n```java\n);\n```\n\nSample Input: No input Sample Output: 0 row(s) affected"
+    },
+    {
+      "question": "Q11. How should the values of an INSERT statement match the data types of the columns?",
+      "answer": "Answer: Ans: Each value must be of the type of its column and in the same order as the columns. The id is an integer written without quotes, the name is text in single quotes, the date of birth is a date in single quotes in year-month-day order, the city is text in single quotes and the weight is an integer. SELECT * FROM person_1; Sample Input: person_1 table created and empty Sample Output: 1 row(s) affected id | name | dob | city | weight"
+    },
+    {
+      "question": "Q12. What happens when a date that does not exist in the calendar is inserted into a DATE column?",
+      "answer": "Answer: Ans: MySQL checks the value against the calendar, so an impossible date is rejected and the row is not inserted.\n\n```java\nINSERT INTO person_1 VALUES (2, 'Rahul', '1996-09-45', 'Calcutta', 60);\n```\n\nSample Input: person_1 table with one row Sample Output: Error Code: 1292. Incorrect date value: '1996-09-45' for column 'dob' at row 1 A month cannot have a 45th day, so the DATE type rejects the value. Q13. Does a data type guarantee that the stored value is realistic? Show with an example. Ans: No. A data type only controls the kind of value. A column declared INT accepts any integer, even a negative weight or a weight of 1 kg, which no real person can have.\n\n```java\nINSERT INTO person_1 VALUES (2, 'Rahul', '2006-09-15', 'Calcutta', -45);\nINSERT INTO person_1 VALUES (3, 'Amish', '1999-03-10', 'Mysuru', 1);\n```\n\nSELECT * FROM person_1; Sample Input: person_1 table with the row of id 1 Sample Output: 1 row(s) affected 1 row(s) affected id | name | dob | city | weight 2 | Rahul | 2006-09-15 | Calcutta | -45 3 | Amish | 1999-03-10 | Mysuru | 1 Both rows are accepted even though the weights are impossible. A rule that stops such values is needed in addition to the data type."
+    },
+    {
+      "question": "Q14. How can wrong values in a column lead to a wrong business decision?",
+      "answer": "Answer: Ans: Suppose a hospital stores weights of 45, 44 and a wrongly entered 1. The average of the three values is (45 + 44 + 1) / 3 = 30. The average of the correct values (45 + 44) / 2 is 44.5. Decisions made from 30 would be wrong. The same problem appears when ids repeat: if two people have the same id, a question such as \"who has id 2?\" has no single answer. Wrong data cannot be trusted for analysis."
+    },
+    {
+      "question": "Q15. Why is it risky to leave a table without any restrictions on its columns?",
+      "answer": "Answer: Ans: Data can be inserted by a person, by an application or by another system, and there is no guarantee that each of them inserts correct values. If the database accepts anything, the table fills with duplicate ids, missing names and impossible values. The data is then not properly organised, queries give unreliable results and decisions based on them go wrong. The database itself must therefore enforce the rules at the time of insertion."
+    },
+    {
+      "question": "Q16. What is a constraint in SQL, and when is it applied?",
+      "answer": "Answer: Ans: A constraint is a restriction applied to a column so that only valid data can enter it. Constraints are applied on the columns when the table is created, and they work together with the data types. When an inserted value breaks a constraint, MySQL rejects it with an error."
+    },
+    {
+      "question": "Q17. Which constraints are available in MySQL?",
+      "answer": "Answer: Ans: There are six constraints: UNIQUE, NOT NULL, PRIMARY KEY, CHECK, DEFAULT and FOREIGN KEY."
+    },
+    {
+      "question": "Q18. What is the UNIQUE constraint?",
+      "answer": "Answer: Ans: UNIQUE ensures that no two rows have the same value in that column. Every value in the column must be different, which is how uniqueness of the data is ensured. It suits columns such as an id or an email id."
+    },
+    {
+      "question": "Q19. What is the NOT NULL constraint?",
+      "answer": "Answer: Ans: NOT NULL ensures that the column cannot be left empty. A row cannot be inserted unless a value is supplied for that column. It is used for data that every record must have, such as the name of an employee."
+    },
+    {
+      "question": "Q20. What is the difference between NULL, a blank value and zero?",
+      "answer": "Answer: Ans: NULL means no value at all, that is nothing is stored in the column. A blank (an empty text or a space) is an actual value, and 0 is an actual number. Neither of them is NULL. NULL can occur in a column of any data type, such as INT, VARCHAR or DATE. NOT NULL rejects only NULL, which means a value must be present."
+    },
+    {
+      "question": "Q21. What is the PRIMARY KEY constraint?",
+      "answer": "Answer: Ans: A primary key is the combination of UNIQUE and NOT NULL. The column cannot contain duplicate values and cannot be empty, so every row can be identified uniquely by it. The basis for choosing the primary key column is studied separately."
+    },
+    {
+      "question": "Q22. What is the CHECK constraint?",
+      "answer": "Answer: Ans: CHECK applies a condition to a column. A value is accepted only when the condition is true. For example, a rule that weight must be greater than 30 would reject the values -45 and 1 that a plain INT column accepts."
+    },
+    {
+      "question": "Q23. What is the DEFAULT constraint?",
+      "answer": "Answer: Ans: DEFAULT supplies a value automatically when no value is given for the column. If a city is not entered for a person, the default value is stored instead of leaving the column empty. The default can be of any data type, according to the column."
+    },
+    {
+      "question": "Q24. What is the FOREIGN KEY constraint?",
+      "answer": "Answer: Ans: A foreign key is the constraint that establishes a relationship between two tables. A column of one table refers to the primary key of another table. It is the last of the six constraints and is covered in detail separately."
+    },
+    {
+      "question": "Q25. On what basis is the constraint for a column chosen?",
+      "answer": "Answer: Ans: Constraints are chosen purely on the requirement, so the requirement has to be understood first. A rule that is right for one table can be wrong for another. For example, if the requirement is that every employee must have a name, NOT NULL is used on the name. If it says that not every employee has an email, NOT NULL is not used on the email. The same column can need different constraints in different projects."
+    },
+    {
+      "question": "Q26. Which constraints suit the employee_id column of an employee table, and must the ids be continuous?",
+      "answer": "Answer: Ans: Every employee has an id and no two employees share one, so the column must be unique and not null. That combination is exactly a PRIMARY KEY, so the column is declared as PRIMARY KEY. The ids need not be continuous. If the ids run 1, 2, 3, 4, 5 and then continue from 11, they are still unique, and uniqueness is all that matters."
+    },
+    {
+      "question": "Q27. Which constraint suits the employee_name column?",
+      "answer": "Answer: Ans: Every employee has a name, so NOT NULL is appropriate. UNIQUE is not appropriate because two employees can have the same name, such as two employees named Rahul in one organisation. Two people named Rahul would be wrongly refused if the name were unique."
+    },
+    {
+      "question": "Q28. Which constraints suit the employee_email column, and why can it not be a primary key?",
+      "answer": "Answer: Ans: Two employees cannot share one email id, so UNIQUE is appropriate. Not every employee must have an email id, so NOT NULL is not applied, and the column may hold NULL for employees without an email. Since a primary key cannot contain NULL, the email column cannot be the primary key."
+    },
+    {
+      "question": "Q29. Why should a phone number be stored as VARCHAR and not INT?",
+      "answer": "Answer: Ans: INT is meant for values on which calculations are done, such as the average age or the average score. Nobody calculates an average of phone numbers. A phone number also carries a country code such as +91 and may contain symbols like a hyphen, which an INT column cannot store. A phone number is therefore stored as VARCHAR."
+    },
+    {
+      "question": "Q30. Which constraints can be applied to a phone number column?",
+      "answer": "Answer: Ans: It depends entirely on the requirement. If every employee must have a different number, UNIQUE can be applied. If two employees may share a number, for example a family contact number, UNIQUE cannot be applied. NOT NULL cannot be applied when some employees have no phone number. When a point of contact must always exist, DEFAULT can store a common contact number for employees who give none. PRIMARY KEY is not suitable because a number is not guaranteed for every employee."
+    },
+    {
+      "question": "Q31. How are multiple constraints applied to a single column?",
+      "answer": "Answer: Ans: A column can carry more than one constraint. The constraints are written after the data type, separated by a space and not by a comma. For example, employee_id INT UNIQUE NOT NULL is valid. Since UNIQUE together with NOT NULL is the definition of a primary key, writing PRIMARY KEY is the direct way. Q32. What kind of invalid data does a table without constraints accept? Show with an employee table. Ans: With no constraints, a table accepts duplicate ids, empty ids, empty names and repeated email ids. CREATE TABLE employee ( employee_id INT, employee_name VARCHAR(50), employee_email VARCHAR(100)\n\n```java\n);\nINSERT INTO employee VALUES (101, 'Rahul', 'rahul@gmail.com');\nINSERT INTO employee VALUES (101, 'Rahul', 'rahul@gmail.com');\nINSERT INTO employee VALUES (NULL, 'Anil', 'anil@gmail.com');\nINSERT INTO employee VALUES (102, NULL, 'rahul@gmail.com');\n```\n\nSELECT * FROM employee; Sample Input: No input Sample Output: employee_id | employee_name | employee_email 101 | Rahul | rahul@gmail.com 101 | Rahul | rahul@gmail.com NULL | Anil | anil@gmail.com 102 | NULL | rahul@gmail.com All four inserts succeed with \"1 row(s) affected\". The table now has a repeated id, an employee without an id, an employee without a name and a repeated email id. Q33. Write a query to create the employee table with suitable constraints on employee_id, employee_name and employee_email. Ans: employee_id is the PRIMARY KEY, employee_name is NOT NULL and employee_email is UNIQUE. The earlier version of the table is dropped first so that it can be created again. DROP TABLE employee; CREATE TABLE employee ( employee_id INT PRIMARY KEY, employee_name VARCHAR(50) NOT NULL, employee_email VARCHAR(100) UNIQUE\n\n```java\n);\n```\n\nSample Input: employee table created without constraints Sample Output: 0 row(s) affected 0 row(s) affected"
+    },
+    {
+      "question": "Q34. What happens when data that breaks the constraints is inserted into the employee table?",
+      "answer": "Answer: Ans: The first row is valid. Each of the following statements breaks one constraint and is rejected, so no row is inserted.\n\n```java\nINSERT INTO employee VALUES (101, 'Rahul', 'rahul@gmail.com');\nINSERT INTO employee VALUES (101, 'Anil', 'anil@gmail.com');\nINSERT INTO employee VALUES (NULL, 'Anil', 'anil@gmail.com');\nINSERT INTO employee VALUES (102, NULL, 'anil@gmail.com');\nINSERT INTO employee VALUES (103, 'Anil', 'rahul@gmail.com');\n```\n\nSample Input: employee table created with the constraints, no rows Sample Output: 1 row(s) affected Error Code: 1062. Duplicate entry '101' for key 'employee.PRIMARY' Error Code: 1048. Column 'employee_id' cannot be null Error Code: 1048. Column 'employee_name' cannot be null Error Code: 1062. Duplicate entry 'rahul@gmail.com' for key 'employee.employee_email' Only the first row is stored. The primary key rejects a repeated id and an empty id, NOT NULL rejects the missing name, and UNIQUE rejects the repeated email id."
+    }
+  ]
+}
