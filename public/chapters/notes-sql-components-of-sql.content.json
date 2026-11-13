@@ -1,0 +1,95 @@
+{
+  "title": "Notes Sql Components Of Sql",
+  "itemsPerPage": 2,
+  "source": "notes-sql-components-of-sql.docx",
+  "items": [
+    {
+      "question": "Q1. What are the two main purposes of a DBMS, and which one takes up most of the real-world work?",
+      "answer": "Answer: A DBMS is used for two things: storing data permanently and retrieving that data efficiently. Creating databases and tables and inserting rows are one-time setup activities. Most day-to-day work in real projects is retrieval, which means reading the data that is already stored so that business decisions can be taken. That is why querying is studied in depth after tables and inserts are understood."
+    },
+    {
+      "question": "Q2. What is the AUTO_INCREMENT feature in MySQL, and how is it different from a constraint?",
+      "answer": "Answer: AUTO_INCREMENT is a column feature, not a constraint. When it is applied to a column, MySQL generates the next numeric value automatically each time a row is inserted, so the value does not have to be typed by hand. It is normally used on ID columns that must be unique and keep increasing (1, 2, 3, ...), such as a primary key. By default the numbering starts from 1. If a different starting number is required, it has to be specified explicitly. A constraint (PRIMARY KEY, NOT NULL, CHECK and so on) is a rule that restricts which values a column will accept. AUTO_INCREMENT does not restrict anything; it supplies the value. Q3. Write a CREATE TABLE statement for a customers table with an auto-incremented primary key, a mandatory first name, a country and a score that must be greater than zero. CREATE TABLE customers ( customer_id INT PRIMARY KEY AUTO_INCREMENT, first_name VARCHAR(20) NOT NULL, country VARCHAR(10), score INT CHECK (score > 0)\n\n```java\n);\n```\n\ncustomer_id is an integer primary key (unique and never empty) whose value is generated automatically. first_name holds up to 20 characters and is NOT NULL because every customer has a name. country holds up to 10 characters. score is an integer, and the CHECK constraint rejects any value that is not greater than 0. After the statement runs, refresh the schema list in MySQL Workbench to see the new table. Sample Input: No input Sample Output: 0 row(s) affected (the customers table is created and appears under Tables after refresh)"
+    },
+    {
+      "question": "Q4. What is the recommended syntax of the INSERT statement, and why should the column list always be written?",
+      "answer": "Answer: Syntax: INSERT INTO table_name (column1, column2, column3)\n\n```java\nVALUES (value1, value2, value3);\n```\n\nThe keywords INSERT INTO are followed by the table name. The columns that will receive data are then listed in brackets, and the VALUES keyword is followed by the values in the same order. Giving only values and skipping the column list can work, but it is not the right way: the statement then depends on the internal column order of the table and can fail or put data into the wrong columns when the table structure changes. A column list makes it explicit which value goes into which column."
+    },
+    {
+      "question": "Q5. Why should the columns in an INSERT statement be listed in the same order in which they were created in the table?",
+      "answer": "Answer: Following the creation order is the first rule of writing inserts. The statement still works when the values match the listed columns, but in large applications a different order leads to bugs and wrong data being stored, and these issues are hard to trace. The safe practice is to check how the table was created and list the columns in exactly that order before writing the values. For a customers table created as customer_id, first_name, country, score, the column list is written in that same order. Q6. Write INSERT statements for the customers table when customer_id is AUTO_INCREMENT, and display the table. INSERT INTO customers (first_name, country, score)\n\n```java\nVALUES ('Rahul', 'India', 90);\n```\n\nINSERT INTO customers (first_name, country, score)\n\n```java\nVALUES ('Shakti', 'USA', 40);\n```\n\nINSERT INTO customers (first_name, country, score)\n\n```java\nVALUES ('Mahesh', 'Sri Lanka', 50);\n```\n\nSELECT * FROM customers; Because customer_id is AUTO_INCREMENT, it is left out of the column list and MySQL generates 1, 2 and 3 on its own. Only three columns are listed and exactly three values are given in each statement. Text values are written in single quotes and numbers are written without quotes. Sample Input: customers table created with AUTO_INCREMENT on customer_id (table is empty) Sample Output: customer_id | first_name | country | score 1 | Rahul | India | 90 2 | Shakti | USA | 40 3 | Mahesh | Sri Lanka | 50"
+    },
+    {
+      "question": "Q7. How does the INSERT statement change when the ID column is not AUTO_INCREMENT?",
+      "answer": "Answer: Without AUTO_INCREMENT, MySQL does not generate the ID. The customer_id column has to be included in the column list and its value has to be supplied for every row. INSERT INTO customers (customer_id, first_name, country, score)\n\n```java\nVALUES (1, 'Rahul', 'India', 90);\n```\n\nSELECT * FROM customers; Sample Input: customers table where customer_id is a plain INT PRIMARY KEY (no AUTO_INCREMENT); table is empty Sample Output: customer_id | first_name | country | score 1 | Rahul | India | 90"
+    },
+    {
+      "question": "Q8. How do you delete a table so that it can be created again with a different definition?",
+      "answer": "Answer: DROP TABLE IF EXISTS customers; DROP TABLE removes the table, including its structure and all rows. IF EXISTS prevents an error when the table is not present. This is useful when a table has to be recreated, for example to add AUTO_INCREMENT to a column. After refreshing the schema list, the table is no longer visible. Since the data is lost along with the table, it should be used carefully. Sample Input: customers table exists in the selected database Sample Output: 0 row(s) affected (customers is no longer listed under Tables after refresh)"
+    },
+    {
+      "question": "Q9. What is the hierarchy of objects in a relational database, and what does inserted data actually refer to?",
+      "answer": "Answer: A database contains tables, a table contains columns and rows, and the data is stored where a row and a column meet. For example, in the customers table, the first row's value under the first_name column is a single piece of data. Whenever data is said to be inserted, it is inserted into a particular table, and the values are placed under the specific columns of a new row. The first value goes to the first column, the second value to the second column, and so on. Seeing data in this hierarchy makes it easier to understand inserts, selects and later changes to the data."
+    },
+    {
+      "question": "Q10. Why should a developer refer to the official documentation of the database when stuck?",
+      "answer": "Answer: Different organizations use different databases and different versions of the same database, so some names or feature implementations can differ. The official documentation is the reference manual written by the people who built the database, and it describes every feature, constraint and function along with its syntax. Reading it is the most reliable way to resolve doubts about syntax or behavior, and the habit applies to every other technology as well, such as Java, front-end technologies or any other programming language. It also prepares a developer for real projects, where documents are the starting point for understanding a system."
+    },
+    {
+      "question": "Q11. What is the role of documentation in the software development life cycle (SDLC)?",
+      "answer": "Answer: The phases of the SDLC are requirement analysis and collection, design, development, testing and maintenance. Documentation is prepared along the way, especially during development, so that there is a reference for the application. Such documentation acts like a user manual: just as a refrigerator or any other hardware product comes with a manual, a software product has documents describing its features and how they behave. A database's official documentation is such a reference manual, in which every feature, constraint and function is described."
+    },
+    {
+      "question": "Q12. What are the components of an SQL query?",
+      "answer": "Answer: An SQL query is made up of keywords, clauses, functions, identifiers, operators and values. - Keywords: reserved words with a special meaning for SQL, such as SELECT, FROM, WHERE, CREATE and TABLE. - Clauses: parts of a query that perform a specific job, such as the SELECT clause (choose columns) and the WHERE clause (filter rows). GROUP BY, HAVING and ORDER BY are other clauses. - Functions: operations that take some input and return a value. - Identifiers: names used in a query, such as table names and column names. - Operators: symbols or keywords that perform an operation or a condition between expressions, such as =, > and AND. - Values: the data or result produced by an operation. For example, in 2 + 2, the plus sign is the operator performing an addition, and the value produced is 4. In the query SELECT first_name FROM employees; the words SELECT and FROM are keywords, SELECT is also a clause, and first_name and employees are identifiers."
+    },
+    {
+      "question": "Q13. What is the difference between a keyword and a clause? Is every keyword a clause?",
+      "answer": "Answer: A keyword is any reserved word that SQL understands. A clause is a part of a query that does a specific job. Most clauses are keywords, but not every keyword is a clause. SELECT is both a keyword and a clause. FROM is a keyword that works together with SELECT to point to the source of the data, and it is treated here as a keyword and not as a clause (some references also call FROM a clause). CREATE and DATABASE in CREATE DATABASE are keywords, but they are not clauses. So almost every clause is a keyword, but the reverse is not true."
+    },
+    {
+      "question": "Q14. What is the basic syntax of a data retrieval query, and what does FROM specify?",
+      "answer": "Answer: Syntax: SELECT column1, column2 FROM object_name; SELECT lists the columns required, or * for all columns. FROM specifies the object from which the data must be fetched. Everything that exists in a database, such as tables, views, stored procedures and functions, is called an object. At this stage, data is read only from tables, so the object is a table name such as customers. Views and other objects are used with FROM later, in the same way."
+    },
+    {
+      "question": "Q15. How does a query travel from the user to the database and back?",
+      "answer": "Answer: The user never talks to the stored data directly. The query is written with the SELECT command and handed to the DBMS. The DBMS receives it, decides how it will be executed, fetches the required data from the database and sends the answer back to the user. In this flow the DBMS is always in the middle, and the user only sees the final result."
+    },
+    {
+      "question": "Q16. In what form is the output of a SELECT query returned, and how can it be used?",
+      "answer": "Answer: The output of a query is always returned in the form of a table, that is, rows and columns. This result can be placed in a data visualization tool such as Power BI to build charts and dashboards for stakeholders, exported to a CSV or Excel file, or used for any other decision-making purpose."
+    },
+    {
+      "question": "Q17. Why is it important to write the query correctly even though the database answers whatever it is asked?",
+      "answer": "Answer: The database returns exactly what the query asks for. If the question is asked in the wrong way, the answer will be wrong even though the data and the DBMS are fine, and a wrong answer leads to wrong decisions. Asking the right question according to the requirement is therefore the most important skill in SQL, and writing efficient queries is a major part of that skill."
+    },
+    {
+      "question": "Q18. What is the SELECT clause, and what does * mean in it?",
+      "answer": "Answer: SELECT is the clause used to choose which columns of an object are to be shown in the result. It always works on columns. When the asterisk symbol is written after SELECT, all columns of the table are selected. When * is not used, the required column names are written explicitly, separated by commas. SELECT only picks the columns that appear in the output. Q19. Write a query to display all columns of the customers table. SELECT * FROM customers; The database first checks that the customers table exists, and then * selects every column and all rows. Sample Input: customer_id | first_name | country | score 1 | Rahul | India | 90 2 | Shakti | USA | 40 3 | Mahesh | Sri Lanka | 50 Sample Output: customer_id | first_name | country | score 1 | Rahul | India | 90 2 | Shakti | USA | 40 3 | Mahesh | Sri Lanka | 50 Q20. Write a query to display only the country column of the customers table. SELECT country FROM customers; Only the named column is returned, one value per row. The other columns remain in the table but do not appear in this result. Sample Input: customer_id | first_name | country | score 1 | Rahul | India | 90 2 | Shakti | USA | 40 3 | Mahesh | Sri Lanka | 50 Sample Output: country India USA Sri Lanka Q21. Write a query to display the first_name and score columns of the customers table. SELECT first_name, score FROM customers; When more than one column is required, the column names are separated by commas, and no comma is written after the last column name. The columns appear in the order in which they are written in the SELECT clause. Sample Input: customer_id | first_name | country | score 1 | Rahul | India | 90 2 | Shakti | USA | 40 3 | Mahesh | Sri Lanka | 50 Sample Output: first_name | score Rahul | 90 Shakti | 40 Mahesh | 50"
+    },
+    {
+      "question": "Q22. Why should SELECT * be avoided in real projects?",
+      "answer": "Answer: SELECT * is convenient while learning, but in real projects only the columns that the requirement needs should be selected. Asking for every column returns unnecessary data, makes the question less precise and makes the query less efficient. Selecting only the required columns is the way to ask the question properly."
+    },
+    {
+      "question": "Q23. In what order does the database process FROM and SELECT in the query SELECT * FROM customers?",
+      "answer": "Answer: Although SELECT is written first, the database first processes FROM. It must know where the data comes from before it can choose columns. It checks whether the customers table exists; if it does not, an error is raised saying that the table does not exist. Once the table is found, the SELECT part decides which columns to return, and here * means all of them. The order of execution is therefore FROM first and SELECT afterwards."
+    },
+    {
+      "question": "Q24. Does a SELECT query change the data stored in a table?",
+      "answer": "Answer: No. A SELECT query only reads data. It asks a question and takes out the answer; the stored rows, columns and constraints of the table are left untouched. The result can be used elsewhere, for example in a CSV or Excel file, without affecting the table."
+    },
+    {
+      "question": "Q25. How do you list the databases available on the server and choose one to work with in MySQL?",
+      "answer": "Answer: SHOW DATABASES; USE classdb; SHOW DATABASES lists every database on the server. USE selects the database in which the following queries are to run (classdb is a placeholder for your own database name). The USE command has to be run again after restarting MySQL Workbench or the computer, because queries on tables fail with an error when no database has been selected. Sample Input: No input Sample Output: Database information_schema\n\n```java\nclassdb\n```\n\nmysql performance_schema sys Database changed"
+    },
+    {
+      "question": "Q26. How should several SQL statements be written and executed in MySQL Workbench?",
+      "answer": "Answer: Every statement is ended with a semicolon and written on its own line. To execute a single statement among several, select that statement's text and run it; only the selected statement is executed and its result is shown. Writing one statement per line and selecting it before running keeps the results easy to follow, and a statement such as SELECT * FROM customers; can be executed on its own while the other statements remain untouched."
+    },
+    {
+      "question": "Q27. Which clause is used to filter rows, and why is it needed along with SELECT?",
+      "answer": "Answer: SELECT only chooses columns, and it returns every row of the table. Often only some rows are required, for example the first name of the customer from a particular country. The WHERE clause is added after the FROM part to apply such a filter on the rows. WHERE works together with operators, which are studied in the next topic, and other clauses such as GROUP BY, HAVING and ORDER BY serve different purposes. SELECT first_name FROM customers\n\n```java\nWHERE country = 'USA';\n```\n\nSample Input: customer_id | first_name | country | score 1 | Rahul | India | 90 2 | Shakti | USA | 40 3 | Mahesh | Sri Lanka | 50 Sample Output: first_name Shakti"
+    }
+  ]
+}
