@@ -1,0 +1,87 @@
+{
+  "title": "Notes Sql Inserting A Data Into The Tables",
+  "itemsPerPage": 2,
+  "source": "notes-sql-inserting-a-data-into-the-tables.docx",
+  "items": [
+    {
+      "question": "Q2. What naming convention is followed for columns made of two words?",
+      "answer": "Answer: Ans: A column name made of two words has its words joined with an underscore, as in employee_id, employee_name and marital_status. The underscore separates the words so that the name can be read easily, as variable names are written in a programming language. This is a convention and not a rule, and a table can be created without following it."
+    },
+    {
+      "question": "Q3. How is a valid row inserted into the employee table?",
+      "answer": "Answer: Ans: Every value is supplied in the order of the columns. Text values are in single quotes and numbers are not. All the constraints are satisfied, so the row is stored.\n\n```java\nINSERT INTO employee VALUES (101, 'Amish', 'amish@gmail.com', 23, 'Married');\n```\n\nSELECT * FROM employee; Sample Input: employee table created and empty Sample Output: 1 row(s) affected employee_id | employee_name | employee_email | employee_age | marital_status 101 | Amish | amish@gmail.com | 23 | Married"
+    },
+    {
+      "question": "Q4. What happens when a row with an existing primary key value is inserted?",
+      "answer": "Answer: ```java\nINSERT INTO employee VALUES (101, 'Swetha', 'swetha@gmail.com', 26, 'Single');\n```\n\nAns: Sample Input: employee table containing the row with employee_id 101 Sample Output: Error Code: 1062. Duplicate entry '101' for key 'employee.PRIMARY' The primary key must be unique, and 101 already exists, so the row is rejected."
+    },
+    {
+      "question": "Q5. What happens when an email id that already exists is inserted into a UNIQUE column?",
+      "answer": "Answer: ```java\nINSERT INTO employee VALUES (102, 'Swetha', 'amish@gmail.com', 26, 'Single');\n```\n\nAns: Sample Input: employee table containing the row with employee_id 101 and email amish@gmail.com Sample Output: Error Code: 1062. Duplicate entry 'amish@gmail.com' for key 'employee.employee_email' The id 102 is new, but the email id is a duplicate, so the UNIQUE constraint rejects the row. Changing the email id removes the error."
+    },
+    {
+      "question": "Q6. What happens when a value that breaks the CHECK condition is inserted?",
+      "answer": "Answer: ```java\nINSERT INTO employee VALUES (102, 'Swetha', 'swetha@gmail.com', 15, 'Single');\n```\n\nAns: Sample Input: employee table containing the row with employee_id 101 Sample Output: Error Code: 3819. Check constraint 'employee_chk_1' is violated. The age 15 is not greater than 18, so the condition is false and the row is rejected. The message names the CHECK constraint, which MySQL named employee_chk_1."
+    },
+    {
+      "question": "Q7. A statement fails with constraint errors. How are they corrected so that the row is inserted?",
+      "answer": "Answer: Ans: The error message shows which constraint is broken, and the value is corrected accordingly. A repeated primary key needs a new id, a repeated email id needs a different email id, and an age that fails the CHECK condition needs a valid age.\n\n```java\nINSERT INTO employee VALUES (102, 'Swetha', 'swetha@gmail.com', 26, 'Married');\n```\n\nSELECT * FROM employee; Sample Input: employee table containing the row with employee_id 101 Sample Output: 1 row(s) affected employee_id | employee_name | employee_email | employee_age | marital_status 101 | Amish | amish@gmail.com | 23 | Married 102 | Swetha | swetha@gmail.com | 26 | Married"
+    },
+    {
+      "question": "Q8. Should a CHECK constraint on age be applied to every table?",
+      "answer": "Answer: Ans: No. Whether a constraint is applied depends on the requirement of the table. In an employee table the age must be greater than 18, because of the labour rules for hiring. In the table of a hospital, a patient may be a child or a person of ninety years, so such a rule would be wrong, and the age column needs no CHECK constraint there."
+    },
+    {
+      "question": "Q9. What error occurs when an INSERT without a column list gives fewer values than the table has columns?",
+      "answer": "Answer: Ans: The table employee has five columns, and the statement gives four values because the person left marital status out, expecting the default value to be used. MySQL does not guess which column was skipped, so it reports a mismatch.\n\n```java\nINSERT INTO employee VALUES (103, 'Mahesh', 'mahesh@gmail.com', 26);\n```\n\nSample Input: employee table containing the rows with employee_id 101 and 102 Sample Output: Error Code: 1136. Column count doesn't match value count at row 1 The DEFAULT constraint is not applied automatically in this form, because the database cannot know which column the values were meant for."
+    },
+    {
+      "question": "Q10. How is a row inserted so that the DEFAULT value is used?",
+      "answer": "Answer: Ans: The columns that receive values are named in brackets after the table name, and the values follow in the same order. A column that is not named gets its DEFAULT value. INSERT INTO employee (employee_id, employee_name, employee_email, employee_age)\n\n```java\nVALUES (103, 'Mahesh', 'mahesh@gmail.com', 26);\n```\n\nSELECT * FROM employee; Sample Input: employee table containing the rows with employee_id 101 and 102 Sample Output: 1 row(s) affected employee_id | employee_name | employee_email | employee_age | marital_status 101 | Amish | amish@gmail.com | 23 | Married 102 | Swetha | swetha@gmail.com | 26 | Married 103 | Mahesh | mahesh@gmail.com | 26 | Single"
+    },
+    {
+      "question": "Q11. Why should the column names always be written in an INSERT statement, and what rules apply?",
+      "answer": "Answer: Ans: Without a column list the server cannot tell which column is missing, so DEFAULT values are not used and an incomplete list of values fails. A column list also makes the statement easier to read, because it shows which value goes into which column. The rules are that the number of values must match the number of listed columns, the values must be in the same order as the listed columns, and each value must suit the data type of its column. Writing the column list is therefore the proper way to insert data. Q12. Write a query to create a departments table with a primary key. Ans: department_id is the PRIMARY KEY, department_name is NOT NULL and department_location holds the location of the department. CREATE TABLE departments ( department_id INT PRIMARY KEY, department_name VARCHAR(20) NOT NULL, department_location VARCHAR(20)\n\n```java\n);\n```\n\nSample Input: No input Sample Output: 0 row(s) affected"
+    },
+    {
+      "question": "Q13. How are several rows inserted into the departments table with one statement?",
+      "answer": "Answer: Ans: INSERT INTO and the column list are written once, and the rows follow as groups of values separated by commas. The last group is followed by a semicolon. Placing each group on its own line, with indentation for the lines after the first, keeps a long query readable. INSERT INTO departments (department_id, department_name, department_location) VALUES (1, 'IT', 'A Block'), (2, 'HR', 'B Block'),\n\n```java\n(3, 'Operations', 'C Block');\n```\n\nSELECT * FROM departments; Sample Input: departments table created and empty Sample Output: 3 row(s) affected Records: 3 Duplicates: 0 Warnings: 0 department_id | department_name | department_location 1 | IT | A Block 2 | HR | B Block 3 | Operations | C Block"
+    },
+    {
+      "question": "Q14. How are comments written in SQL, and what is their use?",
+      "answer": "Answer: Ans: A comment starts with two hyphens followed by a space. The server ignores everything after them on that line, so a commented statement is not executed. In Workbench, selecting lines and pressing Ctrl and the forward slash comments or uncomments them together. Comments are used to explain a query or to switch off a statement that is not needed to run again, such as an INSERT that has already been executed.\n\n```java\n-- INSERT INTO departments (department_id, department_name, department_location) VALUES (5, 'Finance', 'E Block');\n```\n\nSELECT * FROM departments; Sample Input: departments table containing three rows Sample Output: department_id | department_name | department_location 1 | IT | A Block 2 | HR | B Block 3 | Operations | C Block The commented INSERT is ignored, and only the SELECT runs. Q15. Write a query to create an employee2 table that has a foreign key referring to the departments table. Ans: The employee2 table has the department_id column, which is declared as a foreign key referring to the department_id primary key of the departments table. The departments table already exists, as the parent table has to be created first. CREATE TABLE employee2 ( employee_id INT PRIMARY KEY, employee_name VARCHAR(50) NOT NULL, employee_email VARCHAR(50) UNIQUE, department_id INT, FOREIGN KEY (department_id) REFERENCES departments(department_id)\n\n```java\n);\n```\n\nSample Input: departments table with rows exists Sample Output: 0 row(s) affected Q16. Explain the syntax used to declare a foreign key. Ans: FOREIGN KEY is followed by the column of the current table, written in brackets, that is made the foreign key, here department_id of employee2. REFERENCES is followed by the table that is referred to, departments, and then, in brackets, the column of that table that is referred to, department_id. That referred column must be the primary key of the other table. The declaration is written as a separate line after the column definitions, separated by a comma."
+    },
+    {
+      "question": "Q17. How are the foreign keys of a table seen in MySQL Workbench?",
+      "answer": "Answer: Ans: After the Schemas list is refreshed, the table is expanded and its Foreign Keys node lists the foreign keys. MySQL gives each foreign key a name automatically, such as employee2_ibfk_1. A second foreign key in the same table appears as employee2_ibfk_2, and so on, which shows that a table can have many foreign keys, although it has only one primary key."
+    },
+    {
+      "question": "Q18. How are rows inserted into the employee2 table so that every department_id exists in the departments table?",
+      "answer": "Answer: Ans: Each department_id value is one of the primary key values already present in the departments table. INSERT INTO employee2 (employee_id, employee_name, employee_email, department_id) VALUES (1, 'Amish', 'amish@gmail.com', 1), (2, 'Rahul', 'rahul@gmail.com', 2),\n\n```java\n(3, 'Suresh', 'suresh@gmail.com', 3);\n```\n\nSELECT * FROM employee2; Sample Input: departments table contains department ids 1, 2 and 3; employee2 table is empty Sample Output: 3 row(s) affected Records: 3 Duplicates: 0 Warnings: 0 employee_id | employee_name | employee_email | department_id 1 | Amish | amish@gmail.com | 1 2 | Rahul | rahul@gmail.com | 2 3 | Suresh | suresh@gmail.com | 3 Q19. Can the foreign key column contain duplicate values? Show with an example. Ans: Yes. Several rows of the child table can refer to the same row of the parent table. Two employees can work in the same department, so the department_id value 1 can appear twice in employee2. This is the difference from a primary key, whose values never repeat. INSERT INTO employee2 (employee_id, employee_name, employee_email, department_id)\n\n```java\nVALUES (4, 'Mahesh', 'mahesh@gmail.com', 1);\n```\n\nSELECT * FROM employee2; Sample Input: employee2 table containing the rows with employee_id 1, 2 and 3 Sample Output: 1 row(s) affected employee_id | employee_name | employee_email | department_id 1 | Amish | amish@gmail.com | 1 2 | Rahul | rahul@gmail.com | 2 3 | Suresh | suresh@gmail.com | 3 4 | Mahesh | mahesh@gmail.com | 1"
+    },
+    {
+      "question": "Q20. What happens when a department_id that is not present in the departments table is inserted into employee2?",
+      "answer": "Answer: INSERT INTO employee2 (employee_id, employee_name, employee_email, department_id)\n\n```java\nVALUES (5, 'Kiran', 'kiran@gmail.com', 4);\n```\n\nAns: Sample Input: departments table with department ids 1, 2 and 3; employee2 table with four rows Sample Output: Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails (`september_october`.`employee2`, CONSTRAINT `employee2_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`)) employee2 is the child table and departments is the parent table. Department 4 does not exist in the parent table, so the child row cannot refer to it and is rejected."
+    },
+    {
+      "question": "Q21. How is the foreign key error corrected so that the employee row can be inserted?",
+      "answer": "Answer: Ans: The value must first exist in the parent table. The department is inserted into departments first, and then the employee row is inserted into employee2 again. INSERT INTO departments (department_id, department_name, department_location)\n\n```java\nVALUES (4, 'Cleaning', 'D Block');\n```\n\nINSERT INTO employee2 (employee_id, employee_name, employee_email, department_id)\n\n```java\nVALUES (5, 'Kiran', 'kiran@gmail.com', 4);\n```\n\nSELECT * FROM employee2; Sample Input: departments table with department ids 1, 2 and 3; employee2 table with four rows Sample Output: 1 row(s) affected 1 row(s) affected employee_id | employee_name | employee_email | department_id 1 | Amish | amish@gmail.com | 1 2 | Rahul | rahul@gmail.com | 2 3 | Suresh | suresh@gmail.com | 3 4 | Mahesh | mahesh@gmail.com | 1 5 | Kiran | kiran@gmail.com | 4"
+    },
+    {
+      "question": "Q22. Can a foreign key column contain NULL?",
+      "answer": "Answer: Ans: Yes, unless NOT NULL is also declared on it. NULL means nothing, so the row does not refer to any row of the parent table. This is useful when a record has no related parent, for example an employee who is not yet assigned to a department. For such a row no department information is available. INSERT INTO employee2 (employee_id, employee_name, employee_email, department_id)\n\n```java\nVALUES (6, 'Divya', 'divya@gmail.com', NULL);\n```\n\nSELECT * FROM employee2; Sample Input: employee2 table containing five rows Sample Output: 1 row(s) affected employee_id | employee_name | employee_email | department_id 1 | Amish | amish@gmail.com | 1 2 | Rahul | rahul@gmail.com | 2 3 | Suresh | suresh@gmail.com | 3 4 | Mahesh | mahesh@gmail.com | 1 5 | Kiran | kiran@gmail.com | 4 6 | Divya | divya@gmail.com | NULL"
+    },
+    {
+      "question": "Q23. Can a foreign key column also be UNIQUE?",
+      "answer": "Answer: Ans: Yes, it is possible and depends on the requirement. If each department can have only one employee, UNIQUE can be added to the foreign key column so that no value repeats. When many employees belong to one department, which is the usual case, the column must not be UNIQUE."
+    },
+    {
+      "question": "Q24. What are the differences between a primary key and a foreign key?",
+      "answer": "Answer: Ans: A primary key identifies each row of its own table. It is unique, it cannot be NULL and a table can have only one. A foreign key links a row to a row of another table, as it refers to the primary key of that table. It can contain duplicate values, it can contain NULL unless NOT NULL is declared, and a table can have many foreign keys. For example, department_id is the primary key of the departments table, and it is a foreign key in the employee2 table."
+    },
+    {
+      "question": "Q25. How does a foreign key help when data from two tables is needed together?",
+      "answer": "Answer: Ans: The foreign key value in the child table matches a primary key value in the parent table, so each child row can be linked with its parent row. For example, the department_id of an employee leads to the department name and location in the departments table. Combining the tables with this link is done using joins, which are studied later. The foreign key is what makes the relationship available to be used."
+    }
+  ]
+}
