@@ -259,9 +259,6 @@ with zipfile.ZipFile(path) as z:
         # Numbered questions are never code: "16. What is the truth table of &&?"
         if re.match(r"^\\d+[G]?[.)]\\s+", line):
             return False
-        # Before the short-English filter, so "INSERT INTO person VALUES" stays SQL.
-        if is_sql_line(line):
-            return True
         # Type section labels in notes: float: / double: — not code
         if re.fullmatch(
             r"(?:byte|short|int|long|float|double|boolean|char|void|String):",
@@ -413,64 +410,6 @@ with zipfile.ZipFile(path) as z:
             return True
         # Java statements end with ; — teaching placeholders like statement1; too
         if line.endswith(";"):
-            return True
-        return False
-
-    def is_sql_line(line):
-        """SQL query text, not an English sentence that mentions SQL."""
-        s = (line or "").strip()
-        if not s:
-            return False
-        # Column definition: employee_id INT PRIMARY KEY,
-        if re.match(
-            r"^[A-Za-z_][\\w]*\\s+(?:INT|INTEGER|BIGINT|SMALLINT|TINYINT|MEDIUMINT|"
-            r"VARCHAR|CHAR|NCHAR|NVARCHAR|TEXT|TINYTEXT|MEDIUMTEXT|LONGTEXT|"
-            r"DATE|DATETIME|TIMESTAMP|TIME|YEAR|DECIMAL|NUMERIC|FLOAT|DOUBLE|REAL|"
-            r"BOOLEAN|BOOL|BIT|BLOB|JSON|ENUM|SET|SERIAL)\\b",
-            s,
-            re.I,
-        ):
-            return True
-        # Value tuple: (1, 'IT', 'A Block'),
-        if re.match(r"^\\(.*\\)\\s*,?\\s*$", s) and re.search(r"[,']", s):
-            return True
-        if re.match(r"^--\\s+\\S", s):
-            return True
-        # Clause that continues a query: WHERE country = 'India'
-        if re.match(
-            r"^(?:WHERE|AND|OR|ON|GROUP\\s+BY|ORDER\\s+BY|HAVING|LIMIT|OFFSET|"
-            r"SET|VALUES|FROM|JOIN|INNER\\s+JOIN|LEFT\\s+JOIN|RIGHT\\s+JOIN|"
-            r"FULL\\s+JOIN|CROSS\\s+JOIN|UNION|REFERENCES|PRIMARY\\s+KEY|"
-            r"FOREIGN\\s+KEY|CONSTRAINT|UNIQUE|CHECK)\\b",
-            s,
-            re.I,
-        ):
-            if s.endswith(".") and not re.search(r"[=<>';(),*]", s):
-                return False
-            if re.search(r"[=<>';(),*\`]", s) or len(s.split()) <= 8:
-                if re.match(r"^(?:FROM|SELECT|WHERE|INSERT)\\s+(?:is|are|only|lists|specifies|chooses)\\b", s, re.I):
-                    return False
-                return True
-            return False
-        m = re.match(
-            r"^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|TRUNCATE|USE|SHOW|"
-            r"DESC|DESCRIBE|WITH|REPLACE)\\b\\s*(.*)$",
-            s,
-            re.I,
-        )
-        if not m:
-            return False
-        rest = m.group(2) or ""
-        # "SELECT is a clause." / "INSERT INTO and the column list..."
-        if re.match(r"^(?:is|are|only|lists|clause|command)\\b", rest, re.I):
-            return False
-        if re.match(r"^INTO\\s+and\\b", rest, re.I):
-            return False
-        if s.endswith(".") and not re.search(r"[;']", s):
-            return False
-        if '"' in s or re.search(r"[*();,'=<>\`]", s):
-            return True
-        if re.match(r"^(?:\\*|DISTINCT\\b|INTO\\b|[A-Za-z_][\\w.]*)", rest) and len(s.split()) <= 12:
             return True
         return False
 
