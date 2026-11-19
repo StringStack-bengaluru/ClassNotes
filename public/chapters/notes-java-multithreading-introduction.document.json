@@ -1,0 +1,2318 @@
+{
+  "title": "Notes Java Multithreading Introduction",
+  "mode": "document",
+  "source": "notes-java-multithreading-introduction.docx",
+  "pageCount": 7,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1. What is a custom exception, and why do we create one?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A custom exception is an exception class created by the programmer. Java already has many exception classes, but a programmer can still want to create his own, because there is always some requirement that the existing classes do not match exactly. The ATM",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " program of this class is an example: we create our own exception to pass the information of a wrong pin from the ATM to the bank.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2. How do you create a custom exception class?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Create a class and make it extend the Exception class. Just giving a class a n",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ame such as MyException does not make it behave like an exception; only when it extends Exception (or one of its subclasses) it becomes an exception class. Methods of Exception, such as getMessage(), are then available and can be overridden.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "class InvalidPinException extends Exception {\n    @Override\n    public String getMessage() {\n        return \"Invalid pin number\";\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3. What is the problem statement of the ATM program?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "There are three classes: the RBI class holds the main method, the Bank class ha",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "s an init() method that builds an ATM object, and the ATM class has acceptInput() to take the pin number and verify() to compare it with the customer's pin (1234). If the pin is correct, the ATM prints \"Collect your money\". The problem is that when a wrong",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " pin is entered, the ATM only reports it and never blocks the card, however many times the pin is wrong. A real ATM must give the customer three chances and block the card after the third wrong pin. The bank is the one that should decide this, so the ATM m",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ust pass the information \"wrong pin\" to the bank immediately each time.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "4. How is the ATM program executed in memory?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The RAM has a code segment, a static (method area) segment, the heap segment and the stack segment; the focus here is on the stack segment",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ". Execution starts from main, so a stack frame for main is created (the main method is in the RBI class). The Bank object is built in the heap, and a stack frame is created for init(). Inside init(), the ATM object is built in the heap, and each call (acce",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ptInput(), verify()) creates its own stack frame. When a method finishes, its stack frame is removed and the control returns to the place from where it came.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "5. How can the ATM send the information of a wrong pin to the bank?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "There are many ways to do it, and it depends on your thinking and coding capability, but the way used in the class is a custom exception. When the pin is wrong, the ATM creates an object of the custom exception and throws it to the caller, which is the ban",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "k. The bank catches the exception, understands that a wrong pin was entered, and decides what to do: the first and second time it gives another chance, and the third time it blocks the card.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "6. Write the custom exception and the ATM class.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "InvalidPinExcept",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ion extends Exception and overrides getMessage() to return the description \"Invalid pin number\". In verify(), if the entered pin is not equal to the customer's pin, an object of InvalidPinException is created and thrown with the throw keyword. Because it i",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "s a checked exception, verify() declares it with throws.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "import java.util.Scanner;\n\nclass InvalidPinException extends Exception {\n    @Override\n    public String getMessage() {\n        return \"Invalid pin number\";\n    }\n}\n\nclass ATM {\n    Scanner sc = new Scanner(System.in);\n    int customerPin = 1234;\n    int enteredPin;\n\n    void acceptInput() {\n        System.out.println(\"Enter the pin number\");\n        enteredPin = sc.nextInt();\n    }\n\n    void verify() throws InvalidPinException {\n        if (enteredPin == customerPin) {\n            System.out.println(\"Collect your money\");\n        } else {\n            InvalidPinException e = new InvalidPinException();\n            throw e;\n        }\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "7. Write the Bank class that gives three chances, and show the complete program with output.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The bank takes the pin through the ATM and verifies it inside a try block. If the exception is caught, the bank prints the message and gives the next chance by cal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ling acceptInput() again, with the verification again placed inside a try block, which is written inside the catch block (nested try-catch). After the third wrong pin, the bank blocks the card. Sample input: 3333, 4444, 5555.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "import java.util.Scanner;\n\nclass InvalidPinException extends Exception {\n    @Override\n    public String getMessage() {\n        return \"Invalid pin number\";\n    }\n}\n\nclass ATM {\n    Scanner sc = new Scanner(System.in);\n    int customerPin = 1234;\n    int enteredPin;\n\n    void acceptInput() {\n        System.out.println(\"Enter the pin number\");\n        enteredPin = sc.nextInt();\n    }\n\n    void verify() throws InvalidPinException {\n        if (enteredPin == customerPin) {\n            System.out.println(\"Collect your money\");\n        } else {\n            InvalidPinException e = new InvalidPinException();\n            throw e;\n        }\n    }\n}\n\nclass Bank {\n    void init() {\n        ATM atm = new ATM();\n        atm.acceptInput();\n        try {\n            atm.verify();\n        } catch (InvalidPinException e) {\n            System.out.println(e.getMessage());\n            atm.acceptInput();\n            try {\n                atm.verify();\n            } catch (InvalidPinException e2) {\n                System.out.println(e2.getMessage());\n                atm.acceptInput();\n                try {\n                    atm.verify();\n                } catch (InvalidPinException e3) {\n                    System.out.println(e3.getMessage());\n                    System.out.println(\"Your card is blocked, please contact bank\");\n                }\n            }\n        }\n    }\n}\n\npublic class RBI {\n    public static void main(String[] args) {\n        Bank bank = new Bank();\n        bank.init();\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Output when all three pins are wrong:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Enter the pin number",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Invalid pin number",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Enter the pin number",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Invalid pin number",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Enter the pin number",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Invalid pin number",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Your card is blocked, please contact bank",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Output when the first pin is wrong (3333) and the ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "second is correct (1234):",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Enter the pin number",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Invalid pin number",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Enter the pin number",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Collect your money",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "8. Why does the compiler show an error when verify() is called without handling the exception?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "InvalidPinException extends Exception, so it is a checked exception, and the compiler knows about it at compile time. It is not a grammar mistake such as a missing semicolon; it is an exception that must be handled. Since verify() throws it, the method tha",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "t calls verify() must either handle it with try and catch, or declare it with throws (ducking). In the ATM program the bank handles it with try-catch. Eclipse offers both options: \"Add throws declaration\" and \"Surround with try/catch\".",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "9. In how many ways ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "can an exception be handled?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "There are two ways. One is to put the risky statements in a try block and handle the exception in a catch block. The other is to duck the exception with the throws keyword and let the caller handle it. The statements to put in ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "the try block are the risky ones; in the class only the statements that call accept and verify were put in it.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "10. What does the catch block contain, and is it compulsory to print anything there?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The catch block contains the way you want to handle the exce",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ption, and that totally depends on your need. It is not compulsory to print the exception details; in the ATM program, the catch block prints the message and then calls acceptInput() again to give the customer another chance, or blocks the card in the thir",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "d catch.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "11. What is getMessage(), and how is it used with a custom exception?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "getMessage() is a method of the exception class that returns the description of the exception as a String. In the custom exception it is overridden to return \"Invalid pin number",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "\". In the catch block, you do not print the text yourself; you call e.getMessage() with the reference e of the exception object, and it returns the description, which is then printed.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "catch (InvalidPinException e) {\n    System.out.println(e.getMessage());   // Invalid pin number\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "12. Which combinations of try, catch and finally are valid?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "try can be used with one or many catch blocks, with finally, or with both catch and finally (try-catch-finally). try alone is invalid, catch alone is invalid, finally alo",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ne is invalid, and catch with finally but without try is invalid. In short, every catch or finally must belong to a try.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "13. Can try-catch-finally be nested?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Yes. A try-catch-finally can be written inside a try block, inside a catch block, or inside a fina",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "lly block. In the ATM program, the second and third attempts are written as try-catch blocks inside the catch block of the previous attempt. Nested try-catch is the same as nested classes or nested loops: Java allows it.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "14. What is the difference between ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "throw and throws? (Assignment given in the class)",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "throw is a statement that actually throws an exception object, for example throw e; in the verify() method. throws is written in the method declaration (the signature) to tell the compiler and the caller th",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "at the method may throw that type of exception, for example void ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "verify() throws InvalidPinException. In the program, verify() declares throws, and its body uses throw.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "void verify() throws InvalidPinException {   // throws: declaration\n    ...\n    throw e;                                    // throw: throwing the object\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "15. Which questions on exceptions are commonly asked in interviews?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "What is an exception; what is exception handling, and how is it different; how will you handle an exception and in how many ways; explain getMessage() and printStackTrace(); what happens when an exception occurs in a different method (stack trace); what is",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " a custom exception, why and how do you create one; the difference between throw and throws; the difference between final and finally; and the exception hierarchy. The first four are almost always asked, and a custom exception program is often asked to be ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "written.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "16. What is the difference between a program and a process?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A program is a collection of instructions that is stored in the hard disk of the computer and is not executing. A process is the same collection of instructions when it is loaded into the",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " RAM and is being executed. So the instructions are the same, but a program is not executing while a process is executing.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "17. How did the early single-tasking computers execute programs, and what was the disadvantage?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "In the early computers there was a si",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ngle-tasking operating system and one microprocessor. The operating system took one program from the hard disk, put it into the RAM, and the microprocessor executed it line by line. Only after it was completed did the operating system pick the next program",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ". At any point of time only one process ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "was executing, and the operating system was responsible. The disadvantage is that it is slow: if there are hundreds of programs, each one has to wait until the previous one completes.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "18. How did multiple processors ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "try to solve the problem, and what was the disadvantage?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "In this architecture the hardware was changed to have more than one processor, so that several processes could be executed at the same time, while the operating system remained the same single-taskin",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "g one. It is faster, but processors are costly to manufacture, so using many processors makes the computer very costly, and in those days computers were not personal property but used by big organizations and scientists.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "19. What is a multitasking operatin",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "g system, and how does it work with one processor?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A multitasking operating system keeps several programs in the RAM at the same time and lets one microprocessor share its time between them. The hardware is the same, with one processor, one hard disk and o",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ne RAM; only the operating system changed. The microprocessor has a unit of time, for example 60 seconds (just for understanding). If there are three processes, each gets 60 / 3 = 20 seconds. The first process executes for 20 seconds; when the time is over",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " it is stopped, the control switches to the next process, and so on; a stopped process is resumed later from where it stopped. Windows, Android and iOS are examples of multitasking operating systems.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "20. Does a multitasking operating system really execute ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "many processes at the same time?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "No. At any point of time the microprocessor executes only one process, but the switching between the processes is so fast (fractions of a second) that it feels as if all of them are executing at the same ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "time. Analogy: a pe",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "rson coding, listening to the teacher and holding a mobile feels like multitasking, but the brain focuses on only one thing at a time. The processes in the RAM can be your browser tabs, Zoom, Eclipse and the music player; the microprocessor executes them b",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "y switching.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "21. What are the scheduling policies mentioned for choosing which process executes first?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The operating system uses scheduling policies such as first come, first served (first in, first out) and round robin. The details belong to operating sys",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "tems and are not discussed in the Java class.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "22. Why is multithreading needed at the program level?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Our own Java program is also a process, and the microprocessor gives it a limited amount of time, for example 20 seconds. We want the program to use that time efficiently. If the program has three independent activities (adding two numbers, printing charac",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ters with a delay and printing numbers) and they are written one below the other, they are executed line by line, one after the other, and the program takes more time. If the independent activities are coded independently and executed independently, the sa",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "me program takes less time and the CPU time is used efficiently.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "23. What is a thread, and what is multithreading?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A thread is a collection of instructions that is coded independently and executes independently, as a part of the process. Each independent b",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "lock (adding, printing characters, printing numbers) is a thread. We do this to utilize the CPU time efficiently. Multithreading is creating multiple threads in a program: multi means many, and a thread is a track or line of execution. The threads are inde",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "xed from zero, so a program with three threads has Thread-0, Thread-1 and Thread-2. ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    }
+  ],
+  "pages": [
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1. What is a custom exception, and why do we create one?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A custom exception is an exception class created by the programmer. Java already has many exception classes, but a programmer can still want to create his own, because there is always some requirement that the existing classes do not match exactly. The ATM",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " program of this class is an example: we create our own exception to pass the information of a wrong pin from the ATM to the bank.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2. How do you create a custom exception class?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Create a class and make it extend the Exception class. Just giving a class a n",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ame such as MyException does not make it behave like an exception; only when it extends Exception (or one of its subclasses) it becomes an exception class. Methods of Exception, such as getMessage(), are then available and can be overridden.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "class InvalidPinException extends Exception {\n    @Override\n    public String getMessage() {\n        return \"Invalid pin number\";\n    }\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3. What is the problem statement of the ATM program?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "There are three classes: the RBI class holds the main method, the Bank class ha",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "s an init() method that builds an ATM object, and the ATM class has acceptInput() to take the pin number and verify() to compare it with the customer's pin (1234). If the pin is correct, the ATM prints \"Collect your money\". The problem is that when a wrong",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " pin is entered, the ATM only reports it and never blocks the card, however many times the pin is wrong. A real ATM must give the customer three chances and block the card after the third wrong pin. The bank is the one that should decide this, so the ATM m",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ust pass the information \"wrong pin\" to the bank immediately each time.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "4. How is the ATM program executed in memory?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The RAM has a code segment, a static (method area) segment, the heap segment and the stack segment; the focus here is on the stack segment",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ". Execution starts from main, so a stack frame for main is created (the main method is in the RBI class). The Bank object is built in the heap, and a stack frame is created for init(). Inside init(), the ATM object is built in the heap, and each call (acce",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ptInput(), verify()) creates its own stack frame. When a method finishes, its stack frame is removed and the control returns to the place from where it came.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "5. How can the ATM send the information of a wrong pin to the bank?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "There are many ways to do it, and it depends on your thinking and coding capability, but the way used in the class is a custom exception. When the pin is wrong, the ATM creates an object of the custom exception and throws it to the caller, which is the ban",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "k. The bank catches the exception, understands that a wrong pin was entered, and decides what to do: the first and second time it gives another chance, and the third time it blocks the card.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "6. Write the custom exception and the ATM class.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "InvalidPinExcept",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ion extends Exception and overrides getMessage() to return the description \"Invalid pin number\". In verify(), if the entered pin is not equal to the customer's pin, an object of InvalidPinException is created and thrown with the throw keyword. Because it i",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "s a checked exception, verify() declares it with throws.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "import java.util.Scanner;\n\nclass InvalidPinException extends Exception {\n    @Override\n    public String getMessage() {\n        return \"Invalid pin number\";\n    }\n}\n\nclass ATM {\n    Scanner sc = new Scanner(System.in);\n    int customerPin = 1234;\n    int enteredPin;\n\n    void acceptInput() {\n        System.out.println(\"Enter the pin number\");\n        enteredPin = sc.nextInt();\n    }\n\n    void verify() throws InvalidPinException {\n        if (enteredPin == customerPin) {\n            System.out.println(\"Collect your money\");\n        } else {\n            InvalidPinException e = new InvalidPinException();\n            throw e;\n        }\n    }\n}"
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "7. Write the Bank class that gives three chances, and show the complete program with output.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The bank takes the pin through the ATM and verifies it inside a try block. If the exception is caught, the bank prints the message and gives the next chance by cal",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ling acceptInput() again, with the verification again placed inside a try block, which is written inside the catch block (nested try-catch). After the third wrong pin, the bank blocks the card. Sample input: 3333, 4444, 5555.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "code",
+        "text": "import java.util.Scanner;\n\nclass InvalidPinException extends Exception {\n    @Override\n    public String getMessage() {\n        return \"Invalid pin number\";\n    }\n}\n\nclass ATM {\n    Scanner sc = new Scanner(System.in);\n    int customerPin = 1234;\n    int enteredPin;\n\n    void acceptInput() {\n        System.out.println(\"Enter the pin number\");\n        enteredPin = sc.nextInt();\n    }\n\n    void verify() throws InvalidPinException {\n        if (enteredPin == customerPin) {\n            System.out.println(\"Collect your money\");\n        } else {\n            InvalidPinException e = new InvalidPinException();\n            throw e;\n        }\n    }\n}\n\nclass Bank {\n    void init() {\n        ATM atm = new ATM();\n        atm.acceptInput();\n        try {\n            atm.verify();\n        } catch (InvalidPinException e) {\n            System.out.println(e.getMessage());\n            atm.acceptInput();\n            try {\n                atm.verify();\n            } catch (InvalidPinException e2) {\n                System.out.println(e2.getMessage());\n                atm.acceptInput();\n                try {\n                    atm.verify();\n                } catch (InvalidPinException e3) {\n                    System.out.println(e3.getMessage());\n                    System.out.println(\"Your card is blocked, please contact bank\");\n                }\n            }\n        }\n    }\n}\n\npublic class RBI {\n    public static void main(String[] args) {\n        Bank bank = new Bank();\n        bank.init();\n    }\n}"
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Output when all three pins are wrong:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Enter the pin number",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Invalid pin number",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Enter the pin number",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Invalid pin number",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Enter the pin number",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Invalid pin number",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Your card is blocked, please contact bank",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Output when the first pin is wrong (3333) and the ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "second is correct (1234):",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Enter the pin number",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Invalid pin number",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Enter the pin number",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Collect your money",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "8. Why does the compiler show an error when verify() is called without handling the exception?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "InvalidPinException extends Exception, so it is a checked exception, and the compiler knows about it at compile time. It is not a grammar mistake such as a missing semicolon; it is an exception that must be handled. Since verify() throws it, the method tha",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "t calls verify() must either handle it with try and catch, or declare it with throws (ducking). In the ATM program the bank handles it with try-catch. Eclipse offers both options: \"Add throws declaration\" and \"Surround with try/catch\".",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "9. In how many ways ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "can an exception be handled?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "There are two ways. One is to put the risky statements in a try block and handle the exception in a catch block. The other is to duck the exception with the throws keyword and let the caller handle it. The statements to put in ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "the try block are the risky ones; in the class only the statements that call accept and verify were put in it.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "10. What does the catch block contain, and is it compulsory to print anything there?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The catch block contains the way you want to handle the exce",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ption, and that totally depends on your need. It is not compulsory to print the exception details; in the ATM program, the catch block prints the message and then calls acceptInput() again to give the customer another chance, or blocks the card in the thir",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "d catch.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "11. What is getMessage(), and how is it used with a custom exception?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "getMessage() is a method of the exception class that returns the description of the exception as a String. In the custom exception it is overridden to return \"Invalid pin number",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "\". In the catch block, you do not print the text yourself; you call e.getMessage() with the reference e of the exception object, and it returns the description, which is then printed.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "catch (InvalidPinException e) {\n    System.out.println(e.getMessage());   // Invalid pin number\n}"
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "12. Which combinations of try, catch and finally are valid?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "try can be used with one or many catch blocks, with finally, or with both catch and finally (try-catch-finally). try alone is invalid, catch alone is invalid, finally alo",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ne is invalid, and catch with finally but without try is invalid. In short, every catch or finally must belong to a try.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "13. Can try-catch-finally be nested?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Yes. A try-catch-finally can be written inside a try block, inside a catch block, or inside a fina",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "lly block. In the ATM program, the second and third attempts are written as try-catch blocks inside the catch block of the previous attempt. Nested try-catch is the same as nested classes or nested loops: Java allows it.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "14. What is the difference between ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "throw and throws? (Assignment given in the class)",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "throw is a statement that actually throws an exception object, for example throw e; in the verify() method. throws is written in the method declaration (the signature) to tell the compiler and the caller th",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "at the method may throw that type of exception, for example void ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "verify() throws InvalidPinException. In the program, verify() declares throws, and its body uses throw.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "void verify() throws InvalidPinException {   // throws: declaration\n    ...\n    throw e;                                    // throw: throwing the object\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "15. Which questions on exceptions are commonly asked in interviews?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "What is an exception; what is exception handling, and how is it different; how will you handle an exception and in how many ways; explain getMessage() and printStackTrace(); what happens when an exception occurs in a different method (stack trace); what is",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " a custom exception, why and how do you create one; the difference between throw and throws; the difference between final and finally; and the exception hierarchy. The first four are almost always asked, and a custom exception program is often asked to be ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "written.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "16. What is the difference between a program and a process?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A program is a collection of instructions that is stored in the hard disk of the computer and is not executing. A process is the same collection of instructions when it is loaded into the",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " RAM and is being executed. So the instructions are the same, but a program is not executing while a process is executing.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "17. How did the early single-tasking computers execute programs, and what was the disadvantage?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "In the early computers there was a si",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ngle-tasking operating system and one microprocessor. The operating system took one program from the hard disk, put it into the RAM, and the microprocessor executed it line by line. Only after it was completed did the operating system pick the next program",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ". At any point of time only one process ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "was executing, and the operating system was responsible. The disadvantage is that it is slow: if there are hundreds of programs, each one has to wait until the previous one completes.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "18. How did multiple processors ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "try to solve the problem, and what was the disadvantage?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "In this architecture the hardware was changed to have more than one processor, so that several processes could be executed at the same time, while the operating system remained the same single-taskin",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "g one. It is faster, but processors are costly to manufacture, so using many processors makes the computer very costly, and in those days computers were not personal property but used by big organizations and scientists.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "19. What is a multitasking operatin",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "g system, and how does it work with one processor?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A multitasking operating system keeps several programs in the RAM at the same time and lets one microprocessor share its time between them. The hardware is the same, with one processor, one hard disk and o",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ne RAM; only the operating system changed. The microprocessor has a unit of time, for example 60 seconds (just for understanding). If there are three processes, each gets 60 / 3 = 20 seconds. The first process executes for 20 seconds; when the time is over",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " it is stopped, the control switches to the next process, and so on; a stopped process is resumed later from where it stopped. Windows, Android and iOS are examples of multitasking operating systems.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "20. Does a multitasking operating system really execute ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "many processes at the same time?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "No. At any point of time the microprocessor executes only one process, but the switching between the processes is so fast (fractions of a second) that it feels as if all of them are executing at the same ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "time. Analogy: a pe",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "rson coding, listening to the teacher and holding a mobile feels like multitasking, but the brain focuses on only one thing at a time. The processes in the RAM can be your browser tabs, Zoom, Eclipse and the music player; the microprocessor executes them b",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "y switching.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "21. What are the scheduling policies mentioned for choosing which process executes first?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The operating system uses scheduling policies such as first come, first served (first in, first out) and round robin. The details belong to operating sys",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "tems and are not discussed in the Java class.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "22. Why is multithreading needed at the program level?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Our own Java program is also a process, and the microprocessor gives it a limited amount of time, for example 20 seconds. We want the program to use that time efficiently. If the program has three independent activities (adding two numbers, printing charac",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ters with a delay and printing numbers) and they are written one below the other, they are executed line by line, one after the other, and the program takes more time. If the independent activities are coded independently and executed independently, the sa",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "me program takes less time and the CPU time is used efficiently.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "23. What is a thread, and what is multithreading?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A thread is a collection of instructions that is coded independently and executes independently, as a part of the process. Each independent b",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "lock (adding, printing characters, printing numbers) is a thread. We do this to utilize the CPU time efficiently. Multithreading is creating multiple threads in a program: multi means many, and a thread is a track or line of execution. The threads are inde",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "xed from zero, so a program with three threads has Thread-0, Thread-1 and Thread-2. ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ]
+  ]
+}
