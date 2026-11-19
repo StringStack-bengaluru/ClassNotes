@@ -1,0 +1,95 @@
+{
+  "title": "Notes Java Achieving Multithreading In Java",
+  "itemsPerPage": 2,
+  "source": "notes-java-achieving-multithreading-in-java.docx",
+  "items": [
+    {
+      "question": "Why do we need multithreading in Java?",
+      "answer": "Answer: Every concept in Java is a solution to a problem. At the operating system level, many processes run, and the microprocessor switches between them so fast that they appear to run together. Your Java program is one such process and gets only a limited amount of CPU time. Multithreading is the concept that lets you utilize that CPU time efficiently, so that the CPU time given to your program is not wasted."
+    },
+    {
+      "question": "What problem occurs in a program that has no multithreading? Explain with the program of adding, printing characters and printing numbers.",
+      "answer": "Answer: The program has three independent activities: (1) adding two numbers taken from the user with Scanner, (2) printing the characters A to E with a delay of 5 seconds for each character, and (3) printing the numbers 1 to 5. Although the three activities are independent of each other, they are written one below the other, so they run sequentially. Printing characters cannot start until the user has entered both numbers, and printing numbers cannot start until all the characters, with their delays, are finished. While the program waits for the user's input and during every 5-second delay, the CPU time is wasted. This is called sequential execution.\n\n```java\nimport java.util.Scanner;\npublic class Demo {\npublic static void main(String[] args) throws InterruptedException {\n// Activity 1: adding\nScanner sc = new Scanner(System.in);\nSystem.out.println(\"Enter number 1\");\nint num1 = sc.nextInt();\nSystem.out.println(\"Enter number 2\");\nint num2 = sc.nextInt();\nSystem.out.println(\"Sum = \" + (num1 + num2));\nSystem.out.println(\"Adding completed\");\n// Activity 2: printing characters (5 seconds delay for each)\nSystem.out.println(\"Printing characters started\");\nfor (int i = 65; i <= 69; i++) {\nSystem.out.println((char) i);\nThread.sleep(5000);\n}\nSystem.out.println(\"Printing characters completed\");\n// Activity 3: printing numbers\nSystem.out.println(\"Printing numbers started\");\nfor (int i = 1; i <= 5; i++) {\nSystem.out.println(i);\n}\nSystem.out.println(\"Printing numbers completed\");\n}\n}\n```\n\nSample input: 10 and 20. Output (each character appears 5 seconds after the previous one): Enter number 1 Enter number 2 Sum = 30 Adding completed Printing characters started A B C D E Printing characters completed Printing numbers started 1 2 3 4 5 Printing numbers completed"
+    },
+    {
+      "question": "What is sequential execution?",
+      "answer": "Answer: In sequential execution, the instructions execute one by one: the next instruction starts only after the previous one is completed. In the program above, the characters could be printed only after the addition was completed, and the numbers only after the characters were completed. Because of this, the CPU time cannot be utilized efficiently."
+    },
+    {
+      "question": "What are independent instructions, and why do we have to find them first?",
+      "answer": "Answer: Independent instructions are instructions (a block of code) that do not depend on each other and can therefore execute independently. In the sequential program, adding, printing characters and printing numbers are actually independent, but because they were written one below the other, they behaved as if they were dependent. To convert a program to multithreading, you must first read the code properly and identify which blocks are independent. Experience, by writing more programs, helps you identify which code is independent and which is dependent."
+    },
+    {
+      "question": "What is a thread in Java?",
+      "answer": "Answer: A thread is a group of independent instructions that executes independently. One instruction is not a thread; a bunch of independent instructions, kept together in one place, forms a thread. A program that has more than one thread is a multithreaded program."
+    },
+    {
+      "question": "What are the steps to convert a program into a multithreaded program?",
+      "answer": "Answer: There are four steps. Step 1: read the code and identify the independent instructions. Step 2: put each group of independent instructions inside the run() method, so that Java understands that they are independent. Step 3: since run() must be present in a class, create a class for each group that extends the Thread class and overrides run(), and build an object of each class. Step 4: call the start() method on each object (not run() directly)."
+    },
+    {
+      "question": "Which method contains the independent instructions of a thread, and where does it come from?",
+      "answer": "Answer: The independent instructions are placed in the run() method. In Java every method must be present in a class, so the run() method cannot hang alone in your program. run() is defined in the built-in class Thread (java.lang), which was written by the Java developers. By extending the Thread class, the run() method comes into your class, and you override it to give your own body (your independent instructions)."
+    },
+    {
+      "question": "Why do our classes extend the Thread class? Is Thread a final class?",
+      "answer": "Answer: The classes extend Thread to get the run() and start() methods and other facilities of the Thread class. Thread is not a final class, because a final class cannot be extended, and we are extending it. The Thread class is available to every Java developer, and a class that extends it gets extra facilities compared with a normal class."
+    },
+    {
+      "question": "Write the multithreaded version of the previous program.",
+      "answer": "Answer: Each independent activity is moved into the run() method of its own class that extends Thread. In main, an object of each class is created and start() is called on it. Because the three activities are now independent threads, the program asks for the numbers while the characters are already being printed, and the numbers are printed without waiting for the characters. The order of the output lines can vary from run to run, because the thread scheduler decides which thread runs when.\n\n```java\nimport java.util.Scanner;\nclass Adding extends Thread {\npublic void run() {\nScanner sc = new Scanner(System.in);\nSystem.out.println(\"Enter number 1\");\nint num1 = sc.nextInt();\nSystem.out.println(\"Enter number 2\");\nint num2 = sc.nextInt();\nSystem.out.println(\"Sum = \" + (num1 + num2));\nSystem.out.println(\"Adding completed\");\n}\n}\nclass PrintingCharacters extends Thread {\npublic void run() {\nSystem.out.println(\"Printing characters started\");\nfor (int i = 65; i <= 69; i++) {\nSystem.out.println((char) i);\ntry {\nThread.sleep(5000);\n```\n\n} catch (InterruptedException e) {\n\n```java\ne.printStackTrace();\n}\n}\nSystem.out.println(\"Printing characters completed\");\n}\n}\nclass PrintingNumbers extends Thread {\npublic void run() {\nSystem.out.println(\"Printing numbers started\");\nfor (int i = 1; i <= 5; i++) {\nSystem.out.println(i);\n}\nSystem.out.println(\"Printing numbers completed\");\n}\n}\npublic class Demo {\npublic static void main(String[] args) {\nAdding a = new Adding();\nPrintingCharacters b = new PrintingCharacters();\nPrintingNumbers c = new PrintingNumbers();\na.start();\nb.start();\nc.start();\n}\n}\n```"
+    },
+    {
+      "question": "Why do we have to handle an exception when we use Thread.sleep()? How is it handled inside run()?",
+      "answer": "Answer: Thread.sleep() throws InterruptedException, which is a checked exception, so the compiler forces you to handle it. In the main method of the sequential program we could duck it using throws. Inside run() it has to be handled with try and catch, because run() is overridden from the Thread class and cannot declare a checked exception with throws. The try-catch is shown in PrintingCharacters above."
+    },
+    {
+      "question": "What is the difference between e.printStackTrace() and e.getMessage()?",
+      "answer": "Answer: e.printStackTrace() prints the complete information about the exception: the type of the exception, its description and where it happened. e.getMessage() prints only the description."
+    },
+    {
+      "question": "What happens in memory when you create an object of a class that extends Thread?",
+      "answer": "Answer: When you create an object of a normal class, only one object is created in the heap segment. When you create an object of a class that extends Thread, two things happen: the object is created in the heap segment, and a small stack is created in the stack segment, one for that thread. For example, creating the objects of Adding, PrintingCharacters and PrintingNumbers creates three objects in the heap and three small stacks, one for each of them."
+    },
+    {
+      "question": "What are the memory segments referred to in this class?",
+      "answer": "Answer: The method area (also called permanent generation), the heap segment, and the stack segment. For multithreading the focus is on the stack segment. When the program starts, the JVM creates a small stack named main, and a stack frame for the main method is created in it. Each thread object gets its own small stack as well."
+    },
+    {
+      "question": "What are the default names of the threads?",
+      "answer": "Answer: The JVM automatically gives names to the threads: the main thread is named main, and the thread objects you create are named Thread-0, Thread-1 and Thread-2 in the order of creation. In the program above, the Adding thread is Thread-0, PrintingCharacters is Thread-1 and PrintingNumbers is Thread-2. The names can be changed, which is covered later."
+    },
+    {
+      "question": "What is the difference between calling run() and calling start()?",
+      "answer": "Answer: If you call run() directly on the object, it is an ordinary method call: its stack frame is created in the main stack, the three calls execute one after the other, and the program runs sequentially (no multithreading). If you call start(), the JVM registers the thread, creates its own small stack, and run() executes in that thread's stack, independently, under the control of the thread scheduler. So you must call start(), and the JVM calls run() for you. Calling run() directly is a wrong way and is a common interview scenario. a.run(); // wrong: sequential, executes in the main stack\n\n```java\nb.run();\nc.run();\n```\n\na.start(); // correct: a new small stack is created, run() executes there\n\n```java\nb.start();\nc.start();\n```"
+    },
+    {
+      "question": "What happens internally when start() is called?",
+      "answer": "Answer: start() makes the JVM create a new small stack for that thread and hand the thread to the thread scheduler. Then run() is called internally, and the stack frame of run() is created in that thread's small stack, not in the main stack. The thread scheduler then decides which thread executes and when, and the programmer has no control over that decision here (ways of controlling it come in later classes)."
+    },
+    {
+      "question": "What is the thread scheduler?",
+      "answer": "Answer: The JDK has a software called the thread scheduler. Its job is to decide which thread should execute at a given time, and to hand the microprocessor over to that thread for its share of time, then switch to another thread. We cannot say in advance which thread it will pick first, which is why the output order of a multithreaded program can change."
+    },
+    {
+      "question": "How does the microprocessor divide its time among threads? Explain with an example.",
+      "answer": "Answer: The microprocessor gives a limited time to the process, and that time is divided among the threads. For example, if the process gets 15 seconds and has three threads, each thread gets 5 seconds. The thread scheduler lets one thread run for its share of time, then stops it and switches to the next thread. The first thread is resumed later when its turn comes again, and this continues until all threads complete. In the program, a thread that is waiting (for input or during sleep) does not hold the CPU, so the CPU time is used by the other threads."
+    },
+    {
+      "question": "What is concurrent execution?",
+      "answer": "Answer: In concurrent execution, a thread starts, runs for its time slice, stops, and is resumed later from where it stopped, while other threads get their turns. The switching between threads is so fast that it feels as if all of them run at the same time, but in reality the microprocessor executes one thread at a time. Analogy: our brain can focus on only one thing at a time, but the feeling of multitasking is an illusion. Multithreading in Java works with concurrent execution."
+    },
+    {
+      "question": "What is the difference between sequential execution and concurrent execution?",
+      "answer": "Answer: In sequential execution, one instruction group runs completely, and only then the next one starts, so CPU time is wasted whenever the running part is waiting. In concurrent execution, the threads take turns in small slices of time, and when one thread is waiting (for example in sleep) the others use the CPU. In the multithreaded program, in one minute many more lines are executed than in the sequential one (the numbers and the addition progress while the characters wait), and that is the efficient utilization of CPU time."
+    },
+    {
+      "question": "How many threads exist in the multithreaded program?",
+      "answer": "Answer: The program has the main thread (created by the JVM to run the main method) and the three threads that we created: Adding, PrintingCharacters and PrintingNumbers. They are the threads Thread-0, Thread-1 and Thread-2. Having more than one thread is called multithreading."
+    },
+    {
+      "question": "Is extending the Thread class the only way to create a thread?",
+      "answer": "Answer: No. Extending Thread is the first way. There is one more way to achieve multithreading in Java, which is covered in the next class."
+    }
+  ]
+}

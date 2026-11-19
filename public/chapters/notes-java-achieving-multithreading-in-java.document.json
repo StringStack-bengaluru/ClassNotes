@@ -1,0 +1,2416 @@
+{
+  "title": "Notes Java Achieving Multithreading In Java",
+  "mode": "document",
+  "source": "notes-java-achieving-multithreading-in-java.docx",
+  "pageCount": 8,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1. Why do we need multithreading in Java?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Every concept in Java is a solution to a problem. At the operating system level, many processes run, and the microprocessor switches between them so fast that they appear to run together. Your Java program is one such process and gets only a limited amount",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " of CPU time. Multithreading is the concept that lets you utilize that CPU time efficiently, so that the CPU time given to your program is not wasted.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2. What problem occurs in a program that has no multithreading? Explain with the program of adding, print",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ing characters and printing numbers.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The program has three independent activities: (1) adding two numbers taken from the user with Scanner, (2) printing the characters A to E with a delay of 5 seconds for each character, and (3) printing the numbers 1 to 5",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ". Although the three activities are independent of each other, they are written one below the other, so they run sequentially. Printing characters cannot start until the user has entered both numbers, and printing numbers cannot start until all the charact",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ers, with their delays, are finished. While the program waits for the user's input and during every 5-second delay, the CPU time is wasted. This is called sequential execution.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "import java.util.Scanner;\n\npublic class Demo {\n    public static void main(String[] args) throws InterruptedException {\n        // Activity 1: adding\n        Scanner sc = new Scanner(System.in);\n        System.out.println(\"Enter number 1\");\n        int num1 = sc.nextInt();\n        System.out.println(\"Enter number 2\");\n        int num2 = sc.nextInt();\n        System.out.println(\"Sum = \" + (num1 + num2));\n        System.out.println(\"Adding completed\");\n\n        // Activity 2: printing characters (5 seconds delay for each)\n        System.out.println(\"Printing characters started\");\n        for (int i = 65; i <= 69; i++) {\n            System.out.println((char) i);\n            Thread.sleep(5000);\n        }\n        System.out.println(\"Printing characters completed\");\n\n        // Activity 3: printing numbers\n        System.out.println(\"Printing numbers started\");\n        for (int i = 1; i <= 5; i++) {\n            System.out.println(i);\n        }\n        System.out.println(\"Printing numbers completed\");\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample input: 10 and 20. Output (each character appears 5 seconds after the pr",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "evious one):",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Enter number 1",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Enter number 2",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sum = 30",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Adding completed",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Printing characters started",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "B",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "C",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "D",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "E",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Printing characters completed",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Printing numbers started",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "4",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "5",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Printing numbers completed",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3. What is sequential execution?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "In sequential execution, the instructions execute one by one: the next instruction starts only after the previous one is completed. In the program above, the characters could be printed only after the addition was completed, and the numbers only after the ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "characters were completed. Because of this, the CPU time cannot be utilized efficiently.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "4. What are independent instructions, and why do we have to find them first?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Independent instructions are instructions (a block of code) that do not depend on each oth",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "er and can therefore execute independently. In the sequential program, adding, printing characters and printing numbers are actually independent, but because they were written one below the other, they behaved as if they were dependent. To convert a progra",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "m to multithreading, you must first read the code properly and identify which blocks are independent. Experience, by writing more programs, helps you identify which code is independent and which is dependent.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "5. What is a thread in Java?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A thread is a grou",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "p of independent instructions that executes independently. One instruction is not a thread; a bunch of independent instructions, kept together in one place, forms a thread. A program that has more than one thread is a multithreaded program.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "6. What are the",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " steps to convert a program into a multithreaded program?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "There are four steps. Step 1: read the code and identify the independent instructions. Step 2: put each group of independent instructions inside the run() method, so that Java understands that they ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "are independent. Step 3: since run() must be present in a class, create a class for each group that extends the Thread class and overrides run(), and build an object of each class. Step 4: call the start() method on each object (not run() directly).",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "7. Whi",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ch method contains the independent instructions of a thread, and where does it come from?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The independent instructions are placed in the run() method. In Java every method must be present in a class, so the run() method cannot hang alone in your program. r",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "un() is defined in the built-in class Thread (java.lang), which was written by the Java developers. By extending the Thread class, the run() method comes into your class, and you override it to give your own body (your independent instructions).",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "8. Why do ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "our classes extend the Thread class? Is Thread a final class?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The classes extend Thread to get the run() and start() methods and other facilities of the Thread class. Thread is not a final class, because a final class cannot be extended, and we are extendi",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ng it. The Thread class is available to every Java developer, and a class that extends it gets extra facilities compared with a normal class.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "9. Write the multithreaded version of the previous program.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Each independent activity is moved into the run() meth",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "od of its own class that extends Thread. In main, an object of each class is created and start() is called on it. Because the three activities are now ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "independent threads, the program asks for the numbers while the characters are already being printed, and",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " the numbers are printed without waiting for the characters. The order of the output lines can vary from run to run, because the thread scheduler decides which thread runs when.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "import java.util.Scanner;\n\nclass Adding extends Thread {\n    public void run() {\n        Scanner sc = new Scanner(System.in);\n        System.out.println(\"Enter number 1\");\n        int num1 = sc.nextInt();\n        System.out.println(\"Enter number 2\");\n        int num2 = sc.nextInt();\n        System.out.println(\"Sum = \" + (num1 + num2));\n        System.out.println(\"Adding completed\");\n    }\n}\n\nclass PrintingCharacters extends Thread {\n    public void run() {\n        System.out.println(\"Printing characters started\");\n        for (int i = 65; i <= 69; i++) {\n            System.out.println((char) i);\n            try {\n                Thread.sleep(5000);\n            } catch (InterruptedException e) {\n                e.printStackTrace();\n            }\n        }\n        System.out.println(\"Printing characters completed\");\n    }\n}\n\nclass PrintingNumbers extends Thread {\n    public void run() {\n        System.out.println(\"Printing numbers started\");\n        for (int i = 1; i <= 5; i++) {\n            System.out.println(i);\n        }\n        System.out.println(\"Printing numbers completed\");\n    }\n}\n\npublic class Demo {\n    public static void main(String[] args) {\n        Adding a = new Adding();\n        PrintingCharacters b = new PrintingCharacters();\n        PrintingNumbers c = new PrintingNumbers();\n\n        a.start();\n        b.start();\n        c.start();\n    }\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "10. Why do we have to handle an exception when we use Thread.sleep()? How is it handled inside run()?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Thread.sleep() throws InterruptedException, which is a checked exception, so the compiler forces you to handle it. In the main method of the sequential program we could duck it using throws. Inside run() it has to be handled with try and catch, because run",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "() is overridden from the Thread class and cannot declare a checked exception with throws. The try-catch is shown in PrintingCharacters above.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "11. What is the difference between e.printStackTrace() and e.getMessage()?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "e.printStackTrace() prints the complet",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "e information about the exception: the type of the exception, its description and where it happened. e.getMessage() prints only the description.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "12. What happens in memory when you create an object of a class that extends Thread?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "When you create an object ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "of a normal class, only one object is created in the heap segment. When you create an object of a class that extends Thread, two things happen: the object is created in the heap segment, and a small stack is created in the stack segment, one for that threa",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "d. For example, creating the objects of Adding, PrintingCharacters and PrintingNumbers creates three objects in the heap and three small stacks, one for each of them.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "13. What are the memory segments referred to in this class?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The method area (also called ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "permanent generation), the heap segment, and the stack segment. For multithreading the focus is on the stack segment. When the program starts, the JVM creates a small stack named main, and a stack frame for the main method is created in it. Each thread obj",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ect gets its own small stack as well.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "14. What are the default names of the threads?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The JVM automatically gives names to the threads: the main thread is named main, and the thread objects you create are named Thread-0, Thread-1 and Thread-2 in the order o",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "f creation. In the program above, the Adding thread is Thread-0, PrintingCharacters is Thread-1 and PrintingNumbers is Thread-2. The names can be changed, which is covered later.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "15. What is the difference between calling run() and calling start()?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If you ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "call run() directly on the object, it is an ordinary method call: its stack frame is created in the main stack, the three calls execute one after the other, and the program runs sequentially (no multithreading). If you call start(), the JVM registers the t",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "hread, creates its own small stack, and run() executes in that thread's stack, independently, under the control of the thread scheduler. So you must call start(), and the JVM calls run() for you. Calling run() directly is a wrong way and is a common interv",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "iew scenario.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "a.run();   // wrong: sequential, executes in the main stack\nb.run();\nc.run();\n\na.start(); // correct: a new small stack is created, run() executes there\nb.start();\nc.start();"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "16. What happens internally when start() is called?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "start() makes ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "the JVM create a new small stack for that thread and hand the thread to the thread scheduler. Then run() is called internally, and the stack frame of run() is created in that thread's small stack, not in the main stack. The thread scheduler then decides wh",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ich thread executes and when, and the programmer has no control over that decision here (ways of controlling it come in later classes).",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "17. What is the thread scheduler?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The JDK has a software called the thread scheduler. Its job is to decide which thread ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "should execute at a given time, and to hand the microprocessor over to that thread for its share of time, then switch to another thread. We cannot say in advance which thread it will pick ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "first, which is why the output order of a multithreaded program can ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "change.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "18. How does the microprocessor divide its time among threads? Explain with an example.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The microprocessor gives a limited time to the process, and that time is divided among the threads. For example, if the process gets 15 seconds and has three th",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "reads, each thread gets 5 seconds. The thread scheduler lets one thread run for its share of time, then stops it and switches to the next thread. The first thread is resumed later when its turn comes again, and this continues until all threads complete. In",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " the program, a thread that is waiting (for input or during sleep) does not hold the CPU, so the CPU time is used by the other threads.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "19. What is concurrent execution?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "In concurrent execution, a thread starts, runs for its time slice, stops, and is resumed later from where it stopped, while other threads get their turns. The switching between threads is so fast that it feels as if all of them run at the same time, but in",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " reality the microprocessor executes one thread at a time. Analogy: our brain can focus on only one thing at a time, but the feeling of multitasking is an illusion. Multithreading in Java works with concurrent execution.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "20. What is the difference between ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "sequential execution and concurrent execution?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "In sequential execution, one instruction group runs completely, and only then the next one starts, so CPU time is wasted whenever the running part is waiting. In concurrent execution, the threads take turns in",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " small slices of time, and when one thread is waiting (for example in sleep) the others use the CPU. In the multithreaded program, in one minute many more lines are executed than in the ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "sequential one (the numbers and the addition progress while the charac",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ters wait), and that is the efficient utilization of CPU time.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "21. How many threads exist in the multithreaded program?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The program has the main thread (created by the JVM to run the main method) and the three threads that we created: Adding, PrintingChara",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "cters and PrintingNumbers. They are the threads Thread-0, Thread-1 and Thread-2. Having more than one thread is called multithreading.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "22. Is extending the Thread class the only way to create a thread?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "No. Extending Thread is the first way. There is one mo",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "re way to achieve multithreading i",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "n Java, which is covered in the next class.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    }
+  ],
+  "pages": [
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1. Why do we need multithreading in Java?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Every concept in Java is a solution to a problem. At the operating system level, many processes run, and the microprocessor switches between them so fast that they appear to run together. Your Java program is one such process and gets only a limited amount",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " of CPU time. Multithreading is the concept that lets you utilize that CPU time efficiently, so that the CPU time given to your program is not wasted.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2. What problem occurs in a program that has no multithreading? Explain with the program of adding, print",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ing characters and printing numbers.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The program has three independent activities: (1) adding two numbers taken from the user with Scanner, (2) printing the characters A to E with a delay of 5 seconds for each character, and (3) printing the numbers 1 to 5",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ". Although the three activities are independent of each other, they are written one below the other, so they run sequentially. Printing characters cannot start until the user has entered both numbers, and printing numbers cannot start until all the charact",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ers, with their delays, are finished. While the program waits for the user's input and during every 5-second delay, the CPU time is wasted. This is called sequential execution.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "import java.util.Scanner;\n\npublic class Demo {\n    public static void main(String[] args) throws InterruptedException {\n        // Activity 1: adding\n        Scanner sc = new Scanner(System.in);\n        System.out.println(\"Enter number 1\");\n        int num1 = sc.nextInt();\n        System.out.println(\"Enter number 2\");\n        int num2 = sc.nextInt();\n        System.out.println(\"Sum = \" + (num1 + num2));\n        System.out.println(\"Adding completed\");\n\n        // Activity 2: printing characters (5 seconds delay for each)\n        System.out.println(\"Printing characters started\");\n        for (int i = 65; i <= 69; i++) {\n            System.out.println((char) i);\n            Thread.sleep(5000);\n        }\n        System.out.println(\"Printing characters completed\");\n\n        // Activity 3: printing numbers\n        System.out.println(\"Printing numbers started\");\n        for (int i = 1; i <= 5; i++) {\n            System.out.println(i);\n        }\n        System.out.println(\"Printing numbers completed\");\n    }\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample input: 10 and 20. Output (each character appears 5 seconds after the pr",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "evious one):",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Enter number 1",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Enter number 2",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sum = 30",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Adding completed",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Printing characters started",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "B",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "C",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "D",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "E",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Printing characters completed",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Printing numbers started",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "4",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "5",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Printing numbers completed",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3. What is sequential execution?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "In sequential execution, the instructions execute one by one: the next instruction starts only after the previous one is completed. In the program above, the characters could be printed only after the addition was completed, and the numbers only after the ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "characters were completed. Because of this, the CPU time cannot be utilized efficiently.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "4. What are independent instructions, and why do we have to find them first?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Independent instructions are instructions (a block of code) that do not depend on each oth",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "er and can therefore execute independently. In the sequential program, adding, printing characters and printing numbers are actually independent, but because they were written one below the other, they behaved as if they were dependent. To convert a progra",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "m to multithreading, you must first read the code properly and identify which blocks are independent. Experience, by writing more programs, helps you identify which code is independent and which is dependent.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "5. What is a thread in Java?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A thread is a grou",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "p of independent instructions that executes independently. One instruction is not a thread; a bunch of independent instructions, kept together in one place, forms a thread. A program that has more than one thread is a multithreaded program.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "6. What are the",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " steps to convert a program into a multithreaded program?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "There are four steps. Step 1: read the code and identify the independent instructions. Step 2: put each group of independent instructions inside the run() method, so that Java understands that they ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "are independent. Step 3: since run() must be present in a class, create a class for each group that extends the Thread class and overrides run(), and build an object of each class. Step 4: call the start() method on each object (not run() directly).",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "7. Whi",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ch method contains the independent instructions of a thread, and where does it come from?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The independent instructions are placed in the run() method. In Java every method must be present in a class, so the run() method cannot hang alone in your program. r",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "un() is defined in the built-in class Thread (java.lang), which was written by the Java developers. By extending the Thread class, the run() method comes into your class, and you override it to give your own body (your independent instructions).",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "8. Why do ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "our classes extend the Thread class? Is Thread a final class?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The classes extend Thread to get the run() and start() methods and other facilities of the Thread class. Thread is not a final class, because a final class cannot be extended, and we are extendi",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ng it. The Thread class is available to every Java developer, and a class that extends it gets extra facilities compared with a normal class.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "9. Write the multithreaded version of the previous program.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Each independent activity is moved into the run() meth",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "od of its own class that extends Thread. In main, an object of each class is created and start() is called on it. Because the three activities are now ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "independent threads, the program asks for the numbers while the characters are already being printed, and",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " the numbers are printed without waiting for the characters. The order of the output lines can vary from run to run, because the thread scheduler decides which thread runs when.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "code",
+        "text": "import java.util.Scanner;\n\nclass Adding extends Thread {\n    public void run() {\n        Scanner sc = new Scanner(System.in);\n        System.out.println(\"Enter number 1\");\n        int num1 = sc.nextInt();\n        System.out.println(\"Enter number 2\");\n        int num2 = sc.nextInt();\n        System.out.println(\"Sum = \" + (num1 + num2));\n        System.out.println(\"Adding completed\");\n    }\n}\n\nclass PrintingCharacters extends Thread {\n    public void run() {\n        System.out.println(\"Printing characters started\");\n        for (int i = 65; i <= 69; i++) {\n            System.out.println((char) i);\n            try {\n                Thread.sleep(5000);\n            } catch (InterruptedException e) {\n                e.printStackTrace();\n            }\n        }\n        System.out.println(\"Printing characters completed\");\n    }\n}\n\nclass PrintingNumbers extends Thread {\n    public void run() {\n        System.out.println(\"Printing numbers started\");\n        for (int i = 1; i <= 5; i++) {\n            System.out.println(i);\n        }\n        System.out.println(\"Printing numbers completed\");\n    }\n}\n\npublic class Demo {\n    public static void main(String[] args) {\n        Adding a = new Adding();\n        PrintingCharacters b = new PrintingCharacters();\n        PrintingNumbers c = new PrintingNumbers();\n\n        a.start();\n        b.start();\n        c.start();\n    }\n}"
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "10. Why do we have to handle an exception when we use Thread.sleep()? How is it handled inside run()?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Thread.sleep() throws InterruptedException, which is a checked exception, so the compiler forces you to handle it. In the main method of the sequential program we could duck it using throws. Inside run() it has to be handled with try and catch, because run",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "() is overridden from the Thread class and cannot declare a checked exception with throws. The try-catch is shown in PrintingCharacters above.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "11. What is the difference between e.printStackTrace() and e.getMessage()?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "e.printStackTrace() prints the complet",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "e information about the exception: the type of the exception, its description and where it happened. e.getMessage() prints only the description.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "12. What happens in memory when you create an object of a class that extends Thread?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "When you create an object ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "of a normal class, only one object is created in the heap segment. When you create an object of a class that extends Thread, two things happen: the object is created in the heap segment, and a small stack is created in the stack segment, one for that threa",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "d. For example, creating the objects of Adding, PrintingCharacters and PrintingNumbers creates three objects in the heap and three small stacks, one for each of them.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "13. What are the memory segments referred to in this class?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The method area (also called ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "permanent generation), the heap segment, and the stack segment. For multithreading the focus is on the stack segment. When the program starts, the JVM creates a small stack named main, and a stack frame for the main method is created in it. Each thread obj",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ect gets its own small stack as well.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "14. What are the default names of the threads?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The JVM automatically gives names to the threads: the main thread is named main, and the thread objects you create are named Thread-0, Thread-1 and Thread-2 in the order o",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "f creation. In the program above, the Adding thread is Thread-0, PrintingCharacters is Thread-1 and PrintingNumbers is Thread-2. The names can be changed, which is covered later.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "15. What is the difference between calling run() and calling start()?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If you ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "call run() directly on the object, it is an ordinary method call: its stack frame is created in the main stack, the three calls execute one after the other, and the program runs sequentially (no multithreading). If you call start(), the JVM registers the t",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "hread, creates its own small stack, and run() executes in that thread's stack, independently, under the control of the thread scheduler. So you must call start(), and the JVM calls run() for you. Calling run() directly is a wrong way and is a common interv",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "iew scenario.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "a.run();   // wrong: sequential, executes in the main stack\nb.run();\nc.run();\n\na.start(); // correct: a new small stack is created, run() executes there\nb.start();\nc.start();"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "16. What happens internally when start() is called?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "start() makes ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "the JVM create a new small stack for that thread and hand the thread to the thread scheduler. Then run() is called internally, and the stack frame of run() is created in that thread's small stack, not in the main stack. The thread scheduler then decides wh",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ich thread executes and when, and the programmer has no control over that decision here (ways of controlling it come in later classes).",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "17. What is the thread scheduler?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The JDK has a software called the thread scheduler. Its job is to decide which thread ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "should execute at a given time, and to hand the microprocessor over to that thread for its share of time, then switch to another thread. We cannot say in advance which thread it will pick ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "first, which is why the output order of a multithreaded program can ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "change.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "18. How does the microprocessor divide its time among threads? Explain with an example.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The microprocessor gives a limited time to the process, and that time is divided among the threads. For example, if the process gets 15 seconds and has three th",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "reads, each thread gets 5 seconds. The thread scheduler lets one thread run for its share of time, then stops it and switches to the next thread. The first thread is resumed later when its turn comes again, and this continues until all threads complete. In",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " the program, a thread that is waiting (for input or during sleep) does not hold the CPU, so the CPU time is used by the other threads.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "19. What is concurrent execution?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "In concurrent execution, a thread starts, runs for its time slice, stops, and is resumed later from where it stopped, while other threads get their turns. The switching between threads is so fast that it feels as if all of them run at the same time, but in",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " reality the microprocessor executes one thread at a time. Analogy: our brain can focus on only one thing at a time, but the feeling of multitasking is an illusion. Multithreading in Java works with concurrent execution.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "20. What is the difference between ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "sequential execution and concurrent execution?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "In sequential execution, one instruction group runs completely, and only then the next one starts, so CPU time is wasted whenever the running part is waiting. In concurrent execution, the threads take turns in",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " small slices of time, and when one thread is waiting (for example in sleep) the others use the CPU. In the multithreaded program, in one minute many more lines are executed than in the ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "sequential one (the numbers and the addition progress while the charac",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ters wait), and that is the efficient utilization of CPU time.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "21. How many threads exist in the multithreaded program?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The program has the main thread (created by the JVM to run the main method) and the three threads that we created: Adding, PrintingChara",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "cters and PrintingNumbers. They are the threads Thread-0, Thread-1 and Thread-2. Having more than one thread is called multithreading.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "22. Is extending the Thread class the only way to create a thread?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "No. Extending Thread is the first way. There is one mo",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "re way to achieve multithreading i",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "n Java, which is covered in the next class.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ]
+  ]
+}
