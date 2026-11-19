@@ -1,0 +1,4562 @@
+{
+  "title": "Notes Sql Functions In Sql",
+  "mode": "document",
+  "source": "notes-sql-functions-in-sql.docx",
+  "pageCount": 7,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q1. What is NULL in SQL?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "NULL means nothing. It is the absence of a value in a cell. It is not a number, not a string, not a decimal and not a date; it simply means that no value is present. A column that has no data for a particular row holds NULL.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q2. What is the difference betw",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "een NULL, zero, an empty string and a blank space?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "These are four different things and should not be confused:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- NULL: no value at all.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- 0 (zero): a number. It is a value, so it is not NULL.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- Empty string (''): a string with no characters. It is a value,",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " so it is not NULL.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- Blank space (' '): a string that contains a space character. It is also a value.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "When a result shows an empty-looking cell, it is not possible to tell from the screen alone whether it holds NULL, an empty string or a blank space. NULL",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " always means that there is nothing in the cell.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q3. How does NULL get into a table?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "NULL appears when no value is given for a column. If constraints such as NOT NULL have not been applied while creating the table, and neither the application nor the user ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "supplies a value for that column, then the database stores NULL in that cell. In a real application, three things can all go wrong together: the table does not have the constraint, the application does not check the data, and the user forgets to enter a va",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "lue. The result is a row with missing data.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "INSERT INTO customers (first_name, score)\nVALUES ('Peter', 300);\nSELECT * FROM customers;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "In this insert, no value is given for country, so the country cell of the new row holds NULL. (The customers table here has customer_id as AUTO_INCREMENT and a country column without a NOT NULL constraint.)",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "customer_id | first_name | country ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "| score",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1 | Rahul | India | 500",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "customer_id | first_name | country | score",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1 | Rahul | India | 500",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2 | Peter | NULL | 300",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q4. Why is raw data often not ready for decision making, and what kind of problems does it have?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "In real projects, the ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "data cannot be assumed to be proper. A table may have missing values (NULL), blank values, wrong values such as a negative score where only positive values make sense, or other improper entries. Values such as the price of a product or a quantity cannot me",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "aningfully be negative, and a customer without a name cannot be identified.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "If decisions or predictions are made on such data, the results are wrong or cannot be obtained at all. For example, an average calculated over scores that include invalid negative ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "values is misleading. The data therefore has to be organized and cleaned before it is analyzed, which keeps the data accurate and consistent (data integrity).",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q5. What is a function in SQL, and what is it used for?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A function is a ready-made operation that",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " takes an input, processes it and gives back an output. In SQL, functions are used mainly for two purposes: to clean data and to transform data.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Cleaning means fixing improper data so that it is proper before decisions are made. Transforming means converti",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ng data from one form to another, for example changing the case of a text value or joining two text values into one. Functions are therefore the answer when the stored data is not in the shape that is needed.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q6. How does a function work, and what is the m",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ost important rule about its output?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A function takes an input, performs some processing in the background and returns an output. The input can be a value or a column. The most important rule is that the output of a function is always only a single value. ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "A function cannot be expected to return multiple values or multiple rows.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "For example, a function that converts text to lowercase takes the value 'MARK' as input and returns the single value 'mark' as output. The functions that take many rows as their inpu",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "t still give one value as output.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q7. How are functions classified in SQL?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Functions are broadly classified into two types, depending on how the input is taken:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- Single-row functions: the input comes from one single row, and the function works on one row at a time. These are also called row-level functions.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- Multi-row functions: the input comes from multiple rows. They are also called aggregate functions, and th",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "e process is called aggregation.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Every function belongs to one of these two types. Aggregate functions are used to find results such as an average over many rows, and they are learned later.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q8. What are the categories of single-row functions?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Single-row f",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "unctions have four categories, depending on the data type that they work on:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- String functions: work on text values (string data).",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- Numeric functions: work on numeric values.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- Date and time functions: work on date and time values.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- NULL functions: work on NULL values.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "When a function takes its input from one single row and works on one of these types of data, it is a single-row function.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q9. What are the categories of multi-row functions?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Multi-row functions have two categories:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "Basic aggregate functions: the regular functions that take values from multiple rows and give one result.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- Advanced aggregate functions, also called window functions: a more advanced category.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Companies that offer higher packages focus mainly on the multi",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "-row functions, especially window functions, in interviews. For single-row functions, the questions asked are usually at a basic level. The multi-row functions need the single-row functions and the syntax to be understood first.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q10. What is a nested funct",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ion?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The output of one function can be passed as the input of another function. When a function takes the output of another function as its input, it is called a nested function. A chain of several functions can be built in this way: the first function pro",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "cesses its input and gives one output, the second function takes that output and gives its own output, and so on. Each function still returns a single value.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q11. Write a query that uses nested functions to display the first three letters of every customer",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "'s first name in lowercase.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "SELECT LOWER(LEFT(first_name, 3)) AS short_name\nFROM customers;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The LEFT function takes the first_name column and the number 3 as its input and returns the first three characters of the name. Its output becomes the input of the ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "LOWER function, which converts it to lowercase. The nested function returns one value for each row.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "customer_id | first_name | country | score",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1 | Rahul | India | 500",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2 | Maria | Germany | 350",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3 | John | USA | 900",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "short_name",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "rah",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "mar",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "joh",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q12. Where are functions written in a query, and how are their parameters given?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A function is written inside the query where its value is required, for example in the SELECT clause. The function name is followed by brackets, and the values tha",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "t the function needs, called parameters, are written inside the brackets and separated by commas. A parameter can be a fixed value written directly in the query or a column name. Different functions accept different numbers and types of parameters.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q13. Wh",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "at are the categories of string functions?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "String functions work on text data, and they fall into three groups:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- Manipulation functions: change the string, for example joining two strings (CONCAT).",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- Extraction functions: take out a part of a string.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "- Ca",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "lculation functions: calculate something about the string, for example the length of a string.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q14. What is the CONCAT function, and why is it a string manipulation function?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "CONCAT joins two or more strings and returns one single string. It is a manipulat",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ion function because it changes the strings by joining them. The values given to it can be fixed values written in the query or columns.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "It is needed when the output requires data from two columns in one column. For example, the table stores the first name",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " and the country in separate columns, and the requirement is to see them together in a single column.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q15. What is the difference between the + operator and CONCAT?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "In programming languages such as Java, the + sign adds numbers when both sides are numeric, and it joins them when the values are strings. Calling it concatenation when it adds numbers would be wrong, and calling it addition when it joins strings would als",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "o be wrong.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "In MySQL, the + sign is not used to join strings or to join a string with a number. For joining strings, the CONCAT function is used. Some other database systems do allow the + sign for joining strings, so the way of joining text depends on the",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " database.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q16. Write a query to display the first name and the country of each customer together in one column.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "SELECT CONCAT(first_name, country)\nFROM customers;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The CONCAT function takes the two columns as parameters and returns their values joined as o",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ne string. The output is a new column that does not exist in the table, so it has no proper name; its heading is the expression that was written.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "customer_id | first_name | country | score",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1 | Rahul | India | 500",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2 | Maria | Germany | 350",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3 | John | USA | 900",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "CONCAT(first_name, country)"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "RahulIndia",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "MariaGermany",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "JohnUSA",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q17. How can a space or a symbol be placed between the values that are joined by CONCAT?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "CONCAT can take more than one parameter, and a fixed value can be given",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " between the two columns. An empty string with one space, written as ' ', puts a space between the values. A symbol such as a hyphen can be given in the same way, as '-'.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "SELECT CONCAT(first_name, ' ', country)\nFROM customers;\nSELECT CONCAT(first_name, '-', country)\nFROM customers;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "customer_id | first_name | country | score",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1 | Rahul | India | 500",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2 | Maria | Germany | 350",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3 | John | USA | 900",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output (first query):",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "CONCAT(first_name, ' ', country)"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Rahul India",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Maria Germany",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "John USA",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output (second query):",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "CONCAT(first_name, '-', country)"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Rahul-India",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Maria-Germany",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "John-USA",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q18. What is an alias in SQL, and why is it used?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "An alias is a temporary, alternate name given to a column in the output of a query. The name only exists for",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " that query. The actual name of the column in the table does not change, in the same way that a nickname by which people call someone does not change the person's real name. The keyword used to give an alias is AS.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "An alias is especially useful when a func",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "tion or calculation creates a new column in the output, since that column has no proper name of its own. A name can be given to a column, and in the future it will also be possible to give aliases to tables.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q19. Write a query that joins the first name and",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " country with a space and gives the resulting column the alias customer_info.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "SELECT CONCAT(first_name, ' ', country) AS customer_info\nFROM customers;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The keyword AS is written after the function, followed by the alias. The output column now has the headin",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "g customer_info instead of the expression.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "customer_id | first_name | country | score",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1 | Rahul | India | 500",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2 | Maria | Germany | 350",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3 | John | USA | 900",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "customer_info",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Rahul India",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Maria Germany",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "John USA",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q20. Write a query to display the first_name column with the alias customer_name, and show that the table itself does not change.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "SELECT first_name AS customer_name\nFROM customers;\nSELECT * FROM customers;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "In the first query, the output column is shown as ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "customer_name. The second query shows that the table still has the original column name first_name, because an alias is used only for that particular query.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "customer_id | first_name | country | score",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1 | Rahul | India | 500",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2 | Maria | German",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "y | 350",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3 | John | USA | 900",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output (first query):",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "customer_name",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Rahul",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Maria",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "John",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output (second query):",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "customer_id | first_name | country | score",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1 | Rahul | India | 500",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2 | Maria | Germany | 350",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3 | John | USA | 900",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q21. Why do the names of functions differ between database systems, and how should a learner handle it?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Different database systems can use different names for functions that do the same job. For example, the function that gives the length of a string is ca",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "lled LENGTH in MySQL, while some other database systems call it LEN. The function used to convert a value from one data type to another is called CONVERT in one system and CAST in another.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The concept is the same, and only the function name changes. So the",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " concept of what a function does is the important part to understand. When the name or syntax in a particular database is not known, the official documentation of that database should be referred to.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q22. What is casting?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Casting means converting a value f",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "rom one data type to another. It only changes the type in which the value is treated, for example from a string to a number. Database systems provide functions for this, such as CAST and CONVERT, whose names vary between database systems.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q23. How can the ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "list of functions and their syntax be found in the MySQL documentation?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "In the MySQL reference manual, there is a section named Functions and Operators. It lists the built-in functions, grouped by type, with string functions, numeric functions, date and ti",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "me functions and flow control functions as examples. Each function has a description of what it returns. Opening a function shows its syntax, which tells how many parameters it accepts and what type each parameter should be, along with its description.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A f",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "unction such as CONCAT, for instance, is described as returning the concatenated string. It is not necessary to remember every function. The documentation is the place to find the correct name and syntax when needed.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    }
+  ],
+  "pages": [
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q1. What is NULL in SQL?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "NULL means nothing. It is the absence of a value in a cell. It is not a number, not a string, not a decimal and not a date; it simply means that no value is present. A column that has no data for a particular row holds NULL.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q2. What is the difference betw",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "een NULL, zero, an empty string and a blank space?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "These are four different things and should not be confused:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- NULL: no value at all.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- 0 (zero): a number. It is a value, so it is not NULL.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- Empty string (''): a string with no characters. It is a value,",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " so it is not NULL.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- Blank space (' '): a string that contains a space character. It is also a value.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "When a result shows an empty-looking cell, it is not possible to tell from the screen alone whether it holds NULL, an empty string or a blank space. NULL",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " always means that there is nothing in the cell.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q3. How does NULL get into a table?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "NULL appears when no value is given for a column. If constraints such as NOT NULL have not been applied while creating the table, and neither the application nor the user ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "supplies a value for that column, then the database stores NULL in that cell. In a real application, three things can all go wrong together: the table does not have the constraint, the application does not check the data, and the user forgets to enter a va",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "lue. The result is a row with missing data.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "INSERT INTO customers (first_name, score)\nVALUES ('Peter', 300);\nSELECT * FROM customers;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "In this insert, no value is given for country, so the country cell of the new row holds NULL. (The customers table here has customer_id as AUTO_INCREMENT and a country column without a NOT NULL constraint.)",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "customer_id | first_name | country ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "| score",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1 | Rahul | India | 500",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "customer_id | first_name | country | score",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1 | Rahul | India | 500",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2 | Peter | NULL | 300",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q4. Why is raw data often not ready for decision making, and what kind of problems does it have?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "In real projects, the ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "data cannot be assumed to be proper. A table may have missing values (NULL), blank values, wrong values such as a negative score where only positive values make sense, or other improper entries. Values such as the price of a product or a quantity cannot me",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "aningfully be negative, and a customer without a name cannot be identified.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "If decisions or predictions are made on such data, the results are wrong or cannot be obtained at all. For example, an average calculated over scores that include invalid negative ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "values is misleading. The data therefore has to be organized and cleaned before it is analyzed, which keeps the data accurate and consistent (data integrity).",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q5. What is a function in SQL, and what is it used for?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A function is a ready-made operation that",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " takes an input, processes it and gives back an output. In SQL, functions are used mainly for two purposes: to clean data and to transform data.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Cleaning means fixing improper data so that it is proper before decisions are made. Transforming means converti",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ng data from one form to another, for example changing the case of a text value or joining two text values into one. Functions are therefore the answer when the stored data is not in the shape that is needed.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q6. How does a function work, and what is the m",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ost important rule about its output?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A function takes an input, performs some processing in the background and returns an output. The input can be a value or a column. The most important rule is that the output of a function is always only a single value. ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "A function cannot be expected to return multiple values or multiple rows.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "For example, a function that converts text to lowercase takes the value 'MARK' as input and returns the single value 'mark' as output. The functions that take many rows as their inpu",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "t still give one value as output.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q7. How are functions classified in SQL?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Functions are broadly classified into two types, depending on how the input is taken:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- Single-row functions: the input comes from one single row, and the function works on one row at a time. These are also called row-level functions.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- Multi-row functions: the input comes from multiple rows. They are also called aggregate functions, and th",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "e process is called aggregation.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Every function belongs to one of these two types. Aggregate functions are used to find results such as an average over many rows, and they are learned later.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q8. What are the categories of single-row functions?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Single-row f",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "unctions have four categories, depending on the data type that they work on:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- String functions: work on text values (string data).",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- Numeric functions: work on numeric values.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- Date and time functions: work on date and time values.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- NULL functions: work on NULL values.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "When a function takes its input from one single row and works on one of these types of data, it is a single-row function.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q9. What are the categories of multi-row functions?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Multi-row functions have two categories:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "Basic aggregate functions: the regular functions that take values from multiple rows and give one result.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- Advanced aggregate functions, also called window functions: a more advanced category.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Companies that offer higher packages focus mainly on the multi",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "-row functions, especially window functions, in interviews. For single-row functions, the questions asked are usually at a basic level. The multi-row functions need the single-row functions and the syntax to be understood first.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q10. What is a nested funct",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ion?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The output of one function can be passed as the input of another function. When a function takes the output of another function as its input, it is called a nested function. A chain of several functions can be built in this way: the first function pro",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "cesses its input and gives one output, the second function takes that output and gives its own output, and so on. Each function still returns a single value.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q11. Write a query that uses nested functions to display the first three letters of every customer",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "'s first name in lowercase.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "SELECT LOWER(LEFT(first_name, 3)) AS short_name\nFROM customers;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The LEFT function takes the first_name column and the number 3 as its input and returns the first three characters of the name. Its output becomes the input of the ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "LOWER function, which converts it to lowercase. The nested function returns one value for each row.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "customer_id | first_name | country | score",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1 | Rahul | India | 500",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2 | Maria | Germany | 350",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3 | John | USA | 900",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "short_name",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "rah",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "mar",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "joh",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q12. Where are functions written in a query, and how are their parameters given?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A function is written inside the query where its value is required, for example in the SELECT clause. The function name is followed by brackets, and the values tha",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "t the function needs, called parameters, are written inside the brackets and separated by commas. A parameter can be a fixed value written directly in the query or a column name. Different functions accept different numbers and types of parameters.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q13. Wh",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "at are the categories of string functions?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "String functions work on text data, and they fall into three groups:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- Manipulation functions: change the string, for example joining two strings (CONCAT).",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- Extraction functions: take out a part of a string.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "- Ca",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "lculation functions: calculate something about the string, for example the length of a string.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q14. What is the CONCAT function, and why is it a string manipulation function?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "CONCAT joins two or more strings and returns one single string. It is a manipulat",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ion function because it changes the strings by joining them. The values given to it can be fixed values written in the query or columns.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "It is needed when the output requires data from two columns in one column. For example, the table stores the first name",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " and the country in separate columns, and the requirement is to see them together in a single column.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q15. What is the difference between the + operator and CONCAT?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "In programming languages such as Java, the + sign adds numbers when both sides are numeric, and it joins them when the values are strings. Calling it concatenation when it adds numbers would be wrong, and calling it addition when it joins strings would als",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "o be wrong.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "In MySQL, the + sign is not used to join strings or to join a string with a number. For joining strings, the CONCAT function is used. Some other database systems do allow the + sign for joining strings, so the way of joining text depends on the",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " database.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q16. Write a query to display the first name and the country of each customer together in one column.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "SELECT CONCAT(first_name, country)\nFROM customers;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The CONCAT function takes the two columns as parameters and returns their values joined as o",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ne string. The output is a new column that does not exist in the table, so it has no proper name; its heading is the expression that was written.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "customer_id | first_name | country | score",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1 | Rahul | India | 500",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2 | Maria | Germany | 350",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3 | John | USA | 900",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "CONCAT(first_name, country)"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "RahulIndia",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "MariaGermany",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "JohnUSA",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q17. How can a space or a symbol be placed between the values that are joined by CONCAT?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "CONCAT can take more than one parameter, and a fixed value can be given",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " between the two columns. An empty string with one space, written as ' ', puts a space between the values. A symbol such as a hyphen can be given in the same way, as '-'.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "SELECT CONCAT(first_name, ' ', country)\nFROM customers;\nSELECT CONCAT(first_name, '-', country)\nFROM customers;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "customer_id | first_name | country | score",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1 | Rahul | India | 500",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2 | Maria | Germany | 350",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3 | John | USA | 900",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output (first query):",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "CONCAT(first_name, ' ', country)"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Rahul India",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Maria Germany",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "John USA",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output (second query):",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "CONCAT(first_name, '-', country)"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Rahul-India",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Maria-Germany",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "John-USA",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q18. What is an alias in SQL, and why is it used?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "An alias is a temporary, alternate name given to a column in the output of a query. The name only exists for",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " that query. The actual name of the column in the table does not change, in the same way that a nickname by which people call someone does not change the person's real name. The keyword used to give an alias is AS.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "An alias is especially useful when a func",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "tion or calculation creates a new column in the output, since that column has no proper name of its own. A name can be given to a column, and in the future it will also be possible to give aliases to tables.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q19. Write a query that joins the first name and",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " country with a space and gives the resulting column the alias customer_info.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "SELECT CONCAT(first_name, ' ', country) AS customer_info\nFROM customers;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The keyword AS is written after the function, followed by the alias. The output column now has the headin",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "g customer_info instead of the expression.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "customer_id | first_name | country | score",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1 | Rahul | India | 500",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2 | Maria | Germany | 350",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3 | John | USA | 900",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "customer_info",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Rahul India",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Maria Germany",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "John USA",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q20. Write a query to display the first_name column with the alias customer_name, and show that the table itself does not change.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "SELECT first_name AS customer_name\nFROM customers;\nSELECT * FROM customers;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "In the first query, the output column is shown as ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "customer_name. The second query shows that the table still has the original column name first_name, because an alias is used only for that particular query.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "customer_id | first_name | country | score",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1 | Rahul | India | 500",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2 | Maria | German",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "y | 350",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3 | John | USA | 900",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output (first query):",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "customer_name",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Rahul",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Maria",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "John",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output (second query):",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "customer_id | first_name | country | score",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1 | Rahul | India | 500",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2 | Maria | Germany | 350",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3 | John | USA | 900",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q21. Why do the names of functions differ between database systems, and how should a learner handle it?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Different database systems can use different names for functions that do the same job. For example, the function that gives the length of a string is ca",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "lled LENGTH in MySQL, while some other database systems call it LEN. The function used to convert a value from one data type to another is called CONVERT in one system and CAST in another.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The concept is the same, and only the function name changes. So the",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " concept of what a function does is the important part to understand. When the name or syntax in a particular database is not known, the official documentation of that database should be referred to.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q22. What is casting?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Casting means converting a value f",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "rom one data type to another. It only changes the type in which the value is treated, for example from a string to a number. Database systems provide functions for this, such as CAST and CONVERT, whose names vary between database systems.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q23. How can the ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "list of functions and their syntax be found in the MySQL documentation?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "In the MySQL reference manual, there is a section named Functions and Operators. It lists the built-in functions, grouped by type, with string functions, numeric functions, date and ti",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "me functions and flow control functions as examples. Each function has a description of what it returns. Opening a function shows its syntax, which tells how many parameters it accepts and what type each parameter should be, along with its description.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A f",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "unction such as CONCAT, for instance, is described as returning the concatenated string. It is not necessary to remember every function. The documentation is the place to find the correct name and syntax when needed.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ]
+  ]
+}
