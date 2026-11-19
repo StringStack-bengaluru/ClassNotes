@@ -410,6 +410,17 @@ with zipfile.ZipFile(path) as z:
             r"break|continue|new|System\\.|Page\\s*<)",
             line,
         ):
+            # "try can be used..." / "throw is a statement..." are answers, not code.
+            if (
+                line.endswith(".")
+                and " " in line
+                and re.search(
+                    r"\\b(is|are|can|cannot|used|using|means|invalid|alone|written|actually)\\b",
+                    line,
+                    re.I,
+                )
+            ):
+                return False
             return True
         # Java statements end with ; — teaching placeholders like statement1; too
         if line.endswith(";"):
@@ -430,6 +441,9 @@ with zipfile.ZipFile(path) as z:
             s,
             re.I,
         ):
+            # "In real projects..." is a sentence, not a column named In of type REAL.
+            if s.endswith(".") or len(s.split()) > 16:
+                return False
             return True
         # Value tuple: (1, 'IT', 'A Block'),
         if re.match(r"^\\(.*\\)\\s*,?\\s*$", s) and re.search(r"[,']", s):
@@ -464,6 +478,13 @@ with zipfile.ZipFile(path) as z:
         if not m:
             return False
         rest = m.group(2) or ""
+        if m.group(1).upper() == "CREATE" and not re.match(
+            r"^(?:OR\\s+REPLACE\\s+|UNIQUE\\s+|TEMPORARY\\s+|TEMP\\s+)*"
+            r"(?:TABLE|DATABASE|INDEX|VIEW|SCHEMA|PROCEDURE|FUNCTION|TRIGGER|USER|ROLE)\\b",
+            rest,
+            re.I,
+        ):
+            return False
         # "SELECT is a clause." / "INSERT INTO and the column list..."
         if re.match(r"^(?:is|are|only|lists|clause|command)\\b", rest, re.I):
             return False
@@ -1359,8 +1380,45 @@ with zipfile.ZipFile(path) as z:
                 out.append(b)
         return out
 
+    def stitch_code_across_ellipsis(items):
+        """Keep a method snippet together when Word puts ... between its lines."""
+        out = []
+        i = 0
+        while i < len(items):
+            b = items[i]
+            if b.get("type") != "code":
+                out.append(b)
+                i += 1
+                continue
+            text = b.get("text") or ""
+            j = i + 1
+            def ends_open(chunk):
+                last = (chunk or "").rstrip().splitlines()[-1] if (chunk or "").strip() else ""
+                return last.split("//", 1)[0].rstrip().endswith("{")
+            while ends_open(text) and j < len(items):
+                k = j
+                while k < len(items) and items[k].get("type") == "blank":
+                    k += 1
+                if k >= len(items):
+                    break
+                mid = items[k]
+                raw = mid.get("text") or "".join((r.get("text") or "") for r in (mid.get("runs") or []))
+                if raw.strip() not in ("...", "…"):
+                    break
+                n = k + 1
+                while n < len(items) and items[n].get("type") == "blank":
+                    n += 1
+                if n >= len(items) or items[n].get("type") != "code":
+                    break
+                text = text + "\\n    ...\\n" + (items[n].get("text") or "")
+                j = n + 1
+            out.append({"type": "code", "text": text})
+            i = j
+        return out
+
     merged = stitch_open_code_with_paragraphs(merged)
     merged = stitch_code_sandwiched_paragraphs(merged)
+    merged = stitch_code_across_ellipsis(merged)
     merged = peel_sample_output_from_code(merged)
     merged = demote_misclassified_code(merged)
     merged = attach_chart_blocks(merged)
