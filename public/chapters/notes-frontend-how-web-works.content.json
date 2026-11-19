@@ -1,0 +1,79 @@
+{
+  "title": "Notes Frontend How Web Works",
+  "itemsPerPage": 2,
+  "source": "notes-frontend-how-web-works.docx",
+  "items": [
+    {
+      "question": "Q1. What is an IP address, and what does it identify?",
+      "answer": "Answer: An IP address is the address of a computer on a network. Just as a physical location needs an address so that it can be reached, every computer that communicates over a network needs an address so that others can locate it. Both the client computer and the server computer have an IP address. An IP address is written as four numbers separated by dots, for example 192.168.16.78 (an illustrative value). A request from a client is directed to the address of the server, and the response is returned to the address of the client."
+    },
+    {
+      "question": "Q2. Does every computer on a network have its own separate IP address as seen from the internet?",
+      "answer": "Answer: Not exactly. The address seen from outside is the address of the network gateway (the router), and not of a single computer. Many computers that are connected to the same router go out through the same gateway, so computers sitting together on one network appear with the same address. The server of a website also has its own address, in the same way."
+    },
+    {
+      "question": "Q3. What is DNS, and why is it needed?",
+      "answer": "Answer: DNS stands for Domain Name System. Computers locate each other with IP addresses, but numbers such as 172.16.8.20 are difficult for people to remember. People therefore type a name such as netflix.com in the browser. DNS is the system that converts this domain name into the IP address of the server. After pressing Enter, this conversion happens internally and the user never has to type the numbers. Once the IP address is known, the request is sent to the correct server."
+    },
+    {
+      "question": "Q4. What happens, from start to end, when a domain name such as netflix.com is typed in the browser and Enter is pressed?",
+      "answer": "Answer: - The browser on the client computer takes the address that was typed. - The domain name is converted into the IP address of the server by DNS. - An HTTP request is sent from the client to that address, asking for the required resource. - The server processes the request. - The server sends back an HTTP response, which contains the page (HTML) that was asked for, along with a status code. - The browser displays the page to the user. Every click or action on the page repeats this cycle with a new request and a new response."
+    },
+    {
+      "question": "Q5. What is HTTP, and why is it called a communication language between a client and a server?",
+      "answer": "Answer: HTTP stands for HyperText Transfer Protocol. It is the protocol, that is, the set of rules, through which a client and a server communicate. Two people who want to talk to each other need a common language. In the same way, a client and a server need a common language, and HTTP is that language. When a request is sent from the client and a response comes back from the server, both are exchanged in HTTP. The request is called an HTTP request and the response is called an HTTP response."
+    },
+    {
+      "question": "Q6. What is the difference between HTTP and HTTPS?",
+      "answer": "Answer: HTTPS is the secure version of HTTP. The S in HTTPS stands for secure. With HTTPS, the data that travels between the client and the server is encrypted, so it cannot be read by anyone who intercepts it. With plain HTTP, there is no such protection. Websites of organizations use HTTPS, and a user can see it at the beginning of the address in the browser. How the encryption works is studied later."
+    },
+    {
+      "question": "Q7. Why does the address of a project running on a developer's own computer start with http://localhost?",
+      "answer": "Answer: A project that is created and run on the developer's own computer is running on the local system. Its address therefore starts with http followed by localhost, and a port number may follow. Only the developer's computer is using it, so no security has been added. An application that is meant to be used by other people in an organization cannot be given to them like this, because security has to be added, and its address uses HTTPS."
+    },
+    {
+      "question": "Q8. What does it mean that HTTP is stateless?",
+      "answer": "Answer: Stateless means that the server does not remember anything about the previous request. Every request that the client sends is completely independent of the requests before it. This can be seen on any website. Opening the login page is one request. Clicking on another option, such as billing or payments, is a completely different request that gets its own response. The server does not carry over what happened in the earlier request. Refreshing a page also sends everything again, and the server does not remember what it sent earlier."
+    },
+    {
+      "question": "Q9. What are cookies and sessions, and why are they needed when HTTP is stateless?",
+      "answer": "Answer: Because HTTP does not remember earlier requests, an application sometimes has to keep some extra information, such as the name of the user that is displayed on the pages after login. This extra information is stored using cookies and sessions. Cookies are stored on the client side, and sessions come from the server side. They are a way of remembering information in a protocol that does not remember anything by itself. The details are learned later in the course."
+    },
+    {
+      "question": "Q10. What are the four types of operations that a client can request from a server?",
+      "answer": "Answer: A client can request only four kinds of operations from a server. They are called HTTP methods (the operations of REST APIs): - GET: receive or read information from the server. - POST: send new information to the server. - PUT: update or alter information that is already stored. - DELETE: delete information. These four correspond to the CRUD operations: create (POST), read (GET), update (PUT) and delete (DELETE). The whole functionality of an application is built on these four operations: receiving data, sending data, updating data and deleting data."
+    },
+    {
+      "question": "Q11. What is the difference between GET and POST?",
+      "answer": "Answer: GET is used when the client wants to receive information from the server, such as opening a page or reading stored data. The client is getting something from the server. POST is used when the client sends information to the server. On a sign-up form, for example, the user types a name and other details and clicks Submit. The details are being sent to the server, which is a POST action. In short, GET brings information to the client, and POST carries information from the client to the server."
+    },
+    {
+      "question": "Q12. When are PUT and DELETE used?",
+      "answer": "Answer: PUT is used to alter information that has already been stored. Suppose a user entered the wrong gender while signing up. Instead of creating a new account, the stored data has to be corrected, and the update is made with a PUT request. DELETE is used to remove information that is stored. The client asks the server to delete the data, and the server deletes it. Any application, in the end, receives, sends, updates or deletes data through these four operations."
+    },
+    {
+      "question": "Q13. A user signs up on a website once. Why is the user not asked to sign up again on the next visit?",
+      "answer": "Answer: The first time, the website does not know who the user is, so the user has to introduce himself by filling in the sign-up form with the name, email and other details and clicking Submit. These details are sent to the server through a POST request. The server stores them in a database. Because the information is already stored in the database, the user need not sign up a second time. The user only has to log in with the stored details such as the email and password, and the server checks them against the database."
+    },
+    {
+      "question": "Q14. How does the server return only the requested page, such as the sign-up page, and not something else?",
+      "answer": "Answer: Each resource of a website is located at its own address. When the user clicks on Sign Up, the request goes to the address of the sign-up resource, and only the sign-up page comes back, not the movies page or the login page. The server is able to do this because of the back-end code. A back-end programming language is used to create APIs, which handle the different requests and perform the different actions for each resource. APIs are learned later in the course."
+    },
+    {
+      "question": "Q15. How can the HTML code of a web page be seen in the browser?",
+      "answer": "Answer: Right-click on the page and choose Inspect. A panel opens at the bottom of the browser (the developer tools). On its left side, the HTML code of that page is displayed. This is the page that the server sent in its response and that the browser is displaying. The structure of the page, the text and the other content that the user sees on the screen are written in HTML."
+    },
+    {
+      "question": "Q16. What is CSS, and what can it be seen doing on a web page?",
+      "answer": "Answer: CSS is used for the look of a page. In the Inspect panel, the styles of an element can be seen. Things such as the colors that are used (red text, for example), how the content is aligned and the padding are all controlled by CSS. HTML provides the structure and content of a page, and CSS provides its colors and layout."
+    },
+    {
+      "question": "Q17. What does the Network tab show, and what are status codes such as 200 and 404?",
+      "answer": "Answer: The Network tab of the browser's developer tools shows the requests that the browser sends to the server and the responses that come back. Every response carries a status code that tells whether the request was successful. - 200: the request was successful, and the browser received the information it asked for. - 404: not found. The server did not have the relevant information for the request. Status codes are studied in detail later in the course."
+    },
+    {
+      "question": "Q18. Why are many requests seen in the Network tab when a page is refreshed?",
+      "answer": "Answer: A page is made up of many parts, and each part needs its own request. When the page is refreshed, within a fraction of a second the browser sends many requests to the server, and each of them gets a response. All the elements of the page are loaded automatically from these responses. Every refresh, click or action on the page therefore results in a request being sent and a response being received."
+    }
+  ]
+}
