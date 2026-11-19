@@ -1,0 +1,904 @@
+{
+  "title": "Notes Java Multithreading Continues",
+  "mode": "document",
+  "source": "notes-java-multithreading-continues.docx",
+  "pageCount": 2,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q1. Why are methods used instead of writing a separate independent program for every operation?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: Operations such as addition, subtraction, multiplication and division are related jobs. Writing a separate independent program for each of them would mean fifteen programs for fifteen operations, or fifty programs for fifty operations, and every progr",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "am would repeat the same structure. With methods, each operation is written once as a method inside a single program, and it is called whenever it is needed. A method does one job, can be called many times with different values, and keeps the program organ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ised. This is a common interview question on methods.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q2. Write a Java program in which addition, subtraction, multiplication and division are separate methods.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: Each operation is a method of the Calculator class that takes two numbers and returns the ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "result. The main method calls each method with the values 20 and 10 and prints the result. The division method converts the first number to double so that the result keeps its decimal part.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "public class Calculator {\nstatic int add(int a, int b) {\nreturn a + b;\n}\nstatic int subtract(int a, int b) {\nreturn a - b;\n}\nstatic int multiply(int a, int b) {\nreturn a * b;\n}\nstatic double divide(int a, int b) {\nreturn (double) a / b;\n}\npublic static void main(String[] args) {\nSystem.out.println(\"Addition: \" + add(20, 10));\nSystem.out.println(\"Subtraction: \" + subtract(20, 10));\nSystem.out.println(\"Multiplication: \" + multiply(20, 10));\nSystem.out.println(\"Division: \" + divide(20, 10));\n}\n}"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input: No input",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Addition: 30",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Subtraction: 10",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Multiplication: 200",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Division: 2.0",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Adding another operation only needs one more method in the same class, and not a new program.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q3. What happens to a Java program when an exception occurs?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: An exception is an event that disturbs the normal flow of a program while it is running. If the exception is not handled, the program does not continue with the remaining statements. It stops abruptly at the point where the exception occurred, and the",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " whole process is terminated. Handling exceptions, so that the program can continue, is a separate topic that follows this introduction.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q4. In which year was Java released, and which is older, Java or Python?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: Java was released in 1995. Python came ab",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "out four years earlier, in 1991, so Python is the older of the two languages.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q5. What are the main characteristics of Python?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: Python is a dynamically typed language, which means the data type of a variable is decided while the program runs and does n",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ot have to be declared. It is an object-oriented programming language, and it is an interpreted language, so the code is executed by an interpreter. It is widely popular, and it is used for areas such as AI and deep learning, where libraries like TensorFlo",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "w are used. Python also has functions and methods, and it is the language that is learned after Java.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q6. How should a candidate explain a project in an interview?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: The explanation should be short and clear, in about three to four points. It should say",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " what the project is about, what the candidate worked on and what the candidate did in it. Too much explanation is not required, and the details can be given when the interviewer asks for them. A project description that only names technologies does not sh",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ow what the candidate has done.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q7. Is one project enough to talk about in an interview?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: No. One project is not sufficient. A candidate should be ready with at least three projects, so that there is enough practical work to speak about and the interviewer can see the skills used in each.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q8. Is it enough to list concept names such as enca",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "psulation and abstraction when asked what a candidate knows?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: No. Naming concepts alone does not work in an interview. When a company asks what the candidate knows, the candidate has to explain what has been done with those concepts, such as where enca",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "psulation or abstraction was used in the programs or projects. Concept names are only the starting point, and the interviewer expects an explanation of the work.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q9. How should previously learned concepts be revised?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: Revision should be done actively a",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "nd not only by reading. The concept is recalled first, then its definition, and then how the program is written for it. After that the program is written and executed on a laptop, so that the concept is practised and not only visualised. Every concept lear",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ned from the beginning is revised in the same way, and the doubts that come up are asked and cleared.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    }
+  ],
+  "pages": [
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q1. Why are methods used instead of writing a separate independent program for every operation?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: Operations such as addition, subtraction, multiplication and division are related jobs. Writing a separate independent program for each of them would mean fifteen programs for fifteen operations, or fifty programs for fifty operations, and every progr",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "am would repeat the same structure. With methods, each operation is written once as a method inside a single program, and it is called whenever it is needed. A method does one job, can be called many times with different values, and keeps the program organ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ised. This is a common interview question on methods.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q2. Write a Java program in which addition, subtraction, multiplication and division are separate methods.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: Each operation is a method of the Calculator class that takes two numbers and returns the ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "result. The main method calls each method with the values 20 and 10 and prints the result. The division method converts the first number to double so that the result keeps its decimal part.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "public class Calculator {\nstatic int add(int a, int b) {\nreturn a + b;\n}\nstatic int subtract(int a, int b) {\nreturn a - b;\n}\nstatic int multiply(int a, int b) {\nreturn a * b;\n}\nstatic double divide(int a, int b) {\nreturn (double) a / b;\n}\npublic static void main(String[] args) {\nSystem.out.println(\"Addition: \" + add(20, 10));\nSystem.out.println(\"Subtraction: \" + subtract(20, 10));\nSystem.out.println(\"Multiplication: \" + multiply(20, 10));\nSystem.out.println(\"Division: \" + divide(20, 10));\n}\n}"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input: No input",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Addition: 30",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Subtraction: 10",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Multiplication: 200",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Division: 2.0",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Adding another operation only needs one more method in the same class, and not a new program.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q3. What happens to a Java program when an exception occurs?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: An exception is an event that disturbs the normal flow of a program while it is running. If the exception is not handled, the program does not continue with the remaining statements. It stops abruptly at the point where the exception occurred, and the",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " whole process is terminated. Handling exceptions, so that the program can continue, is a separate topic that follows this introduction.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q4. In which year was Java released, and which is older, Java or Python?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: Java was released in 1995. Python came ab",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "out four years earlier, in 1991, so Python is the older of the two languages.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q5. What are the main characteristics of Python?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: Python is a dynamically typed language, which means the data type of a variable is decided while the program runs and does n",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ot have to be declared. It is an object-oriented programming language, and it is an interpreted language, so the code is executed by an interpreter. It is widely popular, and it is used for areas such as AI and deep learning, where libraries like TensorFlo",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "w are used. Python also has functions and methods, and it is the language that is learned after Java.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q6. How should a candidate explain a project in an interview?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: The explanation should be short and clear, in about three to four points. It should say",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " what the project is about, what the candidate worked on and what the candidate did in it. Too much explanation is not required, and the details can be given when the interviewer asks for them. A project description that only names technologies does not sh",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ow what the candidate has done.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q7. Is one project enough to talk about in an interview?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: No. One project is not sufficient. A candidate should be ready with at least three projects, so that there is enough practical work to speak about and the interviewer can see the skills used in each.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q8. Is it enough to list concept names such as enca",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "psulation and abstraction when asked what a candidate knows?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: No. Naming concepts alone does not work in an interview. When a company asks what the candidate knows, the candidate has to explain what has been done with those concepts, such as where enca",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "psulation or abstraction was used in the programs or projects. Concept names are only the starting point, and the interviewer expects an explanation of the work.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q9. How should previously learned concepts be revised?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: Revision should be done actively a",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "nd not only by reading. The concept is recalled first, then its definition, and then how the program is written for it. After that the program is written and executed on a laptop, so that the concept is practised and not only visualised. Every concept lear",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ned from the beginning is revised in the same way, and the doubts that come up are asked and cleared.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ]
+  ]
+}
