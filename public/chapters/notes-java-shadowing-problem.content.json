@@ -1,0 +1,127 @@
+{
+  "title": "Notes Java Shadowing Problem",
+  "itemsPerPage": 2,
+  "source": "notes-java-shadowing-problem.docx",
+  "items": [
+    {
+      "question": "What is the main purpose of a constructor in Java?",
+      "answer": "Answer: A constructor initializes an object when it is created. It is commonly used to assign initial values to the object's instance variables."
+    },
+    {
+      "question": "When is a constructor called?",
+      "answer": "Answer: A constructor is called as part of object creation. When an object is created with new, Java invokes a constructor that matches the arguments supplied."
+    },
+    {
+      "question": "What is a default constructor?",
+      "answer": "Answer: When a class does not declare any constructor, the compiler provides a no-argument constructor. This is commonly called the default constructor."
+    },
+    {
+      "question": "When does the compiler provide a default no-argument constructor?",
+      "answer": "Answer: The compiler provides it only when the class does not declare any constructor of its own. The lesson describes this as happening during compilation."
+    },
+    {
+      "question": "Will the compiler provide a default constructor when a class already has a parameterized constructor?",
+      "answer": "Answer: No. Once the programmer declares a constructor, the compiler does not add the default no-argument constructor. If the class also needs a no-argument constructor, the programmer must declare one explicitly."
+    },
+    {
+      "question": "Can an object be created without calling a constructor?",
+      "answer": "Answer: No. Object creation invokes a constructor. It may be a compiler-provided default constructor or a constructor declared by the programmer."
+    },
+    {
+      "question": "What is constructor overloading?",
+      "answer": "Answer: Constructor overloading means defining multiple constructors in the same class. Each constructor has the class name, but the constructors have different parameter signatures."
+    },
+    {
+      "question": "What makes two constructor signatures different?",
+      "answer": "Answer: A constructor signature is distinguished by its parameter list. The number of parameters, their data types, and their order can make signatures different."
+    },
+    {
+      "question": "Can a class contain two constructors with the same parameter signature?",
+      "answer": "Answer: No. Two constructors in the same class cannot have the same parameter types in the same order. Their signatures must differ for overloading to be valid."
+    },
+    {
+      "question": "Can constructors have the same name in one class?",
+      "answer": "Answer: Yes. All constructors in a class use the class name. Constructor overloading is possible because their parameter signatures differ, not because their names differ."
+    },
+    {
+      "question": "How is constructor overloading related to method overloading?",
+      "answer": "Answer: Both use the same name with different parameter signatures. With constructor overloading, the shared name is the class name; with method overloading, the shared name is the method name."
+    },
+    {
+      "question": "Why is constructor overloading useful?",
+      "answer": "Answer: It provides different ways to initialize objects. Depending on the information available, an object can be created with only an ID, with an ID and name, or with an ID, name, and email."
+    },
+    {
+      "question": "Which properties were used in the User class example?",
+      "answer": "Answer: The example focuses on three instance variables: id, name, and email. The constructor examples use different combinations of these values to create User objects in different states."
+    },
+    {
+      "question": "How can a User object be created when only the ID is available?",
+      "answer": "Answer: Use a constructor that accepts one integer parameter, for example, new User(10). That constructor assigns the supplied value to the object's id field."
+    },
+    {
+      "question": "How can a User object be created when the ID and name are available?",
+      "answer": "Answer: Use a constructor with two parameters, such as new User(20, \"Asha\"). The constructor initializes both id and name."
+    },
+    {
+      "question": "How can a User object be created when the ID, name, and email are available?",
+      "answer": "Answer: Use a constructor with three parameters, such as new User(30, \"Raghu\", \"raghu@example.com\"). The constructor initializes all three instance variables."
+    },
+    {
+      "question": "What happens if a class has only one parameterized constructor?",
+      "answer": "Answer: An object must be created by calling that constructor with a matching argument list. A call to a different constructor signature is not valid unless that constructor has also been declared."
+    },
+    {
+      "question": "What is the this keyword in Java?",
+      "answer": "Answer: The this keyword refers to the current object. In the constructor example, it represents the object whose constructor is currently executing."
+    },
+    {
+      "question": "What does this refer to while a constructor is executing?",
+      "answer": "Answer: It refers to the object being initialized by that constructor. The lesson describes this as holding the address or reference of the current object in use."
+    },
+    {
+      "question": "What is an instance variable?",
+      "answer": "Answer: An instance variable is declared inside a class but outside its methods and constructors, and it is not declared static. Each object has its own instance-variable values."
+    },
+    {
+      "question": "What is a local variable in the constructor example?",
+      "answer": "Answer: The constructor parameters, such as id, name, and email, are local to the constructor call. They receive the values passed when the object is created."
+    },
+    {
+      "question": "What is the shadowing problem?",
+      "answer": "Answer: Shadowing occurs when a local variable or constructor parameter has the same name as an instance variable. The local name takes precedence in the constructor, so an assignment such as id = id refers to the parameter on both sides instead of updating the field."
+    },
+    {
+      "question": "What happens when a constructor uses id = id instead of this.id = id?",
+      "answer": "Answer: The parameter is assigned to itself, and the instance variable is not updated. The object therefore keeps the field's default value. For an int field, that value is 0; for String reference fields, it is null."
+    },
+    {
+      "question": "How can the shadowing problem be solved?",
+      "answer": "Answer: Use this to identify the instance variable. For example, this.id = id assigns the constructor parameter id to the id field of the current object."
+    },
+    {
+      "question": "In the statement this.name = name, what does each name refer to?",
+      "answer": "Answer: this.name refers to the name instance variable belonging to the current object. The name on the right refers to the local constructor parameter."
+    },
+    {
+      "question": "Why can local-variable names and instance-variable names be the same in a constructor?",
+      "answer": "Answer: The names can be the same, but the code must distinguish the instance variables from the parameters. The lesson uses this for that distinction and notes that it is a common coding convention."
+    },
+    {
+      "question": "Does this refer to the same object for every constructor call?",
+      "answer": "Answer: No. It refers to the current object being initialized in that particular constructor call. When a different object is created, this refers to that different object."
+    },
+    {
+      "question": "How can constructor overloading be implemented in a User class?",
+      "answer": "Answer: Provide constructors with different parameter lists. The following program supports object creation with no details, only an ID, an ID and name, or all three values. The this keyword assigns each parameter to the corresponding instance variable.\n\n```java\nclass User {    int id;    String name;    String email;    User() {        // No-argument constructor    }    User(int id) {        this.id = id;    }    User(int id, String name) {        this.id = id;        this.name = name;    }    User(int id, String name, String email) {        this.id = id;        this.name = name;        this.email = email;    }    void register() {        System.out.println(name + \" is registered\");    }    void login() {        System.out.println(name + \" has logged in\");    }}\npublic class UserApplication {    public static void main(String[] args) {        User user1 = new User();        User user2 = new User(10);        User user3 = new User(20, \"Asha\");        User user4 = new User(30, \"Raghu\", \"raghu@example.com\");        System.out.println(user1.id + \" \" + user1.name + \" \" + user1.email);        System.out.println(user2.id + \" \" + user2.name + \" \" + user2.email);        System.out.println(user3.id + \" \" + user3.name + \" \" + user3.email);        System.out.println(user4.id + \" \" + user4.name + \" \" + user4.email);        user4.register();        user4.login();    }}\n```\n\nSample Input: No input Sample Output:0 null null10 null null20 Asha null30 Raghu raghu@example.comRaghu is registeredRaghu has logged in"
+    },
+    {
+      "question": "What does the following program demonstrate about the shadowing problem?",
+      "answer": "Answer: The constructor parameters have the same names as the instance variables. The statements id = id and name = name assign each local parameter to itself. As a result, the fields keep their default values. The example makes the problem visible before applying this.\n\n```java\nclass User {    int id;    String name;    User(int id, String name) {        id = id;        name = name;    }}public class ShadowingDemo {    public static void main(String[] args) {        User user = new User(30, \"Raghu\");        System.out.println(user.id);        System.out.println(user.name);    }}\n```\n\nSample Input: No input Sample Output:0null"
+    },
+    {
+      "question": "How can the previous program be corrected using this?",
+      "answer": "Answer: Write this.id = id and this.name = name. The left side identifies the current object's instance variables, while the right side identifies the constructor parameters.\n\n```java\nclass User {    int id;    String name;    User(int id, String name) {        this.id = id;        this.name = name;    }}public class ThisKeywordDemo {    public static void main(String[] args) {        User user = new User(30, \"Raghu\");        System.out.println(user.id);        System.out.println(user.name);    }}\n```\n\nSample Input: No input Sample Output:30Raghu"
+    }
+  ]
+}
