@@ -1,0 +1,143 @@
+{
+  "title": "Notes Java Synchronization In Java",
+  "itemsPerPage": 2,
+  "source": "notes-java-synchronization-in-java.docx",
+  "items": [
+    {
+      "question": "What is a shared resource in a multithreaded Java program?",
+      "answer": "Answer: A shared resource is an object or resource that can be accessed by more than one thread. In the example, the Bathroom object is one common resource, and the Boy, Girl, and Other threads all need to use it."
+    },
+    {
+      "question": "Why can simultaneous access to one shared resource create a problem?",
+      "answer": "Answer: When multiple threads use the same resource at the same time without coordination, their activities can overlap and cause conflicting access. The example shows three threads trying to use one bathroom at once, which is not the required behavior."
+    },
+    {
+      "question": "What real-world example is used to explain synchronization?",
+      "answer": "Answer: A bathroom is used as the shared resource. Three people—represented by the Boy, Girl, and Other threads—want to use that one bathroom. The required behavior is that one person uses it at a time, and the next person waits until the current person leaves."
+    },
+    {
+      "question": "What is the expected behavior when several threads need one common resource?",
+      "answer": "Answer: The example requires one resource to be shared by many threads, but only one thread should access that resource at a time. The threads should use it one after another rather than entering together."
+    },
+    {
+      "question": "Which objects are created for the bathroom synchronization example?",
+      "answer": "Answer: A Bathroom object represents the shared resource. Separate Boy, Girl, and Other objects represent the threads that want to access that resource."
+    },
+    {
+      "question": "Why is the Bathroom class not created as a thread?",
+      "answer": "Answer: The Bathroom object represents the resource being shared; it is not one of the activities that must execute independently. The Boy, Girl, and Other classes are the thread classes because they perform the work of accessing the bathroom."
+    },
+    {
+      "question": "How are the Boy, Girl, and Other threads created?",
+      "answer": "Answer: Each class extends the Thread class and overrides the run() method. The run() method contains the instruction to use the shared Bathroom object."
+    },
+    {
+      "question": "What is the purpose of overriding the run() method in each thread class?",
+      "answer": "Answer: The run() method defines what that particular thread does when it starts. In this example, each thread's run() method calls the use() method on its Bathroom reference."
+    },
+    {
+      "question": "How many threads are present when the program creates Boy, Girl, and Other threads?",
+      "answer": "Answer: There are four threads in total: the main thread and the three additional threads represented by Boy, Girl, and Other."
+    },
+    {
+      "question": "Why is only one Bathroom object created in the main() method?",
+      "answer": "Answer: The requirement is to make all three threads use one common resource. Creating one Bathroom object and passing its reference to every thread ensures they all access the same object."
+    },
+    {
+      "question": "How are the thread names assigned in the example?",
+      "answer": "Answer: The setName() method is used to assign meaningful names to the thread objects, such as \"Boy\", \"Girl\", and \"Other\". These names make it possible to identify which thread is executing."
+    },
+    {
+      "question": "How can the Bathroom class identify which thread is currently executing its use() method?",
+      "answer": "Answer: It can call Thread.currentThread() to obtain the thread that is currently executing the method, and then call getName() on that returned Thread object to obtain its name."
+    },
+    {
+      "question": "What does Thread.currentThread() return?",
+      "answer": "Answer: Thread.currentThread() returns a reference to the Thread object representing the thread that is currently executing the code. It can be used even inside a class that does not extend Thread."
+    },
+    {
+      "question": "Why can Thread.currentThread() be used inside the Bathroom class even though Bathroom does not extend Thread?",
+      "answer": "Answer: The method is static and returns the currently executing Thread object. Therefore, the Bathroom class does not need to inherit from Thread to identify the thread that called its use() method."
+    },
+    {
+      "question": "What does the getName() method return?",
+      "answer": "Answer: getName() returns the name assigned to a thread. In the example, the Bathroom object uses the returned name to identify whether Boy, Girl, or Other is currently using the resource."
+    },
+    {
+      "question": "What is the purpose of the use() method in the Bathroom class?",
+      "answer": "Answer: The use() method contains the operations performed while a thread uses the bathroom. It identifies the current thread, displays entry and usage messages, applies delays, and displays an exit message."
+    },
+    {
+      "question": "Why is the use() method declared as public and void?",
+      "answer": "Answer: It is public so the thread classes can call it through their Bathroom reference. It is void because the method performs an activity and does not return a value."
+    },
+    {
+      "question": "Why is Thread.sleep() used while a thread is using the shared resource?",
+      "answer": "Answer: Thread.sleep() introduces a delay in the thread's execution. A delay of 5,000 milliseconds represents five seconds in the example and makes it easier to observe that another thread must wait while the current thread is still using the bathroom."
+    },
+    {
+      "question": "What exception must be handled when Thread.sleep() is used?",
+      "answer": "Answer: Thread.sleep() can throw InterruptedException. The sleep operation should therefore be placed inside a try block, with an appropriate catch block to handle the exception."
+    },
+    {
+      "question": "How is the same Bathroom object reference passed to each thread?",
+      "answer": "Answer: The Bathroom reference is supplied as an argument when each Boy, Girl, and Other object is constructed. Each thread class receives that reference through its constructor and stores it in an instance variable."
+    },
+    {
+      "question": "What is the difference between the constructor parameter and the instance variable in a thread class?",
+      "answer": "Answer: The constructor parameter is a local variable that receives the Bathroom reference when the object is created. The instance variable belongs to the thread object and stores that reference so the run() method can use it later."
+    },
+    {
+      "question": "Why is the this keyword used when assigning the Bathroom reference in a constructor?",
+      "answer": "Answer: The this keyword refers to the current object. In an assignment such as this.bathroom = bathroom, the left side refers to the instance variable and the right side refers to the constructor parameter. This avoids confusion when both have the same name."
+    },
+    {
+      "question": "Why must each thread receive the reference to the same Bathroom object?",
+      "answer": "Answer: The threads must coordinate access to one shared resource. If each thread received a different Bathroom object, they would not be competing for the same object's lock, and the intended synchronization would not be achieved."
+    },
+    {
+      "question": "What happens when start() is called on the Boy, Girl, and Other thread objects?",
+      "answer": "Answer: Calling start() starts each thread as a separate thread of execution. The JVM then invokes that thread's run() method, which calls use() on the shared Bathroom object."
+    },
+    {
+      "question": "What problem is demonstrated when all three threads access the Bathroom object without synchronization?",
+      "answer": "Answer: The three threads can enter the resource operation at overlapping times. That means multiple threads may use the same shared resource simultaneously, contrary to the requirement that only one should use it at a time."
+    },
+    {
+      "question": "What is synchronization in Java?",
+      "answer": "Answer: Synchronization is a way to control access to a shared resource so that only one thread at a time can execute the protected operation on that shared resource. In this example, the synchronized keyword is used to coordinate the threads that need the same Bathroom object."
+    },
+    {
+      "question": "Which Java keyword is used to implement the locking mechanism in the example?",
+      "answer": "Answer: The synchronized keyword is used. It provides the locking behavior needed to prevent multiple threads from executing the protected method on the same object at the same time."
+    },
+    {
+      "question": "What happens when a thread enters a synchronized instance method?",
+      "answer": "Answer: The thread acquires the lock associated with that object before executing the synchronized method. While it holds that lock, another thread attempting to enter a synchronized instance method on the same object must wait."
+    },
+    {
+      "question": "When is the lock released after a synchronized method is called?",
+      "answer": "Answer: The lock is released when the thread leaves the synchronized method, including when the method completes. Another waiting thread can then acquire the lock and enter the method."
+    },
+    {
+      "question": "Does Thread.sleep() release the lock of a synchronized method?",
+      "answer": "Answer: No. When Thread.sleep() is called while the thread is still executing the synchronized use() method, the thread continues to hold the object lock. Other threads calling the same synchronized method on that Bathroom object must wait until the first thread leaves the method."
+    },
+    {
+      "question": "Why is the synchronized keyword applied to the Bathroom object's use() method?",
+      "answer": "Answer: The Bathroom object is the shared resource. Placing synchronized on its use() method protects the resource operation itself, so all threads that call use() on that same object must take turns."
+    },
+    {
+      "question": "Does synchronization guarantee that Boy always uses the bathroom before Girl and Other?",
+      "answer": "Answer: No. Synchronization ensures that only one thread at a time executes the protected method on the shared object, but it does not establish a fixed order among the waiting threads. The order can vary between program runs."
+    },
+    {
+      "question": "What is the difference between the synchronized method demonstrated here and a synchronized block?",
+      "answer": "Answer: The demonstrated implementation uses a synchronized method in the Bathroom class. A synchronized block was raised as a related interview question, but its syntax and behavior were left for a later lesson, so it is not developed here."
+    },
+    {
+      "question": "What is the key interview definition of synchronization in Java from this example?",
+      "answer": "Answer: Synchronization is a locking mechanism implemented with the synchronized keyword. It ensures that, at any point in time, only one thread can access the protected shared resource operation on the same object. 35. Coding Question 1: Write a Java program in which three threads share one Bathroom object. Use synchronization so that only one thread can use the bathroom at a time.\n\n```java\nclass Bathroom {\npublic synchronized void use() {\nString name = Thread.currentThread().getName();\nSystem.out.println(name + \" has entered the bathroom\");\ntry {\nThread.sleep(5000);\nSystem.out.println(name + \" is using the bathroom\");\nThread.sleep(5000);\n```\n\n} catch (InterruptedException e) {\n\n```java\ne.printStackTrace();\n}\nSystem.out.println(name + \" has exited the bathroom\");\n}\n}\nclass Boy extends Thread {\nprivate Bathroom bathroom;\n```\n\nBoy(Bathroom bathroom) {\n\n```java\nthis.bathroom = bathroom;\n}\n@Override\npublic void run() {\nbathroom.use();\n}\n}\nclass Girl extends Thread {\nprivate Bathroom bathroom;\n```\n\nGirl(Bathroom bathroom) {\n\n```java\nthis.bathroom = bathroom;\n}\n@Override\npublic void run() {\nbathroom.use();\n}\n}\nclass Other extends Thread {\nprivate Bathroom bathroom;\n```\n\nOther(Bathroom bathroom) {\n\n```java\nthis.bathroom = bathroom;\n}\n@Override\npublic void run() {\nbathroom.use();\n}\n}\npublic class ThreadSynchronizationDemo {\npublic static void main(String[] args) {\nBathroom bathroom = new Bathroom();\nBoy boy = new Boy(bathroom);\nGirl girl = new Girl(bathroom);\nOther other = new Other(bathroom);\nboy.setName(\"Boy\");\ngirl.setName(\"Girl\");\nother.setName(\"Other\");\nboy.start();\ngirl.start();\nother.start();\n}\n}\n```\n\nSample Input: No input Sample Output: One possible output (the order of the threads may vary):Boy has entered the bathroomBoy is using the bathroomBoy has exited the bathroomGirl has entered the bathroomGirl is using the bathroomGirl has exited the bathroomOther has entered the bathroomOther is using the bathroomOther has exited the bathroom"
+    }
+  ]
+}
