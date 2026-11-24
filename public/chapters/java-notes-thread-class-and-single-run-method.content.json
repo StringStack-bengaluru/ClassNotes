@@ -1,0 +1,127 @@
+{
+  "title": "Java Notes Thread Class And Single Run Method",
+  "itemsPerPage": 2,
+  "source": "java-notes-thread-class-and-single-run-method.docx",
+  "items": [
+    {
+      "question": "What are the two ways of creating a thread in Java?",
+      "answer": "Answer: The two ways discussed are extending the Thread class and implementing the Runnable interface. When Runnable is used, its run() method contains the instructions, and a Thread object is used to execute that task."
+    },
+    {
+      "question": "What is a thread?",
+      "answer": "Answer: A thread is a sequence or collection of instructions that can execute independently as part of a process. A Java program can contain multiple threads to perform independent activities."
+    },
+    {
+      "question": "Why is multithreading used?",
+      "answer": "Answer: Multithreading allows a program to perform multiple independent activities. It helps use the available processor time more effectively instead of making every activity wait for one long sequence of instructions to finish."
+    },
+    {
+      "question": "What is the main thread in Java?",
+      "answer": "Answer: The main thread is the thread that executes the main() method when a Java application starts. It is the first thread present in a normal Java application."
+    },
+    {
+      "question": "Does every normal Java application have a main thread?",
+      "answer": "Answer: Yes. The main() method runs on the main thread, so a normal Java application starts with at least that one thread. Additional threads can be created by the programmer."
+    },
+    {
+      "question": "How many threads are present if a program has three worker threads and the main thread?",
+      "answer": "Answer: There are four threads in total: the main thread and the three worker threads. The main thread must be included when counting all the threads in the program."
+    },
+    {
+      "question": "Is a run() method itself a thread?",
+      "answer": "Answer: No. A run() method contains the instructions that a thread executes. The thread is the independent execution path; the run() method supplies its task."
+    },
+    {
+      "question": "What happens when the main() method starts executing?",
+      "answer": "Answer: The main thread begins executing the statements in main(). The JVM creates the main thread's execution context, including its stack, and the statements are executed on that thread."
+    },
+    {
+      "question": "Does the whole program necessarily stop as soon as the main thread finishes?",
+      "answer": "Answer: No. Other worker threads can continue executing after the main thread has completed. The worker threads have their own independent execution and must also finish before the application fully terminates, assuming they are ordinary non-daemon threads."
+    },
+    {
+      "question": "Why does each thread have its own stack?",
+      "answer": "Answer: Each thread has its own stack to keep track of its method calls and local execution state. When a thread calls a method, a stack frame is created for that method on that thread's stack."
+    },
+    {
+      "question": "Which Java class is used to work with thread information and thread behavior?",
+      "answer": "Answer: The Thread class represents a thread. It provides methods to inspect information about a thread, such as its name and priority, and methods to configure certain thread properties."
+    },
+    {
+      "question": "What does Thread.currentThread() do?",
+      "answer": "Answer: Thread.currentThread() is a static method that returns the Thread object representing the thread that is currently executing the code. It can be used to inspect the current thread from inside a method or task."
+    },
+    {
+      "question": "What is the return type of Thread.currentThread()?",
+      "answer": "Answer: Its return type is Thread. The returned object can be stored in a Thread reference and used to call methods such as getName() and getPriority()."
+    },
+    {
+      "question": "How can you get the name of the currently executing thread?",
+      "answer": "Answer: Call Thread.currentThread().getName(). The currentThread() call obtains the executing Thread object, and getName() returns that thread's name."
+    },
+    {
+      "question": "What does getName() return?",
+      "answer": "Answer: getName() returns the name assigned to a thread. Java assigns default names to threads when names are not supplied by the programmer."
+    },
+    {
+      "question": "How can you get a thread's priority?",
+      "answer": "Answer: Call getPriority() on the Thread object. It returns the thread's priority value."
+    },
+    {
+      "question": "What caution was mentioned about Thread.getId()?",
+      "answer": "Answer: The lesson notes that getId() is deprecated in Java 19 and later. It may remain available for compatibility, but the lesson advises against using it in new projects."
+    },
+    {
+      "question": "What is the default priority of a Java thread?",
+      "answer": "Answer: The normal default priority is 5. Java thread priorities range from 1 to 10, with 1 representing the minimum priority and 10 the maximum priority."
+    },
+    {
+      "question": "Does a higher thread priority guarantee that the thread will execute first?",
+      "answer": "Answer: No. Priority does not guarantee a particular execution order. Thread scheduling determines which runnable thread gets processor time, and the exact order should not be assumed."
+    },
+    {
+      "question": "How can you change the name of a thread?",
+      "answer": "Answer: Use setName(String name) on the Thread object. For example, worker.setName(\"printing numbers\") assigns a descriptive name to that thread."
+    },
+    {
+      "question": "How can you change the priority of a thread?",
+      "answer": "Answer: Use setPriority(int priority) on the Thread object. The value must be within Java's supported priority range of 1 through 10. The example in the lesson changes a thread's priority to 8."
+    },
+    {
+      "question": "Why might a programmer give a thread a meaningful name?",
+      "answer": "Answer: A meaningful name makes it easier to identify the purpose of a thread. In the class example, names such as add, printing characters, and printing numbers identify the activity assigned to each thread."
+    },
+    {
+      "question": "What is the difference between calling run() directly and calling start()?",
+      "answer": "Answer: Calling run() directly is an ordinary method call, so its instructions execute on the current thread. Calling start() starts a new thread of execution; the JVM then invokes that thread's run() method."
+    },
+    {
+      "question": "What decides which thread executes next?",
+      "answer": "Answer: Thread scheduling decides which runnable thread gets processor time. The program should not assume that threads will execute in the order in which start() was called."
+    },
+    {
+      "question": "How can you get only the name of the currently executing thread instead of printing the entire Thread information?",
+      "answer": "Answer: First get the current Thread object, then call getName(): String name = Thread.currentThread().getName(). The name can then be used or printed independently."
+    },
+    {
+      "question": "Why should String.equals() be used when comparing a thread name with a task name?",
+      "answer": "Answer: String.equals() compares the text content of two strings. The lesson uses it to check whether the current thread's name matches values such as add or printing numbers. The == operator checks whether references are the same, so it is not the appropriate content comparison here."
+    },
+    {
+      "question": "How can a program perform several independent activities with one run() method?",
+      "answer": "Answer: Create multiple objects of the same Thread subclass and assign a different name to each object. In the shared run() method, obtain the current thread's name and use if/else conditions with equals() to select the activity for that thread."
+    },
+    {
+      "question": "What are the three activities used in the single-run-method example?",
+      "answer": "Answer: The example uses an addition activity, a character-printing activity, and a number-printing activity. Each activity is assigned to a separate Thread object by giving that object a different name."
+    },
+    {
+      "question": "Why are three Thread objects created from the same class in the example?",
+      "answer": "Answer: Each object represents a separate thread and therefore has its own execution path. All three objects use the same run() method, but their different names let the method identify which activity each thread should perform."
+    },
+    {
+      "question": "Why might the output order of multiple threads change between program runs?",
+      "answer": "Answer: The threads are independent, and the scheduler chooses which one gets processor time. Therefore, the addition, character-printing, and number-printing activities may appear in different orders on different runs. Coding Question 1: Write a Java program to display the name and priority of the currently executing thread.\n\n```java\npublic class CurrentThreadInfo {    public static void main(String[] args) {        Thread current = Thread.currentThread();        System.out.println(\"Thread name: \" + current.getName());        System.out.println(\"Thread priority: \" + current.getPriority());    }}\n```\n\nSample Input: No input Sample Output: Thread name: mainThread priority: 5 Coding Question 2: Write a Java program to change the current thread name and priority, then display the updated values.\n\n```java\npublic class ThreadSettingsDemo {    public static void main(String[] args) {        Thread current = Thread.currentThread();        System.out.println(current.getName() + \" \" + current.getPriority());        current.setName(\"Application-Main\");        current.setPriority(8);        System.out.println(current.getName() + \" \" + current.getPriority());    }}\n```\n\nSample Input: No input Sample Output: main 5Application-Main 8 Coding Question 3: Create three threads that perform addition, print characters, and print numbers by using one shared run() method.\n\n```java\npublic class SingleRunMethodDemo extends Thread {    @Override    public void run() {        String task = Thread.currentThread().getName();        if (task.equals(\"add\"))            System.out.println(\"Sum: \" + (10 + 20));        else if (task.equals(\"printing characters\"))            System.out.println(\"Characters: A B C D E\");        else if (task.equals(\"printing numbers\"))            System.out.println(\"Numbers: 1 2 3 4 5\");    }    public static void main(String[] args) {        SingleRunMethodDemo first = new SingleRunMethodDemo();        SingleRunMethodDemo second = new SingleRunMethodDemo();        SingleRunMethodDemo third = new SingleRunMethodDemo();        first.setName(\"add\");        second.setName(\"printing characters\");        third.setName(\"printing numbers\");        first.start();        second.start();        third.start();    }}\n```\n\nSample Input: No input Sample Output: One possible output (the order may vary):Sum: 30Characters: A B C D ENumbers: 1 2 3 4 5"
+    }
+  ]
+}
