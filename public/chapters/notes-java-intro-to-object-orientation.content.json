@@ -1,0 +1,239 @@
+{
+  "title": "Notes Java Intro To Object Orientation",
+  "itemsPerPage": 2,
+  "source": "notes-java-intro-to-object-orientation.docx",
+  "items": [
+    {
+      "question": "What is the Fibonacci sequence?",
+      "answer": "Answer: The Fibonacci sequence is a number sequence that begins with 0 and 1. Every term after the first two is obtained by adding the two immediately preceding terms."
+    },
+    {
+      "question": "What are the first two fixed terms of the Fibonacci sequence?",
+      "answer": "Answer: The first term is 0 and the second term is 1. These starting values are used to calculate all subsequent terms."
+    },
+    {
+      "question": "How is the next Fibonacci term calculated?",
+      "answer": "Answer: Add the previous two terms. For example, after 0 and 1, the next term is 0 + 1 = 1. The following term is 1 + 1 = 2, and then 1 + 2 = 3."
+    },
+    {
+      "question": "What are the first five terms of the Fibonacci sequence?",
+      "answer": "Answer: The first five terms are 0, 1, 1, 2, and 3. The next term would be 5 because 2 + 3 = 5."
+    },
+    {
+      "question": "What is the difference between printing the first N Fibonacci terms and finding the Nth Fibonacci term?",
+      "answer": "Answer: Printing the first N terms displays the complete sequence from the beginning up to the requested count. Finding the Nth term displays only the value at that position. For example, printing five terms gives 0 1 1 2 3, while finding the fifth term gives only 3."
+    },
+    {
+      "question": "How can the first N Fibonacci terms be generated using a loop?",
+      "answer": "Answer: Store the first two terms in variables, print them when the requested count permits, and then use a loop to calculate the remaining terms. In each iteration, calculate the next term, print it, and update the two stored values."
+    },
+    {
+      "question": "Why does the Fibonacci loop begin with the third term?",
+      "answer": "Answer: The first and second terms are already known as 0 and 1. The loop therefore starts at term number 3 and calculates each later term from the previous two."
+    },
+    {
+      "question": "Why are the two Fibonacci variables updated after calculating each new term?",
+      "answer": "Answer: After calculating the next term, the older second term becomes the new first term, and the calculated term becomes the new second term. This keeps the two most recent values ready for the next iteration."
+    },
+    {
+      "question": "Write a Java program to print the first N Fibonacci terms.",
+      "answer": "Answer: The program reads the number of terms, prints 0 and 1 when those positions are required, and uses a for loop from the third term onward.\n\n```java\nimport java.util.Scanner;\npublic class FibonacciSeries {\npublic static void main(String[] args) {\nScanner sc = new Scanner(System.in);\nint n = sc.nextInt();\nint first = 0;\nint second = 1;\nif (n >= 1) {\nSystem.out.print(first);\n}\nif (n >= 2) {\nSystem.out.print(\" \" + second);\n}\nfor (int i = 3; i <= n; i++) {\nint next = first + second;\nSystem.out.print(\" \" + next);\nfirst = second;\nsecond = next;\n}\n}\n}\n```\n\nSample Input: 5 Sample Output: 0 1 1 2 3"
+    },
+    {
+      "question": "What does the Fibonacci position example return when the requested position is 5?",
+      "answer": "Answer: It returns 3. The sequence positions are counted from 1: position 1 is 0, position 2 is 1, position 3 is 1, position 4 is 2, and position 5 is 3."
+    },
+    {
+      "question": "Write a Java program to find one Fibonacci term at a requested position.",
+      "answer": "Answer: The program handles the first two positions directly. For later positions, it repeatedly calculates the next term and updates the two previous values.\n\n```java\nimport java.util.Scanner;\npublic class FibonacciPosition {\npublic static void main(String[] args) {\nScanner sc = new Scanner(System.in);\nint position = sc.nextInt();\nint first = 0;\nint second = 1;\nif (position == 1) {\nSystem.out.println(first);\n```\n\n} else if (position == 2) {\n\n```java\nSystem.out.println(second);\n```\n\n} else {\n\n```java\nfor (int i = 3; i <= position; i++) {\nint next = first + second;\nfirst = second;\nsecond = next;\n}\nSystem.out.println(second);\n}\n}\n}\n```\n\nSample Input: 5 Sample Output: 3"
+    },
+    {
+      "question": "What is the golden ratio?",
+      "answer": "Answer: The golden ratio is a mathematical ratio that the lesson connected with the Fibonacci sequence and recurring proportions and patterns. The detailed mathematical derivation was not developed in this session."
+    },
+    {
+      "question": "What natural and biological examples were mentioned when discussing recurring mathematical patterns?",
+      "answer": "Answer: Examples mentioned included shells, sunflower and other flower patterns, leaves, spiral galaxies, snowflakes, branching river systems, blood vessels, neural networks, and lightning-like branching patterns."
+    },
+    {
+      "question": "What is an arithmetic progression (AP)?",
+      "answer": "Answer: An arithmetic progression is a sequence in which the difference between consecutive terms remains constant."
+    },
+    {
+      "question": "What is the common difference in an arithmetic progression?",
+      "answer": "Answer: The common difference is the value added to one term to obtain the next term. It can be calculated by subtracting a term from the term immediately after it: d = second term − first term."
+    },
+    {
+      "question": "How can the common difference be identified from the sequence 2, 5, 8, 11, 14?",
+      "answer": "Answer: Subtract consecutive terms: 5 − 2 = 3, 8 − 5 = 3, and 11 − 8 = 3. The common difference is 3."
+    },
+    {
+      "question": "How can an arithmetic progression be generated in a Java program?",
+      "answer": "Answer: Read the first term, the common difference, and the number of terms. Print the current term and add the common difference to it for each iteration."
+    },
+    {
+      "question": "Write a Java program to print an arithmetic progression.",
+      "answer": "Answer: The program accepts the first term, common difference, and number of terms, and then generates the sequence using a loop.\n\n```java\nimport java.util.Scanner;\npublic class ArithmeticProgression {\npublic static void main(String[] args) {\nScanner sc = new Scanner(System.in);\nint firstTerm = sc.nextInt();\nint difference = sc.nextInt();\nint n = sc.nextInt();\nint term = firstTerm;\nfor (int i = 1; i <= n; i++) {\nSystem.out.print(term);\nif (i < n) {\nSystem.out.print(\" \");\n}\nterm = term + difference;\n}\n}\n}\n```\n\nSample Input: 2 3 5 Sample Output: 2 5 8 11 14"
+    },
+    {
+      "question": "What is the formula for the sum of the first N terms of an arithmetic progression?",
+      "answer": "Answer: When the first term is a and the Nth (last) term is l, the sum is Sₙ = N(a + l) / 2. The last term can be found using l = a + (N − 1)d."
+    },
+    {
+      "question": "Why can a formula be preferable to calculating an arithmetic progression sum with a loop?",
+      "answer": "Answer: A formula can calculate the sum directly instead of repeatedly generating and adding every term. This avoids a loop that grows with the number of terms and can reduce the amount of work needed."
+    },
+    {
+      "question": "What is a geometric progression (GP)?",
+      "answer": "Answer: A geometric progression is a sequence in which each term is obtained by multiplying the previous term by a fixed value called the common ratio."
+    },
+    {
+      "question": "What is the common ratio in a geometric progression?",
+      "answer": "Answer: The common ratio is the multiplier between consecutive terms. For nonzero terms, it can be found by dividing a term by the term immediately before it."
+    },
+    {
+      "question": "How can the common ratio be identified from the sequence 2, 4, 8, 16, 32?",
+      "answer": "Answer: Divide consecutive terms: 4 ÷ 2 = 2, 8 ÷ 4 = 2, and 16 ÷ 8 = 2. The common ratio is 2."
+    },
+    {
+      "question": "How is a geometric progression generated using a loop?",
+      "answer": "Answer: Start with the first term. Print the current term and multiply it by the common ratio to obtain the next term. Repeat this process for the required number of terms."
+    },
+    {
+      "question": "Write a Java program to print a geometric progression.",
+      "answer": "Answer: The program reads the first term, common ratio, and number of terms. It prints the current term and multiplies it by the ratio during each iteration.\n\n```java\nimport java.util.Scanner;\npublic class GeometricProgression {\npublic static void main(String[] args) {\nScanner sc = new Scanner(System.in);\nint firstTerm = sc.nextInt();\nint ratio = sc.nextInt();\nint n = sc.nextInt();\nint term = firstTerm;\nfor (int i = 1; i <= n; i++) {\nSystem.out.print(term);\nif (i < n) {\nSystem.out.print(\" \");\n}\nterm = term * ratio;\n}\n}\n}\n```\n\nSample Input: 2 2 5 Sample Output: 2 4 8 16 32"
+    },
+    {
+      "question": "What sequence is produced by the powers 2⁰, 2¹, 2², and 2³?",
+      "answer": "Answer: The resulting values are 1, 2, 4, and 8. Each value is twice the previous value."
+    },
+    {
+      "question": "What does Math.pow() return, and why might type casting be needed?",
+      "answer": "Answer: Math.pow() returns a double value. When the program needs to store a whole-number result in an int variable, an explicit cast such as (int) Math.pow(2, exponent) is needed."
+    },
+    {
+      "question": "Write a Java program to print the first N powers of 2 as integers.",
+      "answer": "Answer: The loop starts with exponent 0, calculates each power using Math.pow(), converts the result to int, and prints it.\n\n```java\nimport java.util.Scanner;\npublic class PowersOfTwo {\npublic static void main(String[] args) {\nScanner sc = new Scanner(System.in);\nint n = sc.nextInt();\nfor (int exponent = 0; exponent < n; exponent++) {\nint value = (int) Math.pow(2, exponent);\nSystem.out.print(value);\nif (exponent < n - 1) {\nSystem.out.print(\" \");\n}\n}\n}\n}\n```\n\nSample Input: 4 Sample Output: 1 2 4 8"
+    },
+    {
+      "question": "What happens when two integer values are divided in Java?",
+      "answer": "Answer: Integer division produces an integer result and discards the fractional part. For example, 10 / 20 evaluates to 0 when both operands are int. To obtain 0.5, convert at least one operand to double before division."
+    },
+    {
+      "question": "What is object-oriented programming (OOP)?",
+      "answer": "Answer: Object-oriented programming is a style of programming that organizes a program around objects and is intended to help model and solve real-world problems."
+    },
+    {
+      "question": "What is a class in Java?",
+      "answer": "Answer: A class is a blueprint used to define the structure and behavior of objects. It describes the data an object can hold and the operations it can perform."
+    },
+    {
+      "question": "What is an object in Java?",
+      "answer": "Answer: An object is an instance of a class. It represents a created entity with its own state and behavior."
+    },
+    {
+      "question": "What does the term instance mean in the class-and-object example?",
+      "answer": "Answer: An instance is a concrete object created from a class. The session associated this concrete existence with an object created in heap memory."
+    },
+    {
+      "question": "What properties and behaviors were used to describe a Calculator object?",
+      "answer": "Answer: The Calculator object was described as holding two numbers, a and b, as data (properties). Its behaviors included addition, subtraction, multiplication, and division."
+    },
+    {
+      "question": "How do you create a Calculator object in Java?",
+      "answer": "Answer: ```java\nUse the new keyword with the class constructor and assign the created object to a reference variable. For example: Calculator calculator = new Calculator();\n```"
+    },
+    {
+      "question": "What is the purpose of the new keyword in object creation?",
+      "answer": "Answer: The new keyword creates an object from the specified class. The reference variable on the left side stores a reference to that created object."
+    },
+    {
+      "question": "What is an anonymous object in Java?",
+      "answer": "Answer: An anonymous object is an object that is created without storing its reference in a named reference variable. It can be useful when an object is needed for a one-time operation."
+    },
+    {
+      "question": "How can an anonymous object be used to call a method?",
+      "answer": "Answer: The object can be created and the method called in the same expression, for example: new Calculator().divide(). The reference is not stored in a separate variable."
+    },
+    {
+      "question": "How does calling a static method differ from calling an instance method?",
+      "answer": "Answer: A static method belongs to the class and can be called using the class name, without creating an object. An instance method is associated with an object and is called through an object reference."
+    },
+    {
+      "question": "What is a Java package?",
+      "answer": "Answer: A package is a way to group related classes and other program elements. It helps organize a project by keeping similar or module-related code together."
+    },
+    {
+      "question": "Why are packages useful in a Java project?",
+      "answer": "Answer: Packages organize related classes into meaningful groups. For example, classes associated with database work can be grouped separately from classes associated with security or payments."
+    },
+    {
+      "question": "What package-naming convention was introduced in the session?",
+      "answer": "Answer: The package name was described as following a reverse-domain style: domain/company/project/module. A lower-case dotted name such as com.company.project.database makes the organization clear."
+    },
+    {
+      "question": "What is the difference between a local variable and an instance variable?",
+      "answer": "Answer: A local variable is declared inside a method or block and is associated with that method execution. An instance variable is declared in a class outside its methods and belongs to an object; each object has its own instance state."
+    },
+    {
+      "question": "Where are objects and local variables represented in the memory model discussed in the lesson?",
+      "answer": "Answer: The lesson used a simplified model in which objects are created in heap memory, while local variables are associated with the stack frame of the method that is executing."
+    },
+    {
+      "question": "What is a stack frame?",
+      "answer": "Answer: A stack frame is the memory record created for a method invocation. It holds information for that method execution, including its local variables and the information needed to return to the caller."
+    },
+    {
+      "question": "What happens when the main() method starts executing?",
+      "answer": "Answer: A stack frame for main() is created. As the method executes, its local variables are associated with that frame, and objects created by the program are represented in heap memory."
+    },
+    {
+      "question": "What happens when one method calls another method?",
+      "answer": "Answer: A new stack frame is created for the called method. Control moves to that method, its statements execute, and when it returns, its frame is removed and control continues from the calling method."
+    },
+    {
+      "question": "What is an object reference variable?",
+      "answer": "Answer: An object reference variable holds a reference to an object rather than holding the object’s instance data directly. The reference is used to access that object."
+    },
+    {
+      "question": "How does the reference variable connect to an object in heap memory?",
+      "answer": "Answer: The object is created in heap memory, and a reference variable stores a reference to it. Using that reference, the program can access the object’s fields and methods."
+    },
+    {
+      "question": "What is the role of the dot operator when working with an object reference?",
+      "answer": "Answer: The dot operator is used with an object reference to access members of the referenced object, such as its fields and methods. For example, calculator.add() calls the add() method through calculator."
+    },
+    {
+      "question": "What happens to a method’s local variables when the method returns?",
+      "answer": "Answer: The method’s stack frame is removed when the method finishes. Its local variables belong to that invocation and are no longer available after the method returns."
+    },
+    {
+      "question": "What is garbage collection in Java?",
+      "answer": "Answer: Garbage collection is the automatic memory-reclamation process that removes objects that are no longer reachable by the program, making their heap memory available for reuse."
+    },
+    {
+      "question": "When does an object become eligible for garbage collection?",
+      "answer": "Answer: An object becomes eligible when no live reference can reach it. For example, if the only reference to an object is lost or goes out of scope, the object may become eligible for garbage collection."
+    },
+    {
+      "question": "Does becoming eligible for garbage collection mean that the object is removed immediately?",
+      "answer": "Answer: No. Eligibility means the object can be reclaimed. The program does not control the exact time at which the garbage collector performs the collection."
+    },
+    {
+      "question": "What basic characteristics of object-oriented programs were outlined?",
+      "answer": "Answer: The session described applications as being made up of objects; objects as having useful roles; objects as interacting with other objects; objects as belonging to classes or categories; and objects as having properties and behavior."
+    },
+    {
+      "question": "What are the four main pillars of object-oriented programming?",
+      "answer": "Answer: The four pillars named in the session are encapsulation, inheritance, polymorphism, and abstraction."
+    },
+    {
+      "question": "What is the basic meaning of encapsulation introduced in the lesson?",
+      "answer": "Answer: Encapsulation literally means covering or enclosing. The session introduced its programming meaning as providing controlled access. The detailed implementation and examples were left for a later explanation."
+    },
+    {
+      "question": "Write a Java program that creates a Calculator object and performs basic arithmetic operations.",
+      "answer": "Answer: The class stores two numbers as instance variables and provides methods for addition, subtraction, multiplication, and division. The main() method reads the values, creates a Calculator object, assigns the values, and calls the methods.\n\n```java\nimport java.util.Scanner;\nclass Calculator {\nint a, b;\nint add() { return a + b; }\nint subtract() { return a - b; }\nint multiply() { return a * b; }\ndouble divide() { return (double) a / b; }\n}\npublic class CalculatorDemo {\npublic static void main(String[] args) {\nScanner sc = new Scanner(System.in);\nCalculator calculator = new Calculator();\ncalculator.a = sc.nextInt();\ncalculator.b = sc.nextInt();\nSystem.out.println(\"Addition = \" + calculator.add());\nSystem.out.println(\"Subtraction = \" + calculator.subtract());\nSystem.out.println(\"Multiplication = \" + calculator.multiply());\nif (calculator.b == 0)\nSystem.out.println(\"Division is not defined\");\nelse\nSystem.out.println(\"Division = \" + calculator.divide());\n}\n}\n```\n\nSample Input: 10 20 Sample Output: Addition = 30; Subtraction = -10; Multiplication = 200; Division = 0.5"
+    }
+  ]
+}
