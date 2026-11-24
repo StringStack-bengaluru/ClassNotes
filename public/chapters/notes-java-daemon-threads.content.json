@@ -1,0 +1,115 @@
+{
+  "title": "Notes Java Daemon Threads",
+  "itemsPerPage": 2,
+  "source": "notes-java-daemon-threads.docx",
+  "items": [
+    {
+      "question": "What is a daemon thread in Java?",
+      "answer": "Answer: A daemon thread is a background/helper thread whose purpose is to support the main work performed by other threads. It does not keep the Java application running after all user threads have finished."
+    },
+    {
+      "question": "What is the difference between a primary thread and a daemon thread in this lesson?",
+      "answer": "Answer: The primary thread performs the main application task. A daemon thread performs supporting work for that primary task. In the cricket example, Gill represents the primary worker, while the batting coach and bowling coach are helper threads."
+    },
+    {
+      "question": "Why are daemon threads used?",
+      "answer": "Answer: They are useful for background work that is needed while the main application work is active. When the user threads finish, the JVM does not need to stay alive only to keep daemon threads running."
+    },
+    {
+      "question": "What real-world example is used to explain daemon threads?",
+      "answer": "Answer: A cricket team is used as an analogy. The main player, Gill, is the primary worker. The batting coach and bowling coach support him during practice, so they represent daemon/helper threads."
+    },
+    {
+      "question": "What tasks does the primary thread perform in the cricket example?",
+      "answer": "Answer: Gill checks the pitch and ground conditions, warms up, practices catching, practices batting, practices bowling, and then finishes the practice session and goes to the hotel."
+    },
+    {
+      "question": "What work do the batting coach and bowling coach perform?",
+      "answer": "Answer: They support Gill during practice. The batting coach helps with batting-related practice, and the bowling coach helps with bowling-related practice. Their work is secondary to Gill’s main activity."
+    },
+    {
+      "question": "How does the example represent a helper thread that remains available?",
+      "answer": "Answer: The coach threads use a repeating loop to represent being available to help while Gill is practicing. The example uses a loop and a delay so the helper activity can run repeatedly alongside the primary task."
+    },
+    {
+      "question": "Why is Thread.sleep() used in the cricket example?",
+      "answer": "Answer: Thread.sleep() is used to create a time gap between activities. It represents actions such as inspecting the pitch, taking a water break, or pausing before moving to the next practice activity."
+    },
+    {
+      "question": "How many milliseconds are equal to three seconds?",
+      "answer": "Answer: Three seconds are equal to 3,000 milliseconds. Therefore, Thread.sleep(3000) pauses the current thread for approximately three seconds."
+    },
+    {
+      "question": "What happens when a primary/user thread finishes while daemon threads are still running?",
+      "answer": "Answer: When all user threads have finished, the JVM can exit even if daemon threads are still executing. The daemon threads do not keep the application alive by themselves."
+    },
+    {
+      "question": "Why should the coach threads be daemon threads in this example?",
+      "answer": "Answer: The coaches exist only to help Gill. When Gill finishes his practice, the coaching threads should not keep the application running independently. Marking them as daemon threads gives them that helper lifecycle."
+    },
+    {
+      "question": "What could happen if the coach threads were ordinary user threads with infinite loops?",
+      "answer": "Answer: They could keep the application running even after Gill finishes, because the JVM waits while user threads are still alive. A continuously running helper thread should therefore be marked as daemon when it is intended to end with the application’s user work."
+    },
+    {
+      "question": "Which Java class is used to create the threads in the demonstrated example?",
+      "answer": "Answer: The example creates thread classes by extending the Thread class and overriding the run() method. The Gill, BattingCoach, and BowlingCoach objects each represent a thread."
+    },
+    {
+      "question": "What are the steps for designing daemon threads?",
+      "answer": "Answer: First, identify the primary thread. Second, identify which supporting threads should behave as daemon threads. Third, have the primary application flow create the helper thread objects. Fourth, mark the helper threads as daemon before starting them."
+    },
+    {
+      "question": "Why should the primary thread be identified first?",
+      "answer": "Answer: A daemon thread exists to support some primary work. Identifying the primary thread makes it clear which activity the helper threads are supporting and when their work should no longer be required."
+    },
+    {
+      "question": "Which thread creates the helper thread objects in the example?",
+      "answer": "Answer: The main application flow creates the Gill, BattingCoach, and BowlingCoach thread objects. It then assigns meaningful names and configures the coach threads before starting them."
+    },
+    {
+      "question": "Which method marks a thread as a daemon thread?",
+      "answer": "Answer: The Thread class provides the setDaemon(boolean on) method. Calling setDaemon(true) marks the thread as a daemon thread."
+    },
+    {
+      "question": "When must setDaemon(true) be called?",
+      "answer": "Answer: It must be called before the thread is started. Configure the daemon status first, and call start() afterward."
+    },
+    {
+      "question": "What happens if setDaemon(true) is called after start()?",
+      "answer": "Answer: Java throws an IllegalThreadStateException. The daemon status cannot be changed after the thread has been started."
+    },
+    {
+      "question": "Does setDaemon(true) start the thread?",
+      "answer": "Answer: No. It only marks the thread as a daemon. The thread must still be started separately by calling start()."
+    },
+    {
+      "question": "Can both the batting coach and bowling coach be daemon threads?",
+      "answer": "Answer: Yes. Both helper threads can be marked as daemon by calling setDaemon(true) on each thread object before either one is started."
+    },
+    {
+      "question": "Why should setDaemon(true) be called before start() for both coaches?",
+      "answer": "Answer: The daemon setting must be applied while each thread is still in the new state. After start() has been called, attempting to change the daemon status causes an IllegalThreadStateException."
+    },
+    {
+      "question": "What is the role of the garbage collector in this topic?",
+      "answer": "Answer: The garbage collector is given as an example of a built-in daemon thread in Java. It performs background memory-management work by helping reclaim objects that are no longer reachable."
+    },
+    {
+      "question": "What is the difference between a user-defined daemon thread and a built-in daemon thread?",
+      "answer": "Answer: A user-defined daemon thread is created by the programmer, such as the batting coach and bowling coach in the example. A built-in daemon thread, such as the garbage collector, is provided by the Java runtime."
+    },
+    {
+      "question": "Why might the output of daemon threads appear incomplete or vary between runs?",
+      "answer": "Answer: Daemon threads can be stopped when the JVM exits after the user threads finish. Because their work is background work, they may not complete every loop iteration or print every expected message before the application ends."
+    },
+    {
+      "question": "Write a Java program that creates one primary thread and two daemon helper threads.",
+      "answer": "Answer: The Gill thread performs a finite sequence of practice activities. The batting coach and bowling coach repeatedly provide support. Both coach threads are marked as daemon before start() is called. The exact order of printed messages can vary because the threads execute concurrently.\n\n```java\npublic class DaemonThreadDemo {    private static void pause() {        try {            Thread.sleep(1000);        } catch (InterruptedException e) {            Thread.currentThread().interrupt();        }    }\nstatic class Gill extends Thread {        @Override        public void run() {            System.out.println(\"Gill is inspecting the pitch\");            pause();            System.out.println(\"Gill is warming up\");            pause();            System.out.println(\"Gill is doing catching practice\");            pause();            System.out.println(\"Gill is doing batting practice\");            pause();            System.out.println(\"Gill is doing bowling practice\");            pause();            System.out.println(\"Gill has finished and is going to the hotel\");        }    }\nstatic class BattingCoach extends Thread {        @Override        public void run() {            while (true) {                System.out.println(\"Batting coach is assisting Gill\");                pause();            }        }    }\nstatic class BowlingCoach extends Thread {        @Override        public void run() {            while (true) {                System.out.println(\"Bowling coach is assisting Gill\");                pause();            }        }    }\npublic static void main(String[] args) {        Gill gill = new Gill();        BattingCoach battingCoach = new BattingCoach();        BowlingCoach bowlingCoach = new BowlingCoach();        battingCoach.setName(\"Batting Coach\");        bowlingCoach.setName(\"Bowling Coach\");        battingCoach.setDaemon(true);        bowlingCoach.setDaemon(true);        gill.start();        battingCoach.start();        bowlingCoach.start();    }}\n```\n\nSample Input: No input Sample Output (illustrative; thread scheduling may change the order): Gill is inspecting the pitch Batting coach is assisting Gill Bowling coach is assisting Gill Gill is warming up Batting coach is assisting Gill Gill is doing batting practice Bowling coach is assisting Gill Gill has finished and is going to the hotel"
+    },
+    {
+      "question": "Write the correct order for marking and starting a daemon thread.",
+      "answer": "Answer: Create the thread object, call setDaemon(true), and then call start(). Do not call setDaemon(true) after start().\n\n```java\nThread helper = new Thread();\nhelper.setDaemon(true);\nhelper.start();\n```\n\nSample Input: No input Sample Output: No output is required; the snippet demonstrates the required method-call order."
+    }
+  ]
+}
