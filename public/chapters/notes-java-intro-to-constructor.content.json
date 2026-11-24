@@ -1,0 +1,143 @@
+{
+  "title": "Notes Java Intro To Constructor",
+  "itemsPerPage": 2,
+  "source": "notes-java-intro-to-constructor.docx",
+  "items": [
+    {
+      "question": "What is encapsulation in Java?",
+      "answer": "Answer: Encapsulation is the process of providing controlled access to the important data of an object. The data is kept inside the class, and access is provided through methods rather than allowing outside code to change the fields directly."
+    },
+    {
+      "question": "How is encapsulation implemented in the examples discussed?",
+      "answer": "Answer: The important instance variables are declared private. Public getter and setter methods are then provided so that other classes can read or update those values in a controlled way."
+    },
+    {
+      "question": "Why are the data members of a class made private?",
+      "answer": "Answer: Private data members cannot be accessed directly from outside their own class. This prevents other classes, such as a main application class, from changing the object's data without going through the class's access methods."
+    },
+    {
+      "question": "What is the purpose of a setter method?",
+      "answer": "Answer: A setter method receives a value and assigns it to a private instance variable. It can also check the value before assigning it, which allows the class to validate incoming data."
+    },
+    {
+      "question": "What is the purpose of a getter method?",
+      "answer": "Answer: A getter method returns the value of a private instance variable. Code outside the class can use the getter to read the data without directly accessing the private field."
+    },
+    {
+      "question": "Why is one getter normally provided for each property?",
+      "answer": "Answer: A getter is intended to return the value of a particular property. The standard approach demonstrated is to provide a separate getter for each property, such as getId(), getName(), getAge(), getMarks(), and getCollege()."
+    },
+    {
+      "question": "Can a setter accept more than one parameter?",
+      "answer": "Answer: A Java method can accept multiple parameters, so one setter could technically receive several values. However, the standard design discussed is to provide one setter for each property. This keeps each method focused on updating one field and makes the class easier to maintain."
+    },
+    {
+      "question": "How do setter methods help with validation?",
+      "answer": "Answer: A setter can check whether the supplied value meets the required condition before assigning it. For example, the Student example checks the ID, name length, age, and marks before storing those values. Invalid values can be rejected rather than stored."
+    },
+    {
+      "question": "Which properties were included in the Student class example?",
+      "answer": "Answer: The Student class contains id (int), name (String), age (int), marks (int), and college (String). It also contains a study() behavior."
+    },
+    {
+      "question": "What validation conditions were discussed for the Student properties?",
+      "answer": "Answer: The demonstrated checks included an ID greater than zero, a name with at least three characters, an age greater than 18, and marks greater than 20. A length check for the college value was also mentioned, but its exact threshold is not clear in the recording."
+    },
+    {
+      "question": "What should happen when a value fails validation in a setter?",
+      "answer": "Answer: The setter should not assign the invalid value. The example prints an invalid-data message for the relevant property, such as an invalid ID, name, age, or marks value."
+    },
+    {
+      "question": "Why can't a separate application class assign a private Student field directly?",
+      "answer": "Answer: The application class is outside the Student class. Since the field is private, a statement such as student.id = 10 is not allowed from that external class. The application must use the public setter to update it."
+    },
+    {
+      "question": "How can another class read the private Student properties?",
+      "answer": "Answer: It should call the public getter methods through the Student object reference. For example, student.getId(), student.getName(), student.getAge(), student.getMarks(), and student.getCollege() return the corresponding values."
+    },
+    {
+      "question": "What is the study() method in the Student example?",
+      "answer": "Answer: study() is a public void behavior of the Student class. It represents an operation that a Student object can perform and can be called through the object reference, for example student.study()."
+    },
+    {
+      "question": "How can the Student class implement encapsulation using private fields, setters, getters, and a behavior?",
+      "answer": "Answer: Declare the five properties as private. Provide public setters that validate the values before assigning them, public getters that return the values, and a public study() method. The application class creates a Student object, updates it through setters, reads it through getters, and calls study(). Java Code:\n\n```java\nclass Student {    private int id;    private String name;    private int age;    private int marks;    private String college;\npublic void setId(int id) {        if (id > 0) {            this.id = id;        } else {            System.out.println(\"Invalid ID\");        }    }\npublic int getId() {        return id;    }\npublic void setName(String name) {        if (name != null && name.length() >= 3) {            this.name = name;        } else {            System.out.println(\"Invalid name\");        }    }\npublic String getName() {        return name;    }\npublic void setAge(int age) {        if (age > 18) {            this.age = age;        } else {            System.out.println(\"Invalid age\");        }    }\npublic int getAge() {        return age;    }\npublic void setMarks(int marks) {        if (marks > 20) {            this.marks = marks;        } else {            System.out.println(\"Invalid marks\");        }    }\npublic int getMarks() {        return marks;    }\npublic void setCollege(String college) {        this.college = college;    }\npublic String getCollege() {        return college;    }\npublic void study() {        System.out.println(\"Student is studying\");    }}\npublic class StudentApp {    public static void main(String[] args) {        Student student = new Student();\nstudent.setId(10);        student.setName(\"Rommel\");        student.setAge(25);        student.setMarks(90);        student.setCollege(\"StringStack Institute of Technology\");\nSystem.out.println(student.getId());        System.out.println(student.getName());        System.out.println(student.getAge());        System.out.println(student.getMarks());        System.out.println(student.getCollege());        student.study();    }}\n```\n\nSample Input: No input Sample Output: 10Rommel2590StringStack Institute of TechnologyStudent is studying"
+    },
+    {
+      "question": "What default values do the Student instance variables receive when an object is created without assigning values?",
+      "answer": "Answer: The integer instance variables id, age, and marks receive the default value 0. The String instance variables name and college receive the default value null. The values can then be changed using setters or initialized through a constructor."
+    },
+    {
+      "question": "What limitation was identified when values are assigned only after object creation?",
+      "answer": "Answer: The object is first created with its default field values, and the application then makes separate setter calls to populate the fields. This adds an extra step when all the required data is already available at the time the object is created."
+    },
+    {
+      "question": "What is a constructor in Java?",
+      "answer": "Answer: A constructor is a special member of a class that has the same name as the class and has no return type. It is invoked when an object is created and is used to initialize the object, including its instance variables."
+    },
+    {
+      "question": "How is a constructor different from a regular method?",
+      "answer": "Answer: A constructor has the same name as its class and does not declare a return type. It is invoked as part of object creation. A regular method has its own method name and is called when the program invokes it to perform an operation."
+    },
+    {
+      "question": "When is a constructor executed?",
+      "answer": "Answer: A constructor is executed when the program creates an object using new. The constructor body runs as part of object creation, allowing the object's initial data to be assigned immediately."
+    },
+    {
+      "question": "What is a parameterized constructor?",
+      "answer": "Answer: A parameterized constructor accepts values through its parameters. Those values can be assigned to the object's instance variables while the object is being created, instead of creating the object first and setting every property afterward."
+    },
+    {
+      "question": "Which properties were included in the Product class example?",
+      "answer": "Answer: The Product class includes id, name, price, stock, and description. The constructor receives values for these properties, and getter methods are provided to read them."
+    },
+    {
+      "question": "How does a Product constructor initialize an object?",
+      "answer": "Answer: The Product constructor accepts the product details as arguments and assigns each argument to its corresponding instance variable. The object is therefore initialized during the new Product(...) expression."
+    },
+    {
+      "question": "How are Product details accessed after a parameterized object is created?",
+      "answer": "Answer: The application uses the Product reference and the public getters, such as getId(), getName(), getPrice(), getStock(), and getDescription(). The product's behavior can also be invoked through the object reference when a method is defined."
+    },
+    {
+      "question": "What is a default constructor?",
+      "answer": "Answer: When a class does not declare any constructor, the Java compiler provides a default no-argument constructor. This allows the class to be instantiated using an expression such as new Car()."
+    },
+    {
+      "question": "When does the compiler provide a default constructor?",
+      "answer": "Answer: The compiler supplies the default no-argument constructor only when the class does not declare a constructor of its own. When a programmer declares a constructor, the compiler does not add that default constructor automatically."
+    },
+    {
+      "question": "What is the difference between the compiler-provided default constructor and a parameterized constructor?",
+      "answer": "Answer: The compiler-provided default constructor takes no arguments. A parameterized constructor is written with parameters so that values can be supplied during object creation. The Product example uses a constructor that accepts product details."
+    },
+    {
+      "question": "What is the Object class in Java?",
+      "answer": "Answer: Object is a class in the java.lang package and is the root class of the Java class hierarchy. A class that does not explicitly specify another superclass implicitly inherits from Object. The Object class itself has no parent class."
+    },
+    {
+      "question": "Is the Object class the same thing as an object created from a class?",
+      "answer": "Answer: No. Object is the name of a built-in Java class. An object, or instance, is a runtime entity created from a class using new. The Object class is the root superclass from which Java classes inherit."
+    },
+    {
+      "question": "What does super() mean inside a constructor?",
+      "answer": "Answer: super() is a call to the constructor of the immediate parent class. The constructor discussion uses it to explain how a class's constructor invokes its superclass constructor before continuing with the rest of its own initialization."
+    },
+    {
+      "question": "What constructor call is added when a constructor does not explicitly call a superclass constructor?",
+      "answer": "Answer: The compiler inserts a call to the no-argument superclass constructor, super(), when the constructor does not explicitly invoke a superclass constructor. This is part of the constructor flow described in the lesson."
+    },
+    {
+      "question": "What are the main points to remember about constructors from this lesson?",
+      "answer": "Answer: A constructor has the same name as the class, has no return type, and is called during object creation. It can initialize instance variables using parameters. If no constructor is declared, the compiler provides a default no-argument constructor, and a superclass constructor is invoked through super()."
+    },
+    {
+      "question": "How can a Product class use a parameterized constructor and getters?",
+      "answer": "Answer: Declare the product properties as private, initialize them through a constructor that accepts the product details, and provide a getter for each property. The ProductApp class creates the object by passing arguments to new Product(...) and reads the details through the getters. The values below are illustrative examples of the constructor call. Java Code:\n\n```java\nclass Product {    private int id;    private String name;    private double price;    private int stock;    private String description;\npublic Product(int id, String name, double price, int stock, String description) {        this.id = id;        this.name = name;        this.price = price;        this.stock = stock;        this.description = description;    }\npublic int getId() {        return id;    }\npublic String getName() {        return name;    }\npublic double getPrice() {        return price;    }\npublic int getStock() {        return stock;    }\npublic String getDescription() {        return description;    }}\npublic class ProductApp {    public static void main(String[] args) {        Product product = new Product(            10, \"Laptop\", 2000.0, 5, \"Portable computer\"        );\nSystem.out.println(product.getId());        System.out.println(product.getName());        System.out.println(product.getPrice());        System.out.println(product.getStock());        System.out.println(product.getDescription());    }}\n```\n\nSample Input: No input Sample Output: 10Laptop2000.05Portable computer"
+    },
+    {
+      "question": "How can an object be created when a class does not declare a constructor?",
+      "answer": "Answer: Create the object with new and the class name followed by empty parentheses. If the class has no declared constructor, the compiler provides a default no-argument constructor, so the object can be created as shown below. Java Code:\n\n```java\nclass Car {    // No constructor is declared in this class.}\npublic class DefaultConstructorDemo {    public static void main(String[] args) {        Car car = new Car();        System.out.println(\"Car object created\");    }}\n```\n\nSample Input: No input Sample Output: Car object created"
+    }
+  ]
+}
