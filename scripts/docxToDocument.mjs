@@ -260,7 +260,7 @@ with zipfile.ZipFile(path) as z:
         if re.match(r"^\\d+[G]?[.)]\\s+", line):
             return False
         # Before the short-English filter, so "INSERT INTO person VALUES" stays SQL.
-        if is_sql_line(line):
+        if is_sql_line(line) or is_python_line(line):
             return True
         # Type section labels in notes: float: / double: — not code
         if re.fullmatch(
@@ -319,6 +319,9 @@ with zipfile.ZipFile(path) as z:
         # Short comparison used as an example: a == 10
         if re.fullmatch(r"[A-Za-z_]\\w*\\s*(?:==|!=|<=|>=)\\s*\\d+", line):
             return True
+        # File-extension labels: .py      Python code
+        if re.match(r"^\\.[A-Za-z0-9]+\\s+[A-Za-z]", line):
+            return False
         # Continuation lines inside expressions / println args — not English sentences
         if re.match(r"^[+*/,.]\\s*", line) and not re.search(
             r"\\b(is|are|produces|uses)\\b",
@@ -366,6 +369,13 @@ with zipfile.ZipFile(path) as z:
                         re.search(r"[;{}()=]", code_prefix)
                         or re.search(r"\\b(new|return|class)\\b", code_prefix)
                     ):
+                        # An answer that ends with an example is still a sentence.
+                        if len(line.split()) > 12 and re.search(
+                            r"\\b(for example|keyword|the|must)\\b",
+                            line,
+                            re.I,
+                        ):
+                            return False
                         return True
         # } else {  |  else {  |  else if (...) {
         if re.match(r"^}\\s*else\\b", line) or re.match(r"^else(\\s+if\\b|\\s*\\{|\\s*$)", line):
@@ -375,7 +385,8 @@ with zipfile.ZipFile(path) as z:
             return True
         # for-loop increment continuation split onto its own line: divisor++) {
         if re.search(r"(?:\\+\\+|--)", line) and re.search(r"[){};]", line):
-            return True
+            if not (line.endswith(".") and len(line.split()) > 10):
+                return True
         # Incomplete assignment / logical continuation: FindNumber findNumber =  |  ... &&
         if re.search(r"[=&|]$", line) or line.endswith(("&&", "||")):
             return True
@@ -384,14 +395,15 @@ with zipfile.ZipFile(path) as z:
             return True
         # Parameter lines only: Type varName  where var starts lowercase (Java style)
         # Do NOT match "Grade B" / "Child Ticket" (both words capitalized).
-        if re.match(
+        if not ("," in line and "<" not in line) and re.match(
             r"^(?:final\\s+)?(?:[A-Z][\\w.<>,\\[\\]?]*|(?:boolean|byte|short|int|long|float|double|char|var))\\s+[a-z]\\w*\\s*,?\\s*$",
             line,
         ):
             return True
         # Condition / expression fragment: number % 4 == 0) {
         if re.search(r"(%|==|!=|<=|>=|&&|\\|\\|)", line) and re.search(r"[){}]", line):
-            return True
+            if not (line.endswith(".") and len(line.split()) > 10):
+                return True
         # Method / constructor signatures: void eat() {  |  public void start() {
         if re.match(
             r"^(?:public|private|protected|static|final|synchronized|native|abstract|default|\\s)*"
@@ -424,6 +436,36 @@ with zipfile.ZipFile(path) as z:
             return True
         # Java statements end with ; — teaching placeholders like statement1; too
         if line.endswith(";"):
+            return True
+        return False
+
+    def is_python_line(line):
+        """A Python statement or command on its own line, not a sentence about Python."""
+        s = (line or "").strip()
+        if not s or "\\n" in s:
+            return False
+        if re.match(r"^>>>\\s+\\S", s):
+            return True
+        if re.match(r"^print\\s*\\(", s) and not re.search(
+            r"\\b(function|displays|written|used)\\b",
+            s,
+            re.I,
+        ):
+            return True
+        if re.match(r"^python3?\\s+(?:--[\\w.-]+|\\S+\\.py)\\b", s, re.I):
+            return len(s.split()) <= 12
+        if re.match(r"^javac\\s+\\S+\\.java\\b", s, re.I):
+            return True
+        if re.match(r"^java\\s+[A-Z]\\w*\\b", s) and not s.endswith("."):
+            return len(s.split()) <= 12
+        if re.match(r"^(?:class|def)\\s+[A-Za-z_]\\w*", s) and ":" in s and not s.endswith("."):
+            return True
+        if (
+            re.match(r"^[A-Za-z_][\\w]*\\s*=\\s*\\S", s)
+            and not s.endswith(".")
+            and len(s.split()) <= 10
+            and not re.search(r"\\b(is|are|means|assigns|used|example)\\b", s, re.I)
+        ):
             return True
         return False
 
@@ -478,6 +520,9 @@ with zipfile.ZipFile(path) as z:
         if not m:
             return False
         rest = m.group(2) or ""
+        # "Use the new keyword..." is an answer, not USE database.
+        if m.group(1).upper() == "USE" and not re.match(r"^[A-Za-z_][\\w]*\\s*;?\\s*$", rest):
+            return False
         if m.group(1).upper() == "CREATE" and not re.match(
             r"^(?:OR\\s+REPLACE\\s+|UNIQUE\\s+|TEMPORARY\\s+|TEMP\\s+)*"
             r"(?:TABLE|DATABASE|INDEX|VIEW|SCHEMA|PROCEDURE|FUNCTION|TRIGGER|USER|ROLE)\\b",
@@ -740,8 +785,10 @@ with zipfile.ZipFile(path) as z:
                 or is_tree_or_flow_line(text)
                 or is_flow_label_line(text)
             )
+            code_lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+            all_lines_code = len(code_lines) > 1 and all(is_code_line(ln) for ln in code_lines)
             looks_code = (not is_diagram) and (
-                p_is_code_style(style) or is_code_line(text) or runs_are_mono(text_runs)
+                p_is_code_style(style) or is_code_line(text) or runs_are_mono(text_runs) or all_lines_code
             )
             if is_diagram:
                 blocks.append({"type": "diagramLine", "text": text.replace("\\r\\n", "\\n")})
