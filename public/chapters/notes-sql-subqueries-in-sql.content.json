@@ -1,0 +1,103 @@
+{
+  "title": "Notes Sql Subqueries In Sql",
+  "itemsPerPage": 2,
+  "source": "notes-sql-subqueries-in-sql.docx",
+  "items": [
+    {
+      "question": "What is a subquery in SQL?",
+      "answer": "Answer: A subquery is a query written inside another SQL query. The inner query produces a result that the outer query can use to retrieve or filter data."
+    },
+    {
+      "question": "Why are subqueries useful when solving SQL requirements?",
+      "answer": "Answer: A requirement can sometimes be divided into smaller steps. For example, first calculate the average price of all products, then use that result to find products whose prices are greater than the average. A subquery allows the result of the first query to be used by the second query."
+    },
+    {
+      "question": "How can you identify the inner query and the outer query?",
+      "answer": "Answer: The query written inside another query is the inner query, or subquery. The query that contains it is the outer query. The outer query uses the result produced by the inner query."
+    },
+    {
+      "question": "How should a subquery be enclosed in SQL?",
+      "answer": "Answer: Write the subquery inside parentheses. Do not place a semicolon at the end of the inner query before the closing parenthesis; the complete SQL statement is executed as one query."
+    },
+    {
+      "question": "What is a scalar subquery?",
+      "answer": "Answer: A scalar subquery returns a single value. For example, SELECT AVG(price) FROM products returns one average-price value that can be compared with individual product prices."
+    },
+    {
+      "question": "What is the difference between a correlated subquery and a non-correlated subquery?",
+      "answer": "Answer: A non-correlated subquery can run independently of the outer query. A correlated subquery depends on a value from the outer query. The lesson introduces these two categories without going deeply into their execution details."
+    },
+    {
+      "question": "In which parts of a SQL statement can a subquery be written?",
+      "answer": "Answer: A subquery can be used in the SELECT clause, the FROM clause, a JOIN, and the WHERE clause. Its role depends on the location where it is written."
+    },
+    {
+      "question": "How does a subquery behave when it is written in the SELECT clause?",
+      "answer": "Answer: A subquery in the SELECT clause is used to produce a value for a selected column. The result is presented as part of the output columns."
+    },
+    {
+      "question": "How does a subquery behave when it is written in the FROM clause?",
+      "answer": "Answer: A subquery in the FROM clause produces a result set that the outer query can use like a table. This result is commonly called a derived table. It is created by the query and is not a permanent table stored in the database."
+    },
+    {
+      "question": "Why is an alias given to a subquery used in the FROM clause?",
+      "answer": "Answer: The result of a FROM-clause subquery is treated as a table by the outer query, so it needs a table alias. The outer query uses that alias to refer to the derived table and its columns."
+    },
+    {
+      "question": "How is a subquery used in the WHERE clause?",
+      "answer": "Answer: A subquery in the WHERE clause supplies a value or set of values for a condition. The outer query applies the condition to filter the rows it returns."
+    },
+    {
+      "question": "How can a subquery be used with a JOIN?",
+      "answer": "Answer: A subquery can be included as a data source in a JOIN operation. It produces a result set that can be joined with another table or result set."
+    },
+    {
+      "question": "Why is it useful to execute the inner query separately while developing a subquery?",
+      "answer": "Answer: Running the inner query by itself helps you check the result it produces before placing it inside the outer query. In MySQL Workbench, select and execute the inner query separately when you need to inspect its output."
+    },
+    {
+      "question": "How would you find products whose prices are greater than the average price of all products?",
+      "answer": "Answer: First calculate the average price. Then compare each product price with that single value and return only the products whose prices are greater. The following example uses a subquery in the WHERE clause and a derived table in the FROM clause. SELECT product_data.product_id, product_data.price FROM ( SELECT product_id, price FROM products ) AS product_data WHERE product_data.price > ( SELECT AVG(price) FROM products\n\n```java\n);\n```\n\nSample Input (products): product_id | price1 | 1002 | 2003 | 300 Sample Output: product_id | price3 | 300"
+    },
+    {
+      "question": "What are the main steps for solving the products-greater-than-average requirement?",
+      "answer": "Answer: Identify the products table and the price column. Calculate the average price of all products. Make that calculated result available to the outer query, then filter the product rows by checking whether each price is greater than the average."
+    },
+    {
+      "question": "Why should the filtering condition be applied in the outer query when using a derived table?",
+      "answer": "Answer: The outer query can filter the rows after the derived table has produced its result. The derived table is referenced through its alias, and the WHERE condition is written in the outer query using the relevant column from that result."
+    },
+    {
+      "question": "How can you calculate the total sales made by each customer?",
+      "answer": "Answer: Use the SUM aggregate function on the sales amount and GROUP BY the customer identifier. This produces one summary row for each customer, showing that customer’s total sales."
+    },
+    {
+      "question": "How can you rank customers according to their total sales?",
+      "answer": "Answer: First calculate the total sales for each customer using GROUP BY. Use that grouped result as a derived table, then apply the RANK() window function in the outer query. Sort the ranking by total sales in descending order so the customer with the highest total receives the first rank. SELECT customer_sales.customer_id, customer_sales.total_sales, RANK() OVER (ORDER BY customer_sales.total_sales DESC) AS customer_rank FROM ( SELECT customer_id, SUM(sales_amount) AS total_sales FROM orders GROUP BY customer_id\n\n```java\n) AS customer_sales;\n```\n\nSample Input (orders): customer_id | sales_amount101 | 200102 | 500101 | 100103 | 400 Sample Output: customer_id | total_sales | customer_rank102 | 500 | 1103 | 400 | 2101 | 300 | 3"
+    },
+    {
+      "question": "Why is GROUP BY used before applying RANK() to customer sales?",
+      "answer": "Answer: The requirement is to rank customers by their total sales, not to rank individual order rows. GROUP BY customer_id and SUM(sales_amount) first produce one total for each customer. RANK() is then applied to those customer-level totals."
+    },
+    {
+      "question": "Why is ORDER BY total_sales DESC used inside RANK()?",
+      "answer": "Answer: The requirement is to give the highest-selling customer the top rank. DESC sorts the total sales from highest to lowest before RANK() assigns the ranking values."
+    },
+    {
+      "question": "Is PARTITION BY required when ranking all customers together?",
+      "answer": "Answer: No. The example ranks all customers in one group, so the RANK() expression uses ORDER BY total_sales DESC without PARTITION BY. PARTITION BY would be relevant only when the ranking needs to restart within separate groups."
+    },
+    {
+      "question": "How can sales values be classified as High, Medium, or Low?",
+      "answer": "Answer: Use a CASE expression to test the sales amount. In the exercise, amounts greater than 50 are classified as High, amounts greater than 20 and up to 50 are Medium, and amounts of 20 or less are Low."
+    },
+    {
+      "question": "How can you display a sales category for each product and sort the results from highest to lowest sales?",
+      "answer": "Answer: Use CASE WHEN to create a category based on each product’s sales amount. Then use ORDER BY sales DESC to display the products from the highest sales amount to the lowest. SELECT product_id, sales, CASE WHEN sales > 50 THEN 'High' WHEN sales > 20 THEN 'Medium' ELSE 'Low' END AS sales_category FROM product_sales ORDER BY sales DESC; Sample Input (product_sales): product_id | sales1 | 802 | 353 | 15 Sample Output: product_id | sales | sales_category1 | 80 | High2 | 35 | Medium3 | 15 | Low"
+    },
+    {
+      "question": "What should you check when a nested query is difficult to understand or gives an unexpected result?",
+      "answer": "Answer: Check the inner query separately to confirm its output. Verify that the parentheses enclose the intended subquery, that the derived table has an alias when it is used in FROM, and that the outer query refers to the correct alias and columns. Keep the indentation clear so the inner and outer queries can be distinguished."
+    }
+  ]
+}
