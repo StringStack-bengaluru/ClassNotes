@@ -1,0 +1,187 @@
+{
+  "title": "Notes Sql Date And Time Functions 2",
+  "itemsPerPage": 2,
+  "source": "notes-sql-date-and-time-functions-2.docx",
+  "items": [
+    {
+      "question": "What are the four broad categories of date and time functions reviewed in the lesson?",
+      "answer": "Answer: The lesson groups date and time functions into four categories: extraction, formatting, calculation, and validation. The class briefly recaps extraction and then concentrates on formatting."
+    },
+    {
+      "question": "What is the purpose of date and time extraction functions?",
+      "answer": "Answer: Extraction functions return a particular part of a date or time value. Examples discussed include YEAR(), MONTH(), DAY(), HOUR(), MINUTE(), and SECOND(). These functions are useful when a requirement asks for only one component."
+    },
+    {
+      "question": "How is a date or time formatting function different from an extraction function?",
+      "answer": "Answer: An extraction function retrieves a component such as the month or year. A formatting function changes how the date or time value is displayed. DATE_FORMAT() is the MySQL function demonstrated for changing the display format."
+    },
+    {
+      "question": "Why might an application need to display a date in a different format from the database format?",
+      "answer": "Answer: A database may store or display dates in a standard format, while a client, report, or business requirement may expect a different arrangement. The date can be formatted for the intended audience without changing the original stored date value."
+    },
+    {
+      "question": "What standard date representation is used as the starting point in the lesson?",
+      "answer": "Answer: The class uses the familiar year-month-day arrangement as the standard example, such as YYYY-MM-DD. A date-time value can also include the time portion. The displayed format can then be changed to meet a requirement."
+    },
+    {
+      "question": "How do the US and European date arrangements differ in the examples discussed?",
+      "answer": "Answer: The US-style example places the month first, followed by the day and year: MM/DD/YYYY. The European-style example places the day first, followed by the month and year: DD/MM/YYYY. The required order depends on the audience or application."
+    },
+    {
+      "question": "Which MySQL function is used to format a date or date-time value?",
+      "answer": "Answer: Use DATE_FORMAT(). It accepts a date or date-time value and a format string that describes how the result should appear."
+    },
+    {
+      "question": "What is the general syntax of DATE_FORMAT() in MySQL?",
+      "answer": "Answer: The syntax is DATE_FORMAT(date_value, format_string). The first argument is the date or date-time value to format. The second argument contains the format specifiers and any literal characters that should appear in the result."
+    },
+    {
+      "question": "What are the two arguments passed to DATE_FORMAT()?",
+      "answer": "Answer: The first argument is the date or date-time column or value. The second argument is the required format pattern. The format pattern determines the order and appearance of the date and time components."
+    },
+    {
+      "question": "What does the format string inside DATE_FORMAT() contain?",
+      "answer": "Answer: It contains percent-based format specifiers for date or time components. It can also contain ordinary characters, such as spaces, commas, slashes, hyphens, or labels, that should appear in the displayed result."
+    },
+    {
+      "question": "Does DATE_FORMAT() change the value stored in the table?",
+      "answer": "Answer: No. DATE_FORMAT() changes the representation returned by the SELECT query. It does not rewrite the stored date or time value in the table."
+    },
+    {
+      "question": "What does the %M format specifier represent?",
+      "answer": "Answer: %M represents the full month name, such as January or February. It is useful when the requirement asks for the month in words rather than as a number."
+    },
+    {
+      "question": "What does the %m format specifier represent?",
+      "answer": "Answer: %m represents the month as a two-digit number, including a leading zero where necessary. For example, a month can appear as 01, 02, or 11."
+    },
+    {
+      "question": "What is the difference between a numeric month and a month name in DATE_FORMAT()?",
+      "answer": "Answer: Use %m when the month should appear numerically, such as 06. Use %M when the full month name is required, such as June. The correct specifier depends on the requested output."
+    },
+    {
+      "question": "What is the difference between %d and %e for the day of the month?",
+      "answer": "Answer: %d displays the day using two digits, including a leading zero where needed. %e displays the day without requiring a leading zero. Choose the one that matches the required presentation."
+    },
+    {
+      "question": "What does the %D format specifier return?",
+      "answer": "Answer: %D displays the day of the month with an English ordinal suffix, such as 1st, 2nd, or 3rd. It is useful when the output needs a written-style day rather than only a numeric day."
+    },
+    {
+      "question": "What is the difference between %Y and %y?",
+      "answer": "Answer: %Y displays the year using four digits, while %y displays the year using two digits. For example, a four-digit year and its final two digits can be selected separately using these specifiers."
+    },
+    {
+      "question": "How can the weekday be included in a formatted date?",
+      "answer": "Answer: The lesson demonstrates using a weekday format specifier so the weekday can appear as part of the formatted result. %W returns the full weekday name, while %a returns an abbreviated weekday name."
+    },
+    {
+      "question": "How can a date be displayed with the full weekday and full month name?",
+      "answer": "Answer: Combine the relevant specifiers in the format string. For example, '%W, %M %D, %Y' requests the full weekday, a comma and space, the full month name, the day with its ordinal suffix, and the four-digit year."
+    },
+    {
+      "question": "How can the month be displayed in words instead of numbers?",
+      "answer": "Answer: Use %M inside the DATE_FORMAT() format string. For example: DATE_FORMAT(order_date, '%M %d, %Y'). This displays the full month name followed by a two-digit day and four-digit year."
+    },
+    {
+      "question": "How can the year be formatted using DATE_FORMAT()?",
+      "answer": "Answer: Use %Y for a four-digit year or %y for a two-digit year. If the requirement is only to extract the year as a component, the YEAR() extraction function can also be used."
+    },
+    {
+      "question": "When would YEAR() be used instead of a year format specifier?",
+      "answer": "Answer: YEAR(date_value) extracts the year component. DATE_FORMAT(date_value, '%Y') formats the date value as text containing a four-digit year. The class points out that an extraction function can be used when only the component is needed."
+    },
+    {
+      "question": "Which function is mentioned for retrieving the quarter of a date?",
+      "answer": "Answer: Use QUARTER(date_value) to retrieve the quarter number from a date. The lesson uses this as an example of applying an extraction function when the required component is the quarter."
+    },
+    {
+      "question": "How can a date and time be formatted together?",
+      "answer": "Answer: Pass the date-time column to DATE_FORMAT() and include the required date and time specifiers in one format string. The format can include the weekday, month, day, year, hour, minute, second, and AM/PM indicator when required."
+    },
+    {
+      "question": "What does %H represent in a time format?",
+      "answer": "Answer: %H represents the hour in a 24-hour clock. Use it when the required output should show hours from 00 through 23."
+    },
+    {
+      "question": "What does %h represent in a time format?",
+      "answer": "Answer: %h represents the hour in a 12-hour clock. It is commonly used with an AM/PM indicator when the output needs a 12-hour time representation."
+    },
+    {
+      "question": "Which format specifier is used for minutes?",
+      "answer": "Answer: Use %i for minutes. Do not confuse it with %M, which represents the full month name, or %m, which represents the numeric month."
+    },
+    {
+      "question": "Which format specifier is used for seconds?",
+      "answer": "Answer: Use %s for seconds in the formatted time. It can be placed after the hour and minute specifiers to display a complete time value."
+    },
+    {
+      "question": "How can AM or PM be displayed with a formatted time?",
+      "answer": "Answer: Use %p to display the AM or PM indicator. Pair it with a 12-hour hour specifier such as %h when the output is intended to use a 12-hour clock."
+    },
+    {
+      "question": "What is the difference between a 12-hour and a 24-hour display?",
+      "answer": "Answer: A 12-hour display uses an hour value from 01 to 12 and can include AM or PM. A 24-hour display uses an hour value from 00 to 23 and does not need an AM/PM indicator. The format string should match the requirement."
+    },
+    {
+      "question": "Why do spaces and punctuation matter inside a DATE_FORMAT() pattern?",
+      "answer": "Answer: Characters such as spaces, commas, slashes, and hyphens become part of the output. If a space or separator is omitted, the displayed components may run together. The format string must include the exact separators required for readability."
+    },
+    {
+      "question": "Can ordinary text be included in a DATE_FORMAT() result?",
+      "answer": "Answer: Yes. A format string can include literal text and punctuation along with format specifiers. For example, a comma and spaces can be placed between the weekday, month, and day so the result reads naturally."
+    },
+    {
+      "question": "What is the role of CONCAT() in the date-formatting exercise?",
+      "answer": "Answer: CONCAT() joins multiple string values or expressions into one output string. The lesson uses it to bring separately prepared pieces together when the required display cannot be built conveniently as one continuous formatted expression."
+    },
+    {
+      "question": "When can CONCAT() be useful alongside date and time functions?",
+      "answer": "Answer: Use CONCAT() when the required output needs values produced by different functions. The lesson combines a formatted date or time value with a separately extracted value such as the quarter, bringing the pieces into one readable result."
+    },
+    {
+      "question": "How can a DATE_FORMAT() result be given a readable column heading?",
+      "answer": "Answer: Add an alias after the expression with AS. For example: DATE_FORMAT(order_date, '%M %d, %Y') AS formatted_order_date. The alias becomes the output column heading in the query result."
+    },
+    {
+      "question": "What is a basic query to display an order date in a month-name format?",
+      "answer": "Answer: Use DATE_FORMAT() in the SELECT list and pass the date column and required pattern. For example: SELECT DATE_FORMAT(order_date, '%M %d, %Y') AS formatted_order_date FROM orders; This formats the order date as a full month name, day, and four-digit year."
+    },
+    {
+      "question": "How can the same date be displayed in a US-style numeric format?",
+      "answer": "Answer: Use a month-first format string. For example: SELECT DATE_FORMAT(order_date, '%m/%d/%Y') AS us_date FROM orders; The output is arranged as month, day, and four-digit year."
+    },
+    {
+      "question": "How can the same date be displayed in a European-style numeric format?",
+      "answer": "Answer: Use a day-first format string. For example: SELECT DATE_FORMAT(order_date, '%d/%m/%Y') AS european_date FROM orders; The output is arranged as day, month, and four-digit year."
+    },
+    {
+      "question": "What was the practical requirement involving the creation date or creation timestamp?",
+      "answer": "Answer: The exercise asks for the creation date/time to be displayed in a custom, human-readable format instead of showing the database's default representation. The required output combines date parts and time parts, including the weekday or month wording and a suitable clock representation."
+    },
+    {
+      "question": "How should a multi-part creation timestamp requirement be approached?",
+      "answer": "Answer: First list every requested component: weekday, month, day, year, hour, minute, second, and AM/PM or 24-hour time as applicable. Identify the correct format specifier for each component, add literal spaces and separators, and then combine additional expressions with CONCAT() if needed."
+    },
+    {
+      "question": "Why should a query select only the required date/time column instead of using SELECT *?",
+      "answer": "Answer: When the task asks only for a formatted creation date or timestamp, selecting the required column keeps the result focused. The lesson emphasizes understanding the requested output and choosing the necessary column rather than retrieving every column from the table."
+    },
+    {
+      "question": "Can the format string be reused for different date columns?",
+      "answer": "Answer: Yes. The same DATE_FORMAT() pattern can be applied to another date or date-time column by changing the first argument. The format string can remain the same when the required display is unchanged."
+    },
+    {
+      "question": "What is a useful way to solve DATE_FORMAT() questions in an interview or practical task?",
+      "answer": "Answer: Break the expected output into individual components before writing the query. Identify the correct specifier for each component, check whether the component is already available through an extraction function, and include all required spaces and punctuation. Then run the query and compare the result with the requested format."
+    },
+    {
+      "question": "What should be checked when a formatted date or time does not look correct?",
+      "answer": "Answer: Check that the correct date column is passed as the first argument, that each format specifier represents the intended component, and that the format string contains the required spaces and separators. Also check for commonly confused specifiers such as %M for month name and %i for minutes."
+    },
+    {
+      "question": "What did the lesson say about CAST() and CONVERT() near the end of the class?",
+      "answer": "Answer: The class briefly raises the difference between casting and converting and notes that the distinction should be understood in the MySQL context. A detailed comparison or complete syntax explanation is not provided in this lesson, so it is left as a follow-up topic rather than filled in here."
+    }
+  ]
+}
