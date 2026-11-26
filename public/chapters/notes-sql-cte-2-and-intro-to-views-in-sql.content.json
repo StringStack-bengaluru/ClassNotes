@@ -1,0 +1,151 @@
+{
+  "title": "Notes Sql Cte 2 And Intro To Views In Sql",
+  "itemsPerPage": 2,
+  "source": "notes-sql-cte-2-and-intro-to-views-in-sql.docx",
+  "items": [
+    {
+      "question": "What customer-analysis requirement is used to demonstrate multiple CTEs?",
+      "answer": "Answer: The requirement is to prepare four pieces of information for each customer: total sales, the customer's last order date, the customer's rank based on total sales, and a customer segment based on total sales."
+    },
+    {
+      "question": "Why is the customer-analysis requirement divided into separate steps?",
+      "answer": "Answer: The requirement involves information from more than one table and several calculations. Solving each part separately makes it easier to understand the logic before combining the results with joins and CTEs."
+    },
+    {
+      "question": "How is total sales calculated for each customer?",
+      "answer": "Answer: The sales amount is aggregated for each customer using the SUM() function. The result is grouped by customer_id so that the query produces one total-sales value for each customer."
+    },
+    {
+      "question": "Why is GROUP BY customer_id used when calculating total sales?",
+      "answer": "Answer: The requirement asks for a separate total for every customer. GROUP BY customer_id places each customer's sales records into a group, allowing SUM() to calculate that customer's total."
+    },
+    {
+      "question": "How can the total-sales query be converted into a CTE?",
+      "answer": "Answer: Keep the SELECT query that calculates total sales, give the CTE a name, and place the query inside parentheses after AS. Introduce the CTE with the WITH keyword."
+    },
+    {
+      "question": "What is the basic structure used to define a CTE?",
+      "answer": "Answer: The structure is WITH followed by a CTE name, AS, and a parenthesized SELECT query. After the CTE definition, write the main query that uses the CTE."
+    },
+    {
+      "question": "Does defining a CTE mean that its query can be executed by itself as a separate statement?",
+      "answer": "Answer: No. In the lesson's explanation, the CTE is a supporting named result within the complete SQL statement. It is used by the main query rather than executed as an independent final statement."
+    },
+    {
+      "question": "What does a CTE provide to the main query?",
+      "answer": "Answer: The SELECT statement inside the CTE produces a result set with columns. The main query can use that result like a table, for example in the FROM clause or in a JOIN."
+    },
+    {
+      "question": "Why should a CTE select only the columns needed by the main query?",
+      "answer": "Answer: Selecting only the required columns keeps the intermediate result focused. For the total-sales requirement, the important values are the customer identifier and the calculated total sales."
+    },
+    {
+      "question": "How is a CTE used together with the customers table?",
+      "answer": "Answer: The main query reads from the customers table and joins the total-sales CTE using customer_id. This makes the calculated total available alongside the customer's details."
+    },
+    {
+      "question": "Why is a LEFT JOIN used when joining the total-sales CTE to customers?",
+      "answer": "Answer: The requirement is to retain all customers. A LEFT JOIN keeps every row from the customers table and adds matching CTE data when available. A customer without a matching sales result can therefore have NULL values for the CTE columns."
+    },
+    {
+      "question": "Why are table aliases useful when joining a CTE to the customers table?",
+      "answer": "Answer: Aliases make it clear which source each column belongs to. They are especially useful when both sources contain a column such as customer_id, because the query can identify the correct source explicitly."
+    },
+    {
+      "question": "Is the output produced by a CTE necessarily the final output of the SQL statement?",
+      "answer": "Answer: No. A CTE produces an intermediate result that the main query can use. The final output is produced by the main query after it performs the required selections and joins."
+    },
+    {
+      "question": "How is the last order date for each customer calculated?",
+      "answer": "Answer: Use the MAX() aggregate function on the order-date column and group the result by customer_id. MAX() returns the latest date in each customer's group."
+    },
+    {
+      "question": "Why is MAX() appropriate for finding a customer's last order date?",
+      "answer": "Answer: The latest order date is the maximum date value for that customer. MAX() identifies that date directly without needing to sort every order and select a row manually."
+    },
+    {
+      "question": "Why is GROUP BY customer_id needed when finding the last order date?",
+      "answer": "Answer: It makes the MAX() calculation customer-specific. The result contains the maximum order date for each customer rather than one maximum date for the entire orders table."
+    },
+    {
+      "question": "How can the last-order-date query be prepared for reuse?",
+      "answer": "Answer: Define the query that selects customer_id and the MAX() order date, grouped by customer_id, as another named CTE. The main query can then refer to this CTE as a result source."
+    },
+    {
+      "question": "How can more than one standalone CTE be declared in the same WITH clause?",
+      "answer": "Answer: Declare the first CTE after WITH, then separate the next CTE definition with a comma. Give each CTE its own name and AS clause, and place the main query after the CTE definitions."
+    },
+    {
+      "question": "What is the purpose of defining separate total-sales and last-order CTEs?",
+      "answer": "Answer: Each CTE handles one calculation. One prepares total sales per customer, while the other prepares the last order date per customer. The main query can use both prepared results without repeating the full calculation logic."
+    },
+    {
+      "question": "How does the main query combine the customers, total-sales, and last-order results?",
+      "answer": "Answer: The main query starts with the customers table and joins the two CTE results using customer_id. LEFT JOINs preserve the customers while bringing in the matching total-sales and last-order values."
+    },
+    {
+      "question": "What information can the combined customer query return?",
+      "answer": "Answer: It can return customer details together with the calculated total sales and last order date. These are intermediate parts of the larger customer-analysis requirement; ranking and segmentation are handled as later steps."
+    },
+    {
+      "question": "What is a standalone CTE in the lesson's terminology?",
+      "answer": "Answer: A standalone CTE is independent. Its defining query obtains its data from the database tables rather than depending on the result of another CTE."
+    },
+    {
+      "question": "What does the lesson mean by a nested CTE?",
+      "answer": "Answer: The lesson uses nested CTE to describe a CTE arrangement in which one CTE depends on the result produced by another CTE. The result of the earlier CTE becomes the input for the dependent CTE."
+    },
+    {
+      "question": "How does the data flow in the nested CTE example?",
+      "answer": "Answer: The first CTE communicates with the database and produces a result set. The next CTE uses that result as its source and produces another result. The main query then uses the dependent CTE's result to prepare the final output."
+    },
+    {
+      "question": "Why must the earlier CTE be present when a dependent CTE is used?",
+      "answer": "Answer: The dependent CTE refers to the earlier CTE by name. If the earlier CTE is not defined in the statement, the dependent CTE has no source for the data it needs."
+    },
+    {
+      "question": "Can the dependent CTE be treated as an independent query that obtains all its data directly from the database?",
+      "answer": "Answer: Not in the nested example being explained. The dependent CTE uses the output of the preceding CTE. Its result therefore relies on the earlier CTE being defined and available."
+    },
+    {
+      "question": "Is the result of the dependent CTE the final result of the complete statement?",
+      "answer": "Answer: No. It is another intermediate result. The main query still uses that result and performs the final selection or join needed to produce the complete output."
+    },
+    {
+      "question": "What is the key difference between a standalone CTE and a nested CTE?",
+      "answer": "Answer: A standalone CTE is independent and is defined from database data. In the nested arrangement discussed, a later CTE depends on the result of an earlier CTE. The dependency between the CTEs is the important distinction."
+    },
+    {
+      "question": "How is customer ranking added to the customer-analysis requirement?",
+      "answer": "Answer: The total-sales result is already available, so the next step is to calculate a rank for each customer based on that value. The lesson uses the RANK() window function for this calculation."
+    },
+    {
+      "question": "How should RANK() order customers when the highest sales should receive the first rank?",
+      "answer": "Answer: Use the total-sales value in the window function's ORDER BY clause with DESC. Descending order places the highest total sales first, so that customer receives rank 1."
+    },
+    {
+      "question": "Why is PARTITION BY not used in the demonstrated customer ranking?",
+      "answer": "Answer: The ranking is calculated across the customer set as a whole, not separately within smaller groups. The lesson therefore uses the ORDER BY total-sales value in descending order without adding a PARTITION BY clause."
+    },
+    {
+      "question": "Why is the ranking calculation performed using the total-sales result?",
+      "answer": "Answer: The total-sales CTE has already calculated one sales total per customer. The ranking query can use that prepared result instead of repeating the sales aggregation."
+    },
+    {
+      "question": "How is the customer-ranking CTE joined to the customers table?",
+      "answer": "Answer: The main query joins the customer-ranking result to the customers table using customer_id. A LEFT JOIN is used so that the customer list is retained, and the customer rank column is selected from the ranking CTE."
+    },
+    {
+      "question": "What does the customer rank represent in the demonstrated example?",
+      "answer": "Answer: It represents a customer's position when customers are ordered by total sales from highest to lowest. The example discusses customer 83 receiving rank 1 and customer 80 receiving rank 3; the ranking is based on their total-sales values."
+    },
+    {
+      "question": "What final calculation remains after total sales, last order date, and rank are prepared?",
+      "answer": "Answer: The remaining requirement is to assign a segment to each customer based on total sales. The class identifies this as the next part of the customer-analysis task."
+    },
+    {
+      "question": "Was the customer-segmentation query completed in this class?",
+      "answer": "Answer: No. The segmentation step was left as practice. The requirement is to segment customers based on their total sales, but the lesson does not provide completed segmentation logic or the thresholds for the segments."
+    }
+  ]
+}
