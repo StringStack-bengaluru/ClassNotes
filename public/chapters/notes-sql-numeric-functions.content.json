@@ -1,0 +1,143 @@
+{
+  "title": "Notes Sql Numeric Functions",
+  "itemsPerPage": 2,
+  "source": "notes-sql-numeric-functions.docx",
+  "items": [
+    {
+      "question": "What topics are covered in this SQL lesson?",
+      "answer": "Answer: The lesson explains the SUBSTRING() function for extracting text from a specified position, the TRIM() function for removing leading and trailing spaces, the use of LENGTH() to handle variable-length strings, and an introduction to numeric functions with a detailed explanation of ROUND()."
+    },
+    {
+      "question": "What is the difference between a string function and a numeric function?",
+      "answer": "Answer: A string function performs an operation on character or text data. A numeric function performs an operation on numeric data, such as integer or decimal values."
+    },
+    {
+      "question": "What does the SUBSTRING() function do in MySQL?",
+      "answer": "Answer: SUBSTRING() extracts a portion of a string. It is useful when the required characters begin at a particular position rather than always at the leftmost or rightmost end."
+    },
+    {
+      "question": "What is the syntax of SUBSTRING() in MySQL?",
+      "answer": "Answer: The syntax is SUBSTRING(string, start_position, length). The length argument is optional. The function can return the remaining characters from the starting position when the length is omitted."
+    },
+    {
+      "question": "What are the arguments of SUBSTRING()?",
+      "answer": "Answer: The first argument is the string or column value to work on. The second argument is the starting position from which extraction begins. The optional third argument specifies how many characters to return."
+    },
+    {
+      "question": "How are character positions counted in SUBSTRING()?",
+      "answer": "Answer: Character positions are counted from 1. The first character is at position 1, the second character is at position 2, and so on."
+    },
+    {
+      "question": "How is SUBSTRING() different from LEFT() and RIGHT()?",
+      "answer": "Answer: LEFT() extracts characters from the beginning of a string, while RIGHT() extracts characters from the end. SUBSTRING() allows extraction to begin at a specified position, so it can retrieve a section from the middle of a string or from any chosen starting point."
+    },
+    {
+      "question": "What happens when the length argument is omitted from SUBSTRING()?",
+      "answer": "Answer: When the length argument is omitted, SUBSTRING() returns the characters from the specified starting position through the end of the string."
+    },
+    {
+      "question": "Why should a query avoid hardcoding the number of characters to extract?",
+      "answer": "Answer: Values stored in a column may have different lengths. A hardcoded length may work for one value but return an incomplete result or an unsuitable result for another value. LENGTH() can be used when the required length should depend on the actual string."
+    },
+    {
+      "question": "How can LENGTH() be used with SUBSTRING()?",
+      "answer": "Answer: LENGTH() calculates the length of the string. It can be placed inside SUBSTRING() to supply a length based on the current column value instead of using a fixed number."
+    },
+    {
+      "question": "Write a query to extract four characters from the third position of the string DATABASE.",
+      "answer": "Answer: Use SUBSTRING() with the string, starting position, and required length. Sample Input: String: 'DATABASE'\n\n```java\nSELECT SUBSTRING('DATABASE', 3, 4) AS extracted_text;\n```\n\nSample Output: extracted_text: TABA"
+    },
+    {
+      "question": "Why should a query select only the required columns?",
+      "answer": "Answer: A query should return only the columns needed for the requirement. If the requirement asks for customer first names, select the first_name column instead of using SELECT * to retrieve every column from the table."
+    },
+    {
+      "question": "Why can a leading space cause an incorrect result when extracting the first visible character?",
+      "answer": "Answer: SUBSTRING() counts spaces as characters. If a first name begins with a space, that space occupies position 1. Starting the extraction at position 2 would return the name with its first visible letter still present."
+    },
+    {
+      "question": "Write a query to retrieve each customer first name after removing its first character.",
+      "answer": "Answer: Select only the first_name column and use SUBSTRING() to start from position 2. Sample Input: customers.first_name contains: John, George, Martin SELECT SUBSTRING(first_name, 2) AS modified_first_name FROM customers; Sample Output: modified_first_name: ohn, eorge, artin"
+    },
+    {
+      "question": "How can TRIM() be combined with SUBSTRING() to remove the first visible character?",
+      "answer": "Answer: Apply TRIM() to remove leading and trailing spaces before extracting the substring. For example, SUBSTRING(TRIM(first_name), 2) starts from the second character of the cleaned first name."
+    },
+    {
+      "question": "What does the TRIM() function do?",
+      "answer": "Answer: TRIM() removes leading and trailing spaces from a string. It is useful when text values contain unwanted spaces at the beginning or end."
+    },
+    {
+      "question": "What is the difference between TRIM(), LTRIM(), and RTRIM()?",
+      "answer": "Answer: TRIM() removes spaces from both ends of a string. LTRIM() removes leading spaces from the left side, while RTRIM() removes trailing spaces from the right side. The lesson recommends using the basic TRIM() function for common cleanup of spaces at both ends."
+    },
+    {
+      "question": "Does TRIM() remove spaces between words?",
+      "answer": "Answer: No. TRIM() removes spaces at the beginning and end of a string. It does not remove a space between words. For example, trimming \"Rahul Kumar\" keeps the space between Rahul and Kumar."
+    },
+    {
+      "question": "Why is it difficult to identify extra spaces just by looking at query output?",
+      "answer": "Answer: Leading, trailing, and repeated spaces may not be obvious in displayed results. The visible text can look similar even when the stored values contain different numbers of spaces. LENGTH() can help inspect the length of the stored string."
+    },
+    {
+      "question": "Write a query to remove leading and trailing spaces before removing the first character from each customer first name.",
+      "answer": "Answer: Use TRIM() inside SUBSTRING(). The optional length can also be calculated dynamically with LENGTH(). Sample Input: customers.first_name contains: ' John ', 'George ', ' Martin' SELECT SUBSTRING(TRIM(first_name), 2, LENGTH(TRIM(first_name))) AS modified_first_name FROM customers; Sample Output: modified_first_name: ohn, eorge, artin"
+    },
+    {
+      "question": "What should be checked before performing string operations on customer names?",
+      "answer": "Answer: Check whether the values contain unwanted leading or trailing spaces. Clean the text with TRIM() before applying SUBSTRING() so that the character positions match the visible name."
+    },
+    {
+      "question": "What are numeric functions in MySQL?",
+      "answer": "Answer: Numeric functions perform operations on numeric values. They can work with number data such as integers and decimal values."
+    },
+    {
+      "question": "What kinds of numeric values can numeric functions work with?",
+      "answer": "Answer: The lesson explains that numeric functions can work with integer values as well as decimal values."
+    },
+    {
+      "question": "Which numeric function examples are mentioned in the lesson?",
+      "answer": "Answer: The lesson briefly mentions examples such as square-root, sine, cosine, tangent, logarithmic, and random-number functions. These are introduced as examples; the detailed explanation in this class focuses on ROUND()."
+    },
+    {
+      "question": "What does RAND() return?",
+      "answer": "Answer: RAND() returns a random floating-point number. It is mentioned as one example of a numeric function."
+    },
+    {
+      "question": "Why can numeric data contain negative values in a business database?",
+      "answer": "Answer: Business data can represent both positive and negative results. For example, a positive value may represent profit, while a negative value may represent a loss. Queries and numeric operations should account for the values that can actually occur in the data."
+    },
+    {
+      "question": "Write a query to round 3.516 to two decimal places.",
+      "answer": "Answer: Pass the number and the required number of decimal places to ROUND(). Sample Input: Number: 3.516; decimal places: 2\n\n```java\nSELECT ROUND(3.516, 2) AS rounded_value;\n```\n\nSample Output: rounded_value: 3.52"
+    },
+    {
+      "question": "What does the ROUND() function do?",
+      "answer": "Answer: ROUND() rounds a numeric value to the requested number of decimal places. It can be used with integer or decimal numeric values."
+    },
+    {
+      "question": "What is the syntax of ROUND() in MySQL?",
+      "answer": "Answer: The syntax is ROUND(number, decimal_places). The first argument is the numeric value to round, and the second argument specifies how many decimal places should be retained."
+    },
+    {
+      "question": "What does the decimal_places argument specify in ROUND()?",
+      "answer": "Answer: It specifies the number of digits to retain after the decimal point. For example, a value of 2 requests rounding to two decimal places, while a value of 0 requests rounding to a whole number."
+    },
+    {
+      "question": "How does ROUND() decide whether to round a value up or leave it unchanged?",
+      "answer": "Answer: ROUND() examines the digit immediately after the last decimal place being retained. If that digit is 5 or greater, the retained digit is rounded up. If it is less than 5, the retained digit stays unchanged."
+    },
+    {
+      "question": "What is the result of rounding 3.516 to two decimal places?",
+      "answer": "Answer: The result is 3.52. The two decimal places to retain are 5 and 1. The next digit is 6, which is greater than or equal to 5, so the second decimal digit is rounded up."
+    },
+    {
+      "question": "What happens when the digit after the required decimal places is less than 5?",
+      "answer": "Answer: The retained decimal digits remain unchanged. For example, rounding 3.514 to two decimal places returns 3.51 because the next digit is 4."
+    },
+    {
+      "question": "What happens when ROUND() is used with zero decimal places?",
+      "answer": "Answer: The number is rounded to the nearest whole number. For example, ROUND(3.516, 0) returns 4 because the first digit after the decimal point is 5."
+    }
+  ]
+}

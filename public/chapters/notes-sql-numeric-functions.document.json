@@ -1,0 +1,2754 @@
+{
+  "title": "Notes Sql Numeric Functions",
+  "mode": "document",
+  "source": "notes-sql-numeric-functions.docx",
+  "pageCount": 4,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1. What topics are covered in this SQL lesson?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The lesson explains the SUBSTRING() function for extracting text from a specified",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " position, the TRIM() function for removing leading and trailing spaces, the use of LENGTH() to handle variable-length strings, and an introduction to numeric functions with a detailed explanation of ROUND().",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2. What is the difference between a string func",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "tion and a numeric function?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A string function performs an operation on character or text data. A numeric function performs an operation on numeric data, such as integer or decimal values.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3. What does the SUBSTRING() function do in MySQL?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "SUBSTRING() extr",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "acts a portion of a string. It is useful when the required characters begin at a particular position rather than always at the leftmost or rightmost end.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "4. What is the syntax of SUBSTRING() in MySQL?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The syntax is SUBSTRING(string, start_position, length)",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ". The length argument is optional. The function can return the remaining characters from the starting position when the length is omitted.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "5. What are the arguments of SUBSTRING()?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The first argument is the string or column value to work on. The second arg",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ument is the starting position from which extraction begins. The optional third argument specifies how many characters to return.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "6. How are character positions counted in SUBSTRING()?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Character positions are counted from 1. The first character is at posit",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ion 1, the second character is at position 2, and so on.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "7. How is SUBSTRING() different from LEFT() and RIGHT()?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "LEFT() extracts characters from the beginning of a string, while RIGHT() extracts characters from the end. SUBSTRING() allows extraction to be",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "gin at a specified position, so it can retrieve a section from the middle of a string or from any chosen starting point.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "8. What happens when the length argument is omitted from SUBSTRING()?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "When the length argument is omitted, SUBSTRING() returns the ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "characters from the specified starting position through the end of the string.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "9. Why should a query avoid hardcoding the number of characters to extract?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "Values stored in a column may have different lengths. A hardcoded length may work for one value but return an incomplete result or an unsuitable result for another value. LENGTH() can be used when the required length should depend on the actual string."
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "10. How can LENGTH() be used with SUBSTRING()?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "LENGTH() calculates the length of the string. It can be p",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "laced inside SUBSTRING() to supply a length based on the current column value instead of using a fixed number.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "11. Write a query to extract four characters from the third position of the string DATABASE.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Use SUBSTRING() with the string, starting position, ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "and required length.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "String: 'DATABASE'",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "code",
+      "text": "SELECT SUBSTRING('DATABASE', 3, 4) AS extracted_text;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "extracted_text: TABA",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "12. Why should a query select only the required columns?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A query should return only the columns needed for the r",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "equirement. If the requirement asks for customer first names, select the first_name column instead of using SELECT * to retrieve every column from the table.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "13. Why can a leading space cause an incorrect result when extracting the first visible character?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "SUBSTRING() counts spaces as characters. If a first name begins with a space, that space occupies position 1. Starting the extraction at position 2 would return the name with its first visible letter still present.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "14. Write a query to retrieve each custo",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "mer first name after removing its first character.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Select only the first_name column and use SUBSTRING() to start from position 2.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "customers.first_name contains: John, George, Martin",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "code",
+      "text": "SELECT SUBSTRING(first_name, 2) AS modified_first_name\nFROM customers;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "modified_first_name: ohn, eorge, artin",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "15. How can TRIM() be combined with SUBSTRING() to remove the first visible character?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Apply TRIM() to remove leading and trailing spaces before extracting the substring. For example, SUBSTR",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ING(TRIM(first_name), 2) starts from the second character of the cleaned first name.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "16. What does the TRIM() function do?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "TRIM() removes leading and trailing spaces from a string. It is useful when text values contain unwanted spaces at the beginning or e",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "nd.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "17. What is the difference between TRIM(), LTRIM(), and RTRIM()?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "TRIM() removes spaces from both ends of a string. LTRIM() removes leading spaces from the left side, while RTRIM() removes trailing spaces from the right side. The lesson recommends using",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " the basic TRIM() function for common cleanup of spaces at both ends.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "18. Does TRIM() remove spaces between words?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "No. TRIM() removes spaces at the beginning and end of a string. It does not remove a space between words. For example, trimming \"Rahul Kumar\"",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " keeps the space between Rahul and Kumar.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "19. Why is it difficult to identify extra spaces just by looking at query output?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Leading, trailing, and repeated spaces may not be obvious in displayed results. The visible text can look similar even when the stor",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ed values contain different numbers of spaces. LENGTH() can help inspect the length of the stored string.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "20. Write a query to remove leading and trailing spaces before removing the first character from each customer first name.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Use TRIM() inside SUBSTRING",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "(). The optional length can also be calculated dynamically with LENGTH().",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "customers.first_name contains: '  John  ', 'George ', ' Martin'",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "code",
+      "text": "SELECT SUBSTRING(TRIM(first_name), 2, LENGTH(TRIM(first_name))) AS modified_first_name\nFROM customers;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "modified_first_name: ohn, eorge, artin",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "21. What should be checked before performing string operations on customer names?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "Check whether the values contain unwanted leading or trailing spaces. Clean the text with TRIM() before applying SUBSTRING() so that the character positions match the visible name."
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "22. What are numeric functions in MySQL?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Numeric functions perform operations on numeric values. They can work with number data such as integers and decimal values.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "23. What kinds of numeric valu",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "es can numeric functions work with?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The lesson explains that numeric functions can work with integer values as well as decimal values.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "24. Which numeric function examples are mentioned in the lesson?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The lesson briefly mentions examples such as square-root",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": ", sine, cosine, tangent, logarithmic, and random-number functions. These are introduced as examples; the detailed explanation in this class focuses on ROUND().",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "25. What does RAND() return?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "RAND() returns a random floating-point number. It is mentioned as o",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ne example of a numeric function.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "26. Why can numeric data contain negative values in a business database?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Business data can represent both positive and negative results. For example, a positive value may represent profit, while a negative value may repres",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ent a loss. Queries and numeric operations should account for the values that can actually occur in the data.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "27. Write a query to round 3.516 to two decimal places.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Pass the number and the required number of decimal places to ROUND().",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Number: 3.516; decimal places: 2",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "code",
+      "text": "SELECT ROUND(3.516, 2) AS rounded_value;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "rounded_value: 3.52",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "28. What does the ROUND() function do?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "ROUND() rounds a numeric value to the requested number of decimal places. It can be used with integer or dec",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "imal numeric values.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "29. What is the syntax of ROUND() in MySQL?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The syntax is ROUND(number, decimal_places). The first argument is the numeric value to round, and the second argument specifies how many decimal places should be retained.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "30. What does the ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "decimal_places argument specify in ROUND()?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "It specifies the number of digits to retain after the decimal point. For example, a value of 2 requests rounding to two decimal places, while a value of 0 requests rounding to a whole number.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "31. How does ROUND()",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " decide whether to round a value up or leave it unchanged?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "ROUND() examines the digit immediately after the last decimal place being retained. If that digit is 5 or greater, the retained digit is rounded up. If it is less than 5, the retained digit stays u",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "nchanged.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "32. What is the result of rounding 3.516 to two decimal places?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The result is 3.52. The two decimal places to retain are 5 and 1. The next digit is 6, which is greater than or equal to 5, so the second decimal digit is rounded up.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "33. What happen",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "s when the digit after the required decimal places is less than 5?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The retained decimal digits remain unchanged. For example, rounding 3.514 to two decimal places returns 3.51 because the next digit is 4.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "34. What happens when ROUND() is used with zero ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "decimal places?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The number is rounded to the nearest whole number. For example, ROUND(3.516, 0) returns 4 because the first digit after the decimal point is 5.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    }
+  ],
+  "pages": [
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1. What topics are covered in this SQL lesson?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The lesson explains the SUBSTRING() function for extracting text from a specified",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " position, the TRIM() function for removing leading and trailing spaces, the use of LENGTH() to handle variable-length strings, and an introduction to numeric functions with a detailed explanation of ROUND().",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2. What is the difference between a string func",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "tion and a numeric function?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A string function performs an operation on character or text data. A numeric function performs an operation on numeric data, such as integer or decimal values.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3. What does the SUBSTRING() function do in MySQL?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "SUBSTRING() extr",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "acts a portion of a string. It is useful when the required characters begin at a particular position rather than always at the leftmost or rightmost end.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "4. What is the syntax of SUBSTRING() in MySQL?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The syntax is SUBSTRING(string, start_position, length)",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ". The length argument is optional. The function can return the remaining characters from the starting position when the length is omitted.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "5. What are the arguments of SUBSTRING()?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The first argument is the string or column value to work on. The second arg",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ument is the starting position from which extraction begins. The optional third argument specifies how many characters to return.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "6. How are character positions counted in SUBSTRING()?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Character positions are counted from 1. The first character is at posit",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ion 1, the second character is at position 2, and so on.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "7. How is SUBSTRING() different from LEFT() and RIGHT()?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "LEFT() extracts characters from the beginning of a string, while RIGHT() extracts characters from the end. SUBSTRING() allows extraction to be",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "gin at a specified position, so it can retrieve a section from the middle of a string or from any chosen starting point.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "8. What happens when the length argument is omitted from SUBSTRING()?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "When the length argument is omitted, SUBSTRING() returns the ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "characters from the specified starting position through the end of the string.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "9. Why should a query avoid hardcoding the number of characters to extract?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "Values stored in a column may have different lengths. A hardcoded length may work for one value but return an incomplete result or an unsuitable result for another value. LENGTH() can be used when the required length should depend on the actual string."
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "10. How can LENGTH() be used with SUBSTRING()?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "LENGTH() calculates the length of the string. It can be p",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "laced inside SUBSTRING() to supply a length based on the current column value instead of using a fixed number.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "11. Write a query to extract four characters from the third position of the string DATABASE.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Use SUBSTRING() with the string, starting position, ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "and required length.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "String: 'DATABASE'",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "code",
+        "text": "SELECT SUBSTRING('DATABASE', 3, 4) AS extracted_text;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "extracted_text: TABA",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "12. Why should a query select only the required columns?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A query should return only the columns needed for the r",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "equirement. If the requirement asks for customer first names, select the first_name column instead of using SELECT * to retrieve every column from the table.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "13. Why can a leading space cause an incorrect result when extracting the first visible character?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "SUBSTRING() counts spaces as characters. If a first name begins with a space, that space occupies position 1. Starting the extraction at position 2 would return the name with its first visible letter still present.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "14. Write a query to retrieve each custo",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "mer first name after removing its first character.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Select only the first_name column and use SUBSTRING() to start from position 2.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "customers.first_name contains: John, George, Martin",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "code",
+        "text": "SELECT SUBSTRING(first_name, 2) AS modified_first_name\nFROM customers;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "modified_first_name: ohn, eorge, artin",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "15. How can TRIM() be combined with SUBSTRING() to remove the first visible character?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Apply TRIM() to remove leading and trailing spaces before extracting the substring. For example, SUBSTR",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ING(TRIM(first_name), 2) starts from the second character of the cleaned first name.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "16. What does the TRIM() function do?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "TRIM() removes leading and trailing spaces from a string. It is useful when text values contain unwanted spaces at the beginning or e",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "nd.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "17. What is the difference between TRIM(), LTRIM(), and RTRIM()?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "TRIM() removes spaces from both ends of a string. LTRIM() removes leading spaces from the left side, while RTRIM() removes trailing spaces from the right side. The lesson recommends using",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " the basic TRIM() function for common cleanup of spaces at both ends.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "18. Does TRIM() remove spaces between words?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "No. TRIM() removes spaces at the beginning and end of a string. It does not remove a space between words. For example, trimming \"Rahul Kumar\"",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " keeps the space between Rahul and Kumar.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "19. Why is it difficult to identify extra spaces just by looking at query output?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Leading, trailing, and repeated spaces may not be obvious in displayed results. The visible text can look similar even when the stor",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ed values contain different numbers of spaces. LENGTH() can help inspect the length of the stored string.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "20. Write a query to remove leading and trailing spaces before removing the first character from each customer first name.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Use TRIM() inside SUBSTRING",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "(). The optional length can also be calculated dynamically with LENGTH().",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "customers.first_name contains: '  John  ', 'George ', ' Martin'",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "code",
+        "text": "SELECT SUBSTRING(TRIM(first_name), 2, LENGTH(TRIM(first_name))) AS modified_first_name\nFROM customers;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "modified_first_name: ohn, eorge, artin",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "21. What should be checked before performing string operations on customer names?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "Check whether the values contain unwanted leading or trailing spaces. Clean the text with TRIM() before applying SUBSTRING() so that the character positions match the visible name."
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "22. What are numeric functions in MySQL?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Numeric functions perform operations on numeric values. They can work with number data such as integers and decimal values.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "23. What kinds of numeric valu",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "es can numeric functions work with?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The lesson explains that numeric functions can work with integer values as well as decimal values.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "24. Which numeric function examples are mentioned in the lesson?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The lesson briefly mentions examples such as square-root",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": ", sine, cosine, tangent, logarithmic, and random-number functions. These are introduced as examples; the detailed explanation in this class focuses on ROUND().",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "25. What does RAND() return?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "RAND() returns a random floating-point number. It is mentioned as o",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ne example of a numeric function.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "26. Why can numeric data contain negative values in a business database?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Business data can represent both positive and negative results. For example, a positive value may represent profit, while a negative value may repres",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ent a loss. Queries and numeric operations should account for the values that can actually occur in the data.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "27. Write a query to round 3.516 to two decimal places.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Pass the number and the required number of decimal places to ROUND().",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Number: 3.516; decimal places: 2",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "code",
+        "text": "SELECT ROUND(3.516, 2) AS rounded_value;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "rounded_value: 3.52",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "28. What does the ROUND() function do?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "ROUND() rounds a numeric value to the requested number of decimal places. It can be used with integer or dec",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "imal numeric values.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "29. What is the syntax of ROUND() in MySQL?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The syntax is ROUND(number, decimal_places). The first argument is the numeric value to round, and the second argument specifies how many decimal places should be retained.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "30. What does the ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "decimal_places argument specify in ROUND()?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "It specifies the number of digits to retain after the decimal point. For example, a value of 2 requests rounding to two decimal places, while a value of 0 requests rounding to a whole number.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "31. How does ROUND()",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " decide whether to round a value up or leave it unchanged?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "ROUND() examines the digit immediately after the last decimal place being retained. If that digit is 5 or greater, the retained digit is rounded up. If it is less than 5, the retained digit stays u",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "nchanged.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "32. What is the result of rounding 3.516 to two decimal places?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The result is 3.52. The two decimal places to retain are 5 and 1. The next digit is 6, which is greater than or equal to 5, so the second decimal digit is rounded up.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "33. What happen",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "s when the digit after the required decimal places is less than 5?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The retained decimal digits remain unchanged. For example, rounding 3.514 to two decimal places returns 3.51 because the next digit is 4.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "34. What happens when ROUND() is used with zero ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "decimal places?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The number is rounded to the nearest whole number. For example, ROUND(3.516, 0) returns 4 because the first digit after the decimal point is 5.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ]
+  ]
+}
