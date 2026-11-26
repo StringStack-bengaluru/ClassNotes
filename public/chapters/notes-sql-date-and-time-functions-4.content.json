@@ -1,0 +1,199 @@
+{
+  "title": "Notes Sql Date And Time Functions 4",
+  "itemsPerPage": 2,
+  "source": "notes-sql-date-and-time-functions-4.docx",
+  "items": [
+    {
+      "question": "What are the main categories of MySQL single-row functions reviewed before the new topic?",
+      "answer": "Answer: The review mentions string functions, numeric functions, and date and time functions. A single-row function works with values from an individual row and returns a result for that row. Aggregate or multiple-row functions are a separate category and are not the focus of this lesson."
+    },
+    {
+      "question": "Which date and time function categories were reviewed?",
+      "answer": "Answer: The four categories reviewed are extraction, formatting, calculation, and validation. Extraction functions return parts of a date or time value, formatting functions change how it is displayed, and calculation functions perform date or time arithmetic. Validation was identified as the fourth category."
+    },
+    {
+      "question": "What is the purpose of a data type conversion function?",
+      "answer": "Answer: A conversion function changes a value from one data type to another. The lesson reviews CONVERT() and CAST() as two MySQL functions that can perform data type conversion."
+    },
+    {
+      "question": "What is the difference between CAST() and CONVERT() highlighted in the lesson?",
+      "answer": "Answer: Both functions can convert a value from one data type to another. CONVERT() has an additional character-set conversion form that uses the USING keyword. CAST() does not provide that same USING character-set conversion form."
+    },
+    {
+      "question": "What is a character set in the context of MySQL?",
+      "answer": "Answer: A character set defines how character data is represented and encoded for storage and processing. The same visible text can be represented using different character sets."
+    },
+    {
+      "question": "Why can the same text be associated with different character sets?",
+      "answer": "Answer: A string can be stored or represented using different character encodings depending on the character set selected by the database or expression. The displayed word may remain the same even though its character-set representation changes."
+    },
+    {
+      "question": "Which character-set names are mentioned as examples?",
+      "answer": "Answer: Examples discussed include utf8mb4, latin1, Greek, Hebrew, and other character-set representations. The lesson emphasizes understanding the conversion concept rather than memorizing every available character set."
+    },
+    {
+      "question": "What is the syntax for converting an expression to a different character set?",
+      "answer": "Answer: Use the CONVERT() function with the USING keyword, followed by the target character-set name. The general syntax is shown below. CONVERT(expression USING character_set_name)"
+    },
+    {
+      "question": "What does the USING keyword specify in CONVERT() for character-set conversion?",
+      "answer": "Answer: USING introduces the character set to which the expression should be converted. The character-set name follows the USING keyword."
+    },
+    {
+      "question": "Can the expression passed to CONVERT() be only a string?",
+      "answer": "Answer: No. The expression can be a value or expression of different kinds. The important part in this form is that the target character set is specified after USING."
+    },
+    {
+      "question": "Does character-set conversion translate a word from one language into another?",
+      "answer": "Answer: No. Character-set conversion does not translate the meaning or language of a word. For example, converting the character-set representation of the word “pizza” does not translate the word into Greek; the visible text remains “pizza” when the characters can be represented."
+    },
+    {
+      "question": "What changes when CONVERT() is used with USING?",
+      "answer": "Answer: The character-set representation of the expression changes to the specified character set. The lesson repeatedly distinguishes this representation change from language translation: the text itself is not being translated."
+    },
+    {
+      "question": "How can you check the character set associated with an expression?",
+      "answer": "Answer: Use the CHARSET() function. It returns the character set associated with the supplied expression. CHARSET(expression)"
+    },
+    {
+      "question": "How can you check the collation associated with an expression?",
+      "answer": "Answer: Use the COLLATION() function. It returns the collation associated with the supplied expression. COLLATION(expression)"
+    },
+    {
+      "question": "How can CHARSET() and COLLATION() be used to inspect a value?",
+      "answer": "Answer: Apply the functions to the same expression to inspect its character-set and collation information. This helps identify the representation metadata associated with the value.\n\n```java\nSELECT CHARSET('Hello'), COLLATION('Hello');\n```"
+    },
+    {
+      "question": "Does the output of CONVERT() necessarily look different after character-set conversion?",
+      "answer": "Answer: No. The displayed text may look exactly the same before and after conversion. The change is in the character-set representation, not necessarily in the visible characters."
+    },
+    {
+      "question": "Why does the lesson use CHARSET() after a conversion example?",
+      "answer": "Answer: The visible text alone may not show that a conversion occurred. CHARSET() can be used to inspect the character set associated with the result and make the representation change easier to identify."
+    },
+    {
+      "question": "Is character-set conversion expected to be used frequently in everyday application queries?",
+      "answer": "Answer: The lesson notes that this type of conversion may be used less frequently in routine work, but students should understand the syntax and behavior so they can recognize and use it when required."
+    },
+    {
+      "question": "What are the main date and time calculation functions introduced in this class?",
+      "answer": "Answer: The class introduces DATE_ADD(), DATE_SUB(), DATEDIFF(), and TIMESTAMPDIFF(). DATE_ADD() and DATE_SUB() adjust a date or time value, while DATEDIFF() and TIMESTAMPDIFF() calculate the difference between two date or time values."
+    },
+    {
+      "question": "What does DATE_ADD() do?",
+      "answer": "Answer: DATE_ADD() adds a specified interval to a date or time value. The interval can represent a number of days, months, years, hours, minutes, or another supported time unit."
+    },
+    {
+      "question": "What is the general syntax of DATE_ADD()?",
+      "answer": "Answer: DATE_ADD() takes the starting date or time expression and an INTERVAL expression containing the amount and unit to add. DATE_ADD(date_expression, INTERVAL amount unit)"
+    },
+    {
+      "question": "What is the purpose of the INTERVAL keyword in DATE_ADD()?",
+      "answer": "Answer: INTERVAL identifies the amount of time to add and the unit in which that amount is expressed. The amount and unit are supplied together after the INTERVAL keyword."
+    },
+    {
+      "question": "Which interval units are demonstrated or discussed for date calculations?",
+      "answer": "Answer: The lesson discusses units such as DAY, MONTH, YEAR, HOUR, MINUTE, and SECOND. The unit should match the kind of date or time adjustment required."
+    },
+    {
+      "question": "How do you add two days to a date?",
+      "answer": "Answer: Specify the date expression, followed by INTERVAL 2 DAY. For example:\n\n```java\nSELECT DATE_ADD('2026-11-23', INTERVAL 2 DAY);\n```"
+    },
+    {
+      "question": "How do you add two months to a date?",
+      "answer": "Answer: Use MONTH as the interval unit. For example:\n\n```java\nSELECT DATE_ADD('2026-11-23', INTERVAL 2 MONTH);\n```"
+    },
+    {
+      "question": "Can DATE_ADD() also subtract an interval?",
+      "answer": "Answer: Yes. The interval expression can be negative. A negative interval moves the date or time backward instead of forward. For example:\n\n```java\nSELECT DATE_ADD('2026-11-23', INTERVAL -4 YEAR);\n```"
+    },
+    {
+      "question": "What does DATE_SUB() do?",
+      "answer": "Answer: DATE_SUB() subtracts a specified interval from a date or time expression. It uses the same idea of an interval amount and unit as DATE_ADD()."
+    },
+    {
+      "question": "What is the general syntax of DATE_SUB()?",
+      "answer": "Answer: The first argument is the starting date or time expression. The INTERVAL argument specifies how much time to subtract. DATE_SUB(date_expression, INTERVAL amount unit)"
+    },
+    {
+      "question": "What is the difference between DATE_ADD() and DATE_SUB()?",
+      "answer": "Answer: DATE_ADD() moves the supplied date or time forward by the specified interval, while DATE_SUB() moves it backward. The lesson also demonstrates that a negative interval with DATE_ADD() can be used to move backward."
+    },
+    {
+      "question": "How can you subtract four years from a date using DATE_SUB()?",
+      "answer": "Answer: Pass the date expression and an interval of four years to DATE_SUB(). For example:\n\n```java\nSELECT DATE_SUB('2026-11-23', INTERVAL 4 YEAR);\n```"
+    },
+    {
+      "question": "Why might you use CURRENT_TIMESTAMP instead of a hard-coded date and time?",
+      "answer": "Answer: CURRENT_TIMESTAMP supplies the current date and time from the system. Using it makes the calculation relative to the time when the query runs instead of relying on a fixed value typed into the query."
+    },
+    {
+      "question": "How can you add minutes to the current date and time?",
+      "answer": "Answer: Use DATE_ADD() with CURRENT_TIMESTAMP and an interval expressed in MINUTE. For example:\n\n```java\nSELECT DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 5 MINUTE);\n```"
+    },
+    {
+      "question": "What is the difference between using a date-only value and a current timestamp in a calculation?",
+      "answer": "Answer: A date-only expression supplies a date without a time component, while CURRENT_TIMESTAMP supplies the current date and time. The starting expression should match whether the requirement needs a date result or a date-and-time result."
+    },
+    {
+      "question": "What does DATEDIFF() calculate?",
+      "answer": "Answer: DATEDIFF() calculates the difference between two date expressions. Its result is expressed in days."
+    },
+    {
+      "question": "What is the syntax of DATEDIFF()?",
+      "answer": "Answer: DATEDIFF() accepts two date expressions. The first expression is subtracted by the second expression. DATEDIFF(date_expression1, date_expression2)"
+    },
+    {
+      "question": "What unit does DATEDIFF() return?",
+      "answer": "Answer: DATEDIFF() returns the difference in days. It does not directly return the difference in years or months."
+    },
+    {
+      "question": "Why is the order of the two arguments important in DATEDIFF()?",
+      "answer": "Answer: The function calculates the first date minus the second date. Placing the later date first and the earlier date second gives a positive day difference; reversing the order changes the sign of the result."
+    },
+    {
+      "question": "How can you calculate the number of days between two dates?",
+      "answer": "Answer: Pass the later date as the first argument and the earlier date as the second argument. For example:\n\n```java\nSELECT DATEDIFF('2026-11-23', '2026-09-06');\n```"
+    },
+    {
+      "question": "Why is DATEDIFF() not sufficient when the requirement asks for an employee's age in years?",
+      "answer": "Answer: DATEDIFF() returns a number of days. An age requirement normally asks for completed years, so a function that can return a difference in a specified unit is more suitable."
+    },
+    {
+      "question": "What does TIMESTAMPDIFF() do?",
+      "answer": "Answer: TIMESTAMPDIFF() calculates the difference between two date or time expressions using a unit specified by the query. Depending on the required result, the unit can be YEAR, MONTH, DAY, MINUTE, or another supported unit."
+    },
+    {
+      "question": "What is the general syntax of TIMESTAMPDIFF()?",
+      "answer": "Answer: The unit is supplied first, followed by the starting date/time expression and the ending date/time expression. TIMESTAMPDIFF(unit, datetime_expression1, datetime_expression2)"
+    },
+    {
+      "question": "Why must you specify a unit in TIMESTAMPDIFF()?",
+      "answer": "Answer: The unit tells MySQL how to express the difference. For example, the same pair of date expressions can be evaluated in years, months, days, or minutes depending on the unit supplied."
+    },
+    {
+      "question": "Which units are used as examples with TIMESTAMPDIFF()?",
+      "answer": "Answer: The lesson demonstrates or discusses YEAR, MONTH, DAY, and MINUTE. The unit should be selected according to the output required by the problem."
+    },
+    {
+      "question": "How is TIMESTAMPDIFF() different from DATEDIFF()?",
+      "answer": "Answer: DATEDIFF() returns a difference in days. TIMESTAMPDIFF() allows the query to specify the result unit, such as years, months, days, or minutes. This makes TIMESTAMPDIFF() more suitable when the requirement asks for a particular unit other than days."
+    },
+    {
+      "question": "How do you calculate an employee's age from the birth date?",
+      "answer": "Answer: Use the employee's birth date as the starting expression and the current date as the ending expression. TIMESTAMPDIFF() can return the difference in YEAR units, which is more useful for an age-in-years requirement than a raw day count."
+    },
+    {
+      "question": "Which table and column are selected for the employee-age example?",
+      "answer": "Answer: The example uses the employee table and selects the birth-date column because the age calculation depends on each employee's date of birth. Only the columns required by the task need to be selected."
+    },
+    {
+      "question": "What is the query pattern for calculating an employee's age in years?",
+      "answer": "Answer: Use TIMESTAMPDIFF() with YEAR as the unit, the birth-date column as the first date expression, and CURDATE() as the ending date. The following is the query pattern for the employee example:\n\n```java\nSELECT employee_id, birth_date,       TIMESTAMPDIFF(YEAR, birth_date, CURDATE()) AS ageFROM employees;\n```"
+    },
+    {
+      "question": "Why should you identify the correct table and requirement before writing a date calculation query?",
+      "answer": "Answer: Select the table that stores the required date column, identify the result and unit you need, and choose the matching function. Practice writing the query step by step instead of simply copying it."
+    }
+  ]
+}
