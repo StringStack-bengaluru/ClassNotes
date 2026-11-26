@@ -1,0 +1,151 @@
+{
+  "title": "Notes Sql Intro To Null Functions 1",
+  "itemsPerPage": 2,
+  "source": "notes-sql-intro-to-null-functions-1.docx",
+  "items": [
+    {
+      "question": "What does NULL represent in a MySQL table?",
+      "answer": "Answer: NULL represents missing or unknown information. It means that a value is not available or has not been provided for that field."
+    },
+    {
+      "question": "Is NULL the same as zero?",
+      "answer": "Answer: No. Zero is a known numeric value. NULL means the value is unknown or missing, so it must not be treated as zero during calculations or analysis."
+    },
+    {
+      "question": "Is NULL the same as an empty string?",
+      "answer": "Answer: No. An empty string is a string value containing no characters. NULL indicates that no value is available."
+    },
+    {
+      "question": "Is NULL the same as a blank space?",
+      "answer": "Answer: No. A blank space is still a character stored in a string. NULL means that the column has no known value."
+    },
+    {
+      "question": "Why is it important to distinguish NULL, zero, an empty string, and spaces?",
+      "answer": "Answer: They represent different kinds of data. Treating them as interchangeable can lead to incorrect conclusions when displaying information or performing calculations."
+    },
+    {
+      "question": "Why can NULL values cause problems during analysis?",
+      "answer": "Answer: A missing value may prevent a meaningful decision from being made. For example, a missing country cannot identify where a customer belongs, and a missing score cannot be treated as a score of zero without an explicit rule."
+    },
+    {
+      "question": "Why should data be cleaned before performing analytical calculations?",
+      "answer": "Answer: NULL values should be handled according to the requirement before relying on the data for analysis. Cleaning missing information helps avoid decisions based on assumptions that are not supported by the stored values."
+    },
+    {
+      "question": "How can an optional field in an application lead to a NULL value?",
+      "answer": "Answer: A form may contain optional fields that a user is allowed to leave blank. When the application stores the submitted information, a field that was not provided may be stored as NULL."
+    },
+    {
+      "question": "What is an example of an optional field in a registration form?",
+      "answer": "Answer: A middle name can be optional. A user may provide a first name and last name but leave the middle-name field empty. The database may then contain NULL for the middle name."
+    },
+    {
+      "question": "How can NULL values appear in customer or employee data?",
+      "answer": "Answer: They can appear when users do not provide optional information, such as an age, middle name, country, or address. The application may store a NULL value for the omitted field."
+    },
+    {
+      "question": "What are the two broad purposes of NULL-handling operations discussed in this lesson?",
+      "answer": "Answer: One group is used to replace NULL values with an alternative value. Another group is used to check whether a value is NULL or is not NULL."
+    },
+    {
+      "question": "What is the purpose of the IFNULL() function in MySQL?",
+      "answer": "Answer: IFNULL() checks the first expression. If it is NULL, the function returns the replacement value supplied as the second argument. Otherwise, it returns the original value."
+    },
+    {
+      "question": "What is the syntax of IFNULL()?",
+      "answer": "Answer: The syntax is: IFNULL(value, replacement_value). The first argument is the value being checked, and the second argument is returned when the first argument is NULL."
+    },
+    {
+      "question": "How many arguments does IFNULL() accept in the usage taught in this lesson?",
+      "answer": "Answer: IFNULL() accepts two arguments: the value to check and one replacement value."
+    },
+    {
+      "question": "What happens when the first argument of IFNULL() is NULL?",
+      "answer": "Answer: The function returns the second argument as the replacement value."
+    },
+    {
+      "question": "What happens when the first argument of IFNULL() is not NULL?",
+      "answer": "Answer: The function returns the first argument as it is. The replacement value is not used."
+    },
+    {
+      "question": "How can IFNULL() be used with shipping and billing addresses?",
+      "answer": "Answer: A billing address can be checked first. If the billing address is NULL, the shipping address can be returned as the replacement. If the billing address is available, that address is returned."
+    },
+    {
+      "question": "What is an illustrative IFNULL() expression for choosing an address?",
+      "answer": "Answer: An illustrative expression is IFNULL(billing_address, shipping_address). It returns the billing address when available; otherwise, it uses the shipping address."
+    },
+    {
+      "question": "What limitation of IFNULL() is highlighted in the class?",
+      "answer": "Answer: IFNULL() provides only two choices: the original value or one replacement value. It cannot, by itself, check a longer list of fallback values."
+    },
+    {
+      "question": "When might IFNULL() be insufficient for an application requirement?",
+      "answer": "Answer: It may be insufficient when several alternatives must be checked. For example, a requirement may need to consider more than one possible address before deciding which value to use."
+    },
+    {
+      "question": "What is the purpose of the COALESCE() function?",
+      "answer": "Answer: COALESCE() checks multiple expressions and returns the first value in the list that is not NULL. It is useful when a requirement has more than one possible fallback value."
+    },
+    {
+      "question": "What is the general syntax of COALESCE()?",
+      "answer": "Answer: The general syntax is: COALESCE(value1, value2, value3, ...). The function checks the arguments in order and returns the first non-NULL value."
+    },
+    {
+      "question": "How does COALESCE() evaluate its arguments?",
+      "answer": "Answer: It checks the arguments from left to right. When it finds the first non-NULL value, that value is returned."
+    },
+    {
+      "question": "Why is COALESCE() more flexible than IFNULL() for fallback requirements?",
+      "answer": "Answer: COALESCE() can examine more than two values. If the first value is NULL, it can check the next value and continue until it finds a non-NULL value."
+    },
+    {
+      "question": "How can COALESCE() help when an application has multiple possible address values?",
+      "answer": "Answer: The application can list the preferred address first, followed by other acceptable alternatives. COALESCE() returns the first address in that list that is not NULL."
+    },
+    {
+      "question": "What is the main difference between IFNULL() and COALESCE()?",
+      "answer": "Answer: IFNULL() checks one value and provides one replacement value. COALESCE() can check multiple values and returns the first non-NULL value in the list."
+    },
+    {
+      "question": "When should COALESCE() be considered instead of IFNULL()?",
+      "answer": "Answer: Use COALESCE() when the requirement involves multiple fallback values or more than two possible outcomes. It is more flexible for that type of requirement."
+    },
+    {
+      "question": "Which replacement function does the instructor recommend using more often?",
+      "answer": "Answer: The instructor recommends COALESCE() as a personal preference because it is more flexible when handling multiple possible replacement values. IFNULL() can still be used when only two choices are required."
+    },
+    {
+      "question": "What is the purpose of IS NULL?",
+      "answer": "Answer: IS NULL checks whether an expression or column contains a NULL value. It is used for validation or checking rather than replacing the value."
+    },
+    {
+      "question": "What is the purpose of IS NOT NULL?",
+      "answer": "Answer: IS NOT NULL checks whether an expression or column contains a value that is not NULL."
+    },
+    {
+      "question": "What kind of result do IS NULL and IS NOT NULL provide?",
+      "answer": "Answer: They provide a true-or-false result based on whether the checked value is NULL. They are used to test the state of a value."
+    },
+    {
+      "question": "How are replacement and validation operations different?",
+      "answer": "Answer: Replacement operations such as IFNULL() and COALESCE() return an alternative when a value is NULL. IS NULL and IS NOT NULL check whether the value is missing or present."
+    },
+    {
+      "question": "Why is IFNULL() not suitable for every multi-step fallback requirement?",
+      "answer": "Answer: IFNULL() has only two possible outcomes: return the supplied value or return one replacement. When more than two possible values must be considered, a function such as COALESCE() is more suitable."
+    },
+    {
+      "question": "What is the shipping and billing address example intended to demonstrate?",
+      "answer": "Answer: It demonstrates that an application may need a fallback when an optional address is missing. It also shows why a requirement with several possible outcomes needs a more flexible approach than a two-value replacement."
+    },
+    {
+      "question": "What should be considered before choosing a NULL-handling function?",
+      "answer": "Answer: Identify whether the requirement is to replace a missing value or simply check whether it is missing. Then determine whether one replacement is enough or whether several fallback values must be considered."
+    },
+    {
+      "question": "What is the key lesson about NULL values in application data?",
+      "answer": "Answer: NULL is not zero, an empty string, or a blank space. It represents missing or unknown information, and it must be handled deliberately before the data is used for decisions or analysis."
+    }
+  ]
+}
