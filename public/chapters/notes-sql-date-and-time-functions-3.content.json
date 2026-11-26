@@ -1,0 +1,155 @@
+{
+  "title": "Notes Sql Date And Time Functions 3",
+  "itemsPerPage": 2,
+  "source": "notes-sql-date-and-time-functions-3.docx",
+  "items": [
+    {
+      "question": "What topic is introduced after the review of MySQL date and time functions?",
+      "answer": "Answer: The lesson introduces the converting or casting category of functions. These functions are used when a value needs to be changed from one data type to another data type."
+    },
+    {
+      "question": "What are the main date and time function categories reviewed before conversion functions?",
+      "answer": "Answer: The review covers extraction, formatting, calculation, and validation. Extraction retrieves parts such as the year, month, day, hour, minute, or second. Formatting changes how a date or time is displayed. The class then moves to conversion and casting."
+    },
+    {
+      "question": "What is data type conversion in MySQL?",
+      "answer": "Answer: Data type conversion means changing a value from one data type to another. For example, a value represented as text can be converted into a numeric type before it is used in a numeric operation."
+    },
+    {
+      "question": "Which two MySQL functions are discussed for converting data types?",
+      "answer": "Answer: The two functions are CONVERT() and CAST(). Both are used to convert an expression or value into a requested data type."
+    },
+    {
+      "question": "What is the basic syntax of CONVERT() when specifying a target data type?",
+      "answer": "Answer: The syntax is CONVERT(expression, target_type). The expression is the value to convert, and the target_type identifies the data type required for the result. The two arguments are separated by a comma."
+    },
+    {
+      "question": "What does the expression argument represent in CONVERT()?",
+      "answer": "Answer: The expression is the original value that needs conversion. It may be a column, a function result, or a literal value. The target type tells MySQL what data type to convert that expression into."
+    },
+    {
+      "question": "What is the basic syntax of CAST()?",
+      "answer": "Answer: The syntax is CAST(expression AS target_type). The expression is the value to convert, and AS introduces the data type that should be used for the result."
+    },
+    {
+      "question": "What is the main purpose shared by CONVERT() and CAST()?",
+      "answer": "Answer: Both functions convert a value from one data type to another. For example, a numeric value stored as text can be converted to a numeric type, or a date-time value can be converted to a DATE value."
+    },
+    {
+      "question": "What is the syntax difference between CONVERT() and CAST()?",
+      "answer": "Answer: CONVERT() separates the expression and target type with a comma, as in CONVERT(value, SIGNED). CAST() uses the AS keyword, as in CAST(value AS SIGNED)."
+    },
+    {
+      "question": "What additional conversion form does CONVERT() support?",
+      "answer": "Answer: In addition to converting an expression to a data type, CONVERT() supports character-set conversion with the form CONVERT(expression USING transcoding_name). This is the additional capability highlighted when the two functions are compared."
+    },
+    {
+      "question": "What is the interview-level difference between CONVERT() and CAST() discussed in the lesson?",
+      "answer": "Answer: Both can convert one data type to another. The additional feature highlighted for CONVERT() is character-set conversion. The class notes that CAST() does not use the same USING transcoding-name form."
+    },
+    {
+      "question": "Was character-set conversion explained in full during this class?",
+      "answer": "Answer: No. The lesson identifies character-set conversion as an additional feature of CONVERT(), but its detailed behavior is deferred to a later class."
+    },
+    {
+      "question": "Why might a value need to be converted before performing calculations?",
+      "answer": "Answer: A value may be received or stored as text even when the application needs to perform numeric operations on it. Converting it to an appropriate numeric type makes the intended calculation possible."
+    },
+    {
+      "question": "How are values entered as text treated in the examples discussed?",
+      "answer": "Answer: The class explains that values enclosed in quotes are string values. Even when the characters look like a number, the value is still text until it is converted to a numeric data type."
+    },
+    {
+      "question": "How can a date-time value be converted so that only its date part is returned?",
+      "answer": "Answer: The value can be converted to the DATE type. For example, CONVERT(NOW(), DATE) converts the current date-time value returned by NOW() to a date value, leaving out the time portion."
+    },
+    {
+      "question": "What is the role of NOW() in the date conversion example?",
+      "answer": "Answer: NOW() supplies the current date and time. The example uses it as the expression passed to CONVERT(), with DATE as the target type, to obtain only the date part."
+    },
+    {
+      "question": "What does the SIGNED target type represent in a conversion?",
+      "answer": "Answer: SIGNED converts a value to a signed integer type. A signed integer can represent both negative and positive whole numbers."
+    },
+    {
+      "question": "What happens when a decimal string is converted to SIGNED?",
+      "answer": "Answer: The fractional part is not retained in the integer result. The example discussed converts a value such as '45.678' to the whole-number result 45."
+    },
+    {
+      "question": "Why should SIGNED not be used when the fractional part must be preserved?",
+      "answer": "Answer: SIGNED produces a whole-number result, so the digits after the decimal point are discarded. A decimal target should be used when the result needs to retain a fractional part."
+    },
+    {
+      "question": "What does the UNSIGNED target type indicate?",
+      "answer": "Answer: UNSIGNED represents a non-negative integer value. Unlike a signed integer, it does not represent negative numbers; it is used for values that are zero or positive."
+    },
+    {
+      "question": "What is the DECIMAL data type used for in MySQL?",
+      "answer": "Answer: DECIMAL is used to represent numeric values that have digits after the decimal point. The class introduces it as the MySQL data type to use when a converted result needs to retain a decimal portion."
+    },
+    {
+      "question": "What two values are specified when defining a DECIMAL type?",
+      "answer": "Answer: A DECIMAL definition uses precision and scale. Precision specifies the total number of digits allowed, while scale specifies how many of those digits are allowed after the decimal point."
+    },
+    {
+      "question": "What does precision mean in DECIMAL(M,D)?",
+      "answer": "Answer: Precision, represented by M, is the total number of digits in the value. It includes the digits before and after the decimal point."
+    },
+    {
+      "question": "What does scale mean in DECIMAL(M,D)?",
+      "answer": "Answer: Scale, represented by D, is the number of digits allowed after the decimal point. It determines how many fractional digits the decimal value can contain."
+    },
+    {
+      "question": "How should DECIMAL(8,2) be interpreted?",
+      "answer": "Answer: The value can contain up to eight digits in total, with two digits reserved for the fractional part. Therefore, up to six digits are available before the decimal point and two after it."
+    },
+    {
+      "question": "How can a string containing a decimal number be converted to DECIMAL?",
+      "answer": "Answer: Specify DECIMAL with the required precision and scale as the target type. For example, CAST('45.67' AS DECIMAL(5,2)) converts the text value to a decimal value with five total digits and two fractional digits."
+    },
+    {
+      "question": "When should DECIMAL be chosen instead of SIGNED?",
+      "answer": "Answer: Choose DECIMAL when the result must retain digits after the decimal point. Choose SIGNED when a whole-number result is required and the fractional portion is not needed."
+    },
+    {
+      "question": "What happens if a decimal value has more digits than the defined DECIMAL precision and scale allow?",
+      "answer": "Answer: The declared precision and scale limit the digits that can be represented. A value that does not fit those limits may not be represented as supplied. The lesson focuses on understanding the limits rather than exploring every SQL-mode-specific outcome."
+    },
+    {
+      "question": "How does the class distinguish DECIMAL from FLOAT and DOUBLE?",
+      "answer": "Answer: The instructor briefly relates DECIMAL to real-number representations such as FLOAT and DOUBLE in programming. The main focus in MySQL is on DECIMAL and its explicit precision and scale settings; the class does not provide a detailed comparison of all three database types."
+    },
+    {
+      "question": "Why are precision and scale important when converting values to DECIMAL?",
+      "answer": "Answer: They determine how many digits can be stored in total and how many digits can appear after the decimal point. Selecting them carefully helps the converted value fit the intended numeric format."
+    },
+    {
+      "question": "What does the class explain about choosing a conversion target?",
+      "answer": "Answer: The target type should match the form of the result required by the task. For example, use DATE when only the date is needed, SIGNED for a whole number, and DECIMAL when fractional digits must be retained."
+    },
+    {
+      "question": "How is JSON used in an application?",
+      "answer": "Answer: JSON is briefly introduced as a format for exchanging request and response data between an application and a server or API. Detailed JSON handling is deferred."
+    },
+    {
+      "question": "Why does the instructor mention converting values in application development?",
+      "answer": "Answer: An application may receive values from a user or a server in one representation, while the database or application logic needs another data type. Conversion is one way to prepare a value for the operation or representation required."
+    },
+    {
+      "question": "What is the practical point about user input emphasized in the class?",
+      "answer": "Answer: The lesson reminds students that values entered by a user are commonly received as strings. If the application needs to perform arithmetic with an input value, it must be converted to an appropriate numeric type first."
+    },
+    {
+      "question": "What should be checked before converting a string to a numeric type?",
+      "answer": "Answer: The string should contain a value that can be interpreted as the requested numeric type. A value that is not compatible with the target type may not convert as intended, so the input and target type must be considered together."
+    },
+    {
+      "question": "How does converting a current timestamp to DATE differ from keeping the original value?",
+      "answer": "Answer: A current timestamp includes both date and time information. Converting it to DATE returns only the date portion, which is useful when the time component is not required."
+    },
+    {
+      "question": "What practice task is assigned?",
+      "answer": "Answer: Write six practice queries using CONVERT() and CAST(). The individual requirements are not clear enough in the transcript to reconstruct safely."
+    }
+  ]
+}
