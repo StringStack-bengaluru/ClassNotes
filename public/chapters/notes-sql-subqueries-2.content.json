@@ -1,0 +1,55 @@
+{
+  "title": "Notes Sql Subqueries 2",
+  "itemsPerPage": 2,
+  "source": "notes-sql-subqueries-2.docx",
+  "items": [
+    {
+      "question": "Q1. In which places of a query can a subquery be used?",
+      "answer": "Answer: Ans: A subquery is a query written inside another query. It can be used in four places: inside the FROM clause, inside the SELECT clause, inside the WHERE clause and inside a join. The place where it is used decides what kind of output the subquery has to give, so the location has to be decided first, based on the requirement."
+    },
+    {
+      "question": "Q2. What output must a subquery give in each of its locations?",
+      "answer": "Answer: Ans: In the FROM clause the output of the subquery is used as a table, because FROM always needs a table with rows and columns. In a join also the subquery is used as a table. In the SELECT clause the subquery must give one single value, which is called a scalar value, because inside the SELECT clause only columns are presented and a single value is placed in a column. In the WHERE clause the subquery gives a scalar value when it is compared with an operator such as greater than or equal to, and it gives a single column of values when it is used with the IN operator."
+    },
+    {
+      "question": "Q3. What is a scalar value, and how does a subquery give one?",
+      "answer": "Answer: Ans: A scalar value is a single value, such as the number 60 or the text India. It is one value, and not a list of values or a table. A subquery gives a scalar value when it is written with a function that returns one result, such as COUNT or AVG. Such a function works on many rows and returns a single value, so a query that uses it can be placed where one value is needed."
+    },
+    {
+      "question": "Q4. How should a subquery be developed?",
+      "answer": "Answer: Ans: The inner query is developed first, and the outer query is built around it. The first thing to decide is the location where the subquery is going to be used. The second thing is the output that the location needs, a table or a scalar value. The inner query is then written and executed on its own to check its output. After that it is placed inside parentheses at the chosen location, and the outer query uses it. Writing the inner query separately and looking at its result makes it easy to see how the complete query works."
+    },
+    {
+      "question": "Q5. How is a subquery written inside the FROM clause?",
+      "answer": "Answer: Ans: The subquery is written in parentheses after FROM and is treated as a table, so everything that is needed from it, including a condition, goes inside the subquery. The subquery is given an alias, which works as the name of the table, and the outer query selects its columns from that alias. SELECT product_id, product FROM ( SELECT product_id, product, price FROM products WHERE price >= 20\n\n```java\n) AS costly_products;\n```\n\nSample Input: products table with the following rows product_id | product | price 101 | Bottle | 10 102 | Tape | 15 103 | Socks | 20 104 | Caps | 25 105 | Gloves | 30 Sample Output: product_id | product 103 | Socks 104 | Caps 105 | Gloves"
+    },
+    {
+      "question": "Q6. What happens if a subquery used in the FROM clause is not given an alias?",
+      "answer": "Answer: Ans: MySQL reports an error, because the result of a subquery in FROM is treated as a table, and a table must have a name. SELECT product_id, product FROM ( SELECT product_id, product, price FROM products WHERE price >= 20\n\n```java\n);\n```\n\nSample Input: products table as in the earlier sample Sample Output: Error Code: 1248. Every derived table must have its own alias Adding an alias, such as AS costly_products, after the closing parenthesis removes the error. Q7. How is a subquery used inside the SELECT clause? Write a query that shows the product id, the product, the price and the total number of orders. Ans: The product columns come from the products table, and the total number of orders comes from the orders table. The total is calculated by a subquery in parentheses with COUNT, which gives one single value, and the subquery is given an alias so that its column has a name. The outer query reads the products table. SELECT product_id, product, price, (SELECT COUNT(*) FROM orders) AS total_orders FROM products; Sample Input: products table as in the earlier sample, and an orders table with five rows order_id | product_id | customer_id | sales 1 | 101 | 2 | 10 2 | 102 | 3 | 15 3 | 101 | 1 | 20 4 | 104 | 5 | 60 5 | 102 | 1 | 50 Sample Output: product_id | product | price | total_orders 101 | Bottle | 10 | 5 102 | Tape | 15 | 5 103 | Socks | 20 | 5 104 | Caps | 25 | 5 105 | Gloves | 30 | 5 The single value 5 is repeated against every product row."
+    },
+    {
+      "question": "Q8. Why is a subquery suitable for the requirement of showing product details together with the total number of orders?",
+      "answer": "Answer: Ans: The product details are in the products table, and the number of orders is in the orders table. A join could also bring them together, but the tables would have to be joined, the rows grouped and the orders counted, and the query becomes complicated. With a subquery the count is calculated on its own as one value, and the outer query stays simple. The choice between a join and a subquery depends on the requirement."
+    },
+    {
+      "question": "Q9. What happens if a subquery in the SELECT clause returns more than one value?",
+      "answer": "Answer: Ans: A subquery in the SELECT clause must return a single value. If it returns several rows, MySQL rejects the query. SELECT product_id, (SELECT price FROM products) AS price FROM products; Sample Input: products table as in the earlier sample Sample Output: Error Code: 1242. Subquery returns more than 1 row The inner query returns the prices of all five products, which is not a scalar value. A function such as AVG or COUNT in the inner query gives one value and fixes the error."
+    },
+    {
+      "question": "Q10. How is a subquery used in the WHERE clause?",
+      "answer": "Answer: Ans: The WHERE clause is used to filter data, and it always works with an operator, such as a comparison operator, a logical operator, a membership operator or a search operator. The subquery is written in parentheses on the side of the operator where a value is needed. For a comparison operator the subquery must return a single value, because a value is compared with one value, for example a score with 60 or a country with India. The FROM clause of the outer query must be a table. Q11. Write a query to find the products whose price is higher than the average price of all the products. Ans: The average price is a single value, so it can be calculated by a subquery and used in the WHERE clause of the outer query. The inner query on its own, SELECT AVG(price) FROM products, returns one value, 20, for the sample data. The outer query keeps the products whose price is greater than that value. SELECT product_id, product, price FROM products\n\n```java\nWHERE price > (SELECT AVG(price) FROM products);\n```\n\nSample Input: products table as in the earlier sample, whose average price is 20 Sample Output: product_id | product | price 104 | Caps | 25 105 | Gloves | 30 The filter has to be applied in the outer query, because the inner query gives only the average value and not the product rows."
+    },
+    {
+      "question": "Q12. What is the IN operator, and why is it used?",
+      "answer": "Answer: Ans: IN is a membership operator that checks whether a value is one of a list of values. It replaces several conditions joined with OR. Instead of writing country = 'Germany' OR country = 'India' OR country = 'Japan', the condition is written once with IN and the values are listed in brackets. SELECT customer_id, first_name, country FROM customers\n\n```java\nWHERE country IN ('Germany', 'India');\n```\n\nSample Input: customers table with the following rows customer_id | first_name | last_name | country | score 1 | Jossef | Goldberg | Germany | 350 2 | Kevin | Brown | USA | 900 3 | Mary | NULL | USA | 750 4 | Mark | Schwarz | Germany | 500 5 | Anna | Adams | USA | NULL Sample Output: customer_id | first_name | country 1 | Jossef | Germany 4 | Mark | Germany Q13. Write a query to show the details of the orders made by customers in Germany, using a subquery. Ans: The requirement needs two different pieces of data. The customers table tells which customers are in Germany, and the orders table holds the orders. The inner query selects only the customer_id column of the customers from Germany. There can be several such customers, so the outer query uses the IN operator with the inner query, which gives a single column of values. The outer query selects the order details from the orders table. SELECT * FROM orders WHERE customer_id IN ( SELECT customer_id FROM customers WHERE country = 'Germany'\n\n```java\n);\n```\n\nSample Input: the customers table and the orders table as in the earlier samples Sample Output: order_id | product_id | customer_id | sales 3 | 101 | 1 | 20 5 | 102 | 1 | 50 The customers 1 and 4 are in Germany. Only the customer 1 has made orders, so only the orders 3 and 5 are shown."
+    },
+    {
+      "question": "Q14. Why can the equal-to operator not be used when the subquery returns several values?",
+      "answer": "Answer: Ans: An equal-to operator compares one value with one value. If the subquery returns several customer ids, MySQL cannot compare a single value with them, and it reports an error. The IN operator is used when the inner query gives several values. SELECT * FROM orders WHERE customer_id = ( SELECT customer_id FROM customers WHERE country = 'Germany'\n\n```java\n);\n```\n\nSample Input: the customers table and the orders table as in the earlier samples Sample Output: Error Code: 1242. Subquery returns more than 1 row Two customers are from Germany, so the inner query returns two ids, and the query fails."
+    },
+    {
+      "question": "Q15. Can a subquery be used in a join?",
+      "answer": "Answer: Ans: Yes. A join combines tables, so the subquery used in a join must give a table as its output, in the same way as a subquery in the FROM clause. The FROM clause and the join take a table, whereas the SELECT clause takes a single value. The use of a subquery in a join is practised with exercises and is studied further in the next topic."
+    }
+  ]
+}

@@ -1,0 +1,2688 @@
+{
+  "title": "Notes Sql Subqueries 2",
+  "mode": "document",
+  "source": "notes-sql-subqueries-2.docx",
+  "pageCount": 5,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Subqueries in FROM, SELECT, WHERE and JOIN",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "center",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q1. In which places of a query can a subquery be used?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: A subquery is a query written inside another query. It can be used in four places: inside the FROM clause, inside the SELECT clause, inside the WHERE clause and inside a join. The place where it is used decides what kind of output the subquery has to give, so the location has to be decided first, based on the requirement.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q2. What output must a subquery give in each of its locations?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: In the FROM clause the output of the subquery is used as a table, because FROM always needs a table with rows and columns. In a join also the subquery is used as a table. In the SELECT clause the subquery must give one single value, which is called a scalar value, because inside the SELECT clause only columns are presented and a single value is placed in a column. In the WHERE clause the subquery gives a scalar value when it is compared with an operator such as greater than or equal to, and it gives a single column of values when it is used with the IN operator.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q3. What is a scalar value, and how does a subquery give one?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: A scalar value is a single value, such as the number 60 or the text India. It is one value, and not a list of values or a table. A subquery gives a scalar value when it is written with a function that returns one result, such as COUNT or AVG. Such a function works on many rows and returns a single value, so a query that uses it can be placed where one value is needed.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q4. How should a subquery be developed?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: The inner query is developed first, and the outer query is built around it. The first thing to decide is the location where the subquery is going to be used. The second thing is the output that the location needs, a table or a scalar value. The inner query is then written and executed on its own to check its output. After that it is placed inside parentheses at the chosen location, and the outer query uses it. Writing the inner query separately and looking at its result makes it easy to see how the complete query works.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q5. How is a subquery written inside the FROM clause?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: The subquery is written in parentheses after FROM and is treated as a table, so everything that is needed from it, including a condition, goes inside the subquery. The subquery is given an alias, which works as the name of the table, and the outer query selects its columns from that alias.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "SELECT product_id, product\nFROM (\nSELECT product_id, product, price\nFROM products\nWHERE price >= 20\n) AS costly_products;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input: products table with the following rows",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "product_id | product | price",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "101 | Bottle | 10",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "102 | Tape | 15",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "103 | Socks | 20",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "104 | Caps | 25",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "105 | Gloves | 30",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "product_id | product",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "103 | Socks",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "104 | Caps",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "105 | Gloves",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q6. What happens if a subquery used in the FROM clause is not given an alias?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: MySQL reports an error, because the result of a subquery in FROM is treated as a table, and a table must have a name.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "SELECT product_id, product\nFROM (\nSELECT product_id, product, price\nFROM products\nWHERE price >= 20\n);"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input: products table as in the earlier sample",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Error Code: 1248. Every derived table must have its own alias",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Adding an alias, such as AS costly_products, after the closing parenthesis removes the error.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q7. How is a subquery used inside the SELECT clause? Write a query that shows the product id, the product, the price and the total number of orders.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: The product columns come from the products table, and the total number of orders comes from the orders table. The total is calculated by a subquery in parentheses with COUNT, which gives one single value, and the subquery is given an alias so that its column has a name. The outer query reads the products table.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "SELECT product_id,\nproduct,\nprice,\n(SELECT COUNT(*) FROM orders) AS total_orders\nFROM products;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input: products table as in the earlier sample, and an orders table with five rows",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "order_id | product_id | customer_id | sales",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1 | 101 | 2 | 10",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2 | 102 | 3 | 15",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3 | 101 | 1 | 20",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "4 | 104 | 5 | 60",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "5 | 102 | 1 | 50",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "product_id | product | price | total_orders",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "101 | Bottle | 10 | 5",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "102 | Tape | 15 | 5",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "103 | Socks | 20 | 5",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "104 | Caps | 25 | 5",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "105 | Gloves | 30 | 5",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The single value 5 is repeated against every product row.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q8. Why is a subquery suitable for the requirement of showing product details together with the total number of orders?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: The product details are in the products table, and the number of orders is in the orders table. A join could also bring them together, but the tables would have to be joined, the rows grouped and the orders counted, and the query becomes complicated. With a subquery the count is calculated on its own as one value, and the outer query stays simple. The choice between a join and a subquery depends on the requirement.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q9. What happens if a subquery in the SELECT clause returns more than one value?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: A subquery in the SELECT clause must return a single value. If it returns several rows, MySQL rejects the query.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "SELECT product_id,\n(SELECT price FROM products) AS price\nFROM products;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input: products table as in the earlier sample",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Error Code: 1242. Subquery returns more than 1 row",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The inner query returns the prices of all five products, which is not a scalar value. A function such as AVG or COUNT in the inner query gives one value and fixes the error.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q10. How is a subquery used in the WHERE clause?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: The WHERE clause is used to filter data, and it always works with an operator, such as a comparison operator, a logical operator, a membership operator or a search operator. The subquery is written in parentheses on the side of the operator where a value is needed. For a comparison operator the subquery must return a single value, because a value is compared with one value, for example a score with 60 or a country with India. The FROM clause of the outer query must be a table.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q11. Write a query to find the products whose price is higher than the average price of all the products.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: The average price is a single value, so it can be calculated by a subquery and used in the WHERE clause of the outer query. The inner query on its own, SELECT AVG(price) FROM products, returns one value, 20, for the sample data. The outer query keeps the products whose price is greater than that value.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "SELECT product_id, product, price\nFROM products\nWHERE price > (SELECT AVG(price) FROM products);"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input: products table as in the earlier sample, whose average price is 20",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "product_id | product | price",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "104 | Caps | 25",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "105 | Gloves | 30",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The filter has to be applied in the outer query, because the inner query gives only the average value and not the product rows.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q12. What is the IN operator, and why is it used?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: IN is a membership operator that checks whether a value is one of a list of values. It replaces several conditions joined with OR. Instead of writing country = 'Germany' OR country = 'India' OR country = 'Japan', the condition is written once with IN and the values are listed in brackets.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "SELECT customer_id, first_name, country\nFROM customers\nWHERE country IN ('Germany', 'India');"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input: customers table with the following rows",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "customer_id | first_name | last_name | country | score",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1 | Jossef | Goldberg | Germany | 350",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2 | Kevin | Brown | USA | 900",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3 | Mary | NULL | USA | 750",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "4 | Mark | Schwarz | Germany | 500",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "5 | Anna | Adams | USA | NULL",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "customer_id | first_name | country",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1 | Jossef | Germany",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "4 | Mark | Germany",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q13. Write a query to show the details of the orders made by customers in Germany, using a subquery.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: The requirement needs two different pieces of data. The customers table tells which customers are in Germany, and the orders table holds the orders. The inner query selects only the customer_id column of the customers from Germany. There can be several such customers, so the outer query uses the IN operator with the inner query, which gives a single column of values. The outer query selects the order details from the orders table.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "SELECT *\nFROM orders\nWHERE customer_id IN (\nSELECT customer_id\nFROM customers\nWHERE country = 'Germany'\n);"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input: the customers table and the orders table as in the earlier samples",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "order_id | product_id | customer_id | sales",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3 | 101 | 1 | 20",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "5 | 102 | 1 | 50",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The customers 1 and 4 are in Germany. Only the customer 1 has made orders, so only the orders 3 and 5 are shown.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q14. Why can the equal-to operator not be used when the subquery returns several values?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: An equal-to operator compares one value with one value. If the subquery returns several customer ids, MySQL cannot compare a single value with them, and it reports an error. The IN operator is used when the inner query gives several values.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "code",
+      "text": "SELECT *\nFROM orders\nWHERE customer_id = (\nSELECT customer_id\nFROM customers\nWHERE country = 'Germany'\n);"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input: the customers table and the orders table as in the earlier samples",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Error Code: 1242. Subquery returns more than 1 row",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Two customers are from Germany, so the inner query returns two ids, and the query fails.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Q15. Can a subquery be used in a join?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ans: Yes. A join combines tables, so the subquery used in a join must give a table as its output, in the same way as a subquery in the FROM clause. The FROM clause and the join take a table, whereas the SELECT clause takes a single value. The use of a subquery in a join is practised with exercises and is studied further in the next topic.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    }
+  ],
+  "pages": [
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Subqueries in FROM, SELECT, WHERE and JOIN",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "center",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q1. In which places of a query can a subquery be used?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: A subquery is a query written inside another query. It can be used in four places: inside the FROM clause, inside the SELECT clause, inside the WHERE clause and inside a join. The place where it is used decides what kind of output the subquery has to give, so the location has to be decided first, based on the requirement.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q2. What output must a subquery give in each of its locations?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: In the FROM clause the output of the subquery is used as a table, because FROM always needs a table with rows and columns. In a join also the subquery is used as a table. In the SELECT clause the subquery must give one single value, which is called a scalar value, because inside the SELECT clause only columns are presented and a single value is placed in a column. In the WHERE clause the subquery gives a scalar value when it is compared with an operator such as greater than or equal to, and it gives a single column of values when it is used with the IN operator.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q3. What is a scalar value, and how does a subquery give one?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: A scalar value is a single value, such as the number 60 or the text India. It is one value, and not a list of values or a table. A subquery gives a scalar value when it is written with a function that returns one result, such as COUNT or AVG. Such a function works on many rows and returns a single value, so a query that uses it can be placed where one value is needed.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q4. How should a subquery be developed?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: The inner query is developed first, and the outer query is built around it. The first thing to decide is the location where the subquery is going to be used. The second thing is the output that the location needs, a table or a scalar value. The inner query is then written and executed on its own to check its output. After that it is placed inside parentheses at the chosen location, and the outer query uses it. Writing the inner query separately and looking at its result makes it easy to see how the complete query works.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q5. How is a subquery written inside the FROM clause?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: The subquery is written in parentheses after FROM and is treated as a table, so everything that is needed from it, including a condition, goes inside the subquery. The subquery is given an alias, which works as the name of the table, and the outer query selects its columns from that alias.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "SELECT product_id, product\nFROM (\nSELECT product_id, product, price\nFROM products\nWHERE price >= 20\n) AS costly_products;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input: products table with the following rows",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "product_id | product | price",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "101 | Bottle | 10",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "102 | Tape | 15",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "103 | Socks | 20",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "104 | Caps | 25",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "105 | Gloves | 30",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "product_id | product",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "103 | Socks",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "104 | Caps",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "105 | Gloves",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q6. What happens if a subquery used in the FROM clause is not given an alias?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: MySQL reports an error, because the result of a subquery in FROM is treated as a table, and a table must have a name.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "SELECT product_id, product\nFROM (\nSELECT product_id, product, price\nFROM products\nWHERE price >= 20\n);"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input: products table as in the earlier sample",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Error Code: 1248. Every derived table must have its own alias",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Adding an alias, such as AS costly_products, after the closing parenthesis removes the error.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q7. How is a subquery used inside the SELECT clause? Write a query that shows the product id, the product, the price and the total number of orders.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: The product columns come from the products table, and the total number of orders comes from the orders table. The total is calculated by a subquery in parentheses with COUNT, which gives one single value, and the subquery is given an alias so that its column has a name. The outer query reads the products table.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "SELECT product_id,\nproduct,\nprice,\n(SELECT COUNT(*) FROM orders) AS total_orders\nFROM products;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input: products table as in the earlier sample, and an orders table with five rows",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "order_id | product_id | customer_id | sales",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1 | 101 | 2 | 10",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2 | 102 | 3 | 15",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3 | 101 | 1 | 20",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "4 | 104 | 5 | 60",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "5 | 102 | 1 | 50",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "product_id | product | price | total_orders",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "101 | Bottle | 10 | 5",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "102 | Tape | 15 | 5",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "103 | Socks | 20 | 5",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "104 | Caps | 25 | 5",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "105 | Gloves | 30 | 5",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The single value 5 is repeated against every product row.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q8. Why is a subquery suitable for the requirement of showing product details together with the total number of orders?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: The product details are in the products table, and the number of orders is in the orders table. A join could also bring them together, but the tables would have to be joined, the rows grouped and the orders counted, and the query becomes complicated. With a subquery the count is calculated on its own as one value, and the outer query stays simple. The choice between a join and a subquery depends on the requirement.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q9. What happens if a subquery in the SELECT clause returns more than one value?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: A subquery in the SELECT clause must return a single value. If it returns several rows, MySQL rejects the query.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "SELECT product_id,\n(SELECT price FROM products) AS price\nFROM products;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input: products table as in the earlier sample",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Error Code: 1242. Subquery returns more than 1 row",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The inner query returns the prices of all five products, which is not a scalar value. A function such as AVG or COUNT in the inner query gives one value and fixes the error.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q10. How is a subquery used in the WHERE clause?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: The WHERE clause is used to filter data, and it always works with an operator, such as a comparison operator, a logical operator, a membership operator or a search operator. The subquery is written in parentheses on the side of the operator where a value is needed. For a comparison operator the subquery must return a single value, because a value is compared with one value, for example a score with 60 or a country with India. The FROM clause of the outer query must be a table.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q11. Write a query to find the products whose price is higher than the average price of all the products.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: The average price is a single value, so it can be calculated by a subquery and used in the WHERE clause of the outer query. The inner query on its own, SELECT AVG(price) FROM products, returns one value, 20, for the sample data. The outer query keeps the products whose price is greater than that value.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "SELECT product_id, product, price\nFROM products\nWHERE price > (SELECT AVG(price) FROM products);"
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input: products table as in the earlier sample, whose average price is 20",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "product_id | product | price",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "104 | Caps | 25",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "105 | Gloves | 30",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The filter has to be applied in the outer query, because the inner query gives only the average value and not the product rows.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q12. What is the IN operator, and why is it used?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: IN is a membership operator that checks whether a value is one of a list of values. It replaces several conditions joined with OR. Instead of writing country = 'Germany' OR country = 'India' OR country = 'Japan', the condition is written once with IN and the values are listed in brackets.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "SELECT customer_id, first_name, country\nFROM customers\nWHERE country IN ('Germany', 'India');"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input: customers table with the following rows",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "customer_id | first_name | last_name | country | score",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1 | Jossef | Goldberg | Germany | 350",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2 | Kevin | Brown | USA | 900",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3 | Mary | NULL | USA | 750",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "4 | Mark | Schwarz | Germany | 500",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "5 | Anna | Adams | USA | NULL",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "customer_id | first_name | country",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1 | Jossef | Germany",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "4 | Mark | Germany",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q13. Write a query to show the details of the orders made by customers in Germany, using a subquery.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: The requirement needs two different pieces of data. The customers table tells which customers are in Germany, and the orders table holds the orders. The inner query selects only the customer_id column of the customers from Germany. There can be several such customers, so the outer query uses the IN operator with the inner query, which gives a single column of values. The outer query selects the order details from the orders table.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "SELECT *\nFROM orders\nWHERE customer_id IN (\nSELECT customer_id\nFROM customers\nWHERE country = 'Germany'\n);"
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input: the customers table and the orders table as in the earlier samples",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "order_id | product_id | customer_id | sales",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3 | 101 | 1 | 20",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "5 | 102 | 1 | 50",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The customers 1 and 4 are in Germany. Only the customer 1 has made orders, so only the orders 3 and 5 are shown.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q14. Why can the equal-to operator not be used when the subquery returns several values?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: An equal-to operator compares one value with one value. If the subquery returns several customer ids, MySQL cannot compare a single value with them, and it reports an error. The IN operator is used when the inner query gives several values.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "code",
+        "text": "SELECT *\nFROM orders\nWHERE customer_id = (\nSELECT customer_id\nFROM customers\nWHERE country = 'Germany'\n);"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input: the customers table and the orders table as in the earlier samples",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Error Code: 1242. Subquery returns more than 1 row",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Two customers are from Germany, so the inner query returns two ids, and the query fails.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Q15. Can a subquery be used in a join?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ans: Yes. A join combines tables, so the subquery used in a join must give a table as its output, in the same way as a subquery in the FROM clause. The FROM clause and the join take a table, whereas the SELECT clause takes a single value. The use of a subquery in a join is practised with exercises and is studied further in the next topic.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ]
+  ]
+}
