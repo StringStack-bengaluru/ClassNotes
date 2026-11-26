@@ -180,6 +180,9 @@ with zipfile.ZipFile(path) as z:
             if "|" in line and not re.fullmatch(r"\\|+", line):
                 return True
             return False
+        # Indented SQL keywords are query lines, not inheritance-tree labels.
+        if line.upper() in ("CASE", "WHEN", "ELSE", "END", "SELECT", "FROM", "WHERE"):
+            return False
         ident = r"(?:Demo\\d+|[A-Z][A-Za-z0-9]*)"
         if re.match(r"^\\s{2,}", raw) and re.fullmatch(ident + r"(?:\\s+" + ident + r")*", line):
             return True
@@ -260,7 +263,7 @@ with zipfile.ZipFile(path) as z:
         if re.match(r"^\\d+[G]?[.)]\\s+", line):
             return False
         # Before the short-English filter, so "INSERT INTO person VALUES" stays SQL.
-        if is_sql_line(line) or is_python_line(line):
+        if is_sql_line(line) or is_python_line(line) or is_sql_fragment(line):
             return True
         # Type section labels in notes: float: / double: — not code
         if re.fullmatch(
@@ -466,6 +469,23 @@ with zipfile.ZipFile(path) as z:
             and len(s.split()) <= 10
             and not re.search(r"\\b(is|are|means|assigns|used|example)\\b", s, re.I)
         ):
+            return True
+        return False
+
+    def is_sql_fragment(line):
+        """A line of a query that Word split away from SELECT: a column, WHEN, or RANK()."""
+        s = (line or "").strip()
+        if not s or s.endswith(".") or s.endswith("?"):
+            return False
+        if re.match(r"^[A-Za-z_][\\w.]*(?:\\s+[A-Za-z_][\\w.]*)?\\s*,\\s*$", s):
+            return True
+        if re.match(r"^(?:CASE|ELSE)\\b", s, re.I) and len(s.split()) <= 6:
+            return True
+        if re.match(r"^END\\s+AS\\s+[A-Za-z_]\\w*\\s*$", s, re.I):
+            return True
+        if re.match(r"^WHEN\\b", s, re.I) and re.search(r"\\bTHEN\\b", s, re.I) and len(s.split()) <= 12:
+            return True
+        if re.match(r"^[A-Za-z_]\\w*\\s*\\(.*\\)\\s+OVER\\b", s, re.I) and len(s.split()) <= 16:
             return True
         return False
 
@@ -843,6 +863,68 @@ with zipfile.ZipFile(path) as z:
                     rows.append(cells)
             if rows:
                 blocks.append({"type": "table", "rows": rows})
+
+    def split_mixed_code_lines(items):
+        """Pull a statement such as print(type(a)) out of the answer around it."""
+        out = []
+        for b in items:
+            if b.get("type") != "paragraph":
+                out.append(b)
+                continue
+            text = "".join((r.get("text") or "") for r in (b.get("runs") or []))
+            lines = text.split("\\n")
+            if len([ln for ln in lines if ln.strip()]) < 2:
+                out.append(b)
+                continue
+            kinds = []
+            for ln in lines:
+                st = ln.strip()
+                if not st:
+                    kinds.append("blank")
+                elif is_code_line(st):
+                    kinds.append("code")
+                else:
+                    kinds.append("prose")
+            if "code" not in kinds or "prose" not in kinds:
+                out.append(b)
+                continue
+            buf_kind = None
+            buf = []
+            def flush():
+                if not buf or buf_kind is None:
+                    return
+                chunk = "\\n".join(buf).strip("\\n")
+                if not chunk.strip():
+                    return
+                if buf_kind == "code":
+                    out.append({"type": "codeLine", "text": chunk})
+                else:
+                    out.append({
+                        "type": "paragraph",
+                        "runs": [{
+                            "text": chunk,
+                            "bold": False,
+                            "italic": False,
+                            "underline": False,
+                            "mono": False,
+                        }],
+                        "align": b.get("align") or "left",
+                        "indent": False,
+                    })
+            for ln, kind in zip(lines, kinds):
+                if kind == "blank":
+                    if buf_kind == "code":
+                        buf.append("")
+                    continue
+                if buf_kind != kind:
+                    flush()
+                    buf = []
+                    buf_kind = kind
+                buf.append(ln)
+            flush()
+        return out
+
+    blocks = split_mixed_code_lines(blocks)
 
     # Merge consecutive listItems → list; consecutive codeLine → code block
     merged = []
