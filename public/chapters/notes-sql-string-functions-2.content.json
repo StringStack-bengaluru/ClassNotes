@@ -1,0 +1,103 @@
+{
+  "title": "Notes Sql String Functions 2",
+  "itemsPerPage": 2,
+  "source": "notes-sql-string-functions-2.docx",
+  "items": [
+    {
+      "question": "Which SQL string manipulation functions were covered in this class?",
+      "answer": "Answer: The class focused on LEFT(), RIGHT(), REPLACE(), and LTRIM(). These functions extract characters from a string, replace selected text, and remove leading spaces before further processing."
+    },
+    {
+      "question": "What does the LEFT() function do in MySQL?",
+      "answer": "Answer: LEFT() returns a specified number of characters from the beginning, or left side, of a string. The number of characters to return is provided as the second argument."
+    },
+    {
+      "question": "What is the syntax of the LEFT() function?",
+      "answer": "Answer: Use LEFT(string, number_of_characters). The first argument is the string or column value, and the second argument specifies how many characters should be returned from its left side."
+    },
+    {
+      "question": "Write a query to retrieve the first two characters from the string Medea.",
+      "answer": "Answer: Use a static string to test LEFT() and give the returned expression a readable column alias. Sample Input: 'Medea' Number of characters: 2 SQL Query:\n\n```java\nSELECT LEFT('Medea', 2) AS first_two_characters;\n```\n\nSample Output: first_two_characters Me"
+    },
+    {
+      "question": "What does the RIGHT() function do in MySQL?",
+      "answer": "Answer: RIGHT() returns a specified number of characters from the end, or right side, of a string. It is useful when a requirement asks for the last few characters of a value."
+    },
+    {
+      "question": "What is the syntax of the RIGHT() function?",
+      "answer": "Answer: Use RIGHT(string, number_of_characters). The first argument is the string or column, and the second argument specifies how many characters should be returned from its right side."
+    },
+    {
+      "question": "Write a query to retrieve the last two characters of each customer first name.",
+      "answer": "Answer: Use RIGHT() on the first_name column with 2 as the character count. Select only the required expression rather than returning every column from the table. Sample Input (customers): first_name Medea John George Martin Peter SQL Query: SELECT RIGHT(first_name, 2) AS last_two_characters FROM customers; Sample Output: last_two_characters ea hn ge in er"
+    },
+    {
+      "question": "How are LEFT() and RIGHT() different?",
+      "answer": "Answer: LEFT() extracts characters starting from the beginning of a string, whereas RIGHT() extracts characters starting from the end. Both functions take the number of characters to return as their second argument."
+    },
+    {
+      "question": "What does the REPLACE() function do?",
+      "answer": "Answer: REPLACE() searches a string for specified text and substitutes matching occurrences with new text. It can be used to change separators, modify part of a value, or remove unwanted characters."
+    },
+    {
+      "question": "What is the syntax of the REPLACE() function in MySQL?",
+      "answer": "Answer: Use REPLACE(string, old_value, new_value). The first argument is the input string or column, the second is the text to find, and the third is the replacement text."
+    },
+    {
+      "question": "Write a query to replace hyphens in a phone number with forward slashes.",
+      "answer": "Answer: Pass the phone number as the input string, a hyphen as the old value, and a forward slash as the new value. Sample Input: '987-667-4547' SQL Query:\n\n```java\nSELECT REPLACE('987-667-4547', '-', '/') AS formatted_phone;\n```\n\nSample Output:\n\n```java\nformatted_phone\n```\n\n987/667/4547"
+    },
+    {
+      "question": "Write a query to remove hyphens from a phone number.",
+      "answer": "Answer: Pass an empty string as the new value. The matching hyphens are removed from the returned string. Sample Input: '987-667-4547' SQL Query:\n\n```java\nSELECT REPLACE('987-667-4547', '-', '') AS phone_without_hyphens;\n```\n\nSample Output: phone_without_hyphens 9876674547"
+    },
+    {
+      "question": "Can REPLACE() be used with a column from a table?",
+      "answer": "Answer: Yes. The first argument can be a column name. The function is applied to the value from each row returned by the query, allowing the query to display a transformed version of that column."
+    },
+    {
+      "question": "What is a static value in a SELECT statement?",
+      "answer": "Answer: A static value is a literal value written directly in the SELECT statement rather than retrieved from a table column. A SELECT statement can return a static value even when no table is specified."
+    },
+    {
+      "question": "Why would you use SELECT with a static value while learning a string function?",
+      "answer": "Answer: A static value lets you test a function with a known input before applying it to table data. It helps you check how the function behaves and understand the expected result."
+    },
+    {
+      "question": "How can you give a temporary name to a function result in a SELECT query?",
+      "answer": "Answer: Use a column alias with AS after the expression. The alias gives the result column a readable heading in the query output; it does not rename the original table column."
+    },
+    {
+      "question": "Write a query to replace the .txt extension in a filename with .csv.",
+      "answer": "Answer: Use REPLACE() on a static filename. This changes the extension text in the returned string; it does not physically rename a file on the computer. Sample Input: 'report.txt' SQL Query:\n\n```java\nSELECT REPLACE('report.txt', '.txt', '.csv') AS updated_filename;\n```\n\nSample Output: updated_filename report.csv"
+    },
+    {
+      "question": "What does LTRIM() do?",
+      "answer": "Answer: LTRIM() removes leading spaces from the left side of a string. It is useful when a text value begins with unwanted spaces that could affect later string operations."
+    },
+    {
+      "question": "Why should you remove leading spaces before extracting the first characters of a name?",
+      "answer": "Answer: A leading space is itself a character. If LEFT() is applied before removing it, the result may contain the space instead of the intended letters. Cleaning the value first helps the query return the characters requested."
+    },
+    {
+      "question": "Write a query to retrieve the first two non-space characters from each customer first name.",
+      "answer": "Answer: Apply LTRIM() to first_name first, then pass the cleaned value to LEFT() with 2 as the character count. Sample Input (customers): first_name 'Medea' ' John' 'George' 'Martin' 'Peter' SQL Query: SELECT LEFT(LTRIM(first_name), 2) AS first_two_characters FROM customers; Sample Output: first_two_characters Me Jo Ge Ma Pe"
+    },
+    {
+      "question": "What should you check after writing a query for a business requirement?",
+      "answer": "Answer: Check whether the result matches the requirement exactly. Do not stop merely because the query executes. Verify the selected column, the number of characters returned, and whether unwanted spaces or other data issues affect the result."
+    },
+    {
+      "question": "Why is it important to understand a requirement before choosing LEFT() or RIGHT()?",
+      "answer": "Answer: The requirement determines which end of the string must be read. Use LEFT() for characters from the beginning and RIGHT() for characters from the end. Choosing the wrong function can produce a valid query with an incorrect result."
+    },
+    {
+      "question": "Can the names or syntax of string functions differ between database systems?",
+      "answer": "Answer: Yes. Function names and syntax can vary between database systems. When working with another database, check its official documentation instead of assuming that a function has the same name or syntax everywhere."
+    },
+    {
+      "question": "What should you focus on when learning a SQL function for interviews?",
+      "answer": "Answer: Understand what the function does, its arguments, and the result it returns. Practice applying it to realistic requirements, and confirm that the output matches what was requested."
+    }
+  ]
+}

@@ -1,0 +1,3220 @@
+{
+  "title": "Notes Sql String Functions 2",
+  "mode": "document",
+  "source": "notes-sql-string-functions-2.docx",
+  "pageCount": 5,
+  "blocks": [
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "1. Which SQL string manipulation functions were covered in this class?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The class focused on LEFT(), RIGHT(), REPLACE(), and LTRIM(). These ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "functions extract characters from a string, replace selected text, and remove leading spaces before further processing.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "2. What does the LEFT() function do in MySQL?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "LEFT() returns a specified number of characters from the beginning, or left side, of a str",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ing. The number of characters to return is provided as the second argument.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "3. What is the syntax of the LEFT() function?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Use LEFT(string, number_of_characters). The first argument is the string or column value, and the second argument specifies how many c",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "haracters should be returned from its left side.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "4. Write a query to retrieve the first two characters from the string Medea.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Use a static string to test LEFT() and give the returned expression a readable column alias.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "'Medea'",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Number of chara",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "cters: 2",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "SQL Query:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "code",
+      "text": "SELECT LEFT('Medea', 2) AS first_two_characters;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "first_two_characters",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Me",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "5. What does the RIGHT() function do in MySQL?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "RIGHT() returns a specified number of characters from the end, or right side, of a string. It is ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "useful when a requirement asks for the last few characters of a value.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "6. What is the syntax of the RIGHT() function?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Use RIGHT(string, number_of_characters). The first argument is the string or column, and the second argument specifies how many characters",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " should be returned from its right side.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "7. Write a query to retrieve the last two characters of each customer first name.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Use RIGHT() on the first_name column with 2 as the character count. Select only the required expression rather than returning every c",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "olumn from the table.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input (customers):",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "first_name",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Medea",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "John",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "George",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Martin",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Peter",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "SQL Query:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "code",
+      "text": "SELECT RIGHT(first_name, 2) AS last_two_characters\nFROM customers;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "last_two_characters",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "ea",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "hn",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "ge",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "in",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "er",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "8. How are LEFT() and RIGHT() ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "different?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "LEFT() extracts characters starting from the beginning of a string, whereas RIGHT() extracts characters starting from the end. Both functions take the number of characters to return as their second argument.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "9. What does the REPLACE() function d",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "o?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "REPLACE() searches a string for specified text and substitutes matching occurrences with new text. It can be used to change separators, modify part of a value, or remove unwanted characters.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "10. What is the syntax of the REPLACE() function in MySQL?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Use",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " REPLACE(string, old_value, new_value). The first argument is the input string or column, the second is the text to find, and the third is the replacement text.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "11. Write a query to replace hyphens in a phone number with forward slashes.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Pass the phone num",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ber as the input string, a hyphen as the old value, and a forward slash as the new value.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "'987-667-4547'",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "SQL Query:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "code",
+      "text": "SELECT REPLACE('987-667-4547', '-', '/') AS formatted_phone;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "code",
+      "text": "formatted_phone"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "987/667/4547",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "12. Write a query to ",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "remove hyphens from a phone number.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Pass an empty string as the new value. The matching hyphens are removed from the returned string.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "'987-667-4547'",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "SQL Query:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "code",
+      "text": "SELECT REPLACE('987-667-4547', '-', '') AS phone_without_hyphens;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "phone_without_hyphens",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "9876674547",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "13. Can REPLACE() be used with a column from a table?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Yes. The first argument can be a column name. The function is applied to the value from each row returned by the query, allowing the query to display a transformed versi",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "on of that column.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "14. What is a static value in a SELECT statement?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A static value is a literal value written directly in the SELECT statement rather than retrieved from a table column. A SELECT statement can return a static value even when no table is sp",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "ecified.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "15. Why would you use SELECT with a static value while learning a string function?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A static value lets you test a function with a known input before applying it to table data. It helps you check how the function behaves and understand the expected",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " result.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "16. How can you give a temporary name to a function result in a SELECT query?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Use a column alias with AS after the expression. The alias gives the result column a readable heading in the query output; it does not rename the original table column.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "17. Write a query to replace the .txt extension in a filename with .csv.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Use REPLACE() on a static filename. This changes the extension text in the returned string; it does not physically rename a file on the computer.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "'report.txt'",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "SQL Query:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "code",
+      "text": "SELECT REPLACE('report.txt', '.txt', '.csv') AS updated_filename;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "updated_filename",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "code",
+      "text": "report.csv"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "18. What does LTRIM() do?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "LTRIM() removes leading spaces from the left side of a string. It is useful when a text value begins with unwanted ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "spaces that could affect later string operations.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "19. Why should you remove leading spaces before extracting the first characters of a name?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "A leading space is itself a character. If LEFT() is applied before removing it, the result may contain the space in",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "stead of the intended letters. Cleaning the value first helps the query return the characters requested.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "20. Write a query to retrieve the first two non-space characters from each customer first name.",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Apply LTRIM() to first_name first, then pass the cleane",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "d value to LEFT() with 2 as the character count.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Input (customers):",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "first_name",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "'Medea'",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "' John'",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "'George'",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "'Martin'",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "'Peter'",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "SQL Query:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "code",
+      "text": "SELECT LEFT(LTRIM(first_name), 2) AS first_two_characters\nFROM customers;"
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Sample Output:",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "first_two_characters",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Me",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Jo",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ge",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Ma",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Pe",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": true
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "21. What should you check after writing a query for a business requirement?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Check whether the result matches the requirement exactly. Do not stop merely because the query executes. Verify the selected column, the number of characters returned, and",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " whether unwanted spaces or other data issues affect the result.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "22. Why is it important to understand a requirement before choosing LEFT() or RIGHT()?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "The requirement determines which end of the string must be read. Use LEFT() for characters from the begi",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "nning and RIGHT() for characters from the end. Choosing the wrong function can produce a valid query with an incorrect result.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "23. Can the names or syntax of string functions differ between database systems?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Yes. Function names and syntax can vary between ",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": "database systems. When working with another database, check its official documentation instead of assuming that a function has the same name or syntax everywhere.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "24. What should you focus on when learning a SQL function for interviews?",
+          "bold": true,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    },
+    {
+      "type": "paragraph",
+      "runs": [
+        {
+          "text": "Understand what the",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        },
+        {
+          "text": " function does, its arguments, and the result it returns. Practice applying it to realistic requirements, and confirm that the output matches what was requested.",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "mono": false
+        }
+      ],
+      "align": "left",
+      "indent": false
+    }
+  ],
+  "pages": [
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "1. Which SQL string manipulation functions were covered in this class?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The class focused on LEFT(), RIGHT(), REPLACE(), and LTRIM(). These ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "functions extract characters from a string, replace selected text, and remove leading spaces before further processing.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "2. What does the LEFT() function do in MySQL?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "LEFT() returns a specified number of characters from the beginning, or left side, of a str",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ing. The number of characters to return is provided as the second argument.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "3. What is the syntax of the LEFT() function?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Use LEFT(string, number_of_characters). The first argument is the string or column value, and the second argument specifies how many c",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "haracters should be returned from its left side.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "4. Write a query to retrieve the first two characters from the string Medea.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Use a static string to test LEFT() and give the returned expression a readable column alias.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "'Medea'",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Number of chara",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "cters: 2",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "SQL Query:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "code",
+        "text": "SELECT LEFT('Medea', 2) AS first_two_characters;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "first_two_characters",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Me",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "5. What does the RIGHT() function do in MySQL?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "RIGHT() returns a specified number of characters from the end, or right side, of a string. It is ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "useful when a requirement asks for the last few characters of a value.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "6. What is the syntax of the RIGHT() function?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Use RIGHT(string, number_of_characters). The first argument is the string or column, and the second argument specifies how many characters",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " should be returned from its right side.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "7. Write a query to retrieve the last two characters of each customer first name.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Use RIGHT() on the first_name column with 2 as the character count. Select only the required expression rather than returning every c",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "olumn from the table.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input (customers):",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "first_name",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Medea",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "John",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "George",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Martin",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Peter",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "SQL Query:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "code",
+        "text": "SELECT RIGHT(first_name, 2) AS last_two_characters\nFROM customers;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "last_two_characters",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "ea",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "hn",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "ge",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "in",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "er",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "8. How are LEFT() and RIGHT() ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "different?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "LEFT() extracts characters starting from the beginning of a string, whereas RIGHT() extracts characters starting from the end. Both functions take the number of characters to return as their second argument.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "9. What does the REPLACE() function d",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "o?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "REPLACE() searches a string for specified text and substitutes matching occurrences with new text. It can be used to change separators, modify part of a value, or remove unwanted characters.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "10. What is the syntax of the REPLACE() function in MySQL?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Use",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " REPLACE(string, old_value, new_value). The first argument is the input string or column, the second is the text to find, and the third is the replacement text.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "11. Write a query to replace hyphens in a phone number with forward slashes.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Pass the phone num",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ber as the input string, a hyphen as the old value, and a forward slash as the new value.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "'987-667-4547'",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "SQL Query:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "code",
+        "text": "SELECT REPLACE('987-667-4547', '-', '/') AS formatted_phone;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "code",
+        "text": "formatted_phone"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "987/667/4547",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "12. Write a query to ",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "remove hyphens from a phone number.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Pass an empty string as the new value. The matching hyphens are removed from the returned string.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "'987-667-4547'",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "SQL Query:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "code",
+        "text": "SELECT REPLACE('987-667-4547', '-', '') AS phone_without_hyphens;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "phone_without_hyphens",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "9876674547",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "13. Can REPLACE() be used with a column from a table?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Yes. The first argument can be a column name. The function is applied to the value from each row returned by the query, allowing the query to display a transformed versi",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "on of that column.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "14. What is a static value in a SELECT statement?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A static value is a literal value written directly in the SELECT statement rather than retrieved from a table column. A SELECT statement can return a static value even when no table is sp",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "ecified.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "15. Why would you use SELECT with a static value while learning a string function?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A static value lets you test a function with a known input before applying it to table data. It helps you check how the function behaves and understand the expected",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " result.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "16. How can you give a temporary name to a function result in a SELECT query?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Use a column alias with AS after the expression. The alias gives the result column a readable heading in the query output; it does not rename the original table column.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "17. Write a query to replace the .txt extension in a filename with .csv.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Use REPLACE() on a static filename. This changes the extension text in the returned string; it does not physically rename a file on the computer.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "'report.txt'",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "SQL Query:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "code",
+        "text": "SELECT REPLACE('report.txt', '.txt', '.csv') AS updated_filename;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "updated_filename",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "code",
+        "text": "report.csv"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "18. What does LTRIM() do?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "LTRIM() removes leading spaces from the left side of a string. It is useful when a text value begins with unwanted ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "spaces that could affect later string operations.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "19. Why should you remove leading spaces before extracting the first characters of a name?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "A leading space is itself a character. If LEFT() is applied before removing it, the result may contain the space in",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "stead of the intended letters. Cleaning the value first helps the query return the characters requested.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ],
+    [
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "20. Write a query to retrieve the first two non-space characters from each customer first name.",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Apply LTRIM() to first_name first, then pass the cleane",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "d value to LEFT() with 2 as the character count.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Input (customers):",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "first_name",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "'Medea'",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "' John'",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "'George'",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "'Martin'",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "'Peter'",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "SQL Query:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "code",
+        "text": "SELECT LEFT(LTRIM(first_name), 2) AS first_two_characters\nFROM customers;"
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Sample Output:",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "first_two_characters",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Me",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Jo",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ge",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Ma",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Pe",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": true
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "21. What should you check after writing a query for a business requirement?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Check whether the result matches the requirement exactly. Do not stop merely because the query executes. Verify the selected column, the number of characters returned, and",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " whether unwanted spaces or other data issues affect the result.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "22. Why is it important to understand a requirement before choosing LEFT() or RIGHT()?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "The requirement determines which end of the string must be read. Use LEFT() for characters from the begi",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "nning and RIGHT() for characters from the end. Choosing the wrong function can produce a valid query with an incorrect result.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "23. Can the names or syntax of string functions differ between database systems?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Yes. Function names and syntax can vary between ",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": "database systems. When working with another database, check its official documentation instead of assuming that a function has the same name or syntax everywhere.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "24. What should you focus on when learning a SQL function for interviews?",
+            "bold": true,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      },
+      {
+        "type": "paragraph",
+        "runs": [
+          {
+            "text": "Understand what the",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          },
+          {
+            "text": " function does, its arguments, and the result it returns. Practice applying it to realistic requirements, and confirm that the output matches what was requested.",
+            "bold": false,
+            "italic": false,
+            "underline": false,
+            "mono": false
+          }
+        ],
+        "align": "left",
+        "indent": false
+      }
+    ]
+  ]
+}
